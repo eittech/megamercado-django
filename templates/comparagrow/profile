@@ -1,0 +1,109 @@
+{% extends 'comparagrow/base.html' %}
+{% load static %}
+
+
+{% block cabecera %}
+
+{% endblock %}
+
+
+{% block content %}
+<section class="section-name bg-white padding-y">
+  <div class="container text-center text-muted">
+    <header class="section-heading">
+      <h2 class="title-section">MI PERFIL</h2>
+    </header><!-- sect-heading -->
+    <div class="row">
+      <aside class="col-sm-6">
+        <div class="aside align-self-center">
+          <span class="icon-wrap icon-md round" style="
+              font-size: 156px;
+              height: 300px;
+              border: 2px solid #01b22c !important;
+              /* border: #000; */
+              /* background-color: #000; */
+              width: 300px;
+              padding: 66px;
+              color: #672d93 !important;
+          ">
+          						<i class="fa fa-camera" style="
+          "></i>
+					</span>
+				</div>
+      </aside>
+      <aside class="col-sm-6">
+        <form>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" value="{{ user.first_name }}" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Apellido</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" value="{{ user.last_name }}" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Usuario</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="colFormLabel" value="{{ user.username }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="colFormLabel" value="{{ user.email }}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Tipo de Documento</label>
+            <div class="col-sm-10">
+              <select name="dni_type" class="form-control" id="id_dni_type">
+                <option value="">---------</option>
+                {% if customer.dni_type == "PASAPORTE" %}
+                  
+                {% endif %}
+                <option value="PASAPORTE">Pasaporte</option>
+                <option value="RUT">RUT</option>
+                <option value="CEDULA" selected="">Cedula</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Numero de Documento</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="colFormLabel" value="{% if customer %}{{ customer.dni }} {% endif %}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Sexo</label>
+            <div class="col-sm-10">
+              <select name="gender" id="id_gender" class="form-control">
+                <option value="">---------</option>
+                <option value="FE">Femenino</option>
+                <option value="MA" selected="">Masculino</option>
+                <option value="DS">Diversidad</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Fecha de Nacimiento</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control" id="colFormLabel" value="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label text-right">Sitio Web</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="colFormLabel" value="{% if customer %}{{ customer.website }} {% endif %}">
+            </div>
+          </div>
+
+        </form>
+      </aside>
+    </div>
+  </div><!-- container // -->
+</section>
+{% endblock %}

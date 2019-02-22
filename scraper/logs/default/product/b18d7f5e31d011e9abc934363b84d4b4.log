@@ -1,0 +1,1202 @@
+2019-02-16 09:53:25 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: scraper)
+2019-02-16 09:53:25 [scrapy.utils.log] INFO: Versions: lxml 4.3.1.0, libxml2 2.9.9, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (default, Feb 12 2019, 08:15:36) - [Clang 10.0.0 (clang-1000.11.45.5)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Darwin-18.2.0-x86_64-i386-64bit
+2019-02-16 09:53:25 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'scraper', 'LOG_FILE': 'logs/default/product/b18d7f5e31d011e9abc934363b84d4b4.log', 'NEWSPIDER_MODULE': 'scraper.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['scraper.spiders']}
+2019-02-16 09:53:25 [scrapy.extensions.telnet] INFO: Telnet Password: 9dc7d3608d9576a0
+2019-02-16 09:53:25 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+2019-02-16 09:53:25 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-02-16 09:53:25 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-02-16 09:53:25 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2019-02-16 09:53:25 [scrapy.core.engine] INFO: Spider opened
+2019-02-16 09:53:25 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-02-16 09:53:25 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6024
+2019-02-16 09:53:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/robots.txt> (referer: None)
+2019-02-16 09:53:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/> (referer: None)
+2019-02-16 09:53:26 [scrapy.dupefilters] DEBUG: Filtered duplicate request: <GET https://www.lajuana.cl/fertilizantes-quemanta/> - no more duplicates will be shown (see DUPEFILTER_DEBUG to show all duplicates)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/infinity-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/grass-o-matic/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/DNA-genetics-reserva-privada/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:31 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:33 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/test-de-drogas/> (failed 1 times): 500 Internal Server Error
+2019-02-16 09:53:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/productos-con-cbd/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:53:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/critical-express-3-2-semillas-positronics-seeds.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:53:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/critical-express-3-2-semillas-positronics-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Critical Express 3+2 semillas Positronics Seeds'}
+2019-02-16 09:53:37 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/cum-laude-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:53:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/cum-laude-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cum laude 3+2 Semillas Positronics'}
+2019-02-16 09:53:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/super-cheese-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:53:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/northern-lights-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:53:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/super-cheese-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Super Cheese 3+2 Semillas Positronics'}
+2019-02-16 09:53:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/shark-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:53:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/northern-lights-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Northern Lights 1 Semilla Pyramid Seeds'}
+2019-02-16 09:53:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/shark-1-semilla-pyramid-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Shark 1 Semilla Pyramid Seeds'}
+2019-02-16 09:53:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/1024-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:53:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/1024-3-semillas-medical-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': '1024 3 Semillas Medical Seeds'}
+2019-02-16 09:53:48 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/tdf-feminized-mix-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:53:48 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/tdf-feminized-mix-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Tdf Feminized Mix 5 Semillas Flying Dutchmen'}
+2019-02-16 09:53:50 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/dame-blanche-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:53:50 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/dame-blanche-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Dame Blanche 5 Semillas Flying Dutchmen'}
+2019-02-16 09:53:51 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/black-dream-3-semillas-eva-seeds.html> (referer: https://www.lajuana.cl/eva-seeds/)
+2019-02-16 09:53:51 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/eva-seeds/black-dream-3-semillas-eva-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Black Dream 3 Semillas Eva Seeds'}
+2019-02-16 09:53:52 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/auto-duck-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:53:52 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/auto-duck-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Auto Duck 3 Semillas Dutch Passion'}
+2019-02-16 09:53:53 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/auto-durban-poison-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:53:53 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/auto-durban-poison-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Auto Durban Poison 3 Semillas Dutch Passion'}
+2019-02-16 09:53:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics-reserva-privada/og-kush-3-semillas-dna-reserva-privada.html> (referer: https://www.lajuana.cl/DNA-genetics-reserva-privada/)
+2019-02-16 09:53:55 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics-reserva-privada/og-kush-3-semillas-dna-reserva-privada.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Og Kush 3 Semillas Dna Reserva Privada'}
+2019-02-16 09:53:56 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/nevilles-haze-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:53:57 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/nevilles-haze-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': "Neville'S Haze 3 Semillas Green House Seeds"}
+2019-02-16 09:53:57 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/grass-o-matic/auto-mass-3-semillas-grassomatic.html> (referer: https://www.lajuana.cl/grass-o-matic/)
+2019-02-16 09:53:57 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/grass-o-matic/auto-mass-3-semillas-grassomatic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Auto Mass 3 Semillas Grassomatic'}
+2019-02-16 09:53:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/haze-20-auto-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:53:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/productos-con-cbd/cbd-e-liquid-hemp-bombs-75mg.html> (referer: https://www.lajuana.cl/productos-con-cbd/)
+2019-02-16 09:53:59 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/haze-20-auto-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Haze 2.0 Auto 3 Semillas Dinafem'}
+2019-02-16 09:53:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/white-siberian-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/productos-con-cbd/cbd-e-liquid-hemp-bombs-75mg.html>
+{'image': 'image', 'marca': 'marca', 'name': 'CBD E-Liquid Hemp Bombs 75mg'}
+2019-02-16 09:54:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/white-siberian-3-semillas-dinafem.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'White Siberian 3 Semillas Dinafem'}
+2019-02-16 09:54:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/productos-con-cbd/jarabe-cbd-hemp-bombs.html> (referer: https://www.lajuana.cl/productos-con-cbd/)
+2019-02-16 09:54:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/productos-con-cbd/jarabe-cbd-hemp-bombs.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Jarabe Cbd - Hemp Bombs'}
+2019-02-16 09:54:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/productos-con-cbd/capsulas-de-cbd-hemp-bombs.html> (referer: https://www.lajuana.cl/productos-con-cbd/)
+2019-02-16 09:54:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/critical-auto-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:01 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/productos-con-cbd/capsulas-de-cbd-hemp-bombs.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Capsulas De Cbd - Hemp Bombs'}
+2019-02-16 09:54:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/critical-auto-3-semillas-dinafem.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Critical+ Auto 3 Semillas Dinafem'}
+2019-02-16 09:54:02 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/kush-n-cheese-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/kush-n-cheese-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Kush-N-Cheese 3 Semillas Dinafem'}
+2019-02-16 09:54:03 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/cheese-auto-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:03 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/cheese-auto-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Cheese Auto 3 Semillas Dinafem'}
+2019-02-16 09:54:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/super-silver-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/super-silver-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Super Silver 3 Semillas Dinafem'}
+2019-02-16 09:54:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/blue-thai-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/deep-cheese-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/blue-thai-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Blue Thai 3 Semillas Dinafem'}
+2019-02-16 09:54:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/deep-cheese-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Deep Cheese 3 Semillas Dinafem'}
+2019-02-16 09:54:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/blue-widow-3-semillas-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dinafem/critical-20-auto-1-semilla-dinafem.html> (referer: https://www.lajuana.cl/dinafem/)
+2019-02-16 09:54:07 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/blue-widow-3-semillas-dinafem.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Blue Widow 3 Semillas Dinafem'}
+2019-02-16 09:54:07 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dinafem/critical-20-auto-1-semilla-dinafem.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Critical+ 2.0 Auto 1 Semilla Dinafem'}
+2019-02-16 09:54:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics-reserva-privada/sour-kush-3-semillas-dna-reserva-privada.html> (referer: https://www.lajuana.cl/DNA-genetics-reserva-privada/)
+2019-02-16 09:54:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics-reserva-privada/sour-diesel-3-semillas-dna-reserva-privada.html> (referer: https://www.lajuana.cl/DNA-genetics-reserva-privada/)
+2019-02-16 09:54:08 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics-reserva-privada/sour-kush-3-semillas-dna-reserva-privada.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sour Kush 3 Semillas Dna Reserva Privada'}
+2019-02-16 09:54:08 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics-reserva-privada/sour-diesel-3-semillas-dna-reserva-privada.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sour Diesel 3 Semillas Dna Reserva Privada'}
+2019-02-16 09:54:09 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/cannalope-kush-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:09 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/cannalope-kush-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cannalope Kush 3 Semillas Dna Genetics'}
+2019-02-16 09:54:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/golden-lemons-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/golden-lemons-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Golden Lemons 3 Semillas Dna Genetics'}
+2019-02-16 09:54:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/lemon-skunk-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/lemon-skunk-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lemon Skunk 3 Semillas Dna Genetics'}
+2019-02-16 09:54:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/la-confidential-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/la-confidential-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'La Confidential 3 Semillas Dna Genetics'}
+2019-02-16 09:54:13 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/tangilope-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:13 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/cannalope-haze-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:13 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/exodus-kush-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:13 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/60-day-wonder-auto-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/tangilope-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Tangilope 3 Semillas Dna Genetics'}
+2019-02-16 09:54:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/cannalope-haze-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cannalope Haze 3 Semillas Dna Genetics'}
+2019-02-16 09:54:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/exodus-kush-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Exodus Kush 3 Semillas Dna Genetics'}
+2019-02-16 09:54:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/60-day-wonder-auto-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': '60 Day Wonder Auto 3 Semillas Dna Genetics'}
+2019-02-16 09:54:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dna-genetics/sour-kosher-3-semillas-dna-genetics.html> (referer: https://www.lajuana.cl/dna-genetics/)
+2019-02-16 09:54:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dna-genetics/sour-kosher-3-semillas-dna-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sour Kosher 3 Semillas Dna Genetics'}
+2019-02-16 09:54:20 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/the-edge-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:20 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/the-edge-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'The Edge 3 Semillas Dutch Passion'}
+2019-02-16 09:54:20 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/twilight-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:20 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/twilight-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Twilight 3 Semillas Dutch Passion'}
+2019-02-16 09:54:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/cbd-compassion-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/skunk-ns11-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/cbd-compassion-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cbd Compassion 3 Semillas Dutch Passion'}
+2019-02-16 09:54:22 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/mazar-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/skunk-ns11-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Skunk Ns11 3 Semillas Dutch Passion'}
+2019-02-16 09:54:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/mazar-3-semillas-dutch-passion.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Mazar 3 Semillas Dutch Passion'}
+2019-02-16 09:54:22 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/californian-orange-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/californian-orange-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Californian Orange 3 Semillas Dutch Passion'}
+2019-02-16 09:54:22 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/pamir-gold-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/pamir-gold-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Pamir Gold 3 Semillas Dutch Passion'}
+2019-02-16 09:54:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/dutch-passion/frisian-dew-3-semillas-dutch-passion.html> (referer: https://www.lajuana.cl/dutch-passion/)
+2019-02-16 09:54:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/dutch-passion/frisian-dew-3-semillas-dutch-passion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Frisian Dew 3 Semillas Dutch Passion'}
+2019-02-16 09:54:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/pink-plant-3-semillas-eva-seeds.html> (referer: https://www.lajuana.cl/eva-seeds/)
+2019-02-16 09:54:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/eva-seeds/pink-plant-3-semillas-eva-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pink Plant 3 Semillas Eva Seeds'}
+2019-02-16 09:54:25 [scrapy.extensions.logstats] INFO: Crawled 66 pages (at 66 pages/min), scraped 47 items (at 47 items/min)
+2019-02-16 09:54:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/jamaican-dream-3-semillas-eva-seeds.html> (referer: https://www.lajuana.cl/eva-seeds/)
+2019-02-16 09:54:26 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/eva-seeds/jamaican-dream-3-semillas-eva-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Jamaican Dream 3 Semillas Eva Seeds'}
+2019-02-16 09:54:28 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/monster-3-semillas-eva-seeds.html> (referer: https://www.lajuana.cl/eva-seeds/)
+2019-02-16 09:54:28 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/eva-seeds/missing-in-barcelona-3-semillas-eva-seeds.html> (referer: https://www.lajuana.cl/eva-seeds/)
+2019-02-16 09:54:28 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/eva-seeds/monster-3-semillas-eva-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Monster 3 Semillas Eva Seeds'}
+2019-02-16 09:54:28 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/eva-seeds/missing-in-barcelona-3-semillas-eva-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Missing In Barcelona 3 Semillas Eva Seeds'}
+2019-02-16 09:54:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/zkittlez-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/zkittlez-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Zkittlez Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/lemon-ak-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/lemon-ak-3-semillas-fastbuds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Lemon AK 3 Semillas Fastbuds'}
+2019-02-16 09:54:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/west-coast-og-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/west-coast-og-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'West Coast O.G. Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/lsd-25-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/girl-scout-cookies-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:32 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/lsd-25-auto-3-semillas-fastbuds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Lsd-25 Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:32 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/girl-scout-cookies-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Girl Scout Cookies Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/green-crack-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/green-crack-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Green Crack Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/mexican-airlines-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/blue-dream-matic-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:34 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/mexican-airlines-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Mexican Airlines Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:34 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/blue-dream-matic-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Blue Dream Matic Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/gorila-glue-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:34 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/gorila-glue-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Gorila Glue Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/fastbuds/californian-snow-auto-3-semillas-fastbuds.html> (referer: https://www.lajuana.cl/fastbuds/)
+2019-02-16 09:54:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/fastbuds/californian-snow-auto-3-semillas-fastbuds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Californian Snow Auto 3 Semillas Fastbuds'}
+2019-02-16 09:54:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/amsterdam-mist-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/amsterdam-mist-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Amsterdam Mist 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/edelweiss-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/edelweiss-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Edelweiss 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/skunk-classic-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/skunk-classic-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Skunk Classic 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:37 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/g-force-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/g-force-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'G Force 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/flying-dragon-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/flying-dragon-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Flying Dragon 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/dutch-delight-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/voyager-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/dutch-delight-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Dutch Delight 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/voyager-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Voyager 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/flying-dutchmen/skunk-no1-5-semillas-flying-dutchmen.html> (referer: https://www.lajuana.cl/flying-dutchmen/)
+2019-02-16 09:54:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/flying-dutchmen/skunk-no1-5-semillas-flying-dutchmen.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Skunk No1 5 Semillas Flying Dutchmen'}
+2019-02-16 09:54:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/exodus-cheese-auto-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/exodus-cheese-auto-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Exodus Cheese Auto 3 Semillas Green House Seeds'}
+2019-02-16 09:54:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/nl5-haze-mist-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:42 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/nl5-haze-mist-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Nl5 Haze Mist 3 Semillas Green House Seeds'}
+2019-02-16 09:54:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/white-rhino-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:42 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/white-rhino-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'White Rhino 3 Semillas Green House Seeds'}
+2019-02-16 09:54:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/exodus-cheese-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:42 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/exodus-cheese-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Exodus Cheese 3 Semillas Green House Seeds'}
+2019-02-16 09:54:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/great-white-shark-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/cheese-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:44 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/great-white-shark-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Great White Shark 3 Semillas Green House Seeds'}
+2019-02-16 09:54:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/kalashnikova-auto-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:44 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/cheese-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cheese 3 Semillas Green House Seeds'}
+2019-02-16 09:54:44 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/kalashnikova-auto-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Kalashnikova Auto 3 Semillas Green House Seeds'}
+2019-02-16 09:54:45 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/super-critical-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:45 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/super-critical-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Super Critical 3 Semillas Green House Seeds'}
+2019-02-16 09:54:47 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/green-house-seeds/white-widow-3-semillas-green-house-seeds.html> (referer: https://www.lajuana.cl/green-house-seeds/)
+2019-02-16 09:54:47 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/green-house-seeds/white-widow-3-semillas-green-house-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'White Widow 3 Semillas Green House Seeds'}
+2019-02-16 09:54:47 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/lost-coast-og-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:47 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/bubba-cheese-auto-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:48 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/lost-coast-og-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lost Coast Og 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:48 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/bubba-cheese-auto-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bubba Cheese Auto 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:48 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/lost-coast-hashplant-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:49 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/lost-coast-skunk-auto-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:49 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/lost-coast-hashplant-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lost Coast Hashplant 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:49 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/lost-coast-skunk-auto-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lost Coast Skunk Auto 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:49 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/lemon-kush-headband-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:49 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/lemon-kush-headband-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lemon Kush Headband 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:49 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/master-kush-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:49 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/master-kush-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Master Kush 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:50 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/chocolate-mint-og-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:51 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/chocolate-mint-og-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Chocolate Mint Og 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:52 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/chemdawg-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:52 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/chemdawg-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Chemdawg 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:53 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/lemon-thai-kush-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:53 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/lemon-thai-kush-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lemon Thai Kush 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/humboldt-seeds/purple-trainwreck-3-semillas-humboldt-seeds.html> (referer: https://www.lajuana.cl/humboldt-seeds/)
+2019-02-16 09:54:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/devil-fruit-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:54:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/humboldt-seeds/purple-trainwreck-3-semillas-humboldt-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Purple Trainwreck 3 Semillas Humboldt Seeds'}
+2019-02-16 09:54:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/devil-fruit-3-semillas-medical-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Devil Fruit 3 Semillas Medical Seeds'}
+2019-02-16 09:54:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/jack-la-mota-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:54:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/jack-la-mota-3-semillas-medical-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Jack La Mota 3 Semillas Medical Seeds'}
+2019-02-16 09:54:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/2046-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:54:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/y-griega-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:54:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/2046-3-semillas-medical-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': '2046 3 Semillas Medical Seeds'}
+2019-02-16 09:54:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/y-griega-3-semillas-medical-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Y Griega 3 Semillas Medical Seeds'}
+2019-02-16 09:54:56 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/prozack-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:54:56 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/prozack-3-semillas-medical-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'PROZACK 3 SEMILLAS MEDICAL SEEDS'}
+2019-02-16 09:55:03 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medical-seeds/channel-3-semillas-medical-seeds.html> (referer: https://www.lajuana.cl/medical-seeds/)
+2019-02-16 09:55:03 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medical-seeds/channel-3-semillas-medical-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Channel+ 3 Semillas Medical Seeds'}
+2019-02-16 09:55:03 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/super-hash-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:03 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/super-hash-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Super Hash 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/white-widow-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/nefertiti-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/white-widow-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'White Widow 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/new-york-city-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/auto-blue-pyramid-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/nefertiti-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Nefertiti 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/new-york-city-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'New York City 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/auto-blue-pyramid-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Auto Blue Pyramid 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/kryptonite-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:05 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/kryptonite-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Kryptonite 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/lennon-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:07 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/lennon-1-semilla-pyramid-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Lennon 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/pyramid-seeds/anesthesia-1-semilla-pyramid-seeds.html> (referer: https://www.lajuana.cl/pyramid-seeds/)
+2019-02-16 09:55:09 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/pyramid-seeds/anesthesia-1-semilla-pyramid-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Anesthesia 1 Semilla Pyramid Seeds'}
+2019-02-16 09:55:10 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/lucid-bolt-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:10 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/original-cheese-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:10 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/white-berry-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:11 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/lucid-bolt-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lucid Bolt 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:11 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/acid-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:11 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/pandora-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:11 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/original-cheese-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Original Cheese 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:11 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/white-berry-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'White Berry 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:11 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/acid-3-semillas-paradise-seeds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Acid 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:11 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/pandora-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Pandora 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/spoetnik-n1-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/paradise-seeds/icecream-3-semillas-paradise-seeds.html> (referer: https://www.lajuana.cl/paradise-seeds/)
+2019-02-16 09:55:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/spoetnik-n1-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Spoetnik N1 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/paradise-seeds/icecream-3-semillas-paradise-seeds.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Icecream 3 Semillas Paradise Seeds'}
+2019-02-16 09:55:14 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/jack-diesel-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/jack-diesel-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Jack Diesel 3+2 Semillas Positronics'}
+2019-02-16 09:55:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/critical-47-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/critical-47-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Critical 47 3+2 Semillas Positronics'}
+2019-02-16 09:55:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/caramelice-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/caramelice-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Caramelice 3+2 Semillas Positronics'}
+2019-02-16 09:55:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/blue-rhino-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/black-widow-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:17 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/blue-rhino-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Blue Rhino 3+2 Semillas Positronics'}
+2019-02-16 09:55:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/amnesia-mistery-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/positronics-seeds/claustrum-3-2-semillas-positronics.html> (referer: https://www.lajuana.cl/positronics-seeds/)
+2019-02-16 09:55:17 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/black-widow-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Black Widow 3+2 Semillas Positronics'}
+2019-02-16 09:55:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/amnesia-mistery-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Amnesia Mistery 3+2 semillas Positronics'}
+2019-02-16 09:55:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/positronics-seeds/claustrum-3-2-semillas-positronics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Claustrum 3+2 Semillas Positronics'}
+2019-02-16 09:55:19 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/mazar-automatica-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:19 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/mazar-automatica-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Mazar Automática A Granel'}
+2019-02-16 09:55:20 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/strawberry-feminizada-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:20 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/strawberry-feminizada-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Strawberry Feminizada A Granel'}
+2019-02-16 09:55:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/cannatonic-medicinal-cbd-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/cannatonic-medicinal-cbd-a-granel.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Cannatonic Medicinal Cbd A Granel'}
+2019-02-16 09:55:23 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/bruce-banner-3-feminzada-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/bruce-banner-3-feminzada-a-granel.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bruce Banner 3 Feminzada A Granel'}
+2019-02-16 09:55:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/destroyer-feminizada-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/destroyer-feminizada-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Destroyer Feminizada A Granel'}
+2019-02-16 09:55:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/60-day-lemon-automatica-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/60-day-lemon-automatica-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': '60 Day Lemon Automatica A Granel'}
+2019-02-16 09:55:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/skunk-automatica-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/og-kush-feminizada-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/skunk-automatica-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Skunk Automática A Granel'}
+2019-02-16 09:55:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/og-kush-feminizada-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Og Kush Feminizada A Granel'}
+2019-02-16 09:55:25 [scrapy.extensions.logstats] INFO: Crawled 142 pages (at 76 pages/min), scraped 123 items (at 76 items/min)
+2019-02-16 09:55:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/haze-feminizada-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:26 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/haze-feminizada-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Haze Feminizada A Granel'}
+2019-02-16 09:55:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/semillas-a-granel/magnum-automatica-a-granel.html> (referer: https://www.lajuana.cl/semillas/)
+2019-02-16 09:55:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/semillas-a-granel/magnum-automatica-a-granel.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Magnum Automática A Granel'}
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/cosmeticos-cannabicos/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medicina-cannabica/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-fungi/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato-fungi/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/kits-cultivo-fungi/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:31 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:31 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/mundo-fungi/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/platos-para-macetas/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-jiffy/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-para-cultivar/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-mills/> (referer: https://www.lajuana.cl/)
+2019-02-16 09:55:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/arthrocann-warming-75ml.html> (referer: https://www.lajuana.cl/annabis/)
+2019-02-16 09:55:40 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/annabis/arthrocann-warming-75ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Gel de Cannabis Arthrocann Warming 75ml'}
+2019-02-16 09:55:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/varicann-q10-gel-75ml.html> (referer: https://www.lajuana.cl/annabis/)
+2019-02-16 09:55:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/cremcann-hyaluron-50ml.html> (referer: https://www.lajuana.cl/annabis/)
+2019-02-16 09:55:40 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/annabis/varicann-q10-gel-75ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Gel de Cannabis Varicann Q10 75ml'}
+2019-02-16 09:55:40 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/annabis/cremcann-hyaluron-50ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Crema de Cannabis Cremcann Hyaluron 50ml'}
+2019-02-16 09:55:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/cremcann-hyaluron-15ml.html> (referer: https://www.lajuana.cl/annabis/)
+2019-02-16 09:55:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/annabis/cremcann-hyaluron-15ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Crema de Cannabis Cremcann Hyaluron 15ml'}
+2019-02-16 09:55:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/annabis/bodycann-shower-gel-250ml.html> (referer: https://www.lajuana.cl/annabis/)
+2019-02-16 09:55:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/annabis/bodycann-shower-gel-250ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Gel de Cannabis Bodycann Shower 250ml'}
+2019-02-16 09:55:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-10-ml-con-aguja.html> (referer: https://www.lajuana.cl/accesorios-fungi/)
+2019-02-16 09:55:42 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-10-ml-con-aguja.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Jeringa Desechable 10 Ml Con Aguja'}
+2019-02-16 09:55:42 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-pro-natural-magic.html> (referer: https://www.lajuana.cl/kits-cultivo-fungi/)
+2019-02-16 09:55:42 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-pro-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Kit Cultivo Pro'}
+2019-02-16 09:55:43 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/control-de-temperatura/manta-calefactora-35x25-cm-17-w-neptune-hydroponics.html> (referer: https://www.lajuana.cl/accesorios-fungi/)
+2019-02-16 09:55:44 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/control-de-temperatura/manta-calefactora-35x25-cm-17-w-neptune-hydroponics.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Manta Calefactora 35×25 Cm 17 W'}
+2019-02-16 09:55:46 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/tutor-medusa-protect.html> (referer: https://www.lajuana.cl/distintivos-y-guias/)
+2019-02-16 09:55:46 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/distintivos-y-guias/tutor-medusa-protect.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Tutor Para Plantas Medusa Protect'}
+2019-02-16 09:55:47 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/platos-para-macetas/plato-para-macetas-cuadradas-7-11-18-lts-20x20-cms.html> (referer: https://www.lajuana.cl/platos-para-macetas/)
+2019-02-16 09:55:48 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/platos-para-macetas/plato-para-macetas-cuadradas-7-11-18-lts-20x20-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Plato Para Macetas Cuadradas 7-11-18 Lts 20X20 Cms'}
+2019-02-16 09:55:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-15-litros.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:55:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/pensacola-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:55:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-15-litros.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Maceta Textil Texpot 15 Litros'}
+2019-02-16 09:55:54 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/pensacola-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Pensacola'}
+2019-02-16 09:55:54 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/australia-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:55:55 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/australia-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Australia'}
+2019-02-16 09:55:56 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/pure-pot-maceta-textil-757-litros.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:55:56 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/pure-pot-maceta-textil-757-litros.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Pure Pot Maceta Textil 75,7 LITROS'}
+2019-02-16 09:55:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-mills/sustrato-mills-light-mix-50l.html> (referer: https://www.lajuana.cl/sustratos-mills/)
+2019-02-16 09:55:58 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-mills/sustrato-mills-light-mix-50l.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustrato Mills Light Mix 50L'}
+2019-02-16 09:55:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-jiffy/disco-germinador-jiffy.html> (referer: https://www.lajuana.cl/sustratos-jiffy/)
+2019-02-16 09:55:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-jiffy/jiffy-cocoblock-5x5-cms.html> (referer: https://www.lajuana.cl/sustratos-jiffy/)
+2019-02-16 09:55:59 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-jiffy/disco-germinador-jiffy.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Disco Germinador Jiffy'}
+2019-02-16 09:55:59 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-jiffy/jiffy-cocoblock-5x5-cms.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Jiffy Cocoblock 5X5 Cms'}
+2019-02-16 09:56:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-mills/sustrato-mills-top-mix-50-lts.html> (referer: https://www.lajuana.cl/sustratos-mills/)
+2019-02-16 09:56:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-mills/sustrato-mills-top-mix-50-lts.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustrato Mills Top Mix 50 Lts'}
+2019-02-16 09:56:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-mills/sustrato-mills-dna-soil-cork-50-lts.html> (referer: https://www.lajuana.cl/sustratos-mills/)
+2019-02-16 09:56:00 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-mills/sustrato-mills-dna-soil-cork-50-lts.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sustrato Mills DNA Soil Cork 50 Lts'}
+2019-02-16 09:56:02 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-35-lts-15x15x18-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-35-lts-15x15x18-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 3,5 Lts 15X15X18 Cms'}
+2019-02-16 09:56:02 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-rejilla-762-cm.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-rejilla-762-cm.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Maceta Rejilla 7,62 cm'}
+2019-02-16 09:56:02 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-rejilla-5cm-90uds.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-rejilla-5cm-90uds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Maceta Rejilla 5cm 90UDS'}
+2019-02-16 09:56:04 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-56-lts-18x18x23-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:04 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-56-lts-18x18x23-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 5,6 Lts 18X18X23 Cms'}
+2019-02-16 09:56:04 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-blanca-18-lts-26x26x40-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:04 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-blanca-18-lts-26x26x40-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Blanca 18 Lts 26x26x40 cms'}
+2019-02-16 09:56:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-18-lts-26x26x40-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:06 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-18-lts-26x26x40-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 18 Lts 26x26x40 cms'}
+2019-02-16 09:56:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-blanca-7-lts-20x20x275-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-3lts-15x15x20.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:06 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-blanca-7-lts-20x20x275-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Blanca 7 Lts 20X20X27,5 Cms'}
+2019-02-16 09:56:06 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-3lts-15x15x20.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 3Lts 15x15x20'}
+2019-02-16 09:56:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-11-lts-23x23x26-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:09 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-11-lts-23x23x26-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 11 Lts 23X23X26 Cms'}
+2019-02-16 09:56:09 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-7-lts-20x20x25-cms.html> (referer: https://www.lajuana.cl/macetas-de-plastico/)
+2019-02-16 09:56:09 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/macetas-de-plastico/maceta-cuadrada-negra-7-lts-20x20x25-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Cuadrada Negra 7 Lts 20X20X25 Cms'}
+2019-02-16 09:56:12 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/texpot-urban-150-lts-color-arena.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:12 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/texpot-urban-150-lts-color-arena.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Texpot Urban 150 Lts Color Arena'}
+2019-02-16 09:56:14 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/smart-pot-big-bag-bed-jr-190-lts.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/smart-pot-big-bag-bed-jr-190-lts.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Smart Pot BIG BAG BED JR 190 Lts'}
+2019-02-16 09:56:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-3-litros-blanca.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-10-litros-blanca.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-3-litros-blanca.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Textil Texpot 3 Litros Blanca'}
+2019-02-16 09:56:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-10-litros-blanca.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Textil Texpot 10 Litros Blanca'}
+2019-02-16 09:56:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-50-litros.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-50-litros.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Maceta Textil Texpot 50 Litros'}
+2019-02-16 09:56:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-15-litros-blanca.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-15-litros-blanca.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Textil Texpot 15 Litros Blanca'}
+2019-02-16 09:56:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-25-litros-blanca.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-25-litros-blanca.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Textil Texpot 25 Litros Blanca'}
+2019-02-16 09:56:18 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-7-litros-blanca.html> (referer: https://www.lajuana.cl/maceteros-textiles/)
+2019-02-16 09:56:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/maceteros-textiles/maceta-geotextil-texpot-7-litros-blanca.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Maceta Textil Texpot 7 Litros Blanca'}
+2019-02-16 09:56:18 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/platos-para-macetas/plato-para-maceta-18x18-cms.html> (referer: https://www.lajuana.cl/platos-para-macetas/)
+2019-02-16 09:56:19 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/platos-para-macetas/plato-para-maceta-18x18-cms.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Plato Para Maceta 18X18 Cms'}
+2019-02-16 09:56:20 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/platos-para-macetas/plato-para-macetas-cuadradas-35lts-15x15-cms.html> (referer: https://www.lajuana.cl/platos-para-macetas/)
+2019-02-16 09:56:20 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/platos-para-macetas/plato-para-macetas-cuadradas-35lts-15x15-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Plato Para Macetas Cuadradas 3,5Lts 15X15 Cms'}
+2019-02-16 09:56:20 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/tutor-plastico-verde-8mm-grosor-x-60mm-largo.html> (referer: https://www.lajuana.cl/distintivos-y-guias/)
+2019-02-16 09:56:20 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/distintivos-y-guias/tutor-plastico-verde-8mm-grosor-x-60mm-largo.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Tutor Para Plantas Plastico Verde 8Mm Grosor X 60Mm Largo'}
+2019-02-16 09:56:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/etiquetas-distintivas-para-picar-13-x-6-cm-x-1-un.html> (referer: https://www.lajuana.cl/distintivos-y-guias/)
+2019-02-16 09:56:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/distintivos-y-guias/etiquetas-distintivas-para-picar-13-x-6-cm-x-1-un.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Etiquetas Distintivas para plantas 1,3 X 6 Cm X 1 Un'}
+2019-02-16 09:56:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/etiquetas-distintivas-para-plantas-13-x-10-cm-x-1-un.html> (referer: https://www.lajuana.cl/distintivos-y-guias/)
+2019-02-16 09:56:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/distintivos-y-guias/etiquetas-distintivas-para-plantas-13-x-10-cm-x-1-un.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Etiquetas Distintivas para plantas 1,3 X 10 Cm X 1 Un'}
+2019-02-16 09:56:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/distintivos-y-guias/etiqueta-de-pincho-15-cms.html> (referer: https://www.lajuana.cl/distintivos-y-guias/)
+2019-02-16 09:56:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/distintivos-y-guias/etiqueta-de-pincho-15-cms.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Etiqueta Distintiva para plantas tipo Pincho 15 Cms'}
+2019-02-16 09:56:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/texas-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/esporas-de-hongos-thai-koh-samui-super-strain.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/texas-natural-magic.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Esporas De Hongos Texas - Natural Magic'}
+2019-02-16 09:56:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/esporas-de-hongos-thai-koh-samui-super-strain.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Esporas De Hongos THAI KOH SAMUI SUPER STRAIN'}
+2019-02-16 09:56:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/esporas-de-hongos-cambodian.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/esporas-de-hongos-cambodian.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Cambodian'}
+2019-02-16 09:56:25 [scrapy.extensions.logstats] INFO: Crawled 206 pages (at 64 pages/min), scraped 171 items (at 48 items/min)
+2019-02-16 09:56:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/argentina-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/argentina-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Argentina'}
+2019-02-16 09:56:26 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/treasure-coas-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:26 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/treasure-coas-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Treasure Coas'}
+2019-02-16 09:56:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/tulum-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/hawaii-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:27 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/tulum-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Tulum'}
+2019-02-16 09:56:27 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/hawaii-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Hawaii'}
+2019-02-16 09:56:27 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/esporas-de-coleccion/red-spore-natural-magic.html> (referer: https://www.lajuana.cl/esporas-de-coleccion/)
+2019-02-16 09:56:28 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/esporas-de-coleccion/red-spore-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Esporas De Hongos Red Spore'}
+2019-02-16 09:56:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-starter-natural-magic.html> (referer: https://www.lajuana.cl/kits-cultivo-fungi/)
+2019-02-16 09:56:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-starter-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Kit Cultivo Starter'}
+2019-02-16 09:56:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-fungi-san-isidro.html> (referer: https://www.lajuana.cl/kits-cultivo-fungi/)
+2019-02-16 09:56:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato-fungi/vermiculita-esteril-750cc.html> (referer: https://www.lajuana.cl/sustrato-fungi/)
+2019-02-16 09:56:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/kits-cultivo-fungi/kit-cultivo-fungi-san-isidro.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Kit cultivo fungi San Isidro'}
+2019-02-16 09:56:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustrato-fungi/vermiculita-esteril-750cc.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vermiculita Estéril 750cc'}
+2019-02-16 09:56:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato-fungi/grano-esteril-12-kg.html> (referer: https://www.lajuana.cl/sustrato-fungi/)
+2019-02-16 09:56:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustrato-fungi/grano-esteril-12-kg.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Grano Estéril 1,2 Kg'}
+2019-02-16 09:56:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato-fungi/grano-esteril-750cc.html> (referer: https://www.lajuana.cl/sustrato-fungi/)
+2019-02-16 09:56:32 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustrato-fungi/grano-esteril-750cc.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Grano Estéril 750cc'}
+2019-02-16 09:56:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/control-de-temperatura/manta-calefactora-50x30-cm-30-w-neptune-hydroponics.html> (referer: https://www.lajuana.cl/accesorios-fungi/)
+2019-02-16 09:56:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato-fungi/vial-de-solucion-nutritiva-natural-magic.html> (referer: https://www.lajuana.cl/accesorios-fungi/)
+2019-02-16 09:56:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-3-ml-con-aguja.html> (referer: https://www.lajuana.cl/accesorios-fungi/)
+2019-02-16 09:56:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/control-de-temperatura/manta-calefactora-50x30-cm-30-w-neptune-hydroponics.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Manta Calefactora 50×30 Cm 30 W'}
+2019-02-16 09:56:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustrato-fungi/vial-de-solucion-nutritiva-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Solución Nutritiva'}
+2019-02-16 09:56:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-3-ml-con-aguja.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Jeringa Desechable 3 Ml Con Aguja'}
+2019-02-16 09:56:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-cuba-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-cuba-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Cuba'}
+2019-02-16 09:56:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-treasure-coast-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-treasure-coast-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Treasure Coast'}
+2019-02-16 09:56:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-texas-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-texas-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Texas'}
+2019-02-16 09:56:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-huautla-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-huautla-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Huautla'}
+2019-02-16 09:56:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-hawaii-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-australia-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-hawaii-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Hawaii'}
+2019-02-16 09:56:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-thai-baht-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-australia-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Australia'}
+2019-02-16 09:56:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-thai-baht-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Thai Baht'}
+2019-02-16 09:56:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-argentina-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-argentina-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Argentina'}
+2019-02-16 09:56:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-pensacola-natural-magic.html> (referer: https://www.lajuana.cl/viales-de-esporas/)
+2019-02-16 09:56:40 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-pensacola-natural-magic.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Vial De Esporas Pensacola'}
+2019-02-16 10:01:51 [scrapy.extensions.logstats] INFO: Crawled 228 pages (at 22 pages/min), scraped 193 items (at 22 items/min)
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-5-ml-con-aguja.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/accesorios-para-medicion/jeringa-desechable-5-ml-con-aguja.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-red-spore-natural-magic.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/viales-de-esporas/vial-de-esporas-red-spore-natural-magic.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/annabis/cremcann-omega-3-6-50ml.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/annabis/cremcann-omega-3-6-50ml.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/annabis/handcann-crema-75ml.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/annabis/handcann-crema-75ml.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/annabis/boddycann-body-milk-250ml.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/annabis/boddycann-body-milk-250ml.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/annabis/creamcann-q10-men-50ml.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/annabis/creamcann-q10-men-50ml.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/annabis/bodycann-shampoo-250ml.html> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/annabis/bodycann-shampoo-250ml.html took longer than 180.0 seconds..
+2019-02-16 10:01:51 [scrapy.downloadermiddlewares.retry] DEBUG: Retrying <GET https://www.lajuana.cl/sustratos-otras-marcas/> (failed 1 times): User timeout caused connection failure: Getting https://www.lajuana.cl/sustratos-otras-marcas/ took longer than 180.0 seconds..
+2019-02-16 10:01:57 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-top-crop/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-atami/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-biobizz/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustrato/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/tijeras-de-podar/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-full-grow/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:58 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-y-macetas/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/goteros/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/riego-automatico/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:01:59 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/reguladores-de-ph/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:00 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/riego/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/> (referer: https://www.lajuana.cl/)
+2019-02-16 10:02:01 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-top-crop/sustrato-top-crop-heavy-mix-50l.html> (referer: https://www.lajuana.cl/sustratos-top-crop/)
+2019-02-16 10:02:02 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-top-crop/sustrato-top-crop-heavy-mix-50l.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustrato Heavy Mix 50L'}
+2019-02-16 10:02:03 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/tijeras-de-podar/tijera-procut-cuchillas-rectas.html> (referer: https://www.lajuana.cl/tijeras-de-podar/)
+2019-02-16 10:02:03 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-top-crop/sustrato-top-crop-complete-mix-50l.html> (referer: https://www.lajuana.cl/sustratos-top-crop/)
+2019-02-16 10:02:03 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/tijeras-de-podar/tijera-procut-cuchillas-rectas.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Tijera Podadora Procut Cuchillas Rectas'}
+2019-02-16 10:02:03 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-top-crop/sustrato-top-crop-complete-mix-50l.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustrato Complete Mix 50L'}
+2019-02-16 10:02:04 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-full-grow/sustratos-full-grow-plus-11lts.html> (referer: https://www.lajuana.cl/sustratos-full-grow/)
+2019-02-16 10:02:04 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-full-grow/sustratos-full-grow-plus-11lts.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustratos Full Grow Plus 11Lts'}
+2019-02-16 10:02:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sustratos-full-grow/sustratos-full-grow-light-50lts.html> (referer: https://www.lajuana.cl/sustratos-full-grow/)
+2019-02-16 10:02:06 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sustratos-full-grow/sustratos-full-grow-light-50lts.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sustratos Full Grow Light 50Lts'}
+2019-02-16 10:02:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/bolsa-de-piezas-5codos-16mm1t16mm1punzon.html> (referer: https://www.lajuana.cl/sistemas-hidroponicos/)
+2019-02-16 10:02:07 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sistemas-hidroponicos/bolsa-de-piezas-5codos-16mm1t16mm1punzon.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bolsa de piezas (5codos 16mm+1"T"16mm+1punzón)'}
+2019-02-16 10:02:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/enlace-mixto-rosca-macho-12x16mm.html> (referer: https://www.lajuana.cl/sistemas-hidroponicos/)
+2019-02-16 10:02:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/enlace-mixto-rosca-macho-34x16mm.html> (referer: https://www.lajuana.cl/sistemas-hidroponicos/)
+2019-02-16 10:02:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/easy2go-kit-autopot.html> (referer: https://www.lajuana.cl/sistemas-hidroponicos/)
+2019-02-16 10:02:08 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sistemas-hidroponicos/enlace-mixto-rosca-macho-12x16mm.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Enlace Mixto rosca macho 1/2x16mm'}
+2019-02-16 10:02:08 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sistemas-hidroponicos/enlace-mixto-rosca-macho-34x16mm.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Enlace Mixto rosca macho 3/4x16mm'}
+2019-02-16 10:02:08 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sistemas-hidroponicos/easy2go-kit-autopot.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Sistema Hidropónico Easy2Go Kit'}
+2019-02-16 10:02:09 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/sistemas-hidroponicos/tapon-gotero-medusa-8-uds.html> (referer: https://www.lajuana.cl/sistemas-hidroponicos/)
+2019-02-16 10:02:09 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/sistemas-hidroponicos/tapon-gotero-medusa-8-uds.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Tapón Gotero Medusa 8 uds.'}
+2019-02-16 10:02:10 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/pre-filtro-sedimentacion-t33.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:10 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/filtro-osmosis-5-etapas-deposito-presion.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:10 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/pre-filtro-sedimentacion-t33.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pre Filtro Sedimentación T33'}
+2019-02-16 10:02:10 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/filtro-osmosis-5-etapas-deposito-presion.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Filtro Osmosis 5 etapas + depósito presión'}
+2019-02-16 10:02:14 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/reguladores-de-ph/ph-up-500ml-advanced-hydroponics.html> (referer: https://www.lajuana.cl/reguladores-de-ph/)
+2019-02-16 10:02:14 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/reguladores-de-ph/ph-up-500ml-advanced-hydroponics.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Regulador De Ph Up 500Ml'}
+2019-02-16 10:02:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/piedra-difusora-de-aire-25-cms.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/regadera-plastica-6-litros.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/piedra-difusora-de-aire-25-cms.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Piedra Difusora De Aire 2,5 Cms'}
+2019-02-16 10:02:15 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/regadera-plastica-6-litros.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Regadera Plástica 6 Litros'}
+2019-02-16 10:02:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-ec-y-tds-dist4-hanna.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-ec-y-tds-dist4-hanna.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor Ec Y Tds Dist®4 - Hanna'}
+2019-02-16 10:02:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ph-phep-hanna.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:16 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ph-phep-hanna.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor De Ph Phep® - Hanna'}
+2019-02-16 10:02:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/control-de-humedad-dual-grow-genetics.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:17 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/control-de-humedad-dual-grow-genetics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Control de Humedad Dual Grow Genetics'}
+2019-02-16 10:02:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/jarro-graduado-1000-ml-simple.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:18 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-de-iluminacion-la-juana/luxometro-lx1330b-pure-factory.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/jarro-graduado-1000-ml-simple.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Jarro graduado 1000 Ml Simple'}
+2019-02-16 10:02:18 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-de-iluminacion-la-juana/luxometro-lx1330b-pure-factory.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Luxometro LX1330B Pure Factory'}
+2019-02-16 10:02:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/jarra-graduada-1l-2-en-1.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:21 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/jarra-graduada-100ml.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/jarra-graduada-1l-2-en-1.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Jarra Graduada 1L (2 En 1)'}
+2019-02-16 10:02:21 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/jarra-graduada-100ml.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Jarra Graduada 100Ml'}
+2019-02-16 10:02:22 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/pipeta-pasteur-3-ml-1-unidad.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:22 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/pipeta-pasteur-3-ml-1-unidad.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pipeta Pasteur 3 Ml 1 Unidad'}
+2019-02-16 10:02:23 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-medicion/pipeta-pasteur-5-ml-1-unidad.html> (referer: https://www.lajuana.cl/accesorios-para-medicion/)
+2019-02-16 10:02:23 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-medicion/pipeta-pasteur-5-ml-1-unidad.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pipeta Pasteur 5 Ml 1 Unidad'}
+2019-02-16 10:02:23 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-ec-milwaukee.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:23 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-ec-milwaukee.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor EC - Milwaukee'}
+2019-02-16 10:02:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-ph-con-sonda-milwaukee.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:24 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-ph-con-sonda-milwaukee.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor PH con sonda - Milwaukee'}
+2019-02-16 10:02:24 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-ph-milwaukee.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-ph-milwaukee.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor Ph - Milwaukee'}
+2019-02-16 10:02:25 [scrapy.extensions.logstats] INFO: Crawled 274 pages (at 46 pages/min), scraped 220 items (at 27 items/min)
+2019-02-16 10:02:25 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/ph-kit-test-neptune-hydroponics.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:25 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/ph-kit-test-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Medidor De Ph Kit Test Neptune Hydroponics'}
+2019-02-16 10:02:28 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ec-wassertech.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:28 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ec-wassertech.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor De Ec Wassertech'}
+2019-02-16 10:02:28 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-conductividad-ec-milwaukee-0-a-20000-us-cm-cd611.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:28 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-conductividad-ec-milwaukee-0-a-20000-us-cm-cd611.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Medidor De Conductividad Ec Milwaukee 0 A 20.000 Us/Cm (Cd611)'}
+2019-02-16 10:02:28 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ph-wassertech.html> (referer: https://www.lajuana.cl/medidor-ph-y-ec/)
+2019-02-16 10:02:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/medidor-ph-y-ec/medidor-de-ph-wassertech.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Medidor De Ph Wassertech'}
+2019-02-16 10:02:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-12880-scm-20-ml-bolsitas.html> (referer: https://www.lajuana.cl/soluciones-calibradoras/)
+2019-02-16 10:02:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-12880-scm-20-ml-bolsitas.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Solución De Calibración De Conductividad 12880 S/Cm, 20 Ml Bolsitas'}
+2019-02-16 10:02:29 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-12880-s-cm-botella-500-ml.html> (referer: https://www.lajuana.cl/soluciones-calibradoras/)
+2019-02-16 10:02:29 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-12880-s-cm-botella-500-ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Solución De Calibración De Conductividad 12880 S/Cm, Botella 500 Ml'}
+2019-02-16 10:02:30 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-1413-s-cm-1-bolsita-20-ml.html> (referer: https://www.lajuana.cl/soluciones-calibradoras/)
+2019-02-16 10:02:30 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-de-conductividad-1413-s-cm-1-bolsita-20-ml.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Solución De Calibración De Conductividad 1413 S/Cm, 1 Bolsita 20 Ml'}
+2019-02-16 10:02:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-ph-701-20-ml-bolsitas.html> (referer: https://www.lajuana.cl/soluciones-calibradoras/)
+2019-02-16 10:02:32 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-ph-701-20-ml-bolsitas.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Solución De Calibración Ph 7.01, 20 Ml Bolsitas'}
+2019-02-16 10:02:32 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-ph-401-20-ml-bolsitas.html> (referer: https://www.lajuana.cl/soluciones-calibradoras/)
+2019-02-16 10:02:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/soluciones-calibradoras/solucion-de-calibracion-ph-401-20-ml-bolsitas.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Solución De Calibración Ph 4.01, 20 Ml Bolsitas'}
+2019-02-16 10:02:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/lanza-de-riego-neptune-hydroponics.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/regadera-plastica-1600cc.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/lanza-de-riego-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Lanza De Riego Neptune Hydroponics'}
+2019-02-16 10:02:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/deposito-flexible-250l-neptune-hydroponics.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/regadera-plastica-1600cc.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Regadera Plastica 1600Cc'}
+2019-02-16 10:02:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/deposito-flexible-250l-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Deposito Para Agua Flexible 250L Neptune Hydroponics'}
+2019-02-16 10:02:33 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/deposito-flexible-500l-neptune-hydroponics.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:33 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/deposito-flexible-500l-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Deposito Para Agua Flexible 500L Neptune Hydroponics'}
+2019-02-16 10:02:34 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/tubo-atoxico-de-silicona-1m.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:34 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/tubo-atoxico-de-silicona-1m.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Tubo Atóxico de Silicona 1m'}
+2019-02-16 10:02:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/embudo-plastico-10-cms-de-diametro.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/accesorios-para-el-riego/piedra-difusora-de-aire-15-cms.html> (referer: https://www.lajuana.cl/accesorios-para-el-riego/)
+2019-02-16 10:02:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/embudo-plastico-10-cms-de-diametro.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Embudo Plástico 10 Cms De Diametro.'}
+2019-02-16 10:02:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/accesorios-para-el-riego/piedra-difusora-de-aire-15-cms.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Piedra Difusora De Aire 15 Cms'}
+2019-02-16 10:02:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/reguladores-de-ph/ph-down-500ml-advance-hidropone.html> (referer: https://www.lajuana.cl/reguladores-de-ph/)
+2019-02-16 10:02:35 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/sistema-de-osmosis-inversa-activeaqua-hydrofarm.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:35 [scrapy.crawler] INFO: Received SIGTERM, shutting down gracefully. Send again to force 
+2019-02-16 10:02:35 [scrapy.core.engine] INFO: Closing spider (shutdown)
+2019-02-16 10:02:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/reguladores-de-ph/ph-down-500ml-advance-hidropone.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Regulador De Ph Down 500Ml'}
+2019-02-16 10:02:35 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/sistema-de-osmosis-inversa-activeaqua-hydrofarm.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sistema de Osmosis inversa ActiveAqua - Hydrofarm'}
+2019-02-16 10:02:36 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/pre-filtro-carbon-activo-t33.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:36 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/pre-filtro-carbon-activo-t33.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Repuesto filtro osmosis Pre Filtro Carbon Activo T33'}
+2019-02-16 10:02:37 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/repuesto-membrana-50g-para-filtro-osmosis.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:37 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/filtro-de-osmosis/filtro-osmosis-inversa-wassertech-150-190-l-dia.html> (referer: https://www.lajuana.cl/filtro-de-osmosis/)
+2019-02-16 10:02:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/repuesto-membrana-50g-para-filtro-osmosis.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Repuesto Membrana 50G Para Filtro Osmosis'}
+2019-02-16 10:02:37 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/filtro-de-osmosis/filtro-osmosis-inversa-wassertech-150-190-l-dia.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Filtro Osmosis Inversa Wassertech 150-190 L/Día'}
+2019-02-16 10:02:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-5-l.html> (referer: https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/)
+2019-02-16 10:02:38 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-500cc.html> (referer: https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/)
+2019-02-16 10:02:38 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-5-l.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pulverizador presión previa 5 L'}
+2019-02-16 10:02:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-500cc.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pulverizador 500Cc'}
+2019-02-16 10:02:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-2lts.html> (referer: https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/)
+2019-02-16 10:02:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-3l-water-master.html> (referer: https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/)
+2019-02-16 10:02:39 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-1-lt.html> (referer: https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/)
+2019-02-16 10:02:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-2lts.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pulverizador Presión Previa 2Lts'}
+2019-02-16 10:02:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-presion-previa-3l-water-master.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Pulverizador Presion Previa 3L Water Master'}
+2019-02-16 10:02:39 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/regaderas-y-pulverizadores-para-riego/pulverizador-1-lt.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Pulverizador 1 Lt'}
+2019-02-16 10:02:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/riego-automatico/sistema-de-riego-automatico-para-10-plantas-wassertech.html> (referer: https://www.lajuana.cl/riego-automatico/)
+2019-02-16 10:02:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/bomba-sumergible-neptune-hydroponics-nh600.html> (referer: https://www.lajuana.cl/bombas-de-riego/)
+2019-02-16 10:02:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/goteros/gotero-medusa-topspin-12-salidas-25mm.html> (referer: https://www.lajuana.cl/goteros/)
+2019-02-16 10:02:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/riego-automatico/sistema-de-riego-automatico-para-10-plantas-wassertech.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Sistema De Riego Automático Para 10 Plantas'}
+2019-02-16 10:02:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/riego/gotero-hortitec-12-lt-h-60-cm.html> (referer: https://www.lajuana.cl/goteros/)
+2019-02-16 10:02:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/bombas-de-riego/bomba-sumergible-neptune-hydroponics-nh600.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Bomba De Agua Sumergible Nh600'}
+2019-02-16 10:02:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/goteros/gotero-medusa-topspin-12-salidas-25mm.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Gotero Medusa TopSpin 12 salidas (25mm)'}
+2019-02-16 10:02:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/riego/gotero-hortitec-12-lt-h-60-cm.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Gotero 1.2 Lt./H, 60 Cm.'}
+2019-02-16 10:02:41 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-2x15-lmin-2-salidas-neptune-hydroponics.html> (referer: https://www.lajuana.cl/bombas-de-riego/)
+2019-02-16 10:02:41 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-2x15-lmin-2-salidas-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bomba de Aire 2x1,5 L/min. 2 salidas - Neptune Hydroponics'}
+2019-02-16 10:02:43 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-15-lmin-1-salida-neptune-hydroponics.html> (referer: https://www.lajuana.cl/bombas-de-riego/)
+2019-02-16 10:02:43 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-water-master-1-salida-15l-min.html> (referer: https://www.lajuana.cl/bombas-de-riego/)
+2019-02-16 10:02:43 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-15-lmin-1-salida-neptune-hydroponics.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bomba de Aire 1,5 L/min. 1 salida Neptune Hydroponics'}
+2019-02-16 10:02:43 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/bombas-de-riego/bomba-de-aire-water-master-1-salida-15l-min.html>
+{'image': 'image',
+ 'marca': 'marca',
+ 'name': 'Bomba De Aire 1 Salida (1,5L / Min)'}
+2019-02-16 10:02:44 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://www.lajuana.cl/bombas-de-riego/bomba-aquaking-hx4500-2000-l.html> (referer: https://www.lajuana.cl/bombas-de-riego/)
+2019-02-16 10:02:44 [scrapy.core.scraper] DEBUG: Scraped from <200 https://www.lajuana.cl/bombas-de-riego/bomba-aquaking-hx4500-2000-l.html>
+{'image': 'image', 'marca': 'marca', 'name': 'Bomba Aquaking HX4500 2000 L'}
+2019-02-16 10:02:44 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/exception_count': 8,
+ 'downloader/exception_type_count/twisted.internet.error.TimeoutError': 8,
+ 'downloader/request_bytes': 167024,
+ 'downloader/request_count': 317,
+ 'downloader/request_method_count/GET': 317,
+ 'downloader/response_bytes': 11589643,
+ 'downloader/response_count': 309,
+ 'downloader/response_status_count/200': 308,
+ 'downloader/response_status_count/500': 1,
+ 'dupefilter/filtered': 74,
+ 'finish_reason': 'shutdown',
+ 'finish_time': datetime.datetime(2019, 2, 16, 10, 2, 44, 390585),
+ 'item_scraped_count': 254,
+ 'log_count/DEBUG': 572,
+ 'log_count/INFO': 15,
+ 'memusage/max': 137752576,
+ 'memusage/startup': 64409600,
+ 'request_depth_max': 2,
+ 'response_received_count': 308,
+ 'retry/count': 9,
+ 'retry/reason_count/500 Internal Server Error': 1,
+ 'retry/reason_count/twisted.internet.error.TimeoutError': 8,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 316,
+ 'scheduler/dequeued/memory': 316,
+ 'scheduler/enqueued': 521,
+ 'scheduler/enqueued/memory': 521,
+ 'start_time': datetime.datetime(2019, 2, 16, 9, 53, 25, 590999)}
+2019-02-16 10:02:44 [scrapy.core.engine] INFO: Spider closed (shutdown)

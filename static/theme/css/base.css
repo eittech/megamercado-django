@@ -1,0 +1,128 @@
+.bg-footer {
+  background: #682C93 !important;
+  padding-top: 10vh;
+  padding-left: 10vw;
+  min-height: 200px !important;
+}
+.list-footer {
+	font-size: 22px !important;
+	padding-top: 3vh !important;
+}
+.list-footer > i{
+	padding-right: 3vw !important;
+}
+.text-center{
+	text-align: center !important;
+}
+.text-r{
+	text-align: right !important;
+}
+.padding-y{
+	padding-top:22px; padding-bottom:8px;
+}
+.padding-items{
+	padding-left:5vw; padding-right:5vw;
+}
+.text18{
+	font-size: 18px !important;
+}
+.text-morado{
+	font-size: 24px !important;
+	color: #682C93 !important;
+}
+.img-items {
+    width: 80% !important;
+    text-align: center !important;
+ }
+ .items-icon{
+ 	width: 30% !important;
+ 	padding-top: 3vh;
+ 	display: inline !important;
+ }
+ .perfiles{
+ 	border-right: solid 0.6px;
+ 	border-color: #ccc !important;
+ 	text-align: center;
+ 	min-height: 10vh;
+ 	vertical-align: middle;
+ 	padding-top: 1vh;
+ 	padding-right: 15px;
+ }
+ .perfiles-r{
+ 	text-align: center;
+ 	min-height: 10vh;
+ 	vertical-align: middle;
+ 	padding-top: 1vh;
+ 	padding-right: 15px;
+ }
+ .perfil-icon{
+ 	text-align: center !important;
+ 	color:#67757c !important;
+ 	font-weight: 600;
+ }
+ .perfil-icon:hover{
+ 	text-align: center !important;
+ 	color:#28a745 !important;
+ }
+
+.perfil-index{
+ 	z-index: 10000;
+ 	justify-content:center !important;
+}
+.p-b-15{
+	padding-bottom: 15px;
+}
+.p-t-10{
+	padding-top: 8px !important;
+}
+.p-top{
+	top: 10px !important;
+	position: absolute; 
+	transform: translate3d(-35px, 48px, 0px) !important; 
+	top:20px !important; 
+	left: 0px; 
+	will-change: transform;
+}
+.p-top-r{
+	top: 10px !important;
+	position: absolute; 
+	transform: translate3d(-158px, 48px, 0px) !important; 
+	top:20px !important; 
+	left: 0px; 
+	will-change: transform;
+}
+
+.justify-content-end{
+	-webkit-box-pack: end !important;
+    -ms-flex-pack: end !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+.widget-header{
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.font-line-12{
+	line-height: 2px !important;
+}
+.text-gris{
+	color: #5a5f63 !important;
+}
+.text-18{
+	font-size: 18px !important;
+}
+.btn-google {
+    color: #1f1b1b !important;
+    background-color:transparent;
+    border-color: #5a5f63;
+}
+.btn-google:hover {
+    color: #1f1b1b !important;
+    background-color:transparent;
+    border-color: #5a5f63;
+}
+.btn-redondeo {
+    border-radius: 8px 8px 8px 8px !important;
+    min-width: 80px;
+    font-weight: 500;
+}
