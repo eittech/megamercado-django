@@ -26,6 +26,7 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('oauth/', include('social_django.urls', namespace='social')),
     path('api/', include(router.urls)),
     path('scrapy/', include('products.urls')),
     path('productos/', include('products.urls0')),

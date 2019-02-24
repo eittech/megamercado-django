@@ -1,0 +1,73 @@
+{% extends 'comparagrow/base.html' %}
+{% load static %}
+
+
+{% block content %}
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<h4>FILTRAR POR</h4>
+
+
+					</div> <!-- col.// -->
+					<div class="col-10">
+							<div class="row">
+                {% for item in productos %}
+								<div class="col-md-3" style="margin-top:15px;">
+									<div class="card-deck" >
+										<div class="card">
+		                  <img src="/media/{{ item.image }}" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+		                  <div class="card-body" style="
+    height: 48px;
+">
+		                    <h6 class="card-subtitle mb-2" style="color:#01b22c;">
+		                      <a href="#" style="color:#01b22c;font-size: 14px;">{{ item.product.name }}</a>
+		                    </h6>
+		                  </div>
+											<div class="card-footer" style="
+    background-color: #fff;
+    border-top: none;
+">
+												<div class="row">
+													<div class="col">
+														<h5 class="card-title" style="color:#672d93;font-size: 17px;">CLP {{ item.product.total }}</h5>
+													</div>
+												</div>
+												<div class="row">
+												<div class="col">
+													<i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
+												</div>
+												<div class="col text-right">
+													<i class="fas fa-search" style="font-size: 19px;color:#672d93;"></i>
+												</div>
+											</div>
+		                  </div>
+		                </div>
+									</div>
+								</div> <!-- col // -->
+                {% endfor %}
+						</div>
+						<div class="pagination">
+						    <span class="step-links">
+						        {% if productos.has_previous %}
+						            <a href="?page=1">&laquo; first</a>
+						            <a href="?page={{ productos.previous_page_number }}">previous</a>
+						        {% endif %}
+
+						        <span class="current">
+						            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
+						        </span>
+
+						        {% if productos.has_next %}
+						            <a href="?page={{ productos.next_page_number }}">next</a>
+						            <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a>
+						        {% endif %}
+						    </span>
+						</div>
+					</div> <!-- col.// -->
+				</div>
+
+			</div> <!-- container .//  -->
+
+	<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

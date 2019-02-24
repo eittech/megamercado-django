@@ -44,8 +44,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.7','192.168.1.9','127.0.0.1']
 
+#habilitar cuando use postgres
+# SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,6 +59,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #social django
+    'social_django',
+
     'rest_framework',
     'django_user_agents',
     'mptt',
@@ -74,6 +82,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
+    #social django
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
 
@@ -90,6 +100,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #social django
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -119,6 +132,18 @@ DATABASES = {
     }
 }
 
+
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.open_id.OpenIdAuth',
+    # 'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    # 'social_core.backends.yahoo.YahooOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -166,8 +191,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/'
+LOGOUT_URL = '/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+
+#credenciales social login
+SOCIAL_AUTH_GITHUB_KEY = '356c61a6a045c96b53c1'
+SOCIAL_AUTH_GITHUB_SECRET = '10b704f62ebe181f0579b5b9248ca64eb9f70acd'
+
+
+SOCIAL_AUTH_TWITTER_KEY = 'mYP1Zh0VdqTm301D97twSdlFd'
+SOCIAL_AUTH_TWITTER_SECRET = '9uvCC7uX58870992zP0M4cJ8lhPbGXJcT3BAiniaXgOz32onyS'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '361874647317-rfjamk7oeg7jquooa6cov96olaf9vhpk.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'R0E6_UipW7yy8jiduCYifY99'

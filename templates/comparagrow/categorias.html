@@ -1,0 +1,241 @@
+{% extends 'comparagrow/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+		<section class="section-content bg padding-y">
+			<div class="container">
+				<div class="row">
+					<aside class="col-sm-3">
+						<h4>FILTRAR POR</h4>
+						<div class="card">
+							<article class="card-group-item">
+								<header class="card-header">
+									<h5 class=" text-success">MARCAS </h5>
+								</header>
+								<div class="card-body text-gris">
+									<form>
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    AZUL
+										  </span>
+										</label> <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    VERDE
+										  </span>
+										</label>  <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    AMARILLO
+										  </span>
+										</label>  <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    ROJO
+										  </span>
+										</label>  <!-- form-check.// -->
+										<br>
+										<div class="row">
+											<button class="btn btn-primary btn-success btn-md btn-redondeo">TODAS LAS MARCAS</button>
+										</div>
+									</form>
+								</div> <!-- card-body.// -->
+							</article> <!-- card-group-item.// -->
+
+							<article class="card-group-item">
+								<header class="card-header">
+									<h5 class=" text-success">TIENDAS </h5>
+								</header>
+								<div class="card-body text-gris">
+									<form>
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    LUNES
+										  </span>
+										</label> <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    MARTES
+										  </span>
+										</label>  <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    MIERCOLES
+										  </span>
+										</label>  <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    JUEVES
+										  </span>
+										</label>  <!-- form-check.// -->
+										<label class="form-check">
+										  <input class="form-check-input" type="checkbox" value="">
+										  <span class="form-check-label">
+										    VIERNES
+										  </span>
+										</label>  <!-- form-check.// -->
+										<br>
+										<div class="row">
+											<button class="btn btn-primary btn-success btn-md btn-redondeo">TODAS LAS TIENDAS</button>
+										</div>
+									</form>
+								</div> <!-- card-body.// -->
+							</article> <!-- card-group-item.// -->
+
+							<article class="card-group-item">
+								<header class="card-header">
+									<h5 class="title text-success">PRECIO </h5>
+								</header>
+									<div class="card-body text-18">
+										<div class="custom-control custom-checkbox">
+											<span class="float-right badge badge-light round">(3)</span>
+										  	<input type="checkbox" class="custom-control-input" id="Check1">
+										  	<label class="custom-control-label title text-gris" for="Check1">$10.001 - $20.000</label>
+										</div> <!-- form-check.// -->
+
+										<div class="custom-control custom-checkbox">
+											<span class="float-right badge badge-light round">(10)</span>
+										  	<input type="checkbox" class="custom-control-input" id="Check1">
+										  	<label class="custom-control-label title text-gris" for="Check1">$20.001 - $50.000</label>
+										</div> <!-- form-check.// -->
+
+										<div class="custom-control custom-checkbox">
+											<span class="float-right badge badge-light round">(15)</span>
+										  	<input type="checkbox" class="custom-control-input" id="Check1">
+										  	<label class="custom-control-label title text-gris" for="Check1">$50.001 - $100.000</label>
+										</div> <!-- form-check.// -->
+
+									</div> <!-- card-body.// -->
+							</article>
+
+							<article class="card-group-item">
+								<header class="card-header">
+									<h5 class="title text-success">DESPACHO A DOMICILIO </h5>
+								</header>
+									<div class="card-body ">
+										<label class="form-check">
+										  <input class="form-check-input" type="radio" name="exampleRadio" value="">
+										  <span class="form-check-label text-gris">
+										    SI
+										  </span>
+										</label>
+										<label class="form-check">
+										  <input class="form-check-input" type="radio" name="exampleRadio" value="">
+										  <span class="form-check-label text-gris">
+										    NO
+										  </span>
+										</label>
+									</div>
+							</article>
+
+							<article class="card-group-item">
+								<header class="card-header">
+									<h5 class="title text-success">ATRAPAHIELO </h5>
+								</header>
+									<div class="card-body">
+										<label class="form-check">
+										  <input class="form-check-input" type="radio" name="_atrapa" value="">
+										  <span class="form-check-label text-gris">
+										    SI
+										  </span>
+										</label>
+										<label class="form-check">
+										  <input class="form-check-input" type="radio" name="_atrapa" value="">
+										  <span class="form-check-label text-gris">
+										    NO
+										  </span>
+										</label>
+									</div>
+							</article>
+						</div>
+					</aside> <!-- col.// -->
+					<main class="col-sm-9">
+
+						<article class="card card-product">
+							<div class="card-body">
+							<div class="row">
+								<div class="col-sm-12 col-md-3  text-gris text-center">
+									<h1>MACETAS</h1>
+									<p>Mostrando 64 productos</p>
+								</div>
+								<div class="col-sm-12 col-md-5 p-t-10">
+									<button class="btn btn-primary btn-success btn-md btn-redondeo">GUARDAR BUSQUEDA</button>
+								</div>
+
+								<div class="col-sm-12 col-md-4 p-t-10">
+									<select id="inputState" class="form-control">
+										<option> Seleccione...</option>
+									</select>
+								</div>
+
+							</div> <!-- row.// -->
+							</div> <!-- card-body .// -->
+
+							<div class="row" style="padding-left:10px; padding-right:10px">
+                {% for item in productos %}
+								<div class="col-md-3">
+									<figure class="card card-product">
+										<div class="img-wrap"><img src="/media/{{ item.image }}"> </div>
+										<figcaption class="info-wrap">
+												<div class="rating-wrap">
+													<div class=" text-center">
+														<span class="desc text18">{{ item.product.name }}</span><br>
+														<!-- <span class="desc text18">Marca</span> -->
+														<div class="price-wrap h5">
+															<span class="price-new text-morado">{{ item.product.total }}</span>
+														</div> <!-- price-wrap.// -->
+													</div>
+													<div id="code_list_img">
+														<ul class="list-icon row">
+															<li class="col-md-6 col-sm-12"><a href="#">
+																<img src="{% static 'theme/images/items/favorito.png' %}" class="items-icon"></a>
+															</li>
+															<li class="col-md-6 col-sm-12 text-r"><a href="#">
+																<img src="{% static 'theme/images/items/buscar.png' %}" class="items-icon"></a>
+															</li>
+														</ul>
+													</div>
+												</div> <!-- rating-wrap.// -->
+										</figcaption>
+									</figure>
+								</div> <!-- col // -->
+                {% endfor %}
+						</div>
+						<div class="pagination">
+						    <span class="step-links">
+						        {% if productos.has_previous %}
+						            <a href="?page=1">&laquo; first</a>
+						            <a href="?page={{ productos.previous_page_number }}">previous</a>
+						        {% endif %}
+
+						        <span class="current">
+						            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
+						        </span>
+
+						        {% if productos.has_next %}
+						            <a href="?page={{ productos.next_page_number }}">next</a>
+						            <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a>
+						        {% endif %}
+						    </span>
+						</div>
+
+						</article> <!-- card product .// -->
+
+					</main> <!-- col.// -->
+				</div>
+
+			</div> <!-- container .//  -->
+		</section>
+	<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

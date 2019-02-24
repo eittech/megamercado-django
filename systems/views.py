@@ -11,6 +11,9 @@ from products.models import *
 
 # Create your views here.
 def home(request):
+    error=False
+    if request.GET.get('error'):
+        error = True
     user_agent = get_user_agent(request)
     variable = ""
     productos = ProductImage.objects.all()[:12]
@@ -21,7 +24,7 @@ def home(request):
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
-        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category})
+        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error})
 
 @login_required
 def profile(request):
@@ -54,18 +57,21 @@ def login_front(request):
         login(request, user)
         return redirect('/')
     else:
-        return redirect('/')
+        return redirect('/?error=not_access')
 
 
 def register_front(request):
     username = request.POST['username']
     password = request.POST['password']
-    user = User.objects.create_user(username, username, password)
+    try:
+        user = User.objects.create_user(username, username, password)
+    except:
+        return redirect('/?error=not_access')
     if user is not None:
         login(request, user)
         return redirect('/')
     else:
-        return redirect('/')
+        return redirect('/?error=not_access')
 
 def logout_front(request):
     logout(request)

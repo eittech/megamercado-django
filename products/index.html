@@ -63,11 +63,9 @@
                 {% endif %}
 
                 <div class="card">
-                  <img src="/media/{{ item.image }}" style="width:90%;margin-left: 2px;" class="card-img-top" alt="...">
+                  <img src="/media/{{ item.image }}" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;">{{ item.product.name }}</a>
-                    </h6>
+                    <h6 class="card-subtitle mb-2" style="color:#01b22c;">{{ item.product.name }}</h6>
                     <h5 class="card-title" style="color:#672d93;">CLP {{ item.product.total }}</h5>
                   </div>
                   <div class="card-footer">
