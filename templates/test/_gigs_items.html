@@ -1,0 +1,13 @@
+{% for gig in object_list %}
+<div class="gig"
+  {% if forloop.last and page_obj.has_next %}
+    ic-trigger-on="scrolled-into-view"
+    ic-append-from="{% url 'gigs' %}?page={{ page_obj.next_page_number }}"
+    ic-target="#gigs"
+    ic-indicator="#spinner"
+  {% endif %}
+>
+    <div class="gig__title">{{ gig.product.name }}</div>
+    <div class="gig__location">{{ gig.product.total }}</div>
+  </div>
+{% endfor %}

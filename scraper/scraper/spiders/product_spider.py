@@ -84,7 +84,8 @@ class ProductSpider(scrapy.Spider):
             yield response
 
     def parse_product(self,response):
-        shop_id = Shop.objects.filter(pk=1)
+        shop_id = Shop.objects.filter(pk=2)
+        print(shop_id)
         name_category = response.meta['name_category_safe']
         category = None
         category_tags = CategoryTags.objects.filter(tag__contains=name_category).first()
@@ -103,7 +104,7 @@ class ProductSpider(scrapy.Spider):
         category_temp = name_category
         # tax =
         total = product.css('span#our_price_display').attrib['content']
-        shop_id = Shop.objects.get(pk=1)
+        shop_id = Shop.objects.get(pk=3)
 
         Product_object = Product()
         if name:
@@ -134,8 +135,26 @@ class ProductSpider(scrapy.Spider):
         Product_object.tax = 0
 
         print(Product_object)
-        Product_object.save()
-        print(Product_object.id)
+        try:
+            Product_object.save()
+            product_error = False
+        except:
+            product_error = True
+            print("No se pudo guardar el producto")
+
+        if Product_object.id:
+            img_url = response.css('img#bigpic').xpath('@src').get()
+            name = str(Product_object.id) + '.jpg'
+
+            producto_image = ProductImage()
+            producto_image.product = Product_object
+
+            response = urlopen(img_url)
+            io = BytesIO(response.read())
+            producto_image.image.save(name, File(io))
+
+            producto_image.save()
+        # print(Product_object.id)
         # print(shop_id)
         # if category is None:
         #     product_save = Product.objects.create(
@@ -162,15 +181,16 @@ class ProductSpider(scrapy.Spider):
         #         description=description,
         #         total=total
         #     )
-        if Product_object.id:
-            img_url = response.css('img#bigpic').xpath('@src').get()
-            name = str(Product_object.id) + '.jpg'
 
-            producto_image = ProductImage()
-            producto_image.product = Product_object
-
-            response = urlopen(img_url)
-            io = BytesIO(response.read())
-            producto_image.image.save(name, File(io))
-
-            producto_image.save()
+        # if Product_object.id:
+        #     img_url = response.css('img#bigpic').xpath('@src').get()
+        #     name = str(Product_object.id) + '.jpg'
+        #
+        #     producto_image = ProductImage()
+        #     producto_image.product = Product_object
+        #
+        #     response = urlopen(img_url)
+        #     io = BytesIO(response.read())
+        #     producto_image.image.save(name, File(io))
+        #
+        #     producto_image.save()

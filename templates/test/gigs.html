@@ -1,0 +1,16 @@
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="http://cdn.intercoolerjs.org/intercooler-1.2.1.min.js"></script>
+<h2>My Gigs</h2>
+<div id="gigs">
+  {% include 'test/_gigs_items.html' %}
+</div>
+<img id="spinner" src="/static/img/spinner.gif" style="display:none">
+<!-- <div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="{% url 'gigs' %}?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+  {% if page_obj.has_next %}
+    <a href="{% url 'gigs' %}?page={{ page_obj.next_page_number }}">Next</a>
+  {% endif %}
+</div> -->

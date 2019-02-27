@@ -63,15 +63,31 @@
                 {% endif %}
 
                 <div class="card">
-                  <img src="/media/{{ item.image }}" style="width:90%;margin-left: 2px;" class="card-img-top" alt="...">
-                  <div class="card-body">
+                  <img src="/media/{{ item.image }}" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <div class="card-body" style="
+height: 48px;
+">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;">{{ item.product.name }}</a>
+                      <a href="#" style="color:#01b22c;font-size: 14px;">{{ item.product.name }}</a>
                     </h6>
-                    <h5 class="card-title" style="color:#672d93;">CLP {{ item.product.total }}</h5>
                   </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                  <div class="card-footer" style="
+background-color: #fff;
+border-top: none;
+">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title" style="color:#672d93;font-size: 17px;">CLP {{ item.product.total }}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                      <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                    <div class="col text-right">
+                      <i class="fas fa-search" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                  </div>
                   </div>
                 </div>
                 {% if forloop.counter|divisibleby:"4" %}
@@ -116,12 +132,31 @@
                 {% endif %}
 
                 <div class="card">
-                  <img src="/media/{{ item.image }}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ item.product.name }}</h5>
+                  <img src="/media/{{ item.image }}" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <div class="card-body" style="
+height: 48px;
+">
+                    <h6 class="card-subtitle mb-2" style="color:#01b22c;">
+                      <a href="#" style="color:#01b22c;font-size: 14px;">{{ item.product.name }}</a>
+                    </h6>
                   </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                  <div class="card-footer" style="
+background-color: #fff;
+border-top: none;
+">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title" style="color:#672d93;font-size: 17px;">CLP {{ item.product.total }}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                      <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                    <div class="col text-right">
+                      <i class="fas fa-search" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                  </div>
                   </div>
                 </div>
                 {% if forloop.counter|divisibleby:"4" %}
@@ -168,12 +203,31 @@
                 {% endif %}
 
                 <div class="card">
-                  <img src="/media/{{ item.image }}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ item.product.name }}</h5>
+                  <img src="/media/{{ item.image }}" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <div class="card-body" style="
+height: 48px;
+">
+                    <h6 class="card-subtitle mb-2" style="color:#01b22c;">
+                      <a href="#" style="color:#01b22c;font-size: 14px;">{{ item.product.name }}</a>
+                    </h6>
                   </div>
-                  <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                  <div class="card-footer" style="
+background-color: #fff;
+border-top: none;
+">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title" style="color:#672d93;font-size: 17px;">CLP {{ item.product.total }}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col">
+                      <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                    <div class="col text-right">
+                      <i class="fas fa-search" style="font-size: 19px;color:#672d93;"></i>
+                    </div>
+                  </div>
                   </div>
                 </div>
                 {% if forloop.counter|divisibleby:"4" %}

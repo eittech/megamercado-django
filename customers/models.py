@@ -42,3 +42,8 @@ class Customer(models.Model):
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
     def __str__(self):
         return self.alias
+
+
+class MailVerification(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.CharField(verbose_name="token",max_length=200)

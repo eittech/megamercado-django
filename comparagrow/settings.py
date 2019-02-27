@@ -110,6 +110,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'comparagrow.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'teteangarita121194@gmail.com'
+EMAIL_HOST_PASSWORD = '17800074'
+EMAIL_PORT = 587
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -143,6 +149,9 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     # 'social_core.backends.yahoo.YahooOpenId',
     'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.RemoteUserBackend',
+
+
 )
 
 # Password validation

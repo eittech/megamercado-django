@@ -6,5 +6,5 @@ urlpatterns = [
     path('listado', listado, name='listado'),
     path('buscador', buscador, name='buscador'),
     path(_('categorias/<slug:slug>/'), categorias, name='buscador'),
-
+    path('gigs', GigsList.as_view(), name='gigs'),
 ]

@@ -3,11 +3,27 @@
 
 
 {% block content %}
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
-					<div class="col">
-						<h4>FILTRAR POR</h4>
+					<div class="col" style="background:#f6f6f6;">
+						<h4 style="margin-top:15px">FILTRAR POR</h4>
+						<h6 style="margin-top:15px;color:#01b22c;">TIENDAS</h6>
 
+						{% for shop in tiendas %}
+						<h6 style="margin-left:10px;"><a href="{{ pagina }}&tienda={{ shop.product__shop__pk }}">{{ shop.product__shop__name }}</a></h6>
+						{% endfor %}
+
+						<h6 style="margin-top:15px;color:#01b22c;">CATEGORIAS</h6>
+						{% for category in categorias %}
+						<h6 style="margin-left:10px;"><a href="{{ pagina }}&categoria={{ category.product__category__pk }}">{{ category.product__category__name }}</a></h6>
+						{% endfor %}
+
+						<h6 style="margin-top:15px;color:#01b22c;">MARCAS</h6>
+						<h6 style="margin-left:10px;">tienda 1</h6>
+						<h6 style="margin-left:10px;">tienda 1</h6>
+						<h6 style="margin-left:10px;">tienda 1</h6>
+
+						<h6 style="margin-top:15px;color:#01b22c;">PRECIO</h6>
 
 					</div> <!-- col.// -->
 					<div class="col-10">
@@ -50,8 +66,8 @@
 						<div class="pagination">
 						    <span class="step-links">
 						        {% if productos.has_previous %}
-						            <a href="?page=1">&laquo; first</a>
-						            <a href="?page={{ productos.previous_page_number }}">previous</a>
+						            <a href="{{ pagina }}&page=1">&laquo; first</a>
+						            <a href="{{ pagina }}&page={{ productos.previous_page_number }}">previous</a>
 						        {% endif %}
 
 						        <span class="current">
@@ -59,8 +75,8 @@
 						        </span>
 
 						        {% if productos.has_next %}
-						            <a href="?page={{ productos.next_page_number }}">next</a>
-						            <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a>
+						            <a href="{{ pagina }}&page={{ productos.next_page_number }}">next</a>
+						            <a href="{{ pagina }}&page={{ productos.paginator.num_pages }}">last &raquo;</a>
 						        {% endif %}
 						    </span>
 						</div>
