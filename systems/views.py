@@ -43,6 +43,33 @@ def profile(request):
             customer = Customer.objects.get(user=user)
         except:
             customer = False
+        if request.POST:
+            first_name = request.POST['first_name']
+            if first_name is not None:
+                if first_name == "":
+                    first_name = False
+                else:
+                    user.first_name = first_name
+            last_name = request.POST['last_name']
+            if last_name is not None:
+                if last_name == "":
+                    last_name = False
+                else:
+                    user.last_name = last_name
+            gender = request.POST['gender']
+            if gender is not None:
+                if gender == "":
+                    gender = False
+                else:
+                    customer.gender = gender
+            birthday = request.POST['birthday']
+            if birthday is not None:
+                if birthday == "":
+                    birthday = False
+                else:
+                    customer.firts_date = birthday
+            user.save()
+            customer.save()
         return render(request, 'comparagrow/profile',{'user':user,'customer':customer})
     else:
         return redirect('/')
@@ -98,31 +125,54 @@ def activationuser(request,uidb64,token):
     return redirect('/?error=not_access&notvalidatedata')
     # return http.HttpResponseRedirect(a_failure_url)
 
+# def register_view(request)
+
 def register_front(request):
+    if not request.POST :
+        return render(request, 'comparagrow/register.html')
     try:
         username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
+        first_name = request.POST['first_name']
+        if username == email:
+            return redirect('/?error=not_access')
     except:
         return redirect('/?error=not_access')
 
     try:
-        # from django.contrib.auth import get_user_model
-        # from django.contrib.auth.tokens import default_token_generator
-        # user_model = get_user_model()
+        birthday = request.POST['birthday']
+        if birthday == "":
+            birthday = False
+    except:
+        birthday = False
 
-        user = User.objects.create_user(username, username, password)
+    try:
+        gender = request.POST['gender']
+    except:
+        gender = False
+
+    try:
+        user = User.objects.create_user(username, email, password)
+        user.first_name = first_name
         # user = user_model.create_user(username, username, password)
         user.is_active = 0
         user.save()
+        customer = Customer()
+        customer.user = user
+        if gender:
+            customer.gender = gender
+        if birthday:
+            customer.firts_date = birthday
+        customer.alias = first_name
+        customer.save()
 
         token = generarToken(user.pk)
-        print(token)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
         verificacion = MailVerification()
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-        print(verificacion)
         subject, from_email, to = 'hello', 'ing.omar.orozco@gmail.com', 'omar.alexander.orozco.avila@gmail.com'
         text_content = 'This is an important message.'
         html_content = 'http://127.0.0.1:8000/users/validate/'+ uid.decode("utf-8") +'/'+ token
@@ -137,6 +187,36 @@ def register_front(request):
         return redirect('/')
     else:
         return redirect('/?error=not_access')
+
+
+def recovery(request):
+    from django.http import JsonResponse
+    # print('entro a recovery')
+    if not request.POST :
+        return redirect('/?error=not_access&not_mail')
+    try:
+        email = request.POST['username']
+    except:
+        return redirect('/?error=not_access&not_data')
+    user = User.objects.get(username=email)
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    verificacion_activa = MailVerification.objects.get(user=user)
+    if verificacion_activa is not None:
+        token = verificacion_activa.token
+    else:
+        token = generarToken(user.pk)
+        verificacion = MailVerification()
+        verificacion.user = user
+        verificacion.token = token
+        verificacion.save()
+    subject, from_email, to = 'hello', 'ing.omar.orozco@gmail.com', 'omar.alexander.orozco.avila@gmail.com'
+    text_content = 'This is an important message.'
+    html_content = 'http://127.0.0.1:8000/users/recovery/'+ uid.decode("utf-8") +'/'+ token
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+    return JsonResponse({'respuesta':'enviado'})
+
 
 def generarToken(pk):
     from django.contrib.auth import get_user_model

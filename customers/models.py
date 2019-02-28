@@ -37,7 +37,7 @@ class Customer(models.Model):
     dni_type = models.CharField(verbose_name="Tipo de Documento",max_length=20,choices=TYPE_DOCUMENT,blank=True)
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True)
-    firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True)
+    firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
     address = models.ManyToManyField(AddressCustomer,blank=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
     def __str__(self):
@@ -45,5 +45,11 @@ class Customer(models.Model):
 
 
 class MailVerification(models.Model):
+    TYPE_TRANSACTION = (
+        ('PASAPORTE', 'Pasaporte'),
+        ('RUT', 'RUT'),
+        ('CEDULA', 'Cedula'),
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.CharField(verbose_name="token",max_length=200)
+    type = models.CharField(verbose_name="Tipo de Transaccion",max_length=20,choices=TYPE_TRANSACTION,blank=True)

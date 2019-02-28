@@ -14,55 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
-    <style type="text/css">
-      ul, ol{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .navegacion li a{
-        background-color: #672d93;
-        text-decoration: none;
-        padding: 5px 40px 0px 10px;
-        display: block;
-        font-size: 18px;
-      }
-
-      .navegacion li a:hover{
-        cursor: pointer;
-        background-color: #01b22c;
-      }
-      .navegacion > li{
-        float: left;
-      }
-
-      .navegacion li ul {
-        display: none;
-        /* left: 0px; */
-        position: absolute;
-        /* width: 100%; */
-        min-width: 200px;
-      }
-
-      .navegacion li:hover > ul{
-        display: block;
-        z-index: 5000;
-
-      }
-
-      .navegacion li ul li {
-        position: relative;
-        z-index: 5000;
-
-      }
-
-      .navegacion li ul li ul{
-        /* left: 200px; */
-        right:  -200px;
-        z-index: 5000;
-        top: 0px;
-      }
-    </style>
+    {% include 'comparagrow/component/menu_css.html' %}
     <script type="text/javascript">
         function closetoast(name){
           //alert(1);
@@ -73,165 +25,59 @@
   </head>
   <body>
     {% if error %}
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;width:300px ;position:fixed;z-index:20000; top:0; right:10px;">
-      <!-- Then put toasts within -->
-      <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true" style="width:100%">
-          <div class="toast-header">
-            <svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-              <rect width="100%" height="100%" fill="#ffc107"></rect>
-            </svg>
-            <strong class="mr-auto">Notificación</strong>
-            <small class="text-muted"></small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" onclick="closetoast('toast');">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="toast-body">
-            Los datos de acceso ingresados no son validos. Verifique e intente de nuevo.
-          </div>
-        </div>
-    </div>
+    {% include 'comparagrow/component/error_acceso.html' %}
     {% endif %}
 
 
-    <header class="section-header ">
-      <div class="col-sm-12 text-center bg-dark">
-        <span class="text-white">Espacio reservado para promociones especiales</span>
-        <!-- <button class="btn btn-primary btn-success btn-sm btn-redondeo">VER OFERTAS</button> -->
-      </div>
-      <div class="col-sm-12">
-        <div class="row">
-          <div class="col-3 col-md-4">
-            <table style="height: 100px; width:100%;">
-              <tbody>
-                <tr>
-                  <td class="align-middle">
-                      <a href="/" style="text-decoration:none;">
-                        <img class="logo" src="{% static 'theme/images/home/logo.png' %}">
-                      </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="col">
-            <table style="height: 100px; width:100%;">
-              <tbody>
-                <tr>
-                  <td class="align-middle">
-                    <form action="/productos/buscador" class="search-wrap">
-                      <div class="input-group ">
-                        <input name="texto" type="text" class="form-control"
-                        style='border-radius: 8px 8px 8px 8px !important;
-                        padding: 5px 5px 5px 35px !important;
-                        background-position: 5px 3px !important;
-                        background: url("{% static 'img/lupa.png' %}") no-repeat scroll 0 0 transparent;
-                        ' placeholder="Compara AQUÍ">
 
-                      </div>
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  <header class="section-header ">
+    <div class="col-sm-12 text-center bg-dark">
+      <span class="text-white">Espacio reservado para promociones especiales</span>
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
 
-          </div>
-          <div class="col-2 col-md-4">
-            {% if user.is_authenticated %}
-            <div class="row">
-              <div class="col-3">
-                <table style="height: 100px;" align="center">
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center;">
-                        <div class="dropdown">
-                          <a class="" style="color:#01b22c; text-decoration:none;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
-                              <i class="far fa-user" style="font-size: 27px;color:#672d93;"></i><br>
-                              Perfil
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="/profile">Mi perfil</a>
-                						<a class="dropdown-item" href="#">Configuraciones</a>
-                						<a class="dropdown-item" href="/logout">Cerrar sesion</a>
-                          </div>
-                      </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-3">
-                <table style="height: 100px;" align="center">
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center;">
-                        <a class="" style="color:#01b22c; text-decoration:none;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
-                            <i class="far fa-heart" style="font-size: 27px;color:#672d93;"></i><br>
-                            Favoritos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="col-3">
-                <table style="height: 100px;" align="center">
-                  <tbody>
-                    <tr>
-                      <td style="text-align: center;">
-                        <a class="" style="color:#01b22c; text-decoration:none;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" >
-                            <i class="far fa-bell" style="font-size: 27px;color:#672d93;"></i><br>
-                            Alertas
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            {% else %}
-            <table style="height: 100px;">
-              <tbody>
-                <tr>
-                  <td class="align-middle">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_login" style="
-                background-color: #672d93;
-                border: #672d93;
-                padding-left: 20px;
-                padding-right: 20px;
-                border-radius: 8px;">
-                      INGRESO
-                    </button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_register" style="
-                background-color: #01b22c;
-                border: #01b22c;
-                padding-left: 20px;
-                padding-right: 20px;
-                border-radius: 8px;margin-left:10px;">
-                      REGISTRO
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            {% endif %}
-          </div>
+        <div class="col-3 col-md-4">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <a href="/" style="text-decoration:none;">
+                    <img class="logo" src="{% static 'theme/images/home/logo.png' %}">
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <form action="/productos/buscador" class="search-wrap">
+                    <div class="input-group ">
+                      <input name="texto" type="text" class="form-control" style='border-radius: 8px 8px 8px 8px !important;padding: 5px 5px 5px 35px !important;background-position: 5px 3px !important;background: url("{% static 'img/lupa.png' %}") no-repeat scroll 0 0 transparent;' placeholder="Compara AQUÍ">
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-2 col-md-4">
+          {% if user.is_authenticated %}
+            {% include 'comparagrow/component/menu_user.html' %}
+          {% else %}
+            {% include 'comparagrow/component/menu_not_user.html' %}
+          {% endif %}
         </div>
       </div>
-      <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
-        {% listado as listado_producto %}
-
-
+    </div>
+    <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
+      {% listado as listado_producto %}
         {% for genre,structure in listado_producto|tree_info %}
             {% if structure.new_level %}
               {% if forloop.first %}
@@ -245,300 +91,29 @@
                 <a href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;">{{ genre.name }}</a>
             {% for level in structure.closed_levels %}</li></ul>{% endfor %}
         {% endfor %}
-      </nav>
-    </header>
+    </nav>
+  </header>
+  {% block content %}
 
+  {% endblock %}
 
-    {% block content %}
+  {% include 'comparagrow/component/footer.html' %}
 
-    {% endblock %}
-    <footer class="section-footer bg-footer" style="background-color:#672d93;">
-    <div class="container">
-      <div class="row">
-        <br>
-        <br>
-      </div>
-      <div class="row">
-        <aside class="col-sm-4 col-md-4 white">
-          <h4 class="title" style="color:#fff;">INFORMACIÓN</h4>
-          <ul class="list-unstyled list-footer" style="color:#fff;">
-            <li> <a href="#" style="color:#fff;">Quienes Somos</a></li>
-            <li> <a href="#" style="color:#fff;">Contactanos</a></li>
-            <li> <a href="#" style="color:#fff;">FAQ</a></li>
-            <li> <a href="#" style="color:#fff;">Mapa del Sitio</a></li>
-            <li> <a href="#" style="color:#fff;">Terminos y Condiciones</a></li>
-            <li> <a href="#" style="color:#fff;">Politica de Privacidad</a></li>
-          </ul>
-        </aside>
-        <aside class="col-sm-4 col-md-4 white">
-          <h4 class="title" style="color:#fff;">GRUPO PAZ  VERDE</h4>
-          <ul class="list-unstyled list-footer">
-            <li> <a href="#" style="color:#fff;"> Trabajemos Juntos </a></li>
-            <li> <a href="#" style="color:#fff;"> Blog</a></li>
-            <li> <a href="#" style="color:#fff;"> Data </a></li>
-            <li> <a href="#" style="color:#fff;"> Publicidad </a></li>
-          </ul>
-        </aside>
-        <aside class="col-sm-4 col-md-4 white">
-          <h4 class="title" style="color:#fff;">CONÉCTATE</h4>
-          <ul class="list-unstyled list-footer" style="color:#fff;">
-            <i class="fab fa-facebook-f   fa-2x" style="color:#fff;"></i>
-            <i class="fab fa-twitter   fa-2x" style="color:#fff;"></i>
-            <i class="fab fa-instagram   fa-2x" style="color:#fff;"></i>
-            <i class="fab fa-google-plus   fa-2x" style="color:#fff;"></i>
-          </ul>
-        </aside>
-      </div> <!-- row.// -->
-      <br>
-
-    </div><!-- //container -->
-    </footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="{% static 'js/waypoints/lib/jquery.waypoints.js' %}"></script>
-    <script src="{% static 'js/waypoints/lib/shortcuts/infinite.min.js' %}"></script>
-    <script src="http://cdn.intercoolerjs.org/intercooler-1.2.1.min.js"></script>
+    <!-- <script src="{% static 'js/waypoints/lib/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'js/waypoints/lib/shortcuts/infinite.min.js' %}"></script>-->
+    <!-- <script src="http://cdn.intercoolerjs.org/intercooler-1.2.1.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  
+
   </body>
 </html>
+{% if user.is_authenticated %}
 
+{% else %}
+{% include 'comparagrow/component/modal_register.html' %}
+{% endif %}
 
-
-
-
-
-
-<div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <!-- <div class="modal-header">
-        Registro
-      </div> -->
-      <div class="modal-body">
-        <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
-          <h2 class="">Iniciar sesión</h2>
-        </div>
-        <div class="row justify-content-md-center" >
-          <p></p>
-        </div>
-
-        <form action="/login" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
-          {% csrf_token %}
-          <div class="form-row">
-            <div class="col">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
-                </div>
-                <input name="username" type="email" class="form-control" id="validationDefaultUsername2" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row" style="margin-top:10px;">
-            <div class="col">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
-                </div>
-                <input type="password" name="password" class="form-control" id="validationDefaultPassword2" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required>
-              </div>
-            </div>
-          </div>
-          <br>
-          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Iniciar sesión</button>
-        </form>
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-function ocultar(modal){
-  $(modal).modal('hide')
-}
-</script>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <span>ó iniciar sesión con:</span>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-block btn-social btn-google" style="color:#fff;">
-        <span class="fab fa-google" style="color:#fff;"></span> Google
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-social btn-twitter" style="color:#fff;">
-        <span class="fab fa-twitter" style="color:#fff;"></span> Twitter
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a class="btn btn-block btn-social btn-facebook" style="color:#fff;">
-        <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a class="btn btn-block btn-social btn-instagram" style="color:#fff;">
-        <span class="fab fa-instagram" style="color:#fff;"></span> Instagram
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-social btn-github" style="color:#fff;">
-        <span class="fab fa-github" style="color:#fff;"></span> Github
-      </a>
-    </div>
-
-      <div class="row justify-content-md-center" style="margin-top: 20px;margin-left:20px; margin-right:20px;">
-        <p class=""><small>¿No tienes una cuenta?
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_register" onclick="ocultar('#modal_login')" style="
-              text-decoration: none;
-              border: none;
-              background: transparent;
-              color: #007bff;
-              font-size: 12px;
-          ">
-            Regístrate
-          </button>
-        </small></p>
-      </div>
-      <div class="row justify-content-md-center" style="margin-left:20px; margin-right:20px;">
-        <p class="justify-content-md-center text-center"><small><a href="/terminos-politicas">¿Se te olvidó tu contraseña?</a></small></p>
-      </div>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div> -->
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="modal_register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <!-- <div class="modal-header">
-        Registro
-      </div> -->
-      <div class="modal-body">
-        <div class="row justify-content-md-center" style="margin-top: 30px;color:#01b22c">
-          <h2 class="">Regístrate en ComparaGrow.</h2>
-        </div>
-        <div class="row justify-content-md-center" >
-          <p>This line of text is meant to be treated as fine print.</p>
-        </div>
-
-        <form action="/register" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
-          {% csrf_token %}
-          <div class="form-row">
-            <div class="col">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
-                </div>
-                <input name="username" type="email" class="form-control" id="validationDefaultUsername" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row" style="margin-top:10px;">
-            <div class="col">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
-                </div>
-                <input type="password" name="password" class="form-control" id="validationDefaultPassword" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required>
-              </div>
-            </div>
-          </div>
-          <br>
-          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #672d93;border-color: #672d93;">Crear cuenta</button>
-        </form>
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-function ocultar(modal){
-  $(modal).modal('hide')
-}
-</script>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <span>ó registrate con: </span>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-block btn-social btn-google" style="color:#fff;">
-        <span class="fab fa-google" style="color:#fff;"></span> Google
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a class="btn btn-block btn-social btn-twitter" style="color:#fff;">
-        <span class="fab fa-twitter" style="color:#fff;"></span> Twitter
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a class="btn btn-block btn-social btn-facebook" style="color:#fff;">
-        <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a class="btn btn-block btn-social btn-instagram" style="color:#fff;">
-        <span class="fab fa-instagram" style="color:#fff;"></span> Instagram
-      </a>
-    </div>
-    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-      <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-social btn-github" style="color:#fff;">
-        <span class="fab fa-github" style="color:#fff;"></span> Github
-      </a>
-    </div>
-
-      <div class="row justify-content-md-center" style="margin-top: 20px;margin-left:20px; margin-right:20px;">
-        <p class=""><small>¿Ya tienes una cuenta?
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_login" onclick="ocultar('#modal_register')" style="
-              text-decoration: none;
-              border: none;
-              background: transparent;
-              color: #007bff;
-              font-size: 12px;
-          ">
-            Iniciar sesión
-          </button>
-        </small></p>
-      </div>
-      <div class="row justify-content-md-center" style="margin-left:20px; margin-right:20px;">
-        <p class="justify-content-md-center text-center"><small>Al ingresar su dirección de correo electrónico, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio, Política de privacidad</a> y para recibir correos electrónicos de ShopStyle.</small></p>
-      </div>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div> -->
-    </div>
-  </div>
-</div>
+{% include 'comparagrow/component/recovery_account.html' %}

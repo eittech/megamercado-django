@@ -1,0 +1,64 @@
+<div class="modal fade" id="modal_recovery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        Registro
+      </div> -->
+      <div class="modal-body">
+        <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
+          <h2 class="">Recuperar Contraseña</h2>
+        </div>
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+                </div>
+                <input name="username_recovery" type="email" class="form-control" id="validationDefaultrecovery" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+              </div>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-primary" type="button" onclick="enviarRecovery()" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function enviarRecovery(){
+    username = document.getElementById('validationDefaultrecovery').value;
+    $.ajax({
+      method: "POST",
+      url: "/recovery",
+      data: { username: username,csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(), }
+    })
+      .done(function( msg ) {
+        if(msg.respuesta=='enviado'){
+          $('#modal_recovery').modal('hide');
+          $('#respuesta_recovery').modal('show');
+        }
+    });
+  }
+</script>
+
+<div class="modal fade" id="respuesta_recovery" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        Registro
+      </div> -->
+      <div class="modal-body">
+        <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
+          <h2 class="">Correo enviado</h2>
+        </div>
+        <div class="row justify-content-md-center" >
+          <h2 style="font-size:15px;">Revisa tu correo, hemos enviado un</h2>
+        </div>
+        <div class="row justify-content-md-center" >
+          <h2 style="font-size:15px;">enlace para reiniciar tu contraseña.</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

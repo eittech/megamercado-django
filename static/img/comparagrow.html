@@ -1,28 +1,172 @@
-{% extends 'comparagrow/base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://127.0.0.1:8000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block content %}
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./comparagrow_files/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./comparagrow_files/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="./comparagrow_files/bootstrap-social.css">
+    <style type="text/css">
+  ul, ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .navegacion li a{
+    background-color: #672d93;
+    text-decoration: none;
+    padding: 5px 40px 0px 10px;
+    display: block;
+    font-size: 18px;
+  }
+
+  .navegacion li a:hover{
+    cursor: pointer;
+    background-color: #01b22c;
+  }
+  .navegacion > li{
+    float: left;
+  }
+
+  .navegacion li ul {
+    display: none;
+    /* left: 0px; */
+    position: absolute;
+    /* width: 100%; */
+    min-width: 200px;
+  }
+
+  .navegacion li:hover > ul{
+    display: block;
+    z-index: 5000;
+
+  }
+
+  .navegacion li ul li {
+    position: relative;
+    z-index: 5000;
+
+  }
+
+  .navegacion li ul li ul{
+    /* left: 200px; */
+    right:  -200px;
+    z-index: 5000;
+    top: 0px;
+  }
+</style>
+
+    <script type="text/javascript">
+        function closetoast(name){
+          //alert(1);
+          $('.'+name).toast('hide');
+        }
+    </script>
+    <title>comparagrow</title>
+  </head>
+  <body>
+    
+
+
+
+  <header class="section-header ">
+    <div class="col-sm-12 text-center bg-dark">
+      <span class="text-white">Espacio reservado para promociones especiales</span>
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
+
+        <div class="col-3 col-md-4">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <a href="http://127.0.0.1:8000/" style="text-decoration:none;">
+                    <img class="logo" src="./comparagrow_files/logo.png">
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <form action="http://127.0.0.1:8000/productos/buscador" class="search-wrap">
+                    <div class="input-group ">
+                      <input name="texto" type="text" class="form-control" style="border-radius: 8px 8px 8px 8px !important;padding: 5px 5px 5px 35px !important;background-position: 5px 3px !important;background: url(&quot;/static/img/lupa.png&quot;) no-repeat scroll 0 0 transparent;" placeholder="Compara AQUÍ">
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-2 col-md-4">
+          
+            <table style="height: 100px;">
+  <tbody>
+    <tr>
+      <td class="align-middle">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_login" style="background-color: #672d93;border: #672d93;padding-left: 20px;padding-right: 20px;border-radius: 8px;">
+          INGRESO
+        </button>
+        <a href="http://127.0.0.1:8000/register" class="btn btn-primary" style="background-color: #01b22c;color:#fff;border: #01b22c;padding-left: 20px;padding-right: 20px;border-radius: 8px;margin-left:10px;">
+          REGISTRO
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+          
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
+      
+        
+            
+              
+                <ul class="navegacion"><li>
+              
+            
+                <a href="http://127.0.0.1:8000/productos/categorias/senator" style="text-decoration:none; color:#fff;">Senator</a>
+            </li></ul>
+        
+    </nav>
+  </header>
+  
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" style="height:300px;">
       <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="100%" height="300px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: First slide">
         <title>Publicidad</title>
         <rect width="100%" height="100%" fill="#777"></rect>
-        <!-- <img src="{% static 'theme/images/home/logo.png' %}" alt=""> -->
+        <!-- <img src="/static/theme/images/home/logo.png" alt=""> -->
 
         <text x="40%" y="50%" fill="#fff" dy=".3em" style="font-size:40px;">
         Anunciate Aquí
         </text></svg>
     </div>
     <!-- <div class="carousel-item" style="height:300px;">
-      <img src="{% static 'img/anunciate-aqui-2.jpg' %}" alt="" style="height:300px; width:100%">
+      <img src="/static/img/anunciate-aqui-2.jpg" alt="" style="height:300px; width:100%">
     </div> -->
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="http://127.0.0.1:8000/#carouselExampleIndicators" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <a class="carousel-control-next" href="http://127.0.0.1:8000/#carouselExampleIndicators" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -46,11 +190,11 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;">
@@ -64,7 +208,7 @@
                       <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                     </div>
                     <div class="col text-right">
-                      <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                      <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                     </div>
                   </div>
                   </div>
@@ -73,12 +217,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -92,7 +236,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -101,12 +245,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -120,7 +264,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -129,12 +273,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -148,7 +292,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -157,12 +301,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -176,7 +320,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -184,11 +328,11 @@
               </div>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouseldestacados" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="http://127.0.0.1:8000/#carouseldestacados" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouseldestacados" role="button" data-slide="next">
+          <a class="carousel-control-next" href="http://127.0.0.1:8000/#carouseldestacados" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -218,12 +362,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -237,7 +381,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -246,12 +390,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -265,7 +409,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -274,12 +418,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -293,7 +437,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -302,12 +446,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -321,7 +465,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -330,12 +474,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -349,7 +493,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -357,11 +501,11 @@
               </div>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselultimasrebajas" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="http://127.0.0.1:8000/#carouselultimasrebajas" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouselultimasrebajas" role="button" data-slide="next">
+          <a class="carousel-control-next" href="http://127.0.0.1:8000/#carouselultimasrebajas" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -393,12 +537,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -412,7 +556,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -421,12 +565,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -440,7 +584,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -449,12 +593,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -468,7 +612,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -477,12 +621,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -496,7 +640,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -505,12 +649,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -524,7 +668,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -537,12 +681,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -556,7 +700,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -565,12 +709,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -584,7 +728,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -593,12 +737,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -612,7 +756,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -621,12 +765,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -640,7 +784,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -649,12 +793,12 @@
                   <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;">
                     tu tienda
                   </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                  <img src="./comparagrow_files/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
 
                   <!-- <img src="/static/img/anunciese.jpg" style="width:90%; margin-left:2px; margin-top:2px;" class="card-img-top" alt="..."> -->
                   <div class="card-body" style="height: 48px;">
                     <h6 class="card-subtitle mb-2" style="color:#01b22c;">
-                      <a href="#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
+                      <a href="http://127.0.0.1:8000/#" style="color:#01b22c;font-size: 14px;">Tu producto</a>
                     </h6>
                   </div>
                   <div class="card-footer" style="background-color: #fff;border-top: none;height: 82px;">
@@ -668,7 +812,7 @@
                         <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
                       </div>
                       <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+                        <img src="./comparagrow_files/lupa.png" alt="" style="height: 25px;">
                       </div>
                   </div>
                   </div>
@@ -676,11 +820,11 @@
               </div>
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselarmatugrow" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="http://127.0.0.1:8000/#carouselarmatugrow" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouselarmatugrow" role="button" data-slide="next">
+          <a class="carousel-control-next" href="http://127.0.0.1:8000/#carouselarmatugrow" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -691,4 +835,260 @@
   <br>
 </div>
 
-{% endblock %}
+
+
+  <footer class="section-footer bg-footer" style="background-color:#672d93;">
+  <div class="container">
+    <div class="row">
+      <br>
+      <br>
+    </div>
+    <div class="row">
+      <aside class="col-sm-4 col-md-4 white">
+        <h4 class="title" style="color:#fff;">INFORMACIÓN</h4>
+        <ul class="list-unstyled list-footer" style="color:#fff;">
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">Quienes Somos</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">Contactanos</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">FAQ</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">Mapa del Sitio</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">Terminos y Condiciones</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;">Politica de Privacidad</a></li>
+        </ul>
+      </aside>
+      <aside class="col-sm-4 col-md-4 white">
+        <h4 class="title" style="color:#fff;">GRUPO PAZ  VERDE</h4>
+        <ul class="list-unstyled list-footer">
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;"> Trabajemos Juntos </a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;"> Blog</a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;"> Data </a></li>
+          <li> <a href="http://127.0.0.1:8000/#" style="color:#fff;"> Publicidad </a></li>
+        </ul>
+      </aside>
+      <aside class="col-sm-4 col-md-4 white">
+        <h4 class="title" style="color:#fff;">CONÉCTATE</h4>
+        <ul class="list-unstyled list-footer" style="color:#fff;">
+          <i class="fab fa-facebook-f   fa-2x" style="color:#fff;"></i>
+          <i class="fab fa-twitter   fa-2x" style="color:#fff;"></i>
+          <i class="fab fa-instagram   fa-2x" style="color:#fff;"></i>
+          <i class="fab fa-google-plus   fa-2x" style="color:#fff;"></i>
+        </ul>
+      </aside>
+    </div> <!-- row.// -->
+    <br>
+
+  </div><!-- //container -->
+</footer>
+
+  <div class="modal fade" id="modal_login2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        Registro
+      </div> -->
+      <div class="modal-body">
+        <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
+          <h2 class="">Iniciar sesión</h2>
+        </div>
+        <div class="row justify-content-md-center">
+          <p></p>
+        </div>
+
+        <form action="http://127.0.0.1:8000/login" method="post" class="needs-validation" novalidate="" style="margin-left:20px; margin-right:20px;">
+          <input type="hidden" name="csrfmiddlewaretoken" value="wiPNZRqaIKF7QHtJXiIQxd9rwNK3ttEmVVjlg6EsGYlZArJDZQcachN4yZYcx9bk">
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+                </div>
+                <input name="username" type="email" class="form-control" id="validationDefaultUsername2" placeholder="Email" aria-describedby="inputGroupPrepend2" required="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:10px;">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
+                </div>
+                <input type="password" name="password" class="form-control" id="validationDefaultPassword2" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Iniciar sesión</button>
+        </form>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+function ocultar(modal){
+  $(modal).modal('hide')
+}
+</script>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <span>ó iniciar sesión con:</span>
+    </div>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <a href="http://127.0.0.1:8000/oauth/login/google-oauth2/" class="btn btn-block btn-social btn-google" style="color:#fff;">
+        <span class="fab fa-google" style="color:#fff;"></span> Google
+      </a>
+    </div>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <a class="btn btn-block btn-social btn-facebook" style="color:#fff;">
+        <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
+      </a>
+    </div>
+
+      <div class="row justify-content-md-center" style="margin-top: 20px;margin-left:20px; margin-right:20px;">
+        <p class=""><small>¿No tienes una cuenta?
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_register" onclick="ocultar(&#39;#modal_login&#39;)" style="
+              text-decoration: none;
+              border: none;
+              background: transparent;
+              color: #007bff;
+              font-size: 12px;
+          ">
+            Regístrate
+          </button>
+        </small></p>
+      </div>
+      <div class="row justify-content-md-center" style="margin-left:20px; margin-right:20px;">
+        <p class="justify-content-md-center text-center"><small>
+          <a data-toggle="modal" data-target="#modal_recovery_account" onclick="ocultar(&#39;#modal_login&#39;)">¿Se te olvidó tu contraseña?</a></small></p>
+      </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+
+    <script src="./comparagrow_files/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="./comparagrow_files/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="./comparagrow_files/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./comparagrow_files/jquery.waypoints.js"></script>
+    <script src="./comparagrow_files/infinite.min.js"></script>
+    <script src="./comparagrow_files/intercooler-1.2.1.min.js"></script>
+  
+
+
+<div class="modal fade" id="modal_login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        Registro
+      </div> -->
+      <div class="modal-body">
+        <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
+          <h2 class="">Iniciar sesión</h2>
+        </div>
+        <div class="row justify-content-md-center">
+          <p></p>
+        </div>
+
+        <form action="http://127.0.0.1:8000/login" method="post" class="needs-validation" novalidate="" style="margin-left:20px; margin-right:20px;">
+          <input type="hidden" name="csrfmiddlewaretoken" value="wiPNZRqaIKF7QHtJXiIQxd9rwNK3ttEmVVjlg6EsGYlZArJDZQcachN4yZYcx9bk">
+          <div class="form-row">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+                </div>
+                <input name="username" type="email" class="form-control" id="validationDefaultUsername2" placeholder="Email" aria-describedby="inputGroupPrepend2" required="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:10px;">
+            <div class="col">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
+                </div>
+                <input type="password" name="password" class="form-control" id="validationDefaultPassword2" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required="" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Iniciar sesión</button>
+        </form>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+function ocultar(modal){
+  $(modal).modal('hide')
+}
+</script>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <span>ó iniciar sesión con:</span>
+    </div>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <a href="http://127.0.0.1:8000/oauth/login/google-oauth2/" class="btn btn-block btn-social btn-google" style="color:#fff;">
+        <span class="fab fa-google" style="color:#fff;"></span> Google
+      </a>
+    </div>
+    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+      <a class="btn btn-block btn-social btn-facebook" style="color:#fff;">
+        <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
+      </a>
+    </div>
+
+      <div class="row justify-content-md-center" style="margin-top: 20px;margin-left:20px; margin-right:20px;">
+        <p class=""><small>¿No tienes una cuenta?
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_register" onclick="ocultar(&#39;#modal_login&#39;)" style="
+              text-decoration: none;
+              border: none;
+              background: transparent;
+              color: #007bff;
+              font-size: 12px;
+          ">
+            Regístrate
+          </button>
+        </small></p>
+      </div>
+      <div class="row justify-content-md-center" style="margin-left:20px; margin-right:20px;">
+        <p class="justify-content-md-center text-center"><small>
+          <a data-toggle="modal" data-target="#modal_recovery_account" onclick="ocultar(&#39;#modal_login&#39;)">¿Se te olvidó tu contraseña?</a></small></p>
+      </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+
+
+</div></div></div></div></body></html>

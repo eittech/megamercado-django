@@ -1,0 +1,49 @@
+<style type="text/css">
+  ul, ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .navegacion li a{
+    background-color: #672d93;
+    text-decoration: none;
+    padding: 5px 40px 0px 10px;
+    display: block;
+    font-size: 18px;
+  }
+
+  .navegacion li a:hover{
+    cursor: pointer;
+    background-color: #01b22c;
+  }
+  .navegacion > li{
+    float: left;
+  }
+
+  .navegacion li ul {
+    display: none;
+    /* left: 0px; */
+    position: absolute;
+    /* width: 100%; */
+    min-width: 200px;
+  }
+
+  .navegacion li:hover > ul{
+    display: block;
+    z-index: 5000;
+
+  }
+
+  .navegacion li ul li {
+    position: relative;
+    z-index: 5000;
+
+  }
+
+  .navegacion li ul li ul{
+    /* left: 200px; */
+    right:  -200px;
+    z-index: 5000;
+    top: 0px;
+  }
+</style>
