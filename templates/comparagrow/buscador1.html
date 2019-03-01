@@ -9,14 +9,6 @@
 					cursor:pointer;
 				}
 			</style>
-
-			<script>
-				function enviarFiltros(filtro,valor){
-					document.getElementById(filtro).value = valor;
-					$('#formulario_filtro').submit();
-				}
-			</script>
-
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col" style="background:#f6f6f6;">
@@ -24,30 +16,19 @@
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">TIENDAS</h6>
 
 						{% for shop in tiendas %}
-						{% if shop.product__shop__pk|stringformat:"s" == tienda|stringformat:"s" %}
-						<h6 style="margin-left:10px;"><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6>
-
-						{% else %}
-						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6>
-
-						{% endif %}
+						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" href="{{ pagina }}{{ pagina_category }}&tienda={{ shop.product__shop__pk }}">{{ shop.product__shop__name }}</a></h6>
 						{% endfor %}
 
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 						{% for category in categorias %}
-						{% if category.product__category__pk|stringformat:"s" == categoria|stringformat:"s" %}
-						<h6 style="margin-left:10px;"><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('categoria_form_id','{{ category.product__category__pk }}')">{{ category.product__category__name }}</a></h6>
-						{% else %}
-						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('categoria_form_id','{{ category.product__category__pk }}')">{{ category.product__category__name }}</a></h6>
-						{% endif %}
+						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" href="{{ pagina }}{{ pagina_shop }}&categoria={{ category.product__category__pk }}">{{ category.product__category__name }}</a></h6>
 						{% endfor %}
 
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
-						<form id="formulario_filtro" class="form-inline" method="get" action="{{ pagina }}{{ pagina_shop }}">
-
-							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
-							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
-							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
+						<form class="form-inline" method="get" action="{{ pagina }}{{ pagina_shop }}">
+							<input type="hidden" name="tienda" value="{{ tienda }}">
+							<input type="hidden" name="categoria" value="{{ categoria }}">
+							<input type="hidden" name="texto" value="{{ texto }}">
 						  <input type="text" name="min_price" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>

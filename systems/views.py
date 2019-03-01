@@ -193,12 +193,15 @@ def recovery(request):
     from django.http import JsonResponse
     # print('entro a recovery')
     if not request.POST :
-        return redirect('/?error=not_access&not_mail')
+        return JsonResponse({'respuesta':'enviado'})
     try:
         email = request.POST['username']
     except:
-        return redirect('/?error=not_access&not_data')
-    user = User.objects.get(username=email)
+        return JsonResponse({'respuesta':'enviado'})
+    try:
+        user = User.objects.get(username=email)
+    except:
+        return JsonResponse({'respuesta':'enviado'})
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     verificacion_activa = MailVerification.objects.get(user=user)
     if verificacion_activa is not None:
@@ -230,3 +233,8 @@ def generarToken(pk):
 def logout_front(request):
     logout(request)
     return redirect('/')
+
+
+def error_pagina(request):
+    variable = ""
+    return render(request, 'comparagrow/error.html', {'variable':variable})

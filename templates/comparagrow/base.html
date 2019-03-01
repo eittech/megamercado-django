@@ -76,19 +76,19 @@
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
+    <nav class="navbar navbar-light text-white justify-content-center sticky-top" style="background:#672d93;">
       {% listado as listado_producto %}
         {% for genre,structure in listado_producto|tree_info %}
             {% if structure.new_level %}
               {% if forloop.first %}
-                <ul class="navegacion"><li>
+                <ul class="navegacion" style="font-weight: 100;"><li style="font-weight: 100;">
               {% else %}
-                <ul><li>
+                <ul style="font-weight: 100;"><li style="font-weight: 100;">
               {% endif %}
             {% else %}
-              </li><li>
+              </li><li style="font-weight: 100;">
             {% endif %}
-                <a href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;">{{ genre.name }}</a>
+                <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;font-weight: 100;">{{ genre.name }}</a>
             {% for level in structure.closed_levels %}</li></ul>{% endfor %}
         {% endfor %}
     </nav>
@@ -106,7 +106,9 @@
     <script src="{% static 'js/waypoints/lib/shortcuts/infinite.min.js' %}"></script>-->
     <!-- <script src="http://cdn.intercoolerjs.org/intercooler-1.2.1.min.js"></script> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-  
+    {% block js %}
+
+    {% endblock %}
 
   </body>
 </html>

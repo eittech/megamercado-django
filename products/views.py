@@ -2,7 +2,7 @@ import json
 
 from django.http import JsonResponse
 from django.shortcuts import render
-
+import time
 from products.models import *
 
 from django.views.decorators.csrf import csrf_exempt
@@ -13,6 +13,8 @@ from django.core.paginator import Paginator
 from django.views import generic
 
 from django.db.models import Count
+from django.shortcuts import redirect
+
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
@@ -24,14 +26,22 @@ def listado(request):
 
 
 def buscador(request):
-    pagina = "?"
+
+    pagina = "buscador?"
+    categoria = ""
+    tienda = ""
     if request.GET.get('texto'):
         texto = request.GET.get('texto')
         pagina = pagina + "texto=" + texto
     else:
         texto = ""
+
+    print(pagina)
     productos_lista = ProductImage.objects.filter(product__name__contains=texto)
+    tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
+    categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
     shop_id = False
+
     if request.GET.get('tienda'):
         print("tienda paso 1")
         tienda = request.GET.get('tienda')
@@ -40,18 +50,44 @@ def buscador(request):
             print("tienda paso 2")
         except:
             shop_id = False
+    pagina_shop = ""
     if shop_id:
         print("tienda paso 3")
         productos_lista = productos_lista.filter(product__shop=shop_id)
-        pagina = pagina + "&tienda="+tienda
-    tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
-    categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
-    # tiendas = productos_lista.group_by = ['shop']
-    print(tiendas)
-    paginator = Paginator(productos_lista, 8)
+        pagina_shop = "&tienda="+tienda
+
+    categoria_id = False
+
+    if request.GET.get('categoria'):
+        print("categoria_id paso 1")
+        categoria = request.GET.get('categoria')
+        try:
+            categoria_id = Category.objects.get(pk=categoria)
+            print("categoria_id paso 2")
+        except:
+            categoria_id = False
+    pagina_category = ""
+    if categoria_id:
+        print("categoria_id paso 3")
+        productos_lista = productos_lista.filter(product__category=categoria_id)
+        pagina_category = "&categoria="+categoria
+
+    paginator = Paginator(productos_lista, 20)
     page = request.GET.get('page')
-    productos = paginator.get_page(page)
-    return render(request, "comparagrow/buscador.html", {'productos': productos,'tiendas':tiendas,'pagina':pagina,'categorias':categorias})
+    if page is not None:
+        if request.is_ajax():
+            template = "comparagrow/component/items_buscador.html"
+        else:
+            template = "comparagrow/buscador.html"
+    else:
+        template = "comparagrow/buscador.html"
+    try:
+        productos = paginator.get_page(page)
+        print(productos)
+    except:
+        return redirect('/not_found')
+    # time.sleep(3)
+    return render(request, template, {'productos': productos,'tiendas':tiendas,'pagina':pagina,'categorias':categorias,'pagina_shop':pagina_shop,'pagina_category':pagina_category,'texto':texto,'categoria':categoria,'tienda':tienda})
 
 
 class GigsList(generic.ListView):
