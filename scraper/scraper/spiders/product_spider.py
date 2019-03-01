@@ -84,7 +84,7 @@ class ProductSpider(scrapy.Spider):
             yield response
 
     def parse_product(self,response):
-        shop_id = Shop.objects.filter(pk=2)
+        shop_id = Shop.objects.filter(pk=1)
         print(shop_id)
         name_category = response.meta['name_category_safe']
         category = None
@@ -104,7 +104,7 @@ class ProductSpider(scrapy.Spider):
         category_temp = name_category
         # tax =
         total = product.css('span#our_price_display').attrib['content']
-        shop_id = Shop.objects.get(pk=3)
+        shop_id = Shop.objects.get(pk=1)
 
         Product_object = Product()
         if name:
@@ -121,7 +121,7 @@ class ProductSpider(scrapy.Spider):
             Product_object.description = description
 
         if category is None:
-            category = Category.objects.get(pk=60)
+            category = Category.objects.get(pk=1)
             Product_object.category = category
         else:
             Product_object.category = category

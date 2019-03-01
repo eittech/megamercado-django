@@ -1,0 +1,35 @@
+{% extends 'comparagrow/base_blank.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="row justify-content-md-center">
+  <img src="/static/img/loading.gif" alt="">
+</div>
+<div class="row justify-content-md-center" >
+  <p>Te estamos redirigiendo al sitio web de <b>{{ producto.shop.name }}</b></p>
+</div>
+</div>
+<div class="row justify-content-md-center fixed-bottom" style="margin-left:20px; margin-right:20px;">
+  <p class="justify-content-md-center text-center"><small>Al ingresar a esta url, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio y Política de privacidad</a>. Derechos reservados ComparaGrow.cl</small></p>
+</div>
+<!-- <nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" href="#">Fixed bottom</a>
+</nav> -->
+
+{% endblock %}
+{% block scriptb %}
+<script>
+  $(document).ready(function() {
+  $.ajax({
+    method: "GET",
+    url: "/productos/redirect_url/{{ producto.id }}",
+  })
+    .done(function( msg ) {
+      if(msg.status=="aprobado"){
+        $(location).attr('href',msg.url);
+      }
+  });
+  });
+</script>
+{% endblock %}

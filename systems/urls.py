@@ -14,6 +14,12 @@ urlpatterns = [
     #path('users/validate/<uidb64>/<token>', views.activationuser,name='user-activation-link'),
     re_path(r'^users/validate/(?P<uidb64>.+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activationuser,name='user-activation-link'),
 
+    path('quienes-somos', views.quienesSomos, name='login'),
+    path('contactanos', views.contactanos, name='login'),
+    path('faq', views.Faq, name='login'),
+    path('terminos-condiciones', views.terminosCondiciones, name='login'),
+    path('politica-privacidad', views.politicasPrivacidad, name='login'),
+
     #re_path(r'^validate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activationuser),
     # re_path(r'^users/validate/(?P<uidb64>.+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activationuser,name='user-activation-link'),
 

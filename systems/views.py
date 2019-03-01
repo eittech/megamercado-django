@@ -238,3 +238,18 @@ def logout_front(request):
 def error_pagina(request):
     variable = ""
     return render(request, 'comparagrow/error.html', {'variable':variable})
+
+def quienesSomos(request):
+    return render(request, 'comparagrow/quienes-somos.html')
+
+def contactanos(request):
+    return render(request, 'comparagrow/contactanos.html')
+
+def Faq(request):
+    return render(request, 'comparagrow/Faq.html')
+
+def terminosCondiciones(request):
+    return render(request, 'comparagrow/terminosCondiciones.html')
+
+def politicasPrivacidad(request):
+    return render(request, 'comparagrow/politicasPrivacidad.html')

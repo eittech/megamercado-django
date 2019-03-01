@@ -1,0 +1,114 @@
+{% extends 'comparagrow/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+			<div class="container-fluid">
+				<div class="row">
+          <div class="col-2">
+
+          </div>
+          <div class="col-4">
+            <div class="row justify-content-md-center">
+              <img src="/media/{{ producto_image.0.image }}" alt="">
+            </div>
+            <div class="row" style="margin-bottom:40px;">
+              <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <div class="card-deck">
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card-deck">
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                      <div class="card">
+                        <img src="/media/{{ producto_image.0.image }}" style="height: 200px;" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6" style="">
+              <div class="row" style="margin-left:20px;margin-top: 30px;color:#777; font-weight:100;">
+                {% for item in producto.category.get_ancestors %}
+                  {% if forloop.first %}
+                      <a style="text-transform: uppercase;margin-right:2px;color:#777;font-weight:100;cursor:pointer;text-decoration:none;" href="/productos/categorias/{{ item.slug }}"> {{ item.name }} <a/>
+                  {% else %}
+                      /  <a style="text-transform: uppercase;margin-left:2px;color:#777;margin-right:2px;font-weight:100;cursor:pointer;text-decoration:none;" href="/productos/categorias/{{ item.slug }}">  {{ item.name }} <a/>
+                  {% endif %}
+                {% endfor %}
+                  /  <a style="text-transform: uppercase;margin-left:2px;color:#777;font-weight:100;cursor:pointer;text-decoration:none;" href="/productos/categorias/{{ producto.category.slug }}"> {{ producto.category.name }}  <a/>
+              </div>
+              <br>
+              <div class="row" style="margin-left:20px;">
+                <h3 style="font-weight:100;">{{ producto.name }}</h3>
+              </div>
+              <div class="row" style="margin-left:20px;">
+                <p style="font-weight:200; font-size:16px;color:#672d93;">CPL {{ producto.total }}</p>
+              </div>
+              <div class="row" style="margin-left:20px;">
+                <a href="/productos/redirect/{{ producto.id }}" target="_blank" class="btn btn-primary"  style="background-color: #672d93;color:#fff;border: #672d93;padding-left: 20px;padding-right: 20px;border-radius: 8px;width:265px;padding-top: 9px;height: 42px;">
+                  COMPRAR AHORA EN TIENDA
+                </a>
+              </div>
+              <br>
+              <div class="row" style="margin-left:20px;">
+                {% if user.is_authenticated %}
+                <a onclick="FavoriteProduct('{{ producto.id }}')" class="btn btn-primary"  style="background-color: #01b22c;color:#fff;border: #01b22c;padding-left: 20px;padding-right: 20px;border-radius: 8px;width:265px;padding-top: 9px;height: 42px;">
+                  RECIBIR OFERTAS
+                </a>
+                {% else %}
+                <a data-toggle="modal" data-target="#modal_login"  class="btn btn-primary"  style="background-color: #01b22c;color:#fff;border: #01b22c;padding-left: 20px;padding-right: 20px;border-radius: 8px;width:265px;padding-top: 9px;height: 42px;">
+                  RECIBIR OFERTAS
+                </a>
+                {% endif %}
+              </div>
+              <div class="row" style="margin-left:20px;margin-top:30px;">
+                <h3 style="font-weight:100;">Detalle</h3>
+              </div>
+              <div class="row" style="margin-left:20px;margin-top:10px; padding-right:20px;">
+                <p style="font-weight:100;">{{ producto.description }}</p>
+              </div>
+          </div>
+				</div>
+
+			</div> <!-- container .//  -->
+
+	<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}
+
+
+{% block js %}
+<script src="/static/js/notify.js"></script>
+<script src="/static/js/infinite-scroll.pkgd.min.js"></script>
+<script>
+	function FavoriteProduct(id){
+		$.ajax({
+      method: "GET",
+      url: "/productos/favorito/"+id,
+    })
+      .done(function( msg ) {
+          $.notify(msg.text, msg.status);
+    });
+
+	}
+</script>
+{% endblock %}

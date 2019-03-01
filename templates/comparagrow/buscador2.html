@@ -49,8 +49,8 @@
 							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
 							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
-						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
-							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
+						  <input type="text" name="min_price" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
+							 <input type="text" name="max_price" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
 						</form>
 
@@ -80,12 +80,9 @@ font-weight: 100;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
 ">
-							      {% if order_by == "min" %}Menor precio de primero{% endif %}
-										{% if order_by == "max" %}Mayor precio de primero{% endif %}
-										{% if order_by == "dest" %}Destacados de primero{% endif %}
+							      Menor precio de primero
 							    </button>
 							    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-										<a class="dropdown-item" onclick="enviarFiltros('order_by_id','min')">Menor precio de primero</a>
 							      <a class="dropdown-item" onclick="enviarFiltros('order_by_id','max')">Mayor precio de primero</a>
 										<a class="dropdown-item" onclick="enviarFiltros('order_by_id','dest')">Destacados de primero</a>
 							    </div>
@@ -110,7 +107,7 @@ font-weight: 100;
 
 
 {% block js %}
-<script src="/static/js/notify.js"></script>
+
 <script src="/static/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
   $('.article-feed').infiniteScroll({
@@ -119,17 +116,5 @@ font-weight: 100;
     status: '.scroller-status',
     hideNav: '.pagination',
   });
-</script>
-<script>
-	function FavoriteProduct(id){
-		$.ajax({
-      method: "GET",
-      url: "/productos/favorito/"+id,
-    })
-      .done(function( msg ) {
-          $.notify(msg.text, msg.status);
-    });
-
-	}
 </script>
 {% endblock %}

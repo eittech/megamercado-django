@@ -3,239 +3,124 @@
 
 
 {% block content %}
+			<style media="screen">
+				.card:hover{
+					box-shadow: 5px 5px 5px grey;
+					cursor:pointer;
+				}
+			</style>
 
+			<script>
+				function enviarFiltros(filtro,valor){
+					document.getElementById(filtro).value = valor;
+					$('#formulario_filtro').submit();
+				}
+			</script>
 
-		<section class="section-content bg padding-y">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
-					<aside class="col-sm-3">
-						<h4>FILTRAR POR</h4>
-						<div class="card">
-							<article class="card-group-item">
-								<header class="card-header">
-									<h5 class=" text-success">MARCAS </h5>
-								</header>
-								<div class="card-body text-gris">
-									<form>
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    AZUL
-										  </span>
-										</label> <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    VERDE
-										  </span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    AMARILLO
-										  </span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    ROJO
-										  </span>
-										</label>  <!-- form-check.// -->
-										<br>
-										<div class="row">
-											<button class="btn btn-primary btn-success btn-md btn-redondeo">TODAS LAS MARCAS</button>
-										</div>
-									</form>
-								</div> <!-- card-body.// -->
-							</article> <!-- card-group-item.// -->
+					<div class="col" style="background:#f6f6f6;">
+						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
+						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">TIENDAS</h6>
 
-							<article class="card-group-item">
-								<header class="card-header">
-									<h5 class=" text-success">TIENDAS </h5>
-								</header>
-								<div class="card-body text-gris">
-									<form>
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    LUNES
-										  </span>
-										</label> <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    MARTES
-										  </span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    MIERCOLES
-										  </span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    JUEVES
-										  </span>
-										</label>  <!-- form-check.// -->
-										<label class="form-check">
-										  <input class="form-check-input" type="checkbox" value="">
-										  <span class="form-check-label">
-										    VIERNES
-										  </span>
-										</label>  <!-- form-check.// -->
-										<br>
-										<div class="row">
-											<button class="btn btn-primary btn-success btn-md btn-redondeo">TODAS LAS TIENDAS</button>
-										</div>
-									</form>
-								</div> <!-- card-body.// -->
-							</article> <!-- card-group-item.// -->
+						{% for shop in tiendas %}
+						{% if shop.product__shop__pk|stringformat:"s" == tienda|stringformat:"s" %}
+						<!-- <h6 style="margin-left:10px;"><i class="fas fa-check-circle"></i><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6> -->
+						<h6 style="margin-left:10px;"><i class="fas fa-check-circle" style="color:#01b22c;"></i> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6>
+						{% else %}
+						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6>
 
-							<article class="card-group-item">
-								<header class="card-header">
-									<h5 class="title text-success">PRECIO </h5>
-								</header>
-									<div class="card-body text-18">
-										<div class="custom-control custom-checkbox">
-											<span class="float-right badge badge-light round">(3)</span>
-										  	<input type="checkbox" class="custom-control-input" id="Check1">
-										  	<label class="custom-control-label title text-gris" for="Check1">$10.001 - $20.000</label>
-										</div> <!-- form-check.// -->
+						{% endif %}
+						{% endfor %}
 
-										<div class="custom-control custom-checkbox">
-											<span class="float-right badge badge-light round">(10)</span>
-										  	<input type="checkbox" class="custom-control-input" id="Check1">
-										  	<label class="custom-control-label title text-gris" for="Check1">$20.001 - $50.000</label>
-										</div> <!-- form-check.// -->
+						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
+						<form id="formulario_filtro" class="form-inline" method="get" action="{{ pagina }}{{ pagina_shop }}">
 
-										<div class="custom-control custom-checkbox">
-											<span class="float-right badge badge-light round">(15)</span>
-										  	<input type="checkbox" class="custom-control-input" id="Check1">
-										  	<label class="custom-control-label title text-gris" for="Check1">$50.001 - $100.000</label>
-										</div> <!-- form-check.// -->
+							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
+							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
+							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
+							<input type="hidden" name="order_by" id="order_by_id" value="min">
+						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
+							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
+						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
+						</form>
 
-									</div> <!-- card-body.// -->
-							</article>
-
-							<article class="card-group-item">
-								<header class="card-header">
-									<h5 class="title text-success">DESPACHO A DOMICILIO </h5>
-								</header>
-									<div class="card-body ">
-										<label class="form-check">
-										  <input class="form-check-input" type="radio" name="exampleRadio" value="">
-										  <span class="form-check-label text-gris">
-										    SI
-										  </span>
-										</label>
-										<label class="form-check">
-										  <input class="form-check-input" type="radio" name="exampleRadio" value="">
-										  <span class="form-check-label text-gris">
-										    NO
-										  </span>
-										</label>
-									</div>
-							</article>
-
-							<article class="card-group-item">
-								<header class="card-header">
-									<h5 class="title text-success">ATRAPAHIELO </h5>
-								</header>
-									<div class="card-body">
-										<label class="form-check">
-										  <input class="form-check-input" type="radio" name="_atrapa" value="">
-										  <span class="form-check-label text-gris">
-										    SI
-										  </span>
-										</label>
-										<label class="form-check">
-										  <input class="form-check-input" type="radio" name="_atrapa" value="">
-										  <span class="form-check-label text-gris">
-										    NO
-										  </span>
-										</label>
-									</div>
-							</article>
+					</div> <!-- col.// -->
+					<div class="col-10">
+						<div class="row">
+							<div class="col-8">
+								<h4 style="margin-top:15px; font-weight: 200;">ESTAS BUSCANDO: {{ texto }} </h4>
+							</div>
+							<div class="col-4 text-right">
+								<div class="btn-group" role="group" style="
+    margin-right: 30px;
+    margin-top: 10px;
+">
+<label for="" style="
+margin-top: 6px;
+margin-right: 9px;
+font-weight: 100;
+">Ordenar por: </label>
+							    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="
+    border-top-left-radius: 0;
+		background-color: #01b22c;
+		border:#01b22c;
+		color:#fff;
+		font-weight: 100;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+">
+							      {% if order_by == "min" %}Menor precio de primero{% endif %}
+										{% if order_by == "max" %}Mayor precio de primero{% endif %}
+										{% if order_by == "dest" %}Destacados de primero{% endif %}
+							    </button>
+							    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										<a class="dropdown-item" onclick="enviarFiltros('order_by_id','min')">Menor precio de primero</a>
+							      <a class="dropdown-item" onclick="enviarFiltros('order_by_id','max')">Mayor precio de primero</a>
+										<a class="dropdown-item" onclick="enviarFiltros('order_by_id','dest')">Destacados de primero</a>
+							    </div>
+							  </div>
+							</div>
 						</div>
-					</aside> <!-- col.// -->
-					<main class="col-sm-9">
-
-						<article class="card card-product">
-							<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12 col-md-3  text-gris text-center">
-									<h1>MACETAS</h1>
-									<p>Mostrando 64 productos</p>
-								</div>
-								<div class="col-sm-12 col-md-5 p-t-10">
-									<button class="btn btn-primary btn-success btn-md btn-redondeo">GUARDAR BUSQUEDA</button>
-								</div>
-
-								<div class="col-sm-12 col-md-4 p-t-10">
-									<select id="inputState" class="form-control">
-										<option> Seleccione...</option>
-									</select>
-								</div>
-
-							</div> <!-- row.// -->
-							</div> <!-- card-body .// -->
-
-							<div class="row" style="padding-left:10px; padding-right:10px">
-                {% for item in productos %}
-								<div class="col-md-3">
-									<figure class="card card-product">
-										<div class="img-wrap"><img src="/media/{{ item.image }}"> </div>
-										<figcaption class="info-wrap">
-												<div class="rating-wrap">
-													<div class=" text-center">
-														<span class="desc text18">{{ item.product.name }}</span><br>
-														<!-- <span class="desc text18">Marca</span> -->
-														<div class="price-wrap h5">
-															<span class="price-new text-morado">{{ item.product.total }}</span>
-														</div> <!-- price-wrap.// -->
-													</div>
-													<div id="code_list_img">
-														<ul class="list-icon row">
-															<li class="col-md-6 col-sm-12"><a href="#">
-																<img src="{% static 'theme/images/items/favorito.png' %}" class="items-icon"></a>
-															</li>
-															<li class="col-md-6 col-sm-12 text-r"><a href="#">
-																<img src="{% static 'theme/images/items/buscar.png' %}" class="items-icon"></a>
-															</li>
-														</ul>
-													</div>
-												</div> <!-- rating-wrap.// -->
-										</figcaption>
-									</figure>
-								</div> <!-- col // -->
-                {% endfor %}
+						<div class="row">
+							<h4 style="margin-top:5px;margin-left:15px;font-size:12px; font-weight: 200;">Mostrando {{ productos.paginator.count }} Productos </h4>
 						</div>
-						<div class="pagination">
-						    <span class="step-links">
-						        {% if productos.has_previous %}
-						            <a href="?page=1">&laquo; first</a>
-						            <a href="?page={{ productos.previous_page_number }}">previous</a>
-						        {% endif %}
-
-						        <span class="current">
-						            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
-						        </span>
-
-						        {% if productos.has_next %}
-						            <a href="?page={{ productos.next_page_number }}">next</a>
-						            <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a>
-						        {% endif %}
-						    </span>
+						<div class="row">
+							<div class="col article-feed">
+									{% include 'comparagrow/component/items_buscador.html' %}
+							</div>
 						</div>
-
-						</article> <!-- card product .// -->
-
-					</main> <!-- col.// -->
+					</div> <!-- col.// -->
 				</div>
 
 			</div> <!-- container .//  -->
-		</section>
+
 	<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}
+
+
+{% block js %}
+<script src="/static/js/notify.js"></script>
+<script src="/static/js/infinite-scroll.pkgd.min.js"></script>
+<script type="text/javascript">
+  $('.article-feed').infiniteScroll({
+    path: '.pagination__next',
+    append: '.article',
+    status: '.scroller-status',
+    hideNav: '.pagination',
+  });
+</script>
+<script>
+	function FavoriteProduct(id){
+		$.ajax({
+      method: "GET",
+      url: "/productos/favorito/"+id,
+    })
+      .done(function( msg ) {
+          $.notify(msg.text, msg.status);
+    });
+
+	}
+</script>
 {% endblock %}

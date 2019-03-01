@@ -7,7 +7,12 @@
           <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.product.shop.name }}</a>
         </div>
         <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-          <img src="/media/{{ item.image }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+          {% for entry in item.productImage_set.all %}
+          {% if forloop.first %}
+          {{ entry }}
+          <img src="/media/{{ entry.image }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+          {% endif %}
+          {% endfor %}
         </a>
         <div class="card-body" style="margin-top: -20px;height: 40px;">
           <span class="" style="color:#01b22c;">

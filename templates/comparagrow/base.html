@@ -76,7 +76,7 @@
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-light text-white justify-content-center sticky-top" style="background:#672d93;">
+    <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
       {% listado as listado_producto %}
         {% for genre,structure in listado_producto|tree_info %}
             {% if structure.new_level %}
@@ -88,7 +88,7 @@
             {% else %}
               </li><li style="font-weight: 100;">
             {% endif %}
-                <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;font-weight: 100;">{{ genre.name }}</a>
+                <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;font-weight: 100;text-transform: uppercase;">{{ genre.name }}</a>
             {% for level in structure.closed_levels %}</li></ul>{% endfor %}
         {% endfor %}
     </nav>

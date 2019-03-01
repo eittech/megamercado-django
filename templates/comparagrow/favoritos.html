@@ -1,0 +1,61 @@
+{% extends 'comparagrow/base.html' %}
+{% load static %}
+
+
+{% block content %}
+			<style media="screen">
+				.card:hover{
+					box-shadow: 5px 5px 5px grey;
+					cursor:pointer;
+				}
+			</style>
+
+			<div class="container-fluid">
+				<div class="row">
+          <div class="col-1">
+
+          </div>
+					<div class="col-10">
+            <div class="row justify-content-md-center" style="margin-top:40px;" >
+              <h5 style="font-weight:200;">FAVORITOS</h5>
+              <br>
+              <br>
+            </div>
+						<div class="row">
+							<div class="col article-feed">
+									{% include 'comparagrow/component/items_buscador0.html' %}
+							</div>
+						</div>
+					</div> <!-- col.// -->
+				</div>
+
+			</div> <!-- container .//  -->
+
+	<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}
+
+
+{% block js %}
+<script src="/static/js/notify.js"></script>
+<script src="/static/js/infinite-scroll.pkgd.min.js"></script>
+<script type="text/javascript">
+  $('.article-feed').infiniteScroll({
+    path: '.pagination__next',
+    append: '.article',
+    status: '.scroller-status',
+    hideNav: '.pagination',
+  });
+</script>
+<script>
+	function FavoriteProduct(id){
+		$.ajax({
+      method: "GET",
+      url: "/productos/favorito/"+id,
+    })
+      .done(function( msg ) {
+          $.notify(msg.text, msg.status);
+    });
+
+	}
+</script>
+{% endblock %}
