@@ -42,7 +42,7 @@ SECRET_KEY = 'r#hc(l2(-+=ih$6d#d&kkkafvr_4n0e%m)@(92qv1kav3259%4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.7','192.168.1.9','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.5','192.168.1.9','127.0.0.1']
 
 #habilitar cuando use postgres
 # SOCIAL_AUTH_POSTGRES_JSONFIELD = True
@@ -134,7 +134,7 @@ EMAIL_PORT = 587
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite35'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

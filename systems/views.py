@@ -131,16 +131,20 @@ def register_front(request):
     if not request.POST :
         return render(request, 'comparagrow/register.html')
     try:
+        print("1")
         username = request.POST['username']
+        print(username)
         email = request.POST['email']
+        print(email)
         password = request.POST['password']
         first_name = request.POST['first_name']
-        if username == email:
-            return redirect('/?error=not_access')
+        if username != email:
+            return redirect('/?error=not_access_1')
     except:
-        return redirect('/?error=not_access')
+        return redirect('/?error=not_access_2')
 
     try:
+        print("2")
         birthday = request.POST['birthday']
         if birthday == "":
             birthday = False
@@ -148,6 +152,7 @@ def register_front(request):
         birthday = False
 
     try:
+        print("3")
         gender = request.POST['gender']
     except:
         gender = False
