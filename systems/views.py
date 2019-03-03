@@ -178,9 +178,9 @@ def register_front(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-        subject, from_email, to = 'hello', 'ing.omar.orozco@gmail.com', 'omar.alexander.orozco.avila@gmail.com'
-        text_content = 'This is an important message.'
-        html_content = 'http://127.0.0.1:8000/users/validate/'+ uid.decode("utf-8") +'/'+ token
+        subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'comparagrow420@gmail.com', email
+        text_content = 'Utilice el siguiente link para validar su cuenta de comparagrow.'
+        html_content = 'http://34.73.69.53/users/validate/'+ uid.decode("utf-8") +'/'+ token
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
