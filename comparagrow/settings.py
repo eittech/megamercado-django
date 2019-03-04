@@ -113,29 +113,42 @@ WSGI_APPLICATION = 'comparagrow.wsgi.application'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'teteangarita121194@gmail.com'
-EMAIL_HOST_PASSWORD = '17800074'
+EMAIL_HOST_USER = 'comparagrow420@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pazverde420'
+#EMAIL_HOST_USER = 'teteangarita121194@gmail.com'
+#EMAIL_HOST_PASSWORD = '17800074'
+
 EMAIL_PORT = 587
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+ # DATABASES = {
+ #     'default': {
+ #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+ #         'NAME': 'comparagrow',
+ #         'USER': 'postgres',
+ #         'PASSWORD': 'hfv5ac1obcBw1P9x',
+ #         'HOST': '104.197.7.8',
+ #         'PORT': '',
+ #     }
+ # }
+
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'comparagrow',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'comparagrow',
+       'USER':	'postgres',
+       'PASSWORD':	'hfv5ac1obcBw1P9x',
+       'HOST': '104.197.7.8',
+   }
 }
 
 
@@ -193,8 +206,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_URL = '/static/'
-#STATIC_ROOT = 'static_admin/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = 'static_admin/'
+#STATIC_ROOT = 'static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
