@@ -121,7 +121,7 @@ class ProductSpider(scrapy.Spider):
             Product_object.description = description
 
         if category is None:
-            category = Category.objects.get(pk=1)
+            category = Category.objects.get(pk=69)
             Product_object.category = category
         else:
             Product_object.category = category

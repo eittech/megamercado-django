@@ -155,6 +155,39 @@ class GigsList(generic.ListView):
         return ProductImage.objects.all()[:100]
 
 
+def categorias2(request,slug):
+    categoria = Category.objects.get(slug=slug)
+    print(categoria)
+    children = categoria.get_descendants(include_self=False)
+    print(children)
+    productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
+    print(productos_lista_0)
+    productos_lista2 = ProductImage.objects.filter(product__category=categoria)
+    print(productos_lista2)
+    productos_lista = productos_lista_0.union(productos_lista2)
+    print(productos_lista)
+    tiendas = productos_lista.values('product__shop__name','product__shop__pk')
+    print(tiendas)
+    paginator = Paginator(productos_lista, 20)
+    page = request.GET.get('page')
+    if page is not None:
+        if request.is_ajax():
+            template = "comparagrow/component/items_buscador.html"
+        else:
+            template = "comparagrow/categorias.html"
+    else:
+        template = "comparagrow/categorias.html"
+    try:
+        productos = paginator.get_page(page)
+        print(productos)
+    except:
+        return redirect('/not_found')
+    # time.sleep(3)
+    return render(request, template, {
+    'productos': productos
+    })
+
+
 def categorias(request,slug):
     pagina = "?"
     tienda = ""
@@ -165,15 +198,31 @@ def categorias(request,slug):
     else:
         texto = ""
 
-    lista_categorias = Category.objects.all()
+    # lista_categorias = Category.objects.all()
     categoria = Category.objects.get(slug=slug)
+    children = categoria.get_descendants(include_self=True)
+
+    productos_lista = ProductImage.objects.filter(product__category__in=children)
+
+
+    # productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
+    # productos_lista2 = ProductImage.objects.filter(product__category=categoria)
+    # productos_lista = productos_lista_0.union(productos_lista2)
+
+    # productos_lista = productos_lista.order_by('product__total')
+
+    # productos_lista_5 = Product.objects.filter(category__in=children)
+    # productos_lista_6 = Product.objects.filter(category=categoria)
+    # productos_lista_7 = productos_lista_5.union(productos_lista_6)
     # print(categoria)
     # children = categoria.get_children()
     # productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
-    productos_lista = ProductImage.objects.filter(product__category=categoria)
+    # productos_lista = ProductImage.objects.filter(product__category=categoria)
     # productos_lista = productos_lista_0.union(productos_lista_2)
 
     tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
+    # print(productos_lista)
+    #tiendas = None
     # categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
     shop_id = False
     if request.GET.get('tienda'):
@@ -227,6 +276,7 @@ def categorias(request,slug):
             productos_lista = productos_lista.order_by('product__total')
     else:
         order_by = "min"
+    # order_by = "min"
 
 
     paginator = Paginator(productos_lista, 20)

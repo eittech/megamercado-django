@@ -1,0 +1,121 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
+    {% include 'comparagrow/component/menu_css.html' %}
+    <script type="text/javascript">
+        function closetoast(name){
+          //alert(1);
+          $('.'+name).toast('hide');
+        }
+    </script>
+    <title>comparagrow</title>
+  </head>
+  <body>
+    {% if error %}
+    {% include 'comparagrow/component/error_acceso.html' %}
+    {% endif %}
+
+
+
+  <header class="section-header ">
+    <div class="col-sm-12 text-center bg-dark">
+      <span class="text-white">Espacio reservado para promociones especiales</span>
+    </div>
+    <div class="col-sm-12">
+      <div class="row">
+
+        <div class="col-3 col-md-4">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <a href="/" style="text-decoration:none;">
+                    <img class="logo" src="{% static 'theme/images/home/logo.png' %}">
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <table style="height: 100px; width:100%;">
+            <tbody>
+              <tr>
+                <td class="align-middle">
+                  <form action="/productos/buscador" class="search-wrap">
+                    <div class="input-group ">
+                      <input name="texto" type="text" class="form-control" style='border-radius: 8px 8px 8px 8px !important;padding: 5px 5px 5px 35px !important;background-position: 5px 3px !important;background: url("{% static 'img/lupa.png' %}") no-repeat scroll 0 0 transparent;' placeholder="Compara AQUÍ">
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-2 col-md-4">
+          {% if user.is_authenticated %}
+            {% include 'comparagrow/component/menu_user.html' %}
+          {% else %}
+            {% include 'comparagrow/component/menu_not_user.html' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-light text-white justify-content-center" style="background:#672d93;">
+      {% listado as listado_producto %}
+        {% for genre,structure in listado_producto|tree_info %}
+            {% if structure.new_level %}
+              {% if forloop.first %}
+                <ul class="navegacion" style="font-weight: 100;"><li style="font-weight: 100;">
+              {% else %}
+                <ul style="font-weight: 100;"><li style="font-weight: 100;">
+              {% endif %}
+            {% else %}
+              </li><li style="font-weight: 100;">
+            {% endif %}
+                <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;font-weight: 100;text-transform: uppercase;">{{ genre.name }}</a>
+            {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+        {% endfor %}
+    </nav>
+  </header>
+  {% block content %}
+
+  {% endblock %}
+
+  {% include 'comparagrow/component/footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <script src="{% static 'js/waypoints/lib/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'js/waypoints/lib/shortcuts/infinite.min.js' %}"></script>-->
+    <!-- <script src="http://cdn.intercoolerjs.org/intercooler-1.2.1.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    {% block js %}
+
+    {% endblock %}
+
+  </body>
+</html>
+{% if user.is_authenticated %}
+
+{% else %}
+{% include 'comparagrow/component/modal_register.html' %}
+{% endif %}
+
+{% include 'comparagrow/component/recovery_account.html' %}
