@@ -42,8 +42,11 @@ def profile(request):
         try:
             customer = Customer.objects.get(user=user)
         except:
-            customer = False
+            customer = None
         if request.POST:
+            if customer is None:
+                customer = Customer()
+                customer.user = user
             first_name = request.POST['first_name']
             if first_name is not None:
                 if first_name == "":

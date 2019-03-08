@@ -7,13 +7,15 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" type="image/png" href="/static/img/lupa.png">
+    
 
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% include 'comparagrow/component/menu_css.html' %}
     <script type="text/javascript">
         function closetoast(name){
@@ -31,54 +33,126 @@
 
 
   <header class="section-header ">
-    <div class="col-sm-12 text-center bg-dark">
-      <span class="text-white">Espacio reservado para promociones especiales</span>
+    <div class="container-fluid">
+
+
+    <div class="row">
+      <div class="col-sm-12 text-center bg-dark">
+        <span class="text-white">Espacio reservado para promociones especiales</span>
+      </div>
     </div>
-    <div class="col-sm-12">
-      <div class="row">
-
-        <div class="col-3 col-md-4">
-          <table style="height: 100px; width:100%;">
-            <tbody>
-              <tr>
-                <td class="align-middle">
-                  <a href="/" style="text-decoration:none;">
-                    <img class="logo" src="{% static 'theme/images/home/logo.png' %}">
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-lg-4 align-middle">
+          <img class="logo img-fluid" src="{% static 'theme/images/home/logo.png' %}">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-4 align-middle">
+          <form action="/productos/buscador" class="search-wrap" style="padding-top: 18px;">
+            <div class="input-group ">
+              <input name="texto" type="text" class="form-control" style='border-radius: 8px 8px 8px 8px !important;padding: 5px 5px 5px 35px !important;background-position: 5px 3px !important;background: url("{% static 'img/lupa.png' %}") no-repeat scroll 0 0 transparent;' placeholder="Compara AQUÍ">
+            </div>
+          </form>
         </div>
 
-        <div class="col">
-          <table style="height: 100px; width:100%;">
-            <tbody>
-              <tr>
-                <td class="align-middle">
-                  <form action="/productos/buscador" class="search-wrap">
-                    <div class="input-group ">
-                      <input name="texto" type="text" class="form-control" style='border-radius: 8px 8px 8px 8px !important;padding: 5px 5px 5px 35px !important;background-position: 5px 3px !important;background: url("{% static 'img/lupa.png' %}") no-repeat scroll 0 0 transparent;' placeholder="Compara AQUÍ">
-                    </div>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col-2 col-md-4">
+        <div class="col-xs-12 col-sm-12 col-lg-4 align-middle">
           {% if user.is_authenticated %}
             {% include 'comparagrow/component/menu_user.html' %}
           {% else %}
             {% include 'comparagrow/component/menu_not_user.html' %}
           {% endif %}
         </div>
-      </div>
-    </div>
 
+    </div>
+    </div>
   </header>
-  <nav class="navbar navbar-light text-white justify-content-center sticky-top" style="background:#672d93;">
+  <!-- <nav role="navigation" class="navbar justify-content-center sticky-top" style="background:#672d93;">
+      <a href="javascript:void(0);" class="ic menu">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </a>
+      <a href="javascript:void(0);" class="ic close"></a>
+      <ul class="main-nav">
+        <li class="top-level-link">
+          <a><span>Home</span></a>
+        </li>
+
+        <li class="top-level-link">
+          <a class="mega-menu"><span>Products</span></a>
+          <div class="sub-menu-block">
+            <div class="row">
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Clothing</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>Mens</a></li>
+                  <li><a>Womens</a></li>
+                  <li><a>Kids</a></li>
+                  <li><a>New Born</a></li>
+                  <li><a>View All</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Handbags</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>Wallets</a></li>
+                  <li><a>Athletic bag</a></li>
+                  <li><a>Backpack</a></li>
+                  <li><a>Bucket Bag</a></li>
+                  <li><a>View All</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Shoes</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>Mens</a></li>
+                  <li><a>Womens</a></li>
+                  <li><a>Kids</a></li>
+                  <li><a>View All</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="top-level-link">
+          <a><span>Services<span></a>
+        </li>
+        <li class="top-level-link">
+          <a class="mega-menu"><span>About</span></a>
+          <div class="sub-menu-block">
+            <div class="row">
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Company</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>About</a></li>
+                  <li><a>Mission</a></li>
+                  <li><a>Community</a></li>
+                  <li><a>Team</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Media</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>News</a></li>
+                  <li><a>Events</a></li>
+                  <li><a>Blog</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4 col-lg-4 col-sm-4">
+                <h2 class="sub-menu-head">Careers</h2>
+                <ul class="sub-menu-lists">
+                  <li><a>New Opportunities</a></li>
+                  <li><a>Life @ Company</a></li>
+                  <li><a>Why Join Us?</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="top-level-link">
+          <a><span>Contact</span></a>
+        </li>
+      </ul>
+    </nav> -->
+  <nav class="navbar navbar-light justify-content-center sticky-top" style="background:#672d93;">
     {% listado as listado_producto %}
       {% for genre,structure in listado_producto|tree_info %}
           {% if structure.new_level %}
@@ -90,45 +164,14 @@
           {% else %}
             </li><li style="font-weight: 100;">
           {% endif %}
-              <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none; color:#fff;font-weight: 100;text-transform: uppercase;">{{ genre.name }}</a>
+              <a  href="/productos/categorias/{{ genre.slug }}" style="text-decoration:none;font-weight: 100;">{{ genre.name }}</a>
+              <!-- {{ genre.level }} -->
           {% for level in structure.closed_levels %}</li></ul>{% endfor %}
       {% endfor %}
   </nav>
-  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-<a class="navbar-brand" href="#">Navbar</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-  </ul>
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</div>
-</nav> -->
+
+
   {% block content %}
 
   {% endblock %}

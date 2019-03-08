@@ -56,6 +56,7 @@ class Product(models.Model):
     shop = models.ForeignKey(Shop,on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
     reference = models.CharField(verbose_name="Referencia",max_length=200,blank=True)
+    brand = models.CharField(verbose_name="Marca",max_length=200,blank=True)
     url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
     category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE)
@@ -85,6 +86,7 @@ class ProductImage(models.Model):
         return self.product.name
     class Meta:
         verbose_name = "Imagenes de Productos"
+        unique_together = ('product', 'image')
 
 class Attributes(models.Model):
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
@@ -92,6 +94,8 @@ class Attributes(models.Model):
         return self.name
     class Meta:
         verbose_name = "Atributos de Productos"
+        unique_together = ('name',)
+
 
 class ProductAttributes(models.Model):
     product= models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -101,3 +105,4 @@ class ProductAttributes(models.Model):
         return self.attributes.name
     class Meta:
         verbose_name = "Datelle de Atributos de Productos"
+        unique_together = ('product','attributes')

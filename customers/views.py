@@ -5,6 +5,13 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from customers.serializers import UserSerializer, GroupSerializer
 
+from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from products.models import *
+from customers.models import *
+
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -20,3 +27,17 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+@login_required
+def Dashboard(request):
+    return render(request, 'comparagrow/admin/index.html', {'variable':""})
+
+
+@login_required
+def Shop(request):
+    return render(request, 'comparagrow/admin/shop.html', {'variable':""})
+
+
+@login_required
+def Products(request):
+    return render(request, 'comparagrow/admin/products.html', {'variable':""})
