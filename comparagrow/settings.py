@@ -126,10 +126,10 @@ EMAIL_PORT = 587
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'comparagrow-test',
+         'NAME': 'comparagrowtest',
          'USER': 'postgres',
-         'PASSWORD': 'hfv5ac1obcBw1P9x',
-         'HOST': '104.197.7.8',
+         'PASSWORD': 'pazverde123',
+         'HOST': 'localhost',
          'PORT': '',
      }
  }
