@@ -13,3 +13,13 @@ def listado():
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
     return "/media/" + str(productos.image)
+
+
+@register.filter(name='favoriteactive')
+def favoriteactive(value, arg):
+    validatefavorite = FavoriteProduct.objects.filter(user__pk=value).filter(product__pk=arg).first()
+    if validatefavorite is not None:
+        icon = "as fa-minus-circle text-danger"
+    else:
+        icon = "far fa-heart"
+    return icon
