@@ -33,7 +33,17 @@
 						{% endif %}
 						{% endfor %}
 
+						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">MARCAS</h6>
 
+						{% for marc in marcas %}
+						{% if marc.product__brand|stringformat:"s" == marca|stringformat:"s" %}
+						<!-- <h6 style="margin-left:10px;"><i class="fas fa-check-circle"></i><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6> -->
+						<h6 style="margin-left:10px;"><i class="fas fa-check-circle" style="color:#01b22c;"></i> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.product__brand }}')">{{ marc.product__brand }}</a></h6>
+						{% else %}
+						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.product__brand }}')">{{ marc.product__brand }}</a></h6>
+
+						{% endif %}
+						{% endfor %}
 
 
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
