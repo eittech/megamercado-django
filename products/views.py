@@ -18,18 +18,12 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from django import template
-
-register = template.Library()
+# from django import template
+#
+# register = template.Library()
 
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
-
-
-@register.filter(name='imageproduct')
-def imageproduct(value, arg):
-    productos = ProductImage.objects.filter(product__pk=value).firts()
-    return "/media/" + str(productos.image)
 
 def listado(request):
     productos = ProductImage.objects.all()[:20]
