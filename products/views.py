@@ -382,10 +382,11 @@ def detalle_product(request,id):
     try:
         producto = Product.objects.get(pk=id)
         producto_image = ProductImage.objects.filter(product=producto)
+        producto_attr = ProductAttributes.objects.filter(product=producto)
     except:
         producto = None
     if producto is not None:
-        return render(request, "comparagrow/detalle.html",{'producto':producto,'producto_image':producto_image})
+        return render(request, "comparagrow/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr})
     else:
         return redirect('/error')
 

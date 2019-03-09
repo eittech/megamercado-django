@@ -76,6 +76,29 @@
               </div>
           </div>
 				</div>
+				<div class="row ustify-content-md-center">
+						<div class="col-6">
+							<table class="table">
+							  <thead class="thead-dark">
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">Caracteristica</th>
+							      <th scope="col">Valor</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+									{% for t in producto_attr %}
+									<tr>
+							      <th scope="row">#</th>
+							      <td>{{ t.attributes.name }}</td>
+							      <td>{{ t.values }}</td>
+							    </tr>
+									{% endfor %}
+							  </tbody>
+							</table>
+
+						</div>
+				</div>
 
 			</div> <!-- container .//  -->
 
