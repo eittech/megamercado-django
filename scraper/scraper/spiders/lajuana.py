@@ -86,9 +86,10 @@ class ProductSpider(scrapy.Spider):
     def parse_product(self,response):
         shop_id = Shop.objects.filter(pk=1)
         print(shop_id)
-        name_category = response.meta['name_category_safe']
+        name_category_t = response.meta['name_category_safe']
+        name_category = name_category_t.rstrip().lower()
         category = None
-        category_tags = CategoryTags.objects.filter(tag__contains=name_category).first()
+        category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
         if category_tags is None:
             category = None
         else:

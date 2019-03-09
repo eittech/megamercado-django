@@ -33,7 +33,8 @@ def buscador(request):
     categoria = ""
     tienda = ""
     if request.GET.get('texto'):
-        texto = request.GET.get('texto')
+        texto_t = request.GET.get('texto')
+        texto = texto_t.rstrip().lower()
         pagina = pagina + "texto=" + texto
     else:
         texto = ""
