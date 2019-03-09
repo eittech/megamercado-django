@@ -43,10 +43,10 @@ def buscador(request):
         texto = ""
 
     print(pagina)
-    productos_lista = ProductImage.objects.filter(product__name__icontains=texto)
-    tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
-    categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
-    marcas = productos_lista.values('product__brand').annotate(dcount=Count('product__brand'))
+    productos_lista = Product.objects.filter(product__name__icontains=texto)
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
+    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
 
     shop_id = False
     if request.GET.get('tienda'):
@@ -60,7 +60,7 @@ def buscador(request):
     pagina_shop = ""
     if shop_id:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(product__shop=shop_id)
+        productos_lista = productos_lista.filter(shop=shop_id)
         pagina_shop = "&tienda="+tienda
 
 
@@ -71,7 +71,7 @@ def buscador(request):
     pagina_marca = ""
     if marca:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(product__brand=marca)
+        productos_lista = productos_lista.filter(brand=marca)
         pagina_marca = "&marca="+marca
 
 
@@ -87,7 +87,7 @@ def buscador(request):
     pagina_category = ""
     if categoria_id:
         print("categoria_id paso 3")
-        productos_lista = productos_lista.filter(product__category=categoria_id)
+        productos_lista = productos_lista.filter(category=categoria_id)
         pagina_category = "&categoria="+categoria
 
     if request.GET.get('min_price'):
@@ -100,16 +100,16 @@ def buscador(request):
         max_price = None
     if max_price is not None and min_price is not None:
         if float(max_price) > float(min_price):
-            productos_lista = productos_lista.filter(product__total__range=(float(min_price), float(max_price)))
+            productos_lista = productos_lista.filter(total__range=(float(min_price), float(max_price)))
         else:
-            productos_lista = productos_lista.filter(product__total__range=(float(max_price), float(min_price)))
+            productos_lista = productos_lista.filter(total__range=(float(max_price), float(min_price)))
     else:
         if max_price is not None:
-            productos_lista = productos_lista.filter(product__total__range=(0, float(max_price)))
+            productos_lista = productos_lista.filter(total__range=(0, float(max_price)))
             min_price = ""
         else:
             if min_price is not None:
-                productos_lista = productos_lista.filter(product__total__gte=float(min_price))
+                productos_lista = productos_lista.filter(total__gte=float(min_price))
                 max_price = ""
             else:
                 max_price = ""
@@ -119,11 +119,11 @@ def buscador(request):
     if request.GET.get('order_by'):
         order_by = request.GET.get('order_by')
         if order_by == "min":
-            productos_lista = productos_lista.order_by('product__total')
+            productos_lista = productos_lista.order_by('total')
         if order_by == "max":
-            productos_lista = productos_lista.order_by('-product__total')
+            productos_lista = productos_lista.order_by('-total')
         if order_by == "dest":
-            productos_lista = productos_lista.order_by('product__total')
+            productos_lista = productos_lista.order_by('total')
     else:
         order_by = "min"
 
