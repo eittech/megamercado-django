@@ -356,19 +356,25 @@ def favorite_product(request,id):
         try:
             producto = Product.objects.get(pk=id)
             print(producto)
-            favorito = FavoriteProduct()
-            print('paso1')
-            favorito.user = user
-            print('paso1')
+            validatefavorite = FavoriteProduct.objects.filter(user=user).filter(product=producto).first()
+            if validatefavorite is not None:
+                validatefavorite.delete()
+                status = "warn"
+                text = "Se ha eliminado el producto."
+            else:
+                favorito = FavoriteProduct()
+                print('paso1')
+                favorito.user = user
+                print('paso1')
 
-            favorito.product = producto
-            print('paso1')
-            print(favorito)
-            favorito.save()
-            print('paso1')
+                favorito.product = producto
+                print('paso1')
+                print(favorito)
+                favorito.save()
+                print('paso1')
 
-            status = "success"
-            text = "Se agrego correctamente el producto"
+                status = "success"
+                text = "Se agrego correctamente el producto"
         except:
             status = "warn"
             text = "No se pudo agregar el product a favoritos"
