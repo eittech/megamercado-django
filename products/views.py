@@ -349,10 +349,8 @@ def redirect_product(request,id):
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
 def favorite_product(request,id):
-    print(id)
     if request.user.is_authenticated:
         user = request.user
-        print(user)
         try:
             producto = Product.objects.get(pk=id)
             print(producto)
@@ -364,15 +362,9 @@ def favorite_product(request,id):
                 type = "add"
             else:
                 favorito = FavoriteProduct()
-                print('paso1')
                 favorito.user = user
-                print('paso1')
-
                 favorito.product = producto
-                print('paso1')
-                print(favorito)
                 favorito.save()
-                print('paso1')
 
                 status = "success"
                 text = "Se agrego correctamente el producto"
@@ -381,7 +373,7 @@ def favorite_product(request,id):
             status = "warn"
             text = "No se pudo agregar el product a favoritos"
             type = "not"
-        return JsonResponse({"text": text,"status":status})
+        return JsonResponse({"text": text,"status":status,"type":type})
     else:
         status = "warn"
         text = "Debe iniciar sesion."
