@@ -40,7 +40,7 @@ def buscador(request):
         texto = ""
 
     print(pagina)
-    productos_lista = ProductImage.objects.filter(product__name__contains=texto)
+    productos_lista = ProductImage.objects.filter(product__name__icontains=texto)
     tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
     categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
     shop_id = False
