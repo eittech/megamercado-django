@@ -221,30 +221,14 @@ def categorias(request,slug):
     categoria = Category.objects.get(slug=slug)
     children = categoria.get_descendants(include_self=True)
 
-    productos_lista = ProductImage.objects.filter(product__category__in=children)
+    productos_lista = Product.objects.filter(category__in=children)
 
-
-    # productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
-    # productos_lista2 = ProductImage.objects.filter(product__category=categoria)
-    # productos_lista = productos_lista_0.union(productos_lista2)
-
-    # productos_lista = productos_lista.order_by('product__total')
-
-    # productos_lista_5 = Product.objects.filter(category__in=children)
-    # productos_lista_6 = Product.objects.filter(category=categoria)
-    # productos_lista_7 = productos_lista_5.union(productos_lista_6)
-    # print(categoria)
-    # children = categoria.get_children()
-    # productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
-    # productos_lista = ProductImage.objects.filter(product__category=categoria)
-    # productos_lista = productos_lista_0.union(productos_lista_2)
-
-    tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
-    marcas = productos_lista.values('product__brand').annotate(dcount=Count('product__brand'))
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
 
     # print(productos_lista)
     #tiendas = None
-    # categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
+    # categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
     shop_id = False
     if request.GET.get('tienda'):
         print("tienda paso 1")
@@ -257,7 +241,7 @@ def categorias(request,slug):
     pagina_shop = ""
     if shop_id:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(product__shop=shop_id)
+        productos_lista = productos_lista.filter(shop=shop_id)
         pagina_shop = "&tienda="+tienda
 
 
@@ -268,7 +252,7 @@ def categorias(request,slug):
     pagina_marca = ""
     if marca:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(product__brand=marca)
+        productos_lista = productos_lista.filter(brand=marca)
         pagina_marca = "&marca="+marca
 
 
@@ -282,16 +266,16 @@ def categorias(request,slug):
         max_price = None
     if max_price is not None and min_price is not None:
         if float(max_price) > float(min_price):
-            productos_lista = productos_lista.filter(product__total__range=(float(min_price), float(max_price)))
+            productos_lista = productos_lista.filter(total__range=(float(min_price), float(max_price)))
         else:
-            productos_lista = productos_lista.filter(product__total__range=(float(max_price), float(min_price)))
+            productos_lista = productos_lista.filter(total__range=(float(max_price), float(min_price)))
     else:
         if max_price is not None:
-            productos_lista = productos_lista.filter(product__total__range=(0, float(max_price)))
+            productos_lista = productos_lista.filter(total__range=(0, float(max_price)))
             min_price = ""
         else:
             if min_price is not None:
-                productos_lista = productos_lista.filter(product__total__gte=float(min_price))
+                productos_lista = productos_lista.filter(total__gte=float(min_price))
                 max_price = ""
             else:
                 max_price = ""
@@ -301,11 +285,11 @@ def categorias(request,slug):
     if request.GET.get('order_by'):
         order_by = request.GET.get('order_by')
         if order_by == "min":
-            productos_lista = productos_lista.order_by('product__total')
+            productos_lista = productos_lista.order_by('total')
         if order_by == "max":
-            productos_lista = productos_lista.order_by('-product__total')
+            productos_lista = productos_lista.order_by('-total')
         if order_by == "dest":
-            productos_lista = productos_lista.order_by('product__total')
+            productos_lista = productos_lista.order_by('total')
     else:
         order_by = "min"
     # order_by = "min"
