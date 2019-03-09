@@ -361,6 +361,7 @@ def favorite_product(request,id):
                 validatefavorite.delete()
                 status = "warn"
                 text = "Se ha eliminado el producto."
+                type = "add"
             else:
                 favorito = FavoriteProduct()
                 print('paso1')
@@ -375,14 +376,17 @@ def favorite_product(request,id):
 
                 status = "success"
                 text = "Se agrego correctamente el producto"
+                type = "del"
         except:
             status = "warn"
             text = "No se pudo agregar el product a favoritos"
+            type = "not"
         return JsonResponse({"text": text,"status":status})
     else:
         status = "warn"
         text = "Debe iniciar sesion."
-    return JsonResponse({"text": text,"status":status})
+        type = "not"
+    return JsonResponse({"text": text,"status":status,"type":type})
 
 @login_required
 def favorite_detail(request):

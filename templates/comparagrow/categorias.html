@@ -132,6 +132,17 @@ font-weight: 100;
     })
       .done(function( msg ) {
           $.notify(msg.text, msg.status);
+					if(msg.type=="add"){
+						$('#favorite_'+id).removeClass("fas fa-minus-circle text-danger");
+						$('#favorite_'+id).addClass("far fa-heart");
+					}
+					if(msg.type=="del"){
+						$('#favorite_'+id).removeClass("far fa-heart");
+						$('#favorite_'+id).addClass("fas fa-minus-circle text-danger");
+					}
+					if(msg.type=="not"){
+
+					}
     });
 
 	}
