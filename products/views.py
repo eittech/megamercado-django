@@ -156,37 +156,37 @@ class GigsList(generic.ListView):
         return ProductImage.objects.all()[:100]
 
 
-def categorias2(request,slug):
-    categoria = Category.objects.get(slug=slug)
-    print(categoria)
-    children = categoria.get_descendants(include_self=False)
-    print(children)
-    productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
-    print(productos_lista_0)
-    productos_lista2 = ProductImage.objects.filter(product__category=categoria)
-    print(productos_lista2)
-    productos_lista = productos_lista_0.union(productos_lista2)
-    print(productos_lista)
-    tiendas = productos_lista.values('product__shop__name','product__shop__pk')
-    print(tiendas)
-    paginator = Paginator(productos_lista, 20)
-    page = request.GET.get('page')
-    if page is not None:
-        if request.is_ajax():
-            template = "comparagrow/component/items_buscador.html"
-        else:
-            template = "comparagrow/categorias.html"
-    else:
-        template = "comparagrow/categorias.html"
-    try:
-        productos = paginator.get_page(page)
-        print(productos)
-    except:
-        return redirect('/not_found')
-    # time.sleep(3)
-    return render(request, template, {
-    'productos': productos
-    })
+# def categorias2(request,slug):
+#     categoria = Category.objects.get(slug=slug)
+#     print(categoria)
+#     children = categoria.get_descendants(include_self=False)
+#     print(children)
+#     productos_lista_0 = ProductImage.objects.filter(product__category__in=children)
+#     print(productos_lista_0)
+#     productos_lista2 = ProductImage.objects.filter(product__category=categoria)
+#     print(productos_lista2)
+#     productos_lista = productos_lista_0.union(productos_lista2)
+#     print(productos_lista)
+#     tiendas = productos_lista.values('product__shop__name','product__shop__pk')
+#     print(tiendas)
+#     paginator = Paginator(productos_lista, 20)
+#     page = request.GET.get('page')
+#     if page is not None:
+#         if request.is_ajax():
+#             template = "comparagrow/component/items_buscador.html"
+#         else:
+#             template = "comparagrow/categorias.html"
+#     else:
+#         template = "comparagrow/categorias.html"
+#     try:
+#         productos = paginator.get_page(page)
+#         print(productos)
+#     except:
+#         return redirect('/not_found')
+#     # time.sleep(3)
+#     return render(request, template, {
+#     'productos': productos
+#     })
 
 
 def categorias(request,slug):
@@ -301,7 +301,7 @@ def categorias(request,slug):
     'max_price':max_price,
     'min_price':min_price,
     'pagina':pagina,
-    'categorias':"",
+    'categorias':categoria,
     'pagina_shop':pagina_shop,
     'texto':texto,
     'categoria':categoria,
