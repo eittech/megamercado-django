@@ -106,8 +106,6 @@ def login_front(request):
 
 def activationuser(request,uidb64,token):
     from django import http
-    print("llego")
-    # token = request.GET.get('token')
 
     if uidb64 is not None and token is not None:
         print("segundo if")
@@ -123,9 +121,10 @@ def activationuser(request,uidb64,token):
             if verificacion.token == token and user.is_active == 0:
                 user.is_active = 1
                 user.save()
-                return redirect('/')
+                return render(request, 'comparagrow/validate.html')
+                # return redirect('/')
             else:
-                print("no")
+                    return redirect('/?error=not_access&notvalidatedata')
         except:
             pass
     return redirect('/?error=not_access&notvalidatedata')
