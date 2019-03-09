@@ -379,7 +379,8 @@ def favorite_product(request,id):
 def favorite_detail(request):
     if request.user.is_authenticated:
         user = request.user
-        favorito = FavoriteProduct.objects.filter(user=user)
+        favorito_t = FavoriteProduct.objects.filter(user=user)
+        favorito = ProductImage.objects.filter(product=favorito_t.product)
         return render(request, "comparagrow/favoritos.html",{'productos':favorito})
     else:
         return redirect('/error')
