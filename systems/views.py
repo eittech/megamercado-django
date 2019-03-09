@@ -13,6 +13,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import EmailMultiAlternatives
 
+from django.template.loader import render_to_string
+
 
 from products.models import *
 from customers.models import *
@@ -101,6 +103,7 @@ def login_front(request):
     else:
         return redirect('/?error=not_access')
 
+
 def activationuser(request,uidb64,token):
     from django import http
     print("llego")
@@ -181,11 +184,13 @@ def register_front(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
+        link = 'http://35.185.63.218/users/validate/'+ uid.decode("utf-8") +'/'+ token
+
+        msg_html = render_to_string('comparagrow/component/mail.html', {'username': first_name,'link':link})
         subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'comparagrow420@gmail.com', email
-        text_content = 'Utilice el siguiente link para validar su cuenta de comparagrow.'
-        html_content = 'http://34.73.69.53/users/validate/'+ uid.decode("utf-8") +'/'+ token
+        text_content = ''
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-        msg.attach_alternative(html_content, "text/html")
+        msg.attach_alternative(msg_html, "text/html")
         msg.send()
     except:
         return redirect('/?error=not_access&ui')
