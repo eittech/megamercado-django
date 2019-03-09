@@ -265,3 +265,7 @@ def terminosCondiciones(request):
 
 def politicasPrivacidad(request):
     return render(request, 'comparagrow/politicasPrivacidad.html')
+
+
+def pricePlan(request):
+    return render(request, 'comparagrow/price.html')

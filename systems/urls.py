@@ -19,6 +19,8 @@ urlpatterns = [
     path('faq', views.Faq, name='login'),
     path('terminos-condiciones', views.terminosCondiciones, name='login'),
     path('politica-privacidad', views.politicasPrivacidad, name='login'),
+    path('publicidad', views.pricePlan, name='priceplan'),
+
 
     #re_path(r'^validate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activationuser),
     # re_path(r'^users/validate/(?P<uidb64>.+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activationuser,name='user-activation-link'),
