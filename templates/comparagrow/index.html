@@ -38,157 +38,58 @@
   <div class="col-sm-12">
     <div class="row">
       <div class="col-12 col-md-12">
-        <div id="carouseldestacados" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active ">
-              <div class="card-deck">
-                <div class="card" style="">
-                  <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
-                    tu tienda
-                  </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
-                  <div class="card-body" style="margin-top: -20px;height: 40px;">
-                    <span class="" style="color:#01b22c;">
-                      <a href="#" style="color:#777;font-size: 13px;">Tu producto</a>
-                    </span>
-                  </div>
-                  <div class="card-footer" style="background-color: #fff;border-top: none;">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title" style="color:#000;font-size: 14px;">CLP 0.00</h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
-                      </div>
-                      <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
-                      </div>
-                  </div>
-                  </div>
+        <div class="owl-carousel owl-theme">
+          {% for item in productos %}
+            <div class="item">
+              <div class="card" style="">
+                <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
+                  <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.product.shop.name }}</a>
                 </div>
-                <div class="card" style="">
-                  <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
-                    tu tienda
-                  </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
-                  <div class="card-body" style="margin-top: -20px;height: 40px;">
-                    <span class="" style="color:#01b22c;">
-                      <a href="#" style="color:#777;font-size: 13px;">Tu producto</a>
-                    </span>
-                  </div>
-                  <div class="card-footer" style="background-color: #fff;border-top: none;">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title" style="color:#000;font-size: 14px;">CLP 0.00</h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
-                      </div>
-                      <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
-                      </div>
-                  </div>
-                  </div>
+                <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
+                  <img src="/media/{{ item.image }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body" style="margin-top: -20px;height: 40px;">
+                  <span class="" style="color:#01b22c;">
+                    <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="color:#777;font-size: 13px;">{{ item.product.name }}</a>
+                  </span>
                 </div>
-                <div class="card" style="">
-                  <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
-                    tu tienda
-                  </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
-                  <div class="card-body" style="margin-top: -20px;height: 40px;">
-                    <span class="" style="color:#01b22c;">
-                      <a href="#" style="color:#777;font-size: 13px;">Tu producto</a>
-                    </span>
-                  </div>
-                  <div class="card-footer" style="background-color: #fff;border-top: none;">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title" style="color:#000;font-size: 14px;">CLP 0.00</h5>
-                      </div>
+                <div class="card-footer" style="background-color: #fff;border-top: none;">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total }}</h5>
                     </div>
-                    <div class="row">
-                      <div class="col">
-                        <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
-                      </div>
-                      <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
-                      </div>
                   </div>
-                  </div>
+                  <div class="row">
+                    <div class="col">
+                      {% if user.is_authenticated %}
+                      <a onclick="FavoriteProduct('{{ item.product.id }}')">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% else %}
+                      <a data-toggle="modal" data-target="#modal_login">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% endif %}
+                    </div>
+                    <div class="col text-right">
+                      <a href="/productos/detalle/{{ item.product.id }}" target="_blank">
+                      <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;">
+                      </a>
+                    </div>
                 </div>
-                <div class="card" style="">
-                  <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
-                    tu tienda
-                  </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
-                  <div class="card-body" style="margin-top: -20px;height: 40px;">
-                    <span class="" style="color:#01b22c;">
-                      <a href="#" style="color:#777;font-size: 13px;">Tu producto</a>
-                    </span>
-                  </div>
-                  <div class="card-footer" style="background-color: #fff;border-top: none;">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title" style="color:#000;font-size: 14px;">CLP 0.00</h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
-                      </div>
-                      <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
-                      </div>
-                  </div>
-                  </div>
-                </div>
-                <div class="card" style="">
-                  <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
-                    tu tienda
-                  </div>
-                  <img src="/static/img/anunciese.jpg" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
-                  <div class="card-body" style="margin-top: -20px;height: 40px;">
-                    <span class="" style="color:#01b22c;">
-                      <a href="#" style="color:#777;font-size: 13px;">Tu producto</a>
-                    </span>
-                  </div>
-                  <div class="card-footer" style="background-color: #fff;border-top: none;">
-                    <div class="row">
-                      <div class="col">
-                        <h5 class="card-title" style="color:#000;font-size: 14px;">CLP 0.00</h5>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col">
-                        <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
-                      </div>
-                      <div class="col text-right">
-                        <img src="/static/img/lupa.png" alt="" style="height: 25px;">
-                      </div>
-                  </div>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouseldestacados" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouseldestacados" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
+            {% endfor %}
+
         </div>
       </div>
     </div>
   </div>
   <br>
 </div>
+
+
 
 <br>
 <div class="col-sm-12 text-center">
@@ -652,4 +553,25 @@
   <br>
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script>
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5
+        }
+    }
+})
+</script>
 {% endblock %}
