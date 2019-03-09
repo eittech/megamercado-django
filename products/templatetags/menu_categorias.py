@@ -1,7 +1,7 @@
 from django import template
 
 register = template.Library()
-from products.models import Category, Product
+from products.models import *
 
 
 @register.simple_tag
