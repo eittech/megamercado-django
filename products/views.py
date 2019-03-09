@@ -73,6 +73,8 @@ def buscador(request):
         print("tienda paso 3")
         productos_lista = productos_lista.filter(brand=marca)
         pagina_marca = "&marca="+marca
+    else:
+        marca = ""
 
 
     categoria_id = False
@@ -254,6 +256,8 @@ def categorias(request,slug):
         print("tienda paso 3")
         productos_lista = productos_lista.filter(brand=marca)
         pagina_marca = "&marca="+marca
+    else:
+        marca = ""
 
 
     if request.GET.get('min_price'):
