@@ -11,5 +11,5 @@ def listado():
 
 @register.filter(name='imagenproducturl')
 def imagenproducturl(value, arg):
-    productos = ProductImage.objects.filter(product__pk=value).firts()
+    productos = ProductImage.objects.filter(product__pk=value).first()
     return "/media/" + str(productos.image)
