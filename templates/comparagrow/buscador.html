@@ -8,7 +8,7 @@
 					box-shadow: 5px 5px 5px grey;
 					cursor:pointer;
 				}
-				
+
 			</style>
 
 			<script>
@@ -34,6 +34,19 @@
 						{% endif %}
 						{% endfor %}
 
+
+						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">MARCAS</h6>
+
+						{% for marc in marcas %}
+						{% if marc.product__brand|stringformat:"s" == marca|stringformat:"s" %}
+						<!-- <h6 style="margin-left:10px;"><i class="fas fa-check-circle"></i><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('tienda_form_id','{{ shop.product__shop__pk }}')">{{ shop.product__shop__name }}</a></h6> -->
+						<h6 style="margin-left:10px;"><i class="fas fa-check-circle" style="color:#01b22c;"></i> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.product__brand }}')">{{ marc.product__brand }}</a></h6>
+						{% else %}
+						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.product__brand }}')">{{ marc.product__brand }}</a></h6>
+
+						{% endif %}
+						{% endfor %}
+
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 						{% for category in categorias %}
 						{% if category.product__category__pk|stringformat:"s" == categoria|stringformat:"s" %}
@@ -49,6 +62,7 @@
 							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
 							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
 							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
+							<input type="hidden" name="marca" id="marca_form_id" value="{{ marca }}">
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">

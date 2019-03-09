@@ -43,6 +43,8 @@ def buscador(request):
     productos_lista = ProductImage.objects.filter(product__name__icontains=texto)
     tiendas = productos_lista.values('product__shop__name','product__shop__pk').annotate(dcount=Count('product__shop'))
     categorias = productos_lista.values('product__category__name','product__category__pk').annotate(dcount=Count('product__category'))
+    marcas = productos_lista.values('product__brand').annotate(dcount=Count('product__brand'))
+
     shop_id = False
     if request.GET.get('tienda'):
         print("tienda paso 1")
@@ -58,8 +60,19 @@ def buscador(request):
         productos_lista = productos_lista.filter(product__shop=shop_id)
         pagina_shop = "&tienda="+tienda
 
-    categoria_id = False
 
+    marca = False
+    if request.GET.get('marca'):
+        print("tienda paso 1")
+        marca = request.GET.get('marca')
+    pagina_marca = ""
+    if marca:
+        print("tienda paso 3")
+        productos_lista = productos_lista.filter(product__brand=marca)
+        pagina_marca = "&marca="+marca
+
+
+    categoria_id = False
     if request.GET.get('categoria'):
         print("categoria_id paso 1")
         categoria = request.GET.get('categoria')
@@ -138,6 +151,8 @@ def buscador(request):
     'pagina_category':pagina_category,
     'texto':texto,
     'categoria':categoria,
+    'marcas':marcas,
+    'marca':marca,
     'tienda':tienda,
     'order_by':order_by})
 
