@@ -27,16 +27,22 @@ def home(request):
         error = True
     user_agent = get_user_agent(request)
     variable = ""
+
+    servicecontractshop_ci = ServiceContractProduct.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='PUBLICIDAD').filter(servicecontract__service__template_section='carrusel_inicio')
+    #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
+    pk_product = servicecontractshop.values('product__pk')
+    productos_ci = Product.objects.filter(pk__in=pk_product)
+
     productos = ProductImage.objects.all()[:12]
     category = Category.objects.all()
     if user_agent.is_mobile:
         # Do stuff here...
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
-        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error})
+        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
-        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error})
+        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
 
 @login_required
 def profile(request):
