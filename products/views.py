@@ -3,7 +3,9 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render
 import time
+from datetime import datetime
 from products.models import *
+from contracts.models import *
 
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -223,7 +225,12 @@ def categorias(request,slug):
     categoria = Category.objects.get(slug=slug)
     children = categoria.get_descendants(include_self=True)
 
-    productos_lista = Product.objects.filter(category__in=children)
+    servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
+    #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
+    pk_shop = servicecontractshop.values('shop__pk')
+    productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+
+    productos_lista = productos_lista.filter(category__in=children)
 
     tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
     marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
