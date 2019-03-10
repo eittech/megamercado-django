@@ -44,8 +44,12 @@ def buscador(request):
     else:
         texto = ""
 
-    print(pagina)
-    productos_lista = Product.objects.filter(name__icontains=texto)
+    servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
+    #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
+    pk_shop = servicecontractshop.values('shop__pk')
+    productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+
+    productos_lista = productos_lista.filter(name__icontains=texto)
     tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
     categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
     marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
@@ -176,39 +180,6 @@ class GigsList(generic.ListView):
         return ['test/gigs.html']
     def get_queryset(self):
         return ProductImage.objects.all()[:100]
-
-
-# def categorias2(request,slug):
-#     categoria = Category.objects.get(slug=slug)
-#     print(categoria)
-#     children = categoria.get_descendants(include_self=False)
-#     print(children)
-#     productos_lista_0 = ProductImage.objects.filter(category__in=children)
-#     print(productos_lista_0)
-#     productos_lista2 = ProductImage.objects.filter(category=categoria)
-#     print(productos_lista2)
-#     productos_lista = productos_lista_0.union(productos_lista2)
-#     print(productos_lista)
-#     tiendas = productos_lista.values('shop__name','shop__pk')
-#     print(tiendas)
-#     paginator = Paginator(productos_lista, 20)
-#     page = request.GET.get('page')
-#     if page is not None:
-#         if request.is_ajax():
-#             template = "comparagrow/component/items_buscador.html"
-#         else:
-#             template = "comparagrow/categorias.html"
-#     else:
-#         template = "comparagrow/categorias.html"
-#     try:
-#         productos = paginator.get_page(page)
-#         print(productos)
-#     except:
-#         return redirect('/not_found')
-#     # time.sleep(3)
-#     return render(request, template, {
-#     'productos': productos
-#     })
 
 
 def categorias(request,slug):
