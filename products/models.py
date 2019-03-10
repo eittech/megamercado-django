@@ -65,7 +65,7 @@ class Product(models.Model):
     tax = models.FloatField()
     total = models.FloatField()
     def __str__(self):
-        return self.name
+        return str(self.shop) + ' - '+ str(self.name)
     class Meta:
         verbose_name = "Productos"
         unique_together = ('shop', 'name')
