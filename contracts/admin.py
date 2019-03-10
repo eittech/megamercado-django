@@ -11,7 +11,18 @@ class ServiceContractInline(admin.TabularInline):
 class ContractsAdmin(admin.ModelAdmin):
     inlines = (ServiceContractInline,)
 
-admin.site.register(ServiceContract)
+class ServiceContractProductInline(admin.TabularInline):
+    model = ServiceContractProduct
+    extra = 1
+
+class ServiceContractShopInline(admin.TabularInline):
+    model = ServiceContractShop
+    extra = 1
+
+class ServiceContractAdmin(admin.ModelAdmin):
+    inlines = (ServiceContractProductInline,ServiceContractShopInline,)
+
+admin.site.register(ServiceContract,ServiceContractAdmin)
 
 admin.site.register(Contracts,ContractsAdmin)
 admin.site.register(Payment)

@@ -1,6 +1,7 @@
 from django.db import models
 from customers.models import *
 from services.models import Service
+from products.models import Shop, Product
 
 # Create your models here.
 
@@ -30,6 +31,15 @@ class ServiceContract(models.Model):
     total = models.FloatField()
     def __str__(self):
         return self.service.name
+
+#solo aplica para publicidad
+class ServiceContractProduct(models.Model):
+    servicecontract = models.ForeignKey(ServiceContract,on_delete=models.CASCADE,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True)
+
+class ServiceContractShop(models.Model):
+    servicecontract = models.ForeignKey(ServiceContract,on_delete=models.CASCADE,blank=True)
+    shop = models.ForeignKey(Shop,on_delete=models.CASCADE,blank=True)
 
 
 class Payment(models.Model):
