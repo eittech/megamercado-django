@@ -31,7 +31,8 @@ def home(request):
     category = Category.objects.all()
     if user_agent.is_mobile:
         # Do stuff here...
-        return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
+        #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
+        return render(request, 'comparagrow/index.html', {'variable':variable,'productos':productos,'category':category,'error':error})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
