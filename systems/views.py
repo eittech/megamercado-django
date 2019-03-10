@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 
 from products.models import *
 from customers.models import *
+from contracts.models import *
 
 
 # Create your views here.
