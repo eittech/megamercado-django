@@ -98,7 +98,7 @@ class ProductSpider(scrapy.Spider):
             yield response
 
     def parse_product(self,response):
-        shop_id = Shop.objects.filter(pk=2)
+        shop_id = Shop.objects.filter(pk=5)
         print("********")
         print("********")
         print("********")
@@ -137,7 +137,7 @@ class ProductSpider(scrapy.Spider):
         category = category
         category_temp = name_category_t
         total = product.css('span#our_price_display').attrib['content']
-        shop_id = Shop.objects.get(pk=2)
+        shop_id = Shop.objects.get(pk=5)
 
         Product_object = Product()
         if name:
