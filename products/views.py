@@ -43,6 +43,8 @@ def buscador(request):
         pagina = pagina + "texto=" + texto
     else:
         texto = ""
+    print("************************************************")
+
 
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
@@ -55,19 +57,22 @@ def buscador(request):
     marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
 
     shop_id = False
-    if request.GET.get('tienda'):
-        print("tienda paso 1")
-        tienda = request.GET.get('tienda')
+    tienda = []
+    if request.GET.getlist('checkbox_shop[]'):
+        for ck in request.GET.getlist('checkbox_shop[]'):
+            tienda.append(int(ck))
+        # print("tienda paso 1")
+        # tienda = request.GET.get('tienda')
         try:
-            shop_id = Shop.objects.get(pk=tienda)
+            shop_id = Shop.objects.filter(pk__in=tienda)
             print("tienda paso 2")
         except:
             shop_id = False
     pagina_shop = ""
     if shop_id:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(shop=shop_id)
-        pagina_shop = "&tienda="+tienda
+        productos_lista = productos_lista.filter(shop__in=shop_id)
+        pagina_shop = ""
 
 
     marca = False
