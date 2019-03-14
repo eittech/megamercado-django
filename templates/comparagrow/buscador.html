@@ -57,11 +57,11 @@
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">MARCAS</h6>
 
 						{% for marc in marcas %}
-						{% if marc.brand|stringformat:"s" == marca|stringformat:"s" %}
+						{% if marc.brand in marca %}
 						<!-- <h6 style="margin-left:10px;"><i class="fas fa-check-circle"></i><a class="btn btn-primary" style="text-decoration: none;cursor: pointer;color: #fff;font-weight: 100;background: #01b22c;border: #01b22c;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></h6> -->
-						<h6 style="margin-left:10px;"><i class="fas fa-check-circle" style="color:#01b22c;"></i> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')">{{ marc.brand }}</a></h6>
+						<h6 style="margin-left:10px;"><input type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" checked> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')">{{ marc.brand }}</a></h6>
 						{% else %}
-						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')">{{ marc.brand }}</a></h6>
+						<h6 style="margin-left:10px;"><input type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}"> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')">{{ marc.brand }}</a></h6>
 
 						{% endif %}
 						{% endfor %}

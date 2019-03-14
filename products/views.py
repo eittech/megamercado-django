@@ -73,17 +73,16 @@ def buscador(request):
         pagina_shop = ""
 
 
-    marca = False
-    if request.GET.get('marca'):
-        print("tienda paso 1")
-        marca = request.GET.get('marca')
-    pagina_marca = ""
+    marca = []
+    if request.GET.getlist('checkbox_categoria[]'):
+        for ck in request.GET.getlist('checkbox_categoria[]'):
+            marca.append(int(ck))
     if marca:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(brand=marca)
-        pagina_marca = "&marca="+marca
+        productos_lista = productos_lista.filter(brand__in=marca)
+        pagina_marca = ""
     else:
-        marca = ""
+        marca = []
 
 
     categoria_id = False
