@@ -37,9 +37,9 @@
 						<form id="formulario_filtro" method="get" action="{{ pagina }}{{ pagina_shop }}">
 
 						{% for shop in tiendas %}
-						{% set idsh=shop.pk %}
+						{% with shop.shop__pk as idsh %}
 						<h6 style="margin-left:10px;"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}">{{ idsh }} <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></h6>
-
+						{% endwith %}
 						{% endfor %}
 
 
