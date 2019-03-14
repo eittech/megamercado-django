@@ -61,8 +61,6 @@ def buscador(request):
     if request.GET.getlist('checkbox_shop[]'):
         for ck in request.GET.getlist('checkbox_shop[]'):
             tienda.append(int(ck))
-        # print("tienda paso 1")
-        # tienda = request.GET.get('tienda')
         try:
             shop_id = Shop.objects.filter(pk__in=tienda)
             print("tienda paso 2")
@@ -89,19 +87,20 @@ def buscador(request):
 
 
     categoria_id = False
-    if request.GET.get('categoria'):
-        print("categoria_id paso 1")
-        categoria = request.GET.get('categoria')
+    categoria = []
+    if request.GET.getlist('checkbox_categoria[]'):
+        for ck in request.GET.getlist('checkbox_categoria[]'):
+            categoria.append(int(ck))
         try:
-            categoria_id = Category.objects.get(pk=categoria)
+            categoria_id = Category.objects.filter(pk__in=categoria)
             print("categoria_id paso 2")
         except:
             categoria_id = False
     pagina_category = ""
     if categoria_id:
         print("categoria_id paso 3")
-        productos_lista = productos_lista.filter(category=categoria_id)
-        pagina_category = "&categoria="+categoria
+        productos_lista = productos_lista.filter(category__in=categoria_id)
+        pagina_category = ""
 
     if request.GET.get('min_price'):
         min_price = request.GET.get('min_price')

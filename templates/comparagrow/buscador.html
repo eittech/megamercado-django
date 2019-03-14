@@ -46,10 +46,10 @@
 
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 						{% for category in categorias %}
-						{% if category.category__pk|stringformat:"s" == categoria|stringformat:"s" %}
-						<h6 style="margin-left:10px;"><i class="fas fa-check-circle" style="color:#01b22c;"></i> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')">{{ category.category__name }}</a></h6>
+						{% if category.category__pk in categoria %}
+						<h6 style="margin-left:10px;"><input type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked> <a style="margin-left:3px;text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')">{{ category.category__name }}</a></h6>
 						{% else %}
-						<h6 style="margin-left:10px;"><a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')">{{ category.category__name }}</a></h6>
+						<h6 style="margin-left:10px;"><input type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}"> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')">{{ category.category__name }}</a></h6>
 						{% endif %}
 						{% endfor %}
 
