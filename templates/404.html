@@ -1,23 +1,17 @@
-{% extends 'comparagrow/base.html' %}
+{% extends 'comparagrow/base_blank.html' %}
 {% load static %}
 
-
-{% block cabecera %}
-
-{% endblock %}
-
-
 {% block content %}
-<section class="section-name bg-white padding-y">
-  <div class="container text-center text-muted">
-    <div class="row">
-      <aside class="col-sm-12">
-        <h1>404</h1>
-        <h2>Oops! Page Not Be Found</h2>
-        <p>Sorry but the page you are looking for does not exist, have been removed. name changed or is temporarily unavailable</p>
-        <a href="/">Back to homepage</a>
-      </aside>
-    </div>
-  </div>
-</section>
+<div class="container-fluid">
+<div class="row justify-content-md-center" style="margin-top: 100px;color:#672d93">
+  <i style="font-size:120px;" class="fas fa-exclamation-circle"></i>
+</div>
+<div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
+  <h5 style="font-size:44px;">RECURSO NO ENCONTRADO</h5>
+</div>
+<div class="row justify-content-md-center" >
+  <p>Disculpe las molestias causadas</p>
+</div>
+</div>
+
 {% endblock %}
