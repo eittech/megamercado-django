@@ -76,7 +76,7 @@ def buscador(request):
     marca = []
     if request.GET.getlist('checkbox_marca[]'):
         for ck in request.GET.getlist('checkbox_marca[]'):
-            marca.append(int(ck))
+            marca.append(str(ck))
     if marca:
         print("tienda paso 3")
         productos_lista = productos_lista.filter(brand__in=marca)
