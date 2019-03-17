@@ -36,29 +36,23 @@
 <div class="owl-carousel owl-theme" data-plugin-options="{'items': 6, 'loop': false, 'nav': true, 'dots': false}">
   {% for item in productos_ci %}
   <div>
-    <div class="product">
-      <a href="shop-product-sidebar-left.html">
-        <span class="onsale">Sale!</span>
-      </a>
-      <span class="product-thumb-info border-0">
-        <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
-          <span class="text-uppercase text-1">Add to Cart</span>
-        </a>
-        <a href="shop-product-sidebar-left.html">
-          <span class="product-thumb-info-image">
-            <img alt="" class="img-fluid" src="{{ item.id|imagenproducturl:"0" }}" >
-          </span>
-        </a>
-        <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
-          <a href="shop-product-sidebar-left.html">
-            <h4 class="text-4 text-primary">{{ item.name }}</h4>
-            <span class="price">
-              <del><span class="amount">$325</span></del>
-              <ins><span class="amount text-dark font-weight-semibold">$299</span></ins>
-            </span>
-          </a>
-        </span>
-      </span>
+    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
+      <div class="card flip-card text-center rounded-0">
+        <div class="flip-front p-5">
+          <div class="flip-content my-4">
+            <strong class="font-weight-extra-bold text-color-dark line-height-1 text-13 mb-3 d-inline-block">01</strong>
+            <h4 class="font-weight-bold text-color-primary text-4">FIRST STEP</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius.</p>
+          </div>
+        </div>
+        <div class="flip-back d-flex align-items-center p-5" style="background-image: url(/static/porto/img/generic/generic-corporate-17-1.jpg); background-size: cover; background-position: center;">
+          <div class="flip-content my-4">
+            <h4 class="font-weight-bold text-color-light">FIRST MEETING</h4>
+            <p class="font-weight-light text-color-light opacity-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius.</p>
+            <a href="#" class="btn btn-light btn-modern text-color-dark font-weight-bold">LEARN MORE</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   {% endfor %}
