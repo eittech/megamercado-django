@@ -33,26 +33,33 @@
 	</div>
 </section>
 
-<div class="owl-carousel owl-theme full-width" data-plugin-options="{'items': 5, 'loop': false, 'nav': true, 'dots': false}">
+<div class="owl-carousel owl-theme" data-plugin-options="{'items': 6, 'loop': false, 'nav': true, 'dots': false}">
   {% for item in productos_ci %}
   <div>
-    <a href="portfolio-single-wide-slider.html">
-      <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
-        <span class="thumb-info-wrapper">
-          <img src="{{ item.id|imagenproducturl:"0" }}" style="
-    height: 255px;
-    width: 255px;
-">
-          <span class="thumb-info-title">
-            <span class="thumb-info-inner">{{ item.name }}</span>
-            <span class="thumb-info-type">CLP {{ item.total }}</span>
+    <div class="col-sm-6 col-lg-4 product">
+      <a href="shop-product-sidebar-left.html">
+        <span class="onsale">Sale!</span>
+      </a>
+      <span class="product-thumb-info border-0">
+        <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+          <span class="text-uppercase text-1">Add to Cart</span>
+        </a>
+        <a href="shop-product-sidebar-left.html">
+          <span class="product-thumb-info-image">
+            <img alt="" class="img-fluid" src="{{ item.id|imagenproducturl:"0" }}" >
           </span>
-          <span class="thumb-info-action">
-            <span class="thumb-info-action-icon"><i class="fas fa-plus"></i></span>
-          </span>
+        </a>
+        <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+          <a href="shop-product-sidebar-left.html">
+            <h4 class="text-4 text-primary">{{ item.name }}</h4>
+            <span class="price">
+              <del><span class="amount">$325</span></del>
+              <ins><span class="amount text-dark font-weight-semibold">$299</span></ins>
+            </span>
+          </a>
         </span>
       </span>
-    </a>
+    </div>
   </div>
   {% endfor %}
 </div>
