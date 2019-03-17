@@ -39,7 +39,10 @@
     <a href="portfolio-single-wide-slider.html">
       <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
         <span class="thumb-info-wrapper">
-          <img src="{{ item.id|imagenproducturl:"0" }}" class="img-fluid" alt="">
+          <img src="{{ item.id|imagenproducturl:"0" }}" style="
+    height: 255px;
+    width: 255px;
+">
           <span class="thumb-info-title">
             <span class="thumb-info-inner">{{ item.name }}</span>
             <span class="thumb-info-type">CLP {{ item.total }}</span>
