@@ -23,3 +23,10 @@ def favoriteactive(value, arg):
     else:
         icon = "far fa-heart"
     return icon
+
+@register.filter(name='menulevelone')
+def menulevelone(value, arg):
+    categoria = Category.objects.get(slug=value)
+    children = categoria.get_descendants(include_self=False)
+    children = children.filter(level=int(arg))
+    return children

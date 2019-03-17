@@ -1,0 +1,234 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+{% load menu_categorias %}
+
+
+
+{% block content %}
+<section class="section section-height-2 mt-0 mb-3 border-0">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-10">
+
+				<div class="owl-carousel owl-theme stage-margin stage-margin-lg nav-style-2 mb-0 owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 100}" style="height: auto;">
+
+
+
+				<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 2660px; padding-left: 100px; padding-right: 100px;"><div class="owl-item active" style="width: 720px; margin-right: 100px;"><div class="text-center">
+						<span class="text-color-primary">COMPARAGROW</span>
+						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
+						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
+					</div></div><div class="owl-item" style="width: 720px; margin-right: 100px;"><div class="text-center">
+            <span class="text-color-primary">COMPARAGROW</span>
+						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
+						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
+					</div></div><div class="owl-item" style="width: 720px; margin-right: 100px;"><div class="text-center">
+            <span class="text-color-primary">COMPARAGROW</span>
+						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
+						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
+					</div></div></div></div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev disabled"></button><button type="button" role="presentation" class="owl-next"></button></div><div class="owl-dots disabled"></div></div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="owl-carousel owl-theme full-width" data-plugin-options="{'items': 5, 'loop': false, 'nav': true, 'dots': false}">
+  {% for item in productos_ci %}
+  <div>
+    <a href="portfolio-single-wide-slider.html">
+      <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
+        <span class="thumb-info-wrapper">
+          <img src="{{ item.id|imagenproducturl:"0" }}" class="img-fluid" alt="">
+          <span class="thumb-info-title">
+            <span class="thumb-info-inner">{{ item.name }}</span>
+            <span class="thumb-info-type">CLP {{ item.total }}</span>
+          </span>
+          <span class="thumb-info-action">
+            <span class="thumb-info-action-icon"><i class="fas fa-plus"></i></span>
+          </span>
+        </span>
+      </span>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+
+
+<br>
+<div class="col-sm-12 text-center">
+  <h1>Destacados</h1>
+</div>
+<br>
+
+<div class="col-sm-12" style="background:#f6f6f6;">
+  <br>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="owl-carousel owl-theme">
+          {% for item in productos_ci %}
+            <div class="item">
+              <div class="card" style="">
+                <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
+                  <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
+                </div>
+                <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
+                  <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body" style="margin-top: -20px;height: 40px;">
+                  <span class="" style="color:#01b22c;">
+                    <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;">{{ item.name }}</a>
+                  </span>
+                </div>
+                <div class="card-footer" style="background-color: #fff;border-top: none;">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.total }}</h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      {% if user.is_authenticated %}
+                      <a onclick="FavoriteProduct('{{ item.id }}')">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% else %}
+                      <a data-toggle="modal" data-target="#modal_login">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% endif %}
+                    </div>
+                    <div class="col text-right">
+                      <a href="/productos/detalle/{{ item.id }}" target="_blank">
+                      <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;">
+                      </a>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+
+
+<br>
+<div class="col-sm-12 text-center">
+  <h1>Ultimas Rebajas</h1>
+</div>
+<br>
+
+<div class="col-sm-12" >
+  <br>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="owl-carousel owl-theme">
+          {% for item in productos %}
+            <div class="item">
+              <div class="product">
+                <span class="product-thumb-info border-0">
+                  <a href="shop-cart.html" class="add-to-cart-product bg-color-primary">
+                    <span class="text-uppercase text-1">Add to Cart</span>
+                  </a>
+                  <a href="shop-product-sidebar-left.html">
+                    <span class="product-thumb-info-image">
+                      <img alt="" class="img-fluid" src="/static/porto/img/products/product-grey-2.jpg">
+                    </span>
+                  </a>
+                  <span class="product-thumb-info-content product-thumb-info-content pl-0 bg-color-light">
+                    <a href="shop-product-sidebar-left.html">
+                      <h4 class="text-4 text-primary">Golf Bag</h4>
+                      <span class="price">
+                        <span class="amount text-dark font-weight-semibold">$72</span>
+                      </span>
+                    </a>
+                  </span>
+                </span>
+              </div>
+            </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+
+
+<br>
+<div class="col-sm-12 text-center">
+  <h1>Arma tu Grow</h1>
+</div>
+<br>
+
+<div class="col-sm-12" style="background:#f6f6f6;">
+  <br>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="owl-carousel owl-theme">
+          {% for item in productos %}
+            <div class="item">
+              <div class="card" style="">
+                <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
+                  <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.product.shop.name }}</a>
+                </div>
+                <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
+                  <img src="/media/{{ item.image }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body" style="margin-top: -20px;height: 40px;">
+                  <span class="" style="color:#01b22c;">
+                    <a href="/productos/redirect/{{ item.product.id }}" target="_blank" style="color:#777;font-size: 13px;">{{ item.product.name }}</a>
+                  </span>
+                </div>
+                <div class="card-footer" style="background-color: #fff;border-top: none;">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total }}</h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      {% if user.is_authenticated %}
+                      <a onclick="FavoriteProduct('{{ item.product.id }}')">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% else %}
+                      <a data-toggle="modal" data-target="#modal_login">
+                      <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+                      </a>
+                      {% endif %}
+                    </div>
+                    <div class="col text-right">
+                      <a href="/productos/detalle/{{ item.product.id }}" target="_blank">
+                      <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;">
+                      </a>
+                    </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="/static/porto/js/examples/examples.carousels.js"></script>
+{% endblock %}
