@@ -22,12 +22,7 @@
 
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
-	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-		<span class="stext-107 cl6 p-lr-25">
-			{{ producto.reference }}
-		</span>
-	</div>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-lg-7 p-b-30">
@@ -63,11 +58,15 @@
 					<span class="mtext-106 cl2">
 						CPL {{ producto.total }}
 					</span>
-
+					<br>
+					<span class="mtext-106 cl2">
+						{{ producto.reference }}
+					</span>
+					<br>
 					<span class="mtext-106 cl2">
 						{{ producto.brand }}
 					</span>
-
+					<br>
 					<span class="mtext-106 cl2">
 						{{ producto.shop.name }}
 					</span>
