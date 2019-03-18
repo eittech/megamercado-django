@@ -22,6 +22,12 @@
 
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
+	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+		<span class="stext-107 cl6 p-lr-25">
+			{{ producto.reference }}
+		</span>
+	</div>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-lg-7 p-b-30">
@@ -58,6 +64,14 @@
 						CPL {{ producto.total }}
 					</span>
 
+					<span class="mtext-106 cl2">
+						{{ producto.brand }}
+					</span>
+
+					<span class="mtext-106 cl2">
+						{{ producto.shop.name }}
+					</span>
+
 					<p class="stext-102 cl3 p-t-23">
 						{{ producto.description }}
 					</p>
@@ -70,21 +84,21 @@
 					<!--  -->
 					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 						<div class="flex-m bor9 p-r-10 m-r-11">
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-								<i class="far fa-heart   fa-2x" style="color:#672d93;"></i>
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Agregar a favoritos">
+								<i class="far fa-heart   fa-1x" style="color:#672d93;"></i>
 							</a>
 						</div>
 
 						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-							<i class="fab fa-facebook-f   fa-2x" style="color:#672d93;"></i>
+							<i class="fab fa-facebook-f   fa-1x" style="color:#672d93;"></i>
 						</a>
 
 						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-							<i class="fab fa-twitter   fa-2x" style="color:#672d93;"></i>
+							<i class="fab fa-twitter   fa-1x" style="color:#672d93;"></i>
 						</a>
 
 						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-							<i class="fab fa-google-plus   fa-2x" style="color:#672d93;"></i>
+							<i class="fab fa-google-plus   fa-1x" style="color:#672d93;"></i>
 						</a>
 					</div>
 				</div>
@@ -146,15 +160,7 @@
 		</div>
 	</div>
 
-	<!-- <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-		<span class="stext-107 cl6 p-lr-25">
-			SKU: JAK-01
-		</span>
 
-		<span class="stext-107 cl6 p-lr-25">
-			Categories: Jacket, Men
-		</span>
-	</div> -->
 </section>
 
 {% endblock %}
