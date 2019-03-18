@@ -129,39 +129,20 @@
 
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
-			<ul class="main-menu-m">
-				<li>
-					<a href="index.html">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
-				</li>
-
-				<li>
-					<a href="product.html">Shop</a>
-				</li>
-
-				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-				</li>
-
-				<li>
-					<a href="blog.html">Blog</a>
-				</li>
-
-				<li>
-					<a href="about.html">About</a>
-				</li>
-
-				<li>
-					<a href="contact.html">Contact</a>
-				</li>
-			</ul>
+			{% for genre,structure in listado_producto|tree_info %}
+					{% if structure.new_level %}
+						{% if forloop.first %}
+							<ul class="main-menu-m" ><li>
+						{% else %}
+							<ul class="sub-menu-m"><li>
+						{% endif %}
+					{% else %}
+						</li><li>
+					{% endif %}
+							<a  href="/productos/categorias/{{ genre.slug }}">{{ genre.name }}</a>
+							<!-- {{ genre.level }} -->
+					{% for level in structure.closed_levels %}</li></ul>{% endfor %}
+			{% endfor %}
 		</div>
 
 		<!-- Modal Search -->
@@ -196,39 +177,41 @@
 				<ul class="sidebar-link w-full">
 					<li class="p-b-13">
 						<a href="index.html" class="stext-102 cl2 hov-cl1 trans-04">
-							Home
+							Bienvenido
+						</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+							Mi perfil
 						</a>
 					</li>
 
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							My Wishlist
+							Mis favoritos
 						</a>
 					</li>
 
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							My Account
+							Mis notificaciones
 						</a>
 					</li>
 
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							Track Oder
+							Salir
 						</a>
 					</li>
-
+					{% else %}
 					<li class="p-b-13">
 						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							Refunds
+							Iniciar Sesión
 						</a>
 					</li>
+					{% endif %}
 
-					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							Help & FAQs
-						</a>
-					</li>
 				</ul>
 
 				<div class="sidebar-gallery w-full p-tb-30">
