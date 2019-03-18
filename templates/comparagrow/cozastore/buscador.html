@@ -3,6 +3,12 @@
 
 
 {% block content %}
+<script>
+	function enviarFiltros(filtro,valor){
+		document.getElementById(filtro).value = valor;
+		$('#formulario_filtro').submit();
+	}
+</script>
 <div class="bg0 m-t-23 p-b-140">
 	<div class="container">
 		<div class="flex-w flex-sb-m p-b-52">
@@ -68,44 +74,35 @@
 						<input type="hidden" name="order_by" id="order_by_id" value="min">
 					<div class="filter-col1 p-r-15 p-b-27">
 						<div class="mtext-102 cl2 p-b-15">
-							Sort By
+							Ordenar
 						</div>
 
 						<ul>
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Default
+								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','min')">Menor precio de primero
 								</a>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Popularity
+								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','max')">Mayor precio de primero
 								</a>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Average rating
+								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','dest')">Destacados de primero
 								</a>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-									Newness
-								</a>
+								<input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Price: Low to High
-								</a>
+								<input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Price: High to Low
-								</a>
+								<button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
 							</li>
 						</ul>
 					</div>
