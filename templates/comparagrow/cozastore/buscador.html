@@ -175,18 +175,18 @@
 		<div class="flex-c-m flex-w w-full p-t-45">
 			<div class="pagination">
 			    <span class="step-links">
-			        {% if contacts.has_previous %}
+			        {% if productos.has_previous %}
 			            <a href="?page=1">&laquo; primera</a>
-			            <a href="?page={{ contacts.previous_page_number }}">anterior</a>
+			            <a href="?page={{ productos.previous_page_number }}">anterior</a>
 			        {% endif %}
 
 			        <span class="current">
-			            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+			            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
 			        </span>
 
 			        {% if contacts.has_next %}
-			            <a href="?page={{ contacts.next_page_number }}">Proxima</a>
-			            <a href="?page={{ contacts.paginator.num_pages }}">ultima &raquo;</a>
+			            <a href="?page={{ productos.next_page_number }}">Proxima</a>
+			            <a href="?page={{ productos.paginator.num_pages }}">ultima &raquo;</a>
 			        {% endif %}
 			    </span>
 			</div>
