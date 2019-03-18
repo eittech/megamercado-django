@@ -145,9 +145,9 @@ def buscador(request):
         if request.is_ajax():
             template = "comparagrow/component/items_buscador.html"
         else:
-            template = "comparagrow/buscador.html"
+            template = "comparagrow/cozastore/buscador.html"
     else:
-        template = "comparagrow/buscador.html"
+        template = "comparagrow/cozastore/buscador.html"
     try:
         productos = paginator.get_page(page)
         print(productos)
