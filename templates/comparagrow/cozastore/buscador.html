@@ -184,7 +184,7 @@
 			            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
 			        </span>
 
-			        {% if contacts.has_next %}
+			        {% if productos.has_next %}
 			            <a href="?page={{ productos.next_page_number }}">Proxima</a>
 			            <a href="?page={{ productos.paginator.num_pages }}">ultima &raquo;</a>
 			        {% endif %}
