@@ -39,7 +39,7 @@ def home(request):
     if user_agent.is_mobile:
         # Do stuff here...
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
-        return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
+        return render(request, 'comparagrow/cozastore/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
