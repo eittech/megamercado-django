@@ -20,12 +20,16 @@
 		</a>
 		<a href="#" class="stext-109 cl8 hov-cl1 trans-04" style="
     color: white;
-    font-size: 20px;
-">
+    font-size: 20px;">
 {% if texto == "" %}
-	TODOS
+
+	todos los registros
+
+{% else %}
+
+	{{ texto }}
+
 {% endif %}
-			{{ texto }}
 		</a>
 	</div>
 </div>
