@@ -143,7 +143,7 @@ def buscador(request):
     page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
-            template = "comparagrow/cozastore/component/items_buscador.html"
+            template = "comparagrow/cozastore/buscador.html"
         else:
             template = "comparagrow/cozastore/buscador.html"
     else:

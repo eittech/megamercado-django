@@ -35,13 +35,6 @@
   {% endfor %}
 </div>
 
-<div class="scroller-status">
-  <div class="infinite-scroll-request loader-ellips">
-    <!-- <img src="/static/img/load.gif" alt=""> -->
-  </div>
-
-</div>
-
 <p class="pagination">
   {% if productos.has_next %}
   <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page={{ productos.next_page_number }}">Siguiente</a>
