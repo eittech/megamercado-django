@@ -79,17 +79,17 @@
 
 						<ul>
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','min')">Menor precio de primero
+								<a class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','min')">Menor precio de primero
 								</a>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','max')">Mayor precio de primero
+								<a class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','max')">Mayor precio de primero
 								</a>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','dest')">Destacados de primero
+								<a class="filter-link stext-106 trans-04" onclick="enviarFiltros('order_by_id','dest')">Destacados de primero
 								</a>
 							</li>
 
@@ -105,45 +105,18 @@
 
 					<div class="filter-col2 p-r-15 p-b-27">
 						<div class="mtext-102 cl2 p-b-15">
-							Price
+							Tienda
 						</div>
-
 						<ul>
+							{% for shop in tiendas %}
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-									All
-								</a>
+							{% if shop.shop__pk in tienda %}
+							<a href="#" class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></a>
+							{% else %}
+							<a href="#" class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}"> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></a>
+							{% endif %}
 							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$0.00 - $50.00
-								</a>
-							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$50.00 - $100.00
-								</a>
-							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$100.00 - $150.00
-								</a>
-							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$150.00 - $200.00
-								</a>
-							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$200.00+
-								</a>
-							</li>
+							{% endfor %}
 						</ul>
 					</div>
 
