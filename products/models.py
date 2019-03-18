@@ -10,13 +10,15 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Shop(models.Model):
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE,blank=True,null=True)
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
+    url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
     def __str__(self):
         return self.name
     class Meta:
         verbose_name = "Tiendas"
+        unique_together = (('url',))
     #category
 
 class Category(MPTTModel):
@@ -49,6 +51,9 @@ class Category(MPTTModel):
 class CategoryTags(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     tag = models.CharField(verbose_name="tag",max_length=50)
+    class Meta:
+        unique_together = (('category', 'tag',))
+        verbose_name_plural = 'CategoryTags'
 
 # register(Category)
 
