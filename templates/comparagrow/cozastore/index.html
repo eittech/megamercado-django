@@ -90,7 +90,7 @@
 										</div>
 
 										<div class="block2-txt-child2 flex-r p-t-3">
-											<a onclick="FavoriteProduct('{{ item.id }}')" href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+											<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 												<img class="icon-heart1 dis-block trans-04" src="/static/cozastore/images/icons/icon-heart-01.png" alt="ICON">
 												<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/static/cozastore/images/icons/icon-heart-02.png" alt="ICON">
 											</a>
@@ -335,36 +335,7 @@
 {% endblock %}
 
 {% block js %}
-<script>
-	function FavoriteProduct(id){
-		console.log(id)
-		$.ajax({
-      method: "GET",
-      url: "/productos/favorito/"+id,
-    })
-      .done(function( msg ) {
-          $.notify(msg.text, msg.status);
-					console.log(msg.type)
-					if(msg.type=="add"){
-						console.log('add');
-						console.log('#favorite_'+id);
-						$('#favorite_'+id).removeClass("fas fa-minus-circle text-danger");
-						$('#favorite_'+id).addClass("far fa-heart");
-					}
-					if(msg.type=="del"){
-						console.log('del');
-						console.log('#favorite_'+id);
-						$('#favorite_'+id).removeClass("far fa-heart");
-						$('#favorite_'+id).addClass("fas fa-minus-circle text-danger");
-					}
-					if(msg.type=="not"){
-						console.log('not');
-						console.log('#favorite_'+id);
-					}
-    });
 
-	}
-</script>
 <!-- <script src="/static/porto/js/examples/examples.carousels.js"></script> -->
 {% endblock %}
 

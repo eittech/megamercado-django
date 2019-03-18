@@ -764,10 +764,32 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			var idProduct = $(this).parent().parent().find('.js-id-b2').val();
 
 			$(this).on('click', function(){
-				swal(idProduct, "se agrego a tu lista de favoritos !", "success");
 
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
+				$.ajax({
+		      method: "GET",
+		      url: "/productos/favorito/"+id,
+		    })
+		      .done(function( msg ) {
+		          $.notify(msg.text, msg.status);
+							console.log(msg.type)
+							if(msg.type=="add"){
+								swal(idProduct, "se agrego a tu lista de favoritos !", "success");
+
+								$(this).addClass('js-addedwish-b2');
+								$(this).off('click');
+							}
+							if(msg.type=="del"){
+								swal(idProduct, "se agrego a tu lista de favoritos !", "success");
+
+								$(this).addClass('js-addedwish-b2');
+								$(this).off('click');
+							}
+							if(msg.type=="not"){
+								console.log('not');
+								console.log('#favorite_'+id);
+							}
+		    });
+
 			});
 		});
 
