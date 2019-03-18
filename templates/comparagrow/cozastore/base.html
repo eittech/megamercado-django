@@ -206,14 +206,12 @@
 						</a>
 					</li>
 					{% else %}
-					<form action="/login" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
+					<form action="/login" method="post" style="margin-left:20px; margin-right:20px;">
 	          {% csrf_token %}
 	          <div class="form-row">
 	            <div class="col">
 	              <div class="input-group">
-	                <div class="input-group-prepend">
-	                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
-	                </div>
+
 	                <input name="username" type="email" class="form-control" id="validationDefaultUsername2" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
 	              </div>
 	            </div>
@@ -222,9 +220,7 @@
 	          <div class="form-row" style="margin-top:10px;">
 	            <div class="col">
 	              <div class="input-group">
-	                <div class="input-group-prepend">
-	                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
-	                </div>
+
 	                <input type="password" name="password" class="form-control" id="validationDefaultPassword2" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required>
 	              </div>
 	            </div>
@@ -233,6 +229,19 @@
 	          <br>
 	          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Iniciar sesión</button>
 	        </form>
+					<div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+			      <span>ó iniciar sesión con:</span>
+			    </div>
+			    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+			      <a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-block btn-social btn-google" style="color:#fff;">
+			        <span class="fab fa-google" style="color:#fff;"></span> Google
+			      </a>
+			    </div>
+			    <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+			      <a class="btn btn-block btn-social btn-facebook" style="color:#fff;">
+			        <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
+			      </a>
+			    </div>
 					{% endif %}
 
 				</ul>
