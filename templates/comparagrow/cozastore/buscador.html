@@ -172,16 +172,15 @@
 		</div>
 
 		<!-- Load more -->
-		<div class="flex-c-m flex-w w-full p-t-45">
-			<div class="pagination">
-			    <span class="step-links">
+		<!-- <div class="flex-c-m flex-w w-full p-t-45"> -->
+			<div class="flex-c-m flex-w w-full p-t-38">
 			        {% if productos.has_previous %}
 							<a href="?page=1" class="flex-c-m how-pagination1 trans-04 m-all-7">
-			&laquo; primera
-		</a>
-		<a href="?page={{ productos.previous_page_number }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
-anterior
-</a>
+							&laquo;
+							</a>
+							<a href="?page={{ productos.previous_page_number }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+							-1
+							</a>
 			        {% endif %}
 
 			        <!-- <span class="current">
@@ -190,19 +189,17 @@ anterior
 
 			        {% if productos.has_next %}
 							<a href="?page={{ productos.next_page_number }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
-			Proxima
-		</a>
-		<a href="?page={{ productos.paginator.num_pages }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
-ultima &raquo;
-</a>
-
+							+1
+							</a>
+							<a href="?page={{ productos.paginator.num_pages }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+ 							&raquo;
+							</a>
 			        {% endif %}
-			    </span>
 			</div>
 			<!-- <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
 				Load More
 			</a> -->
-		</div>
+		<!-- </div> -->
 	</div>
 </div>
 
