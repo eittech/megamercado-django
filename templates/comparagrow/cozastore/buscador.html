@@ -176,17 +176,26 @@
 			<div class="pagination">
 			    <span class="step-links">
 			        {% if productos.has_previous %}
-			            <a href="?page=1">&laquo; primera</a>
-			            <a href="?page={{ productos.previous_page_number }}">anterior</a>
+							<a href="?page=1" class="flex-c-m how-pagination1 trans-04 m-all-7">
+			&laquo; primera
+		</a>
+		<a href="?page={{ productos.previous_page_number }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+anterior
+</a>
 			        {% endif %}
 
-			        <span class="current">
+			        <!-- <span class="current">
 			            Page {{ productos.number }} of {{ productos.paginator.num_pages }}.
-			        </span>
+			        </span> -->
 
 			        {% if productos.has_next %}
-			            <a href="?page={{ productos.next_page_number }}">Proxima</a>
-			            <a href="?page={{ productos.paginator.num_pages }}">ultima &raquo;</a>
+							<a href="?page={{ productos.next_page_number }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+			Proxima
+		</a>
+		<a href="?page={{ productos.paginator.num_pages }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+ultima &raquo;
+</a>
+
 			        {% endif %}
 			    </span>
 			</div>
