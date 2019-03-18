@@ -13,8 +13,8 @@
 ">
 	<div class="bread-crumb p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 
-    <a href="#" class="stext-109 hov-cl1 trans-04" style="color:#fff;">
-			mi
+    <a href="/" class="stext-109 hov-cl1 trans-04" style="color:#fff;">
+			inicio
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a>
 		<a href="#" class="stext-109 cl8 hov-cl1 trans-04" style="
@@ -27,11 +27,6 @@
 </div>
 <div class="container">
 <div class="row">
-    <div class="col-6">
-      <div class="row justify-content-md-center" style="margin-top: 30px;">
-        <img src="/static/img/photo.png" height="300px" width="300px" class="rounded-circle">
-      </div>
-    </div>
     <div class="col-6">
       <div class="row justify-content-md-center" style="margin-top: 30px;color:#01b22c">
         <h2 class="">Mi Perfil</h2>
