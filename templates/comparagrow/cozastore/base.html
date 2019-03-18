@@ -761,8 +761,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			var idProduct = $(this).parent().parent().find('.js-id-b2').val();
+
 			$(this).on('click', function(){
-				swal(nameProduct, "se agrego a tu lista de favoritos !", "success");
+				swal(idProduct, "se agrego a tu lista de favoritos !", "success");
 
 				$(this).addClass('js-addedwish-b2');
 				$(this).off('click');
@@ -771,9 +773,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+			var idProduct = $(this).parent().parent().find('.js-id-b2').val();
 
 			$(this).on('click', function(){
-				swal(nameProduct, "se agrego a tu lista de favoritos !", "success");
+				swal(idProduct, "se agrego a tu lista de favoritos !", "success");
 
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
