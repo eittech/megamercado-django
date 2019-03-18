@@ -335,6 +335,7 @@
 {% block js %}
 <script>
 	function FavoriteProduct(id){
+		console.log(id)
 		$.ajax({
       method: "GET",
       url: "/productos/favorito/"+id,
