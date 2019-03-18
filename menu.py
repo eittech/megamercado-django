@@ -3,7 +3,11 @@ from products.models import *
 import csv
 
 settings.BASE_DIR
-
+from django.contrib.auth.models import User
+user=User.objects.create_user('omar', password='admin')
+user.is_superuser=True
+user.is_staff=True
+user.save()
 
 #kits
 kits = Category.objects.create(name="Kits",slug="kits")
