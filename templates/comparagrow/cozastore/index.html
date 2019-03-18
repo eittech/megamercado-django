@@ -50,7 +50,7 @@
 <section class="sec-product bg0 p-t-50">
 	<div class="container">
 		<div class="">
-			<h3 class="ltext-102 cl5 txt-center respon1">
+			<h3 class="ltext-103 cl5">
 				Destacados
 			</h3>
 		</div>
@@ -120,7 +120,7 @@
 <section class="sec-product bg0 p-t-50">
 	<div class="container">
 		<div class="">
-			<h3 class="ltext-102 cl5 txt-center respon1">
+			<h3 class="ltext-103 cl5">
 				Ultimas rebajas
 			</h3>
 		</div>
@@ -138,22 +138,24 @@
 								<!-- Block2 -->
 								<div class="block2">
 									<div class="block2-pic hov-img0">
+										<a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 										<img src="{{ item.id|imagenproducturl:"0" }}" alt="IMG-PRODUCT" style="height:255px;">
-
-										<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+										</a>
+										<a href="/productos/detalle/{{ item.id }}" target="_blank" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 											Ver mas
 										</a>
 									</div>
 
 									<div class="block2-txt flex-w flex-t p-t-14">
 										<div class="block2-txt-child1 flex-col-l ">
-											<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											<a href="/productos/redirect/{{ item.id }}" target="_blank" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 												{{ item.name }}
 											</a>
 											<input type="hidden" class="js-id-b2" value="{{ item.id }}">
-
 											<span class="stext-105 cl3">
+												<a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 												{{ item.total }}
+												</a>
 											</span>
 										</div>
 
@@ -185,10 +187,10 @@
 	</div>
 </section>
 
-<section class="sec-product bg0 p-t-50">
+<section class="sec-product bg0 p-t-50 p-b-50">
 	<div class="container">
 		<div class="">
-			<h3 class="ltext-102 cl5 txt-center respon1">
+			<h3 class="ltext-103 cl5">
 				Arma tu grow
 			</h3>
 		</div>
@@ -206,22 +208,24 @@
 								<!-- Block2 -->
 								<div class="block2">
 									<div class="block2-pic hov-img0">
+										<a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 										<img src="{{ item.id|imagenproducturl:"0" }}" alt="IMG-PRODUCT" style="height:255px;">
-
-										<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+										</a>
+										<a href="/productos/detalle/{{ item.id }}" target="_blank" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 											Ver mas
 										</a>
 									</div>
 
 									<div class="block2-txt flex-w flex-t p-t-14">
 										<div class="block2-txt-child1 flex-col-l ">
-											<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+											<a href="/productos/redirect/{{ item.id }}" target="_blank" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 												{{ item.name }}
 											</a>
 											<input type="hidden" class="js-id-b2" value="{{ item.id }}">
-
 											<span class="stext-105 cl3">
+												<a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 												{{ item.total }}
+												</a>
 											</span>
 										</div>
 
