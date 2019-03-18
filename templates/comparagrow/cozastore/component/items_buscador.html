@@ -1,5 +1,5 @@
 {% load menu_categorias %}
-
+<div class="row isotope-grid">
   {% for item in productos %}
   <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
     <div class="block2">
@@ -33,3 +33,19 @@
   </div>
 
   {% endfor %}
+</div>
+
+<div class="scroller-status">
+  <div class="infinite-scroll-request loader-ellips">
+    <!-- <img src="/static/img/load.gif" alt=""> -->
+  </div>
+
+</div>
+
+<p class="pagination">
+  {% if productos.has_next %}
+  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page={{ productos.next_page_number }}">Siguiente</a>
+  {% else% }
+  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page=1">Siguiente</a>
+  {% endif %}
+</p>
