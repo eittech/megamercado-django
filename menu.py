@@ -78,8 +78,11 @@ with open('t.csv', 'r+') as data_file:
             categoria = None
             for item in resultado:
                 categoria = item
-            catg=CategoryTags.objects.create(category=categoria,tag=str(row[0]))
-            if catg:
-                print("grabado")
+            try:
+                catg=CategoryTags.objects.create(category=categoria,tag=str(row[0]))
+                if catg:
+                    print("grabado")
+            except:
+                print("no se grabo")
             # print(categoria)
             # print(row)
