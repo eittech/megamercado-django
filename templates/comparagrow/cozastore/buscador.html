@@ -9,17 +9,35 @@
 		$('#formulario_filtro').submit();
 	}
 </script>
+<div class="container-fluid" style="
+    background: blueviolet;
+">
+	<div class="bread-crumb p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+
+		<a href="/productos/categorias/{{ item.slug }}" class="stext-109 hov-cl1 trans-04" style="color:#fff;">
+			buscador
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a>
+		<a href="#" class="stext-109 cl8 hov-cl1 trans-04" style="
+    color: white;
+    font-size: 20px;
+">
+			{{ texto }}
+		</a>
+	</div>
+</div>
+
 <div class="bg0 m-t-23 p-b-140">
 	<div class="container">
 		<div class="flex-w flex-sb-m p-b-52">
 			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " >
+				<!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " >
 					Estas buscando:
 				</button>
 
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
 					{{ texto }}
-				</button>
+				</button> -->
 			</div>
 
 			<div class="flex-w flex-c-m m-tb-10">
