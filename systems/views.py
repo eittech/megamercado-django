@@ -84,7 +84,7 @@ def profile(request):
                     customer.firts_date = birthday
             user.save()
             customer.save()
-        return render(request, 'comparagrow/profile',{'user':user,'customer':customer})
+        return render(request, 'comparagrow/cozastore/profile',{'user':user,'customer':customer})
     else:
         return redirect('/')
 

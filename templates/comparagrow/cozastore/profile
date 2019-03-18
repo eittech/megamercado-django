@@ -1,0 +1,132 @@
+{% extends 'comparagrow/cozastore/base.html' %}
+{% load static %}
+
+
+{% block cabecera %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid" style="
+    background: blueviolet;
+">
+	<div class="bread-crumb p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+
+    <a href="#" class="stext-109 hov-cl1 trans-04" style="color:#fff;">
+			mi
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a>
+		<a href="#" class="stext-109 cl8 hov-cl1 trans-04" style="
+    color: white;
+    font-size: 20px;
+">
+			PERFIL
+		</a>
+	</div>
+</div>
+<div class="container">
+<div class="row">
+    <div class="col-6">
+      <div class="row justify-content-md-center" style="margin-top: 30px;">
+        <img src="/static/img/photo.png" height="300px" width="300px" class="rounded-circle">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row justify-content-md-center" style="margin-top: 30px;color:#01b22c">
+        <h2 class="">Mi Perfil</h2>
+      </div>
+      <div class="row justify-content-md-center" >
+        <p>This line of text is meant to be treated as fine print.</p>
+      </div>
+      <div class="row justify-content-md-center" >
+        <div class="col-10">
+          <form action="/profile" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-at"></i></span>
+                  </div>
+                  <input name="username" disabled type="email" value="{{ user.username }}" class="form-control" id="validationDefaultUsername" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top:10px;">
+              <div class="col">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+                  </div>
+                  <input name="first_name" value="{{ user.first_name }}" type="text" class="form-control" id="validationDefaultfirst_name" placeholder="Como te llamas?" aria-describedby="inputGroupPrepend2" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top:10px;">
+              <div class="col">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+                  </div>
+                  <input name="last_name" value="{{ user.last_name }}" type="text" class="form-control" id="validationDefaultlast_name" placeholder="Apellido" aria-describedby="inputGroupPrepend2" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top:10px;">
+              <div class="col">
+                <div class="input-group">
+                  <div class="form-check form-check-inline">
+                    {% if customer.gender == 'MA' %}
+                    <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="MA">
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="gender1" value="MA">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    {% if customer.gender == 'FE' %}
+                    <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="FE">
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="gender1" value="FE">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    {% if customer.gender == 'DS' %}
+                    <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="DS">
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="gender" id="gender1" value="DS">
+                    {% endif %}
+                    <label class="form-check-label" for="inlineRadio3">No binario</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top:10px;">
+              <div class="col">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-birthday-cake"></i></span>
+                  </div>
+
+                  <!--  -->
+                  <input name="birthday" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
+                </div>
+              </div>
+            </div>
+            <br>
+            <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #672d93;border-color: #672d93;">Guardar</button>
+          </form>
+      </div>
+      </div>
+    </div>
+</div>
+
+</div>
+<br>
+{% endblock %}
