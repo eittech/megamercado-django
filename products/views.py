@@ -213,32 +213,32 @@ def categorias(request,slug):
     #tiendas = None
     # categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
     shop_id = False
-    if request.GET.get('tienda'):
-        print("tienda paso 1")
-        tienda = request.GET.get('tienda')
+    tienda = []
+    if request.GET.getlist('checkbox_shop[]'):
+        for ck in request.GET.getlist('checkbox_shop[]'):
+            tienda.append(int(ck))
         try:
-            shop_id = Shop.objects.get(pk=tienda)
+            shop_id = Shop.objects.filter(pk__in=tienda)
             print("tienda paso 2")
         except:
             shop_id = False
     pagina_shop = ""
     if shop_id:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(shop=shop_id)
-        pagina_shop = "&tienda="+tienda
+        productos_lista = productos_lista.filter(shop__in=shop_id)
+        pagina_shop = ""
 
 
-    marca = False
-    if request.GET.get('marca'):
-        print("tienda paso 1")
-        marca = request.GET.get('marca')
-    pagina_marca = ""
+    marca = []
+    if request.GET.getlist('checkbox_marca[]'):
+        for ck in request.GET.getlist('checkbox_marca[]'):
+            marca.append(str(ck))
     if marca:
         print("tienda paso 3")
-        productos_lista = productos_lista.filter(brand=marca)
-        pagina_marca = "&marca="+marca
+        productos_lista = productos_lista.filter(brand__in=marca)
+        pagina_marca = ""
     else:
-        marca = ""
+        marca = []
 
 
     if request.GET.get('min_price'):
@@ -284,11 +284,11 @@ def categorias(request,slug):
     page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
-            template = "comparagrow/component/items_buscador.html"
+            template = "comparagrow/cozastore/component/items_buscador.html"
         else:
-            template = "comparagrow/categorias.html"
+            template = "comparagrow/cozastore/categorias.html"
     else:
-        template = "comparagrow/categorias.html"
+        template = "comparagrow/cozastore/categorias.html"
     try:
         productos = paginator.get_page(page)
         print(productos)
