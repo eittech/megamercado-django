@@ -111,9 +111,9 @@
 							{% for shop in tiendas %}
 							<li class="p-b-6">
 							{% if shop.shop__pk in tienda %}
-							<a href="#" class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></a>
+							<a class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" checked>{{ shop.shop__name }}</a>
 							{% else %}
-							<a href="#" class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}"> <a style="text-decoration: none;cursor: pointer;color: #000;font-weight: 100;" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a></a>
+							<a class="filter-link stext-106 trans-04 filter-link-active"><input type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')">{{ shop.shop__name }}</a>
 							{% endif %}
 							</li>
 							{% endfor %}
