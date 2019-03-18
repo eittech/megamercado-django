@@ -34,11 +34,3 @@
 
   {% endfor %}
 </div>
-
-<p class="pagination">
-  {% if productos.has_next %}
-  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page={{ productos.next_page_number }}">Siguiente</a>
-  {% else% }
-  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page=1">Siguiente</a>
-  {% endif %}
-</p>
