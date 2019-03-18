@@ -183,13 +183,13 @@
 					</li>
 					{% if user.is_authenticated %}
 					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="/profile" class="stext-102 cl2 hov-cl1 trans-04">
 							Mi perfil
 						</a>
 					</li>
 
 					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="/productos/favoritos" class="stext-102 cl2 hov-cl1 trans-04">
 							Mis favoritos
 						</a>
 					</li>
@@ -201,16 +201,38 @@
 					</li>
 
 					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="/logout" class="stext-102 cl2 hov-cl1 trans-04">
 							Salir
 						</a>
 					</li>
 					{% else %}
-					<li class="p-b-13">
-						<a href="#" class="stext-102 cl2 hov-cl1 trans-04">
-							Iniciar Sesión
-						</a>
-					</li>
+					<form action="/login" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
+	          {% csrf_token %}
+	          <div class="form-row">
+	            <div class="col">
+	              <div class="input-group">
+	                <div class="input-group-prepend">
+	                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-user"></i></span>
+	                </div>
+	                <input name="username" type="email" class="form-control" id="validationDefaultUsername2" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+	              </div>
+	            </div>
+	          </div>
+
+	          <div class="form-row" style="margin-top:10px;">
+	            <div class="col">
+	              <div class="input-group">
+	                <div class="input-group-prepend">
+	                  <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-lock"></i></span>
+	                </div>
+	                <input type="password" name="password" class="form-control" id="validationDefaultPassword2" placeholder="Contraseña" aria-describedby="inputGroupPrepend2" required>
+	              </div>
+	            </div>
+	          </div>
+
+	          <br>
+	          <button class="btn btn-primary" type="submit" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">Iniciar sesión</button>
+	        </form>
 					{% endif %}
 
 				</ul>
