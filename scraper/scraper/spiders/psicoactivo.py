@@ -39,13 +39,11 @@ class ProductSpider(scrapy.Spider):
             #print(tut)
             url_category = link_categoria.xpath('a/@href').re_first('\w.*')
             name_category = link_categoria.xpath('a/text()').re_first('\w.*')
-            # print(url_category)
-            # print(name_category)
             if url_category is not None:
                 response = scrapy.Request(url=url_category, callback=self.parse_category_all)
                 response.meta['url_category_safe'] = url_category
                 response.meta['name_category_safe'] = name_category
-                response.meta['shop'] = 'https://www.https://www.psicoactivo.cl//'
+                response.meta['shop'] = 'https://www.psicoactivo.cl/'
                 response.meta['shop_name'] = 'psicoactivo.cl'
                 yield response
             # yield scrapy.Request(url=url_category, callback=self.parse_category)
@@ -57,34 +55,23 @@ class ProductSpider(scrapy.Spider):
         name_category = response.meta['name_category_safe']
         shop_url = response.meta['shop']
         shop_name = response.meta['shop_name']
-        # print("************ 00")
-        # print(name_category)
         id_category = pagination.xpath('//input[contains(@name,"id_category")]/@value').re_first('\w.*')
         if id_category:
             id_category_text = "?id_category="+str(id_category)
-            pc = True
         else:
-            pc = None
             id_category_text = ""
         # print(id_category_text)
         nb_item = pagination.xpath('//input[contains(@id,"nb_item")]/@value').re_first('\w.*')
         if nb_item:
-            pc = True
             nb_item_text = "&n="+str(nb_item)
         else:
-            pn = None
             nb_item_text = ""
         # print(nb_item_text)
         url_category_all = str(url_category) + id_category_text + nb_item_text
-        # if pc or pn:
-        #     print("************")
-        #     print("************")
-        #     print(url_category_all)
         response = scrapy.Request(url=url_category_all, callback=self.parse_category)
         response.meta['name_category_safe'] = name_category
         response.meta['shop'] = shop_url
         response.meta['shop_name'] = shop_name
-        # print(response.meta['name_category_safe'])
         yield response
 
 
@@ -93,8 +80,7 @@ class ProductSpider(scrapy.Spider):
         name_category = response.meta['name_category_safe']
         shop_url = response.meta['shop']
         shop_name = response.meta['shop_name']
-        # print("************ 01")
-        # print(name_category)
+
         # name_category = list_product.xpath('.//span[@id="cat-name"]/text()').re_first('\w.*')
         for lista in list_product:
             # print("===")
@@ -121,10 +107,29 @@ class ProductSpider(scrapy.Spider):
         try:
             name_category = response.meta['name_category_safe'].lower()
         except:
-            name_category = 'otros'
+            name_category = None
+
+        try:
+            if name_category is None or name_category == "":
+                spa = response.css("span.navigation_page span a span")
+                name_category = spa[0].xpath('text()').re_first('\w.*')
+        except:
+            print("###############################")
+            print(response.meta['url_product_safe'])
+            category = None
 
         category = None
-        category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        category_tags =  None
+        print("###############################")
+        print("###############################")
+        print("###############################")
+        print(name_category)
+        catgoria_name_ant = name_category
+        if name_category is None or name_category == "":
+            category = None
+        else:
+            category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+
         if category_tags is None:
             category = None
         else:
@@ -137,44 +142,32 @@ class ProductSpider(scrapy.Spider):
             url = response.meta['url_product_safe']
             reference = product.xpath('.//p[@id="product_reference"]/span/text()').re_first('\w.*')
             brand = product.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
-            # description = product.xpath('.//div[@class="product-tabs-container"]/section[@id="descriptionTab"]/div[@class="rte"]/p/text()')
-            try:
-                description = product.css('div.product-tabs-container section#descriptionTab div.rte p::text')[0].extract()
-            except:
-                description = None
+            description = product.xpath('.//div[@id="short_description_block"]/div[@id="short_description_content"]/p/text()').re_first('\w.*')
             category = category
-            category_temp = name_category
             # tax =
             total = product.css('span#our_price_display').attrib['content']
 
             Product_object = Product()
             if name:
                 Product_object.name = name
-                print(name)
             if shop_id:
                 Product_object.shop = shop_id
-                print(shop_id)
             if reference:
                 Product_object.reference = reference
-                print(reference)
             if brand:
                 Product_object.brand = brand
-                print(brand)
             if url:
                 Product_object.url = url
-                print(url)
-            if category_temp:
-                print(category_temp)
-                Product_object.category_temp = category_temp
+            if catgoria_name_ant:
+                Product_object.category_temp = catgoria_name_ant
+
             if description:
                 Product_object.description = description
-                print(description)
 
             if category:
                 Product_object.category = category
-                # category = Category.objects.get(pk=59)
+
             if total:
-                print(total)
                 Product_object.total = total
             else:
                 Product_object.total = 0
