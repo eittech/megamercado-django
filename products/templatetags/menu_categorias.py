@@ -13,10 +13,10 @@ def listado():
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
     try:
-        imagen = productos.image
+        imagen = "/media/" + productos.image
     except:
-        imagen = ""
-    return "/media/" + str(imagen)
+        imagen = "/static/img/no-image-icon-6.png"
+    return  str(imagen)
 
 
 @register.filter(name='favoriteactive')
