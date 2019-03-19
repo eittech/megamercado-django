@@ -43,6 +43,8 @@ class ProductSpider(scrapy.Spider):
             response = scrapy.Request(url=url_category, callback=self.parse_category_all)
             response.meta['url_category_safe'] = url_category
             response.meta['name_category_safe'] = name_category
+            response.meta['shop'] = 'https://www.lajuana.cl/'
+            response.meta['shop_name'] = 'lajuana.cl'
             yield response
             # yield scrapy.Request(url=url_category, callback=self.parse_category)
 
@@ -51,6 +53,8 @@ class ProductSpider(scrapy.Spider):
         pagination = response.css("div#pagination input")
         url_category = response.meta['url_category_safe']
         name_category = response.meta['name_category_safe']
+        shop_url = response.meta['shop']
+        shop_name = response.meta['shop_name']
         id_category = pagination.xpath('//input[contains(@name,"id_category")]/@value').re_first('\w.*')
         if id_category:
             id_category_text = "?id_category="+str(id_category)
@@ -66,12 +70,16 @@ class ProductSpider(scrapy.Spider):
         url_category_all = str(url_category) + id_category_text + nb_item_text
         response = scrapy.Request(url=url_category_all, callback=self.parse_category)
         response.meta['name_category_safe'] = name_category
+        response.meta['shop'] = shop_url
+        response.meta['shop_name'] = shop_name
         yield response
 
 
     def parse_category(self, response):
         list_product = response.css("div.center_column ul.product_list a.product_img_link")
         name_category = response.meta['name_category_safe']
+        shop_url = response.meta['shop']
+        shop_name = response.meta['shop_name']
 
         # name_category = list_product.xpath('.//span[@id="cat-name"]/text()').re_first('\w.*')
         for lista in list_product:
@@ -81,19 +89,33 @@ class ProductSpider(scrapy.Spider):
             response = scrapy.Request(url=url_product, callback=self.parse_product)
             response.meta['url_product_safe'] = url_product
             response.meta['name_category_safe'] = name_category
+            response.meta['shop'] = shop_url
+            response.meta['shop_name'] = shop_name
             yield response
 
     def parse_product(self,response):
-        shop_id = Shop.objects.filter(pk=1)
-        print(shop_id)
-        name_category_t = response.meta['name_category_safe']
-        name_category = name_category_t.rstrip().lower()
+        shop_id = Shop.objects.filter(url=response.meta['shop']).first()
+        if shop_id is not None:
+            print('existe')
+        else:
+            shop_id = Shop()
+            shop_id.name = response.meta['shop_name']
+            shop_id.url = response.meta['shop']
+            shop_id.save()
+            print('no existe')
+
+        try:
+            name_category = response.meta['name_category_safe'].lower()
+        except:
+            name_category = 'otros'
+
         category = None
         category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
         if category_tags is None:
             category = None
         else:
             category = category_tags.category
+
         if category is not None:
             name_category = response.meta['name_category_safe']
             product = response.css("div.center_column")
@@ -106,7 +128,6 @@ class ProductSpider(scrapy.Spider):
             category_temp = name_category
             # tax =
             total = product.css('span#our_price_display').attrib['content']
-            shop_id = Shop.objects.get(pk=1)
 
             Product_object = Product()
             if name:
@@ -124,12 +145,9 @@ class ProductSpider(scrapy.Spider):
             if description:
                 Product_object.description = description
 
-            if category is None:
-                category = Category.objects.get(pk=50)
+            if category:
                 Product_object.category = category
-            else:
-                Product_object.category = category
-                # category = Category.objects.get(pk=59)
+
             if total:
                 Product_object.total = total
             else:
