@@ -45,6 +45,8 @@ class ProductSpider(scrapy.Spider):
                 response = scrapy.Request(url=url_category, callback=self.parse_category_all)
                 response.meta['url_category_safe'] = url_category
                 response.meta['name_category_safe'] = name_category
+                response.meta['shop'] = 'https://www.https://www.psicoactivo.cl//'
+                response.meta['shop_name'] = 'psicoactivo.cl'
                 yield response
             # yield scrapy.Request(url=url_category, callback=self.parse_category)
 
@@ -53,6 +55,8 @@ class ProductSpider(scrapy.Spider):
         pagination = response.css("div#pagination input")
         url_category = response.meta['url_category_safe']
         name_category = response.meta['name_category_safe']
+        shop_url = response.meta['shop']
+        shop_name = response.meta['shop_name']
         # print("************ 00")
         # print(name_category)
         id_category = pagination.xpath('//input[contains(@name,"id_category")]/@value').re_first('\w.*')
@@ -78,6 +82,8 @@ class ProductSpider(scrapy.Spider):
         #     print(url_category_all)
         response = scrapy.Request(url=url_category_all, callback=self.parse_category)
         response.meta['name_category_safe'] = name_category
+        response.meta['shop'] = shop_url
+        response.meta['shop_name'] = shop_name
         # print(response.meta['name_category_safe'])
         yield response
 
@@ -85,6 +91,8 @@ class ProductSpider(scrapy.Spider):
     def parse_category(self, response):
         list_product = response.css("div.center_column ul.product_list a.product_img_link")
         name_category = response.meta['name_category_safe']
+        shop_url = response.meta['shop']
+        shop_name = response.meta['shop_name']
         # print("************ 01")
         # print(name_category)
         # name_category = list_product.xpath('.//span[@id="cat-name"]/text()').re_first('\w.*')
@@ -95,31 +103,25 @@ class ProductSpider(scrapy.Spider):
             response = scrapy.Request(url=url_product, callback=self.parse_product)
             response.meta['url_product_safe'] = url_product
             response.meta['name_category_safe'] = name_category
+            response.meta['shop'] = shop_url
+            response.meta['shop_name'] = shop_name
             yield response
 
     def parse_product(self,response):
-        shop_id = Shop.objects.filter(pk=4)
-        print("********")
-        print("********")
-        print("********")
-
-        # print(response.meta['name_category_safe'])
-        categoria_html = response.css("span.navigation_page span")
-        # for ii in categoria_html:
-        #     print(ii.css('span::text')[0].extract())
-        # print("******** 1")
-        try:
-            name_category_t = categoria_html[0].css('span::text')[0].extract()
-        except:
-            name_category_t = None
-        # print(name_category_t)
+        shop_id = Shop.objects.filter(url=response.meta['shop']).first()
+        if shop_id is not None:
+            print('existe')
+        else:
+            shop_id = Shop()
+            shop_id.name = response.meta['shop_name']
+            shop_id.url = response.meta['shop']
+            shop_id.save()
+            print('no existe')
 
         try:
-            name_category = name_category_t.lower()
+            name_category = response.meta['name_category_safe'].lower()
         except:
             name_category = 'otros'
-        # print("******** 2")
-        # print(name_category)
 
         category = None
         category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
@@ -127,9 +129,7 @@ class ProductSpider(scrapy.Spider):
             category = None
         else:
             category = category_tags.category
-        # print("******** 3")
-        # print(category)
-        #
+
         if category is not None:
             name_category = response.meta['name_category_safe']
             product = response.css("div.center_column")
@@ -143,10 +143,9 @@ class ProductSpider(scrapy.Spider):
             except:
                 description = None
             category = category
-            category_temp = name_category_t
+            category_temp = name_category
             # tax =
             total = product.css('span#our_price_display').attrib['content']
-            shop_id = Shop.objects.get(pk=4)
 
             Product_object = Product()
             if name:
@@ -171,11 +170,7 @@ class ProductSpider(scrapy.Spider):
                 Product_object.description = description
                 print(description)
 
-            if category is None:
-                category = Category.objects.get(pk=50)
-                Product_object.category = category
-                print(category)
-            else:
+            if category:
                 Product_object.category = category
                 # category = Category.objects.get(pk=59)
             if total:
