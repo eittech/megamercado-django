@@ -150,7 +150,7 @@ class ProductSpider(scrapy.Spider):
             category = category
             category_temp = name_category
             try:
-                t = product.xpath('.//h3[@class="product-price"]/text()').re_first('\w.*')
+                t = response.xpath('.//h3[@class="product-price"]/text()').re_first('\w.*')
                 ta = t.split('$')
                 ti = ta[1].split('.')
                 total = ""
@@ -220,7 +220,7 @@ class ProductSpider(scrapy.Spider):
                 print("No se pudo guardar el producto")
 
             if Product_object.id:
-                list_img_t = product.css("div.image")
+                list_img_t = response.css("div.image")
 
                 print("*****************")
                 print("*****************")
