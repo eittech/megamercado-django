@@ -105,7 +105,10 @@ class ProductSpider(scrapy.Spider):
             name = response.xpath('.//h1[@class="h1"]/text()').re_first('\w.*')
             url = response.meta['url_product_safe']
             reference = response.xpath('.//p[@id="product_reference"]/span/text()').re_first('\w.*')
-            brand = response.css('img.brand-image').attrib['title']
+            try:
+                brand = response.css('img.brand-image').attrib['title']
+            except:
+                print("error brand")
             try:
                 description = ""
                 description1 = response.css('div.product-description').extract_first()
