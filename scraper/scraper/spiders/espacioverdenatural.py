@@ -129,7 +129,10 @@ class ProductSpider(scrapy.Spider):
                 p = response.css('div.product-information-inner div.fixed-content')
                 t = p.xpath('.//span[@class="woocommerce-Price-amount amount"]/text()').re_first('\w.*')
                 ti = t.split('.')
-                total = int(ti[0])
+                total = ""
+                for tii in ti:
+                    total = total + str(tii)
+                total = int(total)
             except:
                 total = None
 
