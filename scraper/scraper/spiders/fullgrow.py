@@ -108,6 +108,7 @@ class ProductSpider(scrapy.Spider):
             try:
                 brand = response.css('img.brand-image').attrib['title']
             except:
+                brand = None
                 print("error brand")
             try:
                 description = ""
