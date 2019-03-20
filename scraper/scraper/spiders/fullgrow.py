@@ -32,8 +32,8 @@ class ProductSpider(scrapy.Spider):
         ]
         for url in urls:
             response =  scrapy.Request(url=url, callback=self.parse_category)
-            response.meta['url_category_safe'] = url_category
-            response.meta['name_category_safe'] = name_category
+            response.meta['url_category_safe'] = ""
+            response.meta['name_category_safe'] = "sustratos"
             response.meta['shop'] = 'http://www.fullgrow.cl/'
             response.meta['shop_name'] = 'fullgrow.cl'
             yield response
