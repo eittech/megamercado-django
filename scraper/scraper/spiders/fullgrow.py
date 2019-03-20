@@ -92,17 +92,12 @@ class ProductSpider(scrapy.Spider):
         except:
             name_category = ''
 
-        categ = response.xpath('.//nav[@class="woocommerce-breadcrumb"]/a/text()').extract()
-        print("####################################")
-        print("####################################")
-        print("####################################")
-        print(categ)
         category = None
-        for a in categ:
-            category_tags = CategoryTags.objects.filter(tag__icontains='sustratos').first()
-            print(category_tags)
-            if category_tags:
-                category = category_tags.category
+
+        category_tags = CategoryTags.objects.filter(tag__icontains='sustratos').first()
+        print(category_tags)
+        if category_tags:
+            category = category_tags.category
 
         if category is not None:
             name_category = response.meta['name_category_safe']
