@@ -61,15 +61,18 @@ class ProductSpider(scrapy.Spider):
 
         for lista in list_product:
             # print("===")
-            url_product = lista.xpath('@href').re_first('\w.*')
+            try:
+                url_product = lista.xpath('@href').re_first('\w.*')
 
-            # print(url_product)
-            response = scrapy.Request(url=url_product, callback=self.parse_product)
-            response.meta['url_product_safe'] = url_product
-            response.meta['name_category_safe'] = name_category
-            response.meta['shop'] = shop_url
-            response.meta['shop_name'] = shop_name
-            yield response
+                # print(url_product)
+                response = scrapy.Request(url=url_product, callback=self.parse_product)
+                response.meta['url_product_safe'] = url_product
+                response.meta['name_category_safe'] = name_category
+                response.meta['shop'] = shop_url
+                response.meta['shop_name'] = shop_name
+                yield response
+            except:
+                print("url no valida")
 
     def parse_product(self,response):
         shop_id = Shop.objects.filter(url=response.meta['shop']).first()
