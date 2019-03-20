@@ -13,7 +13,7 @@ def listado():
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
     try:
-        imagen = "/media/" + productos.image
+        imagen = "/media/" + str(productos.image)
     except:
         imagen = "/static/img/no-image-icon-6.png"
     return  str(imagen)
