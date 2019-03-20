@@ -22,7 +22,7 @@ from contracts.models import *
 
 
 # Create your views here.
-def home(request):
+def homeporto(request):
     error=False
     if request.GET.get('error'):
         error = True
@@ -48,7 +48,7 @@ def home(request):
         #cozastore
         return render(request, 'comparagrow/cozastore/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
 
-def homeporto(request):
+def home(request):
     error=False
     if request.GET.get('error'):
         error = True
