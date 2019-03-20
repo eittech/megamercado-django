@@ -49,7 +49,8 @@ def buscador(request):
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_shop = servicecontractshop.values('shop__pk')
-    productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+    # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+    productos_lista = Product.objects.filter()
 
     productos_lista = productos_lista.filter(name__icontains=texto)
     tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
@@ -202,7 +203,9 @@ def categorias(request,slug):
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_shop = servicecontractshop.values('shop__pk')
-    productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+    # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
+    productos_lista = Product.objects.filter()
+
 
     productos_lista = productos_lista.filter(category__in=children)
 
