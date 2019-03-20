@@ -193,7 +193,7 @@ class ProductSpider(scrapy.Spider):
                 for li_img in list_img:
                     print(li_img)
                     contador = contador + 1
-                    img_url = li_img.xpath('@src').re_first('\w.*')
+                    img_url = li_img.xpath('@href').re_first('\w.*')
                     print(img_url)
                     # img_url = response.css('img#bigpic').xpath('@src').get()
                     name = str(Product_object.id) +'_' + str(contador) + '.jpg'
