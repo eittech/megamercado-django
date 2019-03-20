@@ -138,7 +138,7 @@ class ProductSpider(scrapy.Spider):
             if url:
                 Product_object.url = url
             if category_temp:
-                Product_object.category_temp = categ
+                Product_object.category_temp = "sustratos"
             if description:
                 Product_object.description = description
 
