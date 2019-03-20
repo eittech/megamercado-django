@@ -32,7 +32,9 @@ def home(request):
     servicecontractshop_ci = ServiceContractProduct.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='PUBLICIDAD').filter(servicecontract__service__template_section='carrusel_inicio')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
-    productos_ci = Product.objects.filter(pk__in=pk_product)
+    # productos_ci = Product.objects.filter(pk__in=pk_product)
+    productos_ci = Product.objects.filter()[:24]
+
 
     productos = ProductImage.objects.all()[:12]
     category = Category.objects.all()
@@ -56,7 +58,8 @@ def homeporto(request):
     servicecontractshop_ci = ServiceContractProduct.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='PUBLICIDAD').filter(servicecontract__service__template_section='carrusel_inicio')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
-    productos_ci = Product.objects.filter(pk__in=pk_product)
+    # productos_ci = Product.objects.filter(pk__in=pk_product)
+    productos_ci = Product.objects.filter()[:24]
 
     productos = ProductImage.objects.all()[:12]
     category = Category.objects.all()
