@@ -181,7 +181,7 @@
 												<div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
 													<form role="search" class="d-flex w-100" action="/productos/buscador" method="get">
 														<div class="simple-search input-group w-100">
-															<input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="comparar...">
+															<input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="Busca aqui">
 															<span class="input-group-append bg-light border-0">
 																<button class="btn" type="submit">
 																	<img src="{% static 'img/lupa.png' %}" style="height: 21px;">
@@ -208,7 +208,7 @@
 
 			</div>
 
-			<footer id="footer" style="background: #672d93;">
+			<footer id="footer" style="background: #672d93;border:none;">
 				<div class="container">
 					<div class="row py-5 my-4">
 						<div class="col-md-6 col-lg-3 mb-5 mb-md-0">
@@ -282,19 +282,10 @@
 						<div class="col-md-6 col-lg-2">
 							<h5 class="text-3 mb-3">CATEGORIES</h5>
 							<p>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Gadgets</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Photography</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Lifestyle</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Fashion</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Recipes</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Travel</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Business</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Architecture</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Reviews</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Sports</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Videos</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Technology</span></a>
-								<a href="#"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">Design</span></a>
+								{% listado as listado_producto %}
+									{% for genre,structure in listado_producto|tree_info %}
+									<a href="/productos/categorias/{{ genre.slug }}"><span class="badge badge-dark bg-color-black badge-sm py-2 mr-1 mb-2 text-uppercase">{{ genre.name }}</span></a>
+									{% endfor %}
 							</p>
 						</div>
 					</div>
