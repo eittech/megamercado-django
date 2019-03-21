@@ -144,11 +144,11 @@ def buscador(request):
     page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
-            template = "comparagrow/cozastore/buscador.html"
+            template = "comparagrow/buscador.html"
         else:
-            template = "comparagrow/cozastore/buscador.html"
+            template = "comparagrow/buscador.html"
     else:
-        template = "comparagrow/cozastore/buscador.html"
+        template = "comparagrow/buscador.html"
     try:
         productos = paginator.get_page(page)
         print(productos)
@@ -287,11 +287,11 @@ def categorias(request,slug):
     page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
-            template = "comparagrow/cozastore/component/items_buscador.html"
+            template = "comparagrow/component/items_buscador.html"
         else:
-            template = "comparagrow/cozastore/categorias.html"
+            template = "comparagrow/categorias.html"
     else:
-        template = "comparagrow/cozastore/categorias.html"
+        template = "comparagrow/categorias.html"
     try:
         productos = paginator.get_page(page)
         print(productos)
