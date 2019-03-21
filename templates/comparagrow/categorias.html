@@ -54,9 +54,9 @@ list-style: none;
 							{% for shop in tiendas %}
 							<li class="p-b-6">
 							{% if shop.shop__pk in tienda %}
-							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;">{{ shop.shop__name }}</a>
+							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">{{ shop.shop__name }}</a>
 							{% else %}
-							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;">{{ shop.shop__name }}</a>
+							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">{{ shop.shop__name }}</a>
 							{% endif %}
 							</li>
 							{% endfor %}
@@ -81,9 +81,9 @@ list-style: none;
 
 							<li class="p-b-6">
 							{% if marc.brand in marca %}
-							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;">{{ marc.brand }}</a>
+							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">{{ marc.brand }}</a>
 							{% else %}
-							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;">{{ marc.brand }}</a>
+							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">{{ marc.brand }}</a>
 							{% endif %}
 							</li>
 							{% endfor %}
