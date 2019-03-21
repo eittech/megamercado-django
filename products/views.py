@@ -283,7 +283,7 @@ def categorias(request,slug):
     # order_by = "min"
 
 
-    paginator = Paginator(productos_lista, 20)
+    paginator = Paginator(productos_lista, 40)
     page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
