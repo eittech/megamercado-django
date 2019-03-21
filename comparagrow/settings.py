@@ -40,7 +40,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'r#hc(l2(-+=ih$6d#d&kkkafvr_4n0e%m)@(92qv1kav3259%4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.5','192.168.1.9','127.0.0.1','35.185.63.218']
 
@@ -124,23 +124,23 @@ EMAIL_PORT = 587
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'comparagrow',
-         'USER': 'postgres',
-         'PASSWORD': 'pazverde123',
-         'HOST': 'localhost',
-         'PORT': '',
-     }
- }
-
 # DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite36'),
-#    }
-# }
+#      'default': {
+#          'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#          'NAME': 'comparagrow',
+#          'USER': 'postgres',
+#          'PASSWORD': 'pazverde123',
+#          'HOST': 'localhost',
+#          'PORT': '',
+#      }
+#  }
+
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite36'),
+   }
+}
 
 # DATABASES = {
 #    'default': {
