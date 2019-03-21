@@ -2,41 +2,41 @@
 
 <div class="row article">
   {% for item in productos %}
-  <div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;">
-    <div class="card-deck" style="width: 270px;">
+  <div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
+    <div class="card-deck" style="width: 270px;font-weight: 100;">
       <div class="card" style="">
         <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
           <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
         </div>
         <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;" class="card-img-top" alt="...">
+          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
         </a>
-        <div class="card-body" style="margin-top: -20px;height: 40px;">
+        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;">
           <span class="" style="color:#01b22c;">
-            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;">{{ item.name }}</a>
+            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
           </span>
         </div>
-        <div class="card-footer" style="background-color: #fff;border-top: none;">
+        <div class="card-footer" style="background-color: transparent;border-top: none;">
           <div class="row">
             <div class="col">
-              <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.total }}</h5>
+              <h5 class="card-title" style="color:#000;font-size: 14px;font-weight: 100;">$ {{ item.total }}</h5>
             </div>
           </div>
           <div class="row">
             <div class="col">
               {% if user.is_authenticated %}
               <a onclick="FavoriteProduct('{{ item.id }}')">
-              <i class="far fa-heart" style="font-size: 19px;color:#775;" id="favorite_{{ item.id }}"></i>
+              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;" id="favorite_{{ item.id }}"></i>
               </a>
               {% else %}
               <a data-toggle="modal" data-target="#modal_login">
-              <i class="far fa-heart" style="font-size: 19px;color:#775;"></i>
+              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;"></i>
               </a>
               {% endif %}
             </div>
             <div class="col text-right">
               <a href="/productos/detalle/{{ item.id }}" target="_blank">
-              <img src="/static/img/lupa.png" alt="" style="height: 25px;">
+              <img src="/static/img/lupa.png" alt="" style="height: 25px;font-weight: 100;">
               </a>
             </div>
         </div>
