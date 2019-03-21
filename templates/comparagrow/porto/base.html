@@ -48,7 +48,7 @@
 		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/navigation.css">
 
 		<!-- Demo ICO -->
-
+		<link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
 
 
 		<!-- Skin CSS -->
@@ -142,18 +142,18 @@
 
 				          {% else %}
 									<h2 class="word-rotator clip is-full-width mb-2">
-										<span><a href="/login" style="text-decoration:none;color: #000;">Inicia </a></span>
+										<span><a style="text-decoration:none;color: #000;cursor:pointer;" data-toggle="modal" data-target="#modal_login">Inicia </a></span>
 										<span class="word-rotator-words">
 
-											<b class="is-visible" style="color:#01b22c;"><a href="/login" style="text-decoration:none;color:#01b22c;">sesion</a></b>
-											<b class="" style="color:#672d93;"><a href="/login" style="text-decoration:none;color:#672d93">aqui</a></b>
+											<b class="is-visible" style="color:#01b22c;cursor:pointer;"><a style="text-decoration:none;color:#01b22c;cursor:pointer;" data-toggle="modal" data-target="#modal_login">sesion</a></b>
+											<b class="" style="color:#672d93;cursor:pointer;"><a style="text-decoration:none;color:#672d93;cursor:pointer;" data-toggle="modal" data-target="#modal_login">aqui</a></b>
 											<!-- <b class="text-color-primary">extremely</b> -->
 
 										</span>
 										<span>
-											<a href="/login" style="font-size: 28px;height: 40px;line-height: 40px;width: 40px;" target="_blank" title="Facebook">
+											<a style="font-size: 28px;height: 40px;line-height: 40px;width: 40px;cursor:pointer;" target="_blank" data-toggle="modal" data-target="#modal_login">
 												<!-- <img src="/static/img/lupa.png" style="height: 21px;"> -->
-												<span class="fas fa-cannabis pl-0" style="font-size: 29px;color: #01b22c;"></span>
+												<span class="fas fa-cannabis pl-0" style="font-size: 29px;color: #01b22c;cursor:pointer;"></span>
 											</a></span>
 									</h2>
 				          {% endif %}
@@ -375,3 +375,9 @@
 
 	</body>
 </html>
+
+{% if user.is_authenticated %}
+
+{% else %}
+{% include 'comparagrow/component/modal_register.html' %}
+{% endif %}
