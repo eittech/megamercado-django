@@ -53,9 +53,9 @@ def buscador(request):
     productos_lista = Product.objects.filter()
 
     productos_lista = productos_lista.filter(name__icontains=texto)
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
-    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
     shop_id = False
     tienda = []
