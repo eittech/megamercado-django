@@ -211,6 +211,7 @@ def categorias(request,slug):
 
     tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
     marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
 
     # print(productos_lista)
     #tiendas = None
@@ -305,6 +306,7 @@ def categorias(request,slug):
     'min_price':min_price,
     'pagina':pagina,
     'categorias':categoria,
+    'categorias2':categorias2,
     'pagina_shop':pagina_shop,
     'texto':texto,
     'categoria':categoria,
