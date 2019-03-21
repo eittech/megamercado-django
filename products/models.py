@@ -22,7 +22,15 @@ class Shop(models.Model):
     def num_products(self):
         products = Product.objects.filter(shop=self)
         return products.count()
+    def num_products_category_null(self):
+        products = Product.objects.filter(shop=self).filter(category__isnull=True)
+        return products.count()
+    def num_products_category(self):
+        products = Product.objects.filter(shop=self).filter(category__isnull=False)
+        return products.count()
     num_products.short_description = 'Numero de Productos'
+    num_products_category_null.short_description = 'Productos sin categoria'
+    num_products_category.short_description = 'Productos con categoria'
     #category
 
 class Category(MPTTModel):
