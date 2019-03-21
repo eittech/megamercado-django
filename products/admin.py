@@ -30,9 +30,11 @@ class CategoryAdmin(DraggableMPTTAdmin):
     list_display = ('tree_actions', 'indented_title')
     list_display_links = ('indented_title',)
 
+class ShopAdmin(admin.ModelAdmin):
+    list_display = ('name', 'num_products',)
 
 
-admin.site.register(Shop)
+admin.site.register(Shop,ShopAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(ProductImage)

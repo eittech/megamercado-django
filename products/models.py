@@ -19,6 +19,10 @@ class Shop(models.Model):
     class Meta:
         verbose_name = "Tiendas"
         unique_together = (('url',))
+    def num_products(self):
+        products = Product.objects.filter(shop=self)
+        return products.count()
+    num_products.short_description = 'Numero de Productos'
     #category
 
 class Category(MPTTModel):
