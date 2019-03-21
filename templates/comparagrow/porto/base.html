@@ -133,7 +133,8 @@
                                   {% for genre,structure in listado_producto|tree_info %}
                                       {% if genre.level == 0 %}
                                       <li class="dropdown dropdown-full-color dropdown-light dropdown-mega">
-                                        <a class="dropdown-item dropdown-toggle" href="/productos/categorias/{{ genre.slug }}">
+                                        <a class="dropdown-item dropdown-toggle" href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+    letter-spacing: 1px;">
                                           {{ genre.name }}
                                         </a>
                                         {% for item1 in genre.slug|menulevelone:"1" %}
