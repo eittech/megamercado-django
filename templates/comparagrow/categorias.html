@@ -60,7 +60,7 @@
 
 
 								<li class="p-b-6">
-								{% if category.category__pk in categoria %}
+								{% if category.category__pk in categoria_filtro %}
 								<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')" type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">{{ category.category__name }}</a>
 								{% else %}
 								<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')" type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">{{ category.category__name }}</a>

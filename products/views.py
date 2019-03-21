@@ -244,6 +244,21 @@ def categorias(request,slug):
     else:
         marca = []
 
+    categoria_id = False
+    categoria_filtro = []
+    if request.GET.getlist('checkbox_categoria[]'):
+        for ck in request.GET.getlist('checkbox_categoria[]'):
+            categoria_filtro.append(int(ck))
+        try:
+            categoria_id = Category.objects.filter(pk__in=categoria_filtro)
+            print("categoria_id paso 2")
+        except:
+            categoria_id = False
+    pagina_category = ""
+    if categoria_id:
+        print("categoria_id paso 3")
+        productos_lista = productos_lista.filter(category__in=categoria_id)
+        pagina_category = ""
 
     if request.GET.get('min_price'):
         min_price = request.GET.get('min_price')
@@ -307,6 +322,7 @@ def categorias(request,slug):
     'pagina':pagina,
     'categorias':categoria,
     'categorias2':categorias2,
+    'categoria_filtro':categoria_filtro,
     'pagina_shop':pagina_shop,
     'texto':texto,
     'categoria':categoria,
