@@ -209,8 +209,8 @@ def categorias(request,slug):
 
     productos_lista = productos_lista.filter(category__in=children)
 
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop'))
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand'))
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('-shop__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('-brand')
 
     # print(productos_lista)
     #tiendas = None
