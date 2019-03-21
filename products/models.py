@@ -64,7 +64,7 @@ class Product(models.Model):
     brand = models.CharField(verbose_name="Marca",max_length=200,blank=True)
     url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
-    category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE)
+    category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE,null=True)
     category_temp = models.CharField(verbose_name="Categoria Anterior",max_length=200,blank=True)
     price = models.FloatField()
     tax = models.FloatField()
