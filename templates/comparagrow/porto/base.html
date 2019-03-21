@@ -146,7 +146,7 @@
 
                                                   <div class="col-lg-2">
                                                     <span class="dropdown-mega-sub-title">
-                                                    {{ item1.name }}
+                                                    <a class="dropdown-item" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }}</a>
                                                     </span>
                                                     <ul class="dropdown-mega-sub-nav">
                                                       {% for item2 in item1.slug|menulevelone:"2" %}
