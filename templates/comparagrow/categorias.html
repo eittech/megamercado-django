@@ -21,9 +21,10 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-lg-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
+						<form id="formulario_filtro" class="form-inline" method="get" action="{{ pagina }}{{ pagina_shop }}">
 						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
-						<form id="formulario_filtro" class="form-inline" method="get" action="{{ pagina }}{{ pagina_shop }}">
+
 
 							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
 							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
@@ -33,7 +34,7 @@
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
-						</form>
+
 
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">TIENDAS</h6>
 
@@ -84,7 +85,7 @@ font-weight: 100;
 							{% endfor %}
 						</ul>
 
-
+					</form>
 
 					</div> <!-- col.// -->
 					<div class="col-xs-12 col-sm-12 col-lg-10">
