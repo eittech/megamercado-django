@@ -35,7 +35,32 @@
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
 							</div>
+							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
+							{% if categorias.count > 5 %}
+								<ul style="
+								overflow: auto;
+								height: 139px;
+								font-size: 14px;
+					font-family: sans-serif;
+					font-weight: 100;
+					list-style: none;
+					margin-left: -25px;
+	">
+							{% else %}
+								<ul>
+							{% endif %}
+							{% for category in categorias %}
 
+
+								<li class="p-b-6">
+								{% if category.category__pk in categoria %}
+								<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')" type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">{{ category.category__name }}</a>
+								{% else %}
+								<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('categoria_form_id','{{ category.category__pk }}')" type="checkbox" name="checkbox_categoria[]" value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">{{ category.category__name }}</a>
+								{% endif %}
+								</li>
+								{% endfor %}
+							</ul>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">TIENDAS</h6>
 
 						{% if tiendas.count > 5 %}
