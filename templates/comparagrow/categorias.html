@@ -78,7 +78,9 @@ list-style: none;
 							<ul>
 						{% endif %}
 							{% for marc in marcas %}
+							{% if marc.brand == "" %}
 
+							{% else %}
 							<li class="p-b-6">
 							{% if marc.brand in marca %}
 							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">{{ marc.brand }}</a>
@@ -86,6 +88,7 @@ list-style: none;
 							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">{{ marc.brand }}</a>
 							{% endif %}
 							</li>
+							{% endif %}
 							{% endfor %}
 						</ul>
 
