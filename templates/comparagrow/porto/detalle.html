@@ -1,0 +1,91 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+
+{% block csscontent %}
+
+<link rel="stylesheet" href="/static/porto/vendor/bootstrap-star-rating/css/star-rating.min.css">
+
+<link rel="stylesheet" href="/static/porto/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-lg-6">
+
+			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1}">
+				{% for item in producto_image %}
+				<div>
+					<img alt="" class="img-fluid" src="/media/{{ item.image }}">
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+
+		<div class="col-lg-6">
+
+			<div class="summary entry-summary">
+
+				<h1 class="mb-0 font-weight-bold text-7">{{ producto.name }}</h1>
+
+				<p class="price">
+					<span class="amount">$ {{ producto.total }}</span>
+				</p>
+
+				<p class="mb-4"></p>
+
+				<div class="product-meta">
+					<span class="posted-in">Categories:
+						{% for item in producto.category.get_ancestors %}
+						<a rel="tag" href="/productos/categorias/{{ item.slug }}">{{ item.name }}</a>,
+						{% endfor %}
+						<a rel="tag" href="/productos/categorias/{{ producto.category.slug }}">{{ producto.category.name }}</a>
+					</span>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<div class="tabs tabs-product mb-2">
+				<ul class="nav nav-tabs">
+					<li class="nav-item active"><a class="nav-link py-3 px-4" href="#productDescription" data-toggle="tab">Descripción</a></li>
+					<li class="nav-item"><a class="nav-link py-3 px-4" href="#productInfo" data-toggle="tab">Tabla contenidos</a></li>
+				</ul>
+				<div class="tab-content p-0">
+					<div class="tab-pane p-4 active" id="productDescription">
+						{% autoescape off %}
+						{{ producto.description }}
+            {% endautoescape %}
+					</div>
+					<div class="tab-pane p-4" id="productInfo">
+						<table class="table m-0">
+							<tbody>
+								{% for t in producto_attr %}
+								<tr>
+									<th class="border-top-0">
+										{{ t.attributes.name }}:
+									</th>
+									<td class="border-top-0">
+											{{ t.values }}
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

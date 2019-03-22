@@ -388,7 +388,7 @@ def detalle_product(request,id):
     except:
         producto = None
     if producto is not None:
-        return render(request, "comparagrow/cozastore/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr})
+        return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr})
     else:
         return redirect('/error')
 
