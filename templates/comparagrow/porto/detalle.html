@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="/static/porto/vendor/bootstrap-star-rating/css/star-rating.min.css">
 
 <link rel="stylesheet" href="/static/porto/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css">
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 {% endblock %}
 
 
@@ -83,6 +85,9 @@
 
 				<p class="mb-4"></p>
 				<a class="btn btn-primary"  style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">Recibir Ofertas</a>
+				<p class="mb-4"></p>
+
+				<div class="ct-chart ct-perfect-fourth"></div>
 			</div>
 
 
@@ -124,4 +129,19 @@
 	</div>
 </div>
 
+{% endblock %}
+
+
+{% block js %}
+<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script>
+	var data = {
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  series: [
+    [5, 2, 4, 2, 0]
+  ]
+};
+
+new Chartist.Line('.ct-chart', data);
+</script>
 {% endblock %}
