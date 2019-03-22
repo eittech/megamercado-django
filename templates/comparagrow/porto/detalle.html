@@ -45,7 +45,30 @@
 					<span class="amount">$ {{ producto.total }}</span>
 				</p>
 
-				<p class="mb-4"></p>
+				<div class="product-meta">
+					<span class="posted-in"><b>Referencia: </b>
+						{% if producto.reference %}
+						{{ producto.reference }}
+						{% else %}
+						No aplica
+						{% endif %}
+					</span>
+				</div>
+
+				<div class="product-meta">
+					<span class="posted-in"><b>Marca: </b>
+						{% if producto.brand %}
+						{{ producto.brand }}
+						{% else %}
+						No aplica
+						{% endif %}
+					</span>
+				</div>
+
+				<div class="product-meta">
+					<span class="posted-in"><b>Tienda: </b>{{ producto.shop.name }}</span>
+				</div>
+				<!-- <p class="mb-4"></p> -->
 
 				<div class="product-meta">
 					<span class="posted-in">Categories:
@@ -55,6 +78,8 @@
 						<a rel="tag" href="/productos/categorias/{{ producto.category.slug }}">{{ producto.category.name }}</a>
 					</span>
 				</div>
+				<p class="mb-4"></p>
+				<button class="btn btn-primary" style="width: 100%;background-color: #01b22c;border-color: #01b22c;">comparar en tienda</button>
 
 			</div>
 
