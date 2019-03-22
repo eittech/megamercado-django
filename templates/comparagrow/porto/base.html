@@ -97,14 +97,23 @@
 							<div class="header-column justify-content-end">
 								<div class="header-row">
 									{% if user.is_authenticated %}
-									<ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
-										<li class="" style="margin-right: 11px !important;">
-											<span class="pl-0" style="font-size: 16px;">
-												<i class="fas fa-cannabis text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Perfil</span>
+									<ul style="display: flex;list-style: none;">
+										<li class="dropdown" style="margin-right: 11px !important;cursor:pointer;">
+											<div class="dropdown">
+											<span class="pl-0" style="font-size: 16px;cursor:pointer;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fas fa-cannabis text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;cursor:pointer;"></i>Perfil</span>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="/profile">Mi perfil</a>
+									        <a class="dropdown-item" href="/logout">Cerrar sesion</a>
+												</div>
+												</div>
+
 										</li>
 										<li class="" style="margin-right: 11px !important;">
-											<span class="pl-0" style="font-size: 16px;">
+
+											<span class="pl-0" style="font-size: 16px;" >
 												<i class="fas fa-heart text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Favoritos</span>
+
 										</li>
 										<li class="" style="margin-right: 11px !important;">
 											<span class="pl-0" style="font-size: 16px;">

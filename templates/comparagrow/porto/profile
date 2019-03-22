@@ -1,0 +1,208 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+
+
+{% block cabecera %}
+
+{% endblock %}
+
+
+{% block content %}
+<!-- <section class="page-header page-header-classic" style="background:#01b22c;">
+	<div class="container">
+		<div class="row">
+			<div class="col p-static">
+				<h1 data-title-border>Mi perfil</h1>
+
+			</div>
+		</div>
+	</div>
+</section> -->
+<div class="container py-2">
+
+  <div class="row">
+    <div class="col-lg-3 mt-4 mt-lg-0">
+
+      <div class="d-flex justify-content-center mb-4">
+        <div class="profile-image-outer-container">
+          <div class="profile-image-inner-container bg-color-primary">
+            <img src="/media/{{ customer.image }}" id="image_customer">
+            <span class="profile-image-button bg-color-dark">
+              <i class="fas fa-camera text-light"></i>
+            </span>
+          </div>
+          <form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="">
+            {% csrf_token %}
+            <input type="file" id="image" name="image" class="profile-image-input">
+          </form>
+        </div>
+      </div>
+
+
+
+      <aside class="sidebar mt-2" id="sidebar">
+        <ul class="nav nav-list flex-column mb-5">
+          <li class="nav-item"><a class="nav-link text-dark active" href="#">Mi perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="/profile/change/pwd">Cambiar contraseña</a></li>
+        </ul>
+      </aside>
+
+    </div>
+    <div class="col-lg-9">
+
+      <div class="overflow-hidden mb-1">
+        <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">Mi</strong> Perfil</h2>
+      </div>
+      <div class="overflow-hidden mb-4 pb-3">
+        <p class="mb-0">Usa este formulario para editar la información de tu perfil.</p>
+      </div>
+
+      <form role="form" action="/profile" class="needs-validation" method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Username</label>
+              <div class="col-lg-9">
+                  <input class="form-control" name="username" required type="text" value="{{ user.username }}">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">First name</label>
+              <div class="col-lg-9">
+                  <input class="form-control" name="first_name" required type="text" value="{{ user.first_name }}">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Last name</label>
+              <div class="col-lg-9">
+                  <input class="form-control" name="last_name" required type="text" value="{{ user.last_name }}">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Email</label>
+              <div class="col-lg-9">
+                  <input class="form-control" required type="email" value="{{ user.email }}">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Fecha de Nacimiento</label>
+              <div class="col-lg-9">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-birthday-cake"></i></span>
+                  </div>
+
+                  <!--  -->
+                  <input name="birthday" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
+                </div>
+              </div>
+          </div>
+
+
+
+          <div class="form-group row">
+            <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Genero</label>
+            <div class="col-lg-9">
+              <div class="input-group">
+                <div class="form-check form-check-inline">
+                  {% if customer.gender == 'MA' %}
+                  <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="MA">
+                  {% else %}
+                  <input class="form-check-input" type="radio" name="gender" id="gender1" value="MA">
+                  {% endif %}
+                  <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  {% if customer.gender == 'FE' %}
+                  <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="FE">
+                  {% else %}
+                  <input class="form-check-input" type="radio" name="gender" id="gender1" value="FE">
+                  {% endif %}
+                  <label class="form-check-label" for="inlineRadio2">Femenino</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  {% if customer.gender == 'DS' %}
+                  <input class="form-check-input" checked type="radio" name="gender" id="gender1" value="DS">
+                  {% else %}
+                  <input class="form-check-input" type="radio" name="gender" id="gender1" value="DS">
+                  {% endif %}
+                  <label class="form-check-label" for="inlineRadio3">No binario</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+          <div class="form-group col-lg-9">
+
+          </div>
+          <div class="form-group col-lg-3">
+            <input type="submit" value="Guardar" class="btn btn-primary btn-modern float-right" data-loading-text="Loading...">
+          </div>
+          </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+$('#id_ajax_upload_form').submit(function(e){
+  e.preventDefault();
+  $form = $(this)
+  var formData = new FormData(this);
+  console.log(formData);
+  $.ajax({
+       url: '/dashboard/profile/upload/image',
+       type: 'POST',
+       data: formData,
+       success: function (response) {
+           $('.error').remove();
+           console.log(response)
+           if(response.error){
+               console.log('no cargo la imagen')
+           }
+           else{
+               img = '/media/'+response.image;
+               $("#image_customer").attr("src",img);
+           }
+       },
+       cache: false,
+       contentType: false,
+       processData: false
+   });
+});
+
+$("#image").change(function(e){
+   //submit the form here
+   console.log('paso')
+   $('#id_ajax_upload_form').submit();
+   // $.ajax({
+   //      url: window.location.pathname,
+   //      type: 'POST',
+   //      data: formData,
+   //      success: function (response) {
+   //          $('.error').remove();
+   //          console.log(response)
+   //          if(response.error){
+   //              $.each(response.errors, function(name, error){
+   //                  error = '<small class="text-muted error">' + error + '</small>'
+   //                  $form.find('[name=' + name + ']').after(error);
+   //              })
+   //          }
+   //          else{
+   //              alert(response.message)
+   //              window.location = ""
+   //          }
+   //      },
+   //      cache: false,
+   //      contentType: false,
+   //      processData: false
+   //  });
+ });
+</script>
+
+{% endblock %}

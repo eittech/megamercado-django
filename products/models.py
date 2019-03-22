@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 class Shop(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE,blank=True,null=True)
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
+    image = models.ImageField(upload_to="assets/shop/",blank=True,null=True)
     url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
     def __str__(self):
@@ -37,6 +38,7 @@ class Category(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,on_delete=models.CASCADE)
     slug = models.SlugField()
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
+    image = models.ImageField(upload_to="assets/category/",blank=True,null=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
     class MPTTMeta:
         order_insertion_by = ['name']

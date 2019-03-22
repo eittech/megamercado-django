@@ -35,13 +35,14 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
     dni_type = models.CharField(verbose_name="Tipo de Documento",max_length=20,choices=TYPE_DOCUMENT,blank=True)
+    image = models.ImageField(upload_to="assets/customer/",blank=True,null=True)
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
     firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
     address = models.ManyToManyField(AddressCustomer,blank=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
     def __str__(self):
-        return self.alias
+        return self.user.username
 
 
 class MailVerification(models.Model):
