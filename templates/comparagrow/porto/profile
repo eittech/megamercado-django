@@ -26,7 +26,11 @@
       <div class="d-flex justify-content-center mb-4">
         <div class="profile-image-outer-container">
           <div class="profile-image-inner-container bg-color-primary">
+            {% if customer.image %}
             <img src="/media/{{ customer.image }}" id="image_customer">
+            {% else %}
+            <img src="/static/porto/img/avatars/avatar.jpg" id="image_customer">
+            {% endif %}
             <span class="profile-image-button bg-color-dark">
               <i class="fas fa-camera text-light"></i>
             </span>
