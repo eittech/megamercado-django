@@ -109,9 +109,13 @@ def profile(request):
                     birthday = False
                 else:
                     customer.firts_date = birthday
-            user.save()
-            customer.save()
-        return render(request, 'comparagrow/cozastore/profile',{'user':user,'customer':customer})
+            try:
+                user.save()
+                customer.save()
+                customer = Customer.objects.get(user=user)
+            except:
+                print('error')
+        return render(request, 'comparagrow/porto/profile',{'user':user,'customer':customer})
     else:
         return redirect('/')
 
