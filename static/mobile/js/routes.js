@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 var routes = [
   // Index page
   {
@@ -14,8 +14,8 @@ var routes = [
   },
   // Profile page
   {
-    path: '/profile/',
-    url: './pages/profile.html',
+    path: '/profile',
+    url: './profile',
     name: 'profile',
   },
   // AD Detail
