@@ -19,6 +19,7 @@ from django.template.loader import render_to_string
 from products.models import *
 from customers.models import *
 from contracts.models import *
+from systems.models import *
 
 
 # Create your views here.
@@ -134,12 +135,15 @@ def home_blank(request):
     return render(request, 'comparagrow/index_blank.html', {'variable':variable})
 
 def login_front(request):
+    next = request.GET['next']
+    if next is None:
+        next = "/"
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return redirect('/')
+        return redirect(next)
     else:
         return redirect('/?error=not_access')
 
@@ -295,17 +299,112 @@ def quienesSomos(request):
     return render(request, 'comparagrow/quienes-somos.html')
 
 def contactanos(request):
-    return render(request, 'comparagrow/contactanos.html')
+    rsp = ""
+    if request.user.is_authenticated:
+        user = request.user
+        try:
+            email = user.email
+        except:
+            email = ""
+    else:
+        email = ""
+    if not request.POST :
+        rsp = ""
+    else:
+        contact = ContactMessage()
+        try:
+            if request.POST['name']:
+                contact.name = request.POST['name']
+            if request.POST['email']:
+                contact.email = request.POST['email']
+            if request.POST['subject']:
+                contact.subject = request.POST['subject']
+            if request.POST['message']:
+                contact.message = request.POST['message']
+            contact.save()
+            rsp = "exito"
+        except:
+            rsp = "error"
+
+    return render(request, 'comparagrow/contactanos.html',{"email":email,"rsp":rsp})
 
 def Faq(request):
     return render(request, 'comparagrow/Faq.html')
 
+def Sitemap(request):
+    return render(request, 'comparagrow/sitemap.html')
+
 def terminosCondiciones(request):
     return render(request, 'comparagrow/terminosCondiciones.html')
+
+def Clientes(request):
+    return render(request, 'comparagrow/clientes.html')
 
 def politicasPrivacidad(request):
     return render(request, 'comparagrow/politicasPrivacidad.html')
 
+def SuscribirExito(request):
+    return render(request, 'comparagrow/exito.html')
+
+def Publicidad(request):
+    return render(request, 'comparagrow/publicidad.html')
 
 def pricePlan(request):
     return render(request, 'comparagrow/price.html')
+
+def Suscribir(request):
+    if request.POST:
+        try:
+            if request.user.is_authenticated:
+                print('paso 1')
+                user = request.user
+                customer = Customer.objects.get(user=user)
+                if customer is not None:
+                    print('paso 12')
+
+                    addresscustomer = AddressCustomer()
+                    action = request.POST['action']
+                    city = request.POST['city']
+                    company = request.POST['company']
+                    address1 = request.POST['address1']
+                    phone = request.POST['phone']
+                    phone_mobile = request.POST['phone_mobile']
+                    alias = 'direccion ' + str(user.first_name)
+
+                    type = 'SUSCRIPTION'
+
+                    addresscustomer.alias = alias
+                    addresscustomer.type = type
+                    addresscustomer.company = company
+                    addresscustomer.address1 = address1
+                    addresscustomer.city = city
+                    addresscustomer.phone = phone
+                    addresscustomer.phone_mobile = phone_mobile
+
+                    addresscustomer.save()
+                    import datetime
+                    contracts = Contracts()
+                    contracts.customer = customer
+                    contracts.date_contract = datetime.date.today()
+                    contracts.total = 0
+                    if action == "plan":
+                        contracts.state = 'SUSCRIPTIONPLAN'
+                    if action == "publicidad":
+                        contracts.state = 'SUSCRIPTIONPUBLICIDAD'
+                    contracts.save()
+                    return redirect('/exito')
+                else:
+                    return redirect('/not_found')
+            else:
+                return redirect('/not_found')
+        except:
+            return redirect('/not_found')
+    else:
+        try:
+            action = request.GET['action']
+        except:
+            action = None
+        if action is None:
+            return redirect('/not_found')
+        else:
+            return render(request, 'comparagrow/suscribir.html',{'action':action})

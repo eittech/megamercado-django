@@ -18,3 +18,12 @@ class RegisterActivitySystem(models.Model):
     datet = models.DateTimeField(verbose_name="Fecha de Actividad",auto_now=True)
     def __str__(self):
         return self.type
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(verbose_name="Nombre",max_length=200,null=True, blank= True)
+    email = models.CharField(verbose_name="Email",max_length=200,null=True, blank= True)
+    subject = models.CharField(verbose_name="Asunto",max_length=200,null=True, blank= True)
+    message = models.TextField(verbose_name="Mensaje",null=True, blank= True)
+    def __str__(self):
+        return self.subject

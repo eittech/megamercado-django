@@ -18,9 +18,19 @@ urlpatterns = [
     path('quienes-somos', views.quienesSomos, name='login'),
     path('contactanos', views.contactanos, name='login'),
     path('faq', views.Faq, name='login'),
+    path('sitemap',views.Sitemap,name='sitemap'),
     path('terminos-condiciones', views.terminosCondiciones, name='login'),
+    path('clientes', views.Clientes, name='login'),
+
+    path('publicidad', views.Publicidad, name='login'),
+
+    path('suscribir', views.Suscribir, name='login'),
+
     path('politica-privacidad', views.politicasPrivacidad, name='login'),
     path('publicidad', views.pricePlan, name='priceplan'),
+    path('exito', views.SuscribirExito, name='priceplan'),
+
+
 
 
     #re_path(r'^validate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', views.activationuser),

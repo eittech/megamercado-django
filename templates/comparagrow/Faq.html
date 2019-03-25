@@ -1,45 +1,97 @@
-{% extends 'comparagrow/base_blank.html' %}
+{% extends 'comparagrow/porto/base.html' %}
 {% load static %}
-
+{% load menu_categorias %}
 {% block content %}
+
+<style>
+  html .toggle-primary .toggle.active > label{
+    background:#01b22c !important;
+    border-color: #672d93;
+  }
+
+  html .toggle-primary .toggle label{
+    color: #01b22c;
+    border-color: #672d93;
+  }
+</style>
 <div class="container">
+  <div class="row">
+    <div class="col">
 
-<div class="row justify-content-md-center" style="margin-top:40px;" >
-  <h5 style="font-weight:200;">FAQ</h5>
-  <br>
-  <br>
-</div>
-<div class="row justify-content-md-center" >
-  <p class="text-justify" style="font-weight:100;">Comparagrow vende estos productos directamente?
-Comparagrow trabaja directamente con los minoristas/tiendas para garantizar que su catálogo de productos, precios y disponibilidad se actualicen periódicamente para que tu experiencia en Comparagrow sea lo más valiosa posible. Cuando haces clic en el botón “Comprar ahora”, te redirigimos al sitio de la tienda que tiene el producto, de esta manera no vendemos ni enviamos ningún producto directamente.
+      <h2 class="font-weight-normal text-7 mb-2">Preguntas <strong class="font-weight-extra-bold">Frecuentes</strong></h2>
+      <p class="lead">
+        Te dejamos un listado de preguntas comunes, si tu duda no se menciona alli, usa el
+         <a href="/contactanos">formulario de contacto</a> trataremos de responder a la brevedad.
+       </p>
 
-Cómo compro?
+      <hr class="solid my-5">
 
-Cuando has encontrado el producto que buscabas en Comparagrow, y lo seleccionas para comprar, nosotros te redirigimos al sitio web del minorista/tienda en donde se encuentra tu producto, de manera que realices tu compra de manera segura.
-El minorista procesa tu pago, envía tu producto y maneja todas tus necesidades de “servicio al cliente”. Pero, no te preocupes, estamos aquí para ayudarte. Siempre puedes contactarnos para obtener información sobre pedidos o cualquier pregunta que puedas tener.
+      <div class="toggle toggle-primary" data-plugin-toggle>
+        <section class="toggle active">
+          <label>Comparagrow vende estos productos directamente?</label>
+          <p>Comparagrow trabaja directamente con los minoristas/tiendas para garantizar que su
+catálogo de productos, precios y disponibilidad se actualicen periódicamente para que
+tu experiencia en Comparagrow sea lo más valiosa posible. Cuando haces clic en el
+botón “Comprar ahora”, te redirigimos al sitio de la tienda que tiene el producto, de
+esta manera no vendemos ni enviamos ningún producto directamente.</P>
+        </section>
 
-Tengo una pregunta sobre mi compra!
+        <section class="toggle">
+          <label>Cómo compro?</label>
+          <p>Cuando has encontrado el producto que buscabas en Comparagrow, y lo seleccionas
+para comprar, nosotros te redirigimos al sitio web del minorista/tienda en donde se
+encuentra tu producto, de manera que realices tu compra de manera segura.
+El minorista procesa tu pago, envía tu producto y maneja todas tus necesidades de
+“servicio al cliente”. Pero, no te preocupes, estamos aquí para ayudarte. Siempre
+puedes contactarnos para obtener información sobre pedidos o cualquier pregunta
+que puedas tener.</p>
+        </section>
 
-Comparagrow es un motor de búsqueda de Growshops que conecta a los compradores con los minoristas/tiendas que venden los productos directamente. Una vez que haz hecho clic en un producto para comprar a través de Comparagrow, serás redirigido al minorista/tienda que maneja la transacción, el envío y las devoluciones.
+        <section class="toggle">
+          <label>Tengo una pregunta sobre mi compra!</label>
+          <p>
+            Comparagrow es un motor de búsqueda de Growshops que conecta a los
+compradores con los minoristas/tiendas que venden los productos directamente. Una
+vez que haz hecho clic en un producto para comprar a través de Comparagrow, serás
+redirigido al minorista/tienda que maneja la transacción, el envío y las devoluciones.
+<br>
+Te recomendamos encarecidamente que te pongas en contacto con el
+minorista/tienda al que le compraste directamente.
+          </p>
+        </section>
 
-Te recomendamos encarecidamente que te pongas en contacto con el minorista/tienda al que le compraste directamente.
+        <section class="toggle">
+          <label>Cómo puedo saber dónde compré?</label>
+          <p>Revisa la carpeta de correo no deseado y spam de tu correo electrónico para un recibo
+electrónico.<br>
+Verifica el resumen de facturación de tu banco / tarjeta de crédito para ver cómo
+encontrar al minorista.</p>
+        </section>
 
-¿Cómo puedo saber dónde compré?
+        <section class="toggle">
+          <label>Tengo una pregunta sobre devoluciones/cambios.</label>
+          <p>Lamentamos escuchar que no funcionó! Ya que Comparagrow no vende ni envía
+productos directamente, no tenemos información sobre tu compra. Sin embargo,
+puedes comunicarte directamente con el minorista/tienda y ellos trabajarán para
+satisfacer tu solucitud.</p>
+        </section>
 
-Revisa la carpeta de correo no deseado y spam de tu correo electrónico para un recibo electrónico.
-Verifica el resumen de facturación de tu banco / tarjeta de crédito para ver cómo encontrar al minorista.
+        <section class="toggle">
+          <label>¿Por qué el precio no coincide con el precio actual del minorista/tienda?</label>
+          <p>Lamentamos que haya habido una discrepancia entre el precio que ves en
+Comparagrow y el precio en el sitio web del minorista/tienda. Es nuestra principal
+prioridad garantizar que todos los productos en Comparagrow estén sincronizados con
+nuestros minoristas/tiendas destacados, por lo que estamos trabajando para
+mejorarlo todos los días. Desafortunadamente, dado que Comparagrow no vende
+ninguno de los productos que se muestran en nuestro sitio, no podemos ofrecer
+descuentos en ningún producto.</p>
+        </section>
+      </div>
 
-Tengo una pregunta sobre devoluciones/cambios.
-Lamentamos escuchar que no funcionó! Ya que Comparagrow no vende ni envía productos directamente, no tenemos información sobre tu compra. Sin embargo, puedes comunicarte directamente con el minorista/tienda y ellos trabajarán para satisfacer tu solucitud.
+    </div>
 
-¿Por qué el precio no coincide con el precio actual del minorista/tienda?
-Lamentamos que haya habido una discrepancia entre el precio que ves en Comparagrow y el precio en el sitio web del minorista/tienda. Es nuestra principal prioridad garantizar que todos los productos en Comparagrow estén sincronizados con nuestros minoristas/tiendas destacados, por lo que estamos trabajando para mejorarlo todos los días. Desafortunadamente, dado que Comparagrow no vende ninguno de los productos que se muestran en nuestro sitio, no podemos ofrecer descuentos en ningún producto.
+  </div>
 
-</p>
-</div>
-</div>
-<div class="row justify-content-md-center fixed-bottom" style="margin-left:20px; margin-right:20px;">
-  <p class="justify-content-md-center text-center"><small>Al ingresar a esta url, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio y Política de privacidad</a>. Derechos reservados ComparaGrow.cl</small></p>
 </div>
 <!-- <nav class="navbar fixed-bottom navbar-light bg-light">
   <a class="navbar-brand" href="#">Fixed bottom</a>

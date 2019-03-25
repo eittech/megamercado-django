@@ -11,6 +11,9 @@ class Contracts(models.Model):
         ('ORDEN', 'ORDEN'),
         ('PAYMENT', 'PAGADO'),
         ('DELETE', 'ELIMINADO'),
+        ('SUSCRIPTIONPLAN', 'SOLICITUD DE SUSCRIPCION DE PLAN'),
+        ('SUSCRIPTIONPUBLICIDAD', 'SOLICITUD DE SUSCRIPCION DE PUBLICIDAD'),
+
     )
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
     #services = models.ManyToManyField(ServiceContract)
@@ -18,7 +21,7 @@ class Contracts(models.Model):
     total = models.FloatField()
     state = models.CharField(verbose_name="Estado del Contrato",max_length=20,choices=STATE_CONTRACT)
     def __str__(self):
-        return self.customer.alias
+        return "contrato #" + str(self.id)
 
 class ServiceContract(models.Model):
     contract = models.ForeignKey(Contracts,on_delete=models.CASCADE,blank=True)

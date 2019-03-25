@@ -1,0 +1,109 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% block content %}
+
+<style>
+  html .toggle-primary .toggle.active > label{
+    background:#01b22c !important;
+    border-color: #672d93;
+  }
+
+  html .toggle-primary .toggle label{
+    color: #01b22c;
+    border-color: #672d93;
+  }
+</style>
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-md-12 align-self-center p-static order-2 text-center">
+
+								<h1 class="text-dark text-dark text-10"><strong>Mapa del Sitio</strong></h1>
+<span class="sub-title text-dark">Listado de Paginas</span>
+							</div>
+						</div>
+					</div>
+				</section>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+        <ul style="list-style: none;">
+          <li><i class="far fa-file"></i> Footer
+              <ul style="list-style: none;">
+                <li><i class="far fa-file"></i> <a  href="/quienes-somos" style="    font-weight: 500;
+letter-spacing: 1px;">Qienes Somos</a></li>
+                <li><i class="far fa-file"></i> <a  href="/contactanos" style="    font-weight: 500;
+letter-spacing: 1px;">contactanos</a></li>
+                <li><i class="far fa-file"></i> <a  href="/faq" style="    font-weight: 500;
+letter-spacing: 1px;">FAQ</a></li>
+                <li><i class="far fa-file"></i> <a  href="/sitemap" style="    font-weight: 500;
+letter-spacing: 1px;">Mapa del Sitio</a></li>
+                <li><i class="far fa-file"></i> <a  href="/terminos-condiciones" style="    font-weight: 500;
+letter-spacing: 1px;">Terminos y condiciones</a></li>
+                <!-- <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">Politicas de Privacidad</a></li> -->
+                <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">Conviértete en Cliente</a></li>
+                <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">Blog</a></li>
+                <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">Data</a></li>
+                <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">Publicidad</a></li>
+
+              </ul>
+          </li>
+        </ul>
+    </div>
+    <div class="col-6">
+      <ul style="list-style: none;">
+        <li><i class="far fa-file"></i> Header
+      <ul style="list-style: none;">
+        {% listado as listado_producto %}
+          {% for genre,structure in listado_producto|tree_info %}
+              {% if genre.level == 0 %}
+              <li >
+                <i class="far fa-file"></i> <a  href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">
+                  {{ genre.name }}
+                </a>
+                {% for item1 in genre.slug|menulevelone:"1" %}
+                  {% if forloop.first %}
+                    <ul style="list-style: none;">
+                      <li>
+                  {% endif %}
+                            <i class="far fa-file"></i> <a class="" style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }}</a>
+                            <ul style="list-style: none;">
+                              {% for item2 in item1.slug|menulevelone:"2" %}
+                              <li><i class="far fa-file"></i> <a  href="/productos/categorias/{{ item2.slug }}">{{ item2.name }}</a></li>
+                              {% endfor %}
+                            </ul>
+
+                    {% if forloop.last %}
+                      </li>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+
+              </li>
+              {% endif %}
+          {% endfor %}
+      </ul>
+      </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+<!-- <nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" href="#">Fixed bottom</a>
+</nav> -->
+
+{% endblock %}
+{% block scriptb %}
+
+{% endblock %}

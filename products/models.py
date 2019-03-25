@@ -2,7 +2,9 @@ from django.db import models
 from customers.models import Customer
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
-
+import datetime
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # from tagging.registry import register
 
 # from dynamic_scraper.models import Scraper, SchedulerRuntime
@@ -125,3 +127,41 @@ class ProductAttributes(models.Model):
     class Meta:
         verbose_name = "Datelle de Atributos de Productos"
         unique_together = ('product','attributes')
+
+class HistoryPrice(models.Model):
+    product= models.ForeignKey(Product,on_delete=models.CASCADE)
+    date_update = models.DateField(verbose_name="Fecha de la Factura",auto_now=True,blank=True, null= True)
+    total = models.FloatField()
+
+@receiver(post_save, sender=Product, dispatch_uid="update_history_price")
+def update_history_price(sender, instance, **kwargs):
+    actualizar = False
+    try:
+        history = HistoryPrice.objects.filter(product=instance).order_by('date_update').first()
+        print(history)
+        if history is not None:
+            if history.total != instance.total:
+                print("if 1")
+                actualizar = True
+            else:
+                print("if 2")
+                actualizar = False
+                #no actualizamos
+        else:
+            print("if 3")
+            actualizar = True
+            #actualizamos
+    except:
+        print("if 4")
+        actualizar = False
+    try:
+        if actualizar:
+            history = HistoryPrice()
+            history.product =instance
+            history.total = instance.total
+            history.save()
+            print("save exitoso")
+        else:
+            print("no se pudo procesar 2")
+    except:
+        print("no se pudo procesar")

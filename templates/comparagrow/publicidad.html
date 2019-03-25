@@ -1,0 +1,140 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+{% load menu_categorias %}
+{% block content %}
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-md-12 align-self-center p-static order-2 text-center">
+
+								<h1 class="text-dark text-dark text-10"><strong>Publicidad</strong></h1>
+<span class="sub-title text-dark">Listado de Planes</span>
+							</div>
+						</div>
+					</div>
+				</section>
+<div class="container">
+  <div class="row mb-4">
+    <div class="col">
+      <h4 class="mb-2">CARRUSELES</h4>
+    </div>
+  </div>
+
+  <div class="pricing-table pricing-table-no-gap mb-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="plan">
+        <div class="plan-header">
+          <h3>INICIO</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price" style="    font-size: 23px;"><span class="price-unit">$</span>40.000</span>
+          <label class="price-label">POR MES</label>
+        </div>
+        <div class="plan-features">
+          <!-- <ul>
+            <li>10GB Disk Space</li>
+            <li>100GB Monthly Bandwith</li>
+            <li>20 Email Accounts</li>
+            <li>Unlimited Subdomains</li>
+          </ul> -->
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a href="/suscribir?action=publicidad" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
+          {% else %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="plan">
+        <div class="plan-header">
+          <h3>DESTACADOS</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price"><span class="price-unit">$</span>30.000</span>
+          <label class="price-label">POR MES</label>
+        </div>
+        <div class="plan-features">
+          <!-- <ul>
+            <li>5GB Disk Space</li>
+            <li>50GB Monthly Bandwith</li>
+            <li>10 Email Accounts</li>
+            <li>Unlimited Subdomains</li>
+          </ul> -->
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a href="/suscribir?action=publicidad" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
+          {% else %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="plan plan-featured">
+        <div class="plan-header" style="background: #672d93;">
+          <h3>ARMA TU GROW</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price"><span class="price-unit">$</span>20.000</span>
+          <label class="price-label">POR MES</label>
+        </div>
+        <div class="plan-features">
+          <!-- <ul>
+            <li>3GB Disk Space</li>
+            <li>25GB Monthly Bandwith</li>
+            <li>5 Email Accounts</li>
+            <li>Unlimited Subdomains</li>
+          </ul> -->
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a href="/suscribir?action=publicidad" class="btn btn-primary btn-modern py-2 px-4" style="background: #672d93;border-color:#672d93;color:#fff;">SUSCRIBIR</a>
+          {% else %}
+          <a class="btn btn-primary btn-modern py-2 px-4" style="background: #672d93;border-color:#672d93;color:#fff;" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="plan">
+        <div class="plan-header">
+          <h3>ULTIMAS REBAJAS</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price"><span class="price-unit">$</span>10.000</span>
+          <label class="price-label">POR MES</label>
+        </div>
+        <div class="plan-features">
+          <!-- <ul>
+            <li>1GB Disk Space</li>
+            <li>10GB Monthly Bandwith</li>
+            <li>2 Email Accounts</li>
+            <li>Unlimited Subdomains</li>
+          </ul> -->
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" href="/suscribir?action=publicidad">SUSCRIBIR</a>
+
+          {% else %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" href="#">Fixed bottom</a>
+</nav> -->
+
+{% endblock %}
+{% block scriptb %}
+
+{% endblock %}

@@ -33,7 +33,10 @@ class CategoryAdmin(DraggableMPTTAdmin):
 class ShopAdmin(admin.ModelAdmin):
     list_display = ('name', 'num_products','num_products_category','num_products_category_null')
 
+class HistoryPriceAdmin(admin.ModelAdmin):
+    list_display = ('product', 'date_update','total')
 
+admin.site.register(HistoryPrice,HistoryPriceAdmin)
 admin.site.register(Shop,ShopAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Product,ProductAdmin)

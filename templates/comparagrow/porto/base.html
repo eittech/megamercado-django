@@ -100,7 +100,7 @@
 									<ul style="display: flex;list-style: none;">
 										<li class="dropdown" style="margin-right: 11px !important;cursor:pointer;">
 											<div class="dropdown">
-											<span class="pl-0" style="font-size: 16px;cursor:pointer;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="pl-0" style="font-size: 16px;cursor:pointer;color: #672d93;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												<i class="fas fa-cannabis text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;cursor:pointer;"></i>Perfil</span>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<a class="dropdown-item" href="/profile">Mi perfil</a>
@@ -112,45 +112,21 @@
 										<li class="" style="margin-right: 11px !important;">
 
 											<span class="pl-0" style="font-size: 16px;" >
-												<i class="fas fa-heart text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Favoritos</span>
+												<a href="/productos/favoritos/" style="text-decoration:none;color: #777;color: #672d93;">
+												<i class="fas fa-heart text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Favoritos
+												</a>
+												</span>
 
 										</li>
 										<li class="" style="margin-right: 11px !important;">
-											<span class="pl-0" style="font-size: 16px;">
-												<i class="fas fa-bell text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Alertas</span>
+											<span class="pl-0" style="font-size: 16px;color: #672d93;">
+												<i class="fas fa-bell text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>
+												Alertas
+												<span class="tip tip-secondary">1</span>
+											</span>
+
 										</li>
 									</ul>
-
-
-									<!-- <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
-										<li class="social-icons-linkedin">
-											<h2 class="word-rotator slide mb-2">
-												<span class="word-rotator-words bg-primary">
-													<b class="is-visible">PERFIL</b>
-													<b>PERFIL</b>
-													<b>PERFIL</b>
-												</span>
-											</h2>
-										</li>
-										<li class="social-icons-linkedin">
-											<h2 class="word-rotator slide mb-2">
-												<span class="word-rotator-words bg-primary">
-													<b class="is-visible">FAVORITOS</b>
-													<b>FAVORITOS</b>
-													<b>FAVORITOS</b>
-												</span>
-											</h2>
-										</li>
-										<li class="social-icons-linkedin">
-											<h2 class="word-rotator slide mb-2">
-												<span class="word-rotator-words bg-primary">
-													<b class="is-visible">ALERTAS</b>
-													<b>ALERTAS</b>
-													<b>ALERTAS</b>
-												</span>
-											</h2>
-										</li>
-									</ul> -->
 
 				          {% else %}
 									<h2 class="word-rotator clip is-full-width mb-2">
@@ -272,43 +248,43 @@
 							<h5 class="text-3 mb-3">INFORMACION</h5>
 							<ul class="list-unstyled mb-0">
 								<li class="mb-3">
-									<a href="#">
+									<a href="/quienes-somos">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Quienes Somos</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
-									<a href="#">
+									<a href="/contactanos">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Contactanos</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
-									<a href="#">
+									<a href="/faq">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">FAQ</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
-									<a href="#">
+									<a href="/sitemap">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Mapa del Sitio</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
-									<a href="#">
+									<a href="/terminos-condiciones">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Terminos y Condiciones</strong></p>
 									</a>
 								</li>
-								<li class="mb-3">
+								<!-- <li class="mb-3">
 									<a href="#">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Politica de Privacida</strong></p>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
 							<h5 class="text-3 mb-3">GRUPO PAZ VERDE</h5>
 							<ul class="list-unstyled mb-0">
 								<li class="mb-3">
-									<a href="#">
-										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Trabajemos Juntos</strong></p>
+									<a href="/clientes">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Conviértete en Cliente</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
@@ -322,7 +298,7 @@
 									</a>
 								</li>
 								<li class="mb-3">
-									<a href="#">
+									<a href="/publicidad">
 										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Publicidad</strong></p>
 									</a>
 								</li>
@@ -331,9 +307,9 @@
 						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
 							<h5 class="text-3 mb-3">CONÉCTATE</h5>
 							<ul class="footer-social-icons social-icons social-icons-clean social-icons-big social-icons-opacity-light social-icons-icon-light mt-1">
-								<li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-								<li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-								<li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+								<li class="social-icons-facebook"><a href="http://www.facebook.com/comparagrow" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+								<li class="social-icons-twitter"><a href="http://www.twitter.com/comparagrow" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+								<li class="social-icons-instagram"><a href="http://www.instagram.com/ComparaGrow" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
 							</ul>
 						</div>
 						<div class="col-md-6 col-lg-6">

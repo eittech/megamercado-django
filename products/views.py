@@ -385,10 +385,12 @@ def detalle_product(request,id):
         producto = Product.objects.get(pk=id)
         producto_image = ProductImage.objects.filter(product=producto)
         producto_attr = ProductAttributes.objects.filter(product=producto)
+        history = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:5]
+        history_datail = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:100]
     except:
         producto = None
     if producto is not None:
-        return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr})
+        return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})
     else:
         return redirect('/error')
 

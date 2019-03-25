@@ -1,30 +1,85 @@
-{% extends 'comparagrow/base_blank.html' %}
+{% extends 'comparagrow/porto/base.html' %}
 {% load static %}
-
+{% load menu_categorias %}
 {% block content %}
 <div class="container">
+  <div class="row pt-5">
+    <div class="col">
+      <div class="row text-center pb-5">
+        <div class="col-md-9 mx-md-auto">
+          <div class="overflow-hidden mb-3">
+            <h1 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
+              <span>Quienes Somos, </span>
+              <span class="word-rotator-words" style="background:#01b22c;color:#fff;">
+                <b class="is-visible"> un comparador</b>
+                <b> un buscador</b>
+              </span>
+              <span>, Somos una solución</span>
+            </h1>
+          </div>
+          <div class="overflow-hidden mb-3">
+            <p class="lead mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="200">
+              Somos el único comparador de Growshops de Chile, que a través de nuestro servicio gratuito, te ayudamos a ahorrar <b>tiempo y dinero </b>
+              al permitirte buscar entre cientos de sitios webs el producto exacto que buscas en un mismo lugar. Nuestra tecnología de punta permite
+              tener una experiencia de búsqueda sin igual.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <section class="section border-0 mb-0 appear-animation animated fadeIn appear-animation-visible"
+      data-appear-animation="fadeIn" data-plugin-options="{'accY': -150}" style="animation-delay: 100ms;background: #01b22c;">
+					<div class="container">
+						<div class="row counters counters-sm pb-4 pt-3">
+							<div class="col-sm-6 col-lg-4 mb-5 mb-lg-0">
+								<div class="counter">
+									<i class="fas fa-cannabis text-color-light"></i>
+									<strong class="text-color-light font-weight-extra-bold" data-to="{{ "productos"|tiendascount }}" data-append="+">{{ "productos"|tiendascount }}+</strong>
+									<label class="text-4 mt-1 text-color-light">Productos</label>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-5 mb-lg-0">
+								<div class="counter">
+									<i class="icons icon-badge text-color-light"></i>
+									<strong class="text-color-light font-weight-extra-bold" data-to="{{ "tiendas"|tiendascount }}" data-append="+">{{ "tiendas"|tiendascount }}+</strong>
+									<label class="text-4 mt-1 text-color-light">Tiendas</label>
+								</div>
+							</div>
+							<div class="col-sm-6 col-lg-4 mb-5 mb-sm-0">
+								<div class="counter">
+									<i class="icons icon-graph text-color-light"></i>
+									<strong class="text-color-light font-weight-extra-bold" data-to="{{ "categorias"|tiendascount }}" data-append="+">{{ "categorias"|tiendascount }}+</strong>
+									<label class="text-4 mt-1 text-color-light">Categorias</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 
-<div class="row justify-content-md-center" style="margin-top:40px;" >
-  <h5 style="font-weight:200;">Quienes Somos</h5>
-  <br>
-  <br>
-</div>
-<div class="row justify-content-md-center" >
-  <p class="text-justify" style="font-weight:100;">Somos el único comparador de Growshops de Chile, que a través de nuestro servicio gratuito, te ayudamos a ahorrar tiempo y dinero al permitirte buscar entre cientos de sitios webs el producto exacto que buscas en un mismo lugar.
-Nuestra tecnología de punta permite tener una experiencia de búsqueda sin igual.<br><br>
-En Comparagrow, puedes buscar miles de productos de manera rápida y simple, permitiéndote seleccionar tus productos favoritos y alertar cuando ellos han bajado su precio, entre otros servicios que podrás disponer en nuestro sitio. <br><br>
-Creemos en la libre y sana competencia, ya que creememos que es uno de los pilares fundamentales para que las empresas mejoren sus productos y servicios, dandole la importancia que merece a nuestros usuarios. <br><br>
-Nos interesa además, contribuir en dar la oportunidad a que pequeñas empresas emerjan y puedan lograr posicionarse en el mercado así como las grandes empresas que ya se encuentran en el rubro. Algunas de las tantas ventajas de pertenecer a Comparagrow, es el ahorro de costos por infraestructura web, posicionamiento (seo), publicidad online, sinergías con productos de otros vendedores, etc. Pero, lo más importante es que nuestros Clientes (empresas), puedan ser encontrados en las búsquedas que realizan nuestros usuarios en nuestra sitio web.
-</p>
-</div>
-</div>
-<div class="row justify-content-md-center fixed-bottom" style="margin-left:20px; margin-right:20px;">
-  <p class="justify-content-md-center text-center"><small>Al ingresar a esta url, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio y Política de privacidad</a>. Derechos reservados ComparaGrow.cl</small></p>
-</div>
-<!-- <nav class="navbar fixed-bottom navbar-light bg-light">
-  <a class="navbar-brand" href="#">Fixed bottom</a>
-</nav> -->
-
+        <div class="container">
+          <div class="row pt-5">
+            <div class="col">
+              <div class="row text-center pb-5">
+                <div class="col-md-9 mx-md-auto">
+                  <div class="overflow-hidden mb-3">
+                    <p class="lead mb-0 appear-animation text-justify" data-appear-animation="maskUp" data-appear-animation-delay="200">
+                      En Comparagrow, puedes buscar miles de productos de manera rápida y simple, permitiéndote seleccionar tus productos favoritos y alertar
+                       cuando ellos han bajado su precio, entre otros servicios que podrás disponer en nuestro sitio. <br><br>
+                      Creemos en la libre y sana competencia, ya que creememos que es uno de los pilares fundamentales para que las empresas mejoren sus productos
+                       y servicios, dandole la importancia que merece a nuestros usuarios. <br><br>
+                      Nos interesa además, contribuir en dar la oportunidad a que pequeñas empresas emerjan y puedan lograr posicionarse en el mercado así como las
+                      grandes empresas que ya se encuentran en el rubro. Algunas de las tantas ventajas de pertenecer a Comparagrow, es el ahorro de costos por
+                      infraestructura web, posicionamiento (seo), publicidad online, sinergías con productos de otros vendedores, etc. Pero, lo más importante
+                      es que nuestros Clientes (empresas), puedan ser encontrados en las búsquedas que realizan nuestros usuarios en nuestra sitio web.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 {% endblock %}
 {% block scriptb %}
 

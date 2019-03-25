@@ -8,6 +8,7 @@ class AddressCustomer(models.Model):
         ('INVOICE', 'Facturacion'),
         ('DELIVERY', 'Entrega'),
         ('HOME', 'DOMICILIO'),
+        ('SUSCRIPTION', 'SOLICITUD DE SUSCRIPCION'),
     )
     alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
     type = models.CharField(verbose_name="Tipo de Direccion",max_length=20,choices=TYPE_ADDRESS,blank=True)

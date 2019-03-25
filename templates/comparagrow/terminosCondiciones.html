@@ -1,17 +1,392 @@
-{% extends 'comparagrow/base_blank.html' %}
+{% extends 'comparagrow/porto/base.html' %}
 {% load static %}
-
+{% load mptt_tags %}
+{% load menu_categorias %}
 {% block content %}
-<div class="container-fluid">
-<div class="row justify-content-md-center">
-  <img src="/static/img/loading.gif" alt="">
-</div>
-<div class="row justify-content-md-center" >
-  <p>Te estamos redirigiendo al sitio web de <b>{{ producto.shop.name }}</b></p>
-</div>
-</div>
-<div class="row justify-content-md-center fixed-bottom" style="margin-left:20px; margin-right:20px;">
-  <p class="justify-content-md-center text-center"><small>Al ingresar a esta url, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio y Política de privacidad</a>. Derechos reservados ComparaGrow.cl</small></p>
+<div class="container">
+  <h1>Términos y Condiciones.</h1>
+
+  <p class="drop-caps text-justify">
+  Comparagrow, a través de sus sitios webs www.comparagrow.cl y www.comparagrow.com,
+  provee al Usuario un servicio gratuito de comparación de precios de diversos productos
+  obtenidos desde páginas web de tiendas Growshops o provistos por diversas Empresas
+  Ecommerce, de modo de permitir al Usuario optar por un producto que satisfaga sus
+  necesidades.
+  </p>
+
+  <p class="text-justify">
+  AL ACCEDER Y UTILIZAR ESTE SERVICIO, USTED ACEPTA Y ACCEDE A ESTAR OBLIGADO
+  POR LOS TÉRMINOS Y DISPOSICIONES DE ESTE ACUERDO. ASIMISMO, AL UTILIZAR
+  ESTOS SERVICIOS PARTICULARES, USTED ESTARÁ SUJETO A TODA REGLA O GUÍA DE USO
+  CORRESPONDIENTE QUE SE HAYA PUBLICADO PARA DICHOS SERVICIOS. TODA
+  PARTICIPACIÓN EN ESTE SERVICIO CONSTITUIRÁ LA ACEPTACIÓN DE ESTE ACUERDO. SI
+  NO ACEPTA CUMPLIR CON LO ANTERIOR, POR FAVOR, NO UTILICE ESTE SERVICIO.
+  Comparagrow y sus componentes se ofrecen únicamente con fines informativos; esta página no
+  se hace responsable de la exactitud, utilidad o disponibilidad de cualquier información que se
+  transmita o ponga a disposición a través de la misma; no será responsable por cualquier error u
+  omisión en dicha información.
+  </p>
+  <ul style="list-style: none;" class="text-justify">
+  <li>
+  <p><h4>1. Política de Seguridad.</h4>
+  Toda la información almacenada por Comparagrow se guarda en servidores protegidos por
+  estrictas medidas de seguridad.
+  <p>
+  <ul style="list-style: none;" class="text-justify">
+  <li>
+  <p class="text-justify"><h5>a) Registro de Cuenta.</h5>
+  El Usuario podrá acceder al servicio gratuito de comparación de precios de productos que
+  ofrece “Comparagrow”, con beneficios únicos así como tener información de sus últimas
+  búsquedas, seguimiento de Favoritos, etc, mediante el registro en www.comparagrow.cl o
+  acceder a través de Facebook o Google. Los datos confiados en dicho registro se encontrarán
+  debidamente resguardados y reservados según lo establecido en el presente documento.
+  </p>
+  </li>
+  <li>
+  <p class="text-justify"><h5>b) Declaraciones del Usuario. Usos Prohibidos.</h5>
+  El Usuario reconoce y acepta que Comparagrow no es responsable por la disponibilidad y/o
+  contenidos de los sitios web de terceros cuyos enlaces (links) se publican en Comparagrow.
+  Tampoco será responsable por cualquier modificación realizada en los contenidos de tales
+  sitios o por sus políticas de privacidad, términos de contratación, etc. El Usuario reconoce que
+  el hecho de publicar un enlace a un sitio de un tercero no significa que Comparagrow
+  recomiende, sugiera, avale o brinde ningún tipo de garantías sobre los contenidos o los bienes
+  y/o servicios ofrecidos por medio de ese sitio, por lo que en ningún caso será responsable por
+  pérdidas o daños ocasionados con motivo de transacciones realizadas con alguno de esos
+  sitios.
+  </p>
+  </li>
+  <li>
+  <p class="text-justify"><h5>c) Violaciones del Sistema o Bases de Datos. Sistema de Monitoreo.</h5>
+  No está permitida ninguna acción o uso de dispositivo, software, u otro medio tendiente a
+  interferir tanto en las actividades y operatoria de Comparagrow como en las cuentas o bases
+  de datos de Comparagrow. Cualquier intromisión, tentativa o actividad violatoria o contraria a
+  las leyes sobre derecho de propiedad intelectual y/o a las prohibiciones estipuladas en este
+  contrato darán lugar a las acciones legales pertinentes, y a las sanciones previstas por este
+  acuerdo y harán al infractor responsable de indemnizar los daños ocasionados.
+  </p>
+  </li>
+  <li>
+  <p class="text-justify"><h5>d) Propiedad Intelectual.</h5>
+  Los programas, así como las bases de datos, redes, archivos que permiten al Usuario usar
+  Comparagrow, son de propiedad de Paz Verde SpA y se encuentran protegidos por las leyes y
+  tratados internacionales de derecho de autor, marcas, patentes, modelos y diseños
+  industriales. El uso indebido y la reproducción total o parcial de los mismos queda prohibido,
+  salvo autorización expresa y por escrito de Paz Verde SpA. A mayor abundamiento, se prohíbe
+  expresamente al Usuario, en relación al sitio web: i) Utilizarlo para fines diversos de los
+  establecidos en los Términos y Condiciones y en las políticas de Comparagrow; ii) Realizar
+  adaptación o modificación alguna al sitio web que pudiere alterar el uso y/o funcionamiento
+  para el cual ha sido concebido y que se encuentra expresado en estos Términos y Condiciones
+  o realizar obras derivadas del mismo; y iii) Realizar pruebas de &quot;black-box&quot;, practicar
+  ingeniería inversa o descompilación o valerse de cualquier método o técnica para acceder al
+  código fuente o a elementos de Comparagrow.
+  </p>
+  </li>
+  <li>
+  <p class="text-justify"><h5>e) Liberación de Responsabilidad.</h5>
+  El Usuario defenderá e indemnizará a Comparagrow y a sus empleados y agentes con respecto
+  a cualquier demanda, sentencias condenatorias, multas, reclamos, sanciones, embargos, y
+  medidas precautorias que pudieran derivar de: i) Incumplimientos por parte del Usuario de las
+  leyes de propiedad intelectual e industrial en relación al uso del programa computacional y
+  equipos necesarios para el funcionamiento del Portal y los Servicios; ii) Todo perjuicio
+  ocasionado a las Compañías o terceros, proveniente de toda culpa o negligencia imputable al
+  mismo; y iii) Por su incumplimiento a los Términos y Condiciones y demás políticas de
+  Comparagrow que se entienden incorporadas al presente instrumento o por la violación de
+  cualquier legislación vigente, relativa a estas materias o derechos de terceros. Comparagrow
+  no tiene responsabilidad alguna en lo relativo a la veracidad o suficiencia de la información
+  publicada, siendo responsabilidad del usuario chequear su contenido directamente con el
+  comercio. Comparagrow se compromete a hacer el mayor de los esfuerzos para
+  corregir/actualizar cuanto antes las diferencias que pudiera haber en los precios de los
+  productos. Comparagrow no es el titular de los sitios web de las tiendas en los cuales se
+  ofrecen los productos, ni es el propietario de ninguno de los bienes y/o servicios que se
+  ofrecen por medio de los mismos. Los usuarios son responsables exclusivos por las
+  transacciones que celebren con cualquiera de los terceros cuyos sitios aparecen publicados en
+  la plataforma de Comparagrow, como también en cualquier otro de sus canales, y
+  expresamente reconocen que:</p>
+  <ul style="list-style: none;" class="text-justify">
+    <li>a) Comparagrow no es parte de ninguna transacción celebrada
+  entre el usuario y alguno de los sitios cuyos enlaces se publican en este Sitio o con cualquier
+  otro tercero.
+  </li><li>b) No determina ni establece el precio, condiciones de entrega y de seguridad,
+  calidad, legalidad o cualquier otra especificación o término de comercialización de los bienes
+  y/o servicios de los terceros cuyos enlaces se publican en este sitio/tienda.
+  </li><li>c) No brinda
+  ningún tipo de garantía sobre los bienes y/o servicios comercializados por terceros.
+  </li><li>d) Comparagrow no será responsable ni podrá ser responsabilizado por las pérdidas o daños
+  derivados de las transacciones celebradas con terceros o derivado de la presencia de tales
+  servicios o bienes de terceros en este sitio/tienda. Los Usuarios expresamente liberan a
+  Comparagrow de toda responsabilidad que pudiera surgir con motivo de un conflicto en una
+  transacción celebrada entre el Usuario y un tercero. La correspondencia o transacciones de
+  negocios o la participación en promociones por quienes anuncian sus bienes y/o servicios a
+  través del sitio la plataforma Comparagrow, sus otros canales, u otros proveedores
+  encontrados a través de éste sitio/canal incluyendo pagos y entregas de bienes y servicios
+  relacionados y cualquier otro término, condición, garantía o representación relacionados con
+  tales transacciones, son responsabilidad exclusiva del Usuario.
+  </li>
+  </ul>
+  </li>
+  <li>
+  <p class="text-justify"><h5>f) Licencia Limitada.</h5>
+  Todos los derechos de propiedad intelectual e industrial y cualquier otro de similar naturaleza,
+  sobre el sitio web, sus funcionalidades, códigos, desarrollos, software, hardware, dominio,
+  logos, emblemas, logotipos, diseños, estructura, contenidos, información, entre otros, son de
+  propiedad de Paz Verde SpA. En ningún caso se entenderá que el Usuario tendrá algún tipo de
+  derecho sobre los mismos.
+  </p>
+  </li>
+  <li>
+  <p class="text-justify"><h5>l) Vigencia de los Términos y Condiciones</h5>
+  Estos Términos y Condiciones tendrán un plazo de vigencia indefinido. Comparagrow se
+  reserva el derecho de modificar en cualquier momento y sin previo aviso los presentes
+  términos y condiciones. Se entenderá que los Términos han sido modificados con la sola
+  publicación de las modificaciones realizadas a los Términos. Es responsabilidad del usuario
+  ingresar y revisar cada vez que ingrese al sitio ”Comparagrow” los presentes términos y
+  condiciones. Los términos, condiciones y sus modificaciones se aplicarán en forma inmediata
+  con posterioridad a su publicación en el Sitio de Comparagrow. La utilización del Sitio, o de
+  cualquier otro de sus canales, después de realizada cualquier modificación se entenderá como
+  aceptación por parte del Usuario a las modificaciones introducidas a los términos y
+  condiciones.
+  </p>
+  </li>
+  </ul>
+  </li>
+  </ul>
+
+  <ul style="list-style: none;" class="text-justify">
+  <li>
+  <p><h4>2. Política de Privacidad.</h4>
+  <h5>Cookies.</h5>
+  <p class="text-justify">La confianza del usuario es importante para nosotros, y por consiguiente, en Comparagrow
+  nos preocupa proteger su privacidad. Un aspecto importante de esto es proporcionarte toda
+  la información posible sobre cómo utilizamos tus datos de carácter personal, incluso cómo
+  utilizamos el almacenamiento local de datos y tecnología similar.</p>
+
+  <h5>Recolección de Datos.</h5>
+  <p class="text-justify">¿Qué significa almacenamiento local de datos, cookies y tecnología similar? El
+  almacenamiento local de datos implica almacenar diferentes tipos de datos localmente en su
+  dispositivo a través de su navegador web
+  Los datos almacenados localmente pueden, por ejemplo, contener la configuración del
+  usuario, información sobre cómo navega por nuestros sitios web, qué navegador web utiliza y
+  qué anuncios se han mostrado. Los datos almacenados localmente pueden ser utilizados para
+  personalizar el contenido y las funciones en nuestros servicios de forma que sus visitas sean
+  más cómodas y tengan más sentido. Un método de almacenamiento local de datos son las
+  cookies. Las cookies son pequeños archivos de texto que se almacenan en su dispositivo (PC,
+  teléfono móvil o tablet) que nos permiten reconocer su navegador web. Las cookies contienen
+  información principalmente sobre su navegador web y sobre cualquier actividad que se ha
+  producido en él. Además del almacenamiento local de datos, podemos utilizar otra tecnología
+  similar, como web beacons (o balizas web)/pixel tags (o etiquetas de píxel). Esta tecnología
+  reconoce las cookies y los identificadores, y permite a terceros establecer cookies en su
+  dispositivo. Los web beacons pueden ser utilizados para determinar qué anuncios deben
+  mostrarse en tu navegador web. En el presente documento, el término &quot;almacenamiento local
+  de datos&quot; se utiliza como término colectivo para cookies, web beacons y otra tecnología
+  similar. La información generada por las mencionadas cookies sobre el comportamiento del
+  Usuario, así como sus direcciones IP, es transmitida por el navegador hacia los servidores de
+  Google en E.E.U.U. y otros países. En nombre de Comparagrow, Google utilizará esta
+  información con el propósito de generar reportes sobre la actividad que ocurre en la
+  Plataforma Comparagrow, ofreciendo además servicios adicionales para el comportamiento
+  de los usuarios. Las direcciones IP recopiladas por Google Analytics no serán asociadas con
+  otra información que Google pueda tener almacenada en otros servicios. Toda información
+  recopilada es general y no permite llevar a cabo una identificación personal del Usuario. Si el
+  Usuario lo desea puede eliminar el uso de cookies de almacenamiento de información de
+  manera voluntaria, en cualquier momento, a través de la configuración en su navegador. Debe
+  tener en cuenta que esto podría provocar que la Plataforma no funcione en todo su potencial.
+  Adicionalmente, el Usuario podrá detener la transmisión de información a través de cookies,
+  descargando e instalando Google Analytics Opt-out Browser Add-on
+  (http://tools.google.com/dlpage/gaoptout). Comparagrow utiliza diversos métodos de
+  carácter tecnológico para recopilar y almacenar información de sus usuarios para el sólo
+  efecto de prestar el servicio y realizar mejoras a los servicios y/o productos ofrecidos por
+  Comparagrow.¿Quién más utiliza el almacenamiento local de datos en Comparagrow?
+  Utilizamos el almacenamiento local de datos nosotros mismos, y permitimos a nuestros
+  proveedores que lo utilicen cuando nos prestan sus servicios. Estos proveedores están sujetos
+  a acuerdos de encargados del tratamiento de datos, y no se les permite utilizar los datos para
+  fines que no sean proporcionar el servicio que hemos solicitado. Además de para nuestro
+  propio uso, también ofrecemos a terceros la oportunidad de utilizar el almacenamiento de
+  datos en su dispositivo cuando visitas nuestros servicios. Hemos concebido directrices
+  estrictas sobre cómo terceras partes pueden recoger y utilizar datos relativos a nuestros<p>
+
+  <p>visitantes. Las directrices indican que los datos sólo pueden ser utilizados para fines definidos
+  con claridad.
+  Áreas de aplicación para el almacenamiento local de datos:
+  <ul style="list-style: none;" class="text-justify">
+    <li><h5>i) Entrega del servicio a su uso.</h5>
+  <p class="text-justify">Se requiere y es necesario el almacenamiento local de datos con el fin de permitirte utilizar
+  nuestros servicios, tales como información sobre su configuración, que nos dice cómo deben
+  presentarse los servicios en tu navegador web. También utilizamos el almacenamiento local
+  de datos para adaptar nuestros servicios a su uso lo mejor posible. Por ejemplo, para
+  almacenar la configuración para tus sonidos preferidos, para almacenar información sobre la
+  mejor calidad de vídeo que hay disponible para tu navegador web y la velocidad de Internet, o
+  para permitir el uso de funciones especiales, tales como la opción de almacenar anuncios
+  clasificados o conservar búsquedas previas y listados guardados.</p>
+  </li>
+  <li><h5>ii) Análisis y mejora de nuestros servicios.</h5>
+  <p class="text-justify">Utilizamos diversas herramientas de medición que nos proporcionan estadísticas y análisis
+  relativos a nuestros servicios. Estas herramientas nos permiten reconocer el navegador web a
+  lo largo del tiempo y averiguar si el usuario ha visitado el sitio web anteriormente y si es así
+  con qué frecuencia. Estas herramientas nos ofrecen la posibilidad de lograr una visión general
+  de cuántos usuarios únicos tenemos y cómo utilizan nuestros servicios. Asimismo, utilizamos
+  la información que hemos recogido y analizado para desarrollar y mejorar nuestros servicios.</p>
+  </li>
+  <li><h5>iii) Publicidad de terceros</h5>
+  <p class="text-justify">Al igual que en otros sitios web comerciales, en los servicios de Comparagrow el usuario
+  encontrará también anuncios suministrados por otros actores. La mayoría de los actores
+  utilizan almacenamiento local de datos. El almacenamiento local de datos se utiliza para
+  encontrar cookies o identificadores anónimos en su dispositivo para averiguar qué anuncios
+  deben mostrarse o qué anuncios han sido mostrados en su navegador web. El
+  almacenamiento local de datos se utiliza también para medir el efecto de los anuncios
+  midiendo cuántos usuarios hicieron clic en un anuncio específico y cuántos completaron
+  realmente una compra. Nosotros no permitimos que estos datos sean vinculados
+  directamente al usuario. Comparagrow tiene la capacidad de leer datos de cookies de terceros
+  como éstas. Estas compañías pueden utilizar el almacenamiento local de datos para dirigir
+  anuncios específicos en otros sitios web en base a su visita a Comparagrow.</p>
+  </li>
+  </p>
+  <h4>¿Cómo puedo gestionar datos almacenados localmente?</h4>
+  <h5>1. Gestión de cookies en Google Chrome
+  o Cómo eliminar cookies:</h5>
+  Ves a Configuración en el menú de su navegador.
+  <ul>
+  Haz clic en Mostrar configuración avanzada.
+
+  <li>Haz clic en Eliminar datos de navegación.
+  </li><li>Selecciona el período de tiempo para el que deseas eliminar la
+  información en el menú en la parte superior. Si deseas eliminar todas
+  las cookies en el navegador, haz clic en Desde el origen de los tiempos.
+  </li><li>Marca Cookies y otros datos de sitios y complementos..
+  </li><li>Haz clic en Borrar datos de navegación.
+  </li><li>Cierra la ventana.
+  o Cómo evitar que las cookies se almacenen en el navegador web:
+  </li><li>Vas a Configuración en el menú de tu navegador.
+  </li><li>Haz clic en Mostrar configuración avanzada y después haz clic en
+  Configuración de contenido.
+  </li><li>En Cookies, selecciona tu opción preferida. Si desea evitar que todas
+  las cookies se almacenen, haga clic en No permitir que se guarden
+  datos de los sitios.
+  </li><li>Haz clic en Hecho.
+  </li><li>Cierra la ventana.
+  </li></ul>
+  <h5>2. Gestión de cookies en Safari
+  o Cómo eliminar cookies:</h5>
+  <ul>
+  <li>Ir a Preferencias en el menú de su navegador
+  </li><li>Haz clic en la pestaña Privacidad.
+  </li><li>Haz clic en Eliminar todos los datos de los sitios web y después haz clic
+  en Eliminar para eliminar todas las cookies.
+  </li><li>Cierra la ventana.
+  o Cómo evitar que las cookies se almacenen en el navegador web:
+  </li><li>Ir a Preferencias en el menú de tu navegador
+  </li><li>Haz clic en la pestaña Privacidad.
+  </li><li>En Cookies y datos de sitios web selecciona tu opción preferida. Si
+  deseas evitar que todas las cookies se almacenen, haz clic en Bloquear
+  siempre.
+  </li><li>Cierra la ventana.
+  </li>
+  </ul>
+  <h5>3. Gestión de cookies en Firefox
+  o Cómo eliminar cookies:</h5>
+  <ul>
+  <li>Ir a Opciones en el menú de su navegador.
+  </li><li>Haz clic en la pestaña Privacidad.
+  </li><li>Haz clic en Mostrar cookies.
+  </li><li>Selecciona las cookies que deseas eliminar y haz clic en Eliminar
+  seleccionadas. Haz clic en Eliminar todas si deseas eliminar todas las
+  cookies en tu navegador web.
+  </li><li>Cierra la ventana. Cualquier cambio que hayas hecho se guardará
+  automáticamente.
+  </li></ul>
+  <h5>o Cómo evitar que las cookies se almacenen en el navegador web:</h5>
+  <ul>
+  <li>Ir a Configuración en el menú de tu navegador.
+  </li><li>Selecciona la pestaña Privacidad.
+  </li><li>En Historial, haz clic en Usar una configuración personalizada para el
+  historial.
+  </li><li>Selecciona tus opciones preferidas en Permitir cookies de sitios web. Si
+  deseas evitar que todas las cookies se almacenen, desactiva la casilla
+  Aceptar cookies de sitios web.
+  </li><li>Cierra la ventana. Cualquier cambio que hayas hecho se guardará
+  automáticamente.
+  </li>
+  </ul>
+  <h5>4. Gestión de cookies en Internet Explorer
+  o Cómo eliminar cookies:</h5>
+  <ul>
+  <li>Ir a Herramientas (icono de rueda dentada) en el menú de tu
+  navegador.
+  </li><li>Haz clic en Propiedades de Internet.
+  </li><li>En la pestaña General - Historial de navegación, haz clic en Eliminar.
+  </li><li>Asegurate de marcar la opción Cookies y datos de sitios web.
+  </li><li>Haz clic en Eliminar.
+  </li><li>Haz clic en OK.
+  </li>
+  </ul>
+  <h5>o Cómo evitar que las cookies se almacenen en el navegador web:</h5>
+  <ul>
+  <li>Ir a Herramientas (icono de rueda dentada) en el menú de tu
+  navegador.
+  </li><li>Haz clic en Opciones de Internet y después haz clic en la pestaña
+  Privacidad.
+  </li><li>Mueve la barra deslizante al nivel deseado. Si deseas evitar que todas
+  las cookies se almacenen, selecciona el nivel Bloquear todas las
+  cookies.
+  </li><li>Haz clic en OK.
+  </li>
+  </ul>
+  <h5>5. Gestión de cookies en Opera
+  o Cómo eliminar cookies:</h5>
+  <ul>
+  <li>Ir a Configuración en el menú de tu navegador.
+  </li><li>Selecciona la pestaña de Privacidad y Seguridad.
+  </li><li>Haz clic en Cookies y después haz clic en Todas las cookies y datos de
+  sitios web.
+  </li><li>Selecciona las cookies que deseas eliminar y haz clic en Eliminar. Haz
+  clic en Eliminar todas si deseas eliminar todas las cookies en tu
+  navegador web.
+  </li><li>Haz clic en Hecho.
+  </li><li>Cierra la ventana.
+  </li>
+  </ul>
+  <h5>o Cómo evitar que las cookies se almacenen en el navegador web:</h5>
+  <ul>
+    <li>
+  Ir a Configuración en el menú de tu navegador.
+  </li><li>Selecciona la pestaña de Privacidad y Seguridad.
+  </li><li>En Cookies, selecciona tu opción preferida. Si deseas evitar que
+  todas las cookies se almacenen, haz clic en No permitir que se guarden
+  datos de los sitios.
+  </li><li>Cierra la ventana.</li>
+  </ul>
+  <p class="text-justify">
+  Puedes ajustar la configuración en tu navegador web o utilizar programas especiales que han
+  sido desarrollados para gestionar cookies. La configuración en tu navegador web
+  normalmente muestra una lista de todas las cookies que han sido almacenadas para
+  proporcionarle una visión general y, si lo deseas, para eliminar las cookies no deseadas.
+  Normalmente, puedes indicar que aceptas el almacenamiento de cookies de los sitios web
+  que visitas o de terceros afiliados a dichos sitios web. También puedes escoger ser notificado
+  cada vez que se almacena una nueva cookie. Se proporciona a continuación orientación sobre
+  cómo hacer esto en diferentes navegadores web. Tu navegador web almacena normalmente
+  cookies en una carpeta específica en su disco duro, de forma que pueda examinar también el
+  contenido con más detalle.
+  </p>
+  <ol>
+  <li class="text-justify">Podemos cancelar su acceso a la página, sin causa o aviso, lo cual podrá resultar en
+  la incautación y destrucción de toda la información que esté asociada con su cuenta.
+  Todas las disposiciones de este acuerdo que, por su naturaleza, deban sobrevivir a la
+  cancelación sobrevirán a ella, incluyendo sin limitación, las disposiciones de
+  propiedad, renuncias de garantía, indemnización y limitaciones de responsabilidad.
+  </li><li class="text-justify">La empresa se reserva el derecho de modificar estas condiciones de vez en cuando
+  según lo considere oportuno; asimismo, el uso permanente de la página significará
+  su aceptación de cualquier ajuste a tales términos. Si hay algún cambio en nuestra
+  política de privacidad, anunciaremos en nuestra página y en otras páginas
+  importantes de nuestro sitio que se han hecho tales cambios. Si hay algún cambio en
+  nuestra página respecto a la manera en que usamos la información de identificación
+  personal de nuestros clientes, enviaremos una notificación por correo electrónico o
+  correo postal a aquellos que sean afectados por el cambio.
+  </li><li class="text-justify">La página y su contenido original, las características y la funcionalidad son propiedad
+  de Paz Verde SpA y están protegidos por derechos de autor internacionales, marcas
+  registradas, patentes, secretos comerciales y demás leyes de propiedad intelectual o
+  de derechos de propiedad
+  </li>
+    </ol>
+  </li>
+  </ul>
 </div>
 <!-- <nav class="navbar fixed-bottom navbar-light bg-light">
   <a class="navbar-brand" href="#">Fixed bottom</a>

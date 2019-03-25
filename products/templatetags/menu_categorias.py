@@ -9,6 +9,17 @@ def listado():
     p = Category.objects.all()
     return p
 
+@register.filter(name='tiendascount')
+def tiendas(value):
+    p = None
+    if value == "tiendas":
+        p = Shop.objects.all()
+    if value == "productos":
+        p = Product.objects.all()
+    if value == "categorias":
+        p = Category.objects.all()
+    return p.count()
+
 @register.filter(name='imagenproducturl')
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
