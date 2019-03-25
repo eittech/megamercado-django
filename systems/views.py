@@ -126,6 +126,10 @@ def changePassword(request):
     if request.user.is_authenticated:
         user = request.user
         try:
+            customer = Customer.objects.get(user=user)
+        except:
+            customer = None
+        try:
             if request.POST:
                 pwd = request.POST['password']
                 pwd1 = request.POST['password1']
@@ -137,7 +141,7 @@ def changePassword(request):
                     msg = 'error'
         except:
             msg = 'error'
-        return render(request, 'comparagrow/porto/pwd.html',{'user':user,'msg':msg})
+        return render(request, 'comparagrow/porto/pwd.html',{'user':user,'msg':msg,'customer':customer})
     else:
         return redirect('/')
 
