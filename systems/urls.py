@@ -16,6 +16,8 @@ urlpatterns = [
     #path('users/validate/<uidb64>/<token>', views.activationuser,name='user-activation-link'),
     re_path(r'^users/validate/(?P<uidb64>.+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activationuser,name='user-activation-link'),
 
+    re_path(r'^users/recovery/(?P<uidb64>.+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.recoveryuser,name='recoveryuser-link'),
+
     path('quienes-somos', views.quienesSomos, name='login'),
     path('contactanos', views.contactanos, name='login'),
     path('faq', views.Faq, name='login'),

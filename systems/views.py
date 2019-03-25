@@ -21,6 +21,7 @@ from customers.models import *
 from contracts.models import *
 from systems.models import *
 
+from django.contrib import auth
 
 # Create your views here.
 def homeporto(request):
@@ -199,6 +200,34 @@ def activationuser(request,uidb64,token):
     return redirect('/?error=not_access&notvalidatedata')
     # return http.HttpResponseRedirect(a_failure_url)
 
+def recoveryuser(request,uidb64,token):
+    from django import http
+
+    if uidb64 is not None and token is not None:
+        from django.utils.http import urlsafe_base64_decode
+        uid = urlsafe_base64_decode(uidb64)
+        from django.contrib.auth import get_user_model
+        from django.contrib.auth.tokens import default_token_generator
+        user_model = get_user_model()
+        user = user_model.objects.get(pk=uid)
+        verificacion = MailVerification.objects.get(user=user)
+        if verificacion.token == token:
+            user.set_password(token)
+            user.save()
+            username = user.username
+            password = token
+            user1 = auth.authenticate(username=username, password=password)
+            print(user1)
+            if user1:
+                request.user = user1
+                auth.login(request, user1)
+            return redirect('/profile/change/pwd')
+            # return redirect('/')
+        else:
+            return redirect('/not_found?1')
+    return redirect('/not_found?2')
+    # return http.HttpResponseRedirect(a_failure_url)
+
 # def register_view(request)
 
 def register_front(request):
@@ -274,15 +303,15 @@ def recovery(request):
     from django.http import JsonResponse
     # print('entro a recovery')
     if not request.POST :
-        return JsonResponse({'respuesta':'enviado'})
+        return JsonResponse({'respuesta':'enviado','error':'1'})
     try:
         email = request.POST['username']
     except:
-        return JsonResponse({'respuesta':'enviado'})
+        return JsonResponse({'respuesta':'enviado','error':'2'})
     try:
         user = User.objects.get(username=email)
     except:
-        return JsonResponse({'respuesta':'enviado'})
+        return JsonResponse({'respuesta':'enviado','error':'3'})
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     verificacion_activa = MailVerification.objects.get(user=user)
     if verificacion_activa is not None:
@@ -293,13 +322,15 @@ def recovery(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-    subject, from_email, to = 'hello', 'ing.omar.orozco@gmail.com', 'omar.alexander.orozco.avila@gmail.com'
-    text_content = 'This is an important message.'
-    html_content = 'http://127.0.0.1:8000/users/recovery/'+ uid.decode("utf-8") +'/'+ token
+    link = 'http://35.185.63.218/users/recovery/'+ uid.decode("utf-8") +'/'+ token
+
+    msg_html = render_to_string('comparagrow/component/recovery.html', {'username': user.first_name,'link':link})
+    subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'comparagrow420@gmail.com', email
+    text_content = ''
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-    msg.attach_alternative(html_content, "text/html")
+    msg.attach_alternative(msg_html, "text/html")
     msg.send()
-    return JsonResponse({'respuesta':'enviado'})
+    return JsonResponse({'respuesta':'enviado','error':'no'})
 
 
 def generarToken(pk):
