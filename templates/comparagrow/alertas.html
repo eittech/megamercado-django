@@ -1,0 +1,57 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+{% load menu_categorias %}
+{% block content %}
+<section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+					<div class="container">
+						<div class="row">
+
+							<div class="col-md-12 align-self-center p-static order-2 text-center">
+
+								<h1 class="text-dark text-dark text-10"><strong>Alertas</strong></h1>
+							</div>
+						</div>
+					</div>
+				</section>
+<div class="container">
+	{% if alerta %}
+	{% for i in alerta %}
+	<div class="col-md-12 mb-12 mb-md-0 appear-animation animated fadeInLeftShorter appear-animation-visible" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+		<div class="row justify-content-center justify-content-md-start">
+
+			<div class="col-2">
+
+
+<a href="/productos/redirect/{{ i.product.id }}" target="_blank">
+
+				<img alt="" class="img-fluid" src="{{ i.product.id|imagenproducturl:"0" }}">
+</a>
+			</div>
+			<div class="col-lg-8">
+				<h2 class="font-weight-bold text-5 line-height-5 mb-1"><a href="/productos/redirect/{{ i.product.id }}" target="_blank">{{ i.product.name }}</a></h2>
+				<p class="mb-0">Descuento!</p>
+				<h2 class="word-rotator slide mb-2">
+					<span><a href="/productos/redirect/{{ i.product.id }}" target="_blank">{{ i.product.total }}</a> </span>
+					<span class="word-rotator-words bg-secondary" style="width: 154.953px;">
+						<b class="is-hidden"> OFERTA!! </b>
+						<b class="is-visible"> OFERTA!! </b>
+					</span>
+					<span></span>
+				</h2>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	{% else %}
+
+
+	{% endif %}
+</div>
+<!-- <nav class="navbar fixed-bottom navbar-light bg-light">
+  <a class="navbar-brand" href="#">Fixed bottom</a>
+</nav> -->
+
+{% endblock %}
+{% block scriptb %}
+
+{% endblock %}
