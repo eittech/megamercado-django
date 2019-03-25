@@ -25,6 +25,7 @@ urlpatterns = [
     path('publicidad', views.Publicidad, name='login'),
 
     path('suscribir', views.Suscribir, name='login'),
+    path('alertas', views.alertasProductos, name='login'),
 
     path('politica-privacidad', views.politicasPrivacidad, name='login'),
     path('publicidad', views.pricePlan, name='priceplan'),

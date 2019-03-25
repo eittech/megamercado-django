@@ -133,27 +133,49 @@ class HistoryPrice(models.Model):
     date_update = models.DateField(verbose_name="Fecha de la Factura",auto_now=True,blank=True, null= True)
     total = models.FloatField()
 
+class AlertsProduct(models.Model):
+    TYPE_ALERT = (
+        ('PRICE', 'PRECIO'),
+
+    )
+    product= models.ForeignKey(Product,on_delete=models.CASCADE)
+    type = models.CharField(verbose_name="Tipo",max_length=20,choices=TYPE_ALERT)
+    content = models.CharField(verbose_name="Contenido",max_length=150,blank=True, null= True)
+
 @receiver(post_save, sender=Product, dispatch_uid="update_history_price")
 def update_history_price(sender, instance, **kwargs):
     actualizar = False
+    alerta = False
+    eliminaralter = False
+    porcentaje = ""
     try:
-        history = HistoryPrice.objects.filter(product=instance).order_by('date_update').first()
+        history = HistoryPrice.objects.filter(product=instance).order_by('-id').first()
         print(history)
         if history is not None:
             if history.total != instance.total:
-                print("if 1")
                 actualizar = True
+                if history.total > instance.total:
+                    alerta = True
+                    a = float(history.total)
+                    b = float(instance.total)
+                    c = b * 100
+                    d = c / a
+                    porcentaje = str(d)
+                    print(porcentaje)
+                else:
+                    alerta = False
+                    eliminaralter = True
             else:
-                print("if 2")
                 actualizar = False
+                alerta = False
                 #no actualizamos
         else:
-            print("if 3")
             actualizar = True
+            alerta = False
             #actualizamos
     except:
-        print("if 4")
         actualizar = False
+        alerta = False
     try:
         if actualizar:
             history = HistoryPrice()
@@ -165,3 +187,21 @@ def update_history_price(sender, instance, **kwargs):
             print("no se pudo procesar 2")
     except:
         print("no se pudo procesar")
+
+    try:
+        if alerta:
+            print("porcentaje")
+            print(porcentaje)
+            alerta = AlertsProduct()
+            alerta.product =instance
+            alerta.type = 'PRICE'
+            alerta.content = porcentaje
+            alerta.save()
+            print("save exitoso")
+        else:
+            if eliminaralter:
+                alerta = AlertsProduct.objects.filter(product=instance)
+                alerta.delete()
+            print("no se pudo procesar 5")
+    except:
+        print("no se pudo procesar 6")

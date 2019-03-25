@@ -36,6 +36,12 @@ class ShopAdmin(admin.ModelAdmin):
 class HistoryPriceAdmin(admin.ModelAdmin):
     list_display = ('product', 'date_update','total')
 
+class AlertsProductAdmin(admin.ModelAdmin):
+    list_display = ('product','type')
+
+admin.site.register(AlertsProduct,AlertsProductAdmin)
+
+
 admin.site.register(HistoryPrice,HistoryPriceAdmin)
 admin.site.register(Shop,ShopAdmin)
 admin.site.register(Category,CategoryAdmin)

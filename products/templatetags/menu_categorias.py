@@ -20,6 +20,26 @@ def tiendas(value):
         p = Category.objects.all()
     return p.count()
 
+@register.filter(name='alertasproductos')
+def alertasproductos(value):
+    try:
+        favoritos = FavoriteProduct.objects.filter(user__pk=int(value))
+        productos = []
+        for ck in favoritos:
+            productos.append(int(ck.product.id))
+        alerta = AlertsProduct.objects.filter(product__id__in=productos)
+        print(alerta)
+        if alerta is not None:
+            if alerta.count() > 0:
+                return '<span class="tip tip-secondary">' + str(alerta.count()) +'</span>'
+            else:
+                return ""
+        else:
+            return ""
+    except:
+        return ""
+
+
 @register.filter(name='imagenproducturl')
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()

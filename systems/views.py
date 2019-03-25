@@ -343,6 +343,19 @@ def Clientes(request):
 def politicasPrivacidad(request):
     return render(request, 'comparagrow/politicasPrivacidad.html')
 
+@login_required
+def alertasProductos(request):
+    user = request.user
+    try:
+        favoritos = FavoriteProduct.objects.filter(user=user)
+        productos = []
+        for ck in favoritos:
+            productos.append(int(ck.product.id))
+        alerta = AlertsProduct.objects.filter(product__id__in=productos)
+    except:
+        alerta = None
+    return render(request, 'comparagrow/alertas.html',{'alerta':alerta})
+
 def SuscribirExito(request):
     return render(request, 'comparagrow/exito.html')
 

@@ -119,11 +119,13 @@
 
 										</li>
 										<li class="" style="margin-right: 11px !important;">
-											<span class="pl-0" style="font-size: 16px;color: #672d93;">
+											<a class="pl-0" href="/alertas" style="font-size: 16px;color: #672d93;">
 												<i class="fas fa-bell text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>
 												Alertas
-												<span class="tip tip-secondary">1</span>
-											</span>
+												{% autoescape off %}
+												{{ user.id|alertasproductos }}
+												{% endautoescape %}
+											</a>
 
 										</li>
 									</ul>
