@@ -1,5 +1,6 @@
 {% load menu_categorias %}
-
+{% load l10n %}
+{% load humanize %}
 <div class="row article">
   {% for item in productos %}
   <div class="col-md-2" style="margin-top:5px; margin-bottom:5px;">
@@ -21,7 +22,7 @@
         <div class="card-footer" style="background-color: #fff;border-top: none;">
           <div class="row">
             <div class="col">
-              <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total }}</h5>
+              <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total|floatformat:0|intcomma }}</h5>
             </div>
           </div>
           <div class="row">

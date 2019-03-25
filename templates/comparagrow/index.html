@@ -1,7 +1,8 @@
 {% extends 'comparagrow/base.html' %}
 {% load static %}
 {% load menu_categorias %}
-
+{% load l10n %}
+{% load humanize %}
 
 
 {% block content %}
@@ -59,7 +60,7 @@
                 <div class="card-footer" style="background-color: #fff;border-top: none;">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.total }}</h5>
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.total|floatformat:0|intcomma }}</h5>
                     </div>
                   </div>
                   <div class="row">
@@ -123,7 +124,7 @@
                 <div class="card-footer" style="background-color: #fff;border-top: none;">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total }}</h5>
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total|floatformat:0|intcomma }}</h5>
                     </div>
                   </div>
                   <div class="row">
@@ -187,7 +188,7 @@
                 <div class="card-footer" style="background-color: #fff;border-top: none;">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total }}</h5>
+                      <h5 class="card-title" style="color:#000;font-size: 14px;">CLP {{ item.product.total|floatformat:0|intcomma }}</h5>
                     </div>
                   </div>
                   <div class="row">

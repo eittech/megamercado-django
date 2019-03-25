@@ -1,6 +1,8 @@
 {% extends 'comparagrow/porto/base.html' %}
 {% load static %}
 {% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
 {% block content %}
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
 					<div class="container">
@@ -31,7 +33,7 @@
 				<h2 class="font-weight-bold text-5 line-height-5 mb-1"><a href="/productos/redirect/{{ i.product.id }}" target="_blank">{{ i.product.name }}</a></h2>
 				<p class="mb-0">Descuento!</p>
 				<h2 class="word-rotator slide mb-2">
-					<span><a href="/productos/redirect/{{ i.product.id }}" target="_blank">{{ i.product.total }}</a> </span>
+					<span><a href="/productos/redirect/{{ i.product.id }}" target="_blank">$ {{ i.product.total|floatformat:0|intcomma }} </a> </span>
 					<span class="word-rotator-words bg-secondary" style="width: 154.953px;">
 						<b class="is-hidden"> OFERTA!! </b>
 						<b class="is-visible"> OFERTA!! </b>
@@ -43,7 +45,7 @@
 	</div>
 	{% endfor %}
 	{% else %}
-
+	<h2>No hay alertas...</h2>
 
 	{% endif %}
 </div>
