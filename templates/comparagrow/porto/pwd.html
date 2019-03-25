@@ -1,0 +1,163 @@
+{% extends 'comparagrow/porto/base.html' %}
+{% load static %}
+
+
+{% block cabecera %}
+
+{% endblock %}
+
+
+{% block content %}
+<!-- <section class="page-header page-header-classic" style="background:#01b22c;">
+	<div class="container">
+		<div class="row">
+			<div class="col p-static">
+				<h1 data-title-border>Mi perfil</h1>
+
+			</div>
+		</div>
+	</div>
+</section> -->
+<div class="container py-2">
+
+  <div class="row">
+    <div class="col-lg-3 mt-4 mt-lg-0">
+
+      <div class="d-flex justify-content-center mb-4">
+        <div class="profile-image-outer-container">
+          <div class="profile-image-inner-container bg-color-primary" style="background: #01b22c !important;">
+            {% if customer.image %}
+            <img src="/media/{{ customer.image }}" id="image_customer">
+            {% else %}
+            <img src="/static/porto/img/avatars/avatar.jpg" id="image_customer">
+            {% endif %}
+            <span class="profile-image-button bg-color-dark">
+              <i class="fas fa-camera text-light"></i>
+            </span>
+          </div>
+          <form enctype="multipart/form-data" id="id_ajax_upload_form" method="POST" novalidate="">
+            {% csrf_token %}
+            <input type="file" id="image" name="image" class="profile-image-input">
+          </form>
+        </div>
+      </div>
+
+
+
+      <aside class="sidebar mt-2" id="sidebar">
+        <ul class="nav nav-list flex-column mb-5">
+          <li class="nav-item"><a class="nav-link" href="/profile">Mi perfil</a></li>
+          <li class="nav-item"><a class="nav-link text-dark active">Cambiar contraseña</a></li>
+        </ul>
+      </aside>
+
+    </div>
+    <div class="col-lg-9">
+
+      <div class="overflow-hidden mb-1">
+        <h2 class="font-weight-normal text-7 mb-0"><strong class="font-weight-extra-bold">Cambiar </strong> Contraseña</h2>
+      </div>
+      <div class="overflow-hidden mb-4 pb-3">
+        <p class="mb-0">Usa este formulario para editar la información de tu perfil.</p>
+      </div>
+      {% if msg == "exito" %}
+      <div class="contact-form-success alert alert-success mt-4" id="contactSuccess">
+        <strong>Exito!</strong> La operación se completo de forma exitosa.
+      </div>
+      {% endif %}
+      {% if msg == "error" %}
+      <div class="contact-form-error alert alert-danger mt-4" id="contactError">
+        <strong>Error!</strong> No se pudo completar la operación.
+        <span class="mail-error-message text-1 d-block" id="mailErrorMessage"></span>
+      </div>
+      {% endif %}
+      <form role="form" action="/profile/change/pwd" class="needs-validation" method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Contraseña</label>
+              <div class="col-lg-9">
+                  <input class="form-control" name="password" required type="password" value="">
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Confirmar la Contraseña</label>
+              <div class="col-lg-9">
+                  <input class="form-control" name="password1" required type="password" value="">
+              </div>
+          </div>
+
+          <div class="form-group row">
+          <div class="form-group col-lg-9">
+
+          </div>
+          <div class="form-group col-lg-3">
+            <input type="submit" value="Cambiar" class="btn btn-primary btn-modern float-right" data-loading-text="Loading...">
+          </div>
+          </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+$('#id_ajax_upload_form').submit(function(e){
+  e.preventDefault();
+  $form = $(this)
+  var formData = new FormData(this);
+  console.log(formData);
+  $.ajax({
+       url: '/dashboard/profile/upload/image',
+       type: 'POST',
+       data: formData,
+       success: function (response) {
+           $('.error').remove();
+           console.log(response)
+           if(response.error){
+               console.log('no cargo la imagen')
+           }
+           else{
+               img = '/media/'+response.image;
+               $("#image_customer").attr("src",img);
+           }
+       },
+       cache: false,
+       contentType: false,
+       processData: false
+   });
+});
+
+$("#image").change(function(e){
+   //submit the form here
+   console.log('paso')
+   $('#id_ajax_upload_form').submit();
+   // $.ajax({
+   //      url: window.location.pathname,
+   //      type: 'POST',
+   //      data: formData,
+   //      success: function (response) {
+   //          $('.error').remove();
+   //          console.log(response)
+   //          if(response.error){
+   //              $.each(response.errors, function(name, error){
+   //                  error = '<small class="text-muted error">' + error + '</small>'
+   //                  $form.find('[name=' + name + ']').after(error);
+   //              })
+   //          }
+   //          else{
+   //              alert(response.message)
+   //              window.location = ""
+   //          }
+   //      },
+   //      cache: false,
+   //      contentType: false,
+   //      processData: false
+   //  });
+ });
+</script>
+
+{% endblock %}

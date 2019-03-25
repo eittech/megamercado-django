@@ -10,6 +10,7 @@ urlpatterns = [
     path('recovery', views.recovery, name='recovery'),
     path('logout', views.logout_front, name='logout'),
     path('profile', views.profile, name='logout'),
+    path('profile/change/pwd', views.changePassword, name='pwd'),
     path('scraping', views.scraping, name='scraping'),
     path('not_found', views.error_pagina, name='error_pagina'),
     #path('users/validate/<uidb64>/<token>', views.activationuser,name='user-activation-link'),

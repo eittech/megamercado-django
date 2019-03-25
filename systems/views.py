@@ -116,7 +116,28 @@ def profile(request):
                 customer = Customer.objects.get(user=user)
             except:
                 print('error')
-        return render(request, 'comparagrow/porto/profile',{'user':user,'customer':customer})
+        return render(request, 'comparagrow/porto/profile.html',{'user':user,'customer':customer})
+    else:
+        return redirect('/')
+
+@login_required
+def changePassword(request):
+    msg = ""
+    if request.user.is_authenticated:
+        user = request.user
+        try:
+            if request.POST:
+                pwd = request.POST['password']
+                pwd1 = request.POST['password1']
+                if pwd == pwd1:
+                    user.set_password(pwd)
+                    user.save()
+                    msg = 'exito'
+                else:
+                    msg = 'error'
+        except:
+            msg = 'error'
+        return render(request, 'comparagrow/porto/pwd.html',{'user':user,'msg':msg})
     else:
         return redirect('/')
 
@@ -168,7 +189,7 @@ def activationuser(request,uidb64,token):
                 return render(request, 'comparagrow/validate.html')
                 # return redirect('/')
             else:
-                    return redirect('/?error=not_access&notvalidatedata')
+                return redirect('/?error=not_access&notvalidatedata')
         except:
             pass
     return redirect('/?error=not_access&notvalidatedata')

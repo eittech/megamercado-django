@@ -15,7 +15,7 @@ def tiendas(value):
     if value == "tiendas":
         p = Shop.objects.all()
     if value == "productos":
-        p = Product.objects.all()
+        p = Product.objects.filter(category__isnull=False)
     if value == "categorias":
         p = Category.objects.all()
     return p.count()
