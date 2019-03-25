@@ -20,6 +20,16 @@ def tiendas(value):
         p = Category.objects.all()
     return p.count()
 
+@register.filter(name='countproductscategory')
+def countproductscategory(value):
+    p = Product.objects.filter(category__id=int(value))
+    if p.count() > 0:
+        c = p.count()
+    else:
+        c = 0
+    return c
+
+
 @register.filter(name='alertasproductos')
 def alertasproductos(value):
     try:

@@ -182,11 +182,11 @@
 
                                                   <div class="col-lg-2">
                                                     <span class="dropdown-mega-sub-title">
-                                                    <a class="" style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }}</a>
+                                                    <a class="" style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }} ({{ item1.id|countproductscategory }})</a>
                                                     </span>
                                                     <ul class="dropdown-mega-sub-nav">
                                                       {% for item2 in item1.slug|menulevelone:"2" %}
-                                                      <li><a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">{{ item2.name }}</a></li>
+                                                      <li><a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">{{ item2.name }} ({{ item2.id|countproductscategory }})</a></li>
                                                       {% endfor %}
                                                     </ul>
                                                   </div>
