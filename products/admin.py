@@ -39,6 +39,12 @@ class HistoryPriceAdmin(admin.ModelAdmin):
 class AlertsProductAdmin(admin.ModelAdmin):
     list_display = ('product','type')
 
+class ListCategoryTaxAdmin(admin.ModelAdmin):
+    list_display = ('tag','state')
+
+admin.site.register(ListCategoryTax,ListCategoryTaxAdmin)
+
+
 admin.site.register(AlertsProduct,AlertsProductAdmin)
 
 

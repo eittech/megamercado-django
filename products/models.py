@@ -71,6 +71,13 @@ class CategoryTags(models.Model):
         unique_together = (('category', 'tag',))
         verbose_name_plural = 'CategoryTags'
 
+class ListCategoryTax(models.Model):
+    tag = models.CharField(verbose_name="tag",max_length=100)
+    state = models.BooleanField(verbose_name="state")
+    class Meta:
+        unique_together = (('tag',))
+        verbose_name_plural = 'ListCategoryTax'
+
 # register(Category)
 
 class Product(models.Model):
