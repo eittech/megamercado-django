@@ -34,6 +34,9 @@ urlpatterns = [
     path('publicidad', views.pricePlan, name='priceplan'),
     path('exito', views.SuscribirExito, name='priceplan'),
 
+    path('google8244a1eb440cee55.html', views.GoogleVerificacion, name='priceplan'),
+
+
 
 
 

@@ -477,3 +477,7 @@ def Suscribir(request):
             return redirect('/not_found')
         else:
             return render(request, 'comparagrow/suscribir.html',{'action':action})
+
+
+def GoogleVerificacion(request):
+    return render(request, 'google.html')
