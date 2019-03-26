@@ -45,6 +45,12 @@ class ListCategoryTaxAdmin(admin.ModelAdmin):
 admin.site.register(ListCategoryTax,ListCategoryTaxAdmin)
 
 
+class CategoryTagsAdmin(admin.ModelAdmin):
+    list_filter = ('category',)
+    list_display = ('tag','category')
+
+admin.site.register(CategoryTags,CategoryTagsAdmin)
+
 admin.site.register(AlertsProduct,AlertsProductAdmin)
 
 

@@ -65,7 +65,7 @@ class Category(MPTTModel):
         return self.name
 
 class CategoryTags(models.Model):
-    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True)
     tag = models.CharField(verbose_name="tag",max_length=50)
     class Meta:
         unique_together = (('category', 'tag',))
