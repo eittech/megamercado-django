@@ -161,7 +161,7 @@ def home_blank(request):
     return render(request, 'comparagrow/index_blank.html', {'variable':variable})
 
 def login_front(request):
-    next = request.GET['next']
+    next = request.POST['next']
     if next is None:
         next = "/"
     username = request.POST['username']
