@@ -140,7 +140,7 @@ class ProductSpider(scrapy.Spider):
             Product_object.brand = brand
         if url:
             Product_object.url = url
-        if category_temp:
+        if categ:
             Product_object.category_temp = categ
         if description:
             Product_object.description = description
