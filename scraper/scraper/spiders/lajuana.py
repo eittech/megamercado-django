@@ -126,8 +126,6 @@ class ProductSpider(scrapy.Spider):
         except:
             description = ""
 
-        category = category
-        category_temp = name_category
         # tax =
         total = product.css('span#our_price_display').attrib['content']
 
@@ -143,7 +141,7 @@ class ProductSpider(scrapy.Spider):
         if url:
             Product_object.url = url
         if category_temp:
-            Product_object.category_temp = category_temp
+            Product_object.category_temp = categ
         if description:
             Product_object.description = description
 
