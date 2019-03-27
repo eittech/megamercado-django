@@ -104,95 +104,113 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = 'otros'
-
+        categ = response.xpath('.//span[@class="navigation_page"]/span/a/span/text()').extract()
         category = None
-        category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
-        if category_tags is None:
-            category = None
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            print(category_tags)
+            if category_tags:
+                category = category_tags.category
+
+        name_category = response.meta['name_category_safe']
+        product = response.css("div.center_column")
+        name = product.xpath('.//div[@class="product-title"]/h1/text()').re_first('\w.*')
+        url = response.meta['url_product_safe']
+        reference = product.xpath('.//p[@id="product_reference"]/span/text()').re_first('\w.*')
+        brand = product.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
+        try:
+            description = ""
+            description1 = response.css('section#descriptionTab div.rte').extract_first()
+            description = re.sub("<div.*?>","",description1)
+            description = re.sub("</div.*?>","",description)
+        except:
+            description = ""
+
+        category = category
+        category_temp = name_category
+        # tax =
+        total = product.css('span#our_price_display').attrib['content']
+
+        Product_object = Product()
+        if name:
+            Product_object.name = name
+        if shop_id:
+            Product_object.shop = shop_id
+        if reference:
+            Product_object.reference = reference
+        if brand:
+            Product_object.brand = brand
+        if url:
+            Product_object.url = url
+        if category_temp:
+            Product_object.category_temp = category_temp
+        if description:
+            Product_object.description = description
+
+        if category:
+            Product_object.category = category
+
+        if total:
+            Product_object.total = total
         else:
-            category = category_tags.category
+            Product_object.total = 0
 
-        if category is not None:
-            name_category = response.meta['name_category_safe']
-            product = response.css("div.center_column")
-            name = product.xpath('.//div[@class="product-title"]/h1/text()').re_first('\w.*')
-            url = response.meta['url_product_safe']
-            reference = product.xpath('.//p[@id="product_reference"]/span/text()').re_first('\w.*')
-            brand = product.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
-            description = product.xpath('.//div[@id="short_description_block"]/div[@id="short_description_content"]/p/text()').re_first('\w.*')
-            category = category
-            category_temp = name_category
-            # tax =
-            total = product.css('span#our_price_display').attrib['content']
+        Product_object.price = 0
+        Product_object.tax = 0
 
-            Product_object = Product()
-            if name:
-                Product_object.name = name
-            if shop_id:
-                Product_object.shop = shop_id
-            if reference:
-                Product_object.reference = reference
-            if brand:
-                Product_object.brand = brand
-            if url:
-                Product_object.url = url
-            if category_temp:
-                Product_object.category_temp = category_temp
-            if description:
-                Product_object.description = description
+        print(Product_object)
+        try:
+            Product_object.save()
+            product_error = False
+        except:
+            product_error = True
+            print("No se pudo guardar el producto")
 
-            if category:
-                Product_object.category = category
+        if Product_object.id:
+            list_img = response.css('ul#thumbs_list_frame li')
 
-            if total:
-                Product_object.total = total
-            else:
-                Product_object.total = 0
+            attributes = response.css('section#featuresTab table.table-data-sheet tr')
+            for item_attr in attributes:
+                atributo = item_attr.xpath('td/text()')[0].extract()
+                attribut = Attributes.objects.filter(name=atributo).first()
+                valor = item_attr.xpath('td/text()')[1].extract()
+                if attribut is not None:
+                    attributes = attribut
+                else:
+                    attributes = Attributes()
+                    attributes.name = atributo
+                    try:
+                        attributes.save()
+                    except:
+                        print('error no se pudo crear el atributo')
+                if attributes is not None:
+                    productattributes = ProductAttributes()
+                    productattributes.product = Product_object
+                    productattributes.attributes = attributes
+                    productattributes.values = valor
+                    try:
+                        productattributes.save()
+                    except:
+                        print('error no se pudo almacenar el valor')
 
-            Product_object.price = 0
-            Product_object.tax = 0
+            img_url = response.css('img#bigpic').xpath('@src').get()
+            name = str(Product_object.id) + '.jpg'
 
-            print(Product_object)
-            try:
-                Product_object.save()
-                product_error = False
-            except:
-                product_error = True
-                print("No se pudo guardar el producto")
+            producto_image = ProductImage()
+            producto_image.product = Product_object
 
-            if Product_object.id:
-                list_img = response.css('ul#thumbs_list_frame li')
+            response = urlopen(img_url)
+            io = BytesIO(response.read())
+            producto_image.image.save(name, File(io))
 
-                attributes = response.css('section#featuresTab table.table-data-sheet tr')
-                for item_attr in attributes:
-                    atributo = item_attr.xpath('td/text()')[0].extract()
-                    attribut = Attributes.objects.filter(name=atributo).first()
-                    valor = item_attr.xpath('td/text()')[1].extract()
-                    if attribut is not None:
-                        attributes = attribut
-                    else:
-                        attributes = Attributes()
-                        attributes.name = atributo
-                        try:
-                            attributes.save()
-                        except:
-                            print('error no se pudo crear el atributo')
-                    if attributes is not None:
-                        productattributes = ProductAttributes()
-                        productattributes.product = Product_object
-                        productattributes.attributes = attributes
-                        productattributes.values = valor
-                        try:
-                            productattributes.save()
-                        except:
-                            print('error no se pudo almacenar el valor')
-
-                img_url = response.css('img#bigpic').xpath('@src').get()
-                name = str(Product_object.id) + '.jpg'
+            producto_image.save()
+            contador = 0
+            for li_img in list_img:
+                #print(tut)
+                contador = contador + 1
+                img_url = li_img.xpath('a/@href').re_first('\w.*')
+                # img_url = response.css('img#bigpic').xpath('@src').get()
+                name = str(Product_object.id) +'_' + str(contador) + '.jpg'
 
                 producto_image = ProductImage()
                 producto_image.product = Product_object
@@ -202,19 +220,3 @@ class ProductSpider(scrapy.Spider):
                 producto_image.image.save(name, File(io))
 
                 producto_image.save()
-                contador = 0
-                for li_img in list_img:
-                    #print(tut)
-                    contador = contador + 1
-                    img_url = li_img.xpath('a/@href').re_first('\w.*')
-                    # img_url = response.css('img#bigpic').xpath('@src').get()
-                    name = str(Product_object.id) +'_' + str(contador) + '.jpg'
-
-                    producto_image = ProductImage()
-                    producto_image.product = Product_object
-
-                    response = urlopen(img_url)
-                    io = BytesIO(response.read())
-                    producto_image.image.save(name, File(io))
-
-                    producto_image.save()
