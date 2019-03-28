@@ -42,7 +42,8 @@ def homeporto(request):
     category = Category.objects.all()
     if user_agent.is_mobile:
         # Do stuff here...
-        return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
+        variable = "mobile"
+        return render(request, 'comparagrow/mobile/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         # return render(request, 'comparagrow/cozastore/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
@@ -67,13 +68,15 @@ def home(request):
     category = Category.objects.all()
     if user_agent.is_mobile:
         # Do stuff here...
-        return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
+        template_ruta = "comparagrow/porto/base_mobile.html"
+        return render(request, 'comparagrow/porto/index.html', {'template_ruta':template_ruta,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
+        template_ruta = "comparagrow/porto/base.html"
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
         #cozastore
-        return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
+        return render(request, 'comparagrow/porto/index.html', {'template_ruta':template_ruta,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
 
 @login_required
 def profile(request):

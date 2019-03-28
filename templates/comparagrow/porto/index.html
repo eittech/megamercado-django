@@ -1,4 +1,6 @@
-{% extends 'comparagrow/porto/base.html' %}
+{% extends template_ruta %}
+
+
 {% load static %}
 {% load menu_categorias %}
 {% load l10n %}
@@ -6,28 +8,44 @@
 
 
 {% block content %}
-<section class="section section-height-2 mt-0 mb-3 border-0">
-	<div class="container">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');background-size: cover;height: 180px;">
+	<div class="container-fluid">
 		<div class="row justify-content-center">
-			<div class="col-lg-10">
+			<div class="col-lg-12">
 
 				<div class="owl-carousel owl-theme stage-margin stage-margin-lg nav-style-2 mb-0 owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 100}" style="height: auto;">
 
 
 
-				<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 2660px; padding-left: 100px; padding-right: 100px;"><div class="owl-item active" style="width: 720px; margin-right: 100px;"><div class="text-center">
-						<span class="text-color-primary">COMPARAGROW</span>
-						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
-						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
-					</div></div><div class="owl-item" style="width: 720px; margin-right: 100px;"><div class="text-center">
-            <span class="text-color-primary">COMPARAGROW</span>
-						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
-						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
-					</div></div><div class="owl-item" style="width: 720px; margin-right: 100px;"><div class="text-center">
-            <span class="text-color-primary">COMPARAGROW</span>
-						<h2 class="font-weight-semibold text-10">Te invitamos a publicar en </h2>
-						<p class="lead lead-2 mb-0">nuestra seccion de slider.</p>
-					</div></div></div></div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev disabled"></button><button type="button" role="presentation" class="owl-next"></button></div><div class="owl-dots disabled"></div></div>
+				<div class="owl-stage-outer">
+					<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 2660px; padding-left: 100px; padding-right: 100px;"><div class="owl-item active" style="width: 720px; margin-right: 100px;"><div class="text-center">
+							<span class="text-color-primary"></span>
+							<h2 class="font-weight-semibold text-10" style="color:#fff;">
+								<a href="/publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="background: blueviolet;border-color: blueviolet blueviolet;font-size: 27px;">Publica Aquí</a>
+							</h2>
+							<p class="lead lead-2 mb-0"></p>
+						</div>
+					</div>
+					<div class="owl-item">
+						<div class="text-center">
+	            <span class="text-color-primary"></span>
+							<h2 class="font-weight-semibold text-10" style="color:#fff;">
+								<a href="/publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="background: blueviolet;border-color: blueviolet blueviolet;font-size: 27px;">Publica Aquí</a>
+							</h2>
+							<p class="lead lead-2 mb-0"></p>
+						</div>
+					</div>
+					<div class="owl-item" style="width: 720px; margin-right: 100px;"><div class="text-center">
+	            <span class="text-color-primary"></span>
+							<h2 class="font-weight-semibold text-10" style="color:#fff;">
+								<a href="/publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="background: blueviolet;border-color: blueviolet blueviolet;font-size: 27px;">Publica Aquí</a>
+							</h2>
+							<p class="lead lead-2 mb-0"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="owl-nav"><button type="button" role="presentation" class="owl-prev disabled"></button><button type="button" role="presentation" class="owl-next"></button></div><div class="owl-dots disabled"></div></div>
 
 			</div>
 		</div>

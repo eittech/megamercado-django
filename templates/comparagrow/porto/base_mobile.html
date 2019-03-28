@@ -1,0 +1,301 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<title>ComparaGrow</title>
+
+		<meta name="keywords" content="HTML5 Template" />
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+		<!-- Web Fonts  -->
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="/static/porto/vendor/fontawesome-free/css/all.min.css"> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+
+		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/magnific-popup/magnific-popup.min.css">
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="/static/porto/css/theme.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-elements.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-blog.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-shop.css">
+
+		<!-- Current Page CSS -->
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/settings.css">
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/layers.css">
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/navigation.css">
+
+		<!-- Demo ICO -->
+		<link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
+
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="/static/porto/css/skins/default.css">
+    <!-- <link rel="stylesheet" href="/static/porto/css/skins/skin-real-estate.css"> -->
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="/static/porto/css/custom.css">
+    <!-- <link rel="stylesheet" href="/static/porto/css/demos/demo-real-estate.css"> -->
+
+		{% block csscontent %}
+		{% endblock %}
+
+		<!-- Head Libs -->
+		<script src="/static/porto/vendor/modernizr/modernizr.min.js"></script>
+
+	</head>
+	<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 500}">
+		<div class="loading-overlay">
+			<div class="bounce-loader">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+
+		<div class="body">
+
+			<header id="header" class="header-effect-shrink" data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyChangeLogo': true, 'stickyStartAt': 30, 'stickyHeaderContainerHeight': 70}">
+				<div class="header-body">
+					<div class="header-container container">
+						<div class="header-row">
+							<div class="header-column">
+								<div class="header-row">
+									<div class="header-logo">
+										<a href="index.html">
+											<img alt="Porto"  height="48" data-sticky-height="40" src="{% static 'theme/images/home/logo.png' %}">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="header-row" style="background:#fff;">
+							<div class="header-column justify-content-end" >
+								<div class="header-row">
+									<div class="header-nav header-nav-line header-nav-top-line header-nav-top-line-with-border order-2 order-lg-1">
+										<div class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+											<nav class="collapse">
+												<ul class="nav nav-pills" id="mainNav">
+													{% listado as listado_producto %}
+														{% for genre,structure in listado_producto|tree_info %}
+																{% if genre.level == 0 %}
+																<li class="dropdown dropdown-full-color dropdown-light dropdown-mega">
+																	<a class="dropdown-item dropdown-toggle" href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">
+																		{{ genre.name }}
+																	</a>
+																	{% for item1 in genre.slug|menulevelone:"1" %}
+																		{% if forloop.first %}
+																			<ul class="dropdown-menu">
+																				<li>
+																					<div class="dropdown-mega-content">
+																						<div class="row">
+																		{% endif %}
+
+																						<div class="col-lg-2">
+																							<span class="dropdown-mega-sub-title">
+																							<a class="" style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }} ({{ item1.id|countproductscategory }})</a>
+																							</span>
+																							<ul class="dropdown-mega-sub-nav">
+																								{% for item2 in item1.slug|menulevelone:"2" %}
+																								<li><a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">{{ item2.name }} ({{ item2.id|countproductscategory }})</a></li>
+																								{% endfor %}
+																							</ul>
+																						</div>
+
+																			{% if forloop.last %}
+																						</div>
+																					</div>
+																				</li>
+																			</ul>
+																			{% endif %}
+																	{% endfor %}
+
+																</li>
+																{% endif %}
+														{% endfor %}
+												</ul>
+											</nav>
+										</div>
+										<button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+											<i class="fas fa-bars"></i>
+										</button>
+									</div>
+									<div class="header-nav-features header-nav-features-no-border header-nav-features-lg-show-border order-1 order-lg-2" style="background:#fff;">
+										<div class="header-nav-feature header-nav-features-search d-inline-flex">
+											<a href="#" class="header-nav-features-toggle" data-focus="headerSearch"><img src="{% static 'img/lupa.png' %}" style="height: 21px;"></a>
+											<div class="header-nav-features-dropdown" id="headerTopSearchDropdown">
+												<form role="search" class="d-flex w-100" action="/productos/buscador" method="get">
+													<div class="simple-search input-group w-100">
+														<input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="Busca aqui">
+														<span class="input-group-append bg-light border-0">
+															<button class="btn" type="submit">
+																<img src="{% static 'img/lupa.png' %}" style="height: 21px;">
+															</button>
+														</span>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div role="main" class="main">
+
+          {% block content %}
+
+          {% endblock %}
+
+			</div>
+
+			<footer id="footer" style="background: #672d93;border:none;">
+				<div class="container">
+					<div class="row py-5 my-4">
+						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
+							<h5 class="text-3 mb-3">INFORMACION</h5>
+							<ul class="list-unstyled mb-0">
+								<li class="mb-3">
+									<a href="/quienes-somos">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Quienes Somos</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="/contactanos">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Contactanos</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="/faq">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">FAQ</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="/sitemap">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Mapa del Sitio</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="/terminos-condiciones">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Terminos y Condiciones</strong></p>
+									</a>
+								</li>
+								<!-- <li class="mb-3">
+									<a href="#">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Politica de Privacida</strong></p>
+									</a>
+								</li> -->
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
+							<h5 class="text-3 mb-3">GRUPO PAZ VERDE</h5>
+							<ul class="list-unstyled mb-0">
+								<li class="mb-3">
+									<a href="/clientes">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Conviértete en Cliente</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="#">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Blog</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="#">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Data</strong></p>
+									</a>
+								</li>
+								<li class="mb-3">
+									<a href="/publicidad">
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Publicidad</strong></p>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
+							<h5 class="text-3 mb-3">CONÉCTATE</h5>
+							<ul class="footer-social-icons social-icons social-icons-clean social-icons-big social-icons-opacity-light social-icons-icon-light mt-1">
+								<li class="social-icons-facebook"><a href="http://www.facebook.com/comparagrow" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+								<li class="social-icons-twitter"><a href="http://www.twitter.com/comparagrow" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+								<li class="social-icons-instagram"><a href="http://www.instagram.com/ComparaGrow" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-lg-6">
+							
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- Vendor -->
+		<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
+		<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
+		<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
+		<script src="/static/porto/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+		<script src="/static/porto/vendor/popper/umd/popper.min.js"></script>
+		<script src="/static/porto/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/porto/vendor/common/common.min.js"></script>
+		<script src="/static/porto/vendor/jquery.validation/jquery.validate.min.js"></script>
+		<script src="/static/porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="/static/porto/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+		<script src="/static/porto/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+		<script src="/static/porto/vendor/isotope/jquery.isotope.min.js"></script>
+		<script src="/static/porto/vendor/owl.carousel/owl.carousel.min.js"></script>
+		<script src="/static/porto/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
+		<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
+		<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
+
+		<!-- Theme Base, Components and Settings -->
+		<script src="/static/porto/js/theme.js"></script>
+
+		<!-- Theme Custom -->
+		<script src="/static/porto/js/custom.js"></script>
+
+		<!-- Theme Initialization Files -->
+		<script src="/static/porto/js/theme.init.js"></script>
+
+		<!-- Examples -->
+		<script src="/static/porto/js/examples/examples.instafeed.js"></script>
+
+    {% block js %}
+
+    {% endblock %}
+
+	</body>
+</html>
+
+{% if user.is_authenticated %}
+
+{% else %}
+{% include 'comparagrow/component/modal_register.html' %}
+{% endif %}
+
+{% include 'comparagrow/component/recovery_account.html' %}
