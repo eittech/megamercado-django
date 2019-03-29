@@ -287,7 +287,7 @@ def register_front(request):
         link = 'http://35.185.63.218/users/validate/'+ uid.decode("utf-8") +'/'+ token
 
         msg_html = render_to_string('comparagrow/component/mail.html', {'username': first_name,'link':link})
-        subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'comparagrow420@gmail.com', email
+        subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'contacto@comparagrow.cl', email
         text_content = ''
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
         msg.attach_alternative(msg_html, "text/html")
@@ -328,7 +328,7 @@ def recovery(request):
     link = 'http://35.185.63.218/users/recovery/'+ uid.decode("utf-8") +'/'+ token
 
     msg_html = render_to_string('comparagrow/component/recovery.html', {'username': user.first_name,'link':link})
-    subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'comparagrow420@gmail.com', email
+    subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'contacto@comparagrow.cl', email
     text_content = ''
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(msg_html, "text/html")
