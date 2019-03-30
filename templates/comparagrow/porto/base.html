@@ -85,12 +85,27 @@
 		</div>
 
 		<div class="body">
-
+			{% if user.is_authenticated %}
+			{% if user.groups.all.0|stringformat:"s" != "cliente" %}
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+							<strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzon de spam, en algunos casos llega alli.
+							http://{{ request.get_host }}
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
 			<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 122, 'stickySetTop': '-122px', 'stickyChangeLogo': false}">
 				<div class="header-body border-color-primary border-top-0 box-shadow-none">
           <div class="header-container  z-index-2" style="min-height: 22px; background:#000;">
 
           </div>
+
 					<div class="header-container container z-index-2" style="min-height: 100px;">
 						<div class="header-row">
 							<div class="header-column">

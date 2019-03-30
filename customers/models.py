@@ -48,9 +48,9 @@ class Customer(models.Model):
 
 class MailVerification(models.Model):
     TYPE_TRANSACTION = (
-        ('PASAPORTE', 'Pasaporte'),
-        ('RUT', 'RUT'),
-        ('CEDULA', 'Cedula'),
+        ('REGISTER', 'Registro'),
+        ('LOGIN', 'Login'),
+        ('RECOVERY', 'Recovery'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.CharField(verbose_name="token",max_length=200)

@@ -14,6 +14,7 @@
   <div class="col-6">
     <form action="/register" method="post" class="needs-validation" novalidate style="margin-left:20px; margin-right:20px;">
       {% csrf_token %}
+      <input type="hidden" name="url_base" value="http://{{ request.get_host }}/">
       <div class="form-row">
         <div class="col">
           <div class="input-group">

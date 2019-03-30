@@ -181,19 +181,20 @@ def activationuser(request,uidb64,token):
     from django import http
 
     if uidb64 is not None and token is not None:
-        print("segundo if")
         from django.utils.http import urlsafe_base64_decode
         uid = urlsafe_base64_decode(uidb64)
-        print(uid)
         try:
             from django.contrib.auth import get_user_model
             from django.contrib.auth.tokens import default_token_generator
             user_model = get_user_model()
             user = user_model.objects.get(pk=uid)
             verificacion = MailVerification.objects.get(user=user)
-            if verificacion.token == token and user.is_active == 0:
-                user.is_active = 1
+            if verificacion.token == token and user.is_active == 1:
+                from django.contrib.auth.models import Group
+                my_group = Group.objects.get(name='cliente')
+                user.groups.add(my_group)
                 user.save()
+                verificacion.delete()
                 return render(request, 'comparagrow/validate.html')
                 # return redirect('/')
             else:
@@ -224,6 +225,7 @@ def recoveryuser(request,uidb64,token):
             if user1:
                 request.user = user1
                 auth.login(request, user1)
+                verificacion.delete()
             return redirect('/profile/change/pwd')
             # return redirect('/')
         else:
@@ -237,11 +239,8 @@ def register_front(request):
     if not request.POST :
         return render(request, 'comparagrow/register.html')
     try:
-        print("1")
         username = request.POST['username']
-        print(username)
         email = request.POST['email']
-        print(email)
         password = request.POST['password']
         first_name = request.POST['first_name']
         if username != email:
@@ -250,7 +249,6 @@ def register_front(request):
         return redirect('/?error=not_access_2')
 
     try:
-        print("2")
         birthday = request.POST['birthday']
         if birthday == "":
             birthday = False
@@ -258,16 +256,20 @@ def register_front(request):
         birthday = False
 
     try:
-        print("3")
         gender = request.POST['gender']
     except:
         gender = False
 
     try:
+        url_base = request.POST['url_base']
+    except:
+        url_base = 'htttp://comparagrow.cl/'
+
+    try:
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
         # user = user_model.create_user(username, username, password)
-        user.is_active = 0
+        user.is_active = 1
         user.save()
         customer = Customer()
         customer.user = user
@@ -284,7 +286,8 @@ def register_front(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-        link = 'http://35.185.63.218/users/validate/'+ uid.decode("utf-8") +'/'+ token
+        link = str(url_base) + 'users/validate/'+ uid.decode("utf-8") +'/'+ token
+        print(link)
 
         msg_html = render_to_string('comparagrow/component/mail.html', {'username': first_name,'link':link})
         subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'contacto@comparagrow.cl', email
