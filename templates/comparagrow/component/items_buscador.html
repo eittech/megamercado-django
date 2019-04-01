@@ -54,11 +54,13 @@
                   {% if productos.has_previous %}
                   <!-- <a href="?page=1">&laquo; first</a>
                   <a href="?page={{ productos.previous_page_number }}">previous</a> -->
-									<li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.previous_page_number }}')"><i class="fas fa-angle-left"></i></a></li>
+									<li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','1')"><i class="fas fa-angle-double-left"></i></a></li>
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.previous_page_number }}')"><i class="fas fa-angle-left"></i></a></li>
+
                   {% endif %}
 
                   {% for c in 1|range:productos.paginator.num_pages %}
-                    {% if forloop.counter >= productos.number and forloop.counter <= productos.number|add:"5" %}
+                    {% if forloop.counter >= productos.number|add:"-3" and forloop.counter <= productos.number|add:"3" %}
                       {% if c == productos.number %}
                         <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
                       {% else %}
@@ -72,6 +74,7 @@
                   <li style="padding: 5px;">{{ productos.number }} de {{ productos.paginator.num_pages }} paginas </li>
                   {% if productos.has_next %}
                   <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.next_page_number }}')"><i class="fas fa-angle-right"></i></a></li>
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.num_pages }}')"><i class="fas fa-angle-double-right"></i></a></li>
                   <!-- <a href="?page={{ productos.next_page_number }}">next</a>
                   <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a> -->
                   {% endif %}
