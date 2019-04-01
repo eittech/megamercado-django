@@ -58,11 +58,31 @@
                   {% endif %}
 
                   {% for c in 1|range:productos.paginator.num_pages %}
-                  {% if c == productos.number %}
-                  <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
-                  {% else %}
-                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
-                  {% endif %}
+                    {% if productos.paginator.num_pages > 10 %}
+                      {% if forloop.counter <= 5 %}
+                        {% if c == productos.number %}
+                          <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
+                        {% else %}
+                          <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
+                        {% endif %}
+                      {% else %}
+                        {% if forloop.counter > productos.paginator.num_pages|add:"-5" %}
+                          {% if c == productos.number %}
+                            <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
+                          {% else %}
+                            <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
+                          {% endif %}
+                        {% else %}
+
+                        {% endif %}
+                      {% endif %}
+                    {% else %}
+                      {% if c == productos.number %}
+                      <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
+                      {% else %}
+                      <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
+                      {% endif %}
+                    {% endif %}
                   {% endfor %}
 									<!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
 									<li class="page-item"><a class="page-link" href="#">2</a></li>
