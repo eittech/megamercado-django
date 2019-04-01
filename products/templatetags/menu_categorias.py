@@ -9,6 +9,11 @@ def listado():
     p = Category.objects.all()
     return p
 
+@register.filter(name='range')
+def filter_range(start, end):
+    end = end + 1
+    return range(start, end)
+
 @register.filter(name='tiendascount')
 def tiendas(value):
     p = None

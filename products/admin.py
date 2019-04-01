@@ -13,7 +13,7 @@ class ProductAttributesInline(admin.TabularInline):
     extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
-    list_filter = ('shop', 'category')
+    list_filter = ('photo','shop', 'category')
     list_display = ('name', 'price','tax','total')
     search_fields = ['name']
     inlines = (ProductAttributesInline,ProductImageInline)
@@ -263,5 +263,5 @@ class CategoryTagsAdmin(admin.ModelAdmin):
     list_filter = ('category',)
     list_display = ('tag','category')
     actions =[controlaction,co2action,humedadaction,phecaction,riegoaction,temperaturaaction,temporizadoresaction,cultivoaction,controlplagasaction,fertilizantesaction,herramientascultivoaction,macetasaction,semillasaction,autoflorecientesaction,feminizadasaction,medicinalesaction,sustratosaction,indooraction,carpasaction,iluminacionaction,ballastsaction,bajoconsumoaction,haluroaction,ledaction,sodioaction,reflectoresaction,ventilacionaction,controloloraction,ductosaction,extractoresaction,ventiladoresaction,kitsaction,kitcontrolaction,kitcultivoaction,kitfertilizantesaction,kitherramientasaction,kitiluminacionaction,kitsemillasaction,kitsustratosaction,kitentilacionaction,parafernaliaaction,bongsaction,encendedoresaction,enroladoresaction,moledoresaction,papelillosaction,pipasaction,vaporizadoresaction]
-    
+
 admin.site.register(CategoryTags,CategoryTagsAdmin)

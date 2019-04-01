@@ -16,12 +16,52 @@
 		<meta name="author" content="okler.net">
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+		<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
+		<link rel="icon" type="image/png" href="/static/img/lupa.png">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+		<style>
+			@font-face {
+		 font-family: 'comparagrow-italic-bold';
+		 font-style: normal;
+		 font-weight: normal;
+		 src: url('/static/AvertaDemo/AvertaDemo-ExtraBoldItalic.otf');
+		 }
 
+		 @font-face {
+		font-family: 'comparagrow-regular';
+		font-style: normal;
+		font-weight: normal;
+		src: url('/static/AvertaDemo/AvertaDemo-Regular.otf');
+		}
+
+			.float{
+			position:fixed;
+			width:60px;
+			height:60px;
+			bottom:50px;
+			right:40px;
+			background-color:#25d366;
+			color:#FFF;
+			border-radius:50px;
+			text-align:center;
+			font-size:30px;
+			box-shadow: 2px 2px 3px #999;
+			z-index:100;
+			}
+
+			.my-float{
+			margin-top:16px;
+			}
+			.float:hover{
+				color:#fff !important;
+			}
+			.my-float:hover{
+				color:#fff !important;
+			}
+		</style>
 		<!-- Web Fonts  -->
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
 
@@ -74,6 +114,8 @@
 		<!-- Head Libs -->
 		<script src="/static/porto/vendor/modernizr/modernizr.min.js"></script>
 
+
+
 	</head>
 	<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 500}">
 		<div class="loading-overlay">
@@ -87,13 +129,13 @@
 		<div class="body">
 			{% if user.is_authenticated %}
 			{% if user.groups.all.0|stringformat:"s" != "cliente" %}
-			<div class="container">
+			<div class="container" style="position: absolute;z-index: 10000;">
 				<div class="row">
 					<div class="col">
 						<div class="alert alert-danger alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-							<strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzon de spam, en algunos casos llega alli.
-							http://{{ request.get_host }}
+							<strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzón de spam, en algunos casos llega allí.
+							<!-- http://{{ request.get_host }} -->
 						</div>
 					</div>
 				</div>
@@ -128,7 +170,7 @@
 												<i class="fas fa-cannabis text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;cursor:pointer;"></i>Perfil</span>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<a class="dropdown-item" href="/profile">Mi perfil</a>
-									        <a class="dropdown-item" href="/logout">Cerrar sesion</a>
+									        <a class="dropdown-item" href="/logout">Cerrar sesión</a>
 												</div>
 												</div>
 
@@ -238,8 +280,10 @@
 										<div class="header-column order-1 order-lg-2">
 											<div class="header-row justify-content-end">
 												<div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
-													<form role="search" class="d-flex w-100" action="/productos/buscador" method="get">
+													<form role="search" class="d-flex w-100" action="/productos/buscador" method="post">
+														{% csrf_token %}
 														<div class="simple-search input-group w-100">
+
 															<input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="Busca aqui">
 															<span class="input-group-append bg-light border-0">
 																<button class="btn" type="submit">
@@ -267,11 +311,17 @@
 
 			</div>
 
+
+			<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+<a href="https://api.whatsapp.com/send?phone=56979670520&text=Hola!!" class="float" target="_blank">
+<i class="fab fa-whatsapp my-float"></i>
+</a>
+
 			<footer id="footer" style="background: #672d93;border:none;">
 				<div class="container">
 					<div class="row py-5 my-4">
 						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
-							<h5 class="text-3 mb-3">INFORMACION</h5>
+							<h5 class="text-3 mb-3">INFORMACIÓN</h5>
 							<ul class="list-unstyled mb-0">
 								<li class="mb-3">
 									<a href="/quienes-somos">
@@ -280,7 +330,7 @@
 								</li>
 								<li class="mb-3">
 									<a href="/contactanos">
-										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Contactanos</strong></p>
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Contáctanos</strong></p>
 									</a>
 								</li>
 								<li class="mb-3">
@@ -295,7 +345,7 @@
 								</li>
 								<li class="mb-3">
 									<a href="/terminos-condiciones">
-										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Terminos y Condiciones</strong></p>
+										<p class="text-3 text-color-light opacity-8 mb-1"><i class="fas fa-angle-right text-color-primary"></i><strong class="ml-2">Términos y Condiciones</strong></p>
 									</a>
 								</li>
 								<!-- <li class="mb-3">

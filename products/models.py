@@ -87,6 +87,7 @@ class Product(models.Model):
     brand = models.CharField(verbose_name="Marca",max_length=200,blank=True)
     url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
+    photo = models.BooleanField(verbose_name="Tiene fotos",blank=True,null=True,default=False)
     category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE,null=True)
     category_temp = models.CharField(verbose_name="Categoria Anterior",max_length=200,blank=True)
     price = models.FloatField()
@@ -148,6 +149,15 @@ class AlertsProduct(models.Model):
     product= models.ForeignKey(Product,on_delete=models.CASCADE)
     type = models.CharField(verbose_name="Tipo",max_length=20,choices=TYPE_ALERT)
     content = models.CharField(verbose_name="Contenido",max_length=150,blank=True, null= True)
+
+@receiver(post_save, sender=ProductImage, dispatch_uid="update_photo_product")
+def update_photo_product(sender, instance, **kwargs):
+    try:
+        product = Product.objects.get(pk=instance.product.id)
+        product.photo = True
+        product.save()
+    except:
+        print('error save photo')
 
 @receiver(post_save, sender=Product, dispatch_uid="update_history_price")
 def update_history_price(sender, instance, **kwargs):

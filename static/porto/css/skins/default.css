@@ -1,9 +1,11 @@
 a {
-	color: #0088CC;
+	/* color: #0088CC; */
+	color: #01b22c;
 }
 
 a:hover {
-	color: #0099e6;
+	/* color: #0099e6; */
+	color: #672d93;
 }
 
 a:focus {
@@ -285,7 +287,7 @@ html .blockquote-light {
 }
 
 p.drop-caps:first-letter {
-	color: #0088CC;
+	color: #01b22c;
 }
 
 p.drop-caps.drop-caps-style-2:first-letter {
@@ -1526,7 +1528,7 @@ html .btn-with-arrow.btn-light.btn-outline:hover span {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-	color: #0088CC;
+	color: #01b22c;
 }
 
 .pagination > .active > a,
@@ -1536,8 +1538,8 @@ html .btn-with-arrow.btn-light.btn-outline:hover span {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus,
 .pagination .page-item.active .page-link {
-	background-color: #0088CC !important;
-	border-color: #0088CC;
+	background-color: #01b22c !important;
+	border-color: #01b22c;
 }
 
 body.dark .pagination > li > a,
@@ -2457,8 +2459,10 @@ html .inverted-light {
 }
 
 .owl-carousel .owl-nav button[class*="owl-"] {
-	background-color: #0088CC;
-	border-color: #0088CC #0088CC #006699;
+	/* background-color: #0088CC;
+	border-color: #0088CC #0088CC #006699; */
+	background-color: #01b22c;
+	border-color: #01b22c #01b22c #01b22c;
 	color: #FFF;
 }
 
@@ -2481,14 +2485,17 @@ html .inverted-light {
 
 .owl-carousel.nav-style-1 .owl-nav .owl-next,
 .owl-carousel.nav-style-1 .owl-nav .owl-prev {
-	color: #0088CC !important;
+	/* color: #0088CC !important; */
+	color: #01b22c !important;
+
 }
 
 .owl-carousel.nav-style-2 .owl-nav .owl-next:before,
 .owl-carousel.nav-style-2 .owl-nav .owl-prev:before,
 .owl-carousel.nav-style-2 .owl-nav .owl-next:after,
 .owl-carousel.nav-style-2 .owl-nav .owl-prev:after {
-	border-color: #0088CC;
+	/* border-color: #0088CC; */
+	border-color: #01b22c;
 }
 
 html body .tabs .nav-tabs .nav-link,
@@ -2497,7 +2504,9 @@ html body .tabs .nav-tabs .nav-link:hover,
 html.dark body .tabs .nav-tabs .nav-link:hover,
 html body .tabs .nav-tabs li.active .nav-link,
 html.dark body .tabs .nav-tabs li.active .nav-link {
-	color: #0088CC;
+	/* color: #0088CC; */
+	color: #01b22c;
+
 }
 
 html body .tabs .nav-tabs .nav-link:hover,
@@ -2510,7 +2519,8 @@ html body .tabs .nav-tabs.nav-justified .nav-link:hover,
 html.dark body .tabs .nav-tabs.nav-justified .nav-link:hover,
 html body .tabs .nav-tabs.nav-justified .nav-link:focus,
 html.dark body .tabs .nav-tabs.nav-justified .nav-link:focus {
-	border-top-color: #0088CC;
+	/* border-top-color: #0088CC; */
+	border-top-color: #01b22c;
 }
 
 html body .tabs.tabs-bottom .nav-tabs li .nav-link:hover,
@@ -2521,7 +2531,9 @@ html body .tabs.tabs-bottom .nav-tabs li.active .nav-link:hover,
 html.dark body .tabs.tabs-bottom .nav-tabs li.active .nav-link:hover,
 html body .tabs.tabs-bottom .nav-tabs li.active .nav-link:focus,
 html.dark body .tabs.tabs-bottom .nav-tabs li.active .nav-link:focus {
-	border-bottom-color: #0088CC;
+	/* border-bottom-color: #0088CC; */
+	border-bottom-color: #01b22c;
+
 }
 
 html body .tabs.tabs-vertical.tabs-left .nav-tabs li .nav-link:hover,

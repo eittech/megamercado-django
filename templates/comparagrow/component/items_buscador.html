@@ -3,16 +3,16 @@
 {% load humanize %}
 <div class="row article">
   {% for item in productos %}
-  <div class="col-2" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
+  <div class="col-sm-3 col-lg-2" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
     <div class="card-deck" style="font-weight: 100;">
       <div class="card" style="    border:none;">
         <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
           <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
         </div>
         <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);max-height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
+          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
         </a>
-        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 37px;font-weight: 100;">
+        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 37px;font-weight: 100;line-height: 14px;">
           <span class="" style="color:#01b22c;">
             <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
           </span>
@@ -27,17 +27,18 @@
             <div class="col">
               {% if user.is_authenticated %}
               <a onclick="FavoriteProduct('{{ item.id }}')">
-              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;" id="favorite_{{ item.id }}"></i>
+              <i class="far fa-heart" style="font-size: 19px;color:#672d93;" id="favorite_{{ item.id }}"></i>
               </a>
               {% else %}
               <a data-toggle="modal" data-target="#modal_login">
-              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;"></i>
+              <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
               </a>
               {% endif %}
             </div>
-            <div class="col text-right">
+            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
               <a href="/productos/detalle/{{ item.id }}" target="_blank">
-              <img src="/static/img/lupa.png" alt="" style="height: 25px;font-weight: 100;">
+              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;font-weight: 100;"> -->
+              ver detalle
               </a>
             </div>
         </div>
@@ -47,20 +48,35 @@
   </div> <!-- col // -->
   {% endfor %}
 </div>
-<div class="scroller-status">
-  <div class="infinite-scroll-request loader-ellips">
-    <!-- <img src="/static/img/load.gif" alt=""> -->
-  </div>
+<div class="row">
+							<div class="col">
+								<ul class="pagination float-right">
+                  {% if productos.has_previous %}
+                  <!-- <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ productos.previous_page_number }}">previous</a> -->
+									<li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.previous_page_number }}')"><i class="fas fa-angle-left"></i></a></li>
+                  {% endif %}
 
-</div>
+                  {% for c in 1|range:productos.paginator.num_pages %}
+                  {% if c == productos.number %}
+                  <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+									<!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li> -->
 
-<p class="pagination">
-  {% if productos.has_next %}
-  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page={{ productos.next_page_number }}">Siguiente</a>
-  {% else% }
-  <a class="pagination__next" href="{{ pagina }}{{ pagina_shop }}{{ pagina_category }}&page=1">Siguiente</a>
-  {% endif %}
-</p>
+                  {% if productos.has_next %}
+                  <a class="page-link" onclick="enviarFiltros('page_id','{{ productos.next_page_number }}')"><i class="fas fa-angle-right"></i></a>
+                  <!-- <a href="?page={{ productos.next_page_number }}">next</a>
+                  <a href="?page={{ productos.paginator.num_pages }}">last &raquo;</a> -->
+                  {% endif %}
+
+								</ul>
+							</div>
+						</div>
 <!-- <div class="pagination">
   <span class="step-links">
       {% if productos.has_previous %}

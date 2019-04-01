@@ -78,7 +78,7 @@
 		        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 		          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
 		        </a>
-		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;">
+		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
 		            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
 		          </span>
@@ -92,18 +92,18 @@
 		          <div class="row">
 		            <div class="col">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('{{ item.id }}')">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;" id="favorite_{{ item.id }}"></i>
+		              <a onclick="FavoriteProduct('de{{ item.id }}','{{ item.id }}')">
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;" id="favorite_de{{ item.id }}"></i>
 		              </a>
 		              {% else %}
 		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;"></i>
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
 		              </a>
 		              {% endif %}
 		            </div>
-		            <div class="col text-right">
+		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
 		              <a href="/productos/detalle/{{ item.id }}" target="_blank">
-		              <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;">
+		              ver detalle
 		              </a>
 		            </div>
 		        </div>
@@ -136,7 +136,7 @@
 		        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 		          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
 		        </a>
-		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;">
+		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
 		            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
 		          </span>
@@ -150,18 +150,19 @@
 		          <div class="row">
 		            <div class="col">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('{{ item.id }}')">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;" id="favorite_{{ item.id }}"></i>
+		              <a onclick="FavoriteProduct('ur{{ item.id }}','{{ item.id }}')">
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;" id="favorite_ur{{ item.id }}"></i>
 		              </a>
 		              {% else %}
 		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;"></i>
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
 		              </a>
 		              {% endif %}
 		            </div>
-		            <div class="col text-right">
+		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
 		              <a href="/productos/detalle/{{ item.id }}" target="_blank">
-		              <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;">
+		              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;"> -->
+									ver detalle
 		              </a>
 		            </div>
 		        </div>
@@ -194,7 +195,7 @@
 		        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 		          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
 		        </a>
-		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;">
+		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
 		            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#777;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
 		          </span>
@@ -208,18 +209,19 @@
 		          <div class="row">
 		            <div class="col">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('{{ item.id }}')">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;" id="favorite_{{ item.id }}"></i>
+		              <a onclick="FavoriteProduct('at{{ item.id }}','{{ item.id }}')">
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;" id="favorite_at{{ item.id }}"></i>
 		              </a>
 		              {% else %}
 		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="far fa-heart" style="font-size: 19px;color:#775;font-weight: 100;"></i>
+		              <i class="far fa-heart" style="font-size: 19px;color:#672d93;"></i>
 		              </a>
 		              {% endif %}
 		            </div>
-		            <div class="col text-right">
+		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
 		              <a href="/productos/detalle/{{ item.id }}" target="_blank">
-		              <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;">
+		              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;"> -->
+									ver detalle
 		              </a>
 		            </div>
 		        </div>
@@ -236,4 +238,35 @@
 
 {% block js %}
 <script src="/static/porto/js/examples/examples.carousels.js"></script>
+<script src="/static/js/notify.js"></script>
+
+<script>
+	function FavoriteProduct(idi,id){
+		$.ajax({
+      method: "GET",
+      url: "/productos/favorito/"+id,
+    })
+      .done(function( msg ) {
+          $.notify(msg.text, msg.status);
+					console.log(msg.type)
+					if(msg.type=="add"){
+						console.log('add');
+						console.log('#favorite_'+id);
+						$('#favorite_'+idi).removeClass("fas fa-heart");
+						$('#favorite_'+idi).addClass("far fa-heart");
+					}
+					if(msg.type=="del"){
+						console.log('del');
+						console.log('#favorite_'+idi);
+						$('#favorite_'+idi).removeClass("far fa-heart");
+						$('#favorite_'+idi).addClass("fas fa-heart");
+					}
+					if(msg.type=="not"){
+						console.log('not');
+						console.log('#favorite_'+id);
+					}
+    });
+
+	}
+</script>
 {% endblock %}

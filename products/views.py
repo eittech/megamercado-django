@@ -37,8 +37,8 @@ def buscador(request):
     pagina = "buscador?"
     categoria = ""
     tienda = ""
-    if request.GET.get('texto'):
-        texto_t = request.GET.get('texto')
+    if request.POST.get('texto'):
+        texto_t = request.POST.get('texto')
         texto = texto_t.rstrip().lower()
         pagina = pagina + "texto=" + texto
     else:
@@ -52,15 +52,15 @@ def buscador(request):
     # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
     productos_lista = Product.objects.filter(category__isnull=False)
 
-    productos_lista = productos_lista.filter(name__icontains=texto)
+    productos_lista = productos_lista.filter(name__icontains=texto).order_by('-photo')
     tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
     categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
     marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
     shop_id = False
     tienda = []
-    if request.GET.getlist('checkbox_shop[]'):
-        for ck in request.GET.getlist('checkbox_shop[]'):
+    if request.POST.getlist('checkbox_shop[]'):
+        for ck in request.POST.getlist('checkbox_shop[]'):
             tienda.append(int(ck))
         try:
             shop_id = Shop.objects.filter(pk__in=tienda)
@@ -75,8 +75,8 @@ def buscador(request):
 
 
     marca = []
-    if request.GET.getlist('checkbox_marca[]'):
-        for ck in request.GET.getlist('checkbox_marca[]'):
+    if request.POST.getlist('checkbox_marca[]'):
+        for ck in request.POST.getlist('checkbox_marca[]'):
             marca.append(str(ck))
     if marca:
         print("tienda paso 3")
@@ -88,8 +88,8 @@ def buscador(request):
 
     categoria_id = False
     categoria = []
-    if request.GET.getlist('checkbox_categoria[]'):
-        for ck in request.GET.getlist('checkbox_categoria[]'):
+    if request.POST.getlist('checkbox_categoria[]'):
+        for ck in request.POST.getlist('checkbox_categoria[]'):
             categoria.append(int(ck))
         try:
             categoria_id = Category.objects.filter(pk__in=categoria)
@@ -102,12 +102,12 @@ def buscador(request):
         productos_lista = productos_lista.filter(category__in=categoria_id)
         pagina_category = ""
 
-    if request.GET.get('min_price'):
-        min_price = request.GET.get('min_price')
+    if request.POST.get('min_price'):
+        min_price = request.POST.get('min_price')
     else:
         min_price = None
-    if request.GET.get('max_price'):
-        max_price = request.GET.get('max_price')
+    if request.POST.get('max_price'):
+        max_price = request.POST.get('max_price')
     else:
         max_price = None
     if max_price is not None and min_price is not None:
@@ -128,8 +128,8 @@ def buscador(request):
                 min_price = ""
     # filter(pub_date__range=(start_date, end_date))
 
-    if request.GET.get('order_by'):
-        order_by = request.GET.get('order_by')
+    if request.POST.get('order_by'):
+        order_by = request.POST.get('order_by')
         if order_by == "min":
             productos_lista = productos_lista.order_by('total')
         if order_by == "max":
@@ -140,8 +140,8 @@ def buscador(request):
         order_by = "min"
 
 
-    paginator = Paginator(productos_lista, 40)
-    page = request.GET.get('page')
+    paginator = Paginator(productos_lista, 20)
+    page = request.POST.get('page')
     if page is not None:
         if request.is_ajax():
             template = "comparagrow/buscador.html"
@@ -190,8 +190,8 @@ def categorias(request,slug):
     pagina = "?"
     tienda = ""
     categoria = ""
-    if request.GET.get('texto'):
-        texto = request.GET.get('texto')
+    if request.POST.get('texto'):
+        texto = request.POST.get('texto')
         pagina = pagina + "texto=" + texto
     else:
         texto = ""
@@ -204,7 +204,7 @@ def categorias(request,slug):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_shop = servicecontractshop.values('shop__pk')
     # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
-    productos_lista = Product.objects.filter()
+    productos_lista = Product.objects.filter().order_by('-photo')
 
 
     productos_lista = productos_lista.filter(category__in=children)
@@ -218,8 +218,8 @@ def categorias(request,slug):
     # categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category'))
     shop_id = False
     tienda = []
-    if request.GET.getlist('checkbox_shop[]'):
-        for ck in request.GET.getlist('checkbox_shop[]'):
+    if request.POST.getlist('checkbox_shop[]'):
+        for ck in request.POST.getlist('checkbox_shop[]'):
             tienda.append(int(ck))
         try:
             shop_id = Shop.objects.filter(pk__in=tienda)
@@ -234,8 +234,8 @@ def categorias(request,slug):
 
 
     marca = []
-    if request.GET.getlist('checkbox_marca[]'):
-        for ck in request.GET.getlist('checkbox_marca[]'):
+    if request.POST.getlist('checkbox_marca[]'):
+        for ck in request.POST.getlist('checkbox_marca[]'):
             marca.append(str(ck))
     if marca:
         print("tienda paso 3")
@@ -246,8 +246,8 @@ def categorias(request,slug):
 
     categoria_id = False
     categoria_filtro = []
-    if request.GET.getlist('checkbox_categoria[]'):
-        for ck in request.GET.getlist('checkbox_categoria[]'):
+    if request.POST.getlist('checkbox_categoria[]'):
+        for ck in request.POST.getlist('checkbox_categoria[]'):
             categoria_filtro.append(int(ck))
         try:
             categoria_id = Category.objects.filter(pk__in=categoria_filtro)
@@ -260,12 +260,12 @@ def categorias(request,slug):
         productos_lista = productos_lista.filter(category__in=categoria_id)
         pagina_category = ""
 
-    if request.GET.get('min_price'):
-        min_price = request.GET.get('min_price')
+    if request.POST.get('min_price'):
+        min_price = request.POST.get('min_price')
     else:
         min_price = None
-    if request.GET.get('max_price'):
-        max_price = request.GET.get('max_price')
+    if request.POST.get('max_price'):
+        max_price = request.POST.get('max_price')
     else:
         max_price = None
     if max_price is not None and min_price is not None:
@@ -286,8 +286,8 @@ def categorias(request,slug):
                 min_price = ""
     # filter(pub_date__range=(start_date, end_date))
 
-    if request.GET.get('order_by'):
-        order_by = request.GET.get('order_by')
+    if request.POST.get('order_by'):
+        order_by = request.POST.get('order_by')
         if order_by == "min":
             productos_lista = productos_lista.order_by('total')
         if order_by == "max":
@@ -299,8 +299,8 @@ def categorias(request,slug):
     # order_by = "min"
 
 
-    paginator = Paginator(productos_lista, 40)
-    page = request.GET.get('page')
+    paginator = Paginator(productos_lista, 20)
+    page = request.POST.get('page')
     if page is not None:
         if request.is_ajax():
             template = "comparagrow/component/items_buscador.html"

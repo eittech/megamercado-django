@@ -20,21 +20,25 @@
 
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-lg-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
+					<div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
 						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
-						<form id="formulario_filtro" method="get" action="{{ pagina }}{{ pagina_shop }}">
+						<!-- <form id="formulario_filtro" method="get" action="{{ pagina }}{{ pagina_shop }}"> -->
+							<form id="formulario_filtro" method="post" action="">
 
+							{% csrf_token %}
 							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
 							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
 							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
 							<input type="hidden" name="marca" id="marca_form_id" value="{{ marca }}">
+							<input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
-							<div class="form-check mb-2" style="display: flex;">
+							<div class="form-check mb-2" style="display: flex;margin-left: -25px">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
-						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
 							</div>
+							<button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">aplicar</button>
+
 							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 							{% if categorias.count > 5 %}
 								<ul style="
@@ -144,15 +148,15 @@ list-style: none;
 						</form>
 
 					</div> <!-- col.// -->
-					<div class="col-xs-12 col-sm-12 col-lg-10">
+					<div class="col-sm-12 col-md-10">
 						<div class="row">
-							<div class="col-8">
+							<div class="col-sm-12 col-md-6">
 
 								<h4 style="margin-top:15px; font-weight: 200;">
 								{{ texto }}
 								</h4>
 							</div>
-							<div class="col-4 text-right">
+							<div class="col-sm-12 col-md-6 text-right">
 								<div class="btn-group" role="group" style="
     margin-right: 30px;
     margin-top: 10px;
@@ -224,14 +228,14 @@ font-weight: 100;
 					if(msg.type=="add"){
 						console.log('add');
 						console.log('#favorite_'+id);
-						$('#favorite_'+id).removeClass("fas fa-minus-circle text-danger");
+						$('#favorite_'+id).removeClass("fas fa-heart");
 						$('#favorite_'+id).addClass("far fa-heart");
 					}
 					if(msg.type=="del"){
 						console.log('del');
 						console.log('#favorite_'+id);
 						$('#favorite_'+id).removeClass("far fa-heart");
-						$('#favorite_'+id).addClass("fas fa-minus-circle text-danger");
+						$('#favorite_'+id).addClass("fas fa-heart");
 					}
 					if(msg.type=="not"){
 						console.log('not');

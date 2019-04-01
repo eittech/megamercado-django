@@ -26,7 +26,7 @@
 </section> -->
 <div class="container">
 
-	<div class="row">
+	<div class="row" style="max-height: 670px;margin-top: 15px;">
 		<div class="col-lg-6">
 
 			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1}">
@@ -86,17 +86,20 @@
 					</span>
 				</div>
 				<p class="mb-4"></p>
-				<a class="btn btn-primary" target="_blank" href="/productos/redirect/{{ producto.id }}" style="width: 100%;background-color: #672d93;border-color: #672d93;">Comprar Ahora en Tienda</a>
+				<a class="btn btn-primary" target="_blank" href="/productos/redirect/{{ producto.id }}" style="width: 100%;background-color: #672d93;border-color: #672d93;">Ir a Tienda</a>
 
 				<p class="mb-4"></p>
 				{% if user.is_authenticated %}
 				<a onclick="FavoriteProduct('{{ producto.id }}')" class="btn btn-primary" style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">Recibir Ofertas</a>
 				{% else %}
-				<a class="btn btn-primary"  data-toggle="modal" data-target="#modal_login" style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">Recibir Ofertas</a>
+				<a class="btn btn-primary"  data-toggle="modal" data-target="#modal_login" style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">
+					<i class="far fa-heart"></i>
+					Recibir Ofertas
+				</a>
 				{% endif %}
 				<p class="mb-4"></p>
 				<h4>Historico de <strong>precios</strong></h4>
-				<div class="ct-chart ct-perfect-fourth"></div>
+				<div class="ct-chart ct-perfect-fourth" style="height:250px !important;"></div>
 			</div>
 
 

@@ -16,25 +16,35 @@
 					document.getElementById(filtro).value = valor;
 					$('#formulario_filtro').submit();
 				}
+				function checkboxFilter(filtro){
+					if($(filtro).is(':checked')){
+						$(filtro).attr('checked', false);
+					}else{
+						$(filtro).attr('checked', true);
+					}
+					$('#formulario_filtro').submit();
+				}
 			</script>
 
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-lg-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
+					<div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
 						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
-						<form id="formulario_filtro" method="get" action="{{ pagina }}{{ pagina_shop }}">
-
+						<form id="formulario_filtro" method="post" action="">
+							{% csrf_token %}
 							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
 							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
 							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
 							<input type="hidden" name="marca" id="marca_form_id" value="{{ marca }}">
+							<input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
+
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
-							<div class="form-check mb-2" style="display: flex;">
+							<div class="form-check mb-2" style="display: flex;margin-left: -25px">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
-						  <button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">Ir</button>
 							</div>
+							<button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">aplicar</button>
 
 							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 							{% if categorias2.count > 5 %}
@@ -78,15 +88,13 @@
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">TIENDAS</h6>
 
 						{% if tiendas.count > 5 %}
-							<ul style="
-						overflow: auto;
-						height: 139px;
+						<ul style="
 						font-size: 14px;
-font-family: sans-serif;
-font-weight: 100;
-list-style: none;
-    margin-left: -25px;
-						">
+			font-family: sans-serif;
+			font-weight: 100;
+			list-style: none;
+			margin-left: -25px;
+">
 						{% else %}
 						<ul style="
 						font-size: 14px;
@@ -97,31 +105,73 @@ list-style: none;
 ">
 						{% endif %}
 							{% for shop in tiendas %}
+							{% if forloop.counter < 6 %}
 							<li class="p-b-6">
 							{% if shop.shop__pk in tienda %}
-							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="checkboxFilter('#checkbox_shop_{{ forloop.counter }}')" type="checkbox" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
 								{{ shop.shop__name }}  ({{ shop.dcount }})
 							</a>
 							{% else %}
-							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('tienda_form_id','{{ shop.shop__pk }}')" type="checkbox" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">
+							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="checkboxFilter('#checkbox_shop_{{ forloop.counter }}')" type="checkbox" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">
 								{{ shop.shop__name }} ({{ shop.dcount }})
 							</a>
 							{% endif %}
 							</li>
-							{% endfor %}
-						</ul>
+							{% endif %}
 
+							{% endfor %}
+							<li><a data-toggle="modal" data-target="#shoplistmodal" style="color:#672d93; cursor:pointer;">Ver todas las tiendas</a></li>
+
+						</ul>
+						<div class="modal fade" id="shoplistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="largeModalLabel">Lista de Tiendas</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+										{% for shop in tiendas %}
+
+										<div class="col-sm-3">
+										{% if shop.shop__pk in tienda %}
+										<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;">
+											<input type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+											{{ shop.shop__name }}  ({{ shop.dcount }})
+										</a>
+										{% else %}
+										<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;">
+											<input type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">
+											{{ shop.shop__name }} ({{ shop.dcount }})
+										</a>
+										{% endif %}
+										</div>
+										{% endfor %}
+									</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-light" data-dismiss="modal"
+										style="    background-color: #01b22c;
+    border: #01b22c;
+    color: #fff;">Cerrar</button>
+										<button type="submit" class="btn btn-light"
+										style="    background-color: #672d93;
+    border: #672d93;
+    color: #fff;">Filtrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">MARCAS</h6>
 
 						{% if marcas.count > 5 %}
-							<ul style="
-    overflow: auto;
-    height: 139px;
-		font-size: 14px;
-font-family: sans-serif;
-font-weight: 100;
-list-style: none;
-    margin-left: -25px;
+						<ul style="
+						font-size: 14px;
+			font-family: sans-serif;
+			font-weight: 100;
+			list-style: none;
+			margin-left: -25px;
 ">
 						{% else %}
 						<ul style="
@@ -133,30 +183,82 @@ list-style: none;
 ">
 						{% endif %}
 							{% for marc in marcas %}
+							{% if forloop.counter < 6 %}
+
 							{% if marc.brand == "" %}
 
 							{% else %}
 							<li class="p-b-6">
 							{% if marc.brand in marca %}
-							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">
+							<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input onclick="checkboxFilter('#checkbox_marca_{{ forloop.counter }}')" type="checkbox" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">
 								{{ marc.brand }} ({{ marc.dcount }})
 							</a>
 							{% else %}
-							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="enviarFiltros('marca_form_id','{{ marc.brand }}')" type="checkbox" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">
+							<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input onclick="checkboxFilter('#checkbox_marca_{{ forloop.counter }}')" type="checkbox"  value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">
 								{{ marc.brand }} ({{ marc.dcount }})
 							</a>
 							{% endif %}
 							</li>
 							{% endif %}
+							{% endif %}
+
 							{% endfor %}
+							<li><a data-toggle="modal" data-target="#brandlistmodal" style="color:#672d93; cursor:pointer;">Ver todas las marcas</a></li>
 						</ul>
 
+						<div class="modal fade" id="brandlistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="largeModalLabel">Lista de Marcas</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+										<div class="row">
+											{% for marc in marcas %}
+											{% if marc.brand == "" %}
+
+											{% else %}
+											{% if marc.brand in marca %}
+											<div class="col-sm-3">
+
+											<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;"><input type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">
+												{{ marc.brand }} ({{ marc.dcount }})
+											</a>
+										</div>
+
+											{% else %}
+											<div class="col-sm-3">
+
+											<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;"><input type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">
+												{{ marc.brand }} ({{ marc.dcount }})
+											</a>
+										</div>
+
+											{% endif %}
+											{% endif %}
+											{% endfor %}
+									</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-light" data-dismiss="modal"
+										style="    background-color: #01b22c;
+    border: #01b22c;
+    color: #fff;">Cerrar</button>
+										<button type="submit" class="btn btn-light"
+										style="    background-color: #672d93;
+    border: #672d93;
+    color: #fff;">Filtrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
 						</form>
 
 					</div> <!-- col.// -->
-					<div class="col-xs-12 col-sm-12 col-lg-10">
+					<div class="col-sm-12 col-md-10">
 						<div class="row">
-							<div class="col-8">
+							<div class="col-sm-12 col-md-6">
 								{% for item in categorias.get_ancestors %}
 								<a href="/productos/categorias/{{ item.slug }}" style="    font-family: sans-serif;
     font-weight: 100;
@@ -169,7 +271,7 @@ list-style: none;
 								{{ categorias.name }}
 								</h4>
 							</div>
-							<div class="col-4 text-right">
+							<div class="col-sm-12 col-md-6 text-right">
 								<div class="btn-group" role="group" style="
     margin-right: 30px;
     margin-top: 10px;
@@ -220,7 +322,7 @@ font-weight: 100;
 
 {% block js %}
 <script src="/static/js/notify.js"></script>
-<script src="/static/js/infinite-scroll.pkgd.min.js"></script>
+<!-- <script src="/static/js/infinite-scroll.pkgd.min.js"></script>
 <script type="text/javascript">
   $('.article-feed').infiniteScroll({
     path: '.pagination__next',
@@ -228,7 +330,7 @@ font-weight: 100;
     status: '.scroller-status',
     hideNav: '.pagination',
   });
-</script>
+</script> -->
 <script>
 	function FavoriteProduct(id){
 		$.ajax({
@@ -241,14 +343,14 @@ font-weight: 100;
 					if(msg.type=="add"){
 						console.log('add');
 						console.log('#favorite_'+id);
-						$('#favorite_'+id).removeClass("fas fa-minus-circle text-danger");
+						$('#favorite_'+id).removeClass("fas fa-heart");
 						$('#favorite_'+id).addClass("far fa-heart");
 					}
 					if(msg.type=="del"){
 						console.log('del');
 						console.log('#favorite_'+id);
 						$('#favorite_'+id).removeClass("far fa-heart");
-						$('#favorite_'+id).addClass("fas fa-minus-circle text-danger");
+						$('#favorite_'+id).addClass("fas fa-heart");
 					}
 					if(msg.type=="not"){
 						console.log('not');
