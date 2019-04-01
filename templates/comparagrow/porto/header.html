@@ -1,0 +1,183 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% load cache %}
+{% if user.is_authenticated %}
+{% if user.groups.all.0|stringformat:"s" != "cliente2" %}
+<div class="container" style="position: absolute;z-index: 10000;">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzón de spam, en algunos casos llega allí.<i class="fas fa-cannabis"></i> <i class="far fa-cannabis"></i>
+        <!-- http://{{ request.get_host }} -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 122, 'stickySetTop': '-122px', 'stickyChangeLogo': false}">
+  <div class="header-body border-color-primary border-top-0 box-shadow-none">
+    <div class="header-container  z-index-2" style="min-height: 22px; background:#000;">
+
+    </div>
+
+    <div class="header-container container z-index-2" style="min-height: 100px;">
+      <div class="header-row">
+        <div class="header-column">
+          <div class="header-row">
+            <h1 class="header-logo">
+              <a href="/">
+                <img style="height: 68px;" src="{% static 'theme/images/home/logo.png' %}">
+                <span class="hide-text">ComparaGrow</span>
+              </a>
+            </h1>
+          </div>
+        </div>
+        <div class="header-column justify-content-end">
+          <div class="header-row">
+            {% if user.is_authenticated %}
+            <ul style="display: flex;list-style: none;">
+              <li class="dropdown" style="margin-right: 11px !important;cursor:pointer;">
+                <div class="dropdown">
+                <span class="pl-0" style="font-size: 16px;cursor:pointer;color: #672d93;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cannabis text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;cursor:pointer;"></i>Perfil</span>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/profile">Mi perfil</a>
+                    <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+                  </div>
+                  </div>
+
+              </li>
+              <li class="" style="margin-right: 11px !important;">
+
+                <span class="pl-0" style="font-size: 16px;" >
+                  <a href="/productos/favoritos/" style="text-decoration:none;color: #777;color: #672d93;">
+                  <i class="fas fa-heart text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>Favoritos
+                  </a>
+                  </span>
+
+              </li>
+              <li class="" style="margin-right: 11px !important;">
+                <a class="pl-0" href="/alertas" style="font-size: 16px;color: #672d93;">
+                  <i class="fas fa-bell text-4" style="top: 1px;margin-right: 5px;font-size: 20px !important;color: #01b22c;"></i>
+                  Alertas
+                  {% autoescape off %}
+                  {{ user.id|alertasproductos }}
+                  {% endautoescape %}
+                </a>
+
+              </li>
+            </ul>
+
+            {% else %}
+            <h2 class="word-rotator clip is-full-width mb-2">
+              <span><a style="text-decoration:none;color: #000;cursor:pointer;" data-toggle="modal" data-target="#modal_login">Inicia </a></span>
+              <span class="word-rotator-words">
+
+                <b class="is-visible" style="color:#01b22c;cursor:pointer;"><a style="text-decoration:none;color:#01b22c;cursor:pointer;" data-toggle="modal" data-target="#modal_login">sesion</a></b>
+                <b class="" style="color:#672d93;cursor:pointer;"><a style="text-decoration:none;color:#672d93;cursor:pointer;" data-toggle="modal" data-target="#modal_login">aqui</a></b>
+                <!-- <b class="text-color-primary">extremely</b> -->
+
+              </span>
+              <span>
+                <a style="font-size: 28px;height: 40px;line-height: 40px;width: 40px;cursor:pointer;" target="_blank" data-toggle="modal" data-target="#modal_login">
+                  <!-- <img src="/static/img/lupa.png" style="height: 21px;"> -->
+                  <span class="fas fa-cannabis pl-0" style="font-size: 29px;color: #01b22c;cursor:pointer;"></span>
+                </a></span>
+            </h2>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="header-nav-bar" style="background:#672d93;">
+      <div class="container">
+        <div class="header-row p-relative">
+          <div class="header-column">
+            <div class="header-row">
+              <div class="header-colum order-2 order-lg-1">
+                <div class="header-row">
+                  <div class="header-nav header-nav-stripe header-nav-divisor header-nav-force-light-text justify-content-start">
+                    <div class="header-nav-main header-nav-main-square header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                      {% cache 500 menu %}
+
+                      <nav class="collapse">
+                        <ul class="nav nav-pills" id="mainNav">
+                          {% listado as listado_producto %}
+                            {% for genre,structure in listado_producto|tree_info %}
+                                {% if genre.level == 0 %}
+                                <li class="dropdown dropdown-full-color dropdown-light dropdown-mega">
+                                  <a class="dropdown-item dropdown-toggle" href="/productos/categorias/{{ genre.slug }}" style="    font-weight: 500;
+letter-spacing: 1px;">
+                                    {{ genre.name }}
+                                  </a>
+                                  {% for item1 in genre.slug|menulevelone:"1" %}
+                                    {% if forloop.first %}
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                          <div class="dropdown-mega-content">
+                                            <div class="row">
+                                    {% endif %}
+
+                                            <div class="col-lg-2">
+                                              <!-- <span class="dropdown-mega-sub-title"> -->
+                                              <a class="dropdown-item" style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }} ({{ item1.id|countproductscategory }})</a>
+                                              <!-- </span> -->
+                                              <ul class="dropdown-mega-sub-nav">
+                                                {% for item2 in item1.slug|menulevelone:"2" %}
+                                                <li><a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">{{ item2.name }} ({{ item2.id|countproductscategory }})</a></li>
+                                                {% endfor %}
+                                              </ul>
+                                            </div>
+
+                                      {% if forloop.last %}
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                      {% endif %}
+                                  {% endfor %}
+
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                      </nav>
+                      {% endcache %}
+
+                    </div>
+                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                      <i class="fas fa-bars"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="header-column order-1 order-lg-2">
+                <div class="header-row justify-content-end">
+                  <div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
+                    <form role="search" class="d-flex w-100" action="/productos/buscador" method="post">
+                      {% csrf_token %}
+                      <div class="simple-search input-group w-100">
+
+                        <input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="Busca aqui">
+                        <span class="input-group-append bg-light border-0">
+                          <button class="btn" type="submit">
+                            <img src="{% static 'img/lupa.png' %}" style="height: 21px;">
+                          </button>
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
