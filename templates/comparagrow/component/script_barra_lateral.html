@@ -1,0 +1,24 @@
+<script>
+function checkboxFilter(filtro){
+  if($(filtro).is(':checked')){
+    $(filtro).attr('checked', false);
+  }else{
+    $(filtro).attr('checked', true);
+  }
+  $('#formulario_filtro').submit();
+}
+function limpiar(css){
+  $('input:checkbox.'+css).prop('checked', false);
+  $('#formulario_filtro').submit();
+}
+function seleccionar(css,css2){
+  if($('input:checkbox.'+css2).is(':checked')){
+    $('input:checkbox.'+css).prop('checked', true);
+  }else{
+    $('input:checkbox.'+css).prop('checked', false);
+  }
+  // $('input:checkbox.deseleccionar_shop_all').prop('checked', false);
+  // $('#formulario_filtro').submit();
+}
+
+</script>
