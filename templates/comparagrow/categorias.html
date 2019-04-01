@@ -5,8 +5,9 @@
 {% block content %}
 			<style media="screen">
 				.card:hover{
-					border-radius: inherit;
-    			box-shadow: 0.1px 0.1px 0.1px #7777;
+					border:1px solid #01b22c !important;
+					border-radius: inherit !important;
+    			/* box-shadow: 0.1px 0.1px 0.1px #7777 !important; */
 					cursor:pointer;
 				}
 			</style>
@@ -40,11 +41,12 @@
 							<input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
 
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
-							<div class="form-check mb-2" style="display: flex;margin-left: -25px">
+							<div class="form-check mb-2" style="display: flex;margin-left: -5px">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 							</div>
-							<button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;" class="btn btn-primary mb-2">aplicar</button>
+							<button type="submit" style="font-size:12px;background:#672d93;border-color:#672d93;margin-left: 15px;width: calc(100% - 15px);" class="btn btn-primary mb-2">
+								<i class="fas fa-cannabis"></i> Filtrar</button>
 
 							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
 							{% if categorias2.count > 5 %}
@@ -120,7 +122,8 @@
 							{% endif %}
 
 							{% endfor %}
-							<li><a data-toggle="modal" data-target="#shoplistmodal" style="color:#672d93; cursor:pointer;">Ver todas las tiendas</a></li>
+							<li>
+								<button type="button" data-toggle="modal" data-target="#shoplistmodal" style="font-size:12px;background:#672d93;border-color:#672d93;width:100%;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button></li>
 
 						</ul>
 						<div class="modal fade" id="shoplistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
@@ -203,7 +206,9 @@
 							{% endif %}
 
 							{% endfor %}
-							<li><a data-toggle="modal" data-target="#brandlistmodal" style="color:#672d93; cursor:pointer;">Ver todas las marcas</a></li>
+							<li>
+								<button type="button" data-toggle="modal" data-target="#brandlistmodal" style="font-size:12px;background:#672d93;border-color:#672d93;width:100%;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button></li>
+
 						</ul>
 
 						<div class="modal fade" id="brandlistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
