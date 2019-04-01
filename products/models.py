@@ -90,6 +90,8 @@ class Product(models.Model):
     photo = models.BooleanField(verbose_name="Tiene fotos",blank=True,null=True,default=False)
     category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE,null=True)
     category_temp = models.CharField(verbose_name="Categoria Anterior",max_length=200,blank=True)
+    image = models.ImageField(upload_to="assets/product/",blank=True,null=True,verbose_name="Miniatura")
+
     price = models.FloatField()
     tax = models.FloatField()
     total = models.FloatField()

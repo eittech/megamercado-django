@@ -9,11 +9,46 @@ html {
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 }
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/static/font/web/averta-regular.woff2) format("woff2"), url(/static/font/web/averta-regular.woff) format("woff")
+}
+
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 600;
+    src: url(/static/font/web/averta-semibold.woff2) format("woff2"), url(/static/font/web/averta-semibold.woff) format("woff")
+}
+
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 700;
+    src: url(/static/font/web/averta-bold.woff2) format("woff2"), url(/static/font/web/averta-bold.woff) format("woff")
+}
+
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 300;
+    src: url(/static/font/web/averta-light.woff2) format("woff2"), url(/static/font/web/averta-light.woff) format("woff")
+}
+
+@font-face {
+    font-family: Schnyder;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/static/font/web/schnyder-regular.woff2) format("woff2"), url(/static/font/web/schnyder-regular.woff) format("woff")
+}
 
 body {
 	background-color: #FFF;
 	color: #777;
-	font-family: "Open Sans", Arial, sans-serif;
+	box-sizing: border-box;
+	font-family: Averta, sans-serif;
 	font-size: 14px;
 	line-height: 26px;
 	margin: 0;
@@ -1487,7 +1522,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 	}
 
 	#header .header-nav-main nav > ul > li.dropdown .dropdown-menu li.dropdown-submenu > a:after {
-		font-family: 'Font Awesome 5 Free';
+		font-family: Averta, sans-serif;
 		content: "\f054";
 		font-weight: 900;
 		position: absolute;
@@ -1686,7 +1721,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 	}
 
 	#header .header-nav-main.header-nav-main-font-alternative nav > ul > li > a {
-		font-family: 'Oswald', sans-serif;
+		font-family: Averta, sans-serif;
 		font-size: 0.85rem;
 		font-weight: 600;
 	}
@@ -2371,7 +2406,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 	}
 
 	#header .header-nav.header-nav-links-side-header nav > ul > li.dropdown > .dropdown-item:before {
-		font-family: 'Font Awesome 5 Free';
+		font-family: Averta, sans-serif;
 		content: "\f054" !important;
 		font-weight: 900;
 		position: absolute;
@@ -2412,7 +2447,7 @@ html.sticky-header-enabled.sticky-header-active #header .header-logo-sticky-chan
 @media (min-width: 992px) {
 	#header .header-nav-main-arrows nav > ul > li > a.dropdown-toggle:after {
 		display: inline-block;
-		font-family: 'Font Awesome 5 Free';
+		font-family: Averta, sans-serif;
 		content: "\f078";
 		font-weight: 900;
 		border: 0;
@@ -2844,7 +2879,7 @@ html.side-header #header.side-header .header-nav.header-nav-links-vertical-slide
 	html.side-header #header.side-header .header-nav.header-nav-links-vertical-slide nav ul > li.dropdown .dropdown-menu li.dropdown-submenu > a.dropdown-item:after,
 	html.side-header-hamburguer-sidebar #header.side-header .header-nav.header-nav-links-vertical-slide nav ul > li.dropdown > a.dropdown-toggle:after,
 	html.side-header-hamburguer-sidebar #header.side-header .header-nav.header-nav-links-vertical-slide nav ul > li.dropdown .dropdown-menu li.dropdown-submenu > a.dropdown-item:after {
-	font-family: 'Font Awesome 5 Free';
+	font-family: Averta, sans-serif;
 	content: "\f054";
 	font-weight: 900;
 	position: relative;
@@ -2914,7 +2949,7 @@ html.side-header #header.side-header .header-nav.header-nav-links-vertical-slide
 
 html.side-header #header.side-header .header-nav.header-nav-links-vertical-slide nav ul li.back-button > a:before,
 	html.side-header-hamburguer-sidebar #header.side-header .header-nav.header-nav-links-vertical-slide nav ul li.back-button > a:before {
-	font-family: 'Font Awesome 5 Free';
+	font-family: Averta, sans-serif;
 	content: "\f053";
 	font-weight: 900;
 	position: relative;
@@ -4939,7 +4974,7 @@ html.ie #header .header-column .header-extra-info .feature-box .feature-box-info
 .page-header .breadcrumb > li + li:before {
 	color: inherit;
 	opacity: 0.5;
-	font-family: 'Font Awesome 5 Free';
+	font-family: Averta, sans-serif;
 	font-weight: 900;
 	content: "\f105";
 	padding: 0 7px 0 5px;
@@ -6276,7 +6311,7 @@ html.dark .text-muted {
 #footer .footer-ribbon span {
 	color: #FFF;
 	font-size: 1.6em;
-	font-family: "Shadows Into Light", cursive;
+	font-family: Averta, sans-serif;
 }
 
 #footer h1, #footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {

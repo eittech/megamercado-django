@@ -329,19 +329,6 @@
 			</footer>
 		</div>
 		<style>
-			@font-face {
-		 font-family: 'comparagrow-italic-bold';
-		 font-style: normal;
-		 font-weight: normal;
-		 src: url('/static/AvertaDemo/AvertaDemo-ExtraBoldItalic.otf');
-		 }
-
-		 @font-face {
-		font-family: 'comparagrow-regular';
-		font-style: normal;
-		font-weight: normal;
-		src: url('/static/AvertaDemo/AvertaDemo-Regular.otf');
-		}
 
 		.card-header {
 			border-radius: 0 0 0 0;
@@ -418,16 +405,16 @@
 			}
 		</style>
 		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+		<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css"> -->
 
 		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css" media="all">
 		<!-- <link rel="stylesheet" href="/static/porto/vendor/fontawesome-free/css/all.min.css"> -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" media="all">
 		<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"> -->
 
 
-		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css" media="all">
 		<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
 		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
 		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
@@ -460,10 +447,11 @@
 		{% endblock %}
 
 		<!-- Head Libs -->
-		<script src="/static/porto/vendor/modernizr/modernizr.min.js"></script>
+		<script src="/static/porto/vendor/modernizr/modernizr.min.js" async></script>
 
 		<!-- Vendor -->
 		<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
+
 		<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
 		<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
 		<script src="/static/porto/vendor/jquery.cookie/jquery.cookie.min.js"></script>
@@ -482,16 +470,16 @@
 		<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
 
 		<!-- Theme Base, Components and Settings -->
-		<script src="/static/porto/js/theme.js"></script>
+		<script src="/static/porto/js/theme.js" async></script>
 
 		<!-- Theme Custom -->
-		<script src="/static/porto/js/custom.js"></script>
+		<script src="/static/porto/js/custom.js" async></script>
 
 		<!-- Theme Initialization Files -->
-		<script src="/static/porto/js/theme.init.js"></script>
+		<script src="/static/porto/js/theme.init.js" async></script>
 
 		<!-- Examples -->
-		<script src="/static/porto/js/examples/examples.instafeed.js"></script>
+		<script src="/static/porto/js/examples/examples.instafeed.js" async></script>
 
     {% block js %}
 

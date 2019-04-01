@@ -213,7 +213,7 @@
 
 					$this.themePluginIcon(opts);
 				});
-				
+
 			});
 		});
 	}
