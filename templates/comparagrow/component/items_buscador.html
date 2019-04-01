@@ -59,7 +59,7 @@
 
                   {% for c in 1|range:productos.paginator.num_pages %}
                     {% if productos.paginator.num_pages > 10 %}
-                      {% if forloop.counter <= 5 %}
+                      {% if forloop.counter <= productos.number|add:"5" %}
                         {% if c == productos.number %}
                           <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
                         {% else %}
