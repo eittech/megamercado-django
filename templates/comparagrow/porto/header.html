@@ -4,19 +4,20 @@
 {% load cache %}
 {% if user.is_authenticated %}
 {% if user.groups.all.0|stringformat:"s" != "cliente2" %}
-<div class="container" style="position: absolute;z-index: 10000;">
-  <div class="row">
-    <div class="col">
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzón de spam, en algunos casos llega allí.<i class="fas fa-cannabis"></i> <i class="far fa-cannabis"></i>
-        <!-- http://{{ request.get_host }} -->
-      </div>
+<div class="container-fluid">
+  <div class="row alert-danger">
+    <div class="col-sm-12">
+        <strong><i class="fas fa-exclamation-triangle"></i>
+          No olvides verificar tu correo!
+        </strong>
+        Revisa el buzón de spam, en algunos casos llega allí.
+        <i class="fas fa-cannabis"></i>
     </div>
   </div>
 </div>
 {% endif %}
 {% endif %}
+
 <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 122, 'stickySetTop': '-122px', 'stickyChangeLogo': false}">
   <div class="header-body border-color-primary border-top-0 box-shadow-none">
     <div class="header-container  z-index-2" style="min-height: 22px; background:#000;">
