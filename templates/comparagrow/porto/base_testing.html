@@ -10,41 +10,40 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<title>ComparaGrow</title>
+		<title>Side Panel | Porto - Responsive HTML5 Template 7.3.0</title>
 
-		<meta name="keywords" content="ComparaGrow" />
-		<meta name="description" content="ComparaGrow">
-		<meta name="author" content="ComparaGrow">
+		<meta name="keywords" content="HTML5 Template" />
+		<meta name="description" content="Porto - Responsive HTML5 Template">
+		<meta name="author" content="okler.net">
 
 		<!-- Favicon -->
-		<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-		<link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
-		<link rel="icon" type="image/png" href="/static/img/lupa.png">
+		<link rel="shortcut icon" href="/static/porto/img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="/static/porto/img/apple-touch-icon.png">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130243054-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'UA-130243054-1');
-		</script>
-
-
-
-
+		<!-- Web Fonts  -->
+		<link href="/static/porto/https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/fontawesome-free/css/all.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/magnific-popup/magnific-popup.min.css">
+		<link rel="stylesheet" href="/static/porto/css/theme.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-elements.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-blog.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-shop.css">
+		<link rel="stylesheet" href="/static/porto/css/skins/default.css">
+		<link rel="stylesheet" href="/static/porto/css/custom.css">
+		<script src="/static/porto/vendor/modernizr/modernizr.min.js"></script>
 
 	</head>
-	<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 50}">
+  <body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 50}">
 	<!-- <body> -->
-		{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-				{% include 'comparagrow/component/slide_login.html' %}
-		{% else %}
 
-		{% endif %}
 		<div class="loading-overlay">
 			<div class="bounce-loader">
 				<div class="bounce1"></div>
@@ -52,7 +51,7 @@
 				<div class="bounce3"></div>
 			</div>
 		</div>
-
+		{% include 'comparagrow/component/slide_login.html' %}
 		<div class="body">
 			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
 			{% include 'comparagrow/porto/header_mobile.html' %}
@@ -60,7 +59,7 @@
 			{% include 'comparagrow/porto/header.html' %}
 			{% endif %}
 
-			<div role="main" class="main">
+      <div role="main" class="main">
 
           {% block content %}
 
@@ -160,26 +159,8 @@
 				color:#fff !important;
 			}
 		</style>
-		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css" media="all">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" media="all">
-		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css" media="all">
-		<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
-		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
-		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
-		<link rel="stylesheet" href="/static/porto/vendor/magnific-popup/magnific-popup.min.css">
-		<link rel="stylesheet" href="/static/porto/css/theme.css">
-		<link rel="stylesheet" href="/static/porto/css/theme-elements.css">
-		<link rel="stylesheet" href="/static/porto/css/theme-blog.css">
-		<link rel="stylesheet" href="/static/porto/css/theme-shop.css">
-		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/settings.css">
-		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/layers.css">
-		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/navigation.css">
-		<link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
-		<link rel="stylesheet" href="/static/porto/css/skins/default.css">
-		<link rel="stylesheet" href="/static/porto/css/custom.css">
-		{% block csscontent %}
-		{% endblock %}
-		<script src="/static/porto/vendor/modernizr/modernizr.min.js" async></script>
+
+
 		<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
 		<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
 		<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
@@ -196,28 +177,11 @@
 		<script src="/static/porto/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 		<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
 		<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
-		<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
-		<script src="/static/porto/js/theme.js" async></script>
-		<script src="/static/porto/js/custom.js" async></script>
-		<script src="/static/porto/js/theme.init.js" async></script>
-		<script src="/static/porto/js/examples/examples.instafeed.js" async></script>
+		<script src="/static/porto/js/theme.js"></script>
+		<script src="/static/porto/js/views/view.contact.js"></script>
+		<script src="/static/porto/js/custom.js"></script>
+		<script src="/static/porto/js/theme.init.js"></script>
 
-    {% block js %}
-
-    {% endblock %}
 
 	</body>
 </html>
-
-{% if user.is_authenticated %}
-
-{% else %}
-		{% include 'comparagrow/component/modal_register.html' %}
-		{% if request.GET.error == 'not_access' %}
-		<script>
-				$( document ).ready(function() {
-				    $('#modal_login').modal('show');
-				});
-		</script>
-		{% endif %}
-{% endif %}

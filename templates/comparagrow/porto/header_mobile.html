@@ -36,8 +36,9 @@
                 <a class="ws-nowrap" href="/alertas"><i class="fas fa-bell"></i> Alertas</a>
               </li>
               {% else %}
+
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
-                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-key"></i> Inicia sesión</a>
+                <a class="side-panel-toggle" data-extra-class="side-panel"><i class="fas fa-key"></i> Inicia sesión</a>
               </li>
               <li style="margin-left:10px;"></li>
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
@@ -121,7 +122,7 @@ letter-spacing: 1px;">
                       {% endcache %}
 
                     </div>
-                    <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                    <button class="btn header-btn-collapse-nav" style="background:#01b22c" data-toggle="collapse" data-target=".header-nav-main nav">
                       <i class="fas fa-bars"></i>
                     </button>
                   </div>
@@ -129,7 +130,7 @@ letter-spacing: 1px;">
               </div>
               <div class="header-column order-1 order-lg-2">
                 <div class="header-row justify-content-end">
-                  <div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
+                  <div class="header-nav-features header-nav-features-no-border w-100">
                     <form role="search" class="d-flex w-100" action="/productos/buscador" method="post">
                       {% csrf_token %}
                       <div class="simple-search input-group w-100">

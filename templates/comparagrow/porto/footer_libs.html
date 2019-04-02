@@ -1,0 +1,123 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% load cache %}
+<style>
+
+.card-header {
+  border-radius: 0 0 0 0;
+border-bottom: 1px solid #672d93 !important;
+}
+.card-header {
+  border-radius: 0 0 0 0;
+padding: .75rem 1.25rem;
+margin-bottom: 0;
+color: inherit;
+background-color: #672d93 !important;
+border-bottom: 1px solid #672d93 !important;
+}
+.card-header > a {
+  color:#fff;
+}
+.card-header:hover > a {
+  color:#fff;
+}
+
+.card-header:first-child{
+  border-radius: 0 0 0 0 !important;
+
+}
+
+.card-header:hover {
+  border-radius: 0 0 0 0;
+  color:#fff;
+  border-bottom: 1px solid #01b22c !important;
+  background-color: #01b22c !important;
+  border-bottom: 1px solid #01b22c !important;
+}
+
+.card:hover > .card-header{
+  color:#fff;
+  border-bottom: 1px solid #01b22c !important;
+  background-color: #01b22c !important;
+  border-bottom: 1px solid #01b22c !important;
+}
+
+.card:hover{
+  /* color:#fff; */
+  border: 1px solid #01b22c !important;
+  border-radius: 0 0 0 0;
+  /* background-color: #01b22c !important; */
+  /* border-bottom: 1px solid #01b22c !important; */
+}
+
+
+
+  .float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:50px;
+  right:40px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index:100;
+  }
+
+  .my-float{
+  margin-top:16px;
+  }
+  .float:hover{
+    color:#fff !important;
+  }
+  .my-float:hover{
+    color:#fff !important;
+  }
+</style>
+<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css" media="all">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" media="all">
+<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css" media="all">
+<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
+<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="/static/porto/vendor/magnific-popup/magnific-popup.min.css">
+<link rel="stylesheet" href="/static/porto/css/theme.css">
+<link rel="stylesheet" href="/static/porto/css/theme-elements.css">
+<link rel="stylesheet" href="/static/porto/css/theme-blog.css">
+<link rel="stylesheet" href="/static/porto/css/theme-shop.css">
+<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/settings.css">
+<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/layers.css">
+<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/navigation.css">
+<link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
+<link rel="stylesheet" href="/static/porto/css/skins/default.css">
+<link rel="stylesheet" href="/static/porto/css/custom.css">
+
+<script src="/static/js/notify.js"></script>
+
+
+<script src="/static/porto/vendor/modernizr/modernizr.min.js" async></script>
+<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
+<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
+<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="/static/porto/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+<script src="/static/porto/vendor/popper/umd/popper.min.js"></script>
+<script src="/static/porto/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/porto/vendor/common/common.min.js"></script>
+<script src="/static/porto/vendor/jquery.validation/jquery.validate.min.js"></script>
+<script src="/static/porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="/static/porto/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+<script src="/static/porto/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+<script src="/static/porto/vendor/isotope/jquery.isotope.min.js"></script>
+<script src="/static/porto/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="/static/porto/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
+<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
+<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
+<script src="/static/porto/js/theme.js" async></script>
+<script src="/static/porto/js/custom.js" async></script>
+<script src="/static/porto/js/theme.init.js" async></script>
+<script src="/static/porto/js/examples/examples.instafeed.js" async></script>

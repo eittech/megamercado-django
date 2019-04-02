@@ -1,0 +1,69 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% load cache %}
+<!DOCTYPE html>
+<html class="side-panel">
+	{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+			{% include 'comparagrow/porto/header_libs_mobile.html' %}
+	{% else %}
+			{% include 'comparagrow/porto/header_libs.html' %}
+	{% endif %}
+	<body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 50}">
+
+		<div class="loading-overlay">
+			<div class="bounce-loader">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+		{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+				{% include 'comparagrow/component/slide_login.html' %}
+		{% else %}
+
+		{% endif %}
+		<div class="body">
+			<!-- header -->
+			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+					{% include 'comparagrow/porto/header_mobile.html' %}
+			{% else %}
+					{% include 'comparagrow/porto/header.html' %}
+			{% endif %}
+			<!-- end header -->
+			<!-- body -->
+			<div role="main" class="main">
+          {% block content %}
+          {% endblock %}
+			</div>
+			<!-- end body -->
+			<!-- footer -->
+			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+					{% include 'comparagrow/porto/footer_mobile.html' %}
+			{% else %}
+					{% include 'comparagrow/porto/footer.html' %}
+			{% endif %}
+			<!-- end footer -->
+		</div>
+
+		{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+				{% include 'comparagrow/porto/footer_libs_mobile.html' %}
+		{% else %}
+				{% include 'comparagrow/porto/footer_libs.html' %}
+		{% endif %}
+
+
+
+		{% block csscontent %}
+		{% endblock %}
+
+    {% block js %}
+    {% endblock %}
+
+	</body>
+</html>
+{% if user.is_authenticated %}
+
+{% else %}
+		{% include 'comparagrow/component/modal_register.html' %}
+{% endif %}

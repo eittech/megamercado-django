@@ -1,0 +1,138 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% load cache %}
+<style>
+
+.card-header {
+  border-radius: 0 0 0 0;
+border-bottom: 1px solid #672d93 !important;
+}
+.card-header {
+  border-radius: 0 0 0 0;
+padding: .75rem 1.25rem;
+margin-bottom: 0;
+color: inherit;
+background-color: #672d93 !important;
+border-bottom: 1px solid #672d93 !important;
+}
+.card-header > a {
+  color:#fff;
+}
+.card-header:hover > a {
+  color:#fff;
+}
+
+.card-header:first-child{
+  border-radius: 0 0 0 0 !important;
+
+}
+
+.card-header:hover {
+  border-radius: 0 0 0 0;
+  color:#fff;
+  border-bottom: 1px solid #01b22c !important;
+  background-color: #01b22c !important;
+  border-bottom: 1px solid #01b22c !important;
+}
+
+.card:hover > .card-header{
+  color:#fff;
+  border-bottom: 1px solid #01b22c !important;
+  background-color: #01b22c !important;
+  border-bottom: 1px solid #01b22c !important;
+}
+
+.card:hover{
+  /* color:#fff; */
+  border: 1px solid #01b22c !important;
+  border-radius: 0 0 0 0;
+  /* background-color: #01b22c !important; */
+  /* border-bottom: 1px solid #01b22c !important; */
+}
+
+
+
+  .float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:50px;
+  right:40px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index:100;
+  }
+
+  .my-float{
+  margin-top:16px;
+  }
+  .float:hover{
+    color:#fff !important;
+  }
+  .my-float:hover{
+    color:#fff !important;
+  }
+</style>
+
+
+<!-- Vendor -->
+<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+
+<script src="/static/porto/vendor/popper/umd/popper.min.js"></script>
+
+<script src="/static/porto/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="/static/porto/vendor/common/common.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.validation/jquery.validate.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+
+<script src="/static/porto/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+
+<script src="/static/porto/vendor/isotope/jquery.isotope.min.js"></script>
+
+<script src="/static/porto/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+<script src="/static/porto/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
+
+<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
+
+<!-- Theme Base, Components and Settings -->
+<script src="/static/porto/js/theme.js"></script>
+
+<!-- Current Page Vendor and Views -->
+<script src="/static/porto/js/views/view.contact.js"></script>
+
+<!-- Theme Custom -->
+<script src="/static/porto/js/custom.js"></script>
+
+<!-- Theme Initialization Files -->
+<script src="/static/porto/js/theme.init.js"></script>
+
+<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-12345678-1', 'auto');
+  ga('send', 'pageview');
+</script>
+ -->
