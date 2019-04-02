@@ -158,6 +158,7 @@
 		</style>
 		<!-- Web Fonts  -->
 		<!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css"> -->
+		{% cache 500 libreriascss %}
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css" media="all">
@@ -195,9 +196,12 @@
 		<link rel="stylesheet" href="/static/porto/css/custom.css">
     <!-- <link rel="stylesheet" href="/static/porto/css/demos/demo-real-estate.css"> -->
 		<!-- Global site tag (gtag.js) - Google Analytics -->
+		{% endcache %}
+
 		{% block csscontent %}
 		{% endblock %}
 
+		{% cache 500 libreriasjs %}
 		<!-- Head Libs -->
 		<script src="/static/porto/vendor/modernizr/modernizr.min.js" async></script>
 
@@ -220,7 +224,8 @@
 		<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
 		<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
 		<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
-
+		{% endcache %}
+		
 		<!-- Theme Base, Components and Settings -->
 		<script src="/static/porto/js/theme.js" async></script>
 
