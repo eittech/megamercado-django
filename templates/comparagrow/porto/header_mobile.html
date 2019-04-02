@@ -23,6 +23,19 @@
         <div class="header-row">
           <nav class="header-nav-top">
             <ul class="nav nav-pills">
+              {% if user.is_authenticated %}
+              <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                <a class="ws-nowrap" href="/profile"><i class="fas fa-cannabis"></i> Mi Perfil</a>
+              </li>
+              <li style="margin-left:10px;"></li>
+              <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                <a class="ws-nowrap" href="/productos/favoritos/"><i class="fas fa-heart"></i> Favoritos</a>
+              </li>
+              <li style="margin-left:10px;"></li>
+              <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                <a class="ws-nowrap" href="/alertas"><i class="fas fa-bell"></i> Alertas</a>
+              </li>
+              {% else %}
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
                 <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-key"></i> Inicia sesión</a>
               </li>
@@ -30,6 +43,7 @@
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
                 <a class="ws-nowrap" href="/register"><i class="fas fa-user"></i> Registrate</a>
               </li>
+              {% endif %}
             </ul>
           </nav>
         </div>
