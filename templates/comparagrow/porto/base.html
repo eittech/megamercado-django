@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="body">
-			{% if request.user_agent.is_mobile %}
+			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
 			{% include 'comparagrow/porto/header_mobile.html' %}
 			{% else %}
 			{% include 'comparagrow/porto/header.html' %}
@@ -71,7 +71,7 @@
 </a>
 
 
-{% if request.user_agent.is_mobile %}
+{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
 {% include 'comparagrow/porto/footer_mobile.html' %}
 {% else %}
 {% include 'comparagrow/porto/footer.html' %}
