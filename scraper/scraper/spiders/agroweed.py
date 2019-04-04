@@ -105,13 +105,14 @@ class ProductSpider(scrapy.Spider):
             brand = product.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
         except:
             reference = None
+
         try:
-            description1 = response.xpath('.//div[@class="woocommerce-tabs wc-tabs-wrapper"]/div[@id="tab-description"]/div[@class="tab-content"]/p/text()').extract()
             description = ""
-            for des1 in description1:
-                description = description + str('<br>') + str(des1)
+            description1 = response.css('div#tab-description div.tab-content').extract_first()
+            description = re.sub("<div.*?>","",description1)
+            description = re.sub("</div.*?>","",description)
         except:
-            description = None
+            description = ""
 
         try:
             t = response.xpath('.//span[@class="woocommerce-Price-amount amount"]/text()').re_first('\w.*')
