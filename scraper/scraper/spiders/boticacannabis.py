@@ -83,38 +83,14 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = None
-
-        try:
-            if name_category is None or name_category == "":
-                spa = response.css("span.posted_in a")
-                name_category = spa[0].xpath('text()').re_first('\w.*').lower()
-        except:
-            print("###############################")
-            print(response.meta['url_product_safe'])
-            category = None
-
+        categ = response.xpath('.//div[@class="mk_product_meta"]/span[@class="posted_in"]/a/text()').extract()
         category = None
-        category_tags =  None
-        print("###############################")
-        print("###############################")
-        print("###############################")
-        print(name_category)
-        catgoria_name_ant = name_category
-        if name_category is None or name_category == "":
-            category = None
-        else:
-            category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            if category_tags:
+                category = category_tags.category
 
-        if category_tags is None:
-            category = None
-        else:
-            category = category_tags.category
-
-        if category is not None:
+        if True:
             name_category = response.meta['name_category_safe']
             product = response.css("div#content")
             name = response.xpath('.//h1[@class="single_product_title entry-title"]/text()').re_first('\w.*')
@@ -128,14 +104,12 @@ class ProductSpider(scrapy.Spider):
             except:
                 reference = None
             try:
-                description1 = product.xpath('.//div[@id="tab-description"]/p/span/text()').extract()
                 description = ""
-                for des1 in description1:
-                    description = description + str('<br>') + str(des1)
+                description1 = response.xpath('.//div[@class="summary entry-summary mk-single-product"]/div[@itemprop="description"]').extract_first()
+                description = re.sub("<div.*?>","",description1)
+                description = re.sub("</div.*?>","",description)
             except:
-                description = None
-            category = category
-            category_temp = name_category
+                description = ""
             try:
                 t = response.xpath('.//span[@class="amount"]/text()').re_first('\w.*')
                 ti = t.split('.')
@@ -167,10 +141,8 @@ class ProductSpider(scrapy.Spider):
                 Product_object.url = url
                 print('url:')
                 print(url)
-            if category_temp:
-                print('category_temp:')
-                print(category_temp)
-                Product_object.category_temp = category_temp
+            if categ:
+                Product_object.category_temp = categ
             if description:
                 Product_object.description = description
                 print('description:')
