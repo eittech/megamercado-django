@@ -112,8 +112,7 @@ class ProductSpider(scrapy.Spider):
                 description = description + str('<br>') + str(des1)
         except:
             description = None
-        category = category
-        category_temp = name_category
+
         try:
             t = response.xpath('.//span[@class="woocommerce-Price-amount amount"]/text()').re_first('\w.*')
             ti = t.split('.')
@@ -136,7 +135,7 @@ class ProductSpider(scrapy.Spider):
         if url:
             Product_object.url = url
         if category_temp:
-            Product_object.category_temp = category_temp
+            Product_object.category_temp = categ
         if description:
             Product_object.description = description
 
