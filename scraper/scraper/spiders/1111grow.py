@@ -75,7 +75,7 @@ class ProductSpider(scrapy.Spider):
         categ = response.xpath('.//div[@class="product_meta"]/span[@class="posted_in"]/a/text()').extract()
         category = None
         for a in categ:
-            category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
             print(category_tags)
             if category_tags:
                 category = category_tags.category
