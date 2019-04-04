@@ -77,38 +77,16 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = None
-
-        try:
-            if name_category is None or name_category == "":
-                name_category = ""
-        except:
-            print("###############################")
-            print(response.meta['url_product_safe'])
-            category = None
-
+        categ = response.xpath('.//div[@class="breadcrumbDiv col-lg-12"]/ul/li/a/text()').extract()
         category = None
-        category_tags =  None
-        print("###############################")
-        print("###############################")
-        print("###############################")
-        print(name_category)
-        catgoria_name_ant = name_category
-        if name_category is None or name_category == "":
-            category = None
-        else:
-            category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            print(category_tags)
+            if category_tags:
+                category = category_tags.category
 
-        if category_tags is None:
-            category = None
-        else:
-            category = category_tags.category
+        if True:
 
-        if category is not None:
-            name_category = response.meta['name_category_safe']
             product = response.css("div#content")
             name = response.xpath('.//h1[@class="product-title"]/text()').re_first('\w.*')
             url = response.meta['url_product_safe']
@@ -121,12 +99,13 @@ class ProductSpider(scrapy.Spider):
             except:
                 reference = None
             try:
-                description1 = product.xpath('.//div[@id="tab-description"]/p/span/text()').extract()
                 description = ""
-                for des1 in description1:
-                    description = description + str('<br>') + str(des1)
+                description1 = response.xpath('.//div[@class="row transitionfx oe_website_sale "]/div[@class="col-lg-6 col-md-6 col-sm-6"]/div').extract()
+                description = re.sub("<div.*?>","",description1[2])
+                description = re.sub("</div.*?>","",description)
             except:
-                description = None
+                description = ""
+
             category = category
             category_temp = name_category
             try:
@@ -160,10 +139,8 @@ class ProductSpider(scrapy.Spider):
                 Product_object.url = url
                 print('url:')
                 print(url)
-            if category_temp:
-                print('category_temp:')
-                print(category_temp)
-                Product_object.category_temp = category_temp
+            if categ:
+                Product_object.category_temp = categ
             if description:
                 Product_object.description = description
                 print('description:')
@@ -186,27 +163,15 @@ class ProductSpider(scrapy.Spider):
             print(Product_object)
             try:
                 Product_object.save()
-                print("*****************")
-                print("*****************")
-                print("*****************")
                 print("se guardo con exito")
                 product_error = False
             except:
                 product_error = True
-                print("*****************")
-                print("*****************")
-                print("*****************")
                 print("No se pudo guardar el producto")
 
             if Product_object.id:
                 list_img_t = response.css("div.main-image")
-
-                print("*****************")
-                print("*****************")
-                print("*****************")
-                print(list_img_t)
                 list_img = list_img_t.css('img')
-                print(list_img)
                 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
                 contador = 0
                 for li_img in list_img:
