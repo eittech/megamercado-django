@@ -140,7 +140,7 @@ def buscador(request):
         order_by = "min"
 
 
-    paginator = Paginator(productos_lista, 20)
+    paginator = Paginator(productos_lista, 24)
     page = request.POST.get('page')
     if page is not None:
         if request.is_ajax():
@@ -299,7 +299,7 @@ def categorias(request,slug):
     # order_by = "min"
 
 
-    paginator = Paginator(productos_lista, 20)
+    paginator = Paginator(productos_lista, 24)
     page = request.POST.get('page')
     if page is not None:
         if request.is_ajax():

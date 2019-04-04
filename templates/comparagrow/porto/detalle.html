@@ -90,20 +90,72 @@
 					</span>
 				</div>
 				<p class="mb-4"></p>
-				<a class="btn btn-primary" target="_blank" href="/productos/redirect/{{ producto.id }}" style="width: 100%;background-color: #672d93;border-color: #672d93;">Ir a Tienda</a>
+				<a class="btn btn-primary" target="_blank" href="/productos/redirect/{{ producto.id }}" style="
+		    width: 100%;
+		    background-color: #672d93;
+		    border-color: #672d93;
+		    ">Ir a Tienda</a>
 
 				<p class="mb-4"></p>
 				{% if user.is_authenticated %}
-				<a onclick="FavoriteProduct('{{ producto.id }}')" class="btn btn-primary" style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">Recibir Ofertas</a>
+				<a onclick="FavoriteProduct('{{ producto.id }}')" class="btn btn-primary" style="width: 100%;background-color: #fff;border-color: #777;color:#777;">Recibir Ofertas</a>
 				{% else %}
-				<a class="btn btn-primary"  data-toggle="modal" data-target="#modal_login" style="width: 100%;background-color: #01b22c;border-color: #01b22c;color:#fff;">
+				<a class="btn btn-primary"  data-toggle="modal" data-target="#modal_login" style="width: 100%;background-color: #fff;border-color: #777;color:#777;">
 					<i class="far fa-heart"></i>
 					Recibir Ofertas
 				</a>
 				{% endif %}
 				<p class="mb-4"></p>
-				<h4>Historico de <strong>precios</strong></h4>
-				<div class="ct-chart ct-perfect-fourth" style="height:250px !important;"></div>
+				<div class="tabs tabs-product mb-2">
+					<ul class="nav nav-tabs">
+						<li class="nav-item active"><a class="nav-link py-3 px-4" href="#productDescription" data-toggle="tab">Descripción</a></li>
+						<li class="nav-item"><a class="nav-link py-3 px-4" href="#productInfo" data-toggle="tab">Tabla contenidos</a></li>
+						<li class="nav-item"><a class="nav-link py-3 px-4" href="#producthistory" data-toggle="tab">Detalle Historico Precio</a></li>
+					</ul>
+					<div class="tab-content p-0">
+						<div class="tab-pane p-4 active" id="productDescription">
+							{% autoescape off %}
+							{{ producto.description }}
+	            {% endautoescape %}
+						</div>
+						<div class="tab-pane p-4" id="productInfo">
+							<table class="table m-0">
+								<tbody>
+									{% for t in producto_attr %}
+									<tr>
+										<th class="border-top-0">
+											{{ t.attributes.name }}:
+										</th>
+										<td class="border-top-0">
+												{{ t.values }}
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane p-4" id="producthistory">
+							<table class="table m-0">
+								<tbody>
+									{% for t in history_datail %}
+									<tr>
+										<th class="border-top-0">
+											{{ t.date_update }}
+										</th>
+										<td class="border-top-0">
+												{{ t.total }}
+										</td>
+										<td class="border-top-0">
+
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
 			</div>
 
 
@@ -112,55 +164,8 @@
 
 	<div class="row">
 		<div class="col">
-			<div class="tabs tabs-product mb-2">
-				<ul class="nav nav-tabs">
-					<li class="nav-item active"><a class="nav-link py-3 px-4" href="#productDescription" data-toggle="tab">Descripción</a></li>
-					<li class="nav-item"><a class="nav-link py-3 px-4" href="#productInfo" data-toggle="tab">Tabla contenidos</a></li>
-					<li class="nav-item"><a class="nav-link py-3 px-4" href="#producthistory" data-toggle="tab">Detalle Historico Precio</a></li>
-				</ul>
-				<div class="tab-content p-0">
-					<div class="tab-pane p-4 active" id="productDescription">
-						{% autoescape off %}
-						{{ producto.description }}
-            {% endautoescape %}
-					</div>
-					<div class="tab-pane p-4" id="productInfo">
-						<table class="table m-0">
-							<tbody>
-								{% for t in producto_attr %}
-								<tr>
-									<th class="border-top-0">
-										{{ t.attributes.name }}:
-									</th>
-									<td class="border-top-0">
-											{{ t.values }}
-									</td>
-								</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-					<div class="tab-pane p-4" id="producthistory">
-						<table class="table m-0">
-							<tbody>
-								{% for t in history_datail %}
-								<tr>
-									<th class="border-top-0">
-										{{ t.date_update }}
-									</th>
-									<td class="border-top-0">
-											{{ t.total }}
-									</td>
-									<td class="border-top-0">
-
-									</td>
-								</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+			<h4>Historico de <strong>precios</strong></h4>
+			<div class="ct-chart ct-perfect-fourth" style="height:250px !important;"></div>
 		</div>
 	</div>
 </div>

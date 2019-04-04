@@ -117,7 +117,18 @@
 		          <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
 		        </div>
 		        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-		          <img src="/static/img/loading2.gif" data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}" data-original="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
+							{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+							<img src="/static/img/loading2.gif"
+							data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}"
+							data-original="{{ item.id|imagenproducturl:"0" }}"
+							style="height: 210px;padding: 2px;font-weight: 100;" class="card-img-top">
+							{% else %}
+							<img src="/static/img/loading2.gif"
+							data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}"
+							data-original="{{ item.id|imagenproducturl:"0" }}"
+							style="max-width: 224px;height: 210px;padding: 2px;font-weight: 100;" class="card-img-top">
+							{% endif %}
+
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
@@ -161,7 +172,7 @@
 
 <div class="row text-center">
 	<div class="col">
-		<h2 class="font-weight-normal text-6 mt-4">Ultimas <strong class="font-weight-extra-bold">rebajas</strong></h2>
+		<h2 class="font-weight-normal text-6 mt-4">Últimas <strong class="font-weight-extra-bold">rebajas</strong></h2>
 	</div>
 </div>
 
