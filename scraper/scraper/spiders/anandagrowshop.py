@@ -131,8 +131,8 @@ class ProductSpider(scrapy.Spider):
 
             try:
                 t = response.xpath('.//h3[@class="product-price"]/text()').re_first('\w.*')
-                ta = t.split('$')
-                ti = ta[1].split('.')
+                # ta = t.split('$')
+                ti = t.split('.')
                 total = ""
                 for tii in ti:
                     total = total + str(tii)
