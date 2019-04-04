@@ -182,7 +182,7 @@ class ProductSpider(scrapy.Spider):
                 print("No se pudo guardar el producto")
 
             if Product_object.id:
-                list_img_t = product.css("figure.woocommerce-product-gallery__wrapper")
+                list_img_t = response.css("figure.woocommerce-product-gallery__wrapper")
 
                 print("*****************")
                 print("*****************")
