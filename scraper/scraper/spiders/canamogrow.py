@@ -106,8 +106,6 @@ class ProductSpider(scrapy.Spider):
             except:
                 description = ""
 
-            category = category
-            category_temp = name_category
             try:
                 t = response.xpath('.//span[@class="oe_currency_value"]/text()').re_first('\w.*')
                 ti = t.split('.')
