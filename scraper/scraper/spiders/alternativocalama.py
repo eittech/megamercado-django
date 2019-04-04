@@ -147,8 +147,6 @@ class ProductSpider(scrapy.Spider):
                 print('url:')
                 print(url)
             if categ:
-                print('category_temp:')
-                print(category_temp)
                 Product_object.category_temp = categ
             if description:
                 Product_object.description = description
