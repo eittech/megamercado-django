@@ -87,38 +87,14 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = None
-
-        try:
-            if name_category is None or name_category == "":
-                spa = response.css("span.posted_in a")
-                name_category = spa.xpath('text()').re_first('\w.*').lower()
-        except:
-            print("###############################")
-            print(response.meta['url_product_safe'])
-            category = None
-
+        categ = response.xpath('.//div[@class="product_meta"]/span[@class="posted_in"]/a/text()').extract()
         category = None
-        category_tags =  None
-        print("###############################")
-        print("###############################")
-        print("###############################")
-        print(name_category)
-        catgoria_name_ant = name_category
-        if name_category is None or name_category == "":
-            category = None
-        else:
-            category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            if category_tags:
+                category = category_tags.category
 
-        if category_tags is None:
-            category = None
-        else:
-            category = category_tags.category
-
-        if category is not None:
+        if True:
             name_category = response.meta['name_category_safe']
             product = response.css("div.single-product")
             name = response.xpath('.//div[@class="titulo-interior"]/h1/text()').re_first('\w.*')
@@ -132,14 +108,13 @@ class ProductSpider(scrapy.Spider):
             except:
                 reference = None
             try:
-                description1 = response.xpath('.//div[@class="woocommerce-product-details__short-description"]/p/text()').extract()
                 description = ""
-                for des1 in description1:
-                    description = description + str(des1) + str('<br>') 
+                description1 = response.css('div.woocommerce-product-details__short-description').extract_first()
+                description = re.sub("<div.*?>","",description1)
+                description = re.sub("</div.*?>","",description)
             except:
-                description = None
-            category = category
-            category_temp = name_category
+                description = ""
+
             try:
                 t = product.xpath('.//span[@class="woocommerce-Price-amount amount"]/text()').re_first('\w.*')
                 ti = t.split('.')
@@ -171,10 +146,10 @@ class ProductSpider(scrapy.Spider):
                 Product_object.url = url
                 print('url:')
                 print(url)
-            if category_temp:
+            if categ:
                 print('category_temp:')
                 print(category_temp)
-                Product_object.category_temp = category_temp
+                Product_object.category_temp = categ
             if description:
                 Product_object.description = description
                 print('description:')
@@ -210,7 +185,7 @@ class ProductSpider(scrapy.Spider):
                 print("No se pudo guardar el producto")
 
             if Product_object.id:
-                list_img_t = product.css("figure.woocommerce-product-gallery__wrapper")
+                list_img_t = response.css("figure.woocommerce-product-gallery__wrapper")
 
                 print("*****************")
                 print("*****************")
