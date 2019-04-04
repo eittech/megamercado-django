@@ -90,14 +90,7 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = ''
-
         categ = response.xpath('.//nav[@class="woocommerce-breadcrumb"]/a/text()').extract()
-        print("################ CATEGORIAS ####################")
-        print(categ)
         category = None
         for a in categ:
             category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).first()
@@ -105,7 +98,7 @@ class ProductSpider(scrapy.Spider):
             if category_tags:
                 category = category_tags.category
 
-        if category is not None:
+        if True:
             name_category = response.meta['name_category_safe']
             product = response.css("div.center_column")
             name = response.xpath('.//div[@class="col-md-12 a-center"]/h1[@class="title"]/text()').re_first('\w.*').rstrip()
@@ -122,8 +115,7 @@ class ProductSpider(scrapy.Spider):
                 description = re.sub("</div.*?>","",description)
             except:
                 print("error")
-            category = category
-            category_temp = name_category
+
             # tax =
             try:
                 p = response.css('div.product-information-inner div.fixed-content')
@@ -157,10 +149,8 @@ class ProductSpider(scrapy.Spider):
                 Product_object.url = url
                 print('url:')
                 print(url)
-            if category_temp:
-                print('category_temp:')
-                print(category_temp)
-                Product_object.category_temp = category_temp
+            if categ:
+                Product_object.category_temp = categ
             if description:
                 Product_object.description = description
                 print('description:')
