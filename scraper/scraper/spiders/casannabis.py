@@ -108,30 +108,30 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = ''
-
-        categ = response.xpath('.//span[@class="navigation_page"]/span/a/span/text()').re_first('\w.*')
+        categ = response.xpath('.//span[@class="navigation_page"]/span/a/span/text()').extract()
 
         category = None
-        category_tags = CategoryTags.objects.filter(tag__icontains=categ).first()
-        if category_tags is None:
-            category = None
-        else:
-            category = category_tags.category
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            if category_tags:
+                category = category_tags.category
 
-        if category is not None:
-            name_category = response.meta['name_category_safe']
+        if True:
             product = response.css("div.center_column")
             name = response.xpath('.//h1[@itemprop="name"]/text()').re_first('\w.*')
             url = response.meta['url_product_safe']
             reference = response.xpath('.//p[@id="product_reference"]/span/text()').re_first('\w.*')
             brand = response.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
-            description = response.xpath('.//section[@id="tab2"]/div[@class="rte"]/p/text()').re_first('\w.*')
-            category = category
-            category_temp = name_category
+
+            try:
+                description = ""
+                description1 = response.css('section#tab2 div.rte').extract_first()
+                description = re.sub("<div.*?>","",description1)
+                description = re.sub("</div.*?>","",description)
+            except:
+                description = ""
+
+
             # tax =
             try:
                 total = response.css('span#our_price_display').attrib['content']
