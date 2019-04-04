@@ -96,59 +96,39 @@ class ProductSpider(scrapy.Spider):
             shop_id.save()
             print('no existe')
 
-        try:
-            name_category = response.meta['name_category_safe'].lower()
-        except:
-            name_category = None
-
-        try:
-            if name_category is None or name_category == "":
-                spa = response.css("ul.breadcrumb li a")
-                name_category = spa[1].xpath('text()').re_first('\w.*').lower()
-        except:
-            print("###############################")
-            print(response.meta['url_product_safe'])
-            category = None
-
+        categ = response.xpath('.//ul[@class="breadcrumb"]/li/a/text()').extract()
         category = None
-        category_tags =  None
-        print("###############################")
-        print("###############################")
-        print("###############################")
-        print(name_category)
-        catgoria_name_ant = name_category
-        if name_category is None or name_category == "":
-            category = None
-        else:
-            category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        for a in categ:
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            if category_tags:
+                category = category_tags.category
 
-        if category_tags is None:
-            category = None
-        else:
-            category = category_tags.category
-
-        if category is not None:
-            name_category = response.meta['name_category_safe']
+        if True:
             product = response.css("div#content")
-            name = response.xpath('.//h3[@class="product-title"]/text()').re_first('\w.*')
+            name = response.xpath('.//h2[@class="page-title"]/text()').re_first('\w.*')
             url = response.meta['url_product_safe']
             try:
                 reference = product.xpath('.//span[@class="sku"]/text()').re_first('\w.*')
             except:
                 reference = None
+
             try:
-                brand = product.xpath('.//span[@itemprop="brand"]/text()').re_first('\w.*')
+                brand_t = response.xpath('.//ul[@class="list-unstyled attr"]/li')
+                for b in brand_t:
+                    texto_b = b.xpath('.//text()').re_first('\w.*')
+                    print(texto_b)
+                    if texto_b == "Marca:":
+                        brand = b.xpath('.//a/text()').re_first('\w.*')
             except:
-                reference = None
+                brand = None
             try:
-                description1 = product.xpath('.//div[@id="tab-description"]/p/span/text()').extract()
                 description = ""
-                for des1 in description1:
-                    description = description + str('<br>') + str(des1)
+                description1 = response.css('div#tab-description').extract_first()
+                description = re.sub("<div.*?>","",description1)
+                description = re.sub("</div.*?>","",description)
             except:
-                description = None
-            category = category
-            category_temp = name_category
+                description = ""
+
             try:
                 t = response.xpath('.//h3[@class="product-price"]/text()').re_first('\w.*')
                 ta = t.split('$')
@@ -181,10 +161,8 @@ class ProductSpider(scrapy.Spider):
                 Product_object.url = url
                 print('url:')
                 print(url)
-            if category_temp:
-                print('category_temp:')
-                print(category_temp)
-                Product_object.category_temp = category_temp
+            if categ:
+                Product_object.category_temp = categ
             if description:
                 Product_object.description = description
                 print('description:')
