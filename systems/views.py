@@ -305,6 +305,12 @@ def register_front(request):
         return redirect('/?error=not_access')
 
 
+def recoveryView(request):
+    return render(request, 'comparagrow/recovery.html')
+
+def testing(request):
+    return render(request, 'comparagrow/testing.html')
+
 def recovery(request):
     from django.http import JsonResponse
     # print('entro a recovery')
