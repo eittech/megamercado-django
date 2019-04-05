@@ -27,11 +27,11 @@
             <div class="col">
               {% if user.is_authenticated %}
               <a onclick="FavoriteProduct('{{ item.product.id }}')">
-              <i class="fas fa-heart" style="font-size: 19px;color:#672d93;" id="favorite_{{ item.product.id }}"></i>
+              <i class="fas fa-heart" style="font-size: 19px;color:#424242;" id="favorite_{{ item.product.id }}"></i>
               </a>
               {% else %}
               <a data-toggle="modal" data-target="#modal_login">
-              <i class="fas fa-heart" style="font-size: 19px;color:#672d93;"></i>
+              <i class="fas fa-heart" style="font-size: 19px;color:#424242;"></i>
               </a>
               {% endif %}
             </div>
