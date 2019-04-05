@@ -88,7 +88,7 @@ function ocultar_mostrar(modal,modal2){
         <!-- <a href="{% url "social:begin" "facebook" %}" class="btn btn-block btn-social btn-facebook" style="color:#fff;">
           <span class="fab fa-facebook-f" style="color:#fff;"></span> Facebook
         </a> -->
-        <button class="btn" type="button" style="
+        <a href="{% url "social:begin" "facebook" %}" class="btn" style="
     background-color: #3b5998;
     border-color: 1px solid rgba(0,0,0,0.2);
 ">
@@ -96,20 +96,20 @@ function ocultar_mostrar(modal,modal2){
     height: 14px;
 ">
           <span style="color:#fff;">Iniciar con Facebook</span>
-        </button>
+        </a>
       </div>
       <div class="col-sm-6">
         <!-- <a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-block btn-social btn-google" style="color:#fff;">
           <span class="fab fa-google" style="color:#fff;"></span> Google
         </a> -->
-        <button class="btn" type="button" style="
+        <a class="btn" href="{% url "social:begin" "google-oauth2" %}" style="
     border: .1rem solid #f6f6f6!important;
 ">
           <img _ngcontent-c33="" class="button__icon" src="/static/img/google-logo.png" style="
     height: 14px;
 ">
           <span _ngcontent-c29="" translate="">Iniciar con Google</span>
-        </button>
+        </a>
       </div>
     </div>
 
