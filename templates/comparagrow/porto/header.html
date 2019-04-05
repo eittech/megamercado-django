@@ -5,7 +5,7 @@
 {% if user.is_authenticated %}
 {% if user.groups.all.0|stringformat:"s" != "cliente" %}
 <div class="container-fluid">
-  <div class="row alert-danger">
+  <div class="row alert-info">
     <div class="col-sm-12">
         <strong><i class="fas fa-exclamation-triangle"></i>
           No olvides verificar tu correo!
