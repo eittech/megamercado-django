@@ -6,21 +6,15 @@ from django.contrib.auth.models import User
 from customers.models import Customer
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
-
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import EmailMultiAlternatives
-
 from django.template.loader import render_to_string
-
-
 from products.models import *
 from customers.models import *
 from contracts.models import *
 from systems.models import *
-
 from django.contrib import auth
 
 # Create your views here.
@@ -263,7 +257,7 @@ def register_front(request):
     try:
         url_base = request.POST['url_base']
     except:
-        url_base = 'htttp://comparagrow.cl/'
+        url_base = 'https://comparagrow.cl/'
 
     try:
         user = User.objects.create_user(username, email, password)
@@ -325,7 +319,12 @@ def recovery(request):
     except:
         return JsonResponse({'respuesta':'enviado','error':'3'})
     uid = urlsafe_base64_encode(force_bytes(user.pk))
-    verificacion_activa = MailVerification.objects.get(user=user)
+    try:
+        verificacion_activa = None
+        verificacion_activa = MailVerification.objects.get(user=user)
+    except:
+        verificacion_activa = None
+
     if verificacion_activa is not None:
         token = verificacion_activa.token
     else:
@@ -334,7 +333,7 @@ def recovery(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-    link = 'http://35.185.63.218/users/recovery/'+ uid.decode("utf-8") +'/'+ token
+    link = 'https://comparagrow.cl/users/recovery/'+ uid.decode("utf-8") +'/'+ token
 
     msg_html = render_to_string('comparagrow/component/recovery.html', {'username': user.first_name,'link':link})
     subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'contacto@comparagrow.cl', email
