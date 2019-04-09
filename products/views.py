@@ -137,7 +137,7 @@ def buscador(request):
         if order_by == "dest":
             productos_lista = productos_lista.order_by('total')
     else:
-        order_by = "min"
+        order_by = "dest"
 
 
     paginator = Paginator(productos_lista, 24)
@@ -295,7 +295,7 @@ def categorias(request,slug):
         if order_by == "dest":
             productos_lista = productos_lista.order_by('total')
     else:
-        order_by = "min"
+        order_by = "dest"
     # order_by = "min"
 
 
