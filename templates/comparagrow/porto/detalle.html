@@ -33,7 +33,7 @@
 	<div class="row" style="margin-top: 15px;">
 		<div class="col-lg-6">
 
-			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1,'thumbs': true}">
+			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1,'nav': true,'dots': false}">
 				{% for item in producto_image %}
 				<div>
 					<img alt="" class="img-fluid" src="/media/{{ item.image }}">
@@ -52,9 +52,10 @@
 				<h1 class="mb-0 font-weight-bold text-7">{{ producto.name }}</h1>
 
 				<p class="price">
-					<span class="amount">$
-
+					<span class="amount">
+						<b>$ 
 						 	{{ producto.total|floatformat:0|intcomma }}
+							</b>
 					</span>
 				</p>
 

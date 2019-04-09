@@ -335,7 +335,7 @@ def categorias(request,slug):
 def redirect_product(request,id):
     # id = request.POST.get('id')
     producto = Product.objects.get(pk=id)
-    time.sleep(3)
+    time.sleep(1)
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
 def favorite_product(request,id):
