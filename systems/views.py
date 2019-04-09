@@ -517,4 +517,4 @@ def Suscribir(request):
 
 
 def GoogleVerificacion(request):
-    return render(request, 'google.html')
+    return render(request, 'google8244a1eb440cee55.html')
