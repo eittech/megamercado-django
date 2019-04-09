@@ -283,7 +283,7 @@ def register_front(request):
     try:
         url_base = request.POST['url_base']
     except:
-        url_base = 'https://comparagrow.cl/'
+        url_base = 'https://comparagrow.cl'
 
     try:
         user = User.objects.create_user(username, email, password)
@@ -306,8 +306,7 @@ def register_front(request):
         verificacion.user = user
         verificacion.token = token
         verificacion.save()
-        link = str(url_base) + 'users/validate/'+ uid.decode("utf-8") +'/'+ token
-        print(link)
+        link = 'https://comparagrow.cl/users/validate/'+ uid.decode("utf-8") +'/'+ token
 
         msg_html = render_to_string('comparagrow/component/mail.html', {'username': first_name,'link':link})
         subject, from_email, to = 'Confirmación cuenta ComparaGrow', 'contacto@comparagrow.cl', email
