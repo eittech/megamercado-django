@@ -1,7 +1,27 @@
 from django import template
+from django_user_agents.utils import get_user_agent
+
 
 register = template.Library()
 from products.models import *
+
+
+@register.filter(name='selecttemplate')
+def selecttemplate(request):
+    try:
+        user_agent = get_user_agent(request)
+        if user_agent.is_mobile:
+            return 'comparagrow/porto/base_mobile.html'
+            print('mobile')
+        else:
+            print('desktop')
+            return 'comparagrow/porto/base.html'
+    except:
+        print('error')
+        return 'comparagrow/porto/base.html'
+
+
+
 
 
 @register.simple_tag
@@ -63,6 +83,24 @@ def imagenproducturl(value, arg):
     except:
         imagen = "/static/img/no-image-icon-6.png"
     return  str(imagen)
+
+@register.filter(name='is_favorite')
+def is_favorite(value, arg):
+    print('filtro')
+    user = User.objects.get(pk=value)
+    print(user)
+    producto = Product.objects.get(pk=arg)
+    print(producto)
+    try:
+        favorito = FavoriteProduct.objects.filter(user=user).filter(product=producto).first()
+
+        if favorito:
+            ico = 'fas fa-heart'
+        else:
+            ico = 'far fa-heart'
+    except:
+        ico = 'far fa-heart'
+    return  str(ico)
 
 
 @register.filter(name='favoriteactive')
