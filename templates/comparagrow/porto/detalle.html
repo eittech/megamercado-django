@@ -30,16 +30,18 @@
 </section> -->
 <div class="container">
 
-	<div class="row" style="max-height: 670px;margin-top: 15px;">
+	<div class="row" style="margin-top: 15px;">
 		<div class="col-lg-6">
 
-			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1}">
+			<div class="owl-carousel owl-theme" data-plugin-options="{'items': 1,'thumbs': true}">
 				{% for item in producto_image %}
 				<div>
 					<img alt="" class="img-fluid" src="/media/{{ item.image }}">
 				</div>
 				{% endfor %}
 			</div>
+			<h4>Historico de <strong>precios</strong></h4>
+			<div class="ct-chart ct-perfect-fourth" style="height:250px !important;"></div>
 
 		</div>
 
@@ -92,8 +94,8 @@
 				<p class="mb-4"></p>
 				<a class="btn btn-primary" target="_blank" href="/productos/redirect/{{ producto.id }}" style="
 		    width: 100%;
-		    background-color: #672d93;
-		    border-color: #672d93;
+		    background-color: #01b22c;
+		    border-color: #01b22c;
 		    ">Ir a Tienda</a>
 
 				<p class="mb-4"></p>
@@ -162,12 +164,12 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col">
+	<!-- <div class="row">
+		<div class="col-sm-5">
 			<h4>Historico de <strong>precios</strong></h4>
 			<div class="ct-chart ct-perfect-fourth" style="height:250px !important;"></div>
 		</div>
-	</div>
+	</div> -->
 </div>
 
 {% endblock %}
