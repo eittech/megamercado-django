@@ -113,6 +113,7 @@ class FavoriteProduct(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     image = models.ImageField(upload_to="assets/product/")
+    # url = models.URLField(verbose_name="URL",max_length=300,blank=True,null=True)
     def __str__(self):
         return self.product.name
     class Meta:
