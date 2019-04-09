@@ -47,15 +47,6 @@
 
 {% block js %}
 <script src="/static/js/notify.js"></script>
-<script src="/static/js/infinite-scroll.pkgd.min.js"></script>
-<script type="text/javascript">
-  $('.article-feed').infiniteScroll({
-    path: '.pagination__next',
-    append: '.article',
-    status: '.scroller-status',
-    hideNav: '.pagination',
-  });
-</script>
 <script>
 	function FavoriteProduct(id){
 		$.ajax({
@@ -66,16 +57,19 @@
           $.notify(msg.text, msg.status);
 					console.log(msg.type)
 					if(msg.type=="add"){
-						console.log('add');
-						console.log('#favorite_'+id);
 						$('#favorite_'+id).removeClass("fas fa-heart");
 						$('#favorite_'+id).addClass("far fa-heart");
+						$('.product-'+id).fadeOut("normal", function() {
+				        $(this).remove();
+				    });
+						// $('.product-'+id).remove();
 					}
 					if(msg.type=="del"){
 						console.log('del');
 						console.log('#favorite_'+id);
 						$('#favorite_'+id).removeClass("far fa-heart");
 						$('#favorite_'+id).addClass("fas fa-heart");
+						console.log('del');
 					}
 					if(msg.type=="not"){
 						console.log('not');

@@ -3,7 +3,7 @@
 {% load humanize %}
 <div class="row article">
   {% for item in productos %}
-  <div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
+  <div class="col product-{{ item.product.id }}" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
     <div class="card-deck" style="width: 270px;font-weight: 100;">
       <div class="card" style="    border:none;">
         <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
@@ -27,11 +27,11 @@
             <div class="col">
               {% if user.is_authenticated %}
               <a onclick="FavoriteProduct('{{ item.product.id }}')">
-              <i class="fas fa-heart" style="font-size: 19px;color:#424242;" id="favorite_{{ item.product.id }}"></i>
+              <i class="fas fa-heart" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_{{ item.product.id }}"></i>
               </a>
               {% else %}
               <a data-toggle="modal" data-target="#modal_login">
-              <i class="fas fa-heart" style="font-size: 19px;color:#424242;"></i>
+              <i class="fas fa-heart" style="font-size: 19px;color:#424242;cursor:pointer;"></i>
               </a>
               {% endif %}
             </div>
