@@ -36,8 +36,8 @@
               {% endif %}
             </div>
             <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-              <a href="/productos/detalle/{{ item.product.id }}" target="_blank">
-              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;font-weight: 100;"> -->
+              <a class="btn btn-primary" style="margin-top: -8px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;"> -->
               ver detalle
               </a>
             </div>
@@ -47,7 +47,7 @@
     </div>
   </div> <!-- col // -->
   {% empty %}
-  
+
   {% endfor %}
 </div>
 <div class="scroller-status">
