@@ -23,11 +23,19 @@
               <br>
               <br>
             </div>
+						{% if productos %}
 						<div class="row">
 							<div class="col article-feed">
 									{% include 'comparagrow/component/favorite_item.html' %}
 							</div>
 						</div>
+						{% else %}
+						<div class="row justify-content-md-center" style="margin-top:40px;" >
+					  <h5>No tienes aún productos guardados en tus Favoritos.</h5>
+					  <h5>Agrégalos y serás notificado cuando estén en oferta.</h5>
+					  </div>
+						{% endif %}
+
 					</div> <!-- col.// -->
 				</div>
 
