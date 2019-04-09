@@ -16,7 +16,7 @@ from customers.models import *
 from contracts.models import *
 from systems.models import *
 from django.contrib import auth
-
+from systems.actionSystem import *
 
 # from django.dispatch import *
 # from django.db.models.signals import pre_save
@@ -77,7 +77,7 @@ def home(request):
         error = True
     user_agent = get_user_agent(request)
     variable = ""
-
+    # registrerActionSystem()
     servicecontractshop_ci = ServiceContractProduct.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='PUBLICIDAD').filter(servicecontract__service__template_section='carrusel_inicio')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
