@@ -86,12 +86,10 @@ def imagenproducturl(value, arg):
 
 @register.filter(name='is_favorite')
 def is_favorite(value, arg):
-    print('filtro')
-    user = User.objects.get(pk=value)
-    print(user)
-    producto = Product.objects.get(pk=arg)
-    print(producto)
+
     try:
+        user = User.objects.get(pk=value)
+        producto = Product.objects.get(pk=arg)
         favorito = FavoriteProduct.objects.filter(user=user).filter(product=producto).first()
 
         if favorito:
