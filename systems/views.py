@@ -17,6 +17,32 @@ from contracts.models import *
 from systems.models import *
 from django.contrib import auth
 
+
+# from django.dispatch import *
+# from django.db.models.signals import pre_save
+#
+#
+# @receiver(pre_save, sender=User, dispatch_uid="createNewCustomer")
+# def createNewCustomer(sender,instance, **kwargs):
+#     try:
+#         mail = None
+#         print('id')
+#         print(instance.id)
+#         mail = instance.email
+#         print('mail')
+#         print(mail)
+#         if mail == "":
+#             print('tiene mail vacio')
+#         else:
+#             if mail is not None:
+#                 instance.username = mail
+#                 print('tiene mail')
+#             else:
+#                 print('no tiene mail')
+#     except:
+#         print('error')
+#     print('finalizo el proceso')
+
 # Create your views here.
 def homeporto(request):
     error=False

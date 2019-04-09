@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.dispatch import *
+from django.db.models.signals import pre_save
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class AddressCustomer(models.Model):
@@ -55,3 +57,10 @@ class MailVerification(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.CharField(verbose_name="token",max_length=200)
     type = models.CharField(verbose_name="Tipo de Transaccion",max_length=20,choices=TYPE_TRANSACTION,blank=True)
+
+# class User(AbstractUser):
+#     class Meta(object):
+#         unique_together = ('email',)
+
+
+    # raise Exception('OMG')
