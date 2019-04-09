@@ -3,7 +3,7 @@
 {% load menu_categorias %}
 {% load cache %}
 {% if user.is_authenticated %}
-{% if user.groups.all.0|stringformat:"s" != "cliente" %}
+{% if user.groups.all.0|stringformat:"s" != "cliente" and not backends.associated %}
 <div class="container-fluid">
   <div class="row alert-info">
     <div class="col-sm-12">
