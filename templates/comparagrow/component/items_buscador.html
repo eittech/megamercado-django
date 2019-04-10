@@ -71,7 +71,7 @@
 									<!-- <li class="page-item active"><a class="page-link" href="#">1</a></li>
 									<li class="page-item"><a class="page-link" href="#">2</a></li>
 									<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-                  <li style="padding: 5px;">{{ productos.number }} de {{ productos.paginator.num_pages }} paginas </li>
+                  <li style="padding: 5px;">{{ productos.number }} de {{ productos.paginator.num_pages }} páginas </li>
                   {% if productos.has_next %}
                   <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.next_page_number }}')"><i class="fas fa-angle-right"></i></a></li>
                   <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ productos.num_pages }}')"><i class="fas fa-angle-double-right"></i></a></li>
