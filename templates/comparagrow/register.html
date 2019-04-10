@@ -85,7 +85,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupPrepend2"><i class="fa fa-birthday-cake"></i></span>
             </div>
-            <input name="birthday" type="date" class="form-control" id="validationDefaultbirthday" placeholder="Fecha de Nacimiento" aria-describedby="inputGroupPrepend2">
+            <input name="birthday" id="birthday" type="date" class="form-control" id="validationDefaultbirthday" placeholder="Fecha de Nacimiento" aria-describedby="inputGroupPrepend2">
           </div>
         </div>
       </div>
@@ -152,4 +152,19 @@ ComparaGrow</small></p>
 
 
 
+{% endblock %}
+
+
+{% block scriptb %}
+<link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="/static/air-datepicker/js/datepicker.min.js"></script>
+<script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
+
+<script>
+  $( document ).ready(function() {
+    $('#birthday').datepicker({
+      language: 'es',dateFormat:'yyyy-mm-dd'
+    });
+  });
+</script>
 {% endblock %}
