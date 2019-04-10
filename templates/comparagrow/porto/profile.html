@@ -154,8 +154,16 @@
 {% endblock %}
 
 {% block js %}
+<link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="/static/air-datepicker/js/datepicker.min.js"></script>
+<script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
 
 <script>
+  $( document ).ready(function() {
+    $('#birthday').datepicker({
+      language: 'es',dateFormat:'yyyy-mm-dd'
+    });
+  });
 $('#id_ajax_upload_form').submit(function(e){
   e.preventDefault();
   $form = $(this)
