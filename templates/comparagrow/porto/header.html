@@ -148,7 +148,7 @@ letter-spacing: 1px;">
                                                   </li>
                                                   {% for item3 in item2.slug|menulevelone:"3" %}
                                                     <li>
-                                                      <a class="dropdown-item" href="/productos/categorias/{{ item3.slug }}">
+                                                      <a style="padding-left: 20px;" class="dropdown-item" href="/productos/categorias/{{ item3.slug }}">
                                                         <b> <i class="fas fa-angle-double-right"></i></b>
                                                         {{ item3.name }} ({{ item3.id|countproductscategory }})</a>
                                                     </li>
