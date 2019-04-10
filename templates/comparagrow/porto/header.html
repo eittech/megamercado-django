@@ -141,7 +141,18 @@ letter-spacing: 1px;">
                                               <!-- </span> -->
                                               <ul class="dropdown-mega-sub-nav">
                                                 {% for item2 in item1.slug|menulevelone:"2" %}
-                                                <li><a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">{{ item2.name }} ({{ item2.id|countproductscategory }})</a></li>
+                                                  <li>
+                                                    <a class="dropdown-item" href="/productos/categorias/{{ item2.slug }}">
+                                                      <b> <i class="fas fa-angle-right"></i></b>
+                                                      {{ item2.name }} ({{ item2.id|countproductscategory }})</a>
+                                                  </li>
+                                                  {% for item3 in item2.slug|menulevelone:"3" %}
+                                                    <li>
+                                                      <a class="dropdown-item" href="/productos/categorias/{{ item3.slug }}">
+                                                        <b> <i class="fas fa-angle-double-right"></i></b>
+                                                        {{ item3.name }} ({{ item3.id|countproductscategory }})</a>
+                                                    </li>
+                                                  {% endfor %}
                                                 {% endfor %}
                                               </ul>
                                             </div>
