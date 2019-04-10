@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 import datetime
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 # from tagging.registry import register
 
 # from dynamic_scraper.models import Scraper, SchedulerRuntime
@@ -48,6 +49,9 @@ class Category(MPTTModel):
     class Meta:
         unique_together = (('parent', 'slug',))
         verbose_name_plural = 'categories'
+
+    def get_absolute_url(self):
+        return '/productos/categorias/'+self.slug
 
     def get_slug_list(self):
         try:
@@ -100,6 +104,8 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Productos"
         unique_together = ('shop', 'name')
+    def get_absolute_url(self):
+        return reverse('product', args=[str(self.id)])
 
 class FavoriteProduct(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
