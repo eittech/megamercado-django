@@ -8,26 +8,14 @@
 
 							<div class="col-md-12 align-self-center p-static order-2 text-center">
 
-								<h1 class="text-dark text-dark text-10"><strong>Conviertete en cliente</strong></h1>
-<span class="sub-title text-dark">Listado de Planes</span>
+								<h1 class="text-dark text-dark text-10"><strong>Conviértete en Cliente</strong></h1>
+<!-- <span class="sub-title text-dark">Listado de Planes</span> -->
 							</div>
 						</div>
 					</div>
 				</section>
 <div class="container">
-  <div class="row">
-    <p class="text-justify">
-      <h5>¡Gracias por tu interés en ser parte Comparagrow! </h5><br/>
-      Constantemente estamos buscando nuevas Tiendas / Clientes para incrementar nuestro creciente catálogo de productos y así ofrecer una mejor experiecia de búsqueda a nuestros atesorados usuarios.
-      <br/>
-      Si tienes dudas, conversemos, llámanos al Cel/Whatsapp : +56 9 79670520 ó envíanos un email a contacto@comparagrow.cl y nos pondremos en contacto contigo a la brevedad.
-      <br/>
-      Si estás decidido, y quieres que tus productos aparezcan en nuestro sitio web, elije uno de los Planes que se indican más abajo y  te contactaremos para gestionar el proceso de carga de tus productos a nuestro sitio web.
-      <br/>
-      ¡Gracias por confiar en nosotros!
 
-    </p>
-  </div>
   <div class="row mb-4">
     <div class="col">
       <h4 class="mb-2"><strong>Tus</strong> Planes</h4>
@@ -35,59 +23,7 @@
   </div>
 
   <div class="pricing-table pricing-table-no-gap mb-4">
-    <div class="col-md-6 col-lg-3">
-      <div class="plan">
-        <div class="plan-header">
-          <h3>Plan Mix</h3>
-        </div>
-        <div class="plan-price">
-          <span class="price" style="    font-size: 23px;"><span class="price-unit">$</span>50.0000 + 30.000</span>
-          <label class="price-label">POR MES</label>
-        </div>
-        <div class="plan-features">
-          <!-- <ul>
-            <li>10GB Disk Space</li>
-            <li>100GB Monthly Bandwith</li>
-            <li>20 Email Accounts</li>
-            <li>Unlimited Subdomains</li>
-          </ul> -->
-        </div>
-        <div class="plan-footer">
-          {% if user.is_authenticated %}
-          <a href="/suscribir?action=plan" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
-          {% else %}
-          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-      <div class="plan">
-        <div class="plan-header">
-          <h3>Plan CPC</h3>
-        </div>
-        <div class="plan-price">
-          <span class="price"><span class="price-unit">$</span>600</span>
-          <label class="price-label">POR MES</label>
-        </div>
-        <div class="plan-features">
-          <!-- <ul>
-            <li>5GB Disk Space</li>
-            <li>50GB Monthly Bandwith</li>
-            <li>10 Email Accounts</li>
-            <li>Unlimited Subdomains</li>
-          </ul> -->
-        </div>
-        <div class="plan-footer">
-          {% if user.is_authenticated %}
-          <a href="/suscribir?action=plan" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
-          {% else %}
-          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
+		<div class="col-md-6 col-lg-3">
       <div class="plan plan-featured">
         <div class="plan-header" style="background: #672d93;">
           <h3>Plan FULL</h3>
@@ -113,6 +49,60 @@
         </div>
       </div>
     </div>
+		<div class="col-md-6 col-lg-3">
+      <div class="plan">
+        <div class="plan-header">
+          <h3>Plan Cobro Por Clic</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price"><span class="price-unit">$</span>600</span>
+          <label class="price-label">POR AÑO</label>
+        </div>
+        <div class="plan-features">
+          <!-- <ul>
+            <li>5GB Disk Space</li>
+            <li>50GB Monthly Bandwith</li>
+            <li>10 Email Accounts</li>
+            <li>Unlimited Subdomains</li>
+          </ul> -->
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a href="/suscribir?action=plan" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
+          {% else %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="plan">
+        <div class="plan-header">
+          <h3>Plan Mix</h3>
+        </div>
+        <div class="plan-price">
+          <span class="price"><span class="price-unit">$</span>50.0000</span>
+          <label class="price-label">POR MES</label>
+        </div>
+        <div class="plan-features">
+          <ul>
+            <li> + $300 por click</li>
+            <!-- <li>100GB Monthly Bandwith</li>
+            <li>20 Email Accounts</li>
+            <li>Unlimited Subdomains</li> -->
+          </ul>
+        </div>
+        <div class="plan-footer">
+          {% if user.is_authenticated %}
+          <a href="/suscribir?action=plan" class="btn btn-dark btn-modern btn-outline py-2 px-4">SUSCRIBIR</a>
+          {% else %}
+          <a class="btn btn-dark btn-modern btn-outline py-2 px-4" data-toggle="modal" data-target="#modal_login">SUSCRIBIR</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+
     <div class="col-md-6 col-lg-3">
       <div class="plan">
         <div class="plan-header">
@@ -141,6 +131,23 @@
         </div>
       </div>
     </div>
+  </div>
+	<div class="row" style="margin-top:60px;">
+
+		<p class="text-center">
+			<b class="text-center">¡Gracias por tu interés en ser parte Comparagrow! </b><br>
+			Constantemente estamos buscando nuevas Tiendas/Clientes para incrementar nuestro creciente
+			catálogo de productos y así ofrecer una mejor experiencia de búsqueda a nuestros Usuarios.
+			Si tienes dudas, llámanos al Cel/Whatsapp : +56 9 79670520 o envíanos un email a
+			contacto@comparagrow.cl, nos pondremos en contacto contigo a la brevedad. <br>
+			Si estás decidido, y quieres que tus productos aparezcan en nuestro sitio web, elije uno de los Planes
+			que se indican más abajo y te contactaremos para gestionar el proceso de carga de tus productos a
+
+			nuestro sitio web.
+			 
+			<br><br>
+			<b>¡GRACIAS POR TU INTERÉS!</b>
+		</p>
   </div>
 </div>
 <!-- <nav class="navbar fixed-bottom navbar-light bg-light">
