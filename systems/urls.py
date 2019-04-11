@@ -41,13 +41,13 @@ urlpatterns = [
     path('terminos-condiciones', views.terminosCondiciones, name='terminos-condiciones'),
     path('clientes', views.Clientes, name='clientes'),
 
-    # path('publicidad', views.Publicidad, name='publicidad'),
+    path('publicidad', views.Publicidad, name='publicidad'),
 
     path('suscribir', views.Suscribir, name='suscribir'),
     path('alertas', views.alertasProductos, name='alertas'),
 
     path('politica-privacidad', views.politicasPrivacidad, name='login'),
-    path('publicidad', views.pricePlan, name='publicidad'),
+    # path('publicidad', views.pricePlan, name='publicidad'),
     path('exito', views.SuscribirExito, name='priceplan'),
 
     path('google8244a1eb440cee55.html', views.GoogleVerificacion, name='GoogleVerificacion'),
