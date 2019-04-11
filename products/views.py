@@ -53,9 +53,9 @@ def buscador(request):
     productos_lista = Product.objects.filter(category__isnull=False)
 
     productos_lista = productos_lista.filter(name__icontains=texto).order_by('-photo')
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    # tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    # categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    # marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
     shop_id = False
     tienda = []
@@ -139,6 +139,9 @@ def buscador(request):
     else:
         order_by = "dest"
 
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
     paginator = Paginator(productos_lista, 24)
     page = request.POST.get('page')
@@ -209,9 +212,9 @@ def categorias(request,slug):
 
     productos_lista = productos_lista.filter(category__in=children)
 
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
-    categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    # tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    # marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    # categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
 
     # print(productos_lista)
     #tiendas = None
@@ -298,6 +301,9 @@ def categorias(request,slug):
         order_by = "dest"
     # order_by = "min"
 
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
 
     paginator = Paginator(productos_lista, 24)
     page = request.POST.get('page')
