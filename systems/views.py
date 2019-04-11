@@ -264,9 +264,9 @@ def register_front(request):
         password = request.POST['password']
         first_name = request.POST['first_name']
         if username != email:
-            return redirect('/?error=not_access_1')
+            return redirect('/?error=not_access')
     except:
-        return redirect('/?error=not_access_2')
+        return redirect('/?error=not_access')
 
     try:
         birthday = request.POST['birthday']
@@ -284,7 +284,13 @@ def register_front(request):
         url_base = request.POST['url_base']
     except:
         url_base = 'https://comparagrow.cl'
-
+    print('paso1')
+    try:
+        user_exist = User.objects.filter(email=email).first()
+        if user_exist is not None:
+            return redirect('/?error=not_access')
+    except:
+        return redirect('/?error=not_access')
     try:
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name
