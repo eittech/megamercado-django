@@ -58,7 +58,7 @@
 
 </style>
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/SliderDesktop.jpg');background-size: auto 400px;height: 180px;">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/fondoslider.png');height: 180px;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -70,14 +70,17 @@
 				<div class="owl-stage-outer">
 					<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 2660px; padding-left: 100px; padding-right: 100px;">
 						<div class="owl-item active" style="width: 720px; margin-right: 100px;">
-							<div class="text-center" style="height: 111px;">
+							<div class="text-center">
 							<span class="text-color-primary"></span>
-							<h2 class="font-weight-semibold text-10" style="color:#fff;margin-top:50px">
-								<a href="/suscribir?action=publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="font-size: 15px;">Publica Aquí</a>
+							<h2 class="font-weight-semibold text-10" style="color:#fff;/* position: absolute; */margin-top: 86px;">
+								<a href="/suscribir?action=publicidad">
+									<img src="/static/img/btn_pub_movil.png">
+								</a>
 							</h2>
 							<p class="lead lead-2 mb-0"></p>
 						</div>
 					</div>
+
 			</div>
 		</div>
 
@@ -88,7 +91,7 @@
 	</div>
 </section>
 {% else %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/SliderDesktop.jpg');background-size: auto 410px;height: 180px;">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/fondoslider.png');height: 180px;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -102,21 +105,15 @@
 						<div class="owl-item active" style="width: 720px; margin-right: 100px;">
 							<div class="text-center" style="height: 111px;">
 							<span class="text-color-primary"></span>
-							<h2 class="font-weight-semibold text-10" style="color:#fff;position: absolute;right: 129px;bottom: -39px;">
-								<a href="/suscribir?action=publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="font-size: 15px;">Publica Aquí</a>
+							<h2 class="font-weight-semibold text-10" style="color:#fff;position: absolute;top: 61%;right: 10%;">
+								<a href="/suscribir?action=publicidad">
+									<img src="/static/img/botones_pub.png" style="height: 42px;width: 410px;">
+								</a>
 							</h2>
 							<p class="lead lead-2 mb-0"></p>
 						</div>
 					</div>
-					<div class="owl-item" style="width: 720px; margin-right: 100px;">
-						<div class="text-center" style="height: 111px;">
-	            <span class="text-color-primary"></span>
-							<h2 class="font-weight-semibold text-10" style="color:#fff;position: absolute;right: 129px;bottom: -39px;">
-								<a href="/suscribir?action=publicidad" class="btn btn-3d btn-success rounded-0 mb-2" style="font-size: 15px;">Publica Aquí</a>
-							</h2>
-							<p class="lead lead-2 mb-0"></p>
-					</div>
-				</div>
+
 			</div>
 		</div>
 
