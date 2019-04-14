@@ -58,7 +58,7 @@
 
 </style>
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/fondoslider.png');height: 180px;">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');height: 180px;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -72,18 +72,7 @@
 						<div class="owl-item active" style="width: 720px; margin-right: 100px;">
 							<div class="text-center">
 							<span class="text-color-primary"></span>
-							<h2 class="font-weight-semibold text-10" style="color:#fff;/* position: absolute; */margin-top: 86px;">
-								{% if user.is_authenticated %}
-								<a href="/suscribir?action=publicidad">
-									<img src="/static/img/btn_pub_movil.png">
-								</a>
-			          {% else %}
-			          <a data-toggle="modal" data-target="#modal_login">
-									<img src="/static/img/btn_pub_movil.png">
-								</a>
-								{% endif %}
 
-							</h2>
 							<p class="lead lead-2 mb-0"></p>
 						</div>
 					</div>
@@ -98,7 +87,7 @@
 	</div>
 </section>
 {% else %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/fondoslider.png');height: 180px;">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');height: 180px;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -112,19 +101,7 @@
 						<div class="owl-item active" style="width: 720px; margin-right: 100px;">
 							<div class="text-center" style="height: 111px;">
 							<span class="text-color-primary"></span>
-							<h2 class="font-weight-semibold text-10" style="color:#fff;position: absolute;top: 61%;right: 10%;">
-								{% if user.is_authenticated %}
-								<a href="/suscribir?action=publicidad">
-									<img src="/static/img/botones_pub.png" style="height: 42px;width: 410px;">
 
-								</a>
-			          {% else %}
-			          <a class="text-10" data-toggle="modal" data-target="#modal_login">
-									<img src="/static/img/botones_pub.png" style="height: 42px;width: 410px;">
-								</a>
-								{% endif %}
-
-							</h2>
 							<p class="lead lead-2 mb-0"></p>
 						</div>
 					</div>
