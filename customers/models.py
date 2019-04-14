@@ -13,7 +13,7 @@ class AddressCustomer(models.Model):
         ('SUSCRIPTION', 'SOLICITUD DE SUSCRIPCION'),
     )
     alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
-    type = models.CharField(verbose_name="Tipo de Direccion",max_length=20,choices=TYPE_ADDRESS,blank=True)
+    type = models.CharField(verbose_name="Tipo de Direccion",max_length=200,choices=TYPE_ADDRESS,blank=True)
     company = models.CharField(verbose_name="Compañia",max_length=200,blank=True)
     address1 = models.CharField(verbose_name="Direccion 1",max_length=200,blank=True)
     address2 = models.CharField(verbose_name="Direccion 2",max_length=200,blank=True)
@@ -37,7 +37,7 @@ class Customer(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
-    dni_type = models.CharField(verbose_name="Tipo de Documento",max_length=20,choices=TYPE_DOCUMENT,blank=True)
+    dni_type = models.CharField(verbose_name="Tipo de Documento",max_length=200,choices=TYPE_DOCUMENT,blank=True)
     image = models.ImageField(upload_to="assets/customer/",blank=True,null=True)
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
@@ -56,7 +56,7 @@ class MailVerification(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     token = models.CharField(verbose_name="token",max_length=200)
-    type = models.CharField(verbose_name="Tipo de Transaccion",max_length=20,choices=TYPE_TRANSACTION,blank=True)
+    type = models.CharField(verbose_name="Tipo de Transaccion",max_length=200,choices=TYPE_TRANSACTION,blank=True)
 
 # class User(AbstractUser):
 #     class Meta(object):

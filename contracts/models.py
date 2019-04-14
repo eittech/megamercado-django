@@ -19,7 +19,7 @@ class Contracts(models.Model):
     #services = models.ManyToManyField(ServiceContract)
     date_contract = models.DateField(verbose_name="Fecha del Contrato")
     total = models.FloatField()
-    state = models.CharField(verbose_name="Estado del Contrato",max_length=20,choices=STATE_CONTRACT)
+    state = models.CharField(verbose_name="Estado del Contrato",max_length=200,choices=STATE_CONTRACT)
     def __str__(self):
         return "contrato #" + str(self.id)
 
@@ -57,7 +57,7 @@ class Payment(models.Model):
         ('PENDING','Pendiente'),
     )
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    type = models.CharField(verbose_name="Tipo de Pago",max_length=20,choices=TYPE_PAYMENT)
+    type = models.CharField(verbose_name="Tipo de Pago",max_length=200,choices=TYPE_PAYMENT)
     reference = models.CharField(verbose_name="Referencia",max_length=200)
     amount = models.FloatField()
     date_payment = models.DateTimeField(verbose_name="Fecha y Hora del Pago")
