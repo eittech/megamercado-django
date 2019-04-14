@@ -465,51 +465,51 @@ def pricePlan(request):
 
 def Suscribir(request):
     if request.POST:
-        try:
-            if request.user.is_authenticated:
-                print('paso 1')
-                user = request.user
-                customer = Customer.objects.get(user=user)
-                if customer is not None:
-                    print('paso 12')
+        # try:
+        if request.user.is_authenticated:
+            print('paso 1')
+            user = request.user
+            customer = Customer.objects.get(user=user)
+            if customer is not None:
+                print('paso 12')
 
-                    addresscustomer = AddressCustomer()
-                    action = request.POST['action']
-                    city = request.POST['city']
-                    company = request.POST['company']
-                    address1 = request.POST['address1']
-                    phone = request.POST['phone']
-                    phone_mobile = request.POST['phone_mobile']
-                    alias = 'direccion ' + str(user.first_name)
+                addresscustomer = AddressCustomer()
+                action = request.POST['action']
+                city = request.POST['city']
+                company = request.POST['company']
+                address1 = request.POST['address1']
+                phone = request.POST['phone']
+                phone_mobile = request.POST['phone_mobile']
+                alias = 'direccion ' + str(user.first_name)
 
-                    type = 'SUSCRIPTION'
+                type = 'SUSCRIPTION'
 
-                    addresscustomer.alias = alias
-                    addresscustomer.type = type
-                    addresscustomer.company = company
-                    addresscustomer.address1 = address1
-                    addresscustomer.city = city
-                    addresscustomer.phone = phone
-                    addresscustomer.phone_mobile = phone_mobile
+                addresscustomer.alias = alias
+                addresscustomer.type = type
+                addresscustomer.company = company
+                addresscustomer.address1 = address1
+                addresscustomer.city = city
+                addresscustomer.phone = phone
+                addresscustomer.phone_mobile = phone_mobile
 
-                    addresscustomer.save()
-                    import datetime
-                    contracts = Contracts()
-                    contracts.customer = customer
-                    contracts.date_contract = datetime.date.today()
-                    contracts.total = 0
-                    if action == "plan":
-                        contracts.state = 'SUSCRIPTIONPLAN'
-                    if action == "publicidad":
-                        contracts.state = 'SUSCRIPTIONPUBLICIDAD'
-                    contracts.save()
-                    return redirect('/exito')
-                else:
-                    return redirect('/not_found_1')
+                addresscustomer.save()
+                import datetime
+                contracts = Contracts()
+                contracts.customer = customer
+                contracts.date_contract = datetime.date.today()
+                contracts.total = 0
+                if action == "plan":
+                    contracts.state = 'SUSCRIPTIONPLAN'
+                if action == "publicidad":
+                    contracts.state = 'SUSCRIPTIONPUBLICIDAD'
+                contracts.save()
+                return redirect('/exito')
             else:
-                return redirect('/not_found_2')
-        except:
-            return redirect('/not_found_3')
+                return redirect('/not_found')
+        else:
+            return redirect('/not_found')
+        # except:
+        #     return redirect('/not_found')
     else:
         try:
             action = request.GET['action']
