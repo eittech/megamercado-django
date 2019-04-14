@@ -505,18 +505,18 @@ def Suscribir(request):
                     contracts.save()
                     return redirect('/exito')
                 else:
-                    return redirect('/not_found')
+                    return redirect('/not_found_1')
             else:
-                return redirect('/not_found')
+                return redirect('/not_found_2')
         except:
-            return redirect('/not_found')
+            return redirect('/not_found_3')
     else:
         try:
             action = request.GET['action']
         except:
             action = None
         if action is None:
-            return redirect('/not_found')
+            return redirect('/not_found_4')
         else:
             return render(request, 'comparagrow/suscribir.html',{'action':action})
 
