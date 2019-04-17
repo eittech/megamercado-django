@@ -44,15 +44,16 @@
 						</div>
 					</section> -->
 					<ul style="font-size: 10px;">
-						<li style="font-size: 10px;line-height: 13px;">
+						<li style="font-size: 10px;line-height: 13px;height: 64px;">
 							Plan Full, permite incorporar TODOS los productos de tu Tienda en nuestro
 sitio web, mientras estos se adecúen a las categorías establecidas en
-ComparaGrow. <a id="ul_fp_btn" style="
-    color: blueviolet;
-    text-decoration: underline;
-    font-size: 11px;
-		cursor:pointer;
-"> ver mas +</a></li>
+ComparaGrow.</li>
+						<li><a id="ul_fp_btn" style="
+						    color: blueviolet;
+						    text-decoration: underline;
+						    font-size: 11px;
+								cursor:pointer;
+						"> ver mas +</a></li>
 				</ul>
 				<ul style="display:none;" id="ul_fp">
 						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
@@ -84,20 +85,21 @@ inicia desde el día en que tus productos se han cargado en nuestro sitio.</li>
         </div>
         <div class="plan-features">
 					<ul style="font-size: 10px;">
-						<li style="font-size: 10px;line-height: 13px;">
+						<li style="font-size: 10px;line-height: 13px;height: 64px;">
 							Plan Cobro Por Click (CPC), es un cobro por redireccionamiento a tu sitio
-desde ComparaGrow.cl. <a id="ul_pcpc_btn" style="
-    color: blueviolet;
-    text-decoration: underline;
-    font-size: 11px;
-		cursor:pointer;
-"> ver mas +</a>
+desde ComparaGrow.cl.
 						</li>
+						<li><a id="ul_pcpc_btn" style="
+						    color: blueviolet;
+						    text-decoration: underline;
+						    font-size: 11px;
+								cursor:pointer;
+						"> ver mas +</a></li>
 					</ul>
 					<ul style="display:none;" id="ul_pcpc">
-						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+						<li style="font-size: 10px;line-height: 13px;">
 							Cada click por redireccionamiento tiene un cobro
-de $500 pesos, con una duración de 1 mes que se inicia desde el día en que
+de $500 pesos,con una duración de 1 mes que se inicia desde el día en que
 TODOS los productos de tu Tienda se han cargado en nuestro sitio web,
 mientras estos se adecúen a las categorías establecidas en ComparaGrow.</li>
 						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
@@ -125,10 +127,21 @@ El CPC se obtendrá a través de informes de Google Analytics.</li>
         </div>
         <div class="plan-features">
 					<ul style="font-size: 10px;">
-						<li style="font-size: 10px;line-height: 13px;">
+						<li style="font-size: 10px;line-height: 13px;height: 64px;">
 							Plan Mix, mezcla una parte del Plan Full y Plan CPC, al tener un precio base
 de $40.000 y un cobro adicional por cada click de redireccionamiento de un
-valor de $300 pesos. Esto significa, que cada vez que el usuario es
+valor de $300 pesos.
+						</li>
+						<li><a id="ul_pm_btn" style="
+								color: blueviolet;
+								text-decoration: underline;
+								font-size: 11px;
+								cursor:pointer;
+						"> ver mas +</a></li>
+						</ul>
+						<ul style="display:none;" id="ul_pm">
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+						Esto significa, que cada vez que el usuario es
 redireccionado a tu sitio desde el nuestro, se cobrarán $300 pesos más al
 valor base de este Plan.</li>
 						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
@@ -161,12 +174,24 @@ valor base de este Plan.</li>
 					<span class=""></span>
         </div>
         <div class="plan-features">
-          <ul>
-            <li></li>
-            <!-- <li>10GB Monthly Bandwith</li>
-            <li>2 Email Accounts</li>
-            <li>Unlimited Subdomains</li> -->
-          </ul>
+					<ul style="font-size: 10px;">
+						<li style="font-size: 10px;line-height: 13px;height: 64px;">
+							Plan Producto, permite incorporar solo 1 producto y tiene una duración de
+	1 mes,
+						</li>
+						<li><a id="ul_pp_btn" style="
+								color: blueviolet;
+								text-decoration: underline;
+								font-size: 11px;
+								cursor:pointer;
+						"> ver mas +</a></li>
+						</ul>
+						<ul style="display:none;" id="ul_pp">
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+							iniciándose desde el día en que el producto de tu Tienda se ha
+ 						cargado en nuestro sitio web.</li>
+					</ul>
+
         </div>
         <div class="plan-footer">
           {% if user.is_authenticated %}
@@ -181,6 +206,10 @@ valor base de este Plan.</li>
     </div>
   </div>
 </div>
+
+
+
+
 <div class="container-fluid">
   <div class="row mb-4">
     <div class="col">
@@ -391,12 +420,20 @@ valor base de este Plan.</li>
 <script>
 	$( function() {
 		$( "#ul_pcpc_btn" ).on( "click", function() {
-	      $('#ul_pcpc').show('shake');
-				$('#ul_pcpc_btn').hide('shake');
+	      $('#ul_pcpc').show();
+				$('#ul_pcpc_btn').hide();
 	  });
 		$( "#ul_fp_btn" ).on( "click", function() {
-	      $('#ul_fp').show('shake');
-				$('#ul_fp_btn').hide('shake');
+	      $('#ul_fp').show();
+				$('#ul_fp_btn').hide();
+	  });
+		$( "#ul_pm_btn" ).on( "click", function() {
+	      $('#ul_pm').show();
+				$('#ul_pm_btn').hide();
+	  });
+		$( "#ul_pp_btn" ).on( "click", function() {
+	      $('#ul_pp').show();
+				$('#ul_pp_btn').hide();
 	  });
 	});
 </script>
