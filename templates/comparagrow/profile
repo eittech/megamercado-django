@@ -98,7 +98,9 @@
                   </div>
 
                   <!--  -->
-                  <input name="birthday" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
+                  <input name="birthday" data-language='es'
+                  data-view="years"
+                  data-date-format="yyyy-mm-dd" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
                 </div>
               </div>
             </div>

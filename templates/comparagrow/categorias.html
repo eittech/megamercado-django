@@ -64,7 +64,7 @@
 				<div class="row">
 					<div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
 						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
-						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">PRECIO</h6>
+						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>PRECIO</strong></h6>
 						<form id="formulario_filtro" method="post" action="">
 							{% csrf_token %}
 							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
@@ -74,14 +74,14 @@
 							<input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
 
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
-							<div class="form-check mb-2" style="display: flex;margin-left: -5px">
+							<div class="form-inline" style="margin-left:15px;">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
 							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 							</div>
 							<button type="submit" style="font-size:12px;background: #01b22c;border-color: #01b22c;margin-left: 15px;width: 100px;" class="btn btn-primary mb-2">
 								<i class="fas fa-cannabis"></i> Filtrar</button>
 
-							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;">CATEGORIAS</h6>
+							<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>CATEGORIAS</strong></h6>
 							{% if categorias2.count > 5 %}
 							<ul style="
 							font-size: 14px;
@@ -143,7 +143,7 @@
 							          {% for category in categorias2 %}
 
 							          {% if category.category__pk in categoria_filtro %}
-							          <div class="col-sm-3">
+							          <div class="col-sm-4">
 
 							          <a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
 							            <input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
@@ -152,7 +152,7 @@
 							        </div>
 
 							          {% else %}
-							          <div class="col-sm-3">
+							          <div class="col-sm-4">
 
 							          <a class="filter-link stext-106 trans-04" style="width: max-content;">
 							            <input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">

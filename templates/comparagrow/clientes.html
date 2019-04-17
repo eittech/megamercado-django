@@ -8,8 +8,8 @@
 
 							<div class="col-md-12 align-self-center p-static order-2 text-center">
 
-								<h1 class="text-dark text-dark text-10"><strong>Conviértete en Cliente</strong></h1>
-<!-- <span class="sub-title text-dark">Listado de Planes</span> -->
+								<h1 class="text-dark text-dark text-10">Muestra tus productos en ComparaGrow</h1>
+								<span class="sub-title text-dark">Ofrecemos Planes de suscripción para que tus productos sean encontrados en nuestro sitio web.</span>
 							</div>
 						</div>
 					</div>
@@ -18,28 +18,48 @@
 
   <div class="row mb-4">
     <div class="col">
-      <h4 class="mb-2"><strong>Tus</strong> Planes</h4>
+      <h4 class="mb-2">PLANES <strong>COMPARAGROW</strong></h4>
     </div>
   </div>
 
   <div class="pricing-table pricing-table-no-gap mb-4">
 		<div class="col-md-6 col-lg-3">
-      <div class="plan plan-featured">
+      <div class="plan">
         <div class="plan-header" style="background: #672d93;">
           <h3>Plan FULL</h3>
         </div>
-        <div class="plan-price">
+        <div class="plan-price" style="
+    height: 144px;
+">
           <span class="price"><span class="price-unit">$</span>60.000</span>
           <label class="price-label">POR MES</label>
 					<span class=""></span>
         </div>
         <div class="plan-features">
-          <ul>
-            <li></li>
-            <!-- <li>25GB Monthly Bandwith</li>
-            <li>5 Email Accounts</li>
-            <li>Unlimited Subdomains</li> -->
-          </ul>
+					<!-- <div class="toggle toggle-primary toggle-simple" data-plugin-toggle="">
+					<section class="toggle">
+						<label>Detalles</label>
+						<div class="toggle-content" >
+
+						</div>
+					</section> -->
+					<ul style="font-size: 10px;">
+						<li style="font-size: 10px;line-height: 13px;">
+							Plan Full, permite incorporar TODOS los productos de tu Tienda en nuestro
+sitio web, mientras estos se adecúen a las categorías establecidas en
+ComparaGrow. <a id="ul_fp_btn" style="
+    color: blueviolet;
+    text-decoration: underline;
+    font-size: 11px;
+		cursor:pointer;
+"> ver mas +</a></li>
+				</ul>
+				<ul style="display:none;" id="ul_fp">
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+El valor de este Plan es de $60.000 y tiene una duración de 1 mes, que se
+inicia desde el día en que tus productos se han cargado en nuestro sitio.</li>
+					</ul>
+
         </div>
         <div class="plan-footer">
           {% if user.is_authenticated %}
@@ -58,17 +78,31 @@
         <div class="plan-price" style="
     height: 144px;
 ">
-          <span class="price"><span class="price-unit">$</span>600</span>
-          <label class="price-label">POR AÑO</label>
+          <span class="price"><span class="price-unit">$</span>500</span>
+          <label class="price-label">POR MES</label>
 					<span class=""></span>
         </div>
         <div class="plan-features">
-          <ul>
-            <li></li>
-            <!-- <li>50GB Monthly Bandwith</li>
-            <li>10 Email Accounts</li>
-            <li>Unlimited Subdomains</li> -->
-          </ul>
+					<ul style="font-size: 10px;">
+						<li style="font-size: 10px;line-height: 13px;">
+							Plan Cobro Por Click (CPC), es un cobro por redireccionamiento a tu sitio
+desde ComparaGrow.cl. <a id="ul_pcpc_btn" style="
+    color: blueviolet;
+    text-decoration: underline;
+    font-size: 11px;
+		cursor:pointer;
+"> ver mas +</a>
+						</li>
+					</ul>
+					<ul style="display:none;" id="ul_pcpc">
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+							Cada click por redireccionamiento tiene un cobro
+de $500 pesos, con una duración de 1 mes que se inicia desde el día en que
+TODOS los productos de tu Tienda se han cargado en nuestro sitio web,
+mientras estos se adecúen a las categorías establecidas en ComparaGrow.</li>
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+El CPC se obtendrá a través de informes de Google Analytics.</li>
+					</ul>
         </div>
         <div class="plan-footer">
           {% if user.is_authenticated %}
@@ -90,12 +124,18 @@
 					<span class="">+ $300 por click</span>
         </div>
         <div class="plan-features">
-          <ul>
-            <li></li>
-            <!-- <li>100GB Monthly Bandwith</li>
-            <li>20 Email Accounts</li>
-            <li>Unlimited Subdomains</li> -->
-          </ul>
+					<ul style="font-size: 10px;">
+						<li style="font-size: 10px;line-height: 13px;">
+							Plan Mix, mezcla una parte del Plan Full y Plan CPC, al tener un precio base
+de $40.000 y un cobro adicional por cada click de redireccionamiento de un
+valor de $300 pesos. Esto significa, que cada vez que el usuario es
+redireccionado a tu sitio desde el nuestro, se cobrarán $300 pesos más al
+valor base de este Plan.</li>
+						<li style="margin-top: 6px;font-size: 10px;line-height: 13px;">
+							Este plan tiene una duración de 1 mes, iniciándose desde el día en que
+							TODOS los productos de tu Tienda se han cargado en nuestro sitio web,
+							mientras se adecúen a las categorías establecidas en ComparaGrow.</li>
+					</ul>
         </div>
         <div class="plan-footer">
           {% if user.is_authenticated %}
@@ -343,7 +383,21 @@
   <a class="navbar-brand" href="#">Fixed bottom</a>
 </nav> -->
 
-{% endblock %}
-{% block scriptb %}
 
+
+{% endblock %}
+
+{% block js %}
+<script>
+	$( function() {
+		$( "#ul_pcpc_btn" ).on( "click", function() {
+	      $('#ul_pcpc').show('shake');
+				$('#ul_pcpc_btn').hide('shake');
+	  });
+		$( "#ul_fp_btn" ).on( "click", function() {
+	      $('#ul_fp').show('shake');
+				$('#ul_fp_btn').hide('shake');
+	  });
+	});
+</script>
 {% endblock %}

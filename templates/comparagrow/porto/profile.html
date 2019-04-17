@@ -65,12 +65,13 @@
 
       <form role="form" action="/profile" class="needs-validation" method="post">
           {% csrf_token %}
-          <div class="form-group row">
+          <!-- <div class="form-group row">
               <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2 required">Usuario</label>
               <div class="col-lg-9">
-                  <input class="form-control" name="username" required type="text" value="{{ user.username }}">
+
               </div>
-          </div>
+          </div> -->
+          <input class="form-control" name="username" required type="hidden" value="{{ user.username }}">
           <div class="form-group row">
               <label class="col-lg-3 font-weight-bold text-dark col-form-label form-control-label text-2">Nombres</label>
               <div class="col-lg-9">
@@ -98,7 +99,9 @@
                   </div>
 
                   <!--  -->
-                  <input name="birthday" id="birthday" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
+                  <input name="birthday" data-language='es'
+                  data-view="years"
+                  data-date-format="yyyy-mm-dd" id="birthday" value="{{ customer.firts_date|date:"Y-m-d" }}" type="date" class="form-control">
                 </div>
               </div>
           </div>
