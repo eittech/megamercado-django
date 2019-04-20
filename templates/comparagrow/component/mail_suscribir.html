@@ -10,16 +10,32 @@
     font-size: 16px;
     font-weight: 100;
 "><tr>
-        <td><img src="http://35.185.63.218/static/theme/images/home/logo.png" alt=""></td>
+        <td><img src="https://comparagrow.cl/static/theme/images/home/logo.png" alt=""></td>
       </tr>
       <tr>
-        <td>Bienvenido, <span>{{ username }}</span></td>
+        <td><h2>Tenemos un nuevo interesado. ;)</h2></td>
       </tr>
       <tr>
-        <td></td>
+        <td><h3>Datos del Cliente</h3></td>
       </tr>
       <tr>
-        <td><a href="{{ link }}">Verificar Cuenta</a></td>
+        <td>
+          <b>Nombre:</b> {{ name }} <br/>
+          <b>Apellido:</b> {{ last_name }} <br/>
+          <b>Celular:</b> {{ phone_mobile }} <br/>
+          <b>Correo:</b> {{ company }} <br/>
+          <b>Esta interesado en:</b> {{ service.get_type_display }} - {{ service.name }} ({{ service.code }}) <br/>
+        </td>
+      </tr>
+      <tr>
+        <td><h3>Datos del Sistema</h3></td>
+      </tr>
+      <tr>
+        <td>
+            <b>Identificador del usuario:</b> {{ user.id }} <br/>
+            <b>Identificador del contrato:</b> {{ contracts.id }} <br/>
+            <b>Identificador del Servicio:</b> {{ service.id }} <br/>
+        </td>
       </tr>
     </tbody></table>
 </body></html>

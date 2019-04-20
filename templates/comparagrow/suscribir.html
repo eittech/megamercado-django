@@ -29,6 +29,8 @@
   											<form id="frmBillingAddress" method="post">
                           {% csrf_token %}
                           <input type="hidden" name="action" value="{{ action }}">
+                          <input type="hidden" name="code" value="{{ code }}">
+
   												<div class="form-row">
   													<div class="form-group col">
   														<label class="font-weight-bold text-dark text-2" >Correo Electrónico</label>

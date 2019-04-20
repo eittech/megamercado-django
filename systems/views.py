@@ -15,6 +15,8 @@ from products.models import *
 from customers.models import *
 from contracts.models import *
 from systems.models import *
+from services.models import *
+
 from django.contrib import auth
 from systems.actionSystem import *
 
@@ -474,6 +476,7 @@ def Suscribir(request):
                 print('Variables POST')
                 name = request.POST['name']
                 action = request.POST['action']
+                code = request.POST['code']
                 company = request.POST['company']
                 phone_mobile = request.POST['phone_mobile']
                 last_name = request.POST['last_name']
@@ -510,6 +513,33 @@ def Suscribir(request):
                 if action == "publicidad":
                     contracts.state = 'SUSCRIPTIONPUBLICIDAD'
                 contracts.save()
+
+                service = Service.objects.filter(code=code).first()
+                if service:
+                    service_contract = ServiceContract()
+                    service_contract.contract = contracts
+                    service_contract.service = service
+                    service_contract.date_init = datetime.date.today()
+                    service_contract.date_end =  datetime.date.today()
+                    service_contract.quantity = 1
+                    service_contract.amount = 0
+                    service_contract.tax = 0
+                    service_contract.total = 0
+                    service_contract.save()
+                # link = 'https://comparagrow.cl/users/recovery/'+ uid.decode("utf-8") +'/'+ token
+                msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
+                'user': user,
+                'name':name,
+                'last_name':last_name,
+                'company':company,
+                'phone_mobile':phone_mobile,
+                'contracts':contracts,
+                'service':service})
+                subject, from_email, to = 'Tenemos un nuevo interesado. ;)', 'contacto@comparagrow.cl', 'contacto@comparagrow.cl'
+                text_content = ''
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(msg_html, "text/html")
+                msg.send()
                 return redirect('/exito')
 
             else:
@@ -519,12 +549,14 @@ def Suscribir(request):
     else:
         try:
             action = request.GET['action']
+            code = request.GET['code']
         except:
             action = None
+            code = None
         if action is None:
             return redirect('/not_found')
         else:
-            return render(request, 'comparagrow/suscribir.html',{'action':action})
+            return render(request, 'comparagrow/suscribir.html',{'action':action,'code':code})
 
 
 def GoogleVerificacion(request):
