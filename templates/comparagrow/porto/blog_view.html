@@ -1,0 +1,47 @@
+{% extends 'comparagrow/porto/base.html' %}
+
+
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+
+
+{% block content %}
+
+  <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12 align-self-center p-static order-2 text-center">
+
+          <h1 class="text-dark font-weight-bold text-8">Blog</h1>
+<span class="sub-title text-dark">Las ultimas noticias del mundo del cannabis!</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="container py-4">
+
+    <div class="row">
+      <div class="col">
+        <div class="blog-posts">
+          <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+          <hr>
+          <p>{% autoescape off %}
+          {{ post.description }}
+          {% endautoescape %}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

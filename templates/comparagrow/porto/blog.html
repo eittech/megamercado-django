@@ -30,7 +30,7 @@
         <div class="blog-posts">
           {% for posts in post %}
           <article class="post post-large">
-            <div class="post-image">
+            <!-- <div class="post-image">
               <div class="owl-carousel owl-theme show-nav-hover" data-plugin-options="{'items': 1, 'margin': 10, 'loop': false, 'nav': true, 'dots': false}">
                 <div>
                   <div class="img-thumbnail border-0 p-0 d-block">
@@ -48,29 +48,44 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="post-date">
-              <span class="day">10</span>
-              <span class="month">Jan</span>
+              <span class="day">{{ posts.fecha|date:"d" }}</span>
+              <span class="month">{{ posts.fecha|date:"M" }}</span>
             </div>
 
             <div class="post-content">
 
-              <h2 class="font-weight-semibold text-6 line-height-3 mb-3"><a href="blog-post.html">Class aptent taciti sociosqu ad litora torquent</a></h2>
-              <p>Euismod atras vulputate iltricies etri elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Pellentesque pellentesque tempor tellus eget hendrerit. Morbi id aliquam ligula. Aliquam id dui sem. Proin rhoncus consequat nisl, eu ornare mauris tincidunt vitae. [...]</p>
+              <h2 class="font-weight-semibold text-6 line-height-3 mb-3"><a href="/blog/{{ posts.slug }}">{{ posts.title }}</a></h2>
+              <p></p>
 
               <div class="post-meta">
-                <span><i class="far fa-user"></i> By <a href="#">John Doe</a> </span>
-                <span><i class="far fa-folder"></i> <a href="#">Lifestyle</a>, <a href="#">Design</a> </span>
-                <span><i class="far fa-comments"></i> <a href="#">12 Comments</a></span>
-                <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="blog-post.html" class="btn btn-xs btn-light text-1 text-uppercase">Read More</a></span>
+                <span><i class="far fa-user"></i> Por <a href="#">{{ posts.source }}</a> </span>
+                <span><i class="far fa-folder"></i> <a href="{{ posts.page_source }}">{{ posts.page_source }}</a></span>
+                <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="/blog/{{ posts.slug }}" class="btn btn-xs btn-light text-1 text-uppercase">Ver mas</a></span>
               </div>
 
             </div>
           </article>
           {% endfor %}
+          <div class="pagination">
+              <span class="step-links">
+                  {% if post.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ post.previous_page_number }}">previous</a>
+                  {% endif %}
 
+                  <span class="current">
+                      Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                  </span>
+
+                  {% if post.has_next %}
+                      <a href="?page={{ post.next_page_number }}">next</a>
+                      <a href="?page={{ post.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+              </span>
+          </div>
         </div>
       </div>
 
