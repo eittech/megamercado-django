@@ -441,26 +441,26 @@ def get_status(request):
 def favorite_search_add(request):
     if request.user.is_authenticated:
         user = request.user
-        # try:
-        favorito = FavoriteSearchs()
-        favorito.user = user
-        search = request.GET.get('data')
-        url = request.GET.get('url')
-        count = request.GET.get('count')
-        product_front = request.GET.get('product_front')
-        product_front = Product.objects.get(pk=product_front)
-        favorito.search = search
-        favorito.url = url
-        favorito.count = count
-        favorito.product_front = product_front
-        favorito.save()
-        status = "success"
-        text = "Se guardo correctamente la busqueda"
-        type = "del"
-        # except:
-        #     status = "warn"
-        #     text = "No se pudo guardar a favoritos"
-        #     type = "not"
+        try:
+            favorito = FavoriteSearchs()
+            favorito.user = user
+            search = request.GET.get('data')
+            url = request.GET.get('url')
+            count = request.GET.get('count')
+            product_front = request.GET.get('product_front')
+            product_front = Product.objects.get(pk=product_front)
+            favorito.search = search
+            favorito.url = url
+            favorito.count = count
+            favorito.product_front = product_front
+            favorito.save()
+            status = "success"
+            text = "Se guardo correctamente la busqueda"
+            type = "del"
+        except:
+            status = "warn"
+            text = "No se pudo guardar a favoritos"
+            type = "not"
     else:
         status = "warn"
         text = "Debe iniciar sesion."
