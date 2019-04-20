@@ -126,7 +126,7 @@ class FavoriteBrands(models.Model):
 class FavoriteSearchs(models.Model):
     search = models.TextField(verbose_name="Busquedas")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    url = models.URLField(verbose_name="URL",blank=True)
+    url = models.URLField(verbose_name="URL",blank=True,max_length=2000)
     count = models.IntegerField(default=0)
     product_front = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True,null=True)
     class Meta:
