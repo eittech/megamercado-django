@@ -1,6 +1,8 @@
 {% extends 'comparagrow/porto/base.html' %}
 {% load static %}
-
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
 
 {% block content %}
 <style>
@@ -66,66 +68,43 @@
 					<div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
 						<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
 						<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>PRECIO</strong></h6>
-						<!-- <form id="formulario_filtro" method="get" action="{{ pagina }}{{ pagina_shop }}"> -->
-							<form id="formulario_filtro" method="post" action="">
+							<form id="formulario_filtro" method="get" action="">
 
 							{% csrf_token %}
-							<input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
-							<input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
-							<input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
-							<input type="hidden" name="marca" id="marca_form_id" value="{{ marca }}">
-							<input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
+							<input type="hidden" name="q" id="q_id" value="{{ term_q }}">
+							<input type="hidden" name="page" id="page_id" value="{{ products.number }}">
 							<input type="hidden" name="order_by" id="order_by_id" value="min">
 							<div class="form-inline" style="margin-left: 15px;">
 						  <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
-							 <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
+							<input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
 							</div>
 							<button type="submit" style="font-size:12px;background: #01b22c;border-color: #01b22c;margin-left: 15px;width: 100px;" class="btn btn-primary mb-2">
 								<i class="fas fa-cannabis"></i> Filtrar</button>
 
 								<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>CATEGORIAS</strong></h6>
-								{% if categorias.count > 5 %}
-								<ul style="
-								font-size: 14px;
-
-					font-weight: 100;
-					list-style: none;
-					margin-left: -25px;
-	">
-								{% else %}
-									<ul style="
-									font-size: 14px;
-
-						font-weight: 100;
-						list-style: none;
-						margin-left: -25px;
-		">
-								{% endif %}
-								{% for category in categorias %}
-
-									{% if forloop.counter < 6 %}
-									<li class="p-b-6">
-									{% if category.category__pk in categoria_filtro %}
-									<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;">
-										<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
-										{{ category.category__name }} ({{ category.dcount }})
-									</a>
-									{% else %}
-									<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;">
-										<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
-										{{ category.category__name }}  ({{ category.dcount }})
-									</a>
-									{% endif %}
-									</li>
-									{% endif %}
+								<ul style="font-size: 14px;font-weight: 100;list-style: none;margin-left: -25px;">
+									{% for category in category_list_left %}
+											{% if forloop.counter < 6 %}
+											<li class="p-b-6">
+													{% if category.category__pk in category_list_selected %}
+															<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;">
+																<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+																{{ category.category__name }} ({{ category.dcount }})
+															</a>
+													{% else %}
+															<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;">
+																<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
+																{{ category.category__name }}  ({{ category.dcount }})
+															</a>
+													{% endif %}
+											</li>
+											{% endif %}
 									{% endfor %}
 									<li>
-								    <button type="button" data-toggle="modal" data-target="#categorylistmodal" style="font-size:12px;background: #01b22c;border-color: #01b22c;width: 100px;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button></li>
-
+								 		<button type="button" data-toggle="modal" data-target="#categorylistmodal" style="font-size:12px;background: #01b22c;border-color: #01b22c;width: 100px;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button>
+									</li>
 								</ul>
-
-
-							<div class="modal fade" id="categorylistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+								<div class="modal fade" id="categorylistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 							  <div class="modal-dialog modal-lg">
 							    <div class="modal-content">
 							      <div class="modal-header">
@@ -144,9 +123,9 @@
 
 							        </div>
 							        <div class="row">
-							          {% for category in categorias %}
+							          {% for category in category_list_left %}
 
-							          {% if category.category__pk in categoria_filtro %}
+							          {% if category.category__pk in category_list_selected %}
 							          <div class="col-sm-4">
 
 							          <a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
@@ -183,7 +162,7 @@
 							  </div>
 							</div>
 
-							{% include 'comparagrow/component/barra_lateral.html' %}
+							{% include 'comparagrow/component/barra_lateral_buscador.html' %}
 
 							</form>
 
@@ -192,8 +171,10 @@
 						<div class="row">
 							<div class="col-sm-12 col-md-6">
 
-								<h4 style="margin-top:15px; font-weight: 200;">
-								{{ texto }}
+								<h4 style="margin-top:15px;font-weight: 200;font-size: 37px;">
+								{{ term_q }} <a onclick="AddFavoriteSearch();" class="btn btn-primary" style="/* width: 100%; */height: 28px;letter-spacing: 0px;padding-top: 4px;background-color: #fff;border-color: #777;color:#777;">
+										<i class="far fa-heart" id="search_favorite"></i> Guardar  busqueda</a>
+								<!-- <a href="http://127.0.0.1:8000/productos/search?csrfmiddlewaretoken=wae9uKLkeW9QAZ21VvzUh3tKxM14tfsL25EtYrf6VNa4HYiqAPhNuYtKRNh4mLk5&amp;q=semillas">click here</a> -->
 								</h4>
 							</div>
 							<div class="col-sm-12 col-md-6 text-right">
@@ -229,11 +210,11 @@ font-weight: 100;
 							</div>
 						</div>
 						<div class="row">
-							<h4 style="margin-top:5px;margin-left:15px;font-size:12px; font-weight: 200;">Mostrando {{ productos.paginator.count }} Productos </h4>
+							<h4 style="margin-top:5px;margin-left:15px;font-size:12px; font-weight: 200;">Mostrando {{ products.paginator.count }} Productos </h4>
 						</div>
 						<div class="row">
 							<div class="col article-feed">
-									{% include 'comparagrow/component/items_buscador.html' %}
+									{% include 'comparagrow/component/items_buscador_1.html' %}
 							</div>
 						</div>
 					</div> <!-- col.// -->
@@ -276,5 +257,45 @@ font-weight: 100;
     });
 
 	}
+
+	(function ($) {
+    $.fn.serializeFormJSON = function () {
+
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+})(jQuery);
+
+function AddFavoriteSearch () {
+		var data = $('#formulario_filtro').serializeFormJSON();
+		datas = JSON.stringify(data)
+		$.ajax({
+			method: "GET",
+			data:{'data':datas,'url':'{{ request.build_absolute_uri }}','count':'{{ products.paginator.count }}','product_front':'{{ products.0.id }}'},
+			url: "/productos/favorito/search/add"
+		}).done(function( msg ) {
+			$.notify(msg.text, msg.status);
+			if(msg.type=="add"){
+				$('#search_favorite').removeClass("fas fa-heart");
+				$('#search_favorite').addClass("far fa-heart");
+			}
+			if(msg.type=="del"){
+				$('#search_favorite').removeClass("far fa-heart");
+				$('#search_favorite').addClass("fas fa-heart");
+			}
+	});;
+}
+
 </script>
 {% endblock %}

@@ -24,10 +24,11 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('customers.urls')),
-
+    path('blog/', include('blog.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
     path('api/', include(router.urls)),
     path('scrapy/', include('products.urls')),

@@ -33,118 +33,99 @@ def listado(request):
     return render(request, "comparagrow/listado.html",{'productos':productos})
 
 
-def buscador(request):
-    pagina = "buscador?"
-    categoria = ""
-    tienda = ""
-    if request.POST.get('texto'):
-        texto_t = request.POST.get('texto')
-        texto = texto_t.rstrip().lower()
-        pagina = pagina + "texto=" + texto
+def search(request):
+    if request.GET.get('q'):
+        term_q = request.GET.get('q')
+        term_q = term_q.rstrip().lower()
     else:
-        texto = ""
-    print("************************************************")
-
-
+        term_q = ""
+    #validacion de productos asociados a tiendas con contratos vijentes
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
-    #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_shop = servicecontractshop.values('shop__pk')
-    # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
-    productos_lista = Product.objects.filter(category__isnull=False)
+    products_list = Product.objects.filter(category__isnull=False)
+    #busqueda de termino
+    products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
+    #barras laterales
+    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
-    productos_lista = productos_lista.filter(name__icontains=texto).order_by('-photo')
-    # tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    # categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
-    # marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
-
-    shop_id = False
-    tienda = []
-    if request.POST.getlist('checkbox_shop[]'):
-        for ck in request.POST.getlist('checkbox_shop[]'):
-            tienda.append(int(ck))
+    shops = False
+    shop_list_selected = []
+    if request.GET.getlist('checkbox_shop[]'):
+        for ck in request.GET.getlist('checkbox_shop[]'):
+            shop_list_selected.append(int(ck))
         try:
-            shop_id = Shop.objects.filter(pk__in=tienda)
-            print("tienda paso 2")
+            shops = Shop.objects.filter(pk__in=shop_list_selected)
         except:
-            shop_id = False
-    pagina_shop = ""
-    if shop_id:
-        print("tienda paso 3")
-        productos_lista = productos_lista.filter(shop__in=shop_id)
-        pagina_shop = ""
+            shops = False
+    if shops:
+        products_list = products_list.filter(shop__in=shops)
 
 
-    marca = []
-    if request.POST.getlist('checkbox_marca[]'):
-        for ck in request.POST.getlist('checkbox_marca[]'):
-            marca.append(str(ck))
-    if marca:
-        print("tienda paso 3")
-        productos_lista = productos_lista.filter(brand__in=marca)
-        pagina_marca = ""
+    brand_list_selected = []
+    if request.GET.getlist('checkbox_marca[]'):
+        for ck in request.GET.getlist('checkbox_marca[]'):
+            brand_list_selected.append(str(ck))
+    if brand_list_selected:
+        products_list = products_list.filter(brand__in=brand_list_selected)
     else:
-        marca = []
+        brand_list_selected = []
 
 
     categoria_id = False
-    categoria = []
-    if request.POST.getlist('checkbox_categoria[]'):
-        for ck in request.POST.getlist('checkbox_categoria[]'):
-            categoria.append(int(ck))
+    category_list_selected = []
+    if request.GET.getlist('checkbox_categoria[]'):
+        for ck in request.GET.getlist('checkbox_categoria[]'):
+            category_list_selected.append(int(ck))
         try:
-            categoria_id = Category.objects.filter(pk__in=categoria)
-            print("categoria_id paso 2")
+            categoria_id = Category.objects.filter(pk__in=category_list_selected)
         except:
             categoria_id = False
-    pagina_category = ""
     if categoria_id:
-        print("categoria_id paso 3")
-        productos_lista = productos_lista.filter(category__in=categoria_id)
-        pagina_category = ""
+        products_list = products_list.filter(category__in=categoria_id)
 
-    if request.POST.get('min_price'):
-        min_price = request.POST.get('min_price')
+
+    if request.GET.get('min_price'):
+        min_price = request.GET.get('min_price')
     else:
         min_price = None
-    if request.POST.get('max_price'):
-        max_price = request.POST.get('max_price')
+    if request.GET.get('max_price'):
+        max_price = request.GET.get('max_price')
     else:
         max_price = None
     if max_price is not None and min_price is not None:
         if float(max_price) > float(min_price):
-            productos_lista = productos_lista.filter(total__range=(float(min_price), float(max_price)))
+            products_list = products_list.filter(total__range=(float(min_price), float(max_price)))
         else:
-            productos_lista = productos_lista.filter(total__range=(float(max_price), float(min_price)))
+            products_list = products_list.filter(total__range=(float(max_price), float(min_price)))
     else:
         if max_price is not None:
-            productos_lista = productos_lista.filter(total__range=(0, float(max_price)))
+            products_list = products_list.filter(total__range=(0, float(max_price)))
             min_price = ""
         else:
             if min_price is not None:
-                productos_lista = productos_lista.filter(total__gte=float(min_price))
+                products_list = products_list.filter(total__gte=float(min_price))
                 max_price = ""
             else:
                 max_price = ""
                 min_price = ""
-    # filter(pub_date__range=(start_date, end_date))
 
-    if request.POST.get('order_by'):
-        order_by = request.POST.get('order_by')
+    if request.GET.get('order_by'):
+        order_by = request.GET.get('order_by')
         if order_by == "min":
-            productos_lista = productos_lista.order_by('total')
+            products_list = products_list.order_by('total')
         if order_by == "max":
-            productos_lista = productos_lista.order_by('-total')
+            products_list = products_list.order_by('-total')
         if order_by == "dest":
-            productos_lista = productos_lista.order_by('total')
+            products_list = products_list.order_by('total')
     else:
         order_by = "dest"
 
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    categorias = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
 
-    paginator = Paginator(productos_lista, 24)
-    page = request.POST.get('page')
+
+    paginator = Paginator(products_list, 24)
+    page = request.GET.get('page')
     if page is not None:
         if request.is_ajax():
             template = "comparagrow/buscador.html"
@@ -153,25 +134,21 @@ def buscador(request):
     else:
         template = "comparagrow/buscador.html"
     try:
-        productos = paginator.get_page(page)
-        print(productos)
+        products = paginator.get_page(page)
     except:
         return redirect('/not_found')
     # time.sleep(3)
     return render(request, template, {
-    'productos': productos,
-    'tiendas':tiendas,
+    'products': products,
+    'shop_list_left':shop_list_left,
+    'brand_list_left':brand_list_left,
+    'category_list_left':category_list_left,
     'max_price':max_price,
     'min_price':min_price,
-    'pagina':pagina,
-    'categorias':categorias,
-    'pagina_shop':pagina_shop,
-    'pagina_category':pagina_category,
-    'texto':texto,
-    'categoria':categoria,
-    'marcas':marcas,
-    'marca':marca,
-    'tienda':tienda,
+    'term_q':term_q,
+    'category_list_selected':category_list_selected,
+    'brand_list_selected':brand_list_selected,
+    'shop_list_selected':shop_list_selected,
     'order_by':order_by})
 
 
@@ -211,6 +188,11 @@ def categorias(request,slug):
 
 
     productos_lista = productos_lista.filter(category__in=children)
+
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+
 
     # tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
     # marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
@@ -301,9 +283,6 @@ def categorias(request,slug):
         order_by = "dest"
     # order_by = "min"
 
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
-    categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
 
     paginator = Paginator(productos_lista, 24)
     page = request.POST.get('page')
@@ -344,6 +323,7 @@ def redirect_product(request,id):
     time.sleep(1)
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
+@login_required
 def favorite_product(request,id):
     if request.user.is_authenticated:
         user = request.user
@@ -378,10 +358,39 @@ def favorite_product(request,id):
 
 @login_required
 def favorite_detail(request):
+    favorito_active = ''
+    search_active = ''
+    brand_active = ''
+    search_list = None
+    favorito = None
+    brand_list= None
+
     if request.user.is_authenticated:
         user = request.user
         favorito = FavoriteProduct.objects.filter(user=user)
-        return render(request, "comparagrow/favoritos.html",{'productos':favorito})
+        search_list = FavoriteSearchs.objects.filter(user=user)
+        brand_list = FavoriteBrands.objects.filter(user=user)
+
+        if not favorito:
+            favorito_active = ''
+            if not search_list:
+                search_active = ''
+                if not brand_list:
+                    brand_active = ''
+                else:
+                    brand_active = 'active'
+            else:
+                search_active = 'active'
+        else:
+            favorito_active = 'active'
+        return render(request, "comparagrow/favoritos.html",{
+        'productos':favorito,
+        'search_list':search_list,
+        'brand_list':brand_list,
+        'favorito_active':favorito_active,
+        'search_active':search_active,
+        'brand_active':brand_active
+        })
     else:
         return redirect('/error')
 
@@ -426,3 +435,42 @@ def get_status(request):
     print(list_jobs)
 
     return JsonResponse({"status": status})
+
+
+@login_required
+def favorite_search_add(request):
+    if request.user.is_authenticated:
+        user = request.user
+        try:
+            favorito = FavoriteSearchs()
+            favorito.user = user
+            search = request.GET.get('data')
+            url = request.GET.get('url')
+            count = request.GET.get('count')
+            product_front = request.GET.get('product_front')
+            product_front = Product.objects.get(pk=product_front)
+            favorito.search = search
+            favorito.url = url
+            favorito.count = count
+            favorito.product_front = product_front
+            favorito.save()
+            status = "success"
+            text = "Se guardo correctamente la busqueda"
+            type = "del"
+        except:
+            status = "warn"
+            text = "No se pudo guardar a favoritos"
+            type = "not"
+    else:
+        status = "warn"
+        text = "Debe iniciar sesion."
+        type = "not"
+    return JsonResponse({"text": text,"status":status,"type":type})
+    # received_json_data = json.loads(request.body.decode("utf-8"))
+    # print(request.GET.get('data'))
+    # j = request.GET.get('data')
+    # d = json.loads(j)
+    # print(d)
+    # for n1 in d:
+    #     print(n1)
+    # return JsonResponse({"status": 'ok'})

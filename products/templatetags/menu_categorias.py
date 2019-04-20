@@ -1,6 +1,7 @@
 from django import template
 from django_user_agents.utils import get_user_agent
 
+import json
 
 register = template.Library()
 from products.models import *
@@ -21,7 +22,19 @@ def selecttemplate(request):
         return 'comparagrow/porto/base.html'
 
 
+@register.filter(name='stringJsonToArray')
+def stringJsonToArray(value):
+    d = json.loads(value)
+    return d
 
+@register.filter(name='returnsearchq')
+def returnsearchq(value):
+    d = json.loads(value)
+    if d['q'] == "":
+        d = "N/a"
+    else:
+        d = d['q']
+    return d
 
 
 @register.simple_tag

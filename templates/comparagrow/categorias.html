@@ -192,8 +192,8 @@
 									<i class="fa fa-angle-right" aria-hidden="true"></i>
 								</a>
 								{% endfor %}
-								<h4 style="margin-top:15px; font-weight: 200;">
-								{{ categorias.name }}
+								<h4 style="margin-top:15px;font-weight: 200;font-size: 37px;">
+								{{ categorias.name }} 
 								</h4>
 							</div>
 							<div class="col-sm-12 col-md-6 text-right">
@@ -284,5 +284,44 @@ font-weight: 100;
     });
 
 	}
+
+	(function ($) {
+		$.fn.serializeFormJSON = function () {
+
+				var o = {};
+				var a = this.serializeArray();
+				$.each(a, function () {
+						if (o[this.name]) {
+								if (!o[this.name].push) {
+										o[this.name] = [o[this.name]];
+								}
+								o[this.name].push(this.value || '');
+						} else {
+								o[this.name] = this.value || '';
+						}
+				});
+				return o;
+		};
+})(jQuery);
+
+function AddFavoriteSearch () {
+		var data = $('#formulario_filtro').serializeFormJSON();
+		datas = JSON.stringify(data)
+		$.ajax({
+			method: "GET",
+			data:{'data':datas,'url':'{{ request.build_absolute_uri }}','count':'{{ products.paginator.count }}','product_front':'{{ products.0.id }}'},
+			url: "/productos/favorito/search/add"
+		}).done(function( msg ) {
+			$.notify(msg.text, msg.status);
+			if(msg.type=="add"){
+				$('#search_favorite').removeClass("fas fa-heart");
+				$('#search_favorite').addClass("far fa-heart");
+			}
+			if(msg.type=="del"){
+				$('#search_favorite').removeClass("far fa-heart");
+				$('#search_favorite').addClass("fas fa-heart");
+			}
+	});;
+}
 </script>
 {% endblock %}

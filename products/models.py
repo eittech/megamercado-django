@@ -116,6 +116,23 @@ class FavoriteProduct(models.Model):
         verbose_name = "Listado de Favoritos"
         unique_together = ('product', 'user')
 
+class FavoriteBrands(models.Model):
+    brand = models.CharField(verbose_name="Marca",max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = "Marcas Favoritas"
+        unique_together = ('brand', 'user')
+
+class FavoriteSearchs(models.Model):
+    search = models.TextField(verbose_name="Busquedas")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    url = models.URLField(verbose_name="URL",blank=True)
+    count = models.IntegerField(default=0)
+    product_front = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True,null=True)
+    class Meta:
+        verbose_name = "Busquedas Favoritas"
+        unique_together = ('search', 'user')
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     image = models.ImageField(upload_to="assets/product/")

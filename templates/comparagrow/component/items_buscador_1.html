@@ -1,0 +1,79 @@
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<div class="row article">
+  {% for item in products %}
+  <div class="col-sm-3 col-lg-2" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
+    <div class="card-deck" style="font-weight: 100;">
+      <div class="card" style="    border:none;">
+        <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
+          <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
+        </div>
+        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
+          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
+        </a>
+        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 37px;font-weight: 100;line-height: 14px;">
+          <span class="" style="color:#01b22c;">
+            <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
+          </span>
+        </div>
+        <div class="card-footer" style="background-color: transparent;border-top: none;">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title" style="color:#403e3e;font-size: 14px;font-weight: bold;">$ {{ item.total|floatformat:0|intcomma }}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              {% if user.is_authenticated %}
+              <a onclick="FavoriteProduct('{{ item.id }}')">
+              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_{{ item.id }}"></i>
+              </a>
+              {% else %}
+              <a data-toggle="modal" data-target="#modal_login">
+              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_{{ item.id }}"></i>
+              </a>
+              {% endif %}
+            </div>
+            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
+              <a class="btn btn-primary" style="margin-top: -8px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+              ver detalle
+              </a>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="row">
+							<div class="col">
+								<ul class="pagination float-right">
+                  {% if products.has_previous %}
+
+									<li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','1')"><i class="fas fa-angle-double-left"></i></a></li>
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ products.previous_page_number }}')"><i class="fas fa-angle-left"></i></a></li>
+
+                  {% endif %}
+
+                  {% for c in 1|range:products.paginator.num_pages %}
+                    {% if forloop.counter >= products.number|add:"-3" and forloop.counter <= products.number|add:"3" %}
+                      {% if c == products.number %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ c }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ c }}')">{{ c }}</a></li>
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+
+                  <li style="padding: 5px;">{{ products.number }} de {{ products.paginator.num_pages }} páginas </li>
+                  {% if products.has_next %}
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ products.next_page_number }}')"><i class="fas fa-angle-right"></i></a></li>
+                  <li class="page-item"><a class="page-link" onclick="enviarFiltros('page_id','{{ products.num_pages }}')"><i class="fas fa-angle-double-right"></i></a></li>
+
+                  {% endif %}
+
+								</ul>
+							</div>
+						</div>

@@ -4,11 +4,57 @@
 {% load humanize %}
 
 {% block content %}
-<style media="screen">
+<style>
+	.menu_header_user:hover{
+		border-bottom: 3px solid #672d93 !important;
+	}
+	.card-header {
+		border-radius: 0 0 0 0;
+	border-bottom: 1px solid #672d93 !important;
+	}
+	.card-header {
+		border-radius: 0 0 0 0;
+	padding: .75rem 1.25rem;
+	margin-bottom: 0;
+	color: inherit;
+	background-color: #672d93 !important;
+	border-bottom: 1px solid #672d93 !important;
+	}
+	.card-header > a {
+		color:#fff;
+	}
+	.card-header:hover > a {
+		color:#fff;
+	}
+
+
+
+	.card-header:first-child{
+		border-radius: 0 0 0 0 !important;
+
+	}
+
+	.card-header:hover {
+		border-radius: 0 0 0 0;
+		color:#fff;
+		border-bottom: 1px solid #01b22c !important;
+		background-color: #01b22c !important;
+		border-bottom: 1px solid #01b22c !important;
+	}
+
+	.card:hover > .card-header{
+		color:#fff;
+		border-bottom: 1px solid #01b22c !important;
+		background-color: #01b22c !important;
+		border-bottom: 1px solid #01b22c !important;
+	}
+
 	.card:hover{
-		border-radius: inherit;
-		box-shadow: 0.1px 0.1px 0.1px #7777;
-		cursor:pointer;
+		/* color:#fff; */
+		border: 1px solid #01b22c !important;
+		border-radius: 0 0 0 0;
+		/* background-color: #01b22c !important; */
+		/* border-bottom: 1px solid #01b22c !important; */
 	}
 </style>
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md" style="
@@ -31,23 +77,51 @@
 
           </div>
 					<div class="col-10">
+						<div class="tabs tabs-product mb-2">
+							<ul class="nav nav-tabs">
+								<li class="nav-item {{ favorito_active }}"><a class="nav-link py-3 px-4" href="#productProduct" data-toggle="tab">Productos</a></li>
+								<li class="nav-item {{ search_active }}"><a class="nav-link py-3 px-4" href="#productSearch" data-toggle="tab">Busquedas</a></li>
+								<!-- <li class="nav-item {{ brand_active }}"><a class="nav-link py-3 px-4" href="#productBrand" data-toggle="tab">Marcas</a></li> -->
+							</ul>
+							<div class="tab-content p-0">
+								<div class="tab-pane p-4 {{ favorito_active }}" id="productProduct">
+									{% if productos %}
+									<div class="row">
+										<div class="col article-feed">
+												{% include 'comparagrow/component/favorite_item.html' %}
+										</div>
+									</div>
+									{% else %}
+									<div class="row justify-content-md-center" style="margin-top:10px;" >
+									<p>No tienes aún productos guardados en tus Favoritos.<br>
+									Agrégalos y serás notificado cuando estén en oferta.</p>
+									</div>
+									{% endif %}
+								</div>
+								<div class="tab-pane p-4 {{ search_active }}" id="productSearch">
+									{% if search_list %}
+											<div class="row">
+													<div class="col article-feed">
+															{% include 'comparagrow/component/favorite_item_search.html' %}
+													</div>
+											</div>
+									{% else %}
+											<div class="row justify-content-md-center" style="margin-top:10px;" >
+													<p>No tienes aún busquedas guardadas en tus Favoritos.</p>
+											</div>
+									{% endif %}
+								</div>
+								<!-- <div class="tab-pane p-4 {{ brand_active }}" id="productBrand">
+
+								</div> -->
+							</div>
+						</div>
             <!-- <div class="row justify-content-md-center" style="margin-top:40px;" >
               <h1 style="font-weight:200;">FAVORITOS</h1>
               <br>
               <br>
             </div> -->
-						{% if productos %}
-						<div class="row">
-							<div class="col article-feed">
-									{% include 'comparagrow/component/favorite_item.html' %}
-							</div>
-						</div>
-						{% else %}
-						<div class="row justify-content-md-center" style="margin-top:10px;" >
-					  <p>No tienes aún productos guardados en tus Favoritos.<br>
-					  Agrégalos y serás notificado cuando estén en oferta.</p>
-					  </div>
-						{% endif %}
+
 
 					</div> <!-- col.// -->
 				</div>

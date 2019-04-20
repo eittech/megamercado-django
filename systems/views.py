@@ -454,6 +454,7 @@ def alertasProductos(request):
         alerta = None
     return render(request, 'comparagrow/alertas.html',{'alerta':alerta})
 
+@login_required
 def SuscribirExito(request):
     return render(request, 'comparagrow/exito.html')
 
@@ -463,6 +464,7 @@ def Publicidad(request):
 def pricePlan(request):
     return render(request, 'comparagrow/price.html')
 
+@login_required
 def Suscribir(request):
     if request.POST:
         try:
@@ -475,21 +477,21 @@ def Suscribir(request):
 
                     addresscustomer = AddressCustomer()
                     action = request.POST['action']
-                    city = request.POST['city']
+                    # city = request.POST['city']
                     company = request.POST['company']
-                    address1 = request.POST['address1']
-                    phone = request.POST['phone']
+                    # address1 = request.POST['address1']
+                    # phone = request.POST['phone']
                     phone_mobile = request.POST['phone_mobile']
                     alias = 'direccion ' + str(user.first_name)
 
                     type = 'SUSCRIPTION'
 
                     addresscustomer.alias = alias
-                    addresscustomer.type = type
+                    # addresscustomer.type = type
                     addresscustomer.company = company
-                    addresscustomer.address1 = address1
-                    addresscustomer.city = city
-                    addresscustomer.phone = phone
+                    # addresscustomer.address1 = address1
+                    # addresscustomer.city = city
+                    # addresscustomer.phone = phone
                     addresscustomer.phone_mobile = phone_mobile
 
                     addresscustomer.save()
