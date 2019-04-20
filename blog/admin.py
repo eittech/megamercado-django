@@ -4,3 +4,5 @@ from blog.models import *
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 admin.site.register(Blog,BlogAdmin)
+
+admin.site.register(Source)

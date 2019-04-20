@@ -15,7 +15,7 @@
 
         <div class="col-md-12 align-self-center p-static order-2 text-center">
 
-          <h1 class="text-dark font-weight-bold text-8">/><Blog</h1>
+          <h1 class="text-dark font-weight-bold text-8">Blog</h1>
 <span class="sub-title text-dark">Las ultimas noticias del mundo del cannabis!</span>
         </div>
 
@@ -61,9 +61,9 @@
               <p></p>
 
               <div class="post-meta">
-                <span><i class="far fa-user"></i> Por <a href="#">{{ posts.source }}</a> </span>
-                <span><i class="far fa-folder"></i> <a href="{{ posts.page_source }}">{{ posts.page_source }}</a></span>
-                <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="/blog/{{ posts.slug }}" class="btn btn-xs btn-light text-1 text-uppercase">Ver mas</a></span>
+                <span><i class="far fa-user"></i> Por <a href="#">{{ posts.author }}</a> </span>
+                <span><i class="far fa-folder"></i> <a href="{{ posts.source.page }}">{{ posts.source.name }}</a></span>
+                <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="{{ posts.url }}" class="btn btn-xs btn-light text-1 text-uppercase">Ir a la fuente</a></span>
               </div>
 
             </div>
