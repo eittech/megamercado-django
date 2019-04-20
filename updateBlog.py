@@ -5,20 +5,22 @@ from blog.models import *
 import feedparser
 #https://www.tristanperry.com/how-to/2014/10/05/add-django-rss-feed.html
 
-urls = [
-    "https://www.canamo.cl/feed/",
-    "http://blog.kushbreak.com/feed/",
-    "https://www.imperioseedsgrowshop.cl/feed/",
-    "https://purplehaze.cl/feed/",
-    "https://www.growcenter.cl/feed/",
-    "https://sweetseeds.es/feed/",
-    "https://dispensarioandino.cl/feed/",
-]
+# urls = [
+#     "https://www.canamo.cl/feed/",
+#     "http://blog.kushbreak.com/feed/",
+#     "https://www.imperioseedsgrowshop.cl/feed/",
+#     "https://purplehaze.cl/feed/",
+#     "https://www.growcenter.cl/feed/",
+#     "https://sweetseeds.es/feed/",
+#     "https://dispensarioandino.cl/feed/",
+# ]
 
-for url in urls:
-    print(url)
+source = Source.objects.filter(state=True)
+
+for url in source:
+    print(url.page)
     print("====================================================")
-    feed = feedparser.parse(url)
+    feed = feedparser.parse(url.url_feed)
     if feed['entries']:
         for entry in feed['entries']:
             try:
@@ -33,8 +35,9 @@ for url in urls:
                 url=entry.link,
                 description=contenido,
                 description_short=entry.description,
-                source=entry.author,
-                page_source=url)
+                source=url,
+                author=entry.author,
+                page_source=url.page)
                 blog.save()
                 print('+ registro exitoso')
             except:
