@@ -456,7 +456,7 @@ def alertasProductos(request):
         alerta = None
     return render(request, 'comparagrow/alertas.html',{'alerta':alerta})
 
-@login_required
+# @login_required
 def SuscribirExito(request):
     return render(request, 'comparagrow/exito.html')
 
@@ -466,84 +466,89 @@ def Publicidad(request):
 def pricePlan(request):
     return render(request, 'comparagrow/price.html')
 
-@login_required
+# @login_required
 def Suscribir(request):
     if request.POST:
         try:
-            if request.user.is_authenticated:
-                user = request.user
+            # if request.user.is_authenticated:
+            #     user = request.user
+            #
+            #     print('Variables POST')
+            name = request.POST['name']
+            action = request.POST['action']
+            code = request.POST['code']
+            company = request.POST['company']
+            phone_mobile = request.POST['phone_mobile']
+            last_name = request.POST['last_name']
+                # print('crear alias')
+                # alias1 = str(name) + str(', ')+ str(last_name)
+                # alias2 = 'direccion: ' + str(user.first_name) + str(' - ')+ str(user.id)
+                #
+                # print('crear direccion')
+                # customer = Customer.objects.filter(user=user).first()
+                # addresscustomer = AddressCustomer()
+                # type = 'SUSCRIPTION'
+                # addresscustomer.alias = alias2
+                # addresscustomer.company = company
+                # addresscustomer.phone_mobile = phone_mobile
+                # addresscustomer.save()
+                #
+                # if not customer:
+                #     customer = Customer()
+                #     customer.user=user
+                #     customer.alias = alias1
+                #     customer.save()
+                #
+                # print('guardar direccion')
+                # customer.address.add(addresscustomer)
+                # customer.save()
+                #
+                # import datetime
+                # contracts = Contracts()
+                # contracts.customer = customer
+                # contracts.date_contract = datetime.date.today()
+                # contracts.total = 0
+                # if action == "plan":
+                #     contracts.state = 'SUSCRIPTIONPLAN'
+                # if action == "publicidad":
+                #     contracts.state = 'SUSCRIPTIONPUBLICIDAD'
+                # contracts.save()
 
-                print('Variables POST')
-                name = request.POST['name']
-                action = request.POST['action']
-                code = request.POST['code']
-                company = request.POST['company']
-                phone_mobile = request.POST['phone_mobile']
-                last_name = request.POST['last_name']
-                print('crear alias')
-                alias1 = str(name) + str(', ')+ str(last_name)
-                alias2 = 'direccion: ' + str(user.first_name) + str(' - ')+ str(user.id)
-
-                print('crear direccion')
-                customer = Customer.objects.filter(user=user).first()
-                addresscustomer = AddressCustomer()
-                type = 'SUSCRIPTION'
-                addresscustomer.alias = alias2
-                addresscustomer.company = company
-                addresscustomer.phone_mobile = phone_mobile
-                addresscustomer.save()
-
-                if not customer:
-                    customer = Customer()
-                    customer.user=user
-                    customer.alias = alias1
-                    customer.save()
-
-                print('guardar direccion')
-                customer.address.add(addresscustomer)
-                customer.save()
-
-                import datetime
-                contracts = Contracts()
-                contracts.customer = customer
-                contracts.date_contract = datetime.date.today()
-                contracts.total = 0
-                if action == "plan":
-                    contracts.state = 'SUSCRIPTIONPLAN'
-                if action == "publicidad":
-                    contracts.state = 'SUSCRIPTIONPUBLICIDAD'
-                contracts.save()
-
-                service = Service.objects.filter(code=code).first()
-                if service:
-                    service_contract = ServiceContract()
-                    service_contract.contract = contracts
-                    service_contract.service = service
-                    service_contract.date_init = datetime.date.today()
-                    service_contract.date_end =  datetime.date.today()
-                    service_contract.quantity = 1
-                    service_contract.amount = 0
-                    service_contract.tax = 0
-                    service_contract.total = 0
-                    service_contract.save()
+            service = Service.objects.filter(code=code).first()
+                # if service:
+                #     service_contract = ServiceContract()
+                #     service_contract.contract = contracts
+                #     service_contract.service = service
+                #     service_contract.date_init = datetime.date.today()
+                #     service_contract.date_end =  datetime.date.today()
+                #     service_contract.quantity = 1
+                #     service_contract.amount = 0
+                #     service_contract.tax = 0
+                #     service_contract.total = 0
+                #     service_contract.save()
                 # link = 'https://comparagrow.cl/users/recovery/'+ uid.decode("utf-8") +'/'+ token
-                msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
-                'user': user,
-                'name':name,
-                'last_name':last_name,
-                'company':company,
-                'phone_mobile':phone_mobile,
-                'contracts':contracts,
-                'service':service})
-                subject, from_email, to = 'Tenemos un nuevo interesado. ;)', 'contacto@comparagrow.cl', 'contacto@comparagrow.cl'
-                text_content = ''
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                msg.attach_alternative(msg_html, "text/html")
-                msg.send()
-                return redirect('/exito')
-
-            else:
-                return redirect('/not_found')
+                # msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
+                # 'user': user,
+                # 'name':name,
+                # 'last_name':last_name,
+                # 'company':company,
+                # 'phone_mobile':phone_mobile,
+                # 'contracts':contracts,
+                # 'service':service})
+            msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
+            'name':name,
+            'last_name':last_name,
+            'company':company,
+            'phone_mobile':phone_mobile,
+            'service':service})
+            subject, from_email, to = 'Tenemos un nuevo interesado. ;)', 'contacto@comparagrow.cl', 'contacto@comparagrow.cl'
+            text_content = ''
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(msg_html, "text/html")
+            msg.send()
+            return redirect('/exito')
+            # else:
+            #     return redirect('/not_found')
         except:
             return redirect('/not_found')
     else:
