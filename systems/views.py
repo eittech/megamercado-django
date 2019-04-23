@@ -541,7 +541,7 @@ def Suscribir(request):
             'company':company,
             'phone_mobile':phone_mobile,
             'service':service})
-            subject, from_email, to = 'Tenemos un nuevo interesado. ;)', 'contacto@comparagrow.cl', 'contacto@comparagrow.cl'
+            subject, from_email, to = 'Tenemos un nuevo interesado. ;)', 'contacto@comparagrow.cl', 'clientes@comparagrow.cl'
             text_content = ''
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(msg_html, "text/html")
