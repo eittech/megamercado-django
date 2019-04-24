@@ -2,7 +2,8 @@ from django.contrib import admin
 from products.models import *
 # Register your models here.
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
-
+from django_google_maps import widgets as map_widgets
+from django_google_maps import fields as map_fields
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
@@ -31,6 +32,9 @@ class CategoryAdmin(DraggableMPTTAdmin):
     list_display_links = ('indented_title',)
 
 class ShopAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
+    }
     list_display = ('name', 'num_products','num_products_category','num_products_category_null')
 
 class HistoryPriceAdmin(admin.ModelAdmin):

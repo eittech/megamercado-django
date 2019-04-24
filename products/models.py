@@ -3,10 +3,11 @@ from customers.models import Customer
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
 import datetime
-from django.db.models.signals import post_save
+from django.db.models.signals import *
 from django.dispatch import receiver
 from django.urls import reverse
 # from tagging.registry import register
+from django_google_maps import fields as map_fields
 
 # from dynamic_scraper.models import Scraper, SchedulerRuntime
 # from scrapy_djangoitem import DjangoItem
@@ -18,6 +19,8 @@ class Shop(models.Model):
     image = models.ImageField(upload_to="assets/shop/",blank=True,null=True)
     url = models.URLField(verbose_name="URL",max_length=200,blank=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
+    address = map_fields.AddressField(max_length=200,default="", null=True,blank=True)
+    geolocation = map_fields.GeoLocationField(max_length=100,default="", null=True,blank=True)
     def __str__(self):
         return self.name
     class Meta:
@@ -103,7 +106,7 @@ class Product(models.Model):
         return str(self.shop) + ' - '+ str(self.name)
     class Meta:
         verbose_name = "Productos"
-        unique_together = ('shop', 'name')
+        unique_together = ('shop', 'url')
     def get_absolute_url(self):
         return reverse('product', args=[str(self.id)])
 
@@ -184,6 +187,12 @@ def update_photo_product(sender, instance, **kwargs):
         product.save()
     except:
         print('error save photo')
+
+@receiver(pre_save, sender=Product, dispatch_uid="update_price_product")
+def update_price_product(sender, instance, **kwargs):
+    print('actualizacion')
+    return
+
 
 @receiver(post_save, sender=Product, dispatch_uid="update_history_price")
 def update_history_price(sender, instance, **kwargs):
