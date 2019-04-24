@@ -55,6 +55,6 @@ for url in source:
                 msg.send()
                 print('+ registro exitoso')
             except:
-                print('- fallo en el registro')
+                print('...')
     else:
         print('? no hay entradas')
