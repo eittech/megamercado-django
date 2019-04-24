@@ -3,6 +3,8 @@ from products.models import *
 import csv
 from blog.models import *
 import feedparser
+from django.core.mail import EmailMultiAlternatives
+
 #https://www.tristanperry.com/how-to/2014/10/05/add-django-rss-feed.html
 
 # urls = [
@@ -39,6 +41,18 @@ for url in source:
                 author=entry.author,
                 page_source=url.page)
                 blog.save()
+
+                # msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
+                # 'name':name,
+                # 'last_name':last_name,
+                # 'company':company,
+                # 'phone_mobile':phone_mobile,
+                # 'service':service})
+                subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
+                text_content = entry.description
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                # msg.attach_alternative(msg_html, "text/html")
+                msg.send()
                 print('+ registro exitoso')
             except:
                 print('- fallo en el registro')

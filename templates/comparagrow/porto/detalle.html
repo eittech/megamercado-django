@@ -112,8 +112,12 @@
 				<p class="mb-4"></p>
 				<div class="tabs tabs-product mb-2">
 					<ul class="nav nav-tabs">
+						{% if producto.description %}
 						<li class="nav-item active"><a class="nav-link py-3 px-4" href="#productDescription" data-toggle="tab">Descripción</a></li>
+						{% endif %}
+						{% if producto_attr %}
 						<li class="nav-item"><a class="nav-link py-3 px-4" href="#productInfo" data-toggle="tab">Tabla contenidos</a></li>
+						{% endif %}
 						<li class="nav-item"><a class="nav-link py-3 px-4" href="#producthistory" data-toggle="tab">Detalle Histórico Precio</a></li>
 					</ul>
 					<div class="tab-content p-0">

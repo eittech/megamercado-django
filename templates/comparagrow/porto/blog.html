@@ -16,7 +16,7 @@
         <div class="col-md-12 align-self-center p-static order-2 text-center">
 
           <h1 class="text-dark font-weight-bold text-8">Blog</h1>
-<span class="sub-title text-dark">Las ultimas noticias del mundo del cannabis!</span>
+<span class="sub-title text-dark">Las últimas noticias del mundo del cannabis!</span>
         </div>
 
       </div>
@@ -77,12 +77,12 @@
                   {% endif %}
 
                   <span class="current">
-                      Pagina {{ post.number }} de {{ post.paginator.num_pages }}.
+                      Página {{ post.number }} de {{ post.paginator.num_pages }}.
                   </span>
 
                   {% if post.has_next %}
                       <a href="?page={{ post.next_page_number }}">Siguiente</a>
-                      <a href="?page={{ post.paginator.num_pages }}">Ultima &raquo;</a>
+                      <a href="?page={{ post.paginator.num_pages }}">Última &raquo;</a>
                   {% endif %}
               </span>
           </div>
