@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table style="width:100%">
+      <tbody style="
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+"><tr>
+        <td><img src="https://comparagrow.cl/static/theme/images/home/logo.png" alt=""></td>
+      </tr>
+      <tr>
+        <td><h2>en hora buena!!! Alguien quiere contactarnos XD</h2></td>
+      </tr>
+      <tr>
+        <td><h3>Datos del Interesado</h3></td>
+      </tr>
+      <tr>
+        <td>
+          <b>Nombre:</b> {{ contact.name }} <br/>
+          <b>email:</b> {{ contact.email }} <br/>
+          <b>Asunto:</b> {{ contact.subject }} <br/>
+          <b>Mensaje:</b><br/>
+          <p>{{ contact.message }}</p>
+        </td>
+      </tr>
+    </tbody></table>
+</body></html>

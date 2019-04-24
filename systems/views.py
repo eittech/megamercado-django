@@ -426,6 +426,14 @@ def contactanos(request):
         except:
             rsp = "error"
 
+        msg_html = render_to_string('comparagrow/component/mail_contactanos.html', {
+        'contact':contact})
+        subject, from_email, to = contact.subject, 'contacto@comparagrow.cl', 'clientes@comparagrow.cl'
+        text_content = ''
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(msg_html, "text/html")
+        msg.send()
+
     return render(request, 'comparagrow/contactanos.html',{"email":email,"rsp":rsp})
 
 def Faq(request):
