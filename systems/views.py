@@ -84,21 +84,37 @@ def home(request):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
     # productos_ci = Product.objects.filter(pk__in=pk_product)
-    productos_ci = Product.objects.filter()[:24]
+    productos_cd = Product.objects.filter().order_by('?')[:24]
+    productos_ur = Product.objects.filter().order_by('?')[:24]
+    productos_ci = Product.objects.filter().order_by('?')[:24]
 
     productos = ProductImage.objects.all()[:12]
     category = Category.objects.all()
     if user_agent.is_mobile:
         # Do stuff here...
         template_ruta = "comparagrow/porto/base_mobile.html"
-        return render(request, 'comparagrow/porto/index.html', {'template_ruta':template_ruta,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
+        return render(request, 'comparagrow/porto/index.html', {
+        'template_ruta':template_ruta,
+        'category':category,
+        'error':error,
+        'productos_ci':productos_ci,
+        'productos_cd':productos_cd,
+        'productos_ur':productos_ur
+        })
         #return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
         #return render(request, 'comparagrow/index.html', {'variable':variable})
     else:
         template_ruta = "comparagrow/porto/base.html"
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
         #cozastore
-        return render(request, 'comparagrow/porto/index.html', {'template_ruta':template_ruta,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
+        return render(request, 'comparagrow/porto/index.html', {
+        'template_ruta':template_ruta,
+        'productos':productos,
+        'category':category,
+        'error':error,
+        'productos_ci':productos_ci,
+        'productos_cd':productos_cd,
+        'productos_ur':productos_ur})
 
 @login_required
 def profile(request):
