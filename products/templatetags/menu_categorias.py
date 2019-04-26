@@ -60,7 +60,9 @@ def tiendas(value):
 
 @register.filter(name='countproductscategory')
 def countproductscategory(value):
-    p = Product.objects.filter(category__id=int(value))
+    categoria = Category.objects.get(pk=int(value))
+    children = categoria.get_descendants(include_self=True)
+    p = Product.objects.filter(category__in=children)
     if p.count() > 0:
         c = p.count()
     else:
