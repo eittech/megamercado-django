@@ -17,9 +17,21 @@ class ProductAttributesInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ('photo',('shop',admin.RelatedOnlyFieldListFilter), ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('name', 'price','tax','total')
-    readonly_fields = ['category','category_temp','photo','shop']
+    readonly_fields = ['category','category_temp','photo']
     search_fields = ['name']
+    # date_hierarchy = 'shop'
     inlines = (ProductAttributesInline,ProductImageInline)
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "shop":
+            user = request.user
+            if user.is_superuser:
+                kwargs["queryset"] = Shop.objects.all()
+            else:
+                customer = Customer.objects.get(user=user)
+                # shop = Shop.objects.filter(customer=customer)
+                kwargs["queryset"] = Shop.objects.filter(customer=customer)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
     def get_queryset(self, request):
         user = request.user
         if user.is_superuser:
