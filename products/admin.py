@@ -1,5 +1,6 @@
 from django.contrib import admin
 from products.models import *
+from customers.models import *
 # Register your models here.
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from django_google_maps import widgets as map_widgets
@@ -14,10 +15,24 @@ class ProductAttributesInline(admin.TabularInline):
     extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
-    list_filter = ('photo','shop', 'category')
+    list_filter = ('photo',('shop',admin.RelatedOnlyFieldListFilter), ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('name', 'price','tax','total')
+    readonly_fields = ['category','category_temp','photo','shop']
     search_fields = ['name']
     inlines = (ProductAttributesInline,ProductImageInline)
+    def get_queryset(self, request):
+        user = request.user
+        if user.is_superuser:
+            queryset = super().get_queryset(request)
+        else:
+            print(user)
+            customer = Customer.objects.get(user=user)
+            print(customer)
+            shop = Shop.objects.filter(customer=customer)
+            # print(shop)
+            queryset = Product.objects.filter(shop__in=shop)
+            print('hola admin')
+        return queryset
 
 
 class CategoryTagsInline(admin.TabularInline):
@@ -36,6 +51,20 @@ class ShopAdmin(admin.ModelAdmin):
         map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
     }
     list_display = ('name', 'num_products','num_products_category','num_products_category_null')
+    search_fields = ['name',]
+    readonly_fields = ['customer','url']
+    def get_queryset(self, request):
+        user = request.user
+        if user.is_superuser:
+            queryset = super().get_queryset(request)
+        else:
+            print(user)
+            customer = Customer.objects.get(user=user)
+            print(customer)
+            # shop = Shop.objects.filter(customer=customer)
+            # print(shop)
+            queryset = Shop.objects.filter(customer=customer)
+        return queryset
 
 class HistoryPriceAdmin(admin.ModelAdmin):
     list_display = ('product', 'date_update','total')
@@ -64,7 +93,27 @@ admin.site.register(HistoryPrice,HistoryPriceAdmin)
 admin.site.register(Shop,ShopAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Product,ProductAdmin)
-admin.site.register(ProductImage)
+
+class ProductImageAdmin(admin.ModelAdmin):
+    list_filter = (('product__shop',admin.RelatedOnlyFieldListFilter), ('product__category',admin.RelatedOnlyFieldListFilter))
+    list_display = ('product', 'image')
+    readonly_fields = ['product',]
+    search_fields = ['product__name']
+    # inlines = (ProductAttributesInline,ProductImageInline)
+    def get_queryset(self, request):
+        user = request.user
+        if user.is_superuser:
+            queryset = super().get_queryset(request)
+        else:
+            print(user)
+            customer = Customer.objects.get(user=user)
+            print(customer)
+            shop = Shop.objects.filter(customer=customer)
+            # print(shop)
+            queryset = ProductImage.objects.filter(product__shop__in=shop)
+            print('hola admin')
+        return queryset
+# admin.site.register(ProductImage,ProductImageAdmin)
 admin.site.register(Attributes)
 admin.site.register(ProductAttributes)
 admin.site.register(FavoriteProduct)

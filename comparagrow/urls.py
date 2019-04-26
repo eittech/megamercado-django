@@ -24,6 +24,9 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
+admin.site.site_header = "Comparagrow <h1>Admin</h1>"
+admin.site.site_title = "UMSRA Admin Portal"
+admin.site.index_title = "Bienvenido a la seccion administrativa ComparaGrow"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
