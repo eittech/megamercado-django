@@ -24,7 +24,7 @@ class Shop(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name = "Tiendas"
+        verbose_name = "Tienda"
         unique_together = (('url',))
     def num_products(self):
         products = Product.objects.filter(shop=self)
@@ -105,7 +105,7 @@ class Product(models.Model):
     def __str__(self):
         return str(self.shop) + ' - '+ str(self.name)
     class Meta:
-        verbose_name = "Productos"
+        verbose_name = "Producto"
         unique_together = ('shop', 'url')
     def get_absolute_url(self):
         return reverse('product', args=[str(self.id)])
@@ -116,14 +116,14 @@ class FavoriteProduct(models.Model):
     def __str__(self):
         return self.product.name
     class Meta:
-        verbose_name = "Listado de Favoritos"
+        verbose_name = "Listado de Favorito"
         unique_together = ('product', 'user')
 
 class FavoriteBrands(models.Model):
     brand = models.CharField(verbose_name="Marca",max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     class Meta:
-        verbose_name = "Marcas Favoritas"
+        verbose_name = "Marcas Favorita"
         unique_together = ('brand', 'user')
 
 class FavoriteSearchs(models.Model):
@@ -133,7 +133,7 @@ class FavoriteSearchs(models.Model):
     count = models.IntegerField(default=0)
     product_front = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True,null=True)
     class Meta:
-        verbose_name = "Busquedas Favoritas"
+        verbose_name = "Busquedas Favorita"
         unique_together = ('search', 'user')
 
 class ProductImage(models.Model):
@@ -143,7 +143,7 @@ class ProductImage(models.Model):
     def __str__(self):
         return self.product.name
     class Meta:
-        verbose_name = "Imagenes de Productos"
+        verbose_name = "Imagenes de Producto"
         unique_together = ('product', 'image')
 
 class Attributes(models.Model):
@@ -151,7 +151,7 @@ class Attributes(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name = "Atributos de Productos"
+        verbose_name = "Atributos de Producto"
         unique_together = ('name',)
 
 
@@ -162,7 +162,7 @@ class ProductAttributes(models.Model):
     def __str__(self):
         return self.attributes.name
     class Meta:
-        verbose_name = "Datelle de Atributos de Productos"
+        verbose_name = "Datelle de Atributos de Producto"
         unique_together = ('product','attributes')
 
 class HistoryPrice(models.Model):
