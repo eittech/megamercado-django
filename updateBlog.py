@@ -38,6 +38,14 @@ for url in source:
                     if i == 0:
                         contenido = content.value
                         i = i + 1
+                print('title=' + entry.title)
+                print('url='+entry.link)
+                print('description=' + contenido)
+                print('description_short='+entry.description)
+                print('source='+url)
+                print('author='+entry.author)
+                print('page_source='+url.page)
+
                 blog = Blog.objects.create(
                 title=entry.title,
                 url=entry.link,
@@ -66,8 +74,8 @@ for url in source:
     else:
         print('? no hay entradas')
 
-    print('Resultados:')
-    print('Numero de Feed'+ str(num_feed))
-    print('Numero de Post'+ str(num_post))
-    print('Numero de Post Agregados'+ str(num_post_add))
-    print('Numero de Post Agregados'+ str(num_post - num_post_add))
+print('Resultados:')
+print('Numero de Feed: '+ str(num_feed))
+print('Numero de Post: '+ str(num_post))
+print('Numero de Post Agregados: '+ str(num_post_add))
+print('Numero de Post No Agregados: '+ str(num_post - num_post_add))
