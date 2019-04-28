@@ -69,7 +69,7 @@ for url in source:
                 print('> post agregado')
             except ValidationError as e:
                 print('- error al guardar el post')
-                print(e)
+                print(e.error)
 
             # try:
             #     subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
