@@ -38,36 +38,45 @@ for url in source:
                     if i == 0:
                         contenido = content.value
                         i = i + 1
-                print('title=' + entry.title)
-                print('url='+entry.link)
-                # print('description=' + contenido)
-                # print('description_short='+entry.description)
-                print('author='+entry.author)
-                print('page_source='+url.page)
+            except:
+                print('- error al generar contenido')
 
-                blog = Blog.objects.create(
-                title=entry.title,
-                url=entry.link,
-                description=contenido,
-                description_short=entry.description,
-                source=url,
-                author=entry.author,
-                page_source=url.page)
+            try:
+                blog = Blog()
+                if entry.title:
+                    blog.title = entry.title
+                # title=entry.title,
+                if entry.link:
+                    blog.url = entry.link
+                # url=entry.link,
+                if contenido:
+                    blog.description = contenido
+                # description=contenido,
+                if entry.description:
+                    blog.description_short = entry.description
+                # description_short=entry.description,
+                if url:
+                    blog.source = url
+                # source=url,
+                if entry.author:
+                    blog.author = entry.author
+                # author=entry.author,
+                if url.page:
+                    blog.page_source = url.page
+                # page_source=url.page)
                 blog.save()
+                print('> post agregado')
+            except:
+                print('- error al guardar el post')
 
-                # msg_html = render_to_string('comparagrow/component/mail_suscribir.html', {
-                # 'name':name,
-                # 'last_name':last_name,
-                # 'company':company,
-                # 'phone_mobile':phone_mobile,
-                # 'service':service})
+            try:
                 subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
                 text_content = entry.description
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 # msg.attach_alternative(msg_html, "text/html")
                 msg.send()
                 num_post_add = num_post_add + 1
-                print('+ registro exitoso')
+                print('> post enviado')
             except:
                 print('- registro no agregado')
     else:
