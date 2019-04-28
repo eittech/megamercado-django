@@ -44,6 +44,7 @@ for url in source:
 
             try:
                 blog = Blog()
+
                 if entry.title:
                     blog.title = entry.title
                 # title=entry.title,
@@ -65,11 +66,14 @@ for url in source:
                 if url.page:
                     blog.page_source = url.page
                 # page_source=url.page)
-                blog.save()
-                print('> post agregado')
-            except ValidationError as e:
+                blogexist = Blog.objects.filter(title=entry.title).first()
+                if blogexist:
+                    print('- ya existe el post en la base de datos')
+                else:
+                    blog.save()
+                    print('> post agregado')
+            except:
                 print('- error al guardar el post')
-                print(e.error)
 
             # try:
             #     subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
