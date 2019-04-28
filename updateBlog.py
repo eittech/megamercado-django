@@ -25,6 +25,7 @@ for url in source:
     feed = feedparser.parse(url.url_feed)
     if feed['entries']:
         for entry in feed['entries']:
+            print(entry.title)
             try:
                 i = 0
                 contenido = ""
@@ -55,6 +56,6 @@ for url in source:
                 msg.send()
                 print('+ registro exitoso')
             except:
-                print('...')
+                print('- registro no agregado')
     else:
         print('? no hay entradas')
