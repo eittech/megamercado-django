@@ -18,13 +18,18 @@ from django.core.mail import EmailMultiAlternatives
 # ]
 
 source = Source.objects.filter(state=True)
+num_feed=0
+num_post=0
+num_post_add=0
 
 for url in source:
+    num_feed = num_feed + 1
     print(url.page)
     print("====================================================")
     feed = feedparser.parse(url.url_feed)
     if feed['entries']:
         for entry in feed['entries']:
+            num_post = num_post + 1
             print(entry.title)
             try:
                 i = 0
@@ -54,8 +59,15 @@ for url in source:
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 # msg.attach_alternative(msg_html, "text/html")
                 msg.send()
+                num_post_add = num_post_add + 1
                 print('+ registro exitoso')
             except:
                 print('- registro no agregado')
     else:
         print('? no hay entradas')
+
+    print('Resultados:')
+    print('Numero de Feed'+ str(num_feed))
+    print('Numero de Post'+ str(num_post))
+    print('Numero de Post Agregados'+ str(num_post_add))
+    print('Numero de Post Agregados'+ str(num_post - num_post_add))
