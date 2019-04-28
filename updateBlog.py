@@ -4,6 +4,7 @@ import csv
 from blog.models import *
 import feedparser
 from django.core.mail import EmailMultiAlternatives
+from django.core.exceptions import ValidationError
 
 #https://www.tristanperry.com/how-to/2014/10/05/add-django-rss-feed.html
 
@@ -66,19 +67,20 @@ for url in source:
                 # page_source=url.page)
                 blog.save()
                 print('> post agregado')
-            except:
+            except ValidationError as e:
                 print('- error al guardar el post')
+                print(e)
 
-            try:
-                subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
-                text_content = entry.description
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                # msg.attach_alternative(msg_html, "text/html")
-                msg.send()
-                num_post_add = num_post_add + 1
-                print('> post enviado')
-            except:
-                print('- registro no agregado')
+            # try:
+            #     subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
+            #     text_content = entry.description
+            #     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            #     # msg.attach_alternative(msg_html, "text/html")
+            #     msg.send()
+            #     num_post_add = num_post_add + 1
+            #     print('> post enviado')
+            # except:
+            #     print('- registro no agregado')
     else:
         print('? no hay entradas')
 
