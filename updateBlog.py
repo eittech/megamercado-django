@@ -40,8 +40,8 @@ for url in source:
                         i = i + 1
                 print('title=' + entry.title)
                 print('url='+entry.link)
-                print('description=' + contenido)
-                print('description_short='+entry.description)
+                # print('description=' + contenido)
+                # print('description_short='+entry.description)
                 print('source='+url)
                 print('author='+entry.author)
                 print('page_source='+url.page)
