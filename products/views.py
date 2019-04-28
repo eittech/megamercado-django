@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from products.models import *
 from contracts.models import *
-
+from systems.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from scrapyd_api import ScrapydAPI
@@ -39,6 +39,15 @@ def search(request):
         term_q = term_q.rstrip().lower()
     else:
         term_q = ""
+
+    #registro de actividades
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'search_text'
+    if request.user:
+        registeractivity.user = request.user
+    registeractivity.data = {'texto':term_q}
+    registeractivity.save()
+
     #validacion de productos asociados a tiendas con contratos vijentes
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     pk_shop = servicecontractshop.values('shop__pk')
@@ -176,9 +185,25 @@ def categorias(request,slug):
     else:
         texto = ""
 
+
+
     # lista_categorias = Category.objects.all()
     categoria = Category.objects.get(slug=slug)
     children = categoria.get_descendants(include_self=True)
+
+
+    #registro de actividades
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'search_category'
+    if request.user:
+        registeractivity.user = request.user
+    registeractivity.data = {
+    'texto':texto,
+    'category__slug':slug,
+    'category__name':categoria.name,
+    'category__id':categoria.id}
+    registeractivity.save()
+
 
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
@@ -321,6 +346,19 @@ def redirect_product(request,id):
     # id = request.POST.get('id')
     producto = Product.objects.get(pk=id)
     time.sleep(1)
+    #registro de actividades
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'redirect_product'
+    if request.user:
+        registeractivity.user = request.user
+    registeractivity.data = {
+    'producto__name':producto.name,
+    'producto__id':producto.id,
+    'producto__shop__name':producto.shop.name,
+    'producto__shop__id':producto.shop.id,
+    'producto__url':producto.url,
+    }
+    registeractivity.save()
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
 @login_required
@@ -405,6 +443,18 @@ def detalle_product(request,id):
     except:
         producto = None
     if producto is not None:
+        #registro de actividades
+        registeractivity = RegisterActivitySystem()
+        registeractivity.type = 'view_product'
+        if request.user:
+            registeractivity.user = request.user
+        registeractivity.data = {
+        'producto__name':producto.name,
+        'producto__id':producto.id,
+        'producto__shop__name':producto.shop.name,
+        'producto__shop__id':producto.shop.id,
+        }
+        registeractivity.save()
         return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})
     else:
         return redirect('/error')
