@@ -84,7 +84,7 @@ for url in source:
                 # msg.attach_alternative(msg_html, "text/html")
                 msg.send()
                 num_post_add = num_post_add + 1
-                print('> post enviado')
+                print('> post enviado.')
             except:
                 print('- registro no agregado')
     else:
