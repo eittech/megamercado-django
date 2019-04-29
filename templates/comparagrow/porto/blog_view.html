@@ -38,7 +38,7 @@
   </section>
 
   <div class="container py-4">
-
+    {% if post %}
     <div class="row">
       <div class="col">
         <div class="blog-posts">
@@ -51,6 +51,19 @@
       </div>
 
     </div>
+    {% else %}
+    <div class="row">
+      <div class="col">
+        <div class="blog-posts">
+          <h1><a href="">Publicación finalizada</a></h1>
+          <hr>
+          <p>Lamentamos informar que esta publicación ya no se encuentra disponible.<br>
+          Te invitamos a revisar otras publicaciónes.</p>
+        </div>
+      </div>
+
+    </div>
+    {% endif %}
 
   </div>
 

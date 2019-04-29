@@ -12,5 +12,9 @@ def lists(request):
     return render(request, 'comparagrow/porto/blog.html', {'post':posts})
 
 def post(request,slug):
-    post =  Blog.objects.get(slug=slug)
+    try:
+        post =  Blog.objects.get(slug=slug)
+    except:
+        post = False
+
     return render(request, 'comparagrow/porto/blog_view.html', {'post':post})
