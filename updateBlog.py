@@ -53,6 +53,8 @@ for url in source:
                 # url=entry.link,
                 if contenido:
                     blog.description = contenido
+                else:
+                    blog.description = entry.description
                 # description=contenido,
                 if entry.description:
                     blog.description_short = entry.description
@@ -75,16 +77,16 @@ for url in source:
             except:
                 print('- error al guardar el post')
 
-            # try:
-            #     subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
-            #     text_content = entry.description
-            #     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-            #     # msg.attach_alternative(msg_html, "text/html")
-            #     msg.send()
-            #     num_post_add = num_post_add + 1
-            #     print('> post enviado')
-            # except:
-            #     print('- registro no agregado')
+            try:
+                subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
+                text_content = entry.description_short
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                # msg.attach_alternative(msg_html, "text/html")
+                msg.send()
+                num_post_add = num_post_add + 1
+                print('> post enviado')
+            except:
+                print('- registro no agregado')
     else:
         print('? no hay entradas')
 
