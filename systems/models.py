@@ -15,7 +15,7 @@ class RegisterActivitySystem(models.Model):
     )
     type = models.CharField(verbose_name="Tipo",max_length=50,choices=TYPE_REGISTER)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank= True)
-    data = models.CharField(verbose_name="Data",max_length=200,null=True, blank= True)
+    data = models.TextField(verbose_name="Data",null=True, blank= True)
     datet = models.DateTimeField(verbose_name="Fecha de Actividad",auto_now=True)
     def __str__(self):
         return self.type
