@@ -19,6 +19,10 @@ class RegisterActivitySystem(models.Model):
     datet = models.DateTimeField(verbose_name="Fecha de Actividad",auto_now=True)
     def __str__(self):
         return self.type
+    class Meta:
+        verbose_name = "Registro de Actividades del Sistema"
+        # app_label = ('systems','Sistema')
+
 
 
 class ContactMessage(models.Model):
@@ -28,3 +32,5 @@ class ContactMessage(models.Model):
     message = models.TextField(verbose_name="Mensaje",null=True, blank= True)
     def __str__(self):
         return self.subject
+    class Meta:
+        verbose_name = "Contactanos"

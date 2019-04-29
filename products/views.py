@@ -41,12 +41,12 @@ def search(request):
         term_q = ""
 
     #registro de actividades
-    # registeractivity = RegisterActivitySystem()
-    # registeractivity.type = 'search_text'
-    # if request.user:
-    #     registeractivity.user = request.user
-    # registeractivity.data = {'texto':term_q}
-    # registeractivity.save()
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'search_text'
+    if request.user.is_authenticated:
+        registeractivity.user = request.user
+    registeractivity.data = {'texto':term_q}
+    registeractivity.save()
 
     #validacion de productos asociados a tiendas con contratos vijentes
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
@@ -193,16 +193,16 @@ def categorias(request,slug):
 
 
     #registro de actividades
-    # registeractivity = RegisterActivitySystem()
-    # registeractivity.type = 'search_category'
-    # if request.user:
-    #     registeractivity.user = request.user
-    # registeractivity.data = {
-    # 'texto':texto,
-    # 'category__slug':slug,
-    # 'category__name':categoria.name,
-    # 'category__id':categoria.id}
-    # registeractivity.save()
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'search_category'
+    if request.user.is_authenticated:
+        registeractivity.user = request.user
+    registeractivity.data = {
+    'texto':texto,
+    'category__slug':slug,
+    'category__name':categoria.name,
+    'category__id':categoria.id}
+    registeractivity.save()
 
 
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
@@ -347,18 +347,18 @@ def redirect_product(request,id):
     producto = Product.objects.get(pk=id)
     time.sleep(1)
     #registro de actividades
-    # registeractivity = RegisterActivitySystem()
-    # registeractivity.type = 'redirect_product'
-    # if request.user:
-    #     registeractivity.user = request.user
-    # registeractivity.data = {
-    # 'producto__name':producto.name,
-    # 'producto__id':producto.id,
-    # 'producto__shop__name':producto.shop.name,
-    # 'producto__shop__id':producto.shop.id,
-    # 'producto__url':producto.url,
-    # }
-    # registeractivity.save()
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'redirect_product'
+    if request.user.is_authenticated:
+        registeractivity.user = request.user
+    registeractivity.data = {
+    'producto__name':producto.name,
+    'producto__id':producto.id,
+    'producto__shop__name':producto.shop.name,
+    'producto__shop__id':producto.shop.id,
+    'producto__url':producto.url,
+    }
+    registeractivity.save()
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
 @login_required
@@ -444,17 +444,17 @@ def detalle_product(request,id):
         producto = None
     if producto is not None:
         #registro de actividades
-        # registeractivity = RegisterActivitySystem()
-        # registeractivity.type = 'view_product'
-        # if request.user:
-        #     registeractivity.user = request.user
-        # registeractivity.data = {
-        # 'producto__name':producto.name,
-        # 'producto__id':producto.id,
-        # 'producto__shop__name':producto.shop.name,
-        # 'producto__shop__id':producto.shop.id,
-        # }
-        # registeractivity.save()
+        registeractivity = RegisterActivitySystem()
+        registeractivity.type = 'view_product'
+        if request.user.is_authenticated:
+            registeractivity.user = request.user
+        registeractivity.data = {
+        'producto__name':producto.name,
+        'producto__id':producto.id,
+        'producto__shop__name':producto.shop.name,
+        'producto__shop__id':producto.shop.id,
+        }
+        registeractivity.save()
         return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})
     else:
         return redirect('/error')
