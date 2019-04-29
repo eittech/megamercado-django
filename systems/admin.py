@@ -7,6 +7,9 @@ class RegisterActivitySystemAdmin(admin.ModelAdmin):
     list_display = ('type', 'user','datet')
     date_hierarchy = 'datet'
     readonly_fields = ['type','user','data']
+    save_as = True
+    save_on_top = True
+    change_list_template = 'admin/change_list_register_activity_graph.html'
     class Meta:
         app_label = "sistemas"
     # readonly_fields = ['category','category_temp','photo']
