@@ -128,15 +128,15 @@ class ProductSpider(scrapy.Spider):
         if Product_exist:
             Product_object = Product_exist
             if total:
-                print('total:')
-                print(total)
                 Product_object.total = total
-            else:
-                Product_object.total = 0
+
             try:
-                Product_object.save()
-                print("Se actualizo el precio")
-                product_error = False
+                if total > 0:
+                    Product_object.save()
+                    print("Se actualizo el precio")
+                    product_error = False
+                else:
+                    print("No Se actualizo el precio")
             except:
                 product_error = True
                 print("No se actualizo el precio")
