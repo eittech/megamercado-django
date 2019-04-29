@@ -123,6 +123,8 @@ class ProductSpider(scrapy.Spider):
             total = int(total)
         except:
             total = None
+
+        Product_exist = Product.objects.filter(url=url).first()
         if Product_exist:
             Product_object = Product_exist
             if total:
