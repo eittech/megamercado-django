@@ -131,6 +131,7 @@ class ProductSpider(scrapy.Spider):
 
         category = None
         # category_tags = CategoryTags.objects.filter(tag__icontains=name_category).first()
+        a = name_category
         category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
         if category_tags is None:
             category = None
