@@ -205,6 +205,7 @@ def categorias(request,slug):
     'category__name':categoria.name,
     'ip':registeractivity.get_client_ip(request),
     'category__id':categoria.id}
+    registeractivity.category = categoria
     registeractivity.save()
 
 
@@ -362,6 +363,9 @@ def redirect_product(request,id):
     'producto__url':producto.url,
     'ip':registeractivity.get_client_ip(request)
     }
+    registeractivity.category = producto.category
+    registeractivity.shop = producto.shop
+    registeractivity.product = producto
     registeractivity.save()
     return JsonResponse({"url": producto.url,"status":"aprobado"})
 
@@ -459,6 +463,9 @@ def detalle_product(request,id):
         'producto__shop__id':producto.shop.id,
         'ip':registeractivity.get_client_ip(request),
         }
+        registeractivity.category = producto.category
+        registeractivity.shop = producto.shop
+        registeractivity.product = producto
         registeractivity.save()
         return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})
     else:
@@ -466,6 +473,27 @@ def detalle_product(request,id):
 
 def redirect_view_product(request,id):
     producto = Product.objects.get(pk=id)
+    return render(request, "comparagrow/redirect.html",{'producto':producto})
+
+def redirect_view_product_publicity(request,slug,id):
+    producto = Product.objects.get(pk=id)
+    registeractivity = RegisterActivitySystem()
+    registeractivity.type = 'click_publicity'
+    if request.user.is_authenticated:
+        registeractivity.user = request.user
+    registeractivity.data = {
+    'producto__name':producto.name,
+    'producto__id':producto.id,
+    'producto__shop__name':producto.shop.name,
+    'producto__shop__id':producto.shop.id,
+    'template_section':slug,
+    'ip':registeractivity.get_client_ip(request),
+    }
+    registeractivity.category = producto.category
+    registeractivity.shop = producto.shop
+    registeractivity.product = producto
+    registeractivity.template_section = slug
+    registeractivity.save()
     return render(request, "comparagrow/redirect.html",{'producto':producto})
 
 def index(request):

@@ -5,6 +5,7 @@ from .views import *
 urlpatterns = [
     path('listado', listado, name='listado'),
     path('redirect/<int:id>', redirect_view_product, name='redirect'),
+    path('publicity/redirect/<slug:slug>/<int:id>', redirect_view_product_publicity, name='redirect'),
     path('redirect_url/<int:id>', redirect_product, name='redirect'),
     path('favorito/<int:id>', favorite_product, name='favorite_product'),
     path('favorito/search/add', favorite_search_add, name='favorite_search_add'),
