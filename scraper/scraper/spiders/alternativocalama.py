@@ -227,5 +227,5 @@ class ProductSpider(scrapy.Spider):
                         producto_image.image.save(name, File(io))
 
                         producto_image.save()
-            else:
-                print('no existe la categoria')
+        else:
+            print('no existe la categoria')
