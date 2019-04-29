@@ -79,7 +79,7 @@ for url in source:
 
             try:
                 subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
-                text_content = entry.description_short
+                text_content = contenido
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 # msg.attach_alternative(msg_html, "text/html")
                 msg.send()
