@@ -45,7 +45,9 @@ def search(request):
     registeractivity.type = 'search_text'
     if request.user.is_authenticated:
         registeractivity.user = request.user
-    registeractivity.data = {'texto':term_q}
+    registeractivity.data = {
+    'texto':term_q,
+    'ip':registeractivity.get_client_ip(request)}
     registeractivity.save()
 
     #validacion de productos asociados a tiendas con contratos vijentes
@@ -201,6 +203,7 @@ def categorias(request,slug):
     'texto':texto,
     'category__slug':slug,
     'category__name':categoria.name,
+    'ip':registeractivity.get_client_ip(request),
     'category__id':categoria.id}
     registeractivity.save()
 
@@ -357,6 +360,7 @@ def redirect_product(request,id):
     'producto__shop__name':producto.shop.name,
     'producto__shop__id':producto.shop.id,
     'producto__url':producto.url,
+    'ip':registeractivity.get_client_ip(request)
     }
     registeractivity.save()
     return JsonResponse({"url": producto.url,"status":"aprobado"})
@@ -453,6 +457,7 @@ def detalle_product(request,id):
         'producto__id':producto.id,
         'producto__shop__name':producto.shop.name,
         'producto__shop__id':producto.shop.id,
+        'ip':registeractivity.get_client_ip(request),
         }
         registeractivity.save()
         return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})

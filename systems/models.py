@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from django.contrib.gis.utils import GeoIP
 
 # Create your models here.
 
@@ -19,6 +20,18 @@ class RegisterActivitySystem(models.Model):
     datet = models.DateTimeField(verbose_name="Fecha de Actividad",auto_now=True)
     def __str__(self):
         return self.type
+    def get_client_ip(self,request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+    # def get_geo_client(self,ip):
+    #     g = GeoIP()
+    #     client_ip = ip
+    #     lat,long = g.lat_lon(client_ip)
+    #     return lat,long
     class Meta:
         verbose_name = "Registro de Actividades del Sistema"
         # app_label = ('systems','Sistema')
