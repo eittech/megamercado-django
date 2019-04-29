@@ -80,7 +80,8 @@ class ProductSpider(scrapy.Spider):
         categ = response.xpath('.//div[@class="breadcrumbDiv col-lg-12"]/ul/li/a/text()').extract()
         category = None
         for a in categ:
-            category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            # category_tags = CategoryTags.objects.filter(tag__icontains=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
+            category_tags = CategoryTags.objects.filter(tag=a.lower()).filter(category__isnull=False).order_by('-category__level').first()
             print(category_tags)
             if category_tags:
                 category = category_tags.category
@@ -115,80 +116,96 @@ class ProductSpider(scrapy.Spider):
                 total = int(total)
             except:
                 total = None
+            Product_exist = Product.objects.filter(url=url).first()
+            if Product_exist:
+                Product_object = Product_exist
+                if total:
+                    Product_object.total = total
 
-            Product_object = Product()
-            if name:
-                Product_object.name = name
-                print('name:')
-                print(name)
-            if shop_id:
-                Product_object.shop = shop_id
-                print('shop:')
-                print(shop_id)
-            if reference:
-                Product_object.reference = reference
-                print('reference:')
-                print(reference)
-            if brand:
-                Product_object.brand = brand
-                print('marca:')
-                print(brand)
-            if url:
-                Product_object.url = url
-                print('url:')
-                print(url)
-            if categ:
-                Product_object.category_temp = categ
-            if description:
-                Product_object.description = description
-                print('description:')
-                print(description)
-
-            if category is not None:
-                Product_object.category = category
-                print('category:')
-                print(category)
-            if total:
-                print('total:')
-                print(total)
-                Product_object.total = total
-            else:
-                Product_object.total = 0
-
-            Product_object.price = 0
-            Product_object.tax = 0
-
-            print(Product_object)
-            try:
-                Product_object.save()
-                print("se guardo con exito")
-                product_error = False
-            except:
-                product_error = True
-                print("No se pudo guardar el producto")
-
-            if Product_object.id:
-                list_img_t = response.css("div.main-image")
-                list_img = list_img_t.css('img')
-                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
-                contador = 0
-                for li_img in list_img:
-                    print(li_img)
-                    contador = contador + 1
-                    img_url = "http://www.canamogrow.cl/" + str(li_img.xpath('@src').re_first('\w.*'))
-                    print(img_url)
-                    # img_url = response.css('img#bigpic').xpath('@src').get()
-                    name = str(Product_object.id) +'_' + str(contador) + '.jpg'
-
-                    producto_image = ProductImage()
-                    producto_image.product = Product_object
-
-                    req = Request(url=img_url, headers=headers)
-                    response = urlopen(req)
-
-                    io = BytesIO(response.read())
-                    producto_image.image.save(name, File(io))
-
-                    producto_image.save()
-        else:
-            print('no existe la categoria')
+                try:
+                    if total > 0:
+                        Product_object.save()
+                        print("Se actualizo el precio")
+                        product_error = False
+                    else:
+                        print("No Se actualizo el precio")
+                except:
+                    product_error = True
+                    print("No se actualizo el precio")
+        #     else:
+        #         Product_object = Product()
+        #         if name:
+        #             Product_object.name = name
+        #             print('name:')
+        #             print(name)
+        #         if shop_id:
+        #             Product_object.shop = shop_id
+        #             print('shop:')
+        #             print(shop_id)
+        #         if reference:
+        #             Product_object.reference = reference
+        #             print('reference:')
+        #             print(reference)
+        #         if brand:
+        #             Product_object.brand = brand
+        #             print('marca:')
+        #             print(brand)
+        #         if url:
+        #             Product_object.url = url
+        #             print('url:')
+        #             print(url)
+        #         if categ:
+        #             Product_object.category_temp = categ
+        #         if description:
+        #             Product_object.description = description
+        #             print('description:')
+        #             print(description)
+        #
+        #         if category is not None:
+        #             Product_object.category = category
+        #             print('category:')
+        #             print(category)
+        #         if total:
+        #             print('total:')
+        #             print(total)
+        #             Product_object.total = total
+        #         else:
+        #             Product_object.total = 0
+        #
+        #         Product_object.price = 0
+        #         Product_object.tax = 0
+        #
+        #         print(Product_object)
+        #         try:
+        #             Product_object.save()
+        #             print("se guardo con exito")
+        #             product_error = False
+        #         except:
+        #             product_error = True
+        #             print("No se pudo guardar el producto")
+        #
+        #         if Product_object.id:
+        #             list_img_t = response.css("div.main-image")
+        #             list_img = list_img_t.css('img')
+        #             headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+        #             contador = 0
+        #             for li_img in list_img:
+        #                 print(li_img)
+        #                 contador = contador + 1
+        #                 img_url = "http://www.canamogrow.cl/" + str(li_img.xpath('@src').re_first('\w.*'))
+        #                 print(img_url)
+        #                 # img_url = response.css('img#bigpic').xpath('@src').get()
+        #                 name = str(Product_object.id) +'_' + str(contador) + '.jpg'
+        #
+        #                 producto_image = ProductImage()
+        #                 producto_image.product = Product_object
+        #
+        #                 req = Request(url=img_url, headers=headers)
+        #                 response = urlopen(req)
+        #
+        #                 io = BytesIO(response.read())
+        #                 producto_image.image.save(name, File(io))
+        #
+        #                 producto_image.save()
+        # else:
+        #     print('no existe la categoria')
