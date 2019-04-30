@@ -3,7 +3,7 @@ from .models import *
 from django.utils.translation import ugettext_lazy as _
 # Register your models here.
 class RegisterActivitySystemAdmin(admin.ModelAdmin):
-    list_filter = ('type','template_section',
+    list_filter = ('type','template_section','country_name','region_name',
     ('user',admin.RelatedOnlyFieldListFilter),
     ('shop',admin.RelatedOnlyFieldListFilter),
     ('category',admin.RelatedOnlyFieldListFilter),

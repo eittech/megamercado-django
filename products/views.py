@@ -214,6 +214,8 @@ def categorias(request,slug):
 
     #registro de actividades
     registeractivity = RegisterActivitySystem()
+    ip = registeractivity.get_client_ip(request)
+    geodata = registeractivity.get_geo_client(ip)
     registeractivity.type = 'search_category'
     if request.user.is_authenticated:
         registeractivity.user = request.user
@@ -221,8 +223,20 @@ def categorias(request,slug):
     'texto':texto,
     'category__slug':slug,
     'category__name':categoria.name,
-    'ip':registeractivity.get_client_ip(request),
+    'ip':ip,
     'category__id':categoria.id}
+    if geodata['continent_name']:
+        registeractivity.continent_name = geodata['continent_name']
+    if geodata['country_name']:
+        registeractivity.country_name = geodata['country_name']
+    if geodata['region_name']:
+        registeractivity.region_name = geodata['region_name']
+    if geodata['zip']:
+        registeractivity.zip = geodata['zip']
+    if geodata['latitude']:
+        registeractivity.latitude = geodata['latitude']
+    if geodata['longitude']:
+        registeractivity.longitude = geodata['longitude']
     registeractivity.category = categoria
     registeractivity.save()
 
@@ -370,6 +384,8 @@ def redirect_product(request,id):
     time.sleep(1)
     #registro de actividades
     registeractivity = RegisterActivitySystem()
+    ip = registeractivity.get_client_ip(request)
+    geodata = registeractivity.get_geo_client(ip)
     registeractivity.type = 'redirect_product'
     if request.user.is_authenticated:
         registeractivity.user = request.user
@@ -379,8 +395,20 @@ def redirect_product(request,id):
     'producto__shop__name':producto.shop.name,
     'producto__shop__id':producto.shop.id,
     'producto__url':producto.url,
-    'ip':registeractivity.get_client_ip(request)
+    'ip':ip
     }
+    if geodata['continent_name']:
+        registeractivity.continent_name = geodata['continent_name']
+    if geodata['country_name']:
+        registeractivity.country_name = geodata['country_name']
+    if geodata['region_name']:
+        registeractivity.region_name = geodata['region_name']
+    if geodata['zip']:
+        registeractivity.zip = geodata['zip']
+    if geodata['latitude']:
+        registeractivity.latitude = geodata['latitude']
+    if geodata['longitude']:
+        registeractivity.longitude = geodata['longitude']
     registeractivity.category = producto.category
     registeractivity.shop = producto.shop
     registeractivity.product = producto
@@ -471,6 +499,8 @@ def detalle_product(request,id):
     if producto is not None:
         #registro de actividades
         registeractivity = RegisterActivitySystem()
+        ip = registeractivity.get_client_ip(request)
+        geodata = registeractivity.get_geo_client(ip)
         registeractivity.type = 'view_product'
         if request.user.is_authenticated:
             registeractivity.user = request.user
@@ -479,8 +509,20 @@ def detalle_product(request,id):
         'producto__id':producto.id,
         'producto__shop__name':producto.shop.name,
         'producto__shop__id':producto.shop.id,
-        'ip':registeractivity.get_client_ip(request),
+        'ip':ip,
         }
+        if geodata['continent_name']:
+            registeractivity.continent_name = geodata['continent_name']
+        if geodata['country_name']:
+            registeractivity.country_name = geodata['country_name']
+        if geodata['region_name']:
+            registeractivity.region_name = geodata['region_name']
+        if geodata['zip']:
+            registeractivity.zip = geodata['zip']
+        if geodata['latitude']:
+            registeractivity.latitude = geodata['latitude']
+        if geodata['longitude']:
+            registeractivity.longitude = geodata['longitude']
         registeractivity.category = producto.category
         registeractivity.shop = producto.shop
         registeractivity.product = producto
@@ -496,6 +538,8 @@ def redirect_view_product(request,id):
 def redirect_view_product_publicity(request,slug,id):
     producto = Product.objects.get(pk=id)
     registeractivity = RegisterActivitySystem()
+    ip = registeractivity.get_client_ip(request)
+    geodata = registeractivity.get_geo_client(ip)
     registeractivity.type = 'click_publicity'
     if request.user.is_authenticated:
         registeractivity.user = request.user
@@ -505,8 +549,20 @@ def redirect_view_product_publicity(request,slug,id):
     'producto__shop__name':producto.shop.name,
     'producto__shop__id':producto.shop.id,
     'template_section':slug,
-    'ip':registeractivity.get_client_ip(request),
+    'ip':ip,
     }
+    if geodata['continent_name']:
+        registeractivity.continent_name = geodata['continent_name']
+    if geodata['country_name']:
+        registeractivity.country_name = geodata['country_name']
+    if geodata['region_name']:
+        registeractivity.region_name = geodata['region_name']
+    if geodata['zip']:
+        registeractivity.zip = geodata['zip']
+    if geodata['latitude']:
+        registeractivity.latitude = geodata['latitude']
+    if geodata['longitude']:
+        registeractivity.longitude = geodata['longitude']
     registeractivity.category = producto.category
     registeractivity.shop = producto.shop
     registeractivity.product = producto
