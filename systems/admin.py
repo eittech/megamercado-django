@@ -10,7 +10,8 @@ class RegisterActivitySystemAdmin(admin.ModelAdmin):
     ('product',admin.RelatedOnlyFieldListFilter))
     list_display = ('type','datet','shop','template_section','category')
     date_hierarchy = 'datet'
-    readonly_fields = ['type','user','data','shop','product','category','template_section']
+    readonly_fields = ['type','user','data','shop','product','category','template_section','location',
+    'continent_name','country_name','region_name','zip','latitude','longitude']
     save_as = True
     save_on_top = True
     change_list_template = 'admin/change_list_register_activity_graph.html'

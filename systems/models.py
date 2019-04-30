@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from products.models import *
+import requests
 # from django.contrib.gis.utils import GeoIP
 
 # Create your models here.
@@ -28,6 +29,15 @@ class RegisterActivitySystem(models.Model):
     template_section = models.TextField(verbose_name="Etique Template",blank=True,null=True,choices=SECTION_SERVICE)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank= True)
     data = models.TextField(verbose_name="Data",null=True, blank= True)
+
+    location = models.TextField(verbose_name="Data",null=True, blank= True)
+    continent_name = models.CharField(verbose_name="continent_name",max_length=150,blank=True,null=True)
+    country_name = models.CharField(verbose_name="country_name",max_length=150,blank=True,null=True)
+    region_name = models.CharField(verbose_name="region_name",max_length=150,blank=True,null=True)
+    zip = models.CharField(verbose_name="zip",max_length=150,blank=True,null=True)
+    latitude = models.CharField(verbose_name="latitude",max_length=150,blank=True,null=True)
+    longitude = models.CharField(verbose_name="longitude",max_length=150,blank=True,null=True)
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True, blank= True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE,null=True, blank= True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True, blank= True)
@@ -41,11 +51,11 @@ class RegisterActivitySystem(models.Model):
         else:
             ip = request.META.get('REMOTE_ADDR')
         return ip
-    # def get_geo_client(self,ip):
-    #     g = GeoIP()
-    #     client_ip = ip
-    #     lat,long = g.lat_lon(client_ip)
-    #     return lat,long
+    def get_geo_client(self,ip):
+        response = requests.get('http://api.ipstack.com/'+ str(ip) +'?access_key=f227eb275ca158bb956a256172e1c998')
+        # response = requests.get('http://freegeoip.net/json/')
+        geodata = response.json()
+        return geodata
     class Meta:
         verbose_name = "Registro de Actividades del Sistema"
         # app_label = ('systems','Sistema')

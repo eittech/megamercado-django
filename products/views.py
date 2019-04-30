@@ -42,13 +42,31 @@ def search(request):
 
     #registro de actividades
     registeractivity = RegisterActivitySystem()
+    ip = registeractivity.get_client_ip(request)
+    geodata = registeractivity.get_geo_client(ip)
+
     registeractivity.type = 'search_text'
     if request.user.is_authenticated:
         registeractivity.user = request.user
     registeractivity.data = {
     'texto':term_q,
-    'ip':registeractivity.get_client_ip(request)}
+    'ip':ip}
+    # if geodatalocation:
+    #     registeractivity.location = geodata
+    if geodata['continent_name']:
+        registeractivity.continent_name = geodata['continent_name']
+    if geodata['country_name']:
+        registeractivity.country_name = geodata['country_name']
+    if geodata['region_name']:
+        registeractivity.region_name = geodata['region_name']
+    if geodata['zip']:
+        registeractivity.zip = geodata['zip']
+    if geodata['latitude']:
+        registeractivity.latitude = geodata['latitude']
+    if geodata['longitude']:
+        registeractivity.longitude = geodata['longitude']
     registeractivity.save()
+    registeractivity.get_geo_client(ip)
 
     #validacion de productos asociados a tiendas con contratos vijentes
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
