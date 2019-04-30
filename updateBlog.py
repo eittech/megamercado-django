@@ -69,22 +69,27 @@ for url in source:
                     blog.page_source = url.page
                 # page_source=url.page)
                 blogexist = Blog.objects.filter(title=entry.title).first()
+                enviar = False
                 if blogexist:
                     print('- ya existe el post en la base de datos')
                 else:
                     blog.save()
+                    enviar = True
                     print('> post agregado')
             except:
                 print('- error al guardar el post')
 
             try:
-                subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
-                text_content = contenido
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-                # msg.attach_alternative(msg_html, "text/html")
-                msg.send()
-                num_post_add = num_post_add + 1
-                print('> post enviado.')
+                if enviar:
+                    subject, from_email, to = entry.title, 'contacto@comparagrow.cl', 'ajj8s5j@comparagrow.cl'
+                    text_content = contenido
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    # msg.attach_alternative(msg_html, "text/html")
+                    msg.send()
+                    num_post_add = num_post_add + 1
+                    print('> post enviado.')
+                else:
+                    print('> post no enviado')
             except:
                 print('- registro no agregado')
     else:
