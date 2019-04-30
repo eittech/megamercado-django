@@ -6,8 +6,7 @@ class RegisterActivitySystemAdmin(admin.ModelAdmin):
     list_filter = ('type','template_section','country_name','region_name',
     ('user',admin.RelatedOnlyFieldListFilter),
     ('shop',admin.RelatedOnlyFieldListFilter),
-    ('category',admin.RelatedOnlyFieldListFilter),
-    ('product',admin.RelatedOnlyFieldListFilter))
+    ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('type','datet','shop','template_section','category')
     date_hierarchy = 'datet'
     readonly_fields = ['type','user','data','shop','product','category','template_section','location',
