@@ -17,6 +17,28 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
     path('', views.home, name='home_view'),
     path('porto', views.homeporto, name='home_porto'),
+
+    #test mobile
+    path('index.html', views.index_mobile, name='mobile'),
+    path('pages/shop.html',views.shop_mobile,name='shop'),
+    path('pages/profile.html',views.profile_mobile,name='profile'),
+    path('pages/ad_detail.html',views.ad_detail_mobile,name='ad_detail'),
+    path('pages/ad_detail_user.html',views.ad_detail_user_mobile,name='ad_detail_user'),
+    path('pages/add_ad.html',views.add_ad_mobile,name='add_ad'),
+    path('pages/pages.html',views.pages_mobile,name='pages'),
+    path('pages/walk.html',views.walk_mobile,name='walk'),
+    path('pages/login.html',views.login_mobile,name='login'),
+    path('pages/signup.html',views.signup_mobile,name='signup'),
+    path('pages/categories.html',views.categories_mobile,name='categories'),
+    path('pages/sellers.html',views.sellers_mobile,name='sellers'),
+    path('pages/404.html',views.error_mobile,name='404'),
+
+
+
+
+
+    #end test mobile
+
     path('blank', views.home_blank, name='home_blank'),
     path('login', views.login_front, name='login'),
     path('register', views.register_front, name='register'),
@@ -25,6 +47,7 @@ urlpatterns = [
     path('testing', views.testing, name='recoveryView'),
 
     path('logout', views.logout_front, name='logout'),
+
     path('profile', views.profile, name='logout'),
     path('profile/change/pwd', views.changePassword, name='pwd'),
     path('scraping', views.scraping, name='scraping'),

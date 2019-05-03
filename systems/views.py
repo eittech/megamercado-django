@@ -44,7 +44,54 @@ from systems.actionSystem import *
 #     except:
 #         print('error')
 #     print('finalizo el proceso')
+#test mobile
+def index_mobile(request):
+    productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    productos_ur = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    return render(request, 'comparagrow/mobile/index.html',{
+    'productos_cd':productos_cd,
+    'productos_ur':productos_ur,
+    'productos_ci':productos_ci
+    })
 
+def profile_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/profile.html')
+
+def shop_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/shop.html')
+
+def ad_detail_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/ad_detail.html')
+
+def ad_detail_user_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/ad_detail_user.html')
+
+def add_ad_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/add_ad.html')
+
+def pages_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/pages.html')
+
+def walk_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/walk.html')
+
+def login_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/login.html')
+
+def signup_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/signup.html')
+
+def categories_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/categories.html')
+
+def sellers_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/sellers.html')
+
+def error_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/404.html')
+
+#end test mobile
 
 
 # Create your views here.

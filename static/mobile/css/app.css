@@ -25,13 +25,46 @@ Template:		Bright - Mobile Template For Classified Ads
 /*===============================================*/
 /* 01. GENERAL	 						    	 */
 /*===============================================*/
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/static/font/web/averta-regular.woff2) format("woff2"), url(/static/font/web/averta-regular.woff) format("woff")
+}
 
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 600;
+    src: url(/static/font/web/averta-semibold.woff2) format("woff2"), url(/static/font/web/averta-semibold.woff) format("woff")
+}
+
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 700;
+    src: url(/static/font/web/averta-bold.woff2) format("woff2"), url(/static/font/web/averta-bold.woff) format("woff")
+}
+
+@font-face {
+    font-family: Averta;
+    font-style: normal;
+    font-weight: 300;
+    src: url(/static/font/web/averta-light.woff2) format("woff2"), url(/static/font/web/averta-light.woff) format("woff")
+}
+
+@font-face {
+    font-family: Schnyder;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/static/font/web/schnyder-regular.woff2) format("woff2"), url(/static/font/web/schnyder-regular.woff) format("woff")
+}
 body {
 	background: #fff;
 }
 
 .ios body {
-    font-family: 'Montserrat', sans-serif;
+  font-family: Averta, sans-serif;;
 	color: #000;
 	background: #fff;
 	line-height: 1.4;
@@ -159,7 +192,9 @@ img {
 }
 
 .title-section h3 {
-	font-size: 18px;
+	font-size: 16px;
+	font-weight: 300;
+
 }
 
 .title-page-with-link,
@@ -170,15 +205,15 @@ img {
 }
 
 .section .item-title {
-	font-size: 12px;
-	font-weight: 700;
+	font-size: 10px;
+	/* font-weight: 700; */
 	color: #000000;
 	margin-top: 5px;
 }
 
 .ios .section .item-title a {
 	color: #000000;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .section .item-infos {
@@ -327,7 +362,7 @@ img {
 
 .ios .tabbar.toolbar-top a.tab-link-active{
 	border-bottom: 2px solid #DDDDDD;
-	font-weight: 700;	
+	font-weight: 700;
 }
 
 /*===============================================*/
@@ -339,7 +374,7 @@ img {
 }
 
 .ios .profile-information .item-text {
-	
+
 	font-size: 12px;
 }
 
@@ -444,7 +479,7 @@ img {
     padding-right: 0px;
 }
 
-.ios .list .item-inner.forgot-password a { 
+.ios .list .item-inner.forgot-password a {
     color: #6d6d72;
 }
 

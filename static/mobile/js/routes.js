@@ -14,8 +14,8 @@ var routes = [
   },
   // Profile page
   {
-    path: '/profile',
-    url: './profile',
+    path: '/profile/',
+    url: './pages/profile.html',
     name: 'profile',
   },
   // AD Detail
@@ -76,5 +76,6 @@ var routes = [
   {
     path: '(.*)',
     url: './pages/404.html',
+    // url: './pages/perfil.html',
   },
 ];

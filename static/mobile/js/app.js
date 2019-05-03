@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 // Dom7
 var $ = Dom7;
 
@@ -6,7 +6,9 @@ var $ = Dom7;
 var app = new Framework7({
   root: '#app',
   theme: 'ios',
-  routes: routes
+  routes: routes,
+  cache: false,
+  cacheDuration: 0
 });
 
 var range = app.range.create({
