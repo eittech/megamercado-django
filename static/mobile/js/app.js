@@ -77,6 +77,7 @@ $$(document).on("click", "#btn_category", function(){
 
 $$(document).on('page:init', '.page[data-name="products"]', function (e) {
   console.log('page init product');
+  app.preloader.hide();
 });
 
 $$(document).on("click", "#btn_category", function(){
@@ -119,7 +120,7 @@ $$(document).on("submit", "#form-search", function(e){
 
   // d = $.param( formData );
   console.log(url_get);
-
+  app.preloader.show();
   app.router.navigate("/products/"+url_get);
   // app.router.navigate(
   // {
