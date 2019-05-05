@@ -34,9 +34,15 @@ urlpatterns = [
     path('pages/404.html',views.error_mobile,name='404'),
 
 
+    #rest api service
+    path('remote/login', views.login_api,name='remotelogin'),
+    path('remote/sampleapi', views.sample_api),
+    path('pages/products.html',views.products_mobile,name='products'),
+    
+    #https://medium.com/quick-code/token-based-authentication-for-django-rest-framework-44586a9a56fb
 
-
-
+    #rest api service web
+    # path('remote/lists/product/great', views.lists_product_great,name='remotelogin'),
     #end test mobile
 
     path('blank', views.home_blank, name='home_blank'),

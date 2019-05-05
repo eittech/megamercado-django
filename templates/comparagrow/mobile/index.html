@@ -11,13 +11,14 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="default">
 		<meta name="theme-color" content="#f44336">
 		<meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:">
-		<title>Bright</title>
+		<title>ComparaGrow.cl</title>
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
 		<link rel="stylesheet" href="{% static 'mobile/css/framework7.ios.css' %}">
 		<link rel="stylesheet" href="{% static 'mobile/css/icons.css' %}"">
 		<link rel="stylesheet" href="{% static 'mobile/css/app.css' %}"">
 		<link rel="apple-touch-icon" href="{% static 'mobile/img/f7-icon-square.png' %}"">
-		<link rel="icon" href="{% static 'mobile/img/f7-icon.png' %}"">
+		<!-- <link rel="icon" href="{% static 'mobile/img/f7-icon.png' %}""> -->
+		<link rel="icon" type="image/png" href="/static/img/lupa.png">
 	</head>
 	<body class="color-theme-pink">
 		<div id="app">
@@ -29,115 +30,55 @@
 				</div>
 			</div>
 
-			<div class="panel panel-right panel-cover panel-filter">
-				<div class="navbar"><div class="navbar-inner sliding">
-					<div class="title">Filter</div></div>
-				</div>
-				<div class="page">
-					<div class="page-content">
-						<div class="block">
-							<div class="list no-hairlines">
-								<ul>
-									<li class="item-content item-input">
-										<div class="item-inner">
-											<div class="item-input-wrap">
-												<input placeholder="Enter a keyword" class="" type="text">
-												<span class="input-clear-button"></span>
-											</div>
-										</div>
-									</li>
-									<li class="item-content item-input">
-										<div class="item-inner">
-											<div class="item-input-wrap input-dropdown-wrap">
-												<select class="input-with-value">
-													<option value="cat1">Electronics</option>
-													<option value="cat2">Women's Clothes</option>
-												</select>
-											</div>
-										</div>
-									</li>
-									<li class="item-content item-input">
-										<div class="item-inner">
-											<div class="item-input-wrap input-dropdown-wrap">
-												<select class="input-with-value">
-													<option value="loc1">Location 1</option>
-													<option value="loc2">Location 2</option>
-												</select>
-											</div>
-										</div>
-									</li>
-									<li class="item-content item-input">
-										<div class="item-inner">
-											<div class="item-input-wrap">
-
-												<div class="item-price-detail">
-													<p>Item price</p>
-													<p>
-														<span class="price-min">100$</span>
-														 -
-														<span class="price-max">500$</span>
-													</p>
-												</div>
-
-												<div class="range-price range-slider range-slider-init" data-dual="true" data-min="0" data-max="500" data-step="10" data-value-left="100" data-value-right="500"></div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<button class="col button button-fill color-black">Apply Filter</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<!-- probando donde inicio -->
 			<div class="view view-main view-init ios-edges" data-url="/">
-				<div class="page no-navbar">
+				<!-- probando donde inicia -->
+				<div class="page">
+					<!--  probando donde inicia-->
 
-					<div class="toolbar tabbar tabbar-labels">
-						<div class="toolbar-inner">
-							<a href="/" class="tab-link tab-link-active">
-								<i class="material-icons">search</i>
-								<span class="tabbar-label">Buscar</span>
-							</a>
-							<a href="/shop/" class="tab-link">
-								<i class="material-icons">visibility</i>
-								<span class="tabbar-label">Mi grow</span>
-							</a>
-							<a href="/add_ad/" class="tab-link">
-								<i class="material-icons">favorite</i>
-								<span class="tabbar-label">Favoritos</span>
-							</a>
-							<a href="/profile/" class="tab-link">
-								<i class="material-icons">grade</i>
-								<span class="tabbar-label">Alertas</span>
-							</a>
-							<a href="/pages/" class="tab-link">
-								<i class="material-icons">pages</i>
-								<span class="tabbar-label">Mas</span>
-							</a>
-						</div>
-					</div>
+					{% include 'comparagrow/mobile/pages/com_header.html' %}
 
 					<div class="page-content">
-						<div class="block block-no-padding">
+						<!-- <div class="section no-border">
+							<div class="section-content">
+								<a class="item-link smart-select smart-select-init" data-open-in="sheet">
+									<select name="mac-windows">
+									  <option value="mac" selected>Mac</option>
+									  <option value="windows">Windows</option>
+									</select>
+									<div class="item-content">
+									  <div class="item-inner">
+									    <div class="item-title">Categorias</div>
+									  </div>
+									</div>
+								</a>
+							</div>
+						</div> -->
+						<div class="block block-no-padding" style="margin-top:2px;">
 							<div class="title-page">
 								<div class="title-page-with-link">
 									<h1 class="" style="
-    display: flex;color: #8a8585;
-"><img src="/static/img/lupa.png" style="height: 35px;margin-right: 4px;">Buscador</h1>
+    display: flex;color: #672d93;
+"><img src="/static/img/logo.png" style="height: 50px;"></h1>
+									{% if user.is_authenticated %}
 									<a href="/profile/" class="tab-link">
 										<i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
 										<!-- <span class="tabbar-label">Profile</span> -->
 									</a>
+									{% else %}
+									<a href="/login/" class="tab-link">
+										<i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+										<!-- <span class="tabbar-label">Profile</span> -->
+									</a>
+									{% endif %}
 								</div>
 							</div>
 							<!-- Search -->
 							<div class="searchbar-page">
-							<form class="searchbar">
+							<form class="searchbar" id="form-search">
 								<div class="searchbar-input-wrap">
 									<input placeholder="Busca miles de productos al mejor precio" class="" type="search" style="border: 1px solid;
-    border-color: #01b22c;">
+    border-bottom:2px solid #01b22c; border-left:none; border-right:none; border-top:none; border-radius: inherit;" name="q">
 									<i class="searchbar-icon"></i>
 									<span class="input-clear-button"></span>
 								</div>
@@ -148,25 +89,18 @@
 
 							<div class="section no-border">
 								<div class="section-content">
-									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="3" class="swiper-container swiper-init swiper-container-horizontal">
 										<div class="swiper-wrapper">
 											<div class="swiper-slide">
 												<a href="#">
 
-														<button class="col button button-fill color-black" style="
+														<button id="btn_category" class="col button button-fill color-black" style="
 							background: #672d93;
 							">Categorias</button>
 
 												</a>
 											</div>
-											<div class="swiper-slide">
-												<a href="#">
-														<button class="col button button-fill color-black" style="
-							background: #672d93;
-							">Destacados</button>
 
-												</a>
-											</div>
 											<div class="swiper-slide">
 												<a href="#">
 														<button class="col button button-fill color-black" style="
@@ -213,142 +147,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- Categories Section -->
-							<!-- <div class="section">
-								<div class="title-section">
-									<div class="title-section-with-link">
-										<h3>Browse categories</h3>
-										<a href="/categories/">See all <i class="f7-icons">chevron_right</i></a>
-									</div>
-								</div>
-								<div class="section-content">
-									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="3" class="swiper-container swiper-init swiper-container-horizontal">
-										<div class="swiper-wrapper">
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat1.png" alt="cat1"></a>
-												<div class="item-title"><a href="#">Vehicles</a></div>
-												<div class="item-infos"><a href="#">205 Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat2.png" alt="cat2"></a>
-												<div class="item-title"><a href="#">Electronics</a></div>
-												<div class="item-infos"><a href="#">13k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat3.png" alt="cat3"></a>
-												<div class="item-title"><a href="#">Sports</a></div>
-												<div class="item-infos"><a href="#">514 Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat4.png" alt="cat3"></a>
-												<div class="item-title"><a href="#">Beauty</a></div>
-												<div class="item-infos"><a href="#">1.2k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat5.png" alt="cat5"></a>
-												<div class="item-title"><a href="#">Home</a></div>
-												<div class="item-infos"><a href="#">1k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat6.png" alt="cat6"></a>
-												<div class="item-title"><a href="#">Jewelry</a></div>
-												<div class="item-infos"><a href="#">1k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat7.png" alt="cat7"></a>
-												<div class="item-title"><a href="#">Clothes</a></div>
-												<div class="item-infos"><a href="#">1k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat8.png" alt="cat8"></a>
-												<div class="item-title"><a href="#">Kids</a></div>
-												<div class="item-infos"><a href="#">1k Ads</a></div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/cat9.png" alt="cat9"></a>
-												<div class="item-title"><a href="#">Toys</a></div>
-												<div class="item-infos"><a href="#">1k Ads</a></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
 
-							<!-- Top ADS Section -->
-							<!-- <div class="section">
-								<div class="title-section">
-									<div class="title-section-with-link">
-										<h3>Top Ads in Sports</h3>
-										<a href="/shop/">See all <i class="f7-icons">chevron_right</i></a>
-									</div>
-								</div>
-								<div class="section-content">
-									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="2" class="swiper-container swiper-init swiper-container-horizontal">
-										<div class="swiper-wrapper">
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/top1.png" alt="top1"></a>
-												<div class="item-title"><a href="/ad_detail/">Brand Crop Tank Top & Leggings Set </a></div>
-												<div class="item-infos">US $200</div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/top2.png" alt="top2"></a>
-												<div class="item-title"><a href="/ad_detail/">Girls Cut and Sew Letter Print Pants</a></div>
-												<div class="item-infos">US $80</div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/top3.png" alt="top2"></a>
-												<div class="item-title"><a href="/ad_detail/">Rainbow Striped Tee & Sweatpants Co-Ord</a></div>
-												<div class="item-infos">US $80</div>
-											</div>
-											<div class="swiper-slide">
-												<a href="#"><img src="./img/top4.png" alt="top2"></a>
-												<div class="item-title"><a href="/ad_detail/">Snap-Stud Panel Side Crop Top & Sweatpants Set</a></div>
-												<div class="item-infos">US $80</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
-
-							<!-- Top ADS Section -->
-							<!-- <div class="section">
-								<div class="title-section">
-									<div class="title-section-with-link">
-										<h3>Trending Ads</h3>
-										<a href="/shop/">See all <i class="f7-icons">chevron_right</i></a>
-									</div>
-								</div>
-								<div class="section-content">
-									<div class="row">
-										<div class="col">
-											<a href="/ad_detail/"><img src="./img/product1.png" alt="product1"></a>
-											<div class="item-category"><a href="#">Electronics  <i class="f7-icons">chevron_right</i></a></div>
-											<div class="item-title"><a href="/ad_detail/">Fujifilm instax mini 9 Instant Film Camera</a></div>
-											<div class="item-infos">US $102</div>
-										</div>
-										<div class="col">
-											<a href="/ad_detail/"><img src="./img/product2.png" alt="product2"></a>
-											<div class="item-category"><a href="#">Women's Clothes  <i class="f7-icons">chevron_right</i></a></div>
-											<div class="item-title"><a href="/ad_detail/">adidas women Blue Soft Trainers</a></div>
-											<div class="item-infos">US $80</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col">
-											<a href="/ad_detail/"><img src="./img/product3.png" alt="product3"></a>
-											<div class="item-category"><a href="#">Electronics  <i class="f7-icons">chevron_right</i></a></div>
-											<div class="item-title"><a href="/ad_detail/">Wireless headphones with Bluetooth</a></div>
-											<div class="item-infos">US $22</div>
-										</div>
-										<div class="col">
-											<a href="/ad_detail/"><img src="./img/product4.png" alt="product4"></a>
-											<div class="item-category"><a href="#">Electronics  <i class="f7-icons">chevron_right</i></a></div>
-											<div class="item-title"><a href="/ad_detail/">Canon Eos 550 Photo with 22 Pixels</a></div>
-											<div class="item-infos">US $650</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
 
 							<!-- Seller Section -->
 							<div class="section sellers-section">
@@ -371,29 +170,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
 
-							<!-- <div class="section sellers-section">
-								<div class="title-section">
-									<div class="title-section-with-link">
-										<h3>ULTIMAS BUSQUEDAS</h3>
-										<a href="/sellers/">See all <i class="f7-icons">chevron_right</i></a>
-									</div>
-								</div>
-								<div class="section-content">
-									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
-										<div class="swiper-wrapper">
-											{% for item in productos_ur %}
-											<div class="swiper-slide">
-												<a href="#"><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
-												<div class="item-title"><a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
-												<div class="item-infos">$ {{ item.total|floatformat:0|intcomma }}</div>
-											</div>
-											{% endfor %}
-										</div>
-									</div>
-								</div>
-							</div> -->
+
 
 							<div class="section sellers-section">
 								<div class="title-section">
@@ -415,7 +193,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
 
 							<div class="section sellers-section">
 								<div class="title-section">
@@ -437,7 +214,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
 
 							<!-- brands Section -->
 

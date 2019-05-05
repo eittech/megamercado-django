@@ -1,96 +1,81 @@
 "use strict";
 var routes = [
   // Index page
+
   {
-    path: '/google/',
-    url: './oauth/login/google-oauth2/',
-    name: 'google',
+    path: '/',
+    url: '/oauth/login/google-oauth2/',
+    name: 'home',
   },
   {
     path: '/',
-    url: './index.html',
+    url: 'http://comparatest.cl/index.html',
     name: 'home',
-    options: {
-      animate: true,
-      ignoreCache:true,
-      reloadCurrent:true,
-    },
   },
   // About page
   {
     path: '/shop/',
-    url: './pages/shop.html',
+    url: 'http://comparatest.cl/pages/shop.html',
     name: 'shop',
-  },
-  //products
-  {
-    path: '/products/',
-    url: './pages/products.html',
-    name: 'products',
-    options: {
-      animate: true,
-      ignoreCache:true,
-      reloadCurrent:true,
-    },
   },
   // Profile page
   {
     path: '/profile/',
-    url: './pages/profile.html',
+    url: 'http://comparatest.cl/pages/profile.html',
     name: 'profile',
   },
   // AD Detail
   {
     path: '/ad_detail/',
-    url: './pages/ad_detail.html',
+    url: 'http://comparatest.cl/pages/ad_detail.html',
     name: 'ad_detail',
   },
   // AD Detail user
   {
     path: '/ad_detail_user/',
-    url: './pages/ad_detail_user.html',
+    url: 'http://comparatest.cl/pages/ad_detail_user.html',
     name: 'ad_detail_user',
   },
   // Add Ad
   {
     path: '/add_ad/',
-    url: './pages/add_ad.html',
+    url: 'http://comparatest.cl/pages/add_ad.html',
     name: 'add_ad',
   },
   // Pages
   {
     path: '/pages/',
-    url: './pages/pages.html',
+    url: 'http://comparatest.cl/pages/pages.html',
     name: 'pages',
   },
   // walk
   {
     path: '/walk/',
-    url: './pages/walk.html',
+    url: 'http://comparatest.cl/pages/walk.html',
     name: 'walk',
   },
   // Login
   {
     path: '/login/',
-    url: './pages/login.html',
+    url: 'http://comparatest.cl/pages/login.html',
     name: 'login',
   },
   // Sign up
   {
     path: '/signup/',
-    url: './pages/signup.html',
+    url: 'http://comparatest.cl/pages/signup.html',
     name: 'signup',
   },
   // categories
   {
     path: '/categories/',
-    url: './pages/categories.html',
+    url: 'http://comparatest.cl/pages/categories.html',
     name: 'categories',
   },
   // Sellers
   {
     path: '/sellers/',
-    url: './pages/sellers.html',
+    url: 'http://comparatest.cl/pages/sellers.html',
     name: 'categories',
   },
   // Default route (404 page). MUST BE THE LAST

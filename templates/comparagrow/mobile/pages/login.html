@@ -1,20 +1,31 @@
-<div class="page no-navbar login-form">
+<div class="page login-form">
+	<div class="navbar">
+		<div class="navbar-inner sliding">
+			<div class="left">
+				<a href="/" >
+					<i class="icon icon-back"></i>
+					<span class="ios-only">Inicio</span>
+				</a>
+			</div>
+			<div class="title"></div>
+		</div>
+	</div>
 	<div class="page-content">
-		
+
 		<div class="block">
-		
+
 		<div class="title-page">
 			<div class="title-page-with-link">
-				<h1>Login to Bright</h1>
+				<h1 style="color:#672d93;">Iniciar sesión</h1>
 			</div>
 		</div>
-			
+
 		<div class="list no-hairlines">
 			<ul>
 				<li class="item-content item-input">
 					<div class="item-inner">
 						<div class="item-input-wrap">
-							<input placeholder="Email Adresse" class="" type="email">
+							<input placeholder="Email" class="" type="email">
 							<span class="input-clear-button"></span>
 						</div>
 					</div>
@@ -22,30 +33,42 @@
 				<li class="item-content item-input">
 					<div class="item-inner">
 						<div class="item-input-wrap">
-							<input placeholder="Password" class="" type="password">
+							<input placeholder="Contraseña" class="" type="password">
 							<span class="input-clear-button"></span>
 						</div>
 					</div>
 				</li>
 				<li class="item-content item-input">
 					<div class="item-inner forgot-password">
-						<a href="#">Forgot Password?</a>
+						<a href="#">Recuperar clave?</a>
 					</div>
 				</li>
 			</ul>
 		</div>
-		
-		<a href="/" class="col button button-fill color-black">Login in</a>
-		
-		<p class="form-login-annonce">
+
+		<a href="/" class="col button button-fill" style="background:#672d93;margin-bottom:2px;">Iniciar Sesión</a>
+		<a href="/google/" class="col button button-fill" style="color:#000;background:#fff;border:.1rem solid #f6f6f6!important;margin-bottom:2px;">
+			<img src="/static/img/google-logo.png" style="height: 14px;    position: absolute;
+    top: 6px;
+    left: 38%;">
+				Google
+		</a>
+		<a href="{% url "social:begin" "facebook" %}" class="col button button-fill" style="background:#3b5998;margin-bottom:2px;">
+			<img src="/static/img/facebook-f.png" style="height: 14px;    position: absolute;
+    top: 6px;
+    left: 35%;">
+			Facebook
+		</a>
+
+		<!-- <p class="form-login-annonce">
 			<span>NEW!</span> Quick login with FaceID
 			<img src="./img/faceid.png" alt="faceid">
-		</p>
-		
+		</p> -->
+
 		<p class="form-login-footer">
-			Don't have an account? <a href="/signup/">Sign up</a>
+			No tienes cuenta? <a href="/signup/">Registrate</a>
 		</p>
-		
+
 		</div>
 	</div>
 </div>

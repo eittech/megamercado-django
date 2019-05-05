@@ -1,3 +1,6 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
 <div class="page">
 	<div class="navbar">
 		<div class="navbar-inner sliding">
@@ -11,81 +14,53 @@
 		</div>
 	</div>
 	<div class="page-content">
-		<div class="block block-list-ads">
-			<div class="title-page">
-				<div class="title-page-with-link">
-					<h1>Categories</h1>
-				</div>
-			</div>
+		<div class="list" style="margin:0 0;">
+			<ul>
+				{% listado as listado_producto %}
+					{% for genre,structure in listado_producto|tree_info %}
+					{% if genre.level == 0 %}
+					<li >
+						<a  href="/productos/categorias/{{ genre.slug }}" style="font-weight: 500;letter-spacing: 1px;">
+							{{ genre.name }}
+						</a>
+						{% for item1 in genre.slug|menulevelone:"1" %}
+							{% if forloop.first %}
+								<ul>
+									<li>
+							{% endif %}
 
-			<!-- Search -->
-			<div class="searchbar-page page-no-padding">
-			<form class="searchbar">
-				<div class="searchbar-input-wrap">
-					<input placeholder="Search for Category" type="search">
-					<i class="searchbar-icon"></i>
-					<span class="input-clear-button"></span>
-				</div>
-			</form>
-			</div>
-			<!-- End Search -->
+												<!-- <span class="dropdown-mega-sub-title"> -->
+												<a style="font-size: 14px;padding: 0;" href="/productos/categorias/{{ item1.slug }}">{{ item1.name }} </a>
+												<!-- </span> -->
+												<ul>
+													{% for item2 in item1.slug|menulevelone:"2" %}
+														<li>
+															<a href="/productos/categorias/{{ item2.slug }}">
+																<b> <i style="color:#01b22c;" class="fas fa-angle-right"></i></b>
+																{{ item2.name }} ({{ item2.id|countproductscategory }})</a>
+														</li>
+														{% for item3 in item2.slug|menulevelone:"3" %}
+															<li>
+																<a style="padding-left: 20px;" href="/productos/categorias/{{ item3.slug }}">
+																	<b> <i style="color:#672d93;" class="fas fa-angle-double-right"></i></b>
+																	{{ item3.name }} ({{ item3.id|countproductscategory }})</a>
+															</li>
+														{% endfor %}
+													{% endfor %}
+												</ul>
 
-			<div class="section no-border">
-				<div class="section-content">
-					<div class="row">
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat1.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Vehicles</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat2.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Electronics</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat3.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Sports</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat4.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Beauty</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat6.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Jewelry</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat5.png" alt="cat1"></a>
-							<div class="item-title"><a href="#">Home</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat7.png" alt="cat7"></a>
-							<div class="item-title"><a href="#">Clothes</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat8.png" alt="cat8"></a>
-							<div class="item-title"><a href="#">Kids</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-						<div class="col">
-							<a href="#"><img src="/static/mobile/img/cat9.png" alt="cat9"></a>
-							<div class="item-title"><a href="#">Toys</a></div>
-							<div class="item-infos"><a href="#">205 Ads</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
 
+								{% if forloop.last %}
+
+									</li>
+								</ul>
+								{% endif %}
+						{% endfor %}
+
+					</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
 		</div>
 
 	</div>

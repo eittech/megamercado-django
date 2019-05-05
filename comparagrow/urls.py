@@ -23,6 +23,8 @@ from django.conf.urls.static import static
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'products', views.ProductViewSet)
+
 
 admin.site.site_header = "Comparagrow <h1>Admin</h1>"
 admin.site.site_title = "UMSRA Admin Portal"

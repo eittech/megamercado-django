@@ -3,9 +3,9 @@
 
 	<div class="toolbar tabbar toolbar-top">
       <div class="toolbar-inner">
-        <a href="#profile" class="tab-link tab-link-active">Profile</a>
-        <a href="#information" class="tab-link">Informations</a>
-        <a href="#ads" class="tab-link">My Ads</a>
+        <a href="#profile" class="tab-link tab-link-active">Perfil</a>
+        <a href="#information" class="tab-link">Datos Personales</a>
+        <!-- <a href="#ads" class="tab-link">My Ads</a> -->
       </div>
     </div>
 
@@ -17,7 +17,16 @@
 					<ul>
 						<li>
 						<div class="item-content">
-							<div class="item-media"><img src="./img/profile.png" width="80" alt="profile"></div>
+							<div class="item-media">
+								{% if customer.image %}
+		            <img src="/media/{{ customer.image }}" width="80" id="image_customer">
+		            {% else %}
+								<!-- <img src="./img/profile.png" width="80" alt="profile"> -->
+		            <img src="/static/porto/img/avatars/avatar.jpg" width="80" id="image_customer">
+		            {% endif %}
+
+
+							</div>
 							<div class="item-inner">
 								<div class="item-title-row">
 									<div class="item-title">Mr. Bright</div>
@@ -139,7 +148,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="ads" class="page-content tab">
+		<!-- <div id="ads" class="page-content tab">
 			<div class="block block-list-ads">
 				<div class="section section-with-toolbar-top no-border">
 					<div class="section-content">
@@ -202,10 +211,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
-	<div class="toolbar tabbar tabbar-labels">
+	<!-- <div class="toolbar tabbar tabbar-labels">
 		<div class="toolbar-inner">
 			<a href="/" class="tab-link">
 				<i class="material-icons">home</i>
@@ -228,7 +237,9 @@
 				<span class="tabbar-label">Pages</span>
 			</a>
 		</div>
-	</div>
+	</div> -->
+	{% include 'comparagrow/mobile/pages/com_header.html' %}
+	
 
 
 </div>

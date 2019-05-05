@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from django_user_agents.utils import get_user_agent
 from django.contrib.auth import authenticate, login
+
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+from rest_framework.response import Response
+
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from customers.models import Customer
@@ -19,6 +31,33 @@ from services.models import *
 
 from django.contrib import auth
 from systems.actionSystem import *
+
+from django.db.models import Count
+from django.core.paginator import Paginator
+
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def login_api(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'},
+                        status=HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key},
+                    status=HTTP_200_OK)
+
+@csrf_exempt
+@api_view(["GET"])
+def sample_api(request):
+    data = {'sample_data': 123}
+    return Response(data, status=HTTP_200_OK)
 
 # from django.dispatch import *
 # from django.db.models.signals import pre_save
@@ -44,8 +83,13 @@ from systems.actionSystem import *
 #     except:
 #         print('error')
 #     print('finalizo el proceso')
+
+#rest api service web
+
+
 #test mobile
 def index_mobile(request):
+    print(request)
     productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
     productos_ur = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
     productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
@@ -55,10 +99,272 @@ def index_mobile(request):
     'productos_ci':productos_ci
     })
 
+@csrf_exempt
+def search_mobile(request):
+    if request.GET.get('q'):
+        term_q = request.GET.get('q')
+        term_q = term_q.rstrip().lower()
+    else:
+        term_q = ""
+
+    #registro de actividades
+    try:
+        registeractivity = RegisterActivitySystem()
+        ip = registeractivity.get_client_ip(request)
+        geodata = registeractivity.get_geo_client(ip)
+
+        registeractivity.type = 'search_text'
+        if request.user.is_authenticated:
+            registeractivity.user = request.user
+        registeractivity.data = {
+        'texto':term_q,
+        'ip':ip}
+        # if geodatalocation:
+        #     registeractivity.location = geodata
+        if geodata['continent_name']:
+            registeractivity.continent_name = geodata['continent_name']
+        if geodata['country_name']:
+            registeractivity.country_name = geodata['country_name']
+        if geodata['region_name']:
+            registeractivity.region_name = geodata['region_name']
+        if geodata['zip']:
+            registeractivity.zip = geodata['zip']
+        if geodata['latitude']:
+            registeractivity.latitude = geodata['latitude']
+        if geodata['longitude']:
+            registeractivity.longitude = geodata['longitude']
+        registeractivity.save()
+        # registeractivity.get_geo_client(ip)
+    except:
+        print('no se registro actividad')
+
+    #validacion de productos asociados a tiendas con contratos vijentes
+    servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
+    pk_shop = servicecontractshop.values('shop__pk')
+    products_list = Product.objects.filter(category__isnull=False)
+    #busqueda de termino
+    products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
+    #barras laterales
+    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+
+    shops = False
+    shop_list_selected = []
+    if request.GET.getlist('checkbox_shop[]'):
+        for ck in request.GET.getlist('checkbox_shop[]'):
+            shop_list_selected.append(int(ck))
+        try:
+            shops = Shop.objects.filter(pk__in=shop_list_selected)
+        except:
+            shops = False
+    if shops:
+        products_list = products_list.filter(shop__in=shops)
+
+
+    brand_list_selected = []
+    if request.GET.getlist('checkbox_marca[]'):
+        for ck in request.GET.getlist('checkbox_marca[]'):
+            brand_list_selected.append(str(ck))
+    if brand_list_selected:
+        products_list = products_list.filter(brand__in=brand_list_selected)
+    else:
+        brand_list_selected = []
+
+
+    categoria_id = False
+    category_list_selected = []
+    if request.GET.getlist('checkbox_categoria[]'):
+        for ck in request.GET.getlist('checkbox_categoria[]'):
+            category_list_selected.append(int(ck))
+        try:
+            categoria_id = Category.objects.filter(pk__in=category_list_selected)
+        except:
+            categoria_id = False
+    if categoria_id:
+        products_list = products_list.filter(category__in=categoria_id)
+
+
+    if request.GET.get('min_price'):
+        min_price = request.GET.get('min_price')
+    else:
+        min_price = None
+    if request.GET.get('max_price'):
+        max_price = request.GET.get('max_price')
+    else:
+        max_price = None
+    if max_price is not None and min_price is not None:
+        if float(max_price) > float(min_price):
+            products_list = products_list.filter(total__range=(float(min_price), float(max_price)))
+        else:
+            products_list = products_list.filter(total__range=(float(max_price), float(min_price)))
+    else:
+        if max_price is not None:
+            products_list = products_list.filter(total__range=(0, float(max_price)))
+            min_price = ""
+        else:
+            if min_price is not None:
+                products_list = products_list.filter(total__gte=float(min_price))
+                max_price = ""
+            else:
+                max_price = ""
+                min_price = ""
+
+    if request.GET.get('order_by'):
+        order_by = request.GET.get('order_by')
+        if order_by == "min":
+            products_list = products_list.order_by('total')
+        if order_by == "max":
+            products_list = products_list.order_by('-total')
+        if order_by == "dest":
+            products_list = products_list.order_by('total')
+    else:
+        order_by = "dest"
+
+
+
+    paginator = Paginator(products_list, 24)
+    page = request.GET.get('page')
+    if page is not None:
+        if request.is_ajax():
+            template = "comparagrow/buscador.html"
+        else:
+            template = 'comparagrow/mobile/pages/search.html'
+    else:
+        template = 'comparagrow/mobile/pages/search.html'
+    try:
+        products = paginator.get_page(page)
+    except:
+        return redirect('/not_found')
+    # time.sleep(3)
+    return render(request, template, {
+    'products': products,
+    'shop_list_left':shop_list_left,
+    'brand_list_left':brand_list_left,
+    'category_list_left':category_list_left,
+    'max_price':max_price,
+    'min_price':min_price,
+    'term_q':term_q,
+    'category_list_selected':category_list_selected,
+    'brand_list_selected':brand_list_selected,
+    'shop_list_selected':shop_list_selected,
+    'order_by':order_by})
+
+
+@login_required
 def profile_mobile(request):
-    return render(request, 'comparagrow/mobile/pages/profile.html')
+    user = request.user
+    try:
+        customer = Customer.objects.get(user=user)
+    except:
+        customer = None
+    return render(request, 'comparagrow/mobile/pages/profile.html',{'user':user,'customer':customer})
+
+def products_mobile(request):
+    if request.GET.get('q'):
+        term_q = request.GET.get('q')
+        term_q = term_q.rstrip().lower()
+    else:
+        term_q = ""
+
+    #registro de actividades
+    try:
+        registeractivity = RegisterActivitySystem()
+        ip = registeractivity.get_client_ip(request)
+        geodata = registeractivity.get_geo_client(ip)
+
+        registeractivity.type = 'search_text'
+        if request.user.is_authenticated:
+            registeractivity.user = request.user
+        registeractivity.data = {
+        'texto':term_q,
+        'ip':ip}
+        # if geodatalocation:
+        #     registeractivity.location = geodata
+        if geodata['continent_name']:
+            registeractivity.continent_name = geodata['continent_name']
+        if geodata['country_name']:
+            registeractivity.country_name = geodata['country_name']
+        if geodata['region_name']:
+            registeractivity.region_name = geodata['region_name']
+        if geodata['zip']:
+            registeractivity.zip = geodata['zip']
+        if geodata['latitude']:
+            registeractivity.latitude = geodata['latitude']
+        if geodata['longitude']:
+            registeractivity.longitude = geodata['longitude']
+        registeractivity.save()
+        # registeractivity.get_geo_client(ip)
+    except:
+        print('no se registro actividad')
+
+    #validacion de productos asociados a tiendas con contratos vijentes
+    servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
+    pk_shop = servicecontractshop.values('shop__pk')
+    products_list = Product.objects.filter(category__isnull=False)
+    #busqueda de termino
+    products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
+    #barras laterales
+    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    print(products_list)
+    return render(request, 'comparagrow/mobile/pages/products.html',{
+    'products':products_list,
+    'shop_list_left':shop_list_left,
+    'category_list_left':category_list_left,
+    'brand_list_left':brand_list_left
+    })
 
 def shop_mobile(request):
+    if request.GET.get('q'):
+        term_q = request.GET.get('q')
+        term_q = term_q.rstrip().lower()
+    else:
+        term_q = ""
+
+    #registro de actividades
+    try:
+        registeractivity = RegisterActivitySystem()
+        ip = registeractivity.get_client_ip(request)
+        geodata = registeractivity.get_geo_client(ip)
+
+        registeractivity.type = 'search_text'
+        if request.user.is_authenticated:
+            registeractivity.user = request.user
+        registeractivity.data = {
+        'texto':term_q,
+        'ip':ip}
+        # if geodatalocation:
+        #     registeractivity.location = geodata
+        if geodata['continent_name']:
+            registeractivity.continent_name = geodata['continent_name']
+        if geodata['country_name']:
+            registeractivity.country_name = geodata['country_name']
+        if geodata['region_name']:
+            registeractivity.region_name = geodata['region_name']
+        if geodata['zip']:
+            registeractivity.zip = geodata['zip']
+        if geodata['latitude']:
+            registeractivity.latitude = geodata['latitude']
+        if geodata['longitude']:
+            registeractivity.longitude = geodata['longitude']
+        registeractivity.save()
+        # registeractivity.get_geo_client(ip)
+    except:
+        print('no se registro actividad')
+
+    #validacion de productos asociados a tiendas con contratos vijentes
+    servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
+    pk_shop = servicecontractshop.values('shop__pk')
+    products_list = Product.objects.filter(category__isnull=False)
+    #busqueda de termino
+    products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
+    #barras laterales
+    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
+    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
+    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    print(products_list)
     return render(request, 'comparagrow/mobile/pages/shop.html')
 
 def ad_detail_mobile(request):

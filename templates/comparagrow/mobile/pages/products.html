@@ -1,0 +1,137 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+
+<div class="page no-navbar" data-name="products">
+
+	{% include 'comparagrow/mobile/pages/com_header.html' %}
+
+	<div class="page-content">
+		<div class="block block-list-ads" style="margin-top:2px;">
+			<div class="title-page">
+				<div class="title-page-with-link">
+					<h1 class="" style="
+display: flex;color: #672d93;
+"><img src="/static/img/logo.png" style="height: 50px;"></h1>
+					{% if user.is_authenticated %}
+					<a href="/profile/" class="tab-link">
+						<i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+						<!-- <span class="tabbar-label">Profile</span> -->
+					</a>
+					{% else %}
+					<a href="/login/" class="tab-link">
+						<i class="material-icons" style="font-size: 40px;color: #01b22c;">input</i>
+						<!-- <span class="tabbar-label">Profile</span> -->
+					</a>
+					{% endif %}
+				</div>
+			</div>
+			<!-- Search -->
+			<div class="searchbar-page">
+			<form class="searchbar" id="form-search">
+				<div class="searchbar-input-wrap">
+					<input placeholder="Busca miles de productos al mejor precio" class="" type="search" style="border: 1px solid;
+border-color: #01b22c;" name="q">
+					<i class="searchbar-icon"></i>
+					<span class="input-clear-button"></span>
+				</div>
+				<div class="row">
+					<div class="col">
+						<h3>Filtros</h3>
+					</div>
+				</div>
+				<div class="list" style="margin:0 0;">
+					<ul>
+						{% if category_list_left %}
+						<li>
+							<a href="#" class="item-link smart-select smart-select-init"  data-searchbar="true" data-searchbar-placeholder="Buscar categoria">
+								<!-- "multiple" attribute for multiple select-->
+								<select name="category" multiple>
+									<!-- options grouped within "optgroup" tag-->
+									<optgroup label="Categorias">
+										{% for categoria in category_list_left %}
+										<option value="{{ categoria.category__pk }}">{{ categoria.category__name }}</option>
+										{% endfor %}
+									</optgroup>
+
+								</select>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title">Categorias</div>
+									</div>
+								</div>
+							</a>
+						</li>
+						{% endif %}
+
+						{% if shop_list_left %}
+						<li>
+							<a href="#" class="item-link smart-select smart-select-init"
+							data-searchbar="true"
+							data-page-back-link-text="regresar"
+							data-open-in="page"
+							data-searchbar-placeholder="Buscar Tienda">
+								<!-- "multiple" attribute for multiple select-->
+								<select name="shop" multiple>
+									<!-- options grouped within "optgroup" tag-->
+									<optgroup label="Tiendas">
+										{% for tiendas in shop_list_left %}
+										<option value="{{ tiendas.shop__pk }}">{{ tiendas.shop__name }}</option>
+										{% endfor %}
+									</optgroup>
+
+								</select>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title">Tiendas</div>
+									</div>
+								</div>
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+				<div class="row" style="margin-top:10px;">
+					<div class="col">
+						<button class="col button button-small button-fill" type="submit" style="
+background: #672d93;
+">Aplicar filtros</button>
+					</div>
+				</div>
+			</form>
+			</div>
+			<!-- End Search -->
+
+			<div class="section no-border">
+				<div class="section-content infinite-scroll-content">
+
+
+						<div class="row" id="row_products">
+							{% for item in products %}
+							<div class="col-50">
+								<a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">
+									<img src="{{ item.id|imagenproducturl:"0" }}" style="height:100px;" alt="product1">
+								</a>
+								<div class="item-category">
+									<a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.category }}<i class="f7-icons">chevron_right</i></a>
+								</div>
+								<div class="item-title">
+									<a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a>
+								</div>
+								<div class="item-infos">
+									$ {{ item.total|floatformat:0|intcomma }}
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+						 <div class="preloader infinite-scroll-preloader"></div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

@@ -1,20 +1,31 @@
-<div class="page no-navbar login-form">
+<div class="page login-form">
+	<div class="navbar">
+		<div class="navbar-inner sliding">
+			<div class="left">
+				<a href="/" >
+					<i class="icon icon-back"></i>
+					<span class="ios-only">Inicio</span>
+				</a>
+			</div>
+			<div class="title"></div>
+		</div>
+	</div>
 	<div class="page-content">
-		
+
 		<div class="block">
-		
+
 		<div class="title-page">
 			<div class="title-page-with-link">
-				<h1>Sign up to Bright</h1>
+				<h1 style="color:#672d93;">Regístrate en ComparaGrow</h1>
 			</div>
 		</div>
-			
+
 		<div class="list no-hairlines">
 			<ul>
 				<li class="item-content item-input">
 					<div class="item-inner">
 						<div class="item-input-wrap">
-							<input placeholder="Full Name" class="" type="text">
+							<input placeholder="Email" class="" type="email">
 							<span class="input-clear-button"></span>
 						</div>
 					</div>
@@ -22,7 +33,7 @@
 				<li class="item-content item-input">
 					<div class="item-inner">
 						<div class="item-input-wrap">
-							<input placeholder="Email Adresse" class="" type="email">
+							<input placeholder="Confirmar Email" class="" type="email">
 							<span class="input-clear-button"></span>
 						</div>
 					</div>
@@ -30,25 +41,65 @@
 				<li class="item-content item-input">
 					<div class="item-inner">
 						<div class="item-input-wrap">
-							<input placeholder="Password" class="" type="password">
+							<input placeholder="Contraseña" class="" type="password">
 							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="item-input-wrap">
+							<input placeholder="Como te llamas?" class="" type="text">
+							<span class="input-clear-button"></span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="radio-inputs">
+							<span class="radio-label">Sexo</span>
+							<label class="radio"><input name="gender" type="radio" value="MA"><i class="icon-radio"></i></label>
+							<span class="radio-input-label">Masculino</span>
+							<label class="radio"><input name="gender" type="radio" value="FE"><i class="icon-radio"></i></label>
+							<span class="radio-input-label">Femenino</span>
+							<label class="radio"><input name="gender" type="radio" value="DS"><i class="icon-radio"></i></label>
+							<span class="radio-input-label">No binario</span>
+						</div>
+					</div>
+				</li>
+				<li class="item-content item-input">
+					<div class="item-inner">
+						<div class="tem-input-wrap">
+							<input placeholder="Fecha de Nacimiento" class="" type="date">
 						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
-		
-		<a href="/" class="col button button-fill color-black">Sign up</a>
-		
-		<p class="form-login-annonce">
+
+		<a href="/" class="col button button-fill color-black" style="background:#672d93;margin-bottom:2px;">Registrate</a>
+		<a href="/" class="col button button-fill" style="color:#000;background:#fff;border:.1rem solid #f6f6f6!important;margin-bottom:2px;">
+			<img src="/static/img/google-logo.png" style="height: 14px;    position: absolute;
+    top: 6px;
+    left: 38%;">
+				Google
+		</a>
+		<a href="/" class="col button button-fill" style="background:#3b5998;margin-bottom:2px;">
+			<img src="/static/img/facebook-f.png" style="height: 14px;    position: absolute;
+    top: 6px;
+    left: 35%;">
+			Facebook
+		</a>
+
+		<!-- <p class="form-login-annonce">
 			<span>NEW!</span> Quick login with FaceID
 			<img src="./img/faceid.png" alt="faceid">
-		</p>
-		
+		</p> -->
+
 		<p class="form-login-footer">
-			Already  have an account?  <a href="/login/">Login up</a>
+			Tienes una cuenta?  <a href="/login/">Inicia Sesion</a>
 		</p>
-		
+
 		</div>
 	</div>
 </div>
