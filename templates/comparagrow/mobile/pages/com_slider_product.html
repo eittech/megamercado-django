@@ -1,0 +1,82 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<div class="section sellers-section">
+  <div class="title-section">
+    <div class="title-section-with-link" style="border-bottom: 2px solid #01b22c;">
+      <h3>DESTACADOS</h3>
+      <!--<a href="/sellers/">See all <i class="f7-icons">chevron_right</i></a>-->
+    </div>
+  </div>
+  <div class="section-content">
+    <div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+      <div class="swiper-wrapper">
+        {% for item in productos_cd %}
+        <div class="swiper-slide">
+          <a href="#" ><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+          <div class="item-title" style="height: 50px;"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+          <div class="item-infos">
+            <i class="material-icons" style="color: #01b22c;font-size: 13px;">favorite_border</i>
+            $ {{ item.total|floatformat:0|intcomma }}</div>
+          <div class="item-infos">
+            ver detalle
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="section sellers-section">
+  <div class="title-section">
+    <div class="title-section-with-link" style="border-bottom: 2px solid #01b22c;">
+      <h3>ÚLTIMAS REBAJAS</h3>
+    </div>
+  </div>
+  <div class="section-content">
+    <div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+      <div class="swiper-wrapper">
+        {% for item in productos_ur %}
+        <div class="swiper-slide">
+          <a href="#"><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+          <div class="item-title" style="height: 50px;"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+          <div class="item-infos">
+            <i class="material-icons" style="color: #01b22c;font-size: 13px;">favorite_border</i>
+            $ {{ item.total|floatformat:0|intcomma }}</div>
+          <div class="item-infos">
+            ver detalle
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+<div class="section sellers-section">
+<div class="title-section">
+  <div class="title-section-with-link" style="border-bottom: 2px solid #01b22c;">
+    <h3>ARMA TU GROW</h3>
+  </div>
+</div>
+<div class="section-content">
+  <div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+    <div class="swiper-wrapper">
+      {% for item in productos_ci %}
+      <div class="swiper-slide">
+        <a href="#"><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+        <div class="item-title" style="height: 50px;"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+        <div class="item-infos">
+          <i class="material-icons" style="color: #01b22c;font-size: 13px;">favorite_border</i>
+          $ {{ item.total|floatformat:0|intcomma }}</div>
+        <div class="item-infos">
+          ver detalle
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>

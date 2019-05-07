@@ -1,0 +1,83 @@
+<div class="page">
+	<div class="navbar">
+		<div class="navbar-inner sliding">
+			<div class="left">
+				<a href="#" class="link back">
+					<i class="icon icon-back"></i>
+					<span class="ios-only">regresar</span>
+				</a>
+			</div>
+			<div class="title">Filtros</div>
+		</div>
+	</div>
+
+
+	<div class="page-content">
+		<div class="block block-list-ads">
+
+
+			<div class="section no-border">
+				<div class="section-content">
+					<div class="list" style="margin:0 0;">
+						<ul>
+							{% if category_list_left %}
+							<li>
+								<a href="#" class="item-link smart-select smart-select-init"  data-searchbar="true" data-searchbar-placeholder="Buscar categoria">
+									<!-- "multiple" attribute for multiple select-->
+									<select name="category" multiple>
+										<!-- options grouped within "optgroup" tag-->
+										<optgroup label="Categorias">
+											{% for categoria in category_list_left %}
+												{% if categoria.category__pk in category_list_selected %}
+													<option value="{{ categoria.category__pk }}" selected>{{ categoria.category__name }}</option>
+												{% else %}
+													<option value="{{ categoria.category__pk }}">{{ categoria.category__name }}</option>
+												{% endif %}
+											{% endfor %}
+										</optgroup>
+
+									</select>
+									<div class="item-content">
+										<div class="item-inner">
+											<div class="item-title">Categorias</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							{% endif %}
+
+							{% if shop_list_left %}
+							<li>
+								<a href="#" class="item-link smart-select smart-select-init"
+								data-searchbar="true"
+								data-page-back-link-text="regresar"
+								data-open-in="page"
+								data-searchbar-placeholder="Buscar Tienda">
+									<!-- "multiple" attribute for multiple select-->
+									<select name="shop" multiple>
+										<!-- options grouped within "optgroup" tag-->
+										<optgroup label="Tiendas">
+											{% for tiendas in shop_list_left %}
+											<option value="{{ tiendas.shop__pk }}">{{ tiendas.shop__name }}</option>
+											{% endfor %}
+										</optgroup>
+
+									</select>
+									<div class="item-content">
+										<div class="item-inner">
+											<div class="item-title">Tiendas</div>
+										</div>
+									</div>
+								</a>
+							</li>
+							{% endif %}
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>

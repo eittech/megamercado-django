@@ -1,15 +1,6 @@
 <div class="page login-form">
-	<div class="navbar">
-		<div class="navbar-inner sliding">
-			<div class="left">
-				<a href="/" >
-					<i class="icon icon-back"></i>
-					<span class="ios-only">Inicio</span>
-				</a>
-			</div>
-			<div class="title"></div>
-		</div>
-	</div>
+	{% include 'comparagrow/mobile/pages/com_header.html' %}
+
 	<div class="page-content">
 
 		<div class="block">
@@ -47,13 +38,13 @@
 		</div>
 
 		<a href="/" class="col button button-fill" style="background:#672d93;margin-bottom:2px;">Iniciar Sesión</a>
-		<a href="/google/" class="col button button-fill" style="color:#000;background:#fff;border:.1rem solid #f6f6f6!important;margin-bottom:2px;">
+		<a href="{% url "social:begin" "google-oauth2" %}" class="link external col button button-fill" style="color:#000;background:#fff;border:.1rem solid #f6f6f6!important;margin-bottom:2px;">
 			<img src="/static/img/google-logo.png" style="height: 14px;    position: absolute;
     top: 6px;
     left: 38%;">
 				Google
 		</a>
-		<a href="{% url "social:begin" "facebook" %}" class="col button button-fill" style="background:#3b5998;margin-bottom:2px;">
+		<a href="{% url "social:begin" "facebook" %}" class="link external col button button-fill" style="background:#3b5998;margin-bottom:2px;">
 			<img src="/static/img/facebook-f.png" style="height: 14px;    position: absolute;
     top: 6px;
     left: 35%;">
@@ -66,7 +57,7 @@
 		</p> -->
 
 		<p class="form-login-footer">
-			No tienes cuenta? <a href="/signup/">Registrate</a>
+			No tienes cuenta? <a href="/signup/" style="color:#672d93">Registrate</a>
 		</p>
 
 		</div>

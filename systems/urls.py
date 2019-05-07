@@ -40,6 +40,7 @@ urlpatterns = [
     path('pages/products.html',views.products_mobile,name='products'),
     path('pages/filtros.html',views.filtros_mobile,name='filtros'),
 
+    path('facebook_btn.html',views.facebook_btn,name='filtros'),
 
     #https://medium.com/quick-code/token-based-authentication-for-django-rest-framework-44586a9a56fb
 

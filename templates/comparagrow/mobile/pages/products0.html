@@ -1,0 +1,157 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+
+<div class="page" data-name="products">
+	<div class="navbar" style="background:#fff !important;">
+		 <div class="navbar-inner" style="background:#fff !important;">
+			 <div class="title-page" style="width:100%;margin-top: 12px;">
+				 <div class="title-page-with-link">
+					 <h1 class="" style="display: flex;color: #672d93;">
+						 <a href="/" >
+								<img src="/static/img/logo.png" style="height: 50px;">
+						 </a>
+					 </h1>
+					 {% if user.is_authenticated %}
+					 <a href="/profile/" class="tab-link text-align-right">
+						 <i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+						 <!-- <span class="tabbar-label">Profile</span> -->
+					 </a>
+					 {% else %}
+					 <a href="/login/" class="tab-link text-align-right">
+						 <i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+						 <!-- <span class="tabbar-label">Profile</span> -->
+					 </a>
+					 {% endif %}
+				 </div>
+			 </div>
+			 <div class="subnavbar" style="background:#fff !important;">
+				 <!-- Searchbar with auto init -->
+				 <form class="searchbar" id="form-search" style="background:#fff !important;">
+					 <div class="searchbar-input-wrap" style="background:#fff !important;">
+						 <input placeholder="Busca miles de productos al mejor precio" class="" type="search" style="border: 1px solid;
+			 border-bottom:2px solid #01b22c; border-left:none; border-right:none; border-top:none; border-radius: inherit;" name="q">
+						 <i class="searchbar-icon"></i>
+						 <span class="input-clear-button"></span>
+					 </div>
+			 </div>
+		 </div>
+	 </div>
+	{% include 'comparagrow/mobile/pages/com_header.html' %}
+	<div class="fab fab-extended fab-center-bottom color-red">
+    <a class="link sheet-open" href="#" data-sheet=".my-sheet">
+      <i class="icon f7-icons if-not-md">add</i>
+      <i class="icon material-icons md-only">add</i>
+      <div class="fab-text">Filtros</div>
+    </a>
+  </div>
+	<div class="sheet-modal my-sheet">
+    <div class="toolbar">
+      <div class="toolbar-inner">
+        <div class="left"></div>
+        <div class="right"><a class="link sheet-close" href="#">Done</a></div>
+      </div>
+    </div>
+    <div class="sheet-modal-inner">
+      <div class="block">
+        <h4>Info</h4>
+				<input type="hidden" name="page" value="">
+				<div class="list" style="margin:0 0;">
+					<ul>
+						{% if category_list_left %}
+						<li>
+							<a href="#" class="item-link smart-select smart-select-init"  data-searchbar="true" data-searchbar-placeholder="Buscar categoria">
+								<!-- "multiple" attribute for multiple select-->
+								<select name="category" multiple>
+									<!-- options grouped within "optgroup" tag-->
+									<optgroup label="Categorias">
+										{% for categoria in category_list_left %}
+											{% if categoria.category__pk in category_list_selected %}
+												<option value="{{ categoria.category__pk }}" selected>{{ categoria.category__name }}</option>
+											{% else %}
+												<option value="{{ categoria.category__pk }}">{{ categoria.category__name }}</option>
+											{% endif %}
+										{% endfor %}
+									</optgroup>
+
+								</select>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title">Categorias</div>
+									</div>
+								</div>
+							</a>
+						</li>
+						{% endif %}
+
+						{% if shop_list_left %}
+						<li>
+							<a href="#" class="item-link smart-select smart-select-init"
+							data-searchbar="true"
+							data-page-back-link-text="regresar"
+							data-open-in="page"
+							data-searchbar-placeholder="Buscar Tienda">
+								<!-- "multiple" attribute for multiple select-->
+								<select name="shop" multiple>
+									<!-- options grouped within "optgroup" tag-->
+									<optgroup label="Tiendas">
+										{% for tiendas in shop_list_left %}
+										<option value="{{ tiendas.shop__pk }}">{{ tiendas.shop__name }}</option>
+										{% endfor %}
+									</optgroup>
+
+								</select>
+								<div class="item-content">
+									<div class="item-inner">
+										<div class="item-title">Tiendas</div>
+									</div>
+								</div>
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+      </div>
+    </div>
+  </div>
+	<div class="page-content">
+		<!-- <div class="fab fab-extended fab-center-bottom color-red"><a href="#"><i class="icon f7-icons if-not-md">add</i><div class="fab-text">Create</div></a></div> -->
+		<div class="block block-list-ads" style="margin-top:2px;">
+			<!-- End Search -->
+
+			<div class="section no-border">
+				<div class="section-content infinite-scroll-content">
+
+
+						<div class="row" id="row_products">
+							{% for item in products %}
+							<div class="col-50">
+								<a class="link external" target="_blank" href="/productos/redirect/{{ item.id }}">
+									<img src="{{ item.id|imagenproducturl:"0" }}" style="height:100px;" alt="product1">
+								</a>
+								<div class="item-category">
+									<a class="link external" target="_blank" href="/productos/redirect/{{ item.id }}">{{ item.category }}<i class="f7-icons">chevron_right</i></a>
+								</div>
+								<div class="item-title">
+									<a class="link external" target="_blank" href="/productos/redirect/{{ item.id }}">{{ item.name }}</a>
+								</div>
+								<div class="item-infos">
+			            <i class="material-icons" style="color: #01b22c;font-size: 15px;">favorite_border</i>
+			            $ {{ item.total|floatformat:0|intcomma }}</div>
+			          <div class="item-infos">
+			            ver detalle
+			          </div>
+							</div>
+							{% endfor %}
+						</div>
+						 <div class="preloader infinite-scroll-preloader"></div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

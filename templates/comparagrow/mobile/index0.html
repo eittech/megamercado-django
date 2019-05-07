@@ -1,0 +1,231 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<meta name="theme-color" content="#f44336">
+		<meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:">
+		<title>ComparaGrow.cl</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'mobile/css/framework7.ios.css' %}">
+		<link rel="stylesheet" href="{% static 'mobile/css/icons.css' %}"">
+		<link rel="stylesheet" href="{% static 'mobile/css/app.css' %}"">
+		<link rel="apple-touch-icon" href="{% static 'mobile/img/f7-icon-square.png' %}"">
+		<!-- <link rel="icon" href="{% static 'mobile/img/f7-icon.png' %}""> -->
+		<link rel="icon" type="image/png" href="/static/img/lupa.png">
+	</head>
+	<body class="color-theme-pink">
+		<div id="app">
+			<div class="statusbar"></div>
+			<div class="panel panel-left panel-cover">
+				<div class="page">
+					<div class="page-content">
+					</div>
+				</div>
+			</div>
+
+			<!-- probando donde inicio -->
+			<div class="view view-main view-init ios-edges" data-url="/">
+				<!-- probando donde inicia -->
+				<div class="page">
+					<!--  probando donde inicia-->
+
+					{% include 'comparagrow/mobile/pages/com_header.html' %}
+
+					<div class="page-content">
+						<!-- <div class="section no-border">
+							<div class="section-content">
+								<a class="item-link smart-select smart-select-init" data-open-in="sheet">
+									<select name="mac-windows">
+									  <option value="mac" selected>Mac</option>
+									  <option value="windows">Windows</option>
+									</select>
+									<div class="item-content">
+									  <div class="item-inner">
+									    <div class="item-title">Categorias</div>
+									  </div>
+									</div>
+								</a>
+							</div>
+						</div> -->
+						<div class="block block-no-padding" style="margin-top:2px;">
+							<div class="title-page">
+								<div class="title-page-with-link">
+									<h1 class="" style="
+    display: flex;color: #672d93;
+"><img src="/static/img/logo.png" style="height: 50px;"></h1>
+									{% if user.is_authenticated %}
+									<a href="/profile/" class="tab-link">
+										<i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+										<!-- <span class="tabbar-label">Profile</span> -->
+									</a>
+									{% else %}
+									<a href="/login/" class="tab-link">
+										<i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+										<!-- <span class="tabbar-label">Profile</span> -->
+									</a>
+									{% endif %}
+								</div>
+							</div>
+							<!-- Search -->
+							<div class="searchbar-page">
+							<form class="searchbar" id="form-search">
+								<div class="searchbar-input-wrap">
+									<input placeholder="Busca miles de productos al mejor precio" class="" type="search" style="border: 1px solid;
+    border-bottom:2px solid #01b22c; border-left:none; border-right:none; border-top:none; border-radius: inherit;" name="q">
+									<i class="searchbar-icon"></i>
+									<span class="input-clear-button"></span>
+								</div>
+							</form>
+							</div>
+							<!-- End Search -->
+
+
+							<div class="section no-border">
+								<div class="section-content">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="3" class="swiper-container swiper-init swiper-container-horizontal">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<a href="#">
+
+														<button id="btn_category" class="col button button-fill color-black" style="
+							background: #672d93;
+							">Categorias</button>
+
+												</a>
+											</div>
+
+											<div class="swiper-slide">
+												<a href="#">
+														<button class="col button button-fill color-black" style="
+							background: #672d93;
+							">Marcas</button>
+
+												</a>
+											</div>
+											<div class="swiper-slide">
+												<a href="#">
+														<button class="col button button-fill color-black" style="
+							background: #672d93;
+							">Tiendas</button>
+
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="section no-border">
+								<div class="section-content">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="15" data-slides-per-view="1" class="swiper-container swiper-init swiper-container-horizontal">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide">
+												<a href="#">
+													<div class="brand-card">
+														<img src="{% static 'theme/images/banners/slide2.png' %}" alt="brand1">
+
+													</div>
+												</a>
+											</div>
+
+											<div class="swiper-slide">
+												<a href="#">
+													<div class="brand-card">
+														<img src="{% static 'theme/images/banners/slide2.png' %}" alt="brand1">
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- Seller Section -->
+							<div class="section sellers-section">
+								<div class="title-section">
+									<div class="title-section-with-link">
+										<h3>DESTACADOS</h3>
+										<!--<a href="/sellers/">See all <i class="f7-icons">chevron_right</i></a>-->
+									</div>
+								</div>
+								<div class="section-content">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+										<div class="swiper-wrapper">
+											{% for item in productos_cd %}
+											<div class="swiper-slide">
+												<a href="#" ><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+												<div class="item-title"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+												<div class="item-infos">$ {{ item.total|floatformat:0|intcomma }}</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+
+
+
+							<div class="section sellers-section">
+								<div class="title-section">
+									<div class="title-section-with-link">
+										<h3>ÚLTIMAS REBAJAS</h3>
+										<!--<a href="/sellers/">See all <i class="f7-icons">chevron_right</i></a>-->
+									</div>
+								</div>
+								<div class="section-content">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+										<div class="swiper-wrapper">
+											{% for item in productos_ur %}
+											<div class="swiper-slide">
+												<a href="#"><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+												<div class="item-title"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+												<div class="item-infos">$ {{ item.total|floatformat:0|intcomma }}</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+
+							<div class="section sellers-section">
+								<div class="title-section">
+									<div class="title-section-with-link">
+										<h3>ARMA TU GROW</h3>
+										<!--<a href="/sellers/">See all <i class="f7-icons">chevron_right</i></a>-->
+									</div>
+								</div>
+								<div class="section-content">
+									<div data-pagination="{&quot;el&quot;: &quot;.swiper-pagination&quot;}" data-space-between="5" data-slides-per-view="2.5" class="swiper-container swiper-init swiper-container-horizontal">
+										<div class="swiper-wrapper">
+											{% for item in productos_ci %}
+											<div class="swiper-slide">
+												<a href="#"><img src="{{ item.id|imagenproducturl:"0" }}" alt="seller1" class="seller-img"></a>
+												<div class="item-title"><a class="link external" target="_blank" href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}">{{ item.name }}</a></div>
+												<div class="item-infos">$ {{ item.total|floatformat:0|intcomma }}</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+
+							<!-- brands Section -->
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<script src="{% static 'mobile/js/framework7.min.js' %}"></script>
+		<script src="{% static 'mobile/js/routes.js' %}"></script>
+		<script src="{% static 'mobile/js/app.js' %}"></script>
+	</body>
+</html>

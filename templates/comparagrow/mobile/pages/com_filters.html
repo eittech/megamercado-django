@@ -1,0 +1,125 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<form id="form-filter" style="background:#fff !important;">
+<input type="hidden" name="page" value="">
+<input type="hidden" name="q" value="{{ q }}">
+<div class="list" style="margin:0 0;">
+  <ul>
+
+    {% if category_list_left %}
+    <li>
+      <a href="#" class="item-link smart-select smart-select-init" data-sheet-close-link-text="seleccionar" data-open-in="sheet">
+        <!-- "multiple" attribute for multiple select-->
+        <select name="category" multiple>
+          <!-- options grouped within "optgroup" tag-->
+          <optgroup label="Categorias">
+            {% for categoria in category_list_left %}
+              {% if categoria.category__pk in category_list_selected %}
+                <option value="{{ categoria.category__pk }}" selected>{{ categoria.category__name }} ({{ marcas.dcount }})</option>
+              {% else %}
+                <option value="{{ categoria.category__pk }}">{{ categoria.category__name }} ({{ categoria.dcount }})</option>
+              {% endif %}
+            {% endfor %}
+          </optgroup>
+
+        </select>
+        <div class="item-content">
+          <div class="item-inner">
+            <div class="item-title">Categorias</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if shop_list_left %}
+    <li>
+      <a href="#" class="item-link smart-select smart-select-init"
+      data-open-in="sheet"
+      data-sheet-close-link-text="seleccionar"
+      >
+        <!-- "multiple" attribute for multiple select-->
+        <!-- data-open-in="page" -->
+
+        <select name="shop" multiple>
+          <!-- options grouped within "optgroup" tag-->
+          <optgroup label="Tiendas">
+            {% for tiendas in shop_list_left %}
+            <option value="{{ tiendas.shop__pk }}">{{ tiendas.shop__name }} ({{ tiendas.dcount }})</option>
+            {% endfor %}
+          </optgroup>
+
+        </select>
+        <div class="item-content">
+          <div class="item-inner">
+            <div class="item-title">Tiendas</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    {% endif %}
+    {% if brand_list_left %}
+    <li>
+      <a href="#" class="item-link smart-select smart-select-init"
+      data-open-in="sheet"
+      data-sheet-close-link-text="seleccionar"
+      >
+        <!-- "multiple" attribute for multiple select-->
+        <!-- data-open-in="page" -->
+
+        <select name="brand" multiple>
+          <!-- options grouped within "optgroup" tag-->
+          <optgroup label="Marcas">
+            {% for marcas in brand_list_left %}
+            <option value="{{ marcas.brand }}">{{ marcas.brand }} ({{ marcas.dcount }})</option>
+            {% endfor %}
+          </optgroup>
+
+        </select>
+        <div class="item-content">
+          <div class="item-inner">
+            <div class="item-title">Marcas</div>
+          </div>
+        </div>
+      </a>
+    </li>
+    {% endif %}
+    <li>
+      <div class="text-align-center" style="
+    margin-top: 12px;
+    margin-bottom: -36px;
+">Rango de Precios</div>
+        <div class="list simple-list">
+          <ul>
+            <li class="item-row">
+              <div class="item-cell width-auto flex-shrink-0">
+                <i class="icon f7-icons if-not-md">money_dollar_round</i>
+                <i class="icon material-icons md-only">attach_money</i>
+              </div>
+              <div class="item-cell item-cell-shrink-3">
+                <!-- Dual range slider with all the parameters passed via data- attributes -->
+                <div
+                  id="price-filter"
+                  class="range-slider range-slider-init color-green"
+                  data-label="true"
+                  data-dual="true"
+                  data-min="0"
+                  data-max="500"
+                  data-step="1"
+                  data-value-left="200"
+                  data-value-right="400"
+                ></div>
+              </div>
+              <div class="item-cell width-auto flex-shrink-0">
+                <i class="icon f7-icons if-not-md">money_dollar_round_fill</i>
+                <i class="icon material-icons md-only">monetization_on</i>
+              </div>
+            </li>
+          </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+</form>

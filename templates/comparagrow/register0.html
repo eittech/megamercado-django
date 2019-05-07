@@ -125,16 +125,21 @@ $(modal).modal('hide')
 <div class="row justify-content-md-center" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
   <span>ó registrate con: </span>
 </div>
-<div class="row" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
+<div class="row" style="margin-top: 5px;margin-left: 3px;margin-right:20px;">
   <div class="col-sm-6">
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <a href="/login" >
+    <iframe src="/facebook_btn.html" id="iframe" name="iframe" width="" height="" onclick="alert(1)" style="
+    border: none;
+    height: 41px;
+"></iframe>
+    </a>
   </div>
-  <div class="col-sm-6">
+  <!-- <div class="col-sm-6">
     <a class="btn" href="{% url "social:begin" "google-oauth2" %}" style="border: .1rem solid #f6f6f6!important;width: 100%;">
       <img src="/static/img/google-logo.png" style="height: 14px;">
       <span>Iniciar con Google</span>
     </a>
-  </div>
+  </div> -->
 </div>
 
 
@@ -152,7 +157,7 @@ $(modal).modal('hide')
     </small></p>
   </div>
   <div class="row justify-content-md-center" style="margin-left:20px; margin-right:20px;">
-    <p class="justify-content-md-center text-center"><small>Al
+    <p class="justify-content-md-center text-center"><small id="smallid">Al
 ingresar su dirección de correo electrónico, usted acepta nuestros <a href="/terminos-politicas">Términos de servicio, Política de privacidad</a> y para recibir correos electrónicos de
 ComparaGrow</small></p>
   </div>
@@ -162,10 +167,7 @@ ComparaGrow</small></p>
 
 {% endblock %}
 
-
 {% block scriptb %}
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.3&appId=2090703191007206&autoLogAppEvents=1"></script>
 <link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
 <script src="/static/air-datepicker/js/datepicker.min.js"></script>
 <script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
@@ -175,6 +177,17 @@ ComparaGrow</small></p>
     $('#birthday').datepicker({
       language: 'es',dateFormat:'yyyy-mm-dd'
     });
+    console.log('inicio')
+    var iframe = $('#iframe').contents();
+    iframe.click(function(event){console.log('link')});
+
   });
+
+  function enviar(){
+    window.open('{% url "social:begin" "facebook" %}','_self');
+  }
+
+
+
 </script>
 {% endblock %}

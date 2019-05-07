@@ -439,6 +439,9 @@ def error_mobile(request):
 #end test mobile
 
 
+def facebook_btn(request):
+    return render(request, 'comparagrow/facebook_btn.html')
+
 # Create your views here.
 def homeporto(request):
     error=False

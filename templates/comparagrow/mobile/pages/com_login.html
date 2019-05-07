@@ -1,0 +1,22 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<div class="title-page">
+  <div class="title-page-with-link">
+    <h1 class="" style="
+display: flex;color: #672d93;
+"><img src="/static/img/logo.png" style="height: 50px;"></h1>
+    {% if user.is_authenticated %}
+    <a href="/profile/" class="tab-link">
+      <i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+      <!-- <span class="tabbar-label">Profile</span> -->
+    </a>
+    {% else %}
+    <a href="/login/" class="tab-link">
+      <i class="material-icons" style="font-size: 40px;color: #01b22c;">account_circle</i>
+      <!-- <span class="tabbar-label">Profile</span> -->
+    </a>
+    {% endif %}
+  </div>
+</div>
