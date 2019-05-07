@@ -38,7 +38,9 @@ urlpatterns = [
     path('remote/login', views.login_api,name='remotelogin'),
     path('remote/sampleapi', views.sample_api),
     path('pages/products.html',views.products_mobile,name='products'),
-    
+    path('pages/filtros.html',views.filtros_mobile,name='filtros'),
+
+
     #https://medium.com/quick-code/token-based-authentication-for-django-rest-framework-44586a9a56fb
 
     #rest api service web
@@ -48,6 +50,8 @@ urlpatterns = [
     path('blank', views.home_blank, name='home_blank'),
     path('login', views.login_front, name='login'),
     path('register', views.register_front, name='register'),
+    path('register2', views.register_front2, name='register'),
+
     path('recovery', views.recovery, name='recovery'),
     path('recovery/form', views.recoveryView, name='recoveryView'),
     path('testing', views.testing, name='recoveryView'),

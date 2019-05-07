@@ -308,11 +308,47 @@ def products_mobile(request):
     shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
     category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
     brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
-    print(products_list)
+
+    shop_list_selected = []
+    if request.GET.get('shop'):
+        shops = False
+        shop_temporal = request.GET.get('shop')
+        shop = shop_temporal.split (',')
+        if shop:
+            for ck in shop:
+                shop_list_selected.append(int(ck))
+            try:
+                shops = Shop.objects.filter(pk__in=shop_list_selected)
+            except:
+                shops = False
+        if shops:
+            products_list = products_list.filter(shop__in=shops)
+
+    category_list_selected = []
+    if request.GET.get('category'):
+        categories = False
+        category_temporal = request.GET.get('category')
+        category = category_temporal.split (',')
+        category_list_selected = []
+        if category:
+            for ck in category:
+                category_list_selected.append(int(ck))
+            try:
+                categories = Category.objects.filter(pk__in=category_list_selected)
+            except:
+                categories = False
+        if categories:
+            products_list = products_list.filter(category__in=categories)
+
+    print(products_list.count())
     return render(request, 'comparagrow/mobile/pages/products.html',{
     'products':products_list,
     'shop_list_left':shop_list_left,
     'category_list_left':category_list_left,
+    'brand_list_left':brand_list_left,
+    'q':term_q,
+    'category_list_selected':category_list_selected,
+    'shop_list_selected':shop_list_selected,
     'brand_list_left':brand_list_left
     })
 
@@ -369,6 +405,9 @@ def shop_mobile(request):
 
 def ad_detail_mobile(request):
     return render(request, 'comparagrow/mobile/pages/ad_detail.html')
+
+def filtros_mobile(request):
+    return render(request, 'comparagrow/mobile/pages/filtros.html')
 
 def ad_detail_user_mobile(request):
     return render(request, 'comparagrow/mobile/pages/ad_detail_user.html')
@@ -627,6 +666,9 @@ def recoveryuser(request,uidb64,token):
     # return http.HttpResponseRedirect(a_failure_url)
 
 # def register_view(request)
+
+def register_front2(request):
+    return render(request, 'comparagrow/register0.html')
 
 def register_front(request):
     if not request.POST :
