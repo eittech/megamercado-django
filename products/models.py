@@ -40,6 +40,24 @@ class Shop(models.Model):
     num_products_category.short_description = 'Productos con categoria'
     #category
 
+class Brand(models.Model):
+    # customer = models.ForeignKey(Customer,on_delete=models.CASCADE,blank=True,null=True)
+    name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
+    image = models.ImageField(upload_to="assets/shop/",blank=True,null=True)
+    url = models.URLField(verbose_name="URL",max_length=200,blank=True)
+    description = models.TextField(verbose_name="Descripcion",blank=True)
+    # address = map_fields.AddressField(max_length=200,default="", null=True,blank=True)
+    # geolocation = map_fields.GeoLocationField(max_length=100,default="", null=True,blank=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Marcas"
+        unique_together = (('name',))
+    def num_products(self):
+        products = Product.objects.filter(brand_related=self)
+        return products.count()
+    num_products.short_description = 'Numero de Productos'
+
 class Category(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,on_delete=models.CASCADE)
     slug = models.SlugField()
@@ -87,6 +105,7 @@ class ListCategoryTax(models.Model):
 
 # register(Category)
 
+
 class Product(models.Model):
     shop = models.ForeignKey(Shop,on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
@@ -96,6 +115,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name="Descripcion",blank=True)
     photo = models.BooleanField(verbose_name="Tiene fotos",blank=True,null=True,default=False)
     category = TreeForeignKey(Category,blank=True,on_delete=models.CASCADE,null=True)
+    brand_related = models.ForeignKey(Brand,blank=True,on_delete=models.CASCADE,null=True)
     category_temp = models.CharField(verbose_name="Categoria Anterior",max_length=200,blank=True)
     image = models.ImageField(upload_to="assets/product/",blank=True,null=True,verbose_name="Miniatura")
 
