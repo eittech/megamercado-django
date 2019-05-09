@@ -1,0 +1,128 @@
+{% load static %}
+{% load mptt_tags %}
+{% load menu_categorias %}
+{% load cache %}
+<div class="side-panel-wrapper" style="width:99%">
+  <button class="hamburguer-btn side-panel-close side-panel-toggle active" data-set-active="false">
+    <span class="close">
+      <span></span>
+      <span></span>
+    </span>
+  </button>
+  <aside class="sidebar">
+    <div class="row justify-content-md-center" style="color:#672d93">
+      <h5 class="">Menu</h5>
+    </div>
+    <div class="row">
+						<div class="col">
+
+							<div class="tabs tabs-bottom tabs-left tabs-simple">
+                {% listado as listado_producto %}
+                 <ul class="nav nav-tabs navbuttons">
+                   {% for genre,structure in listado_producto|tree_info %}
+                   {% if genre.level == 0 %}
+
+                   <li class="nav-item {% if forloop.first %}active{% endif %}">
+                     <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ genre.slug }}" style="font-size:15px;padding: 0px 10px;" data-toggle="tab">{{ genre.name }}</a>
+                   </li>
+
+
+                   {% endif %}
+                   {% endfor %}
+                </ul>
+								<div class="tab-content" style="margin-top: -25px;">
+                  {% for genre,structure in listado_producto|tree_info %}
+                  {% if genre.level == 0 %}
+									<div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ genre.slug }}">
+                        {% for item1 in genre.slug|menulevelone:"1" %}
+                          <div class="col-sm-12" style="border-bottom: 1px solid;">
+                            <a href="/productos/categorias/{{ item1.slug }}" style="color:#000;">{{ item1.name }} </a>
+                          </div>
+                        {% endfor %}
+									</div>
+                  {% endif %}
+                  {% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+          <div class="row justify-content-md-center" style="color:#672d93">
+            <h5 class="">INFORMACIÓN</h5>
+          </div>
+          <div class="row">
+						<div class="col">
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/quienes-somos" style="color:#000;">Quienes Somos </a>
+              </div>
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/contactanos" style="color:#000;">Contáctanos </a>
+              </div>
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/faq" style="color:#000;">FAQ </a>
+              </div>
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/sitemap" style="color:#000;">Mapa del Sitio </a>
+              </div>
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/terminos-condiciones" style="color:#000;">Términos y Condiciones </a>
+              </div>
+            </div>
+					</div>
+          <div class="row justify-content-md-center" style="color:#672d93;margin-top: 20px;">
+            <h5 class="">GRUPO PAZ VERDE</h5>
+          </div>
+          <div class="row">
+						<div class="col">
+
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/clientes" style="color:#000;">Conviértete en Cliente </a>
+              </div>
+              <div class="col-sm-12" style="border-bottom: 1px solid;">
+                <a href="/blog" style="color:#000;">Blog </a>
+              </div>
+
+            </div>
+					</div>
+          <div class="row justify-content-md-center" style="color:#672d93;margin-top: 20px;">
+            <h5 class="">CONÉCTATE</h5>
+          </div>
+          <div class="row">
+						<div class="col">
+
+              <div class="col-sm-12">
+                <ul class="footer-social-icons social-icons social-icons-clean social-icons-big social-icons-opacity-dark social-icons-icon-dark mt-1">
+                  <li class="social-icons-facebook"><a href="http://www.facebook.com/comparagrow" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                  <li class="social-icons-twitter"><a href="http://www.twitter.com/comparagrow" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                  <li class="social-icons-instagram"><a href="http://www.instagram.com/ComparaGrow" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+              </div>
+
+
+            </div>
+					</div>
+
+			</aside>
+</div>
+
+<style>
+  .navbuttons {
+      display: inline-block !important;
+      overflow: auto !important;
+      overflow-y: hidden !important;
+
+      max-width: 100% !important;
+      margin: 0 0 1em !important;
+
+      white-space: nowrap !important;
+
+      /* background: #AAA; */
+  }
+
+  .navbuttons li {
+      display: inline-block !important;
+      vertical-align: top !important;
+  }
+
+
+
+</style>

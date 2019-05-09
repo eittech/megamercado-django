@@ -44,7 +44,10 @@
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
                 <a class="ws-nowrap" href="/register"><i class="fas fa-user"></i> Registrate</a>
               </li>
-
+              <li style="margin-left:10px;"></li>
+              <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                <span onclick="openNav()">open</span>
+              </li>
               {% endif %}
             </ul>
           </nav>
@@ -85,9 +88,15 @@
               <div class="header-colum order-2 order-lg-1">
                 <div class="header-row">
                   <div class="header-nav header-nav-stripe header-nav-divisor header-nav-force-light-text justify-content-start">
-                    {% block btn_filtros %}
-
-                		{% endblock %}
+                    <button  onclick="openNav()" class="hamburguer-btn hamburguer-btn-sticky-dark" style="
+    background: #01b22c;
+    width: 51px;
+    border: 1px solid #01b22c;
+    color: #fff;
+    font-weight: 100;
+">
+                    		Filtros
+                    </button>
                   </div>
                 </div>
               </div>

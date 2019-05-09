@@ -118,7 +118,9 @@ p {
   color: #007aff;
 }
 .ios .color-theme-pink a {
-  color: #ff2d55;
+  /* color: #ff2d55; */
+  color: #ffffff;
+  
 }
 .ios .color-theme-yellow a {
   color: #ffcc00;
@@ -959,6 +961,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
   width: 100%;
   position: relative;
   margin: 0;
+  background:#682C93;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
@@ -992,6 +995,7 @@ html.with-statusbar.device-iphone-x .framework7-root {
 }
 .toolbar-inner {
   position: absolute;
+
   left: 0;
   top: 0;
   width: 100%;
@@ -5514,7 +5518,8 @@ html.with-statusbar.md:not(.device-ios):not(.device-android) .login-screen {
   background: #cfd5da;
 }
 .ios .sheet-modal .toolbar {
-  background: #f7f7f8;
+  /* background: #f7f7f8; */
+  background: #682C93 !important;
 }
 .ios .sheet-modal .toolbar + .sheet-modal-inner {
   height: calc(100% - 44px);

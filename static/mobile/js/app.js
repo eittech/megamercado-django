@@ -12,6 +12,13 @@ var app = new Framework7({
   cacheDuration: 0
 });
 
+
+// app range price
+$$('#price-filter').on('range:change', function (e, range) {
+  console.log('cambiando price');
+  // $$('.price-value').text('$'+(range.value[0])+' - $'+(range.value[1]));
+});
+
 // ************************************************************************************************
 // ************************************************************************************************
 // seccion pagina productos
@@ -22,6 +29,10 @@ var lastItemIndex = $$('.list li').length;
 var maxItems = 200;
 // Append items per load
 var itemsPerLoad = 20;
+
+$$('.infinite-scroll-content').on('infinite', function () {
+  console.log('infinite');
+});
 
 // ************************************************************************************************
 // ************************************************************************************************
@@ -70,14 +81,138 @@ app.request.getJSON(host_site+'/api/products/?format=json', function (data) {
 //     });
 // });
 
-$$(document).on("click", "#btn_category", function(){
-  console.log('working Contrast');
-  app.router.navigate("/categories/");
+// $$(document).on("click", "#btn_category", function(){
+//   console.log('working Contrast');
+//   app.router.navigate("/categories/");
+// });
+
+// $$('.smart-select').on('open', function (e, popup) {
+//   console.log('About popup open');
+// });
+
+$$(document).on('smartselect:open', function () {
+  console.log('page open smart');
+  app.sheet.close('.my-sheet');
+  // app.popup.close('.popup-about');
 });
+$$(document).on('smartselect:closed', function () {
+  console.log('page close smart');
+  app.sheet.open('.my-sheet');
+  // app.popup.open('.popup-about');
+});
+
+
+$$(document).on("click", "#back-filter-product", function(){
+  console.log('categoria close');
+  app.sheet.open('.my-sheet');
+  // app.popup.open('.popup-about');
+
+});
+
+
+$$(document).on("click", "#btn-categoria-filter", function(){
+  console.log('enviar a filtro de categoria');
+  var id = $$(this).attr('id-categoria')
+  console.log(id);
+  var url_get = '?'
+  if(id){
+    url_get = url_get + 'category=' + id
+  }
+  app.preloader.show();
+  app.router.navigate("/products/"+url_get);
+  // app.sheet.open('.my-sheet');
+  // app.popup.open('.popup-about');
+
+});
+
+
+$$(document).on("click", "#btn-shop-index", function(){
+  console.log('enviar a filtro de shop2');
+  var id = $$(this).attr('id_shop')
+  console.log(id);
+  var url_get = '?'
+  if(id){
+    url_get = url_get + 'shop=' + id
+  }
+  app.sheet.close('.shop-sheet');
+  app.preloader.show();
+  app.router.navigate("/products/"+url_get);
+  // app.sheet.open('.my-sheet');
+  // app.popup.open('.popup-about');
+
+});
+
+$$(document).on("click", "#btn-brand-index", function(){
+  console.log('enviar a filtro de brand');
+  var id = $$(this).attr('id_brand')
+  console.log(id);
+  var url_get = '?'
+  if(id){
+    url_get = url_get + 'brand=' + id
+  }
+  app.sheet.close('.brand-sheet');
+  app.preloader.show();
+  app.router.navigate("/products/"+url_get);
+  // app.sheet.open('.my-sheet');
+  // app.popup.open('.popup-about');
+
+});
+
+
+$$(document).on("click", "#filter-product", function(){
+  console.log('Aplicar filtro');
+  var formData = ""
+  formData = app.form.convertToData('#form-filter');
+  console.log(formData);
+  // console.log(e.detail.xhr);
+  // formData.forEach(function(v,i){
+  //   console.log(v);
+  // });
+  var url_get = '?'
+  if(formData["q"]){
+    url_get = url_get + 'q=' + formData["q"] + '&'
+  }
+  if(formData["shop"]){
+    url_get = url_get + 'shop=' + formData["shop"] + '&'
+  }
+  if(formData["category"]){
+    url_get = url_get + 'category=' + formData["category"] + '&'
+  }
+  if(formData["page"]){
+    url_get = url_get + 'page=' + formData["page"] + '&'
+  }
+  if(formData["min_price"]){
+    url_get = url_get + 'min_price=' + formData["min_price"] + '&'
+  }
+  if(formData["max_price"]){
+    url_get = url_get + 'max_price=' + formData["max_price"] + '&'
+  }
+  if(formData["brand"]){
+    url_get = url_get + 'brand=' + formData["brand"] + '&'
+  }
+  // var d = formData["q"]
+
+  // d = $.param( formData );
+  console.log(url_get);
+  app.preloader.show();
+  app.router.navigate("/products/"+url_get);
+});
+// $$(document).on('smartselect:close', function () {
+//   console.log('page open smart');
+// })
+
 
 $$(document).on('page:init', '.page[data-name="products"]', function (e) {
   console.log('page init product');
   app.preloader.hide();
+  // app.infinite.create($$('.page-content'));
+
+
+});
+
+$$(document).on("click", "#categoria-smart", function(){
+  console.log('categoria close');
+  app.sheet.close('.my-sheet');
 });
 
 $$(document).on("click", "#btn_category", function(){
@@ -96,25 +231,25 @@ $$(document).on("submit", "#form-search", function(e){
   // });
   var url_get = '?'
   if(formData["q"]){
-    url_get = url_get + 'q=' + formData["q"]
+    url_get = url_get + 'q=' + formData["q"] + '&'
   }
   if(formData["shop"]){
-    url_get = url_get + 'shop=' + formData["shop"]
+    url_get = url_get + 'shop=' + formData["shop"] + '&'
   }
-  if(formData["order"]){
-    url_get = url_get + 'order=' + formData["order"]
+  if(formData["category"]){
+    url_get = url_get + 'category=' + formData["category"] + '&'
   }
   if(formData["page"]){
-    url_get = url_get + 'page=' + formData["page"]
+    url_get = url_get + 'page=' + formData["page"] + '&'
   }
   if(formData["min_price"]){
-    url_get = url_get + 'min_price=' + formData["min_price"]
+    url_get = url_get + 'min_price=' + formData["min_price"] + '&'
   }
   if(formData["max_price"]){
-    url_get = url_get + 'max_price=' + formData["max_price"]
+    url_get = url_get + 'max_price=' + formData["max_price"] + '&'
   }
   if(formData["brand"]){
-    url_get = url_get + 'brand=' + formData["brand"]
+    url_get = url_get + 'brand=' + formData["brand"] + '&'
   }
   // var d = formData["q"]
 
@@ -134,13 +269,3 @@ $$(document).on("submit", "#form-search", function(e){
 
 
 // app.router.loadPage('/pages/shop.html');
-
-var range = app.range.create({
-  el: '.range-price',
-  on: {
-    change: function (e) {
-      $('.price-min').html(e.value[0]+"$");
-      $('.price-max').html(e.value[1]+"$");
-    }
-  }
-})

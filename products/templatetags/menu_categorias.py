@@ -42,6 +42,18 @@ def listado():
     p = Category.objects.all()
     return p
 
+@register.filter(name='listado_shop')
+def listado_shop(value):
+    print('listado shop')
+    s = Shop.objects.all()
+    return s
+
+@register.filter(name='listado_brand')
+def listado_brand(value):
+    print('listado shop')
+    b = Brand.objects.all()
+    return b
+
 @register.filter(name='range')
 def filter_range(start, end):
     end = end + 1

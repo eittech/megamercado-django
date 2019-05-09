@@ -54,10 +54,17 @@
 	<!-- <body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 50}"> -->
 	<body>
 		{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-				{% include 'comparagrow/component/slide_login.html' %}
+				{% include 'comparagrow/component/slide_menu.html' %}
+				{% block sidefilter %}
+
+				{% endblock %}
 		{% else %}
 
 		{% endif %}
+
+
+
+
 		<div class="loading-overlay">
 			<div class="bounce-loader">
 				<div class="bounce1"></div>
@@ -68,7 +75,9 @@
 
 		<div class="body">
 			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-			{% include 'comparagrow/porto/header_mobile.html' %}
+				{% block sidefilterbtn %}
+					{% include 'comparagrow/porto/header_mobile.html' %}
+				{% endblock %}
 			{% else %}
 			{% include 'comparagrow/porto/header.html' %}
 			{% endif %}
@@ -171,7 +180,11 @@
     {% block js %}
 
     {% endblock %}
-
+		<script>
+		function enviar(){
+	    window.open('{% url "social:begin" "facebook" %}','_self');
+	  }
+		</script>
 	</body>
 </html>
 

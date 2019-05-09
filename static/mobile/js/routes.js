@@ -22,11 +22,23 @@ var routes = [
     url: './pages/shop.html',
     name: 'shop',
   },
+
   //products
   {
     path: '/products/',
     url: './pages/products.html',
     name: 'products',
+    options: {
+      animate: true,
+      ignoreCache:true,
+      reloadCurrent:true,
+    },
+  },
+  //products
+  {
+    path: '/filtros/',
+    url: './pages/filtros.html',
+    name: 'filtros',
     options: {
       animate: true,
       ignoreCache:true,
