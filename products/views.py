@@ -20,6 +20,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from django.db.models.functions import Substr
+
 # from django import template
 #
 # register = template.Library()
@@ -78,9 +80,10 @@ def search(request):
     #busqueda de termino
     products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
     #barras laterales
-    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
-    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    shop_list_left = products_list.values('shop__name','shop__pk').annotate(dcount=Count('shop')).annotate(firstchart=Substr('shop__name',1,1)).order_by('shop__name')
+    # shop_list_left_first_chart = shop_list_left.annotate(firstchart=Substr('shop__name',1,1)).order_by('firstchart')
+    category_list_left = products_list.values('category__name','category__pk').annotate(dcount=Count('category')).annotate(firstchart=Substr('category__name',1,1)).order_by('category__name')
+    brand_list_left = products_list.values('brand').annotate(dcount=Count('brand')).annotate(firstchart=Substr('brand',1,1)).order_by('brand')
 
     shops = False
     shop_list_selected = []
@@ -255,8 +258,8 @@ def categorias(request,slug):
 
     productos_lista = productos_lista.filter(category__in=children)
 
-    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).order_by('shop__name')
-    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).order_by('brand')
+    tiendas = productos_lista.values('shop__name','shop__pk').annotate(dcount=Count('shop')).annotate(firstchart=Substr('shop__name',1,1)).order_by('shop__name')
+    marcas = productos_lista.values('brand').annotate(dcount=Count('brand')).annotate(firstchart=Substr('brand',1,1)).order_by('brand')
     categorias2 = productos_lista.values('category__name','category__pk').annotate(dcount=Count('category')).order_by('category__name')
 
 
