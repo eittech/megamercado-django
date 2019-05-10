@@ -308,29 +308,29 @@ font-weight: 100;
 <script>
 	$(document).ready(function(){
 		console.log('PASO');
-	    var btns = $('.btn-filter-brand').click(function() {
-					console.log(this.id);
-	        if (this.id == 'all') {
-	          $('#parent-brand > div').fadeIn(450);
-	        } else {
-	          var el = $('.' + this.id).fadeIn(450);
-	          $('#parent-brand > div').not(el).hide();
-	        }
-	        $('.btn-filter-brand').removeClass('active');
-	        $(this).addClass('active');
-	      });
+		var btns = $('.btn-filter-brand').click(function() {
+				console.log(this.id);
+				if (this.id == 'brand-all') {
+					$('#parent-brand > div').fadeIn(450);
+				} else {
+					var el = $('.' + this.id).fadeIn(450);
+					$('#parent-brand > div').not(el).hide();
+				}
+				$('.btn-filter-brand').removeClass('active');
+				$(this).addClass('active');
+			});
 
-				var btns = $('.btn-filter-shop').click(function() {
-						console.log(this.id);
-		        if (this.id == 'all') {
-		          $('#parent-shop > div').fadeIn(450);
-		        } else {
-		          var el = $('.' + this.id).fadeIn(450);
-		          $('#parent-shop > div').not(el).hide();
-		        }
-		        $('.btn-filter-shop').removeClass('active');
-		        $(this).addClass('active');
-		      });
+			var btns = $('.btn-filter-shop').click(function() {
+					console.log(this.id);
+					if (this.id == 'shop-all') {
+						$('#parent-shop > div').fadeIn(450);
+					} else {
+						var el = $('.' + this.id).fadeIn(450);
+						$('#parent-shop > div').not(el).hide();
+					}
+					$('.btn-filter-shop').removeClass('active');
+					$(this).addClass('active');
+				});
 
 
 			try {
