@@ -1,0 +1,132 @@
+{% load static %}
+{% load menu_categorias %}
+{% load l10n %}
+{% load humanize %}
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	<div class="container">
+		<div class="row">
+      <div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
+        <h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
+        <h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>PRECIO</strong></h6>
+        <form id="formulario_filtro" method="post" action="">
+          {% csrf_token %}
+          <input type="hidden" name="tienda" id="tienda_form_id" value="{{ tienda }}">
+          <input type="hidden" name="categoria" id="categoria_form_id" value="{{ categoria }}">
+          <input type="hidden" name="texto" id="texto_form_id" value="{{ texto }}">
+          <input type="hidden" name="marca" id="marca_form_id" value="{{ marca }}">
+          <input type="hidden" name="page" id="page_id" value="{{ productos.number }}">
+
+          <input type="hidden" name="order_by" id="order_by_id" value="min">
+          <div class="form-inline" style="margin-left:15px;">
+          <input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
+           <input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
+          </div>
+          <button type="submit" style="font-size:12px;background: #01b22c;border-color: #01b22c;margin-left: 15px;width: 100px;" class="btn btn-primary mb-2">
+            <i class="fas fa-cannabis"></i> Filtrar</button>
+
+          <h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>CATEGORIAS</strong></h6>
+          {% if categorias2.count > 5 %}
+          <ul style="
+          font-size: 14px;
+
+    font-weight: 100;
+    list-style: none;
+    margin-left: -25px;
+  ">
+          {% else %}
+            <ul style="
+            font-size: 14px;
+
+      font-weight: 100;
+      list-style: none;
+      margin-left: -25px;
+  ">
+          {% endif %}
+          {% for category in categorias2 %}
+
+            {% if forloop.counter < 6 %}
+            <li class="p-b-6">
+            {% if category.category__pk in categoria_filtro %}
+            <a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;">
+              <input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+              {{ category.category__name }} ({{ category.dcount }})
+            </a>
+            {% else %}
+            <a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;">
+              <input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
+              {{ category.category__name }}  ({{ category.dcount }})
+            </a>
+            {% endif %}
+            </li>
+            {% endif %}
+            {% endfor %}
+            <li>
+              <button type="button" data-toggle="modal" data-target="#categorylistmodal" style="font-size:12px;background: #01b22c;border-color: #01b22c;width: 100px;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button></li>
+
+          </ul>
+          <div class="modal fade" id="categorylistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="largeModalLabel">Lista de Categorias</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
+                        <input class="seleccionar_category_all" onclick="seleccionar('css_category','seleccionar_category_all')" type="checkbox" style="margin-right: 5px;margin-top: 5px;">
+                        Seleccionar todos
+                      </a>
+                    </div>
+
+
+                  </div>
+                  <div class="row">
+                    {% for category in categorias2 %}
+
+                    {% if category.category__pk in categoria_filtro %}
+                    <div class="col-sm-4">
+
+                    <a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
+                      <input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+                     {{ category.category__name }} ({{ category.dcount }})
+                    </a>
+                  </div>
+
+                    {% else %}
+                    <div class="col-sm-4">
+
+                    <a class="filter-link stext-106 trans-04" style="width: max-content;">
+                      <input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
+                      {{ category.category__name }} ({{ category.dcount }})
+                    </a>
+                  </div>
+
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-light" data-dismiss="modal"
+                  style="    background-color: #01b22c;
+          border: #01b22c;
+          color: #fff;">Cerrar</button>
+                  <button type="button" onclick="limpiar('css_brand')" class="btn btn-light" >Limpiar</button>
+                  <button type="submit" class="btn btn-light"
+                  style="    background-color: #672d93;
+          border: #672d93;
+          color: #fff;">Filtrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {% include 'comparagrow/component/barra_lateral.html' %}
+        </form>
+
+      </div>
+	</div>
+	</div>
+</div>

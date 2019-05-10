@@ -48,25 +48,51 @@
 
 
         </div>
-
         <div class="row">
-        {% for shop in shop_list_left %}
-
-        <div class="col-sm-4 boxshop">
-        {% if shop.shop__pk in shop_list_selected %}
-        <a class="filter-link stext-106 trans-04 filter-link-active name" style="width: max-content;">
-          <input class="css_shop" type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
-          {{ shop.shop__name }}  ({{ shop.dcount }})
-        </a>
-        {% else %}
-        <a class="filter-link stext-106 trans-04 name" style="width: max-content;">
-          <input class="css_shop" type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">
-          {{ shop.shop__name }} ({{ shop.dcount }})
-        </a>
-        {% endif %}
-        </div>
-        {% endfor %}
+            <div class="col-10">
+                <div class="row" id="parent-shop">
+                  {% for shop in shop_list_left %}
+                    <div class="col-sm-4 boxshop shop-{{ shop.firstchart }}">
+                      <!-- {{ shop.shop__name|slice:"0:1" }} -->
+                      {% if shop.shop__pk in shop_list_selected %}
+                        <a class="filter-link stext-106 trans-04 filter-link-active name" style="width: max-content;">
+                          <input class="css_shop" type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
+                          {{ shop.shop__name }}  ({{ shop.dcount }})
+                        </a>
+                      {% else %}
+                        <a class="filter-link stext-106 trans-04 name" style="width: max-content;">
+                          <input class="css_shop" type="checkbox" id="checkbox_shop_{{ forloop.counter }}" name="checkbox_shop[]" value="{{ shop.shop__pk }}" style="margin-right: 5px;margin-top: 5px;">
+                          {{ shop.shop__name }} ({{ shop.dcount }})
+                        </a>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+            </div>
+            <div class="col-1">
+              <div class="row">
+                <div class="col">
+                  <a class="btn btn-light btn-filter-brand" id="brand-all" style="margin-top: -8px;padding: 1px 5px;height: 23px;font-size: 13px;width: 47px;">
+                  <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+                  Todas
+                  </a>
+                </div>
+              </div>
+              {% regroup shop_list_left by firstchart as listado_primera_letra %}
+              {% for listado in listado_primera_letra|dictsort:0 %}
+                  <div class="row">
+                    <div class="col">
+                      <a class="btn btn-light btn-filter-shop" id="shop-{{ listado.grouper }}" style="margin-top: -8px;padding: 1px 5px;height: 23px;font-size: 13px;width: 22px;">
+                      <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+                      {{ listado.grouper }}
+                      </a>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
       </div>
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal"
@@ -137,31 +163,56 @@ color: #fff;">Filtrar</button>
 
         </div>
         <div class="row">
-          {% for marc in brand_list_left %}
-          {% if marc.brand == "" %}
+            <div class="col-10">
+                <div class="row" id="parent-brand">
+                  {% for marc in brand_list_left %}
+                  {% if marc.brand == "" %}
 
-          {% else %}
-          {% if marc.brand in brand_list_selected %}
-          <div class="col-sm-4 box">
+                  {% else %}
+                  {% if marc.brand in brand_list_selected %}
+                  <div class="col-sm-4 box brand-{{ marc.firstchart }}">
 
-          <a class="filter-link stext-106 trans-04 filter-link-active name" style="width: max-content;">
-            <input class="css_brand" type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">
-            {{ marc.brand }} ({{ marc.dcount }})
-          </a>
-        </div>
+                  <a class="filter-link stext-106 trans-04 filter-link-active name" style="width: max-content;">
+                    <input class="css_brand" type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" checked style="margin-right: 5px;margin-top: 5px;">
+                    {{ marc.brand }} ({{ marc.dcount }})
+                  </a>
+                </div>
 
-          {% else %}
-          <div class="col-sm-4 box">
+                  {% else %}
+                  <div class="col-sm-4 box brand-{{ marc.firstchart }}">
 
-          <a class="filter-link stext-106 trans-04 name" style="width: max-content;">
-            <input class="css_brand" type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">
-            {{ marc.brand }} ({{ marc.dcount }})
-          </a>
-        </div>
+                  <a class="filter-link stext-106 trans-04 name" style="width: max-content;">
+                    <input class="css_brand" type="checkbox" id="checkbox_marca_{{ forloop.counter }}" name="checkbox_marca[]" value="{{ marc.brand }}" style="margin-right: 5px;margin-top: 5px;">
+                    {{ marc.brand }} ({{ marc.dcount }})
+                  </a>
+                </div>
 
-          {% endif %}
-          {% endif %}
-          {% endfor %}
+                  {% endif %}
+                  {% endif %}
+                  {% endfor %}
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="row">
+                <div class="col">
+                  <a class="btn btn-light btn-filter-brand" id="brand-all" style="margin-top: -8px;padding: 1px 5px;height: 23px;font-size: 13px;width: 47px;">
+                  <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+                  Todas
+                  </a>
+                </div>
+              </div>
+              {% regroup brand_list_left by firstchart as listado_primera_letra %}
+              {% for listado in listado_primera_letra|dictsort:0 %}
+                  <div class="row">
+                    <div class="col">
+                      <a class="btn btn-light btn-filter-brand" id="brand-{{ listado.grouper }}" style="margin-top: -8px;padding: 1px 5px;height: 23px;font-size: 13px;width: 22px;">
+                      <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+                      {{ listado.grouper }}
+                      </a>
+                    </div>
+                  </div>
+              {% endfor %}
+            </div>
       </div>
       </div>
       <div class="modal-footer">

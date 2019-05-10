@@ -30,8 +30,8 @@
           <div class="row">
             <div class="col-1">
               {% if user.is_authenticated %}
-              <a onclick="FavoriteProduct('{{ item.id }}')">
-              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_{{ item.id }}"></i>
+              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" onclick="FavoriteProduct('{{ item.id }}')">
+              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
               </a>
               {% else %}
               <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" data-toggle="modal" data-target="#modal_login">

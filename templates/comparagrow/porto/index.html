@@ -58,7 +58,7 @@
 
 </style>
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');height: 180px;">
+<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');height: 180px;background-size: 100% 179px;">
 	<div class="container-fluid">
 		<div class="row justify-content-center">
 			<div class="col-lg-12">
@@ -152,8 +152,7 @@
 		<h2 style="font-weight: 300;">Destacados</h2>
 	</div>
 </div>
-
-<div class="owl-carousel owl-theme" id="owl-destacados" data-plugin-options="{'items': 6,'loop': false, 'nav': true, 'dots': false, 'slideBy':6}">
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
   {% for item in productos_cd %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -163,18 +162,7 @@
 		          <a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
 		        </div>
 		        <a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-							{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-							<img src="/static/img/loading2.gif"
-							data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}"
-							data-original="{{ item.id|imagenproducturl:"0" }}"
-							style="height: 210px;padding: 2px;font-weight: 100;" class="card-img-top">
-							{% else %}
-							<img src="/static/img/loading2.gif"
-							data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}"
-							data-original="{{ item.id|imagenproducturl:"0" }}"
-							style="max-width: 224px;height: 210px;padding: 2px;font-weight: 100;" class="card-img-top">
-							{% endif %}
-
+							<img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
@@ -188,19 +176,20 @@
 		            </div>
 		          </div>
 		          <div class="row">
-		            <div class="col-1">
+								<div class="col-1">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('de{{ item.id }}','{{ item.id }}')">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_de{{ item.id }}"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" onclick="FavoriteProduct('{{ item.id }}')">
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% else %}
-		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" data-toggle="modal" data-target="#modal_login">
+		              <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-primary" style="margin-top: -8px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -222,7 +211,7 @@
 	</div>
 </div>
 
-<div class="owl-carousel owl-theme" data-plugin-options="{'items': 6,'loop': false, 'nav': true, 'dots': false}">
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
 	{% for item in productos_ur %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -232,7 +221,7 @@
 		          <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
 		        </div>
 		        <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-		          <img src="/static/img/loading2.gif" data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}" data-original="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
+		          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
@@ -246,21 +235,21 @@
 		            </div>
 		          </div>
 		          <div class="row">
-		            <div class="col-1">
+								<div class="col-1">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('ur{{ item.id }}','{{ item.id }}')">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_ur{{ item.id }}"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" onclick="FavoriteProduct('{{ item.id }}')">
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% else %}
-		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" data-toggle="modal" data-target="#modal_login">
+		              <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-primary" style="margin-top: -8px;" href="/productos/detalle/{{ item.id }}" target="_blank">
-		              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;"> -->
-									ver detalle
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              ver detalle
 		              </a>
 		            </div>
 		        </div>
@@ -281,7 +270,7 @@
 	</div>
 </div>
 
-<div class="owl-carousel owl-theme" data-plugin-options="{'items': 6,'loop': false, 'nav': true, 'dots': false}">
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
 	{% for item in productos_ci %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -291,7 +280,7 @@
 		          <a href="/productos/publicity/redirect/carrusel_tugrow/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
 		        </div>
 		        <a href="/productos/publicity/redirect/carrusel_tugrow/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
-		          <img src="/static/img/loading2.gif" data-plugin-lazyload data-plugin-options="{'effect' : 'fadeIn'}" data-original="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top" alt="...">
+							<img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
@@ -305,21 +294,21 @@
 		            </div>
 		          </div>
 		          <div class="row">
-		            <div class="col-1">
+								<div class="col-1">
 		              {% if user.is_authenticated %}
-		              <a onclick="FavoriteProduct('at{{ item.id }}','{{ item.id }}')">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;" id="favorite_at{{ item.id }}"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" onclick="FavoriteProduct('{{ item.id }}')">
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% else %}
-		              <a data-toggle="modal" data-target="#modal_login">
-		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 19px;color:#424242;cursor:pointer;"></i>
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 5px;height: 23px;" data-toggle="modal" data-target="#modal_login">
+		              <!-- <a data-toggle="modal" data-target="#modal_login"> -->
+		              <i class="{{ user.id|is_favorite:item.id }}" style="font-size: 13px;/* color:#424242; */cursor:pointer;" id="favorite_{{ item.id }}"></i>
 		              </a>
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-primary" style="margin-top: -8px;" href="/productos/detalle/{{ item.id }}" target="_blank">
-		              <!-- <img src="/static/img/lupa.png" alt="" style="height: 25px;width:25px;font-weight: 100;right: 0px;position: absolute;"> -->
-									ver detalle
+		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              ver detalle
 		              </a>
 		            </div>
 		        </div>
@@ -339,33 +328,6 @@
 <script src="/static/js/notify.js"></script>
 
 <script>
-
-$(document).ready(function(){
-	owl = $('#owl-destacados')
-  owl.owlCarousel({
-    center: true,
-    loop: false,
-    margin: 20,
-    items: 2,
-    responsive: {
-      0: {
-        items: 1,
-        navigation: true,
-        nav: true,
-        slideBy: 2 // <!-- HERE
-      },
-      640: {
-        items: 6,
-        navigation: true,
-        nav: true,
-        slideBy: 6 // <!-- HERE
-      }
-    },
-    scrollPerPage: true,
-    navigation: true
-  }).css("z-index", 0)
-});
-
 
 	function FavoriteProduct(idi,id){
 		$.ajax({

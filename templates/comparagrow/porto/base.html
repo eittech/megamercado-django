@@ -189,7 +189,14 @@
 </html>
 
 {% if user.is_authenticated %}
-
+		{% include 'comparagrow/component/modal_register.html' %}
+		{% if request.GET.error == 'not_access' %}
+		<script>
+				$( document ).ready(function() {
+						$('#modal_login').modal('show');
+				});
+		</script>
+		{% endif %}
 {% else %}
 		{% include 'comparagrow/component/modal_register.html' %}
 		{% if request.GET.error == 'not_access' %}

@@ -2,11 +2,13 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <!-- <div class="modal-header">
-        Registro
+        Registro2
       </div> -->
       <div class="modal-body">
         <div class="row justify-content-md-center" style="margin-top: 30px;color:#672d93">
-          <h2 class="">Iniciar sesión</h2>
+          <div class="col text-center">
+            <h2 class="">Iniciar sesión</h2>
+          </div>
         </div>
         <div class="row justify-content-md-center" >
           {% if request.GET.error == 'not_access' %}
@@ -95,7 +97,9 @@ function ocultar_mostrar(modal,modal2){
 }
 </script>
     <div class="row justify-content-md-center" style="margin-top: 5px;">
-      <span>ó iniciar sesión con:</span>
+      <div class="col text-center">
+        <span>ó iniciar sesión con:</span>
+      </div>
     </div>
     <div class="row" style="margin-top: 5px;margin-left: 3px;">
       <div class="col-sm-6">
@@ -116,7 +120,7 @@ function ocultar_mostrar(modal,modal2){
       </a>
     </div>
   </div>
-    
+
 
       <div class="row justify-content-md-center" style="margin-top: 20px;margin-left:20px; margin-right:20px;">
         <p class=""><small style="font-size:16px">¿No tienes una cuenta?

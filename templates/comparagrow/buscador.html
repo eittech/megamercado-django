@@ -14,184 +14,57 @@
 
 
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-{% block sidefilter %}
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	<div class="container">
-		<div class="row">
-		<div class="col-sm-12 col-md-2" style="border-right: 0.5px solid #f6f6f6;margin-right: 0px;">
-			<h4 style="margin-top:15px;font-weight: 200;">FILTRAR POR</h4>
-			<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>PRECIO</strong></h6>
-				<form id="formulario_filtro" method="get" action="">
+		{% block sidefilter %}
+				{% include 'comparagrow/component/side_panel_filter.html' %}
+				<style>
 
-				{% csrf_token %}
-				<input type="hidden" name="q" id="q_id" value="{{ term_q }}">
-				<input type="hidden" name="page" id="page_id" value="{{ products.number }}">
-				<input type="hidden" name="order_by" id="order_by_id" value="min">
-				<div class="form-inline" style="margin-left: 15px;">
-				<input type="text" name="min_price" value="{{ min_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMin" placeholder="Min">
-				<input type="text" name="max_price" value="{{ max_price }}" style="font-size:12px; width:72px;" class="form-control mb-2 mr-sm-2" id="inlineFormInputPriceMax" placeholder="Max">
-				</div>
-				<button type="submit" style="font-size:12px;background: #01b22c;border-color: #01b22c;margin-left: 15px;width: 100px;" class="btn btn-primary mb-2">
-					<i class="fas fa-cannabis"></i> Filtrar</button>
+				  .sidenav {
+				    height: 100%; /* 100% Full-height */
+				    width: 0; /* 0 width - change this with JavaScript */
+				    position: fixed; /* Stay in place */
+				    z-index: 2000; /* Stay on top */
+				    top: 0; /* Stay at the top */
+				    left: 0;
+				    background-color: #fff; /* Black*/
+				    overflow-x: hidden; /* Disable horizontal scroll */
+				    padding-top: 60px; /* Place content 60px from the top */
+				    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+				  }
 
-					<h6 style="margin-top:15px;color:#01b22c;font-weight: 300;"><strong>CATEGORIAS</strong></h6>
-					<ul style="font-size: 14px;font-weight: 100;list-style: none;margin-left: -25px;">
-						{% for category in category_list_left %}
-								{% if forloop.counter < 6 %}
-								<li class="p-b-6">
-										{% if category.category__pk in category_list_selected %}
-												<a class="filter-link stext-106 trans-04 filter-link-active" style="display:flex;width: max-content;">
-													<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
-													{{ category.category__name }} ({{ category.dcount }})
-												</a>
-										{% else %}
-												<a class="filter-link stext-106 trans-04" style="display:flex;width: max-content;">
-													<input class="css_category" onclick="checkboxFilter('#checkbox_categoria_{{ forloop.counter }}')" type="checkbox"  value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
-													{{ category.category__name }}  ({{ category.dcount }})
-												</a>
-										{% endif %}
-								</li>
-								{% endif %}
-						{% endfor %}
-						<li>
-							<button type="button" data-toggle="modal" data-target="#categorylistmodal" style="font-size:12px;background: #01b22c;border-color: #01b22c;width: 100px;" class="btn btn-primary mb-2"><i class="fas fa-cannabis"></i> Ver todas</button>
-						</li>
-					</ul>
-					<div class="modal fade" id="categorylistmodal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title" id="largeModalLabel">Lista de Categorias</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							</div>
-							<div class="modal-body">
-								<div class="row">
-									<div class="col-sm-3">
-										<a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
-											<input class="seleccionar_category_all" onclick="seleccionar('css_category','seleccionar_category_all')" type="checkbox" style="margin-right: 5px;margin-top: 5px;">
-											Seleccionar todos
-										</a>
-									</div>
+				  /* Position and style the close button (top right corner) */
+				  .sidenav .closebtn {
+				    position: absolute;
+				    top: 0;
+				    right: 25px;
+				    font-size: 36px;
+				    margin-left: 50px;
+				  }
 
+				  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+				  #main {
+				    transition: margin-left .5s;
+				    padding: 20px;
+				  }
 
-								</div>
-								<div class="row">
-									{% for category in category_list_left %}
+				  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+				  @media screen and (max-height: 450px) {
+				    .sidenav {padding-top: 15px;}
+				    .sidenav a {font-size: 18px;}
+				  }
+				</style>
 
-									{% if category.category__pk in category_list_selected %}
-									<div class="col-sm-4">
+				<script>
+				  /* Open the sidenav */
+				function openNav() {
+				  document.getElementById("mySidenav").style.width = "100%";
+				}
 
-									<a class="filter-link stext-106 trans-04 filter-link-active" style="width: max-content;">
-										<input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" checked style="margin-right: 5px;margin-top: 5px;">
-									 {{ category.category__name }} ({{ category.dcount }})
-									</a>
-								</div>
-
-									{% else %}
-									<div class="col-sm-4">
-
-									<a class="filter-link stext-106 trans-04" style="width: max-content;">
-										<input class="css_category" type="checkbox" id="checkbox_categoria_{{ forloop.counter }}" name="checkbox_categoria[]" value="{{ category.category__pk }}" style="margin-right: 5px;margin-top: 5px;">
-										{{ category.category__name }} ({{ category.dcount }})
-									</a>
-								</div>
-
-									{% endif %}
-									{% endfor %}
-							</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-light" data-dismiss="modal"
-								style="    background-color: #01b22c;
-				border: #01b22c;
-				color: #fff;">Cerrar</button>
-								<button type="button" onclick="limpiar('css_brand')" class="btn btn-light" >Limpiar</button>
-								<button type="submit" class="btn btn-light"
-								style="    background-color: #672d93;
-				border: #672d93;
-				color: #fff;">Filtrar</button>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				{% include 'comparagrow/component/barra_lateral_buscador.html' %}
-
-				</form>
-
-		</div>
-	</div>
-	</div>
-</div>
-
-<style>
-
-  .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 2000; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #fff; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
-
-  /* The navigation menu links */
-  /* .sidenav a {
-    padding: -1px 0px 0px 0px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  } */
-
-  /* When you mouse over the navigation links, change their color */
-  /* .sidenav a:hover {
-    color: #000;
-  } */
-
-  /* Position and style the close button (top right corner) */
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-
-  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-  #main {
-    transition: margin-left .5s;
-    padding: 20px;
-  }
-
-  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-</style>
-
-<script>
-  /* Open the sidenav */
-function openNav() {
-  document.getElementById("mySidenav").style.width = "100%";
-}
-
-/* Close/hide the sidenav */
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-
-{% endblock %}
-
+				/* Close/hide the sidenav */
+				function closeNav() {
+				  document.getElementById("mySidenav").style.width = "0";
+				}
+				</script>
+		{% endblock %}
 {% else %}
 
 {% endif %}
@@ -368,21 +241,27 @@ function closeNav() {
 							<div class="col-sm-12 col-md-6">
 
 								<h4 style="margin-top:15px;font-weight: 200;font-size: 37px;">
-								{{ term_q }} <a onclick="AddFavoriteSearch();" class="btn btn-primary" style="/* width: 100%; */height: 28px;letter-spacing: 0px;padding-top: 4px;background-color: #fff;border-color: #777;color:#777;">
-										<i class="far fa-heart" id="search_favorite"></i> Guardar  búsqueda</a>
+								{{ term_q }}
+								<a onclick="AddFavoriteSearch();" class="btn btn-primary" style="/* width: 100%; */height: 28px;letter-spacing: 0px;padding-top: 4px;background-color: #fff;border-color: #777;color:#777;">
+										<i class="far fa-heart" id="search_favorite"></i> Guardar  búsqueda
+								</a>
 								<!-- <a href="http://127.0.0.1:8000/productos/search?csrfmiddlewaretoken=wae9uKLkeW9QAZ21VvzUh3tKxM14tfsL25EtYrf6VNa4HYiqAPhNuYtKRNh4mLk5&amp;q=semillas">click here</a> -->
 								</h4>
 							</div>
 							<div class="col-sm-12 col-md-6 text-right">
 								<div class="btn-group" role="group" style="
-    margin-right: 30px;
+    {% if request.user_agent.is_mobile %}{% else %}{% endif %}
     margin-top: 10px;
 ">
+{% if request.user_agent.is_mobile %}
+
+{% else %}
 <label for="" style="
 margin-top: 6px;
 margin-right: 9px;
 font-weight: 100;
 ">Ordenar por: </label>
+{% endif %}
 							    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="
     border-top-left-radius: 0;
 		background-color: #01b22c;
@@ -429,16 +308,31 @@ font-weight: 100;
 <script>
 	$(document).ready(function(){
 		console.log('PASO');
-	    // var $btns = $('.btn').click(function() {
-	    //     if (this.id == 'all') {
-	    //       $('#parent > div').fadeIn(450);
-	    //     } else {
-	    //       var $el = $('.' + this.id).fadeIn(450);
-	    //       $('#parent > div').not($el).hide();
-	    //     }
-	    //     $btns.removeClass('active');
-	    //     $(this).addClass('active');
-	    //   });
+	    var btns = $('.btn-filter-brand').click(function() {
+					console.log(this.id);
+	        if (this.id == 'all') {
+	          $('#parent-brand > div').fadeIn(450);
+	        } else {
+	          var el = $('.' + this.id).fadeIn(450);
+	          $('#parent-brand > div').not(el).hide();
+	        }
+	        $('.btn-filter-brand').removeClass('active');
+	        $(this).addClass('active');
+	      });
+
+				var btns = $('.btn-filter-shop').click(function() {
+						console.log(this.id);
+		        if (this.id == 'all') {
+		          $('#parent-shop > div').fadeIn(450);
+		        } else {
+		          var el = $('.' + this.id).fadeIn(450);
+		          $('#parent-shop > div').not(el).hide();
+		        }
+		        $('.btn-filter-shop').removeClass('active');
+		        $(this).addClass('active');
+		      });
+
+
 			try {
 		    var search = $("#search").on('input',function(){
 		        // $btns.removeClass('active');

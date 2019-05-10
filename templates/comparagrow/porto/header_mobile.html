@@ -4,11 +4,15 @@
 {% load cache %}
 
 {% if user.is_authenticated %}
-{% if user.groups.all.0|stringformat:"s" != "cliente" %}
+{% if user.groups.all.0|stringformat:"s" != "cliente" and not backends.associated %}
 <div class="container-fluid">
-  <div class="row alert-danger">
+  <div class="row alert-info">
     <div class="col-sm-12">
-        <strong><i class="fas fa-exclamation-triangle"></i>No olvides verificar tu correo!</strong> Revisa el buzón de spam, en algunos casos llega allí.<i class="fas fa-cannabis"></i> <i class="far fa-cannabis"></i>
+        <strong>
+          Verifica tu correo!
+        </strong>
+        Revisa el buzón de spam, en algunos casos llega allí.
+        <i class="fas fa-cannabis"></i>
     </div>
   </div>
 </div>
@@ -35,14 +39,18 @@
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
                 <a class="ws-nowrap" href="/alertas"><i class="fas fa-bell"></i> Alertas</a>
               </li>
+              <li style="margin-left:10px;"></li>
+              <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                <a class="ws-nowrap" href="/logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+              </li>
               {% else %}
 
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
-                <a class="ws-nowrap" href="/login"><i class="fas fa-user"></i> Login</a>
+                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-sign-in-alt"></i> Login</a>
               </li>
               <li style="margin-left:10px;"></li>
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
-                <a class="ws-nowrap" href="/register"><i class="fas fa-user"></i> Registrate</a>
+                <a class="ws-nowrap" href="/register"><i class="fas fa-user"></i> Regístrate</a>
               </li>
 
               {% endif %}
@@ -98,7 +106,7 @@
                       {% csrf_token %}
                       <div class="simple-search input-group w-100">
 
-                        <input class="form-control border-0 text-1" id="headerSearch" name="texto" type="search" value="" placeholder="Busca aqui">
+                        <input class="form-control border-0 text-1" id="headerSearch" name="q" type="search" value="" placeholder="Busca aquí">
                         <span class="input-group-append bg-light border-0">
                           <button class="btn" type="submit">
                             <img src="{% static 'img/lupa.png' %}" style="height: 21px;">
