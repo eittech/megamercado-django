@@ -64,54 +64,7 @@
 
 
 {% block content %}
-<style>
-	.card-header {
-		border-radius: 0 0 0 0;
-	border-bottom: 1px solid #672d93 !important;
-	}
-	.card-header {
-		border-radius: 0 0 0 0;
-	padding: .75rem 1.25rem;
-	margin-bottom: 0;
-	color: inherit;
-	background-color: #672d93 !important;
-	border-bottom: 1px solid #672d93 !important;
-	}
-	.card-header > a {
-		color:#fff;
-	}
-	.card-header:hover > a {
-		color:#fff;
-	}
-
-	.card-header:first-child{
-		border-radius: 0 0 0 0 !important;
-
-	}
-
-	.card-header:hover {
-		border-radius: 0 0 0 0;
-		color:#fff;
-		border-bottom: 1px solid #01b22c !important;
-		background-color: #01b22c !important;
-		border-bottom: 1px solid #01b22c !important;
-	}
-
-	.card:hover > .card-header{
-		color:#fff;
-		border-bottom: 1px solid #01b22c !important;
-		background-color: #01b22c !important;
-		border-bottom: 1px solid #01b22c !important;
-	}
-
-	.card:hover{
-		/* color:#fff; */
-		border: 1px solid #01b22c !important;
-		border-radius: 0 0 0 0;
-		/* background-color: #01b22c !important; */
-		/* border-bottom: 1px solid #01b22c !important; */
-	}
-</style>
+{% include 'comparagrow/component/style_items.html' %}
 
 			<script>
 				function enviarFiltros(filtro,valor){
@@ -253,7 +206,7 @@
 						<div class="row">
 							<div class="{% if request.user_agent.is_mobile %}col{% else %}col-sm-12 col-md-6{% endif %}">
 								{% for item in categorias.get_ancestors %}
-								<a href="/productos/categorias/{{ item.slug }}" style="font-weight: 100;color: #01b22c;">
+								<a href="/productos/categorias/{{ item.slug }}" style="font-weight: 100;color: #000;">
 									{{ item.name }}
 									<i class="fa fa-angle-right" aria-hidden="true"></i>
 								</a>
@@ -293,6 +246,21 @@ font-weight: 100;
 										<a class="dropdown-item" style="cursor:pointer;" onclick="enviarFiltros('order_by_id','dest')">Mejor resultado</a>
 							    </div>
 							  </div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<ul class="nav navbuttons">
+									{% for item in categorias.get_descendants %}
+									<li class="nav-item">
+									<a href="/productos/categorias/{{ item.slug }}" class="btn btn-light" style="font-weight: 100;color: #000;margin-right:3px;">
+										{{ item.name }}
+										<i class="fa fa-angle-right" aria-hidden="true"></i>
+									</a>
+									{% endfor %}
+									</li>
+								</ul>
 							</div>
 						</div>
 						<div class="row">

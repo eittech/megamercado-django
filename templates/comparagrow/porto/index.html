@@ -8,55 +8,7 @@
 
 
 {% block content %}
-<style>
-	.card-header {
-		border-radius: 0 0 0 0;
-	border-bottom: 1px solid #672d93 !important;
-	}
-	.card-header {
-		border-radius: 0 0 0 0;
-	padding: .75rem 1.25rem;
-	margin-bottom: 0;
-	color: inherit;
-	background-color: #672d93 !important;
-	border-bottom: 1px solid #672d93 !important;
-	}
-	.card-header > a {
-		color:#fff;
-	}
-	.card-header:hover > a {
-		color:#fff;
-	}
-
-	.card-header:first-child{
-		border-radius: 0 0 0 0 !important;
-
-	}
-
-	.card-header:hover {
-		border-radius: 0 0 0 0;
-		color:#fff;
-		border-bottom: 1px solid #01b22c !important;
-		background-color: #01b22c !important;
-		border-bottom: 1px solid #01b22c !important;
-	}
-
-	.card:hover > .card-header{
-		color:#fff;
-		border-bottom: 1px solid #01b22c !important;
-		background-color: #01b22c !important;
-		border-bottom: 1px solid #01b22c !important;
-	}
-
-	.card:hover{
-		/* color:#fff; */
-		border: 1px solid #01b22c !important;
-		border-radius: 0 0 0 0;
-		/* background-color: #01b22c !important; */
-		/* border-bottom: 1px solid #01b22c !important; */
-	}
-
-</style>
+{% include 'comparagrow/component/style_items.html' %}
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
 <section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/banner.png');height: 180px;background-size: 100% 179px;">
 	<div class="container-fluid">
@@ -144,15 +96,14 @@
 	</div>
 </section>
 {% endif %}
-
-
+<div class="container">
 <div class="row text-center">
 	<div class="col">
 
 		<h2 style="font-weight: 300;">Destacados</h2>
 	</div>
 </div>
-<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 5,"slideBy":5}, "1199": {"items": 5,"slideBy":5},"1900": {"items": 5,"slideBy":5}}, "loop": false, "nav": true, "dots": false}'>
   {% for item in productos_cd %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -189,7 +140,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -211,7 +162,7 @@
 	</div>
 </div>
 
-<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 5,"slideBy":5}, "1199": {"items": 5,"slideBy":5},"1900": {"items": 5,"slideBy":5}}, "loop": false, "nav": true, "dots": false}'>
 	{% for item in productos_ur %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -248,7 +199,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -270,7 +221,7 @@
 	</div>
 </div>
 
-<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 6,"slideBy":6}, "1199": {"items": 6,"slideBy":6}}, "loop": false, "nav": true, "dots": false}'>
+<div class="owl-carousel owl-theme" data-plugin-options='{"lazyLoad": true,"responsive": {"0": {"items": 2,"slideBy":2}, "479": {"items": 2,"slideBy":2}, "768": {"items": 2,"slideBy":2}, "979": {"items": 5,"slideBy":5}, "1199": {"items": 5,"slideBy":5},"1900": {"items": 5,"slideBy":5}}, "loop": false, "nav": true, "dots": false}'>
 	{% for item in productos_ci %}
     <div class="appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">
 			<div class="col" style="margin-top:5px; margin-bottom:5px;padding-right:5px;padding-left:5px;font-weight: 100;">
@@ -307,7 +258,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -319,6 +270,7 @@
 	</div>
 
   {% endfor %}
+</div>
 </div>
 
 {% endblock %}

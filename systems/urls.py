@@ -18,6 +18,8 @@ urlpatterns = [
     path('', views.home, name='home_view'),
     path('porto', views.homeporto, name='home_porto'),
 
+    path('marketplace/<int:id>', views.marketplace, name='mobile'),
+
     #test mobile
     path('index.html', views.index_mobile, name='mobile'),
     path('pages/shop.html',views.shop_mobile,name='shop'),

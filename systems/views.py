@@ -86,6 +86,12 @@ def sample_api(request):
 
 #rest api service web
 
+def marketplace(request,id):
+    print(request)
+    producto = Product.objects.get(pk=id)
+    return render(request, 'comparagrow/marketplace.html',{
+    'producto':producto
+    })
 
 #test mobile
 def index_mobile(request):

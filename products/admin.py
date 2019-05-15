@@ -17,7 +17,7 @@ class ProductAttributesInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ('photo',('shop',admin.RelatedOnlyFieldListFilter), ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('name', 'price','tax','total')
-    readonly_fields = ['category','category_temp','photo']
+    # readonly_fields = ['category','category_temp','photo']
     search_fields = ['name']
     # date_hierarchy = 'shop'
     inlines = (ProductAttributesInline,ProductImageInline)
