@@ -23,7 +23,7 @@
                    {% if genre.level == 0 %}
 
                    <li class="nav-item {% if forloop.first %}active{% endif %}">
-                     <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ genre.slug }}" style="font-size:15px;padding: 0px 10px;text-transform: uppercase;" data-toggle="tab">{{ genre.name }}</a>
+                     <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ genre.slug }}" style="font-size:15px;padding: 0px 10px;text-transform: uppercase;font-weight: 100;" data-toggle="tab">{{ genre.name }}</a>
                    </li>
 
 
@@ -36,7 +36,7 @@
 									<div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ genre.slug }}">
                         {% for item1 in genre.slug|menulevelone:"1" %}
                           <div class="col-sm-12" style="border-bottom: 1px solid;">
-                            <a href="/productos/categorias/{{ item1.slug }}" style="color:#000;text-transform: uppercase;">{{ item1.name }} </a>
+                            <a href="/productos/categorias/{{ item1.slug }}" style="color:#000;text-transform: uppercase;font-weight: 100;">{{ item1.name }} </a>
                           </div>
                         {% endfor %}
 									</div>
@@ -46,44 +46,75 @@
 							</div>
 						</div>
 					</div>
-          <div class="row justify-content-md-center" style="color:#672d93; margin-top:40px;">
-            <h5 class="">INFORMACIÓN</h5>
-          </div>
-          <div class="row">
-						<div class="col">
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/quienes-somos" style="color:#000;">Quienes Somos </a>
-              </div>
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/contactanos" style="color:#000;">Contáctanos </a>
-              </div>
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/faq" style="color:#000;">FAQ </a>
-              </div>
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/sitemap" style="color:#000;">Mapa del Sitio </a>
-              </div>
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/terminos-condiciones" style="color:#000;">Términos y Condiciones </a>
-              </div>
-            </div>
-					</div>
-          <div class="row justify-content-md-center" style="color:#672d93;margin-top: 20px;">
-            <h5 class="">GRUPO PAZ VERDE</h5>
-          </div>
-          <div class="row">
-						<div class="col">
 
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/clientes" style="color:#000;">Conviértete en Cliente </a>
-              </div>
-              <div class="col-sm-12" style="border-bottom: 1px solid;">
-                <a href="/blog" style="color:#000;">Blog </a>
-              </div>
-
+          <div class="toggle toggle-minimal toggle-primary" data-plugin-toggle="">
+          <section class="toggle">
+            <label style="color:#000;font-weight: 100;">INFORMACIÓN</label>
+            <div class="toggle-content">
+              <ul class="list-unstyled mb-0">
+                <li class="">
+                  <a href="/quienes-somos">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Quienes Somos</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/contactanos">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Contáctanos</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/faq">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">FAQ</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/sitemap">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Mapa del Sitio</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/terminos-condiciones">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Términos y Condiciones</span>
+                  </a>
+                </li>
+                <!-- <li class="">
+                  <a href="#">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 ">Politica de Privacida</span>
+                  </a>
+                </li> -->
+              </ul>
             </div>
-					</div>
-          <div class="row justify-content-md-center" style="color:#672d93;margin-top: 20px;">
+          </section>
+
+          <section class="toggle">
+            <label style="color:#000;font-weight: 100;">GRUPO PAZ VERDE</label>
+            <div class="toggle-content">
+              <ul class="list-unstyled mb-0">
+                <li class="">
+                  <a href="/clientes">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2" style="color:#000;font-weight: 100;">Conviértete en Cliente</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="#">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2"  style="color:#000;font-weight: 100;">Blog</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="#">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Data</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/publicidad">
+                    <i class="fas fa-angle-right text-color-primary"></i><span class="ml-2 "  style="color:#000;font-weight: 100;">Publicidad</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+          </div>
+          <div class="row justify-content-md-center" style="color:#672d93;margin-top: 20px;font-weight: 100;">
             <h5 class="">CONÉCTATE</h5>
           </div>
           <div class="row">
@@ -94,6 +125,8 @@
                   <li class="social-icons-facebook"><a href="http://www.facebook.com/comparagrow" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
                   <li class="social-icons-twitter"><a href="http://www.twitter.com/comparagrow" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
                   <li class="social-icons-instagram"><a href="http://www.instagram.com/ComparaGrow" target="_blank" title="instagram"><i class="fab fa-instagram"></i></a></li>
+                  <li class="social-icons-facebook"><a href="https://api.whatsapp.com/send?phone=56979670520&text=Hola!!" target="_blank" title="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+
                 </ul>
               </div>
 
