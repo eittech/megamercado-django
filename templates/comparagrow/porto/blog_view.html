@@ -1,74 +1,271 @@
-{% extends 'comparagrow/porto/base.html' %}
-
-
 {% load static %}
+{% load mptt_tags %}
 {% load menu_categorias %}
-{% load l10n %}
-{% load humanize %}
+{% load cache %}
+<!DOCTYPE html>
+<html class="side-panel">
+	<head>
 
+		<!-- Basic -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-{% block content %}
-<style>
-  .wpsm-show{
-    display:none;
-  }
-  .wpsm-hide{
-    display:none;
+		<title>ComparaGrow</title>
 
-  }
-  iframe{
-    display:none;
-  }
-  .blog-posts a>img {
-    display: none;
-  }
-</style>
-  <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
-    <div class="container">
-      <div class="row">
+		<meta name="keywords" content="ComparaGrow" />
+		<meta name="description" content="ComparaGrow comparador growshop chile mejor cannabis comparagrow.cl comparagrow.com ">
+		<meta name="author" content="ComparaGrow">
 
-        <div class="col-md-12 align-self-center p-static order-2 text-center">
-
-          <h1 class="text-dark font-weight-bold text-8"><a href="/blog">Blog</a></h1>
-<span class="sub-title text-dark">Las últimas noticias del mundo del cannabis!</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="container py-4">
+		<meta property="og:image" content="https://comparagrow.cl/static/img/imagentest.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+		<meta property="fb:app_id" content="2090703191007206" />
+    <meta property="og:type" content="website" />
     {% if post %}
-    <div class="row">
-      <div class="col">
-        <div class="blog-posts">
-          <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-          <hr>
-          <p>{% autoescape off %}
-          {{ post.description }}
-          {% endautoescape %}</p>
-        </div>
-      </div>
-
-    </div>
+    <meta property="og:url" content="https://comparagrow.cl"/>
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:description" content="{{ post.title }}" />
     {% else %}
-    <div class="row">
-      <div class="col">
-        <div class="blog-posts">
-          <h1><a href="">Publicación finalizada</a></h1>
-          <hr>
-          <p>Lamentamos informar que esta publicación ya no se encuentra disponible.<br>
-          Te invitamos a revisar otras publicaciónes.</p>
-        </div>
-      </div>
-
-    </div>
+    <meta property="og:url" content="https://comparagrow.cl"/>
+    <meta property="og:title" content="ComparaGrow" />
+    <meta property="og:description" content="Comparador de productos, Growshop, ComparaGrow, cannabis" />
     {% endif %}
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src https:"> -->
 
-  </div>
+		<!-- Favicon -->
+		<!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->
+		<link rel="icon" type="image/png" href="/static/img/lupa.png">
 
-{% endblock %}
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 
-{% block js %}
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130243054-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
 
-{% endblock %}
+		  gtag('config', 'UA-130243054-1');
+		</script>
+
+
+		{% block cabecera %}
+
+		{% endblock %}
+
+
+	</head>
+	<!-- <body class="loading-overlay-showing" data-loading-overlay data-plugin-options="{'hideDelay': 50}"> -->
+	<body>
+		{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+				{% include 'comparagrow/component/slide_menu.html' %}
+				{% block sidefilter %}
+
+				{% endblock %}
+		{% else %}
+
+		{% endif %}
+
+
+
+
+		<div class="loading-overlay">
+			<div class="bounce-loader">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</div>
+
+		<div class="body">
+			{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+				{% block sidefilterbtn %}
+					{% include 'comparagrow/porto/header_mobile.html' %}
+				{% endblock %}
+			{% else %}
+			{% include 'comparagrow/porto/header.html' %}
+			{% endif %}
+
+			<div role="main" class="main">
+
+        <style>
+          .wpsm-show{
+            display:none;
+          }
+          .wpsm-hide{
+            display:none;
+
+          }
+          iframe{
+            display:none;
+          }
+          .blog-posts a>img {
+            display: none;
+          }
+        </style>
+          <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+            <div class="container">
+              <div class="row">
+
+                <div class="col-md-12 align-self-center p-static order-2 text-center">
+
+                  <h1 class="text-dark font-weight-bold text-8"><a href="/blog">Blog</a></h1>
+        <span class="sub-title text-dark">Las últimas noticias del mundo del cannabis!</span>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <div class="container py-4">
+            {% if post %}
+            <div class="row">
+              <div class="col">
+                <div class="blog-posts">
+                  <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+                  <hr>
+                  <p>{% autoescape off %}
+                  {{ post.description }}
+                  {% endautoescape %}</p>
+                </div>
+              </div>
+
+            </div>
+            {% else %}
+            <div class="row">
+              <div class="col">
+                <div class="blog-posts">
+                  <h1><a href="">Publicación finalizada</a></h1>
+                  <hr>
+                  <p>Lamentamos informar que esta publicación ya no se encuentra disponible.<br>
+                  Te invitamos a revisar otras publicaciónes.</p>
+                </div>
+              </div>
+
+            </div>
+            {% endif %}
+
+          </div>
+
+
+			</div>
+
+
+			<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+<!-- <a href="https://api.whatsapp.com/send?phone=56979670520&text=Hola!!" class="float" target="_blank">
+<i class="fab fa-whatsapp my-float"></i>
+</a> -->
+
+
+{% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
+{% include 'comparagrow/porto/footer_mobile.html' %}
+{% else %}
+{% include 'comparagrow/porto/footer.html' %}
+{% endif %}
+
+
+
+		</div>
+
+		<style>
+
+			.float{
+			position:fixed;
+			width:60px;
+			height:60px;
+			bottom:50px;
+			right:40px;
+			background-color:#25d366;
+			color:#FFF;
+			border-radius:50px;
+			text-align:center;
+			font-size:30px;
+			box-shadow: 2px 2px 3px #999;
+			z-index:100;
+			}
+
+			.my-float{
+			margin-top:16px;
+			}
+			.float:hover{
+				color:#fff !important;
+			}
+			.my-float:hover{
+				color:#fff !important;
+			}
+		</style>
+
+		<link rel="stylesheet" href="/static/porto/vendor/bootstrap/css/bootstrap.min.css" media="all">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" media="all">
+		<link rel="stylesheet" href="/static/porto/vendor/animate/animate.min.css" media="all">
+		<link rel="stylesheet" href="/static/porto/vendor/simple-line-icons/css/simple-line-icons.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/owl.carousel/assets/owl.theme.default.min.css">
+		<link rel="stylesheet" href="/static/porto/vendor/magnific-popup/magnific-popup.min.css">
+		<link rel="stylesheet" href="/static/porto/css/theme.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-elements.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-blog.css">
+		<link rel="stylesheet" href="/static/porto/css/theme-shop.css">
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/settings.css">
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/layers.css">
+		<link rel="stylesheet" href="/static/porto/vendor/rs-plugin/css/navigation.css">
+		<link rel="stylesheet" href="{% static 'css/social/bootstrap-social.css' %}" >
+		<link rel="stylesheet" href="/static/porto/css/skins/default.css">
+		<link rel="stylesheet" href="/static/porto/css/custom.css">
+		{% block csscontent %}
+		{% endblock %}
+		<script src="/static/porto/vendor/modernizr/modernizr.min.js" async></script>
+		<script src="/static/porto/vendor/jquery/jquery.min.js"></script>
+		<script src="/static/porto/vendor/jquery.appear/jquery.appear.min.js"></script>
+		<script src="/static/porto/vendor/jquery.easing/jquery.easing.min.js"></script>
+		<script src="/static/porto/vendor/jquery.cookie/jquery.cookie.min.js"></script>
+		<script src="/static/porto/vendor/popper/umd/popper.min.js"></script>
+		<script src="/static/porto/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="/static/porto/vendor/common/common.min.js"></script>
+		<script src="/static/porto/vendor/jquery.validation/jquery.validate.min.js"></script>
+		<script src="/static/porto/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="/static/porto/vendor/jquery.gmap/jquery.gmap.min.js"></script>
+		<script src="/static/porto/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+		<script src="/static/porto/vendor/isotope/jquery.isotope.min.js"></script>
+		<script src="/static/porto/vendor/owl.carousel/owl.carousel.min.js"></script>
+		<script src="/static/porto/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<script src="/static/porto/vendor/vide/jquery.vide.min.js"></script>
+		<script src="/static/porto/vendor/vivus/vivus.min.js"></script>
+		<script src="/static/porto/vendor/instafeed/instafeed.min.js"></script>
+		<script src="/static/porto/js/theme.js"></script>
+		<script src="/static/porto/js/custom.js"></script>
+		<script src="/static/porto/js/theme.init.js"></script>
+		<script src="/static/porto/js/examples/examples.instafeed.js"></script>
+
+    {% block js %}
+
+    {% endblock %}
+		<script>
+		function enviar(){
+	    window.open('{% url "social:begin" "facebook" %}','_self');
+	  }
+		</script>
+	</body>
+</html>
+
+{% if user.is_authenticated %}
+		{% include 'comparagrow/component/modal_register.html' %}
+		{% if request.GET.error == 'not_access' %}
+		<script>
+				$( document ).ready(function() {
+						$('#modal_login').modal('show');
+				});
+		</script>
+		{% endif %}
+{% else %}
+		{% include 'comparagrow/component/modal_register.html' %}
+		{% if request.GET.error == 'not_access' %}
+		<script>
+				$( document ).ready(function() {
+				    $('#modal_login').modal('show');
+				});
+		</script>
+		{% endif %}
+{% endif %}
