@@ -10,48 +10,14 @@
 {% block content %}
 {% include 'comparagrow/component/style_items.html' %}
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<section class="section section-height-2 mt-0 mb-3 border-0" style="background: url('/static/img/movil-1.jpg');height: 180px;background-size: 100% 179px;">
-	<div class="container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-lg-12">
-
-				<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false, 'stagePadding': 100}" style="height: auto;">
-
-
-
-				<div class="owl-stage-outer">
-					<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0.25s ease 0s; width: 2660px; padding-left: 100px; padding-right: 100px;">
-						<div class="owl-item active" style="width: 720px; margin-right: 100px;">
-							<div class="text-center">
-							<span class="text-color-primary"></span>
-
-							<p class="lead lead-2 mb-0"></p>
-						</div>
-					</div>
-					<div class="owl-item active" style="width: 720px; margin-right: 100px;">
-						<div class="text-center">
-						<span class="text-color-primary"></span>
-
-						<p class="lead lead-2 mb-0"></p>
-					</div>
-				</div>
-				<div class="owl-item active" style="width: 720px; margin-right: 100px;">
-					<div class="text-center">
-					<span class="text-color-primary"></span>
-
-					<p class="lead lead-2 mb-0"></p>
-				</div>
-			</div>
-
-			</div>
-		</div>
-
-	</div>
-
-			</div>
-		</div>
-	</div>
-</section>
+<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false}">
+	<figure style="width:100%;">
+		<img src="/static/img/movil-1.jpg" alt="">
+	</figure>
+	<figure style="width:100%;">
+		<img src="/static/img/movil-2.jpg" alt="">
+	</figure>
+</div>
 {% else %}
 
 <div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false}">
