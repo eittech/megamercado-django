@@ -23,7 +23,7 @@
                    {% if genre.level == 0 %}
 
                    <li class="nav-item {% if forloop.first %}active{% endif %}">
-                     <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ genre.slug }}" style="font-size:15px;padding: 0px 10px;text-transform: uppercase;font-weight: 100;" data-toggle="tab">{{ genre.name }}</a>
+                     <a class="nav-link {% if forloop.first %}active{% endif %}" href="#{{ genre.slug }}" style="color:#777;font-size:15px;padding: 0px 10px;text-transform: uppercase;font-weight: 600;" data-toggle="tab">{{ genre.name }}</a>
                    </li>
 
 
@@ -36,7 +36,7 @@
 									<div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ genre.slug }}">
                         {% for item1 in genre.slug|menulevelone:"1" %}
                           <div class="col-sm-12" style="border-bottom: 1px solid;">
-                            <a href="/productos/categorias/{{ item1.slug }}" style="color:#000;text-transform: uppercase;font-weight: 100;">{{ item1.name }} </a>
+                            <a href="/productos/categorias/{{ item1.slug }}" style="color:#777;text-transform: uppercase;">{{ item1.name }} </a>
                           </div>
                         {% endfor %}
 									</div>
