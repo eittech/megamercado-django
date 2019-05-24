@@ -46,7 +46,7 @@
               {% else %}
 
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
-                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
               </li>
               <li style="margin-left:10px;"></li>
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
@@ -63,19 +63,15 @@
 <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 122, 'stickySetTop': '-122px', 'stickyChangeLogo': false}">
   <div class="header-body border-color-primary border-top-0 box-shadow-none">
     <div class="header-container  z-index-2" style="min-height: 22px; background:#000;">
+      <div class="col text-center" style="height: 13px;">
+        <span style="color:#fff;"><marquee style="margin-top: -3px;">CINTA PROMOCIONAL - DISPONIBLE</marquee></span>
+      </div>
     </div>
     <div class="header-container container z-index-2" style="min-height: 100px;">
       <div class="header-row">
         <div class="header-column">
           <div class="header-row">
             <h1 class="header-logo" style="display:flex;">
-              <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" data-set-active="false">
-									<span class="hamburguer">
-										<span></span>
-										<span></span>
-										<span></span>
-									</span>
-								</button>
               <a href="/">
                 <img src="{% static 'theme/images/home/logo.png' %}" class="img-fluid">
                 <span class="hide-text">ComparaGrow</span>
@@ -100,10 +96,20 @@
                 </div>
               </div>
               <div class="header-column order-1 order-lg-2">
-                <div class="header-row justify-content-end">
-                  <div class="header-nav-features header-nav-features-no-border w-100">
+                <div class="header-row left-content-end">
+                  <div class="header-nav-features header-nav-features-no-border w-100" style="padding-left: 0px;margin-left: 0px;">
+
                     <form role="search" class="d-flex w-100" action="/productos/search" method="get">
                       {% csrf_token %}
+                      <div class="simple-search input-group" style="width: 15%;">
+                        <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" style="margin: 0px; height:40px; color:#fff;" data-set-active="false">
+          									<span class="hamburguer">
+          										<span style="background: #fff;"></span>
+          										<span style="background: #fff;"></span>
+          										<span style="background: #fff;"></span>
+          									</span>
+          							</button>
+                      </div>
                       <div class="simple-search input-group w-100">
 
                         <input class="form-control border-0 text-1" id="headerSearch" name="q" type="search" value="" placeholder="Busca aquí">

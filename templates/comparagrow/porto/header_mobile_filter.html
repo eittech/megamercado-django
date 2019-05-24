@@ -42,7 +42,7 @@
               {% else %}
 
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
-                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-user"></i> Login</a>
+                <a class="ws-nowrap" data-toggle="modal" data-target="#modal_login"><i class="fas fa-user"></i> Iniciar Sesión</a>
               </li>
               <li style="margin-left:10px;"></li>
               <li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
@@ -64,13 +64,6 @@
         <div class="header-column">
           <div class="header-row">
             <h1 class="header-logo" style="display:flex;">
-              <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" data-set-active="false">
-									<span class="hamburguer">
-										<span></span>
-										<span></span>
-										<span></span>
-									</span>
-								</button>
               <a href="/">
                 <img src="{% static 'theme/images/home/logo.png' %}" class="img-fluid">
                 <span class="hide-text">ComparaGrow</span>
@@ -87,7 +80,7 @@
             <div class="header-row">
               <div class="header-colum order-2 order-lg-1">
                 <div class="header-row">
-                  <div class="header-nav header-nav-stripe header-nav-divisor header-nav-force-light-text justify-content-start">
+                  <div class="header-nav header-nav-stripe header-nav-divisor header-nav-force-light-text justify-content-start" style="margin-left: -9px;margin-right: -15px;">
                     <button  onclick="openNav()" class="hamburguer-btn hamburguer-btn-sticky-dark" style="
     background: #01b22c;
     width: 51px;
@@ -101,10 +94,20 @@
                 </div>
               </div>
               <div class="header-column order-1 order-lg-2">
-                <div class="header-row justify-content-end">
-                  <div class="header-nav-features header-nav-features-no-border w-100">
+                <div class="header-row left-content-end">
+                  <div class="header-nav-features header-nav-features-no-border w-100" style="padding-left: 0px;margin-left: 0px;">
+
                     <form role="search" class="d-flex w-100" action="/productos/search" method="get">
                       {% csrf_token %}
+                      <div class="simple-search input-group" style="width: 15%;">
+                        <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" style="margin: 0px; height:40px; color:#fff;" data-set-active="false">
+          									<span class="hamburguer">
+          										<span style="background: #fff;height: 4px;"></span>
+          										<span style="background: #fff;height: 4px;"></span>
+          										<span style="background: #fff;height: 4px;"></span>
+          									</span>
+          							</button>
+                      </div>
                       <div class="simple-search input-group w-100">
 
                         <input class="form-control border-0 text-1" id="headerSearch" name="q" type="search" value="" placeholder="Busca aquí">
