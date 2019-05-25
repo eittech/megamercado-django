@@ -200,25 +200,19 @@ class ProductSpider(scrapy.Spider):
 
                 print(Product_object)
                 try:
-                    Product_object.save()
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
-                    print("se guardo con exito")
-                    product_error = False
+                    if Product_object.total:
+                        Product_object.save()
+                        print("se guardo con exito")
+                        product_error = False
+                    else:
+                        product_error = True
+
                 except:
                     product_error = True
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
                     print("No se pudo guardar el producto")
 
                 if Product_object.id:
                     list_img_t = response.css("div.image")
-
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
                     print(list_img_t)
                     list_img = list_img_t.css('img')
                     print(list_img)
