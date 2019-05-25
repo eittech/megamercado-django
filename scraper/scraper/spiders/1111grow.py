@@ -127,19 +127,6 @@ class ProductSpider(scrapy.Spider):
                 product_error = True
                 print("No se actualizo el precio")
         else:
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-            
             Product_object = Product()
             if name:
                 Product_object.name = name
@@ -185,9 +172,12 @@ class ProductSpider(scrapy.Spider):
 
             print(Product_object)
             try:
-                Product_object.save()
-                print("se guardo con exito")
-                product_error = False
+                if Product_object.total != 0:
+                    Product_object.save()
+                    print("se guardo con exito")
+                    product_error = False
+                else:
+                    product_error = True
             except:
                 product_error = True
                 print("No se pudo guardar el producto")
