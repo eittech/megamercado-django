@@ -185,25 +185,18 @@ class ProductSpider(scrapy.Spider):
 
                 print(Product_object)
                 try:
-                    Product_object.save()
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
-                    print("se guardo con exito")
-                    product_error = False
+                    if Product_object.total > 0:
+                        Product_object.save()
+                        product_error = False
+                        print("se guardo con exito")
+                    else:
+                        product_error = True
                 except:
                     product_error = True
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
                     print("No se pudo guardar el producto")
 
                 if Product_object.id:
                     list_img_t = response.css("figure.woocommerce-product-gallery__wrapper")
-
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
                     print(list_img_t)
                     list_img = list_img_t.css('img')
                     print(list_img)
