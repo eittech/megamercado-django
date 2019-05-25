@@ -222,7 +222,6 @@ def update_history_price(sender, instance, **kwargs):
     porcentaje = ""
     try:
         history = HistoryPrice.objects.filter(product=instance).order_by('-id').first()
-        print(history)
         if history is not None:
             if history.total != instance.total:
                 actualizar = True
@@ -238,7 +237,7 @@ def update_history_price(sender, instance, **kwargs):
                     alerta = False
                     eliminaralter = True
             else:
-                actualizar = False
+                actualizar = True
                 alerta = False
                 #no actualizamos
         else:
@@ -246,15 +245,16 @@ def update_history_price(sender, instance, **kwargs):
             alerta = False
             #actualizamos
     except:
-        actualizar = False
+        actualizar = True
         alerta = False
+
     try:
         if actualizar:
             history = HistoryPrice()
             history.product =instance
             history.total = instance.total
             history.save()
-            print("save exitoso")
+            print("se actualizo el historico de precios")
         else:
             print("no se pudo procesar 2")
     except:
@@ -269,7 +269,7 @@ def update_history_price(sender, instance, **kwargs):
             alerta.type = 'PRICE'
             alerta.content = porcentaje
             alerta.save()
-            print("save exitoso")
+            print("se creo la seccion de alertas")
         else:
             if eliminaralter:
                 alerta = AlertsProduct.objects.filter(product=instance)
