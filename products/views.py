@@ -76,7 +76,7 @@ def search(request):
     #validacion de productos asociados a tiendas con contratos vijentes
     servicecontractshop = ServiceContractShop.objects.filter(servicecontract__contract__state='PAYMENT').filter(servicecontract__service__type='SHOP')
     pk_shop = servicecontractshop.values('shop__pk')
-    products_list = Product.objects.filter(category__isnull=False)
+    products_list = Product.objects.filter(category__isnull=False).filter(total__gte=100)
     #busqueda de termino
     products_list = products_list.filter(name__icontains=term_q).order_by('-photo')
     #barras laterales
@@ -253,7 +253,7 @@ def categorias(request,slug):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_shop = servicecontractshop.values('shop__pk')
     # productos_lista = Product.objects.filter(shop__pk__in=pk_shop)
-    productos_lista = Product.objects.filter().order_by('-photo')
+    productos_lista = Product.objects.filter().order_by('-photo').filter(total__gte=100)
 
 
     productos_lista = productos_lista.filter(category__in=children)
