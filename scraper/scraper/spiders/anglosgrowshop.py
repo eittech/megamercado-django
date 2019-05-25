@@ -138,7 +138,7 @@ class ProductSpider(scrapy.Spider):
         else:
             category = category_tags.category
 
-        if category is not None:
+        if True:
             name_category = response.meta['name_category_safe']
             product = response.css("div.single-product")
             name = product.xpath('.//div[@class="product-summary content_product_detail col-lg-6 col-md-6 col-sm-12 col-xs-12"]/h1[@itemprop="name"]/text()').re_first('\w.*')
@@ -164,6 +164,7 @@ class ProductSpider(scrapy.Spider):
                 total = int(locale.atof(t))
             except:
                 total = None
+
             Product_exist = Product.objects.filter(url=url).first()
             if Product_exist:
                 Product_object = Product_exist
@@ -227,17 +228,13 @@ class ProductSpider(scrapy.Spider):
 
                 print(Product_object)
                 try:
-                    Product_object.save()
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
-                    print("se guardo con exito")
-                    product_error = False
+                    if Product_object.total > 0:
+                        Product_object.save()
+                        product_error = False
+                    else:
+                        product_error = True
                 except:
                     product_error = True
-                    print("*****************")
-                    print("*****************")
-                    print("*****************")
                     print("No se pudo guardar el producto")
 
                 if Product_object.id:
