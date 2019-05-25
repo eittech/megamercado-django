@@ -189,6 +189,9 @@ class HistoryPrice(models.Model):
     product= models.ForeignKey(Product,on_delete=models.CASCADE)
     date_update = models.DateField(verbose_name="Fecha de la Factura",auto_now=True,blank=True, null= True)
     total = models.FloatField()
+    class Meta:
+        verbose_name = "Historico de Precios"
+        unique_together = ('product','date_update','total')
 
 class AlertsProduct(models.Model):
     TYPE_ALERT = (
