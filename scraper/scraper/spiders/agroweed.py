@@ -137,6 +137,7 @@ class ProductSpider(scrapy.Spider):
                     product_error = False
                 else:
                     print("No Se actualizo el precio")
+                    product_error = True
             except:
                 product_error = True
                 print("No se actualizo el precio")
@@ -168,8 +169,11 @@ class ProductSpider(scrapy.Spider):
             Product_object.tax = 0
 
             try:
-                Product_object.save()
-                product_error = False
+                if Product_object.total > 0:
+                    Product_object.save()
+                    product_error = False
+                else:
+                    product_error = True
             except:
                 product_error = True
 
