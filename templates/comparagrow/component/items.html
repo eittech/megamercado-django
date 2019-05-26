@@ -20,7 +20,11 @@
     <div class="card-footer" style="{% if request.user_agent.is_mobile %}padding-left: 0;{% else %}{% endif %}background-color: transparent;border-top: none;">
       <div class="row">
         <div class="col">
-          <h5 class="card-title" style="color:#403e3e;font-size: 14px;font-weight: bold;">$ {{ item.total|floatformat:0|intcomma }}</h5>
+          <h5 class="card-title" style="color:#403e3e;font-size: 14px;font-weight: bold;">$ {{ item.total|floatformat:0|intcomma }}
+            {% autoescape off %}
+            {{ item.id|is_up_down }}
+            {% endautoescape %}
+          </h5>
         </div>
       </div>
       <div class="row">

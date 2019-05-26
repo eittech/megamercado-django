@@ -115,6 +115,22 @@ def is_oferta(value):
     except:
         return ""
 
+@register.filter(name='is_up_down')
+def is_up_down(value):
+    try:
+        p = HistoryPrice.objects.filter(product__pk=value).order_by('-pk')
+        p_actual = p[0].total
+        p_anterior = p[1].total
+        if p_anterior > p_actual:
+            return '<i class="fas fa-arrow-down" style="color:#00b22c;"></i>'
+        else:
+            if p_anterior < p_actual:
+                return '<i class="fas fa-arrow-up" style="color:#efa514;"></i>'
+            else:
+                return ""
+    except:
+        return ""
+
 @register.filter(name='imagenproducturl')
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
