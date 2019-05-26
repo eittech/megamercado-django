@@ -82,7 +82,8 @@ class HistoryPriceAdmin(admin.ModelAdmin):
     list_display = ('product', 'date_update','total')
 
 class AlertsProductAdmin(admin.ModelAdmin):
-    list_display = ('product','type')
+    list_display = ('product','type','content')
+    readonly_fields = ['product']
 
 class ListCategoryTaxAdmin(admin.ModelAdmin):
     list_display = ('tag','state')
