@@ -99,7 +99,12 @@
 		      <div class="card" style="    border:none;">
 		        <div class="card-header" style="height: 27px;padding: 2px 10px;color: #672d93;font-size:12px;">
 		          <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">{{ item.shop.name }}</a>
-		        </div>
+							<span class="tip tip-secondary" style="
+    right: 0px;
+    top: -3px;
+    position: absolute;
+">OFERTA</span>
+						</div>
 		        <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="text-decoration:none;cursor:pointer;">
 		          <img src="{{ item.id|imagenproducturl:"0" }}" style="width:calc(100% - 4px);height: 210px; margin-left:2px; margin-top:2px;font-weight: 100;" class="card-img-top">
 		        </a>
@@ -111,7 +116,7 @@
 		        <div class="card-footer" style="background-color: transparent;border-top: none;">
 		          <div class="row">
 		            <div class="col">
-		              <h5 class="card-title" style="color:#403e3e;font-size: 14px;font-weight: bold;">$ {{ item.total|floatformat:0|intcomma }}</h5>
+		              <h5 class="card-title" style="color:#403e3e;font-size: 14px;font-weight: bold;">$ {{ item.total|floatformat:0|intcomma }} <i class="fas fa-arrow-down"></i></h5>
 		            </div>
 		          </div>
 		          <div class="row">

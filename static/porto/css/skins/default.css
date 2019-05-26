@@ -3410,12 +3410,12 @@ html #header .tip-primary:before {
 }
 
 html #header .tip-secondary {
-	background: #e36159 !important;
+	background: #fb1102 !important;
 	color: #FFF !important;
 }
 
 html #header .tip-secondary:before {
-	border-right-color: #e36159 !important;
+	border-right-color: #fb1102 !important;
 }
 
 html #header .tip-tertiary {
