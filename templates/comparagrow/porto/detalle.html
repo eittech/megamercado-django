@@ -217,6 +217,11 @@
 <script>
 	var data = {
 {% if history %}
+low:0,
+axisX: {
+	type: Chartist.FixedScaleAxis,
+  divisor: 5,
+},
 labels:[{% for i in history %}{% if forloop.first %}'{{ i.date_update }}'{% else %},'{{ i.date_update }}'{% endif %}{% endfor %}],
 series: [
     [{% for i in history %}{% if forloop.first %}{{ i.total|floatformat:"0" }}{% else %},{{ i.total|floatformat:"0" }}{% endif %}{% endfor %}]
