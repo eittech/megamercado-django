@@ -102,6 +102,19 @@ def alertasproductos(value):
         return ""
 
 
+@register.filter(name='is_oferta')
+def is_oferta(value):
+    try:
+        p = HistoryPrice.objects.filter(product__pk=value).order_by('-pk')
+        p_actual = p[0].total
+        p_anterior = p[1].total
+        if p_anterior > p_actual:
+            return '<span class="tip tip-secondary" style="right: 0px;top: -3px;position: absolute;">OFERTA</span>'
+        else:
+            return ""
+    except:
+        return ""
+
 @register.filter(name='imagenproducturl')
 def imagenproducturl(value, arg):
     productos = ProductImage.objects.filter(product__pk=value).first()
