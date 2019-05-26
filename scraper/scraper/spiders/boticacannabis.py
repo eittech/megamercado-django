@@ -124,7 +124,6 @@ class ProductSpider(scrapy.Spider):
                 Product_object = Product_exist
                 if total:
                     Product_object.total = total
-
                 try:
                     if total > 0:
                         Product_object.save()
