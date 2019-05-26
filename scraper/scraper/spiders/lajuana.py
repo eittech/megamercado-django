@@ -140,7 +140,7 @@ class ProductSpider(scrapy.Spider):
         if Product_exist:
             Product_object = Product_exist
             if total:
-                Product_object.total = total
+                Product_object.total = int(total)
             # try:
             if Product_object.total > 0:
                 Product_object.save()
