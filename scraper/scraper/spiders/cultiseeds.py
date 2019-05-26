@@ -30,20 +30,20 @@ class ProductSpider(scrapy.Spider):
         urls = [
             "https://www.cultiseeds.cl/",
         ]
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
         for url in urls:
-            response = scrapy.Request(url=url, callback=self.parse)
+            response = scrapy.Request(url=url,headers=headers, callback=self.parse)
             yield response
 
     def parse(self, response):
         categorias = response.css("a.ybc-mm-item-link")
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
         for link_categoria in categorias:
             #print(tut)
             url_category = link_categoria.xpath('@href').re_first('\w.*')
             name_category = link_categoria.xpath('text()').re_first('\w.*')
-            print(name_category)
-            print(url_category)
             try:
-                response = scrapy.Request(url=url_category, callback=self.parse_category)
+                response = scrapy.Request(url=url_category,headers=headers, callback=self.parse_category)
                 response.meta['url_category_safe'] = url_category
                 response.meta['name_category_safe'] = name_category
                 response.meta['shop'] = 'https://cultiseeds.cl/'
@@ -54,6 +54,7 @@ class ProductSpider(scrapy.Spider):
             # yield scrapy.Request(url=url_category, callback=self.parse_category)
 
     def parse_category(self, response):
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
         list_product = response.css("ul.product_list a.product_img_link")
         name_category = response.meta['name_category_safe']
         shop_url = response.meta['shop']
@@ -64,7 +65,7 @@ class ProductSpider(scrapy.Spider):
             url_product = lista.xpath('@href').re_first('\w.*')
 
             # print(url_product)
-            response = scrapy.Request(url=url_product, callback=self.parse_product)
+            response = scrapy.Request(url=url_product,headers=headers, callback=self.parse_product)
             response.meta['url_product_safe'] = url_product
             response.meta['name_category_safe'] = name_category
             response.meta['shop'] = shop_url
