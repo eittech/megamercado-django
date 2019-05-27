@@ -150,7 +150,7 @@ class ProductSpider(scrapy.Spider):
                     Product_object.total = total
 
                 try:
-                    if total > 0:
+                    if float(total) > 0:
                         Product_object.save()
                         print("Se actualizo el precio")
                         product_error = False
