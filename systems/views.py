@@ -487,11 +487,11 @@ def home(request):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
     # productos_ci = Product.objects.filter(pk__in=pk_product)
-    productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:12]
-    ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('-id')[:12]
+    productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('?')
     ur_pk = ultimas_rebajas.values('product__pk')
-    productos_ur = Product.objects.filter(pk__in=ur_pk)
-    productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:12]
+    productos_ur = Product.objects.filter(pk__in=ur_pk)[:10]
+    productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
 
     productos = ProductImage.objects.all()[:12]
     category = Category.objects.all()
