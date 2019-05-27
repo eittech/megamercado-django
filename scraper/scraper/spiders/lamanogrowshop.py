@@ -155,10 +155,10 @@ class ProductSpider(scrapy.Spider):
                         print("Se actualizo el precio")
                         product_error = False
                     else:
-                        print("No Se actualizo el precio")
+                        print("No Se actualizo el precio 2")
                 except:
                     product_error = True
-                    print("No se actualizo el precio")
+                    print("No se actualizo el precio 3")
         #     else:
         #         Product_object = Product()
         #         if name:
