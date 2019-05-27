@@ -79,6 +79,7 @@ class ShopAdmin(admin.ModelAdmin):
         return queryset
 
 class HistoryPriceAdmin(admin.ModelAdmin):
+    list_filter = ('date_update',)
     list_display = ('product', 'date_update','total')
 
 class AlertsProductAdmin(admin.ModelAdmin):
