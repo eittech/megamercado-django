@@ -95,19 +95,20 @@
               </div>
               <div class="header-column order-1 order-lg-2">
                 <div class="header-row left-content-end">
-                  <div class="header-nav-features header-nav-features-no-border w-100" style="padding-left: 0px;margin-left: 0px;">
+                  <div class="simple-search input-group" style="width: 40px;">
+                    <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" style="margin: 0px; height:40px; color:#fff;" data-set-active="false">
+                        <span class="hamburguer">
+                          <span style="background: #fff;height: 4px;"></span>
+                          <span style="background: #fff;height: 4px;"></span>
+                          <span style="background: #fff;height: 4px;"></span>
+                        </span>
+                    </button>
+                  </div>
+                  <div class="header-nav-features header-nav-features-no-border" style="padding-left: 0px;margin-left: 0px;width: calc(100% - 40px);">
 
                     <form role="search" class="d-flex w-100" action="/productos/search" method="get">
                       {% csrf_token %}
-                      <div class="simple-search input-group" style="width: 15%;">
-                        <button class="hamburguer-btn hamburguer-btn-sticky-dark side-panel-toggle" style="margin: 0px; height:40px; color:#fff;" data-set-active="false">
-          									<span class="hamburguer">
-          										<span style="background: #fff;height: 4px;"></span>
-          										<span style="background: #fff;height: 4px;"></span>
-          										<span style="background: #fff;height: 4px;"></span>
-          									</span>
-          							</button>
-                      </div>
+
                       <div class="simple-search input-group w-100">
 
                         <input class="form-control border-0 text-1" id="headerSearch" name="q" type="search" value="" placeholder="Busca aquí">
