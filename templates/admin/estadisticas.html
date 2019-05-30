@@ -1,0 +1,34 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; Estadisticas
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  <h1 style="">Estadisticas Generales</h1>
+  <div class="row">
+      <div class="col-sm-4" style="width: 100% !important; height:200px!important; ">
+
+      </div>
+  </div>
+  <h1 style="">Estadisticas Especificas</h1>
+  <div class="row">
+      <div class="col-sm-4" style="width: 100% !important; height:200px!important; ">
+
+      </div>
+  </div>
+
+
+</div>
+{% endblock %}

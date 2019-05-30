@@ -10,7 +10,7 @@
 {% block content %}
 {% include 'comparagrow/component/style_items.html' %}
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false}">
+<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false,'lazyLoad': true}">
 	<figure style="width:100%;">
 		<img src="/static/img/movil-1.jpg" alt="">
 	</figure>

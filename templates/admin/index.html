@@ -1,7 +1,16 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+{% block extrastyle %}
+{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+
+<style>
+  a.section:hover {
+      color: #fff !important;
+      text-decoration: none;
+  }
+</style>
+{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
 
@@ -14,6 +23,9 @@
 </div>
 {% endblock %}
 
+
+
+
 {% block content %}
 <div id="content-main">
 
@@ -22,7 +34,7 @@
         <div class="app-{{ app.app_label }} module">
         <table>
         <caption>
-            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+            <a class="section" >{{ app.name }}</a>
         </caption>
         {% for model in app.models %}
             <tr class="model-{{ model.object_name|lower }}">
@@ -31,27 +43,55 @@
             {% else %}
                 <th scope="row">{{ model.name }}</th>
             {% endif %}
-
-            {% if model.add_url %}
-                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-            {% else %}
+            {% if user.groups.all.0|stringformat:"s" == "Clientes" %}
                 <td>&nbsp;</td>
-            {% endif %}
-
-            {% if model.admin_url %}
-                {% if model.view_only %}
-                <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
+                <td>&nbsp;</td>
+            {% else %}
+                {% if model.add_url %}
+                    <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
                 {% else %}
-                <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                    <td>&nbsp;</td>
                 {% endif %}
-            {% else %}
-                <td>&nbsp;</td>
-            {% endif %}
+
+                {% if model.admin_url %}
+                    {% if model.view_only %}
+                    <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
+                    {% else %}
+                    <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
+                    {% endif %}
+                {% else %}
+                    <td>&nbsp;</td>
+                {% endif %}
+            {% endif  %}
+
             </tr>
         {% endfor %}
+
         </table>
         </div>
     {% endfor %}
+
+
+    {% if user.groups.all.0|stringformat:"s" == "Clientes" %}
+    <div class="app-estadisticas module">
+    <table>
+    <caption>
+        <a href="/admin/estadisticas" class="section" title="">Estadisticas</a>
+    </caption>
+    <tr class="model-estadisticas">
+        <th scope="row"><a href="/admin/estadisticas">Estadisticas</a></th>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+
+    </tr>
+
+    </table>
+    </div>
+    {% endif  %}
+
+
+
+
 {% else %}
     <p>{% trans "You don't have permission to view or edit anything." %}</p>
 {% endif %}
