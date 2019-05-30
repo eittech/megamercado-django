@@ -11,11 +11,11 @@
 {% include 'comparagrow/component/style_items.html' %}
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
 <div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false,'lazyLoad': true}">
-	<figure style="width:100%;">
-		<img src="/static/img/movil-1.jpg" alt="">
+	<figure style="width:100%;height:200px;">
+		<img data-plugin-lazyload="" data-plugin-options="{'effect' : 'fadeIn'}" data-original="/static/img/movil-1.jpg" alt="" class="lazy-load-loaded">
 	</figure>
-	<figure style="width:100%;">
-		<img src="/static/img/movil-2.jpg" alt="">
+	<figure style="width:100%; height:200px;">
+		<img data-plugin-lazyload="" data-plugin-options="{'effect' : 'fadeIn'}" data-original="/static/img/movil-2.jpg" alt="" class="lazy-load-loaded">
 	</figure>
 </div>
 {% else %}
