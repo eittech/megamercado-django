@@ -1,7 +1,15 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+{% block extrastyle %}
+<style>
+  .dashboard #content{
+    width:100%;
+  }
+</style>
+{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+
+{% endblock %}
 
 {% block extrahead %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -42,7 +50,8 @@
 </script>
 
 {% endblock %}
-{% block coltype %}colMS{% endblock %}
+{% block coltype %}colM{% endblock %}
+
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
 
@@ -53,37 +62,64 @@
 </div>
 {% endblock %}
 
+
+
 {% block content %}
 <div id="content-main">
   <h1 style="">Estadisticas Generales</h1>
+  <h4 style="">Origenes</h4>
+
   <div class="row">
     <div class="col-2">
-        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0PMsX9P-aFJzdeSwshV3Ncdq9Hjwnyrl0RiaFQ1ADfdyPxTccRQnPS12nys6xQIkQNtjMAyKIh1w/pubchart?oid=354537449&amp;format=image"></iframe>
+        <!-- <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0PMsX9P-aFJzdeSwshV3Ncdq9Hjwnyrl0RiaFQ1ADfdyPxTccRQnPS12nys6xQIkQNtjMAyKIh1w/pubchart?oid=354537449&amp;format=image"></iframe> -->
     </div>
   </div>
-  <h1 style="">Estadisticas Especificas</h1>
   <div class="row">
-      <div class="col-2">
+
+      <div class="col-sm-4" style="width: 40% !important; height:200px!important; ">
+        <h4 style="">Busquedas</h4>
+
         <canvas id="type-chart" style="width: 100% !important; height:200px!important; "></canvas>
       </div>
-      <div class="col-2">
+      <div class="col-sm-4" style="width: 40% !important; height:200px!important; ">
+        <h4 style="">Regiones</h4>
         <canvas id="country_name-chart" style="width: 100% !important; height:200px!important; "></canvas>
-        <script>
-        var ctx2 = document.getElementById('country_name-chart');
-        var lineChart2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
-                datasets: [{
-                    data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
-                    backgroundColor: [{% for item in register_region_name %}randomColorGenerator(),{% endfor %}]
-                }]
-            },
-            options: options
-        });
-        </script>
       </div>
+      <script>
+      var ctx2 = document.getElementById('country_name-chart');
+      var lineChart2 = new Chart(ctx2, {
+          type: 'doughnut',
+          data: {
+              labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
+              datasets: [{
+                  data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
+                  backgroundColor: [{% for item in register_region_name %}randomColorGenerator(),{% endfor %}]
+              }]
+          },
+          options: options
+      });
+      </script>
+      <div class="col-sm-4" style="width: 40% !important; height:200px!important; ">
+        <h4 style="">Categorias</h4>
+        <canvas id="register_category-chart" style="width: 100% !important; height:200px!important; "></canvas>
+      </div>
+      <script>
+      var ctx3 = document.getElementById('register_category-chart');
+      var lineChart3 = new Chart(ctx3, {
+          type: 'doughnut',
+          data: {
+              labels: [{% for item in register_category %}'{{ item.category__name }}',{% endfor %}],
+              datasets: [{
+                  data: [{% for item in register_category %}'{{ item.dcount }}',{% endfor %}],
+                  backgroundColor: [{% for item in register_category %}randomColorGenerator(),{% endfor %}]
+              }]
+          },
+          options: options
+      });
+      </script>
   </div>
+  <h1 style="">Estadisticas Especificas</h1>
+
 
 
 </div>

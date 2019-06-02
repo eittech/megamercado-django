@@ -84,6 +84,8 @@ def sample_api(request):
 #         print('error')
 #     print('finalizo el proceso')
 
+
+
 #rest api service web
 
 def marketplace(request,id):
@@ -94,9 +96,11 @@ def marketplace(request,id):
     })
 
 def estadisticas(request):
-    register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
+    register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
     register_region_name = register.values('region_name').annotate(dcount=Count('region_name'))
-    return render(request, 'admin/estadisticas.html',{'register':register,'register_region_name':register_region_name})
+    register_category = register.values('category__name').annotate(dcount=Count('category__name'))
+
+    return render(request, 'admin/estadisticas.html',{'register':register,'register_region_name':register_region_name,'register_category':register_category})
 
 #test mobile
 def index_mobile(request):
