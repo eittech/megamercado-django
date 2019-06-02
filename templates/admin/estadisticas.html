@@ -36,7 +36,7 @@
         var ctx = document.getElementById("type-chart").getContext('2d');;
         {% regroup register|dictsort:"type" by get_type_display as type_list %}
         var lineChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'pie',
             data: {
                 labels: [{% for type in type_list %}'{{ type.grouper }}',{% endfor %}],
                 datasets: [{
@@ -87,7 +87,7 @@
       <script>
       var ctx2 = document.getElementById('country_name-chart').getContext('2d');;
       var lineChart2 = new Chart(ctx2, {
-          type: 'doughnut',
+          type: 'pie',
           data: {
               labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
               datasets: [{
@@ -101,7 +101,7 @@
       <script>
       var ctx3 = document.getElementById('register_category-chart').getContext('2d');;
       var lineChart3 = new Chart(ctx3, {
-          type: 'doughnut',
+          type: 'pie',
           data: {
               labels: [{% for item in register_category %}'{{ item.category__name }}',{% endfor %}],
               datasets: [{
