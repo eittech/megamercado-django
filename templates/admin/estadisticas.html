@@ -40,7 +40,7 @@
         });
 
         var ctx2 = document.getElementById("country_name-chart");
-        {% regroup register|dictsort:"country_name" by country_name as country_name_list %}
+        {% regroup register|dictsort:"region_name" by region_name as country_name_list %}
         var lineChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
