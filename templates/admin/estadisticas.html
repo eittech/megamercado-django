@@ -39,14 +39,14 @@
             options: options
         });
 
-        var ctx2 = document.getElementById("country_name-chart");
-        {% regroup register|dictsort:"region_name" by region_name as country_name_list %}
+        var ctx2 = document.getElementById("region_name-chart");
+
         var lineChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
-                labels: [{% for type in country_name_list %}'{{ type.grouper }}',{% endfor %}],
+                labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
                 datasets: [{
-                    data: [{% for type in country_name_list %}'{{ type.list|length }}',{% endfor %}],
+                    data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
                     backgroundColor: [{% for type in country_name_list %}randomColorGenerator(),{% endfor %}]
                 }]
             },

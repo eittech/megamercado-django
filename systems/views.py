@@ -95,7 +95,8 @@ def marketplace(request,id):
 
 def estadisticas(request):
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
-    return render(request, 'admin/estadisticas.html',{'register':register})
+    register_region_name = register.values('region_name').annotate(dcount=Count('region_name'))
+    return render(request, 'admin/estadisticas.html',{'register':register,'register_region_name':register_region_name})
 
 #test mobile
 def index_mobile(request):
