@@ -3,6 +3,61 @@
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
 
+{% block extrahead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+<script>
+    var randomColorGenerator = function () {
+        return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+    };
+    var options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+            position: 'left'
+        },
+        title: {
+            display: true
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("type-chart");
+        {% regroup register|dictsort:"type" by get_type_display as type_list %}
+        var lineChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for type in type_list %}'{{ type.grouper }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for type in type_list %}'{{ type.list|length }}',{% endfor %}],
+                    backgroundColor: [{% for type in type_list %}randomColorGenerator(),{% endfor %}]
+                }]
+            },
+            options: options
+        });
+
+        var ctx2 = document.getElementById("country_name-chart");
+        {% regroup register|dictsort:"country_name" by country_name as country_name_list %}
+        var lineChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for type in country_name_list %}'{{ type.grouper }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for type in country_name_list %}'{{ type.list|length }}',{% endfor %}],
+                    backgroundColor: [{% for type in country_name_list %}randomColorGenerator(),{% endfor %}]
+                }]
+            },
+            options: options
+        });
+
+
+    }
+</script>
+
+{% endblock %}
 {% block coltype %}colMS{% endblock %}
 
 {% block bodyclass %}{{ block.super }} dashboard{% endblock %}
@@ -18,14 +73,17 @@
 <div id="content-main">
   <h1 style="">Estadisticas Generales</h1>
   <div class="row">
-      <div class="col-sm-4" style="width: 100% !important; height:200px!important; ">
-
-      </div>
+    <div class="col-2">
+        <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0PMsX9P-aFJzdeSwshV3Ncdq9Hjwnyrl0RiaFQ1ADfdyPxTccRQnPS12nys6xQIkQNtjMAyKIh1w/pubchart?oid=354537449&amp;format=image"></iframe>
+    </div>
   </div>
   <h1 style="">Estadisticas Especificas</h1>
   <div class="row">
-      <div class="col-sm-4" style="width: 100% !important; height:200px!important; ">
-
+      <div class="col-2">
+        <canvas id="type-chart" style="width: 100% !important; height:200px!important; "></canvas>
+      </div>
+      <div class="col-2">
+        <canvas id="country_name-chart" style="width: 100% !important; height:200px!important; "></canvas>
       </div>
   </div>
 

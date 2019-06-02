@@ -94,8 +94,8 @@ def marketplace(request,id):
     })
 
 def estadisticas(request):
-    print('estadisticas')
-    return render(request, 'admin/estadisticas.html')
+    register = RegisterActivitySystem.objects.filter()
+    return render(request, 'admin/estadisticas.html',{'register':register})
 
 #test mobile
 def index_mobile(request):

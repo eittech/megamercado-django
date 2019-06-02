@@ -6,11 +6,10 @@ import json
 
 # Register your models here.
 class RegisterActivitySystemAdmin(admin.ModelAdmin):
-    list_filter = ('type','template_section','country_name','region_name',
-    ('user',admin.RelatedOnlyFieldListFilter),
-    ('shop',admin.RelatedOnlyFieldListFilter),
+    print(admin.RelatedOnlyFieldListFilter)
+    list_filter = ('country_name','region_name',
     ('category',admin.RelatedOnlyFieldListFilter))
-    list_display = ('type','datet','word_search','shop','template_section','category')
+    list_display = ('type','datet','word_search','shop','category')
     date_hierarchy = 'datet'
     @mark_safe
     def word_search(self, obj):
@@ -38,7 +37,7 @@ class RegisterActivitySystemAdmin(admin.ModelAdmin):
             customer = Customer.objects.get(user=user)
             shop = Shop.objects.filter(customer=customer)
             # print(shop)
-            queryset = RegisterActivitySystem.objects.filter(shop__in=shop)
+            queryset = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
         return queryset
     class Meta:
         app_label = "sistemas"
