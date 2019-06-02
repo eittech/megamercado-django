@@ -47,7 +47,7 @@
                 labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
                 datasets: [{
                     data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
-                    backgroundColor: [{% for type in country_name_list %}randomColorGenerator(),{% endfor %}]
+                    backgroundColor: [{% for type in register_region_name %}randomColorGenerator(),{% endfor %}]
                 }]
             },
             options: options
