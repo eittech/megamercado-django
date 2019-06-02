@@ -88,6 +88,7 @@ urlpatterns = [
 
     path('google8244a1eb440cee55.html', views.GoogleVerificacion, name='GoogleVerificacion'),
 
+    path('admin/estadisticas', views.estadisticas, name='estadisticas'),
 
 
 

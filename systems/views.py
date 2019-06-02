@@ -93,6 +93,10 @@ def marketplace(request,id):
     'producto':producto
     })
 
+def estadisticas(request):
+    print('estadisticas')
+    return render(request, 'admin/estadisticas.html')
+
 #test mobile
 def index_mobile(request):
     print(request)
