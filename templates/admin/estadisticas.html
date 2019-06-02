@@ -44,10 +44,10 @@
         var lineChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
-                labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
+                labels: [{% for item in register_region_name %}{% if item.region_name =="None" %}{% else %}'{{ item.region_name }}',{% endif %}{% endfor %}],
                 datasets: [{
-                    data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
-                    backgroundColor: [{% for type in register_region_name %}randomColorGenerator(),{% endfor %}]
+                    data: [{% for item in register_region_name %}{% if item.region_name =="None" %}{% else %}'{{ item.dcount }}',{% endif %}{% endfor %}],
+                    backgroundColor: [{% for item in register_region_name %}{% if item.region_name =="None" %}{% else %}randomColorGenerator(),{% endif %}{% endfor %}]
                 }]
             },
             options: options
