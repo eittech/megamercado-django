@@ -25,11 +25,23 @@
         }
     };
     window.onload = function () {
-        
-
-        var ctx = document.getElementById("region_name-chart");
-
+        var ctx = document.getElementById("type-chart");
+        {% regroup register|dictsort:"type" by get_type_display as type_list %}
         var lineChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for type in type_list %}'{{ type.grouper }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for type in type_list %}'{{ type.list|length }}',{% endfor %}],
+                    backgroundColor: [{% for type in type_list %}randomColorGenerator(),{% endfor %}]
+                }]
+            },
+            options: options
+        });
+
+        var ctx2 = document.getElementById("region_name-chart");
+
+        var lineChart2 = new Chart(ctx2, {
             type: 'doughnut',
             data: {
                 labels: [{% for item in register_region_name %}{% if item.region_name in "None" %}{% else %}'{{ item.region_name }}',{% endif %}{% endfor %}],
