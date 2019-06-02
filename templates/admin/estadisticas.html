@@ -33,7 +33,7 @@
         }
     };
     window.onload = function () {
-        var ctx = document.getElementById("type-chart");
+        var ctx = document.getElementById("type-chart").getContext('2d');;
         {% regroup register|dictsort:"type" by get_type_display as type_list %}
         var lineChart = new Chart(ctx, {
             type: 'doughnut',
@@ -70,14 +70,17 @@
   <h4 style="">Origenes</h4>
 
   <div class="row">
-    <div class="col-2">
+    <div class="col-6" style="width:500px;height:500px;">
         <!-- <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0PMsX9P-aFJzdeSwshV3Ncdq9Hjwnyrl0RiaFQ1ADfdyPxTccRQnPS12nys6xQIkQNtjMAyKIh1w/pubchart?oid=354537449&amp;format=image"></iframe> -->
+        <canvas id="type-chart" style="width:700px;height:500px;"></canvas>
+        <canvas id="country_name-chart" style="width:700px;height:500px;"></canvas>
+        <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+
     </div>
   </div>
-  <canvas id="type-chart"></canvas>
-  <canvas id="country_name-chart"></canvas>
+
       <script>
-      var ctx2 = document.getElementById('country_name-chart');
+      var ctx2 = document.getElementById('country_name-chart').getContext('2d');;
       var lineChart2 = new Chart(ctx2, {
           type: 'doughnut',
           data: {
@@ -90,9 +93,8 @@
           options: options
       });
       </script>
-      <canvas id="register_category-chart"></canvas>
       <script>
-      var ctx3 = document.getElementById('register_category-chart');
+      var ctx3 = document.getElementById('register_category-chart').getContext('2d');;
       var lineChart3 = new Chart(ctx3, {
           type: 'doughnut',
           data: {
@@ -106,9 +108,4 @@
       });
       </script>
   </div>
-  <h1 style="">Estadisticas Especificas</h1>
-
-
-
-</div>
 {% endblock %}
