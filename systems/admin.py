@@ -12,12 +12,15 @@ class RegisterActivitySystemAdmin(admin.ModelAdmin):
     ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('type','datet','word_search','shop','template_section','category')
     date_hierarchy = 'datet'
-
     @mark_safe
     def word_search(self, obj):
         data = obj.data.replace("\'", "\"")
         data = json.loads(data)
-        return u'%' % (data['texto'])
+        try:
+            texto = data['texto']
+        except:
+            texto = ""
+        return texto
         # u'<img src="%s" alt="thumbnail: %s" width="%d" height="%d"/>' % (thumb.url, obj.photo.name, thumb.width, thumb.height)
     word_search.short_description = 'Palabras buscadas'
     word_search.allow_tags = True
