@@ -38,22 +38,6 @@
             },
             options: options
         });
-
-        var ctx2 = document.getElementById("region_name-chart");
-
-        var lineChart2 = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: [{% for item in register_region_name %}{% if item.region_name in "None" %}{% else %}'{{ item.region_name }}',{% endif %}{% endfor %}],
-                datasets: [{
-                    data: [{% for item in register_region_name %}{% if item.region_name in "None" %}{% else %}'{{ item.dcount }}',{% endif %}{% endfor %}],
-                    backgroundColor: [{% for item in register_region_name %}{% if item.region_name in "None" %}{% else %}randomColorGenerator(),{% endif %}{% endfor %}]
-                }]
-            },
-            options: options
-        });
-
-
     }
 </script>
 
@@ -84,6 +68,20 @@
       </div>
       <div class="col-2">
         <canvas id="country_name-chart" style="width: 100% !important; height:200px!important; "></canvas>
+        <script>
+        var ctx2 = document.getElementById('country_name-chart');
+        var lineChart2 = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
+                    backgroundColor: [{% for item in register_region_name %}randomColorGenerator(),{% endfor %}]
+                }]
+            },
+            options: options
+        });
+        </script>
       </div>
   </div>
 
