@@ -96,7 +96,7 @@ def marketplace(request,id):
     })
 
 def estadisticas(request):
-    register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
+    register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     register_region_name = register.values('region_name').annotate(dcount=Count('region_name'))
     register_category = register.values('category__name').annotate(dcount=Count('category__name'))
 
