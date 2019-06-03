@@ -3,17 +3,56 @@
 {% load menu_categorias %}
 {% block content %}
 <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
-					<div class="container">
-						<div class="row">
+		<div class="container">
+			<div class="row">
 
-							<div class="col-md-12 align-self-center p-static order-2 text-center">
+				<div class="col-md-12 align-self-center p-static order-2 text-center">
 
-								<h1 class="text-dark text-dark text-10">Muestra tus productos en ComparaGrow</h1>
-								<span class="sub-title text-dark">Ofrecemos Planes de suscripción para que tus productos sean encontrados en nuestro sitio web.</span>
-							</div>
-						</div>
-					</div>
-				</section>
+					<h1 class="text-dark text-dark text-10">Suscríbete en ComparaGrow</h1>
+					<!-- <span class="sub-title text-dark">Ofrecemos Planes de suscripción para que tus productos sean encontrados en nuestro sitio web.</span> -->
+				</div>
+			</div>
+		</div>
+</section>
+
+
+				<section class="section section-default border-0 my-0" style="background:#fff;">
+									<div class="container">
+										<div class="row">
+											<div class="col">
+
+												<div class="row process">
+													<div class="process-step col-lg-4 mb-5 mb-lg-4 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200" style="animation-delay: 200ms;">
+														<div class="process-step-circle">
+															<strong class="process-step-circle-content"><i class="icon-screen-tablet icons text-5 text-primary"></i></strong>
+														</div>
+														<div class="process-step-content px-4">
+															<p class="mb-0">Tus productos se <b>mostrarán</b> en nuestro sitio web</p>
+														</div>
+													</div>
+													<div class="process-step col-lg-4 mb-5 mb-lg-4 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400" style="animation-delay: 400ms;">
+														<div class="process-step-circle">
+															<strong class="process-step-circle-content"><i class="icons icon-layers text-5 text-primary"></i></strong>
+														</div>
+														<div class="process-step-content px-4">
+															<p class="mb-0">Podrás hacer <b>Publicidad</b></p>
+														</div>
+													</div>
+													<div class="process-step col-lg-4 mb-5 mb-lg-4 appear-animation animated fadeInUpShorter appear-animation-visible" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="600" style="animation-delay: 600ms;">
+														<div class="process-step-circle">
+															<strong class="process-step-circle-content"><i class="icons icon-screen-desktop text-5 text-primary"></i></strong>
+														</div>
+														<div class="process-step-content px-4">
+															<p class="mb-0">Recibirás <b>Reporte Estadístico</b> que beneficiará tus Ventas</p>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</section>
+
 <div class="container">
 
   <div class="row mb-4">
@@ -36,31 +75,14 @@
 					<span class=""></span>
         </div>
         <div class="plan-features">
-					<!-- <div class="toggle toggle-primary toggle-simple" data-plugin-toggle="">
-					<section class="toggle">
-						<label>Detalles</label>
-						<div class="toggle-content" >
-
-						</div>
-					</section> -->
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 110px;">
-							Plan Full, permite incorporar TODOS los productos de tu Tienda en nuestro
-sitio web, mientras estos se adecúen a las categorías establecidas en
-ComparaGrow.</li>
-						<li><a id="ul_fp_btn" style="
-						    color: blueviolet;
-						    text-decoration: underline;
-						    font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-				</ul>
-				<ul style="display:none;" id="ul_fp">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-El valor de este Plan es de $60.000 y tiene una duración de 1 mes, que se
-inicia desde el día en que tus productos se han cargado en nuestro sitio.</li>
-					</ul>
-
+						<ul class="list list-icons list-primary mb-0">
+							<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Te permite incorporar <b>TODOS</b> los productos de tu Tienda, mientras
+apliquen a las categorías establecidas en ComparaGrow.cl</li>
+							<li style="line-height: 19px;text-align: left;"><i class="icons icon-support text-color-primary"></i> La vigencia del Plan es de 1 mes, desde que tus productos se han cargado
+en nuestro sitio.</li>
+							<li style="line-height: 19px;text-align: left;"><i class="icons icon-layers text-color-primary"></i>Incluye <b>Reporte Estadístico</b> mensual para que mejores tu Estrategia de
+Ventas.</li>
+						</ul>
         </div>
         <div class="plan-footer">
           {% if user.is_authenticated %}
@@ -85,26 +107,14 @@ inicia desde el día en que tus productos se han cargado en nuestro sitio.</li>
 					<span class=""></span>
         </div>
         <div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 110px;">
-							Plan Cobro Por Click (CPC), es un cobro por redireccionamiento a tu sitio
-desde ComparaGrow.cl.
-						</li>
-						<li><a id="ul_pcpc_btn" style="
-						    color: blueviolet;
-						    text-decoration: underline;
-						    font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-					</ul>
-					<ul style="display:none;" id="ul_pcpc">
-						<li style="font-size: 14px;line-height: 16px;">
-							Cada click por redireccionamiento tiene un cobro
-de $500 pesos,con una duración de 1 mes que se inicia desde el día en que
-TODOS los productos de tu Tienda se han cargado en nuestro sitio web,
-mientras estos se adecúen a las categorías establecidas en ComparaGrow.</li>
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-El CPC se obtendrá a través de informes de Google Analytics.</li>
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Plan Cobro Por Click (CPC), es un cobro por redireccionamiento a tu sitio
+desde ComparaGrow.cl, que tiene un valor de $500 pesos.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-support text-color-primary"></i> La vigencia del Plan es de 1 mes, desde que tus productos se han cargado
+en nuestro sitio.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-doc text-color-primary"></i> CPC se respalda en base a Google Analytics.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-layers text-color-primary"></i> Incluye <b>Reporte Estadístico</b> mensual para que mejores tu Estrategia de
+Ventas.</li>
 					</ul>
         </div>
         <div class="plan-footer">
@@ -129,28 +139,13 @@ El CPC se obtendrá a través de informes de Google Analytics.</li>
 					<span class="">+ $300 por click</span>
         </div>
         <div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 110px;">
-							Plan Mix, mezcla una parte del Plan Full y Plan CPC, al tener un precio base
-de $40.000 y un cobro adicional por cada click de redireccionamiento de un
-valor de $300 pesos.
-						</li>
-						<li><a id="ul_pm_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_pm">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-						Esto significa, que cada vez que el usuario es
-redireccionado a tu sitio desde el nuestro, se cobrarán $300 pesos más al
-valor base de este Plan.</li>
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							Este plan tiene una duración de 1 mes, iniciándose desde el día en que
-							TODOS los productos de tu Tienda se han cargado en nuestro sitio web,
-							mientras se adecúen a las categorías establecidas en ComparaGrow.</li>
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Este Plan, mezcla al Plan Full y CPC ya que debes pagar un precio base de
+$40.000 pesos y $300 pesos por cada redireccionamiento.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-support text-color-primary"></i> La vigencia del Plan es de 1 mes, desde que tus productos se han cargado
+en nuestro sitio.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-layers text-color-primary"></i> Incluye <b>Reporte Estadístico</b> mensual para que mejores tu Estrategia de
+Ventas.</li>
 					</ul>
         </div>
         <div class="plan-footer">
@@ -179,22 +174,13 @@ valor base de este Plan.</li>
 					<span class=""></span>
         </div>
         <div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 110px;">
-							Plan Producto, permite incorporar solo 1 producto y tiene una duración de
-	1 mes,
-						</li>
-						<li><a id="ul_pp_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_pp">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							iniciándose desde el día en que el producto de tu Tienda se ha
- 						cargado en nuestro sitio web.</li>
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Este Plan te permite incorporar solo 1 (un) producto y tiene una duración de
+1 mes.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-support text-color-primary"></i> La vigencia del Plan es de 1 mes, desde que tu producto se ha cargado en
+nuestro sitio.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-layers text-color-primary"></i> Incluye <b>Reporte Estadístico</b> mensual para que mejores tu Estrategia de
+Ventas.</li>
 					</ul>
 
         </div>
@@ -221,8 +207,9 @@ valor base de este Plan.</li>
 
 							<div class="col-md-12 align-self-center p-static order-2 text-center">
 
-								<h1 class="text-dark text-dark text-10">Incrementa más tus ventas al contratar alguno de los Planes</h1>
-								<span class="sub-title text-dark">Publicitarios para estar mejor posicionado en nuestro sitio web.</span>
+								<h1 class="text-dark text-dark text-10">Incrementa más tus ventas al contratar alguno de
+estos Planes Publicitarios</h1>
+								<!-- <span class="sub-title text-dark">Publicitarios para estar mejor posicionado en nuestro sitio web.</span> -->
 							</div>
 						</div>
 					</div>
@@ -250,23 +237,13 @@ valor base de este Plan.</li>
           <label class="price-label">POR MES</label>
         </div>
         <div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 120px;">
-							Es el lugar de mayor exposición para tu marca, permitiéndote mostrar 1
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Es el lugar de mayor exposición para tu marca, permitiéndote mostrar 1
 anuncio de medidas 1400px *180px (versión escritorio) y 300px * 150px
-(dispositivos móviles).
-						</li>
-						<li><a id="ul_ci_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_ci">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							El valor del espacio publicitario es de $60.000 y tiene una duración de 1
+(dispositivos móviles).</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-wallet text-color-primary"></i> El valor del espacio publicitario es de $60.000 y tiene una duración de 1
 mes, una vez subido tu anuncio a nuestro sitio.</li>
+
 					</ul>
         </div>
         <div class="plan-footer">
@@ -294,21 +271,11 @@ mes, una vez subido tu anuncio a nuestro sitio.</li>
           <label class="price-label">POR MES</label>
         </div>
 				<div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 120px;">
-							Permite mostrar 1 producto en el carrusel de destacados.
-						</li>
-						<li><a id="ul_cd_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_cd">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							El valor del espacio publicitario es de $45.000 y tiene una duración de 1
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Permite mostrar 1 producto en el carrusel de destacados.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-wallet text-color-primary"></i> El valor del espacio publicitario es de $45.000 y tiene una duración de 1
 mes, una vez subido tu anuncio a nuestro sitio.</li>
+
 					</ul>
         </div>
         <div class="plan-footer">
@@ -336,21 +303,11 @@ mes, una vez subido tu anuncio a nuestro sitio.</li>
           <label class="price-label">POR MES</label>
         </div>
 				<div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 120px;">
-							Permite mostrar 1 producto en carrusel últimas rebajas.
-						</li>
-						<li><a id="ul_cur_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_cur">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							El valor del espacio publicitario es de $30.000 y tiene una duración de 1
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Permite mostrar 1 producto en carrusel últimas rebajas.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-wallet text-color-primary"></i> El valor del espacio publicitario es de $30.000 y tiene una duración de 1
 mes, una vez subido tu anuncio a nuestro sitio.</li>
+
 					</ul>
         </div>
         <div class="plan-footer">
@@ -380,21 +337,11 @@ mes, una vez subido tu anuncio a nuestro sitio.</li>
           <label class="price-label">POR MES</label>
         </div>
 				<div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 120px;">
-							Permite mostrar 1 producto en carrusel arma tu grow.
-						</li>
-						<li><a id="ul_catg_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_catg">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							El valor del espacio publicitario es de $15.000 y tiene una duración de 1
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Permite mostrar 1 producto en carrusel arma tu grow.</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-wallet text-color-primary"></i> El valor del espacio publicitario es de $15.000 y tiene una duración de 1
 mes, una vez subido tu anuncio a nuestro sitio.</li>
+
 					</ul>
         </div>
         <div class="plan-footer">
@@ -423,22 +370,12 @@ mes, una vez subido tu anuncio a nuestro sitio.</li>
           <label class="price-label">POR MES</label>
         </div>
 				<div class="plan-features">
-					<ul style="font-size: 14px;">
-						<li style="font-size: 14px;line-height: 16px;height: 120px;">
-							Permite mostrar 1 anuncio en cinta promociones (cinta negra ubicado en la
-parte superior de la página).
-						</li>
-						<li><a id="ul_cp_btn" style="
-								color: blueviolet;
-								text-decoration: underline;
-								font-size: 11px;
-								cursor:pointer;
-						"> ver mas +</a></li>
-						</ul>
-						<ul style="display:none;" id="ul_cp">
-						<li style="margin-top: 6px;font-size: 14px;line-height: 16px;">
-							El valor del espacio publicitario es de $50.000 y tiene una duración de 1
+					<ul class="list list-icons list-primary mb-0">
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-screen-desktop text-color-primary"></i> Permite mostrar 1 anuncio en cinta promociones (cinta negra ubicado en la
+parte superior de la página).</li>
+						<li style="line-height: 19px;text-align: left;"><i class="icons icon-wallet text-color-primary"></i> El valor del espacio publicitario es de $50.000 y tiene una duración de 1
 mes, una vez subido tu anuncio a nuestro sitio.</li>
+
 					</ul>
         </div>
         <div class="plan-footer">

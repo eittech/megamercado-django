@@ -22,7 +22,7 @@
   <div class="header-body border-color-primary border-top-0 box-shadow-none">
     <div class="header-container  z-index-2" style="min-height: 18px;height: 20px;background:#000;">
       <div class="col text-center">
-        <span style="color:#fff;"><marquee style="margin-top: -3px;">CINTA PROMOCIONAL - DISPONIBLE</marquee></span>
+        <a href="/clientes"><span style="color:#fff;"><marquee style="margin-top: -3px;">Suscribe tu Growshop y aumenta tus Ventas… Infórmate de los beneficios Aquí</marquee></span></a>
       </div>
     </div>
 
@@ -170,7 +170,12 @@ letter-spacing: 1px;">
                                 </li>
                                 {% endif %}
                             {% endfor %}
-                        </ul>
+                                <li class="dropdown dropdown-full-color dropdown-light dropdown-mega" style="margin-left:45px;">
+                                  <a class="dropdown-item dropdown-toggle" href="/clientes" style="font-weight: 500;letter-spacing: 1px;background: transparent;">
+                                      <button style="background: transparent;color: #fff;">PUBLICA PRODUCTOS</button>
+                                    </a>
+                                </li>
+                            </ul>
                       </nav>
 
 
@@ -183,7 +188,7 @@ letter-spacing: 1px;">
               </div>
               <div class="header-column order-1 order-lg-2">
                 <div class="header-row justify-content-end">
-                  <div class="header-nav-features header-nav-features-no-border w-75 w-auto-mobile d-none d-sm-flex">
+                  <div class="header-nav-features header-nav-features-no-border w-100 w-auto-mobile d-none d-sm-flex">
                     <form role="search" class="d-flex w-100" action="/productos/search" method="get">
                       {% csrf_token %}
                       <div class="simple-search input-group w-100">
