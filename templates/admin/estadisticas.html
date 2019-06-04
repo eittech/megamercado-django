@@ -139,22 +139,22 @@
         <tr>
           <td>
             <div>
-                {% if register_category %}
-                <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+                {% if register_region_name %}
+                <canvas id="country_name-chart" style="width:700px;height:500px;"></canvas>
                 {% else %}
                 <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
                 {% endif %}
             </div>
-            {% if register_category %}
+            {% if register_region_name %}
             <script>
-            var ctx3 = document.getElementById('register_category-chart').getContext('2d');;
-            var lineChart3 = new Chart(ctx3, {
+            var ctx2 = document.getElementById('country_name-chart').getContext('2d');;
+            var lineChart2 = new Chart(ctx2, {
                 type: 'pie',
                 data: {
-                    labels: [{% for item in register_category %}'{{ item.category__name }}',{% endfor %}],
+                    labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
                     datasets: [{
-                        data: [{% for item in register_category %}'{{ item.dcount }}',{% endfor %}],
-                        backgroundColor: [{% for item in register_category %}randomColorGenerator(),{% endfor %}]
+                        data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
+                        backgroundColor: [{% for item in register_region_name %}randomColorGenerator(),{% endfor %}]
                     }]
                 },
                 options: options
