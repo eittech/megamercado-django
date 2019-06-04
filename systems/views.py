@@ -95,13 +95,33 @@ def marketplace(request,id):
     'producto':producto
     })
 
+@login_required
 def estadisticas(request):
+    user = request.user
+    customer = Customer.objects.get(user=user)
+    shop = Shop.objects.filter(customer=customer)
+    products_customer = Product.objects.filter(shop__in=shop)
+    #analisis de competencia
+    ################################
+    category_customer = products_customer.values('category__pk').annotate(dcount=Count('category'))
+    category_customer_pk = []
+    for ck in category_customer:
+        category_customer_pk.append(str(ck['category__pk']))
+    products_shop_competition = Product.objects.filter(category__pk__in=category_customer_pk)
+    shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:20]
+    ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
     register_region_name = register.values('region_name').annotate(dcount=Count('region_name'))[:10]
     register_category = register.values('category__name').annotate(dcount=Count('category__name'))[:10]
+    register_category = register.values('category__name').annotate(dcount=Count('category__name'))[:10]
 
-    return render(request, 'admin/estadisticas.html',{'register':register,'register_region_name':register_region_name,'register_category':register_category})
+
+    return render(request, 'admin/estadisticas.html',{
+    'register':register,
+    'register_region_name':register_region_name,
+    'register_category':register_category,
+    'shop_competition':shop_competition})
 
 #test mobile
 def index_mobile(request):
