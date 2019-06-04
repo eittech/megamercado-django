@@ -111,6 +111,9 @@ def estadisticas(request):
     shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:10]
 
     alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)[:10]
+
+    click_publicity = RegisterActivitySystem.objects.filter(type='click_publicity')
+    list_product_more_visited = click_publicity.values('product__name','product__pk').annotate(dcount=Count('product__pk'))
     ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
@@ -124,7 +127,8 @@ def estadisticas(request):
     'register_region_name':register_region_name,
     'register_category':register_category,
     'shop_competition':shop_competition,
-    'alert_price_competition':alert_price_competition})
+    'alert_price_competition':alert_price_competition,
+    'list_product_more_visited':list_product_more_visited})
 
 #test mobile
 def index_mobile(request):
