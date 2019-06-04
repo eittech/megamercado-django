@@ -5,25 +5,6 @@ from django.db.models.signals import pre_save
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-class AddressCustomer(models.Model):
-    TYPE_ADDRESS = (
-        ('INVOICE', 'Facturacion'),
-        ('DELIVERY', 'Entrega'),
-        ('HOME', 'DOMICILIO'),
-        ('SUSCRIPTION', 'SOLICITUD DE SUSCRIPCION'),
-    )
-    alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
-    type = models.CharField(verbose_name="Tipo de Direccion",max_length=200,choices=TYPE_ADDRESS,blank=True)
-    company = models.CharField(verbose_name="Compañia",max_length=200,blank=True)
-    address1 = models.CharField(verbose_name="Direccion 1",max_length=200,blank=True)
-    address2 = models.CharField(verbose_name="Direccion 2",max_length=200,blank=True)
-    postcode = models.CharField(verbose_name="Codigo Postal",max_length=200,blank=True)
-    city = models.CharField(verbose_name="Ciudad",max_length=200,blank=True)
-    phone = models.CharField(verbose_name="Telefono",max_length=200,blank=True)
-    phone_mobile = models.CharField(verbose_name="Celular",max_length=200)
-    def __str__(self):
-        return self.alias
-
 class Customer(models.Model):
     TYPE_DOCUMENT = (
         ('PASAPORTE', 'Pasaporte'),
@@ -42,10 +23,34 @@ class Customer(models.Model):
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
     firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
-    address = models.ManyToManyField(AddressCustomer,blank=True)
+    # address = models.ManyToManyField(AddressCustomer,blank=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
     def __str__(self):
         return self.user.username
+    class Meta:
+        verbose_name = "Datos del Cliente"
+
+class AddressCustomer(models.Model):
+    TYPE_ADDRESS = (
+        ('INVOICE', 'Facturacion'),
+        ('DELIVERY', 'Entrega'),
+        ('HOME', 'DOMICILIO'),
+        ('SUSCRIPTION', 'SOLICITUD DE SUSCRIPCION'),
+    )
+    customer = models.ForeignKey(Customer,verbose_name="Cliente",on_delete=models.CASCADE,blank=True,null=True)
+    alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
+    type = models.CharField(verbose_name="Tipo de Direccion",max_length=200,choices=TYPE_ADDRESS,blank=True)
+    company = models.CharField(verbose_name="Compañia",max_length=200,blank=True)
+    address1 = models.CharField(verbose_name="Direccion 1",max_length=200,blank=True)
+    address2 = models.CharField(verbose_name="Direccion 2",max_length=200,blank=True)
+    postcode = models.CharField(verbose_name="Codigo Postal",max_length=200,blank=True)
+    city = models.CharField(verbose_name="Ciudad",max_length=200,blank=True)
+    phone = models.CharField(verbose_name="Telefono",max_length=200,blank=True)
+    phone_mobile = models.CharField(verbose_name="Celular",max_length=200)
+    def __str__(self):
+        return self.alias
+    class Meta:
+        verbose_name = "Direccione"
 
 
 class MailVerification(models.Model):

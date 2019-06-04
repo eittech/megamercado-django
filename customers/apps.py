@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class CustomersConfig(AppConfig):
     name = 'customers'
-    verbose_name = "Clientes y Direcciones"
+    verbose_name = "Datos de Facturación y Envíos"

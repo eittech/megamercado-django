@@ -6,6 +6,9 @@ from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
+from django.utils.safestring import mark_safe
+
+
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
@@ -16,10 +19,21 @@ class ProductAttributesInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ('photo',('shop',admin.RelatedOnlyFieldListFilter), ('category',admin.RelatedOnlyFieldListFilter))
-    list_display = ('name', 'price','tax','total')
+    list_display = ('name', 'category','price','tax','total','publish_')
+    list_editable = ('category',)
     # readonly_fields = ['category','category_temp','photo']
     search_fields = ['name']
     # date_hierarchy = 'shop'
+    @mark_safe
+    def publish_(self, obj):
+        if obj.publish:
+            return u'<img src="/static/admin/img/icon-yes.svg" alt="True">'
+        else:
+            return u'<img src="/static/admin/img/icon-no.svg" alt="False">'
+        # u'<img src="%s" alt="thumbnail: %s" width="%d" height="%d"/>' % (thumb.url, obj.photo.name, thumb.width, thumb.height)
+    publish_.short_description = 'Estado'
+    publish_.allow_tags = True
+
     inlines = (ProductAttributesInline,ProductImageInline)
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "shop":
@@ -37,13 +51,9 @@ class ProductAdmin(admin.ModelAdmin):
         if user.is_superuser:
             queryset = super().get_queryset(request)
         else:
-            print(user)
             customer = Customer.objects.get(user=user)
-            print(customer)
             shop = Shop.objects.filter(customer=customer)
-            # print(shop)
             queryset = Product.objects.filter(shop__in=shop)
-            print('hola admin')
         return queryset
 
 
@@ -64,7 +74,7 @@ class ShopAdmin(admin.ModelAdmin):
     }
     list_display = ('name', 'num_products','num_products_category','num_products_category_null')
     search_fields = ['name',]
-    readonly_fields = ['customer','url']
+    # readonly_fields = ['customer','url']
     def get_queryset(self, request):
         user = request.user
         if user.is_superuser:
@@ -81,10 +91,30 @@ class ShopAdmin(admin.ModelAdmin):
 class HistoryPriceAdmin(admin.ModelAdmin):
     list_filter = ('date_update',)
     list_display = ('product', 'date_update','total')
+    def get_queryset(self, request):
+        user = request.user
+        if user.is_superuser:
+            queryset = super().get_queryset(request)
+        else:
+            customer = Customer.objects.get(user=user)
+            shop = Shop.objects.filter(customer=customer)
+            product = Product.objects.filter(shop__in=shop)
+            queryset = HistoryPrice.objects.filter(product__in=product)
+        return queryset
 
 class AlertsProductAdmin(admin.ModelAdmin):
     list_display = ('product','type','content')
     readonly_fields = ['product']
+    def get_queryset(self, request):
+        user = request.user
+        if user.is_superuser:
+            queryset = super().get_queryset(request)
+        else:
+            customer = Customer.objects.get(user=user)
+            shop = Shop.objects.filter(customer=customer)
+            product = Product.objects.filter(shop__in=shop)
+            queryset = AlertsProduct.objects.filter(product__in=product)
+        return queryset
 
 class ListCategoryTaxAdmin(admin.ModelAdmin):
     list_display = ('tag','state')

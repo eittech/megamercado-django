@@ -107,7 +107,8 @@ class ListCategoryTax(models.Model):
 
 
 class Product(models.Model):
-    shop = models.ForeignKey(Shop,on_delete=models.CASCADE)
+    product = models.ForeignKey('self',null=True,related_name="product_base", blank=True, db_index=True,on_delete=models.CASCADE,verbose_name="Producto Base")
+    shop = models.ForeignKey(Shop,on_delete=models.CASCADE,blank=True,null=True,default=False)
     name = models.CharField(verbose_name="Nombre",max_length=200,blank=True)
     reference = models.CharField(verbose_name="Referencia",max_length=200,blank=True)
     brand = models.CharField(verbose_name="Marca",max_length=200,blank=True)
@@ -118,10 +119,10 @@ class Product(models.Model):
     brand_related = models.ForeignKey(Brand,blank=True,on_delete=models.CASCADE,null=True)
     category_temp = models.CharField(verbose_name="Categoria Anterior",max_length=200,blank=True)
     image = models.ImageField(upload_to="assets/product/",blank=True,null=True,verbose_name="Miniatura")
-
     price = models.FloatField()
     tax = models.FloatField()
     total = models.FloatField()
+    publish = models.BooleanField(verbose_name="Publicar",blank=True,null=True,default=False)
     def __str__(self):
         return str(self.shop) + ' - '+ str(self.name)
     class Meta:
