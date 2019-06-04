@@ -105,6 +105,17 @@
       <caption>
           <a class="section">Listado de las Tiendas de la Competencia con sus URL.</a>
       </caption>
+      {% if shop_competition %}
+      <tbody>
+        {% for i in shop_competition %}
+        <tr>
+          <td>
+            <a>{{ i.shop__name }}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      {% else %}
       <tbody>
         <tr>
           <td>
@@ -114,6 +125,7 @@
           </td>
         </tr>
       </tbody>
+      {% endif %}
     </table>
 
     <table style="width: 100%;">
