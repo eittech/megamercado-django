@@ -8,7 +8,7 @@ class CustomerAdmin(admin.ModelAdmin):
         if db_field.name == "user":
             user = request.user
             if user.is_superuser:
-                kwargs["queryset"] = Customer.objects.all()
+                kwargs["queryset"] = User.objects.all()
             else:
                 kwargs["queryset"] = User.objects.filter(username=user.username)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
