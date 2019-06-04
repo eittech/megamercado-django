@@ -4,14 +4,14 @@ from django.contrib import admin
 from customers.models import *
 
 class CustomerAdmin(admin.ModelAdmin):
-    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
-    #     if db_field.name == "user":
-    #         user = request.user
-    #         if user.is_superuser:
-    #             kwargs["queryset"] = Customer.objects.all()
-    #         else:
-    #             kwargs["queryset"] = User.objects.filter(username=user.username)
-    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "user":
+            user = request.user
+            if user.is_superuser:
+                kwargs["queryset"] = Customer.objects.all()
+            else:
+                kwargs["queryset"] = User.objects.filter(username=user.username)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     def get_queryset(self, request):
         user = request.user
         if user.is_superuser:
