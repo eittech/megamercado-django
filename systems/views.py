@@ -108,9 +108,9 @@ def estadisticas(request):
     for ck in category_customer:
         category_customer_pk.append(str(ck['category__pk']))
     products_shop_competition = Product.objects.filter(category__pk__in=category_customer_pk)
-    shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:20]
+    shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:10]
 
-    alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)
+    alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)[:10]
     ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
