@@ -1,0 +1,146 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+<style>
+  .dashboard #content{
+    width:100%;
+  }
+</style>
+{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
+
+{% endblock %}
+
+{% block extrahead %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+<script>
+    var randomColorGenerator = function () {
+        return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+    };
+    var options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+            position: 'right'
+        },
+        title: {
+            display: true
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    };
+    window.onload = function () {
+        var ctx = document.getElementById("type-chart").getContext('2d');;
+        {% regroup register|dictsort:"type" by get_type_display as type_list %}
+        var lineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [{% for type in type_list %}'{{ type.grouper }}',{% endfor %}],
+                datasets: [{
+                    data: [{% for type in type_list %}'{{ type.list|length }}',{% endfor %}],
+                    backgroundColor: [{% for type in type_list %}randomColorGenerator(),{% endfor %}]
+                }]
+            },
+            options: options
+        });
+    }
+</script>
+
+{% endblock %}
+{% block coltype %}colMS{% endblock %}
+
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; Estadisticas
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<div id="content-main">
+  <h1 style="">Estadisticas Generales</h1>
+
+  <div class="row">
+    <div>
+        <h4 style="">Alertas de Productos Nuevos Ingresados por la Competencia.</h4>
+        <canvas id="type-chart" style="width:700px;height:500px;"></canvas>
+    </div>
+    <div >
+        <h4 style="">Alertas de Cambios de Precios de Productos.</h4>
+        <canvas id="country_name-chart" style="width:700px;height:500px;"></canvas>
+    </div>
+    <div>
+        <h4 style="">Listado de las Tiendas de la Competencia con sus URL.</h4>
+        <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+    </div>
+    <div>
+        <h4 style="">% Usuarios provenientes de Dispositivos Móviles vs Escritorio.</h4>
+        <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+    </div>
+    <div>
+        <h4 style="">% Usuarios de cada región.</h4>
+        <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+  <h1 style="">Estadisticas Espeficicas</h1>
+
+  <div class="row">
+    <div class="col-6" style="width:500px;height:500px;">
+        <h4 style="">Productos más visitados de la Tienda.</h4>
+
+        <!-- <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0PMsX9P-aFJzdeSwshV3Ncdq9Hjwnyrl0RiaFQ1ADfdyPxTccRQnPS12nys6xQIkQNtjMAyKIh1w/pubchart?oid=354537449&amp;format=image"></iframe> -->
+        <canvas id="type-chart" style="width:700px;height:500px;"></canvas>
+        <h4 style="">Listado y número total de redireccionamientos.</h4>
+
+        <canvas id="country_name-chart" style="width:700px;height:500px;"></canvas>
+        <h4 style="">Clics realizados en Publicidad contratada.</h4>
+
+        <canvas id="register_category-chart" style="width:700px;height:500px;"></canvas>
+
+    </div>
+  </div>
+
+      <script>
+      var ctx2 = document.getElementById('country_name-chart').getContext('2d');;
+      var lineChart2 = new Chart(ctx2, {
+          type: 'pie',
+          data: {
+              labels: [{% for item in register_region_name %}'{{ item.region_name }}',{% endfor %}],
+              datasets: [{
+                  data: [{% for item in register_region_name %}'{{ item.dcount }}',{% endfor %}],
+                  backgroundColor: [{% for item in register_region_name %}randomColorGenerator(),{% endfor %}]
+              }]
+          },
+          options: options
+      });
+      </script>
+      <script>
+      var ctx3 = document.getElementById('register_category-chart').getContext('2d');;
+      var lineChart3 = new Chart(ctx3, {
+          type: 'pie',
+          data: {
+              labels: [{% for item in register_category %}'{{ item.category__name }}',{% endfor %}],
+              datasets: [{
+                  data: [{% for item in register_category %}'{{ item.dcount }}',{% endfor %}],
+                  backgroundColor: [{% for item in register_category %}randomColorGenerator(),{% endfor %}]
+              }]
+          },
+          options: options
+      });
+      </script>
+  </div>
+{% endblock %}
