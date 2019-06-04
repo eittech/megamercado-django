@@ -109,6 +109,8 @@ def estadisticas(request):
         category_customer_pk.append(str(ck['category__pk']))
     products_shop_competition = Product.objects.filter(category__pk__in=category_customer_pk)
     shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:20]
+
+    alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)
     ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
@@ -121,7 +123,8 @@ def estadisticas(request):
     'register':register,
     'register_region_name':register_region_name,
     'register_category':register_category,
-    'shop_competition':shop_competition})
+    'shop_competition':shop_competition,
+    'alert_price_competition':alert_price_competition})
 
 #test mobile
 def index_mobile(request):

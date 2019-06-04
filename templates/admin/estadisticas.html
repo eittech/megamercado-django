@@ -1,5 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n static %}
+{% load menu_categorias %}
+
 
 {% block extrastyle %}
 {{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">
@@ -90,6 +92,20 @@
       <caption>
           <a class="section">Alertas de Cambios de Precios de Productos.</a>
       </caption>
+      {% if alert_price_competition %}
+      <tbody>
+        {% for i in alert_price_competition %}
+        <tr>
+          <td>
+            <a>{{ i.product.name }}</a>
+            {% autoescape off %}
+            {{ i.product.id|is_up_down }}
+            {% endautoescape %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      {% else %}
       <tbody>
         <tr>
           <td>
@@ -99,6 +115,7 @@
           </td>
         </tr>
       </tbody>
+      {% endif %}
     </table>
 
     <table style="width: 100%;">
