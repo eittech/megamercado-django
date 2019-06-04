@@ -106,14 +106,18 @@ def estadisticas(request):
     category_customer = products_customer.values('category__pk').annotate(dcount=Count('category'))
     category_customer_pk = []
     for ck in category_customer:
-        category_customer_pk.append(str(ck['category__pk']))
+        if str(ck['category__pk']) == "None":
+            print('error')
+        else:
+            category_customer_pk.append(str(ck['category__pk']))
+    print(category_customer_pk)
     products_shop_competition = Product.objects.filter(category__pk__in=category_customer_pk)
     shop_competition = products_shop_competition.values('shop__pk','shop__name').annotate(dcount=Count('shop__pk'))[:10]
 
     alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)[:10]
 
     click_publicity = RegisterActivitySystem.objects.filter(type='click_publicity')
-    list_product_more_visited = click_publicity.values('product__name','product__pk').annotate(dcount=Count('product__pk'))
+    list_product_more_visited = click_publicity.values('product__name','product__pk').annotate(dcount=Count('product__pk'))[:10]
     ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
