@@ -153,7 +153,21 @@
         <tr>
           <td>
             <div>
-                <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
+                <canvas id="type_dispositive-chart" style="width:700px;height:500px;"></canvas>
+                <script>
+                var ctx3 = document.getElementById('type_dispositive-chart').getContext('2d');;
+                var lineChart3 = new Chart(ctx3, {
+                    type: 'pie',
+                    data: {
+                        labels: ['% Móviles','% Ordenadores','% Tablets',],
+                        datasets: [{
+                            data: ['57.4','42.3','0.3',],
+                            backgroundColor: [randomColorGenerator(),randomColorGenerator(),randomColorGenerator(),]
+                        }]
+                    },
+                    options: options
+                });
+                </script>
             </div>
           </td>
         </tr>
