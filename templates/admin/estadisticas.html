@@ -217,12 +217,12 @@
 <div id="content-related">
   <div class="module">
     <h2 style="">Estadisticas Espeficicas</h2>
-    <h3 style="">Productos más visitados de la Tienda.</h3>
+    <h3 style="color: #672c93;font-size: 15px;">Productos más visitados de la Tienda.</h3>
     <div>
-      {% if list_product_more_visited %}
+      {% if click_publicity_contracted %}
 
-        {% for i in list_product_more_visited %}
-        <p>{{ i.product__name }}</p>
+        {% for i in click_publicity_contracted %}
+        <p> >> {{ i.product__name }}</p>
         {% endfor %}
 
       {% else %}
@@ -230,13 +230,29 @@
       {% endif %}
 
     </div>
-    <h3 style="">Listado y número total de redireccionamientos.</h3>
+    <h3 style="color: #672c93;font-size: 15px;">Listado y número total de redireccionamientos.</h3>
     <div>
-        <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
+      {% if customer_redirect %}
+
+        <p style="font-size: 18px;margin-left: 20px;color: #ffffff;background: #672c93;width: fit-content;border-radius: 10px;">{{ customer_redirect.count }}</p>
+        {% for i in customer_redirect %}
+        <p> >> {{ i.product.name }}</p>
+        {% endfor %}
+      {% else %}
+          <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
+      {% endif %}
     </div>
-    <h3 style="">Clics realizados en Publicidad contratada.</h3>
+    <h3 style="color: #672c93;font-size: 15px;">Clics realizados en Publicidad contratada.</h3>
     <div>
-        <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
+      {% if click_publicity_contracted %}
+
+        {% for i in click_publicity_contracted %}
+        <p> >> {{ i.product__name }}</p>
+        {% endfor %}
+
+      {% else %}
+          <p><img src="https://img.icons8.com/color/40/000000/box-important.png">En estos momentos no tiene alertas.</p>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -116,8 +116,10 @@ def estadisticas(request):
 
     alert_price_competition = AlertsProduct.objects.filter(product__in=products_shop_competition)[:10]
 
+    customer_redirect = RegisterActivitySystem.objects.filter(type='redirect_product').filter(shop__in=shop)
+
     click_publicity = RegisterActivitySystem.objects.filter(type='click_publicity')
-    list_product_more_visited = click_publicity.values('product__name','product__pk').annotate(dcount=Count('product__pk'))[:10]
+    click_publicity_contracted = click_publicity.values('product__name','product__pk').annotate(dcount=Count('product__pk'))[:10]
     ################################
     register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category')).filter(country_name='Chile')
     # register = RegisterActivitySystem.objects.filter(type__in=('search_text','search_category'))
@@ -132,7 +134,8 @@ def estadisticas(request):
     'register_category':register_category,
     'shop_competition':shop_competition,
     'alert_price_competition':alert_price_competition,
-    'list_product_more_visited':list_product_more_visited})
+    'click_publicity_contracted':click_publicity_contracted,
+    'customer_redirect':customer_redirect})
 
 #test mobile
 def index_mobile(request):
