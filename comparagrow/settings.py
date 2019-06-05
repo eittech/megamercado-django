@@ -15,7 +15,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+#DEBUG = True
+DEBUG = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -40,9 +41,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'r#hc(l2(-+=ih$6d#d&kkkafvr_4n0e%m)@(92qv1kav3259%4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.5','192.168.1.9','127.0.0.1','35.185.63.218']
+ALLOWED_HOSTS = ['comparagrow.cl','www.comparagrow.cl']
 
 #habilitar cuando use postgres
 # SOCIAL_AUTH_POSTGRES_JSONFIELD = True
@@ -59,22 +60,31 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     #social django
+    'django_google_maps',
     'social_django',
-
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_user_agents',
+    'corsheaders',
     'mptt',
     'tagging',
-    'systems',
-    'customers',
-    'contracts',
+    'systems.apps.SystemsConfig',
+    'customers.apps.CustomersConfig',
+    'contracts.apps.ContractsConfig',
     'services',
-    'products'
+    'products.apps.ProductsConfig',
+    'blog'
 
 ]
 
+SITE_ID=1
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,6 +97,9 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware',
 
 ]
+
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'comparagrow.urls'
 
@@ -111,15 +124,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'comparagrow.wsgi.application'
 
+
+#EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+#SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+#SENDGRID_API_KEY = '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'
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'comparagrow420@gmail.com'
-EMAIL_HOST_PASSWORD = 'Pazverde420'
-#EMAIL_HOST_USER = 'teteangarita121194@gmail.com'
-#EMAIL_HOST_PASSWORD = '17800074'
-
+EMAIL_HOST = 'mail.comparagrow.cl'
+EMAIL_HOST_USER = 'contacto@comparagrow.cl'
+EMAIL_HOST_PASSWORD = 'Pazverde123..'
 EMAIL_PORT = 587
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -153,6 +170,14 @@ DATABASES = {
 # }
 
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 AUTHENTICATION_BACKENDS = (
     # 'social_core.backends.open_id.OpenIdAuth',
     # 'social_core.backends.google.GoogleOpenId',
@@ -166,6 +191,20 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
 
 
+)
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
 )
 
 # Password validation
@@ -192,7 +231,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-cl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -219,9 +258,14 @@ LOGOUT_URL = '/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyCgbw8SBWbnD_2vX4d3FCxWUQHE541B3Xs'
 
 #credenciales social login
 SOCIAL_AUTH_GITHUB_KEY = '356c61a6a045c96b53c1'
@@ -231,5 +275,13 @@ SOCIAL_AUTH_GITHUB_SECRET = '10b704f62ebe181f0579b5b9248ca64eb9f70acd'
 SOCIAL_AUTH_TWITTER_KEY = 'mYP1Zh0VdqTm301D97twSdlFd'
 SOCIAL_AUTH_TWITTER_SECRET = '9uvCC7uX58870992zP0M4cJ8lhPbGXJcT3BAiniaXgOz32onyS'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '361874647317-rfjamk7oeg7jquooa6cov96olaf9vhpk.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'R0E6_UipW7yy8jiduCYifY99'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '594813018113-8sblfvbqjeh6fb7r9ffbv8qoumil5o4t.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'zLbzES8P78nqbuJbM4qLLuq_'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2090703191007206'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'e941f4e7cdefe99ae0d0085688ea8153'  # App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+  'fields': 'id, name, email'
+}
