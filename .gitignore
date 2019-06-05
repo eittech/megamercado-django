@@ -1,2 +1,8 @@
-comparagrow/settings.py
-db.sqlite3
+comparagrow/*
+db.sqlite
+*.pyc
+__pycache__
+db.sqlite*
+.DS_Store
+migrations
+media
