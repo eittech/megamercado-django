@@ -6,3 +6,8 @@ db.sqlite*
 .DS_Store
 migrations
 media
+*/__pycache__
+
+
+blog/__pycache__/
+blog/migrations/
