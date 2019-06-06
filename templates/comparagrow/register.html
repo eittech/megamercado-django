@@ -126,7 +126,7 @@ $(modal).modal('hide')
   <span>ó registrate con: </span>
 </div>
 <div class="row" style="margin-top: 5px;margin-left:20px; margin-right:20px;">
-  <div class="col-sm-6">
+  <div class="col-sm-12" style="text-align: center;">
     <a href="/login" >
       <iframe src="/facebook_btn.html" id="iframe" name="iframe" width="" height=""  style="
       border: none;
@@ -134,7 +134,7 @@ $(modal).modal('hide')
   "></iframe>
     </a>
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-12" style="text-align: center;">
     <a class="btn" href="{% url "social:begin" "google-oauth2" %}" style="border: .1rem solid #f6f6f6!important;width: 100%;">
       <img src="/static/img/google-logo.png" style="height: 14px;">
       <span>Iniciar con Google</span>

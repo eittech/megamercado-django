@@ -14,7 +14,7 @@
     </a>
     <div class="card-body" style="{% if request.user_agent.is_mobile %}padding: 0;padding-top: 5px;{% else %}margin-top: -20px;height: 40px;margin-bottom: 37px;{% endif %}font-weight: 100;line-height: 14px;">
       <span class="" style="color:#01b22c;">
-        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
+        <a href="/productos/redirect/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name|truncatechars:30 }}</a>
       </span>
     </div>
     <div class="card-footer" style="{% if request.user_agent.is_mobile %}padding-left: 0;{% else %}{% endif %}background-color: transparent;border-top: none;">
@@ -41,7 +41,7 @@
           {% endif %}
         </div>
         <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-          <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+          <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;width: 85%;padding-right: 0px;padding-left: 0px;" href="/productos/detalle/{{ item.id }}" target="_blank">
           ver detalle
           </a>
         </div>

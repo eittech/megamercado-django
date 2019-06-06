@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from blog.models import *
 
 def lists(request):
-    post =  Blog.objects.all()
+    post =  Blog.objects.all().order_by('-pk')
     paginator = Paginator(post, 10) # Show 25 contacts per page
 
     page = request.GET.get('page')

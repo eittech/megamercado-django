@@ -10,7 +10,7 @@
 {% block content %}
 {% include 'comparagrow/component/style_items.html' %}
 {% if request.user_agent.is_mobile  or request.user_agent.is_tablet %}
-<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false,'lazyLoad': true}">
+<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': true, 'nav': true, 'dots': false,'lazyLoad': true,'autoplay':true,'autoplaytimeout':3"}" style="height: auto;margin-top: 5px;">
 	<figure style="width:100%;height:200px;">
 		<img data-plugin-lazyload="" data-plugin-options="{'effect' : 'fadeIn'}" data-original="/static/img/movil-1.jpg" alt="" class="lazy-load-loaded">
 	</figure>
@@ -19,12 +19,13 @@
 	</figure>
 </div>
 {% else %}
-
-<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': false, 'nav': true, 'dots': false}">
+<div class="owl-carousel owl-theme owl-loaded owl-drag owl-carousel-init" data-plugin-options="{'items': 1, 'margin': 100, 'loop': true, 'nav': true, 'dots': false,'autoplay':true,'autoplaytimeout':3}" style="height: auto;margin-top: 5px;">
 	<figure  src="/static/img/web-1500x180.jpg" style="width:100%; height:180px; background-size:cover; background-position:center center; background-repeat:no-repeat;background:url('/static/img/web1-42KB.jpg')"></figure>
 	<figure  src="/static/img/web-1500x180.jpg" style="width:100%; height:180px; background-size:cover; background-position:center center; background-repeat:no-repeat;background:url('/static/img/web2-67KB.jpg')"></figure>
 </div>
 {% endif %}
+
+
 <div class="container">
 <div class="row text-center">
 	<div class="col">
@@ -46,7 +47,7 @@
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
-		            <a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
+		            <a href="/productos/publicity/redirect/carrusel_destacados/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name|truncatechars:30 }}</a>
 		          </span>
 		        </div>
 		        <div class="card-footer" style="background-color: transparent;border-top: none;">
@@ -69,7 +70,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;width: 85%;padding-right: 0px;padding-left: 0px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -108,7 +109,7 @@
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
-		            <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
+		            <a href="/productos/publicity/redirect/carrusel_rebajas/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name|truncatechars:30 }}</a>
 		          </span>
 		        </div>
 		        <div class="card-footer" style="background-color: transparent;border-top: none;">
@@ -135,7 +136,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;width: 85%;padding-right: 0px;padding-left: 0px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
@@ -171,7 +172,7 @@
 		        </a>
 		        <div class="card-body" style="margin-top: -20px;height: 40px;margin-bottom: 20px;font-weight: 100;line-height: 14px;">
 		          <span class="" style="color:#01b22c;">
-		            <a href="/productos/publicity/redirect/carrusel_tugrow/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name }}</a>
+		            <a href="/productos/publicity/redirect/carrusel_tugrow/{{ item.id }}" target="_blank" style="color:#403e3e;font-size: 13px;font-weight: 100;">{{ item.name|truncatechars:30 }}</a>
 		          </span>
 		        </div>
 		        <div class="card-footer" style="background-color: transparent;border-top: none;">
@@ -194,7 +195,7 @@
 		              {% endif %}
 		            </div>
 		            <div class="col text-right" style="padding-left: 0;padding-right: 0;">
-		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;" href="/productos/detalle/{{ item.id }}" target="_blank">
+		              <a class="btn btn-light btn-detalle" style="margin-top: -8px;padding: 1px 21px;height: 23px;width: 85%;padding-right: 0px;padding-left: 0px;" href="/productos/detalle/{{ item.id }}" target="_blank">
 		              ver detalle
 		              </a>
 		            </div>
