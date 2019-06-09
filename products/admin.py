@@ -22,7 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('photo',('shop',admin.RelatedOnlyFieldListFilter), ('category',admin.RelatedOnlyFieldListFilter))
     list_display = ('name', 'category','price','tax','total','publish_')
     list_editable = ('category',)
-    # readonly_fields = ['category','category_temp','photo']
+    readonly_fields = ['product',]
     search_fields = ['name']
     # date_hierarchy = 'shop'
     @mark_safe
