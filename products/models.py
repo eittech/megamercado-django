@@ -8,7 +8,8 @@ from django.dispatch import receiver
 from django.urls import reverse
 # from tagging.registry import register
 from django_google_maps import fields as map_fields
-
+from django.db import transaction
+from django.db import IntegrityError
 # from dynamic_scraper.models import Scraper, SchedulerRuntime
 # from scrapy_djangoitem import DjangoItem
 
@@ -206,16 +207,17 @@ class AlertsProduct(models.Model):
 @receiver(post_save, sender=ProductImage, dispatch_uid="update_photo_product")
 def update_photo_product(sender, instance, **kwargs):
     try:
-        product = Product.objects.get(pk=instance.product.id)
-        product.photo = True
-        product.save()
-    except:
+        with transaction.atomic():
+            product = Product.objects.get(pk=instance.product.id)
+            product.photo = True
+            product.save()
+    except IntegrityError:
         print('error save photo')
 
-@receiver(pre_save, sender=Product, dispatch_uid="update_price_product")
-def update_price_product(sender, instance, **kwargs):
-    print('actualizacion')
-    return
+# @receiver(pre_save, sender=Product, dispatch_uid="update_price_product")
+# def update_price_product(sender, instance, **kwargs):
+#     print('actualizacion')
+#     return
 
 
 @receiver(post_save, sender=Product, dispatch_uid="update_history_price")
@@ -261,7 +263,7 @@ def update_history_price(sender, instance, **kwargs):
             print("se actualizo el historico de precios")
         else:
             print("no se pudo procesar 2")
-    except:
+    except IntegrityError:
         print("no se pudo procesar")
 
     try:
@@ -279,5 +281,5 @@ def update_history_price(sender, instance, **kwargs):
                 alerta = AlertsProduct.objects.filter(product=instance)
                 alerta.delete()
             print("no se pudo procesar 5")
-    except:
+    except IntegrityError:
         print("no se pudo procesar 6")
