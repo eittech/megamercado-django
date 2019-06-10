@@ -16,7 +16,7 @@
           Si requieres alguna información llena el siguiente formulario y contáctanos.</p>
       </div>
 
-      <form id="contactForm" class="contact-form" method="POST">
+      <form id="contactForm" class="contact-form" method="POST" style="display:none;">
         {% if rsp == "exito" %}
         <div class="contact-form-success alert alert-success mt-4" id="contactSuccess">
           <strong>Enviado!</strong> Su mensaje se envió con éxito.
@@ -80,6 +80,15 @@
 </nav> -->
 
 {% endblock %}
-{% block scriptb %}
+{% block js %}
+<script src="https://www.google.com/recaptcha/api.js?render=6Lel-KcUAAAAACJ55k5KYJ5UVyX4zetLP0S6hAsY"></script>
+  <script>
+  grecaptcha.ready(function() {
+      grecaptcha.execute('6Lel-KcUAAAAACJ55k5KYJ5UVyX4zetLP0S6hAsY', {action: 'homepage'}).then(function(token) {
+          $('#contactForm').css('display','block');
+          $('#contactForm').attr('method','post');
 
+      });
+  });
+  </script>
 {% endblock %}
