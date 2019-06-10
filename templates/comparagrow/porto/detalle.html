@@ -4,6 +4,7 @@
 {% load menu_categorias %}
 {% load l10n %}
 {% load humanize %}
+{% load social_share %}
 
 {% block header_social %}
 <meta property="og:url"           content="https://comparagrow.cl/productos/detalle/{{ producto.id }}" />
@@ -24,6 +25,25 @@
 <link rel="stylesheet" href="/static/porto/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css">
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+<style>
+	.facebook-this {
+    background: #4267b2;
+    border-radius: 6px;
+    color: white;
+    padding-left: 10px;
+    width: 193px;
+}
+	.facebook-this a{
+		color:white;
+	}
+
+	.facebook-this a img{
+		position: relative;
+    top: -3px;
+    margin-right: 5px;
+}
+	}
+</style>
 {% endblock %}
 
 
@@ -120,21 +140,7 @@
 				</a>
 				{% endif %}
 				<p class="mb-4"></p>
-				<!-- Load Facebook SDK for JavaScript -->
-				  <div id="fb-root"></div>
-				  <script>(function(d, s, id) {
-				    var js, fjs = d.getElementsByTagName(s)[0];
-				    if (d.getElementById(id)) return;
-				    js = d.createElement(s); js.id = id;
-				    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-				    fjs.parentNode.insertBefore(js, fjs);
-				  }(document, 'script', 'facebook-jssdk'));</script>
-
-				  <!-- Your share button code -->
-				  <div class="fb-share-button"
-				    data-href="https://www.your-domain.com/your-page.html"
-				    data-layout="button_count">
-				  </div>
+				{% post_to_facebook object_or_url "<img src='https://static.xx.fbcdn.net/rsrc.php/v3/yM/r/vle-6xM0Vx5.png'>Compartir en facebook" %}
 
 				<p class="mb-4"></p>
 
