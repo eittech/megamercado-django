@@ -12,7 +12,7 @@
   <div class="row">
     <p>Usa el siguiente formulario para proceder con la suscripción, nuestro equipo te contactará a la brevedad para formalizar el proceso. Trabajamos para darte un buen servicio.</p>
   </div>
-  <div class="row">
+  <div class="row" id="row-form" style="display:none;">
   						<div class="col-lg-9">
 
   							<div class="accordion accordion-modern" id="accordion">
@@ -78,7 +78,7 @@
   <script>
   grecaptcha.ready(function() {
       grecaptcha.execute('6Lel-KcUAAAAACJ55k5KYJ5UVyX4zetLP0S6hAsY', {action: 'homepage'}).then(function(token) {
-          console.log('verificado');
+          $('#row-form').css('display','block');
       });
   });
   </script>
