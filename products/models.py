@@ -103,9 +103,6 @@ class Category(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
-    class Meta:
-        verbose_name = "Categorie"
-    
 
 
 class Groups(models.Model):
