@@ -9,7 +9,27 @@ from django_google_maps import fields as map_fields
 
 from django.utils.safestring import mark_safe
 
+admin.site.register(Shop)
+admin.site.register(ShopGroup)
+admin.site.register(AttributeGroup)
+admin.site.register(Attribute)
+admin.site.register(AttributeGroupShop)
+admin.site.register(AttributeShop)
+admin.site.register(Category)
+admin.site.register(Groups)
+admin.site.register(CategoryGroup)
+admin.site.register(Product)
+admin.site.register(CategoryProduct)
+admin.site.register(CategoryShop)
+admin.site.register(ProductAttribute)
+admin.site.register(Image)
+admin.site.register(ProductAttributeCombination)
+admin.site.register(ProductAttributeImage)
+admin.site.register(ProductAttributeShop)
+admin.site.register(ProductShop)
+admin.site.register(AttributeImpact)
 
+'''
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
@@ -366,3 +386,4 @@ class CategoryTagsAdmin(admin.ModelAdmin):
     actions =[controlaction,co2action,humedadaction,phecaction,riegoaction,temperaturaaction,temporizadoresaction,cultivoaction,controlplagasaction,fertilizantesaction,herramientascultivoaction,macetasaction,semillasaction,autoflorecientesaction,feminizadasaction,medicinalesaction,sustratosaction,indooraction,carpasaction,iluminacionaction,ballastsaction,bajoconsumoaction,haluroaction,ledaction,sodioaction,reflectoresaction,ventilacionaction,controloloraction,ductosaction,extractoresaction,ventiladoresaction,kitsaction,kitcontrolaction,kitcultivoaction,kitfertilizantesaction,kitherramientasaction,kitiluminacionaction,kitsemillasaction,kitsustratosaction,kitentilacionaction,parafernaliaaction,bongsaction,encendedoresaction,enroladoresaction,moledoresaction,papelillosaction,pipasaction,vaporizadoresaction]
 
 admin.site.register(CategoryTags,CategoryTagsAdmin)
+'''
