@@ -3,7 +3,11 @@ from django.contrib import admin
 # Register your models here.
 from customers.models import *
 
-admin.site.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['username', 'alias', 'dni_type','image','dni','gender','firts_date','website','tipo','rol']
+
+admin.site.register(Customer, CustomerAdmin)
+
 '''
 class CustomerAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
