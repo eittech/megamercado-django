@@ -134,7 +134,7 @@ class Product(models.Model):
 
 class FavoriteProduct(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
     def __str__(self):
         return self.product.name
     class Meta:
@@ -143,14 +143,14 @@ class FavoriteProduct(models.Model):
 
 class FavoriteBrands(models.Model):
     brand = models.CharField(verbose_name="Marca",max_length=200)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
     class Meta:
         verbose_name = "Marcas Favorita"
         unique_together = ('brand', 'user')
 
 class FavoriteSearchs(models.Model):
     search = models.TextField(verbose_name="Busquedas")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
     url = models.URLField(verbose_name="URL",blank=True,max_length=2000)
     count = models.IntegerField(default=0)
     product_front = models.ForeignKey(Product,on_delete=models.CASCADE,blank=True,null=True)

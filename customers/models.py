@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 from django.dispatch import *
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group
 # Create your models here.
 
-class Customer(models.Model):
+class Customer(AbstractUser):
     TYPE_DOCUMENT = (
         ('PASAPORTE', 'Pasaporte'),
         ('RUT', 'RUT'),
@@ -16,17 +17,21 @@ class Customer(models.Model):
         ('MA','Masculino'),
         ('DS','Diversidad')
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    TYPE_LIST = (
+        ('Usuario','Usuario'),
+        ('Cliente','Cliente')
+    )
     alias = models.CharField(verbose_name="Alias",max_length=200,blank=True)
     dni_type = models.CharField(verbose_name="Tipo de Documento",max_length=200,choices=TYPE_DOCUMENT,blank=True)
     image = models.ImageField(upload_to="assets/customer/",blank=True,null=True)
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
     firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
-    # address = models.ManyToManyField(AddressCustomer,blank=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
+    tipo = models.CharField(verbose_name="Tipo de Usuario",max_length=8,choices=TYPE_LIST,blank=False, default="Usuario")
+    rol = models.ForeignKey(Group,verbose_name="Tipo de Cliente",on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
-        return self.user.username
+        return self.username
     class Meta:
         verbose_name = "Datos del Cliente"
 
@@ -59,7 +64,7 @@ class MailVerification(models.Model):
         ('LOGIN', 'Login'),
         ('RECOVERY', 'Recovery'),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(Customer, on_delete=models.CASCADE)
     token = models.CharField(verbose_name="token",max_length=200)
     type = models.CharField(verbose_name="Tipo de Transaccion",max_length=200,choices=TYPE_TRANSACTION,blank=True)
 

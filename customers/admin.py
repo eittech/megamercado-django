@@ -3,6 +3,8 @@ from django.contrib import admin
 # Register your models here.
 from customers.models import *
 
+admin.site.register(Customer)
+'''
 class CustomerAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "user":
@@ -50,6 +52,8 @@ class AddressCustomerAdmin(admin.ModelAdmin):
         return queryset
 
 admin.site.register(AddressCustomer,AddressCustomerAdmin)
+'''
+admin.site.register(AddressCustomer)
 
 class MailVerificationAdmin(admin.ModelAdmin):
     list_filter = ('type',)
