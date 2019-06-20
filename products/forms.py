@@ -40,3 +40,16 @@ class AttributeGroupForm(forms.ModelForm):
         '''
         model = AttributeGroup
         fields = '__all__'
+
+class AttributeForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos Attribute
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Attribute
+        fields = '__all__'
