@@ -14,6 +14,7 @@ from django.db import IntegrityError
 # from scrapy_djangoitem import DjangoItem
 
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -29,6 +30,10 @@ class ShopGroup(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
+    def save(self, **kwargs):
+        if self.active is True and self.deleted is True:
+            raise ValidationError("No puede estar activo y eliminado")
+        super(ShopGroup, self).save(**kwargs)
 
 class Shop(models.Model):
     id_shop = models.AutoField(primary_key=True)
@@ -40,6 +45,10 @@ class Shop(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
+    def save(self, **kwargs):
+        if self.active is True and self.deleted is True:
+            raise ValidationError("No puede estar activo y eliminado")
+        super(Shop, self).save(**kwargs)
 
 # ATRIBUTOS
 class AttributeGroup(models.Model):
