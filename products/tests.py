@@ -282,23 +282,8 @@ class ShopTestCase(TestCase):
             'name' : "Nombre"
         }
         form = ShopForm(data=form_data)
-        try:
-            form.save()
-        except:
-            pass
+        self.assertFalse(form.is_valid())
     
-    '''Caso de prueba para verificar si se crea una tienda con id malo'''
-    def test_shop_id_malo(self):
-        form_data = {
-            'id_shop' : "malo",
-            'id_shop_group': self.shopgroup.id_shop_group,
-            'name' : "Nombre"
-        }
-        form = ShopForm(data=form_data)
-        try:
-            form.save()
-        except:
-            pass
     
     '''Caso de prueba para verificar si se crea una tienda con foranea mala'''
     def test_shop_foranea_mala(self):
@@ -308,7 +293,132 @@ class ShopTestCase(TestCase):
             'name' : "Nombre"
         }
         form = ShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+class AttributeGroupTestCase(TestCase):
+    ''' Pruebas para la tabla de AttributeGroup '''
+
+    def setUp(self):
+        pass
+
+    '''Caso de prueba para verificar que se crea un grupo de atributo'''
+    def test_attributegroup_crear(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Nombre",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        form.save()
+        ag1 = AttributeGroup.objects.get(name = "Nombre")
+        self.assertEqual(ag1.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se crea un grupo de atributo'''
+    def test_attributegroup_eliminar(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Nombre",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        form.save()
+        ag1 = AttributeGroup.objects.get(name = "Nombre").delete()
         try:
-            form.save()
+            ag1 = Shop.objects.get(name = "Nombre")
         except:
             pass
+
+    '''Caso de prueba para verificar que se edita un atributo de un grupo de atributo'''
+    def test_attributegroup_editar(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Nombre",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        form.save()
+        ag1 = AttributeGroup.objects.get(name = "Nombre")
+        ag1.name="Change"
+        ag1.save()
+        ag1 = AttributeGroup.objects.get(name = "Change")
+        self.assertEqual(ag1.name, "Change")
+
+    
+    '''Caso de prueba para verificar si se crea un grupo de atributo
+        con string vacio en name'''
+    def test_attributegroup_sin_name(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    '''Caso de prueba para verificar si se crea un grupo de atributo
+        con string vacio en public_name'''
+    def test_attributegroup_sin_publicname(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Name",
+            'public_name': "",
+            'group_type': "Tipo",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un grupo de atributo
+        con string vacio en group_type'''
+    def test_attributegroup_sin_grouptype(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Name",
+            'public_name': "Public name",
+            'group_type': "",
+            'position' : 1
+        }
+        form = AttributeGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un grupo de atributo
+        con string en position'''
+    def test_attributegroup_position_mal(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Nombre",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : "hola"
+        }
+        form = AttributeGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    '''Caso de prueba para verificar si se crea un grupo de atributo
+        con numero negativo en position'''
+    def test_attributegroup_position_negativo(self):
+        form_data = {
+            'id_attribute_group' : "1",
+            'is_color_group': "True",
+            'name' : "Nombre",
+            'public_name': "Public name",
+            'group_type': "Tipo",
+            'position' : -1
+        }
+        form = AttributeGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())

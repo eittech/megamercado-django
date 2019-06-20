@@ -57,7 +57,7 @@ class AttributeGroup(models.Model):
     name = models.CharField(max_length=128, blank=False)
     public_name = models.CharField(max_length=64)
     group_type = models.CharField(max_length=6)
-    position = models.IntegerField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
@@ -67,7 +67,7 @@ class Attribute(models.Model):
     id_attribute_group = models.ForeignKey(AttributeGroup, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, blank=False)
     color = models.CharField(max_length=32, blank=True, null=True)
-    position = models.IntegerField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
 
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
@@ -107,7 +107,7 @@ class Category(models.Model):
     active = models.BooleanField(blank=True, default=False)
     date_add = models.DateTimeField()
     date_upd = models.DateTimeField()
-    position = models.IntegerField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
     is_root_category = models.BooleanField(blank=True, default=False)
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
@@ -191,7 +191,7 @@ class Product(models.Model):
 class CategoryProduct(models.Model):
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    position = models.IntegerField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
 
     class Meta:
         unique_together = (('id_category', 'id_product'),)
@@ -202,7 +202,7 @@ class CategoryProduct(models.Model):
 class CategoryShop(models.Model):
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    position = models.IntegerField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
 
     class Meta:
         unique_together = (('id_category', 'id_shop'),)
@@ -234,7 +234,7 @@ class Image(models.Model):
     id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="assets/products/",blank=True,null=True)
     legend = models.CharField(max_length=128, blank=True, null=True)
-    position = models.SmallIntegerField()
+    position = models.SmallIntegerField(validators=[MinValueValidator(0)])
     cover = models.BooleanField(blank=True, default=False)
 
     class Meta:

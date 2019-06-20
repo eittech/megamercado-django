@@ -18,7 +18,7 @@ class ShopGroupForm(forms.ModelForm):
 class ShopForm(forms.ModelForm):
     '''
         Aqui se implementa el formulario para la creacion
-        de nuevos shop groups
+        de nuevos shop 
     '''
     class Meta:
         '''
@@ -26,4 +26,17 @@ class ShopForm(forms.ModelForm):
             el formulario
         '''
         model = Shop
+        fields = '__all__'
+
+class AttributeGroupForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos Attribute Group 
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeGroup
         fields = '__all__'
