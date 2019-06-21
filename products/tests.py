@@ -1,6 +1,7 @@
 from django.test import TestCase
 from products.models import *
 from products.forms import *
+from datetime import datetime
 
 # Create your tests here.
 
@@ -689,4 +690,139 @@ class AttributeShopTestCase(TestCase):
             'id_shop' : "mala",
         }
         form = AttributeShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+class CategoryTestCase(TestCase):
+    ''' Pruebas para la tabla de Category '''
+
+    def setUp(self):
+        pass
+
+    '''Caso de prueba para verificar que se crea unn Categoria'''
+    def test_category_crear(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Nombre",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': 1,
+            'is_root_category': "False"
+
+        }
+        form = CategoryForm(data=form_data)
+        form.save()
+        group1 = Category.objects.get(name = "Nombre")
+        self.assertEqual(group1.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina una Categoria'''
+    def test_category_eliminar(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Nombre",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': 1,
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        form.save()
+        group1 = Category.objects.get(name = "Nombre").delete()
+        try:
+            group1 = Category.objects.get(name = "Nombre")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se edita un atributo de una tienda'''
+    def test_category_editar(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Nombre",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': 1,
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        form.save()
+        shop1 = Category.objects.get(name = "Nombre")
+        shop1.name="Change"
+        shop1.save()
+        shop1 = Category.objects.get(name = "Change")
+        self.assertEqual(shop1.name, "Change")
+
+    ''' Caso de prueba para verificar si se añaden instancias que poseen strings vacios en
+        el nombre de la categoria. '''
+    def test_category_sin_name(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': 1,
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    ''' Caso de prueba para verificar si se añaden instancias que poseen strings vacios en
+        la fecha de la categoria. '''
+    def test_category_sin_fecha(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Name",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': 1,
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea una categoria
+        con string en position'''
+    def test_category_position_mal(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Nombre",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': "hola",
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    '''Caso de prueba para verificar si se crea una categoria
+        con numero negativo en position'''
+    def test_category_position_negativo(self):
+        form_data = {
+            'id_category': "1",
+            'name' : "Nombre",
+            'description': "Description",
+            'level_depth': 0,
+            'active': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189",
+            'position': -1,
+            'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
         self.assertFalse(form.is_valid())
