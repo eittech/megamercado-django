@@ -1000,3 +1000,292 @@ class CategoryGroupTestCase(TestCase):
         }
         form = CategoryGroupForm(data=form_data)
         self.assertFalse(form.is_valid())
+
+class ProductTestCase(TestCase):
+    ''' Pruebas para la tabla de Products '''
+
+    def setUp(self):
+        self.categoria = Category.objects.create(
+            id_category= "1",
+            name="Nombre",
+            description= "Description",
+            level_depth= 0,
+            active= "True",
+            date_add= timezone.now(),
+            date_upd= timezone.now(),
+            position= 1,
+            is_root_category= "False"
+        )
+        self.shopgroup = ShopGroup.objects.create(
+            id_shop_group="2",
+            name="Nombre grupo",
+            share_order= "True",
+            share_stock= "False",
+            active= "True",
+            deleted= "False")
+        self.shop= Shop.objects.create(
+            id_shop= "1",
+            id_shop_group= self.shopgroup,
+            name="Nombre"
+        )
+
+    '''Caso de prueba para verificar que se crea un Producto'''
+    def test_product_crear(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        form.save()
+        group1 = Product.objects.get(name = "Nombre")
+        self.assertEqual(group1.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina un Producto'''
+    def test_product_eliminar(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        form.save()
+        group1 = Product.objects.get(name = "Nombre").delete()
+        try:
+            group1 = Product.objects.get(name = "Nombre")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se crea un Producto'''
+    def test_product_editar(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        form.save()
+        group1 = Product.objects.get(name = "Nombre")
+        group1.name="Change"
+        group1.save()
+        group1 = Product.objects.get(name = "Change")
+        self.assertEqual(group1.name, "Change")
+
+    '''Caso de prueba para verificar si se crea un producto con
+        string vacio en el nombre'''
+    def test_product_sin_name(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un producto sin foranea'''
+    def test_product_sin_foranea(self):
+        form_data = {
+            'id_product':"1",
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    
+    '''Caso de prueba para verificar si se crea un producto con foranea mala'''
+    def test_product_foranea_mala(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': "mala",
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un producto con precio negativo'''
+    def test_product_precio_negativo(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': -1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "2018-07-29",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    '''Caso de prueba para verificar si se crea un producto sin fecha disponible'''
+    def test_product_sin_fecha_disponible(self):
+        form_data = {
+            'id_product':"1",
+            'id_category_default' : self.categoria.id_category,
+            'id_shop_default': self.shop.id_shop,
+            'name' : "Nombre",
+            'on_sale' : "True",
+            'online_only' : "True",
+            'quantity' : 0,
+            'minimal_quantity': 0,
+            'price': 1,
+            'wholesale_price': 0,
+            'unit_price_ratio': 0,
+            'additional_shipping_cost':1,
+            'width':1,
+            'height':1,
+            'depth':1,
+            'weight':1,
+            'out_of_stock': 0,
+            'available_for_order':"True",
+            'available_date': "",
+            'condition': "new",
+            'visibility': "everywhere",
+            'is_virtual':"True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = ProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
