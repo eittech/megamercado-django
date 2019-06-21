@@ -46,7 +46,7 @@ class ShopGroupTestCase(TestCase):
             pass
 
     '''Caso de prueba para verificar que se edita un atributo de una tienda'''
-    def test_shop_editar(self):
+    def test_shopgroup_editar(self):
         form_data = {
             'id_shop' : "1",
             'name' : "Nombre"
@@ -174,7 +174,7 @@ class ShopGroupTestCase(TestCase):
         self.assertEqual(group1.name, "Nombre")
 
 class ShopTestCase(TestCase):
-    ''' Pruebas para la tabla de ShopGroup '''
+    ''' Pruebas para la tabla de Shop '''
 
     def setUp(self):
         self.shopgroup = ShopGroup.objects.create(
@@ -1489,4 +1489,152 @@ class CategoryShopTestCase(TestCase):
             'position':-1
         }
         form = CategoryShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+class ProductAttributeTestCase(TestCase):
+    ''' Pruebas para la tabla de ProductAttribute '''
+
+    def setUp(self):
+        self.categoria = Category.objects.create(
+            id_category= "1",
+            name="Nombre",
+            description= "Description",
+            level_depth= 0,
+            active= "True",
+            date_add= timezone.now(),
+            date_upd= timezone.now(),
+            position= 1,
+            is_root_category= "False"
+        )
+        self.shopgroup = ShopGroup.objects.create(
+            id_shop_group="2",
+            name="Nombre grupo",
+            share_order= "True",
+            share_stock= "False",
+            active= "True",
+            deleted= "False")
+        self.shop= Shop.objects.create(
+            id_shop= "1",
+            id_shop_group= self.shopgroup,
+            name="Nombre"
+        )
+        self.producto=Product.objects.create(
+            id_product="1",
+            id_category_default= self.categoria,
+            id_shop_default= self.shop,
+            name="Nombre",
+            on_sale="True",
+            online_only= "True",
+            quantity= 0,
+            minimal_quantity= 0,
+            price= 1,
+            wholesale_price= 0,
+            unit_price_ratio= 0,
+            additional_shipping_cost=1,
+            width=1,
+            height=1,
+            depth=1,
+            weight=1,
+            out_of_stock= 0,
+            available_for_order="True",
+            available_date= "2018-07-29",
+            condition= "new",
+            visibility= "everywhere",
+            is_virtual="True",
+            date_add= timezone.now(),
+            date_upd= timezone.now()
+        )
+
+    '''Caso de prueba para verificar que se crea una atributo de un producto'''
+    def test_productattribute_crear(self):
+        form_data = {
+            'id_product_attribute' :1,
+            'id_product':self.producto.id_product,
+            'wholesale_price':1,
+            'price': 1,
+            'quantity':1,
+            'weight':1,
+            'unit_price_impact':1,
+            'minimal_quantity':1,
+            'available_date': "2018-07-29"
+        }
+        form = ProductAttributeForm(data=form_data)
+        form.save()
+        group1 = ProductAttribute.objects.get(id_product = "1")
+        self.assertEqual(group1.id_product.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina un atributo de un producto'''
+    def test_productattribute_eliminar(self):
+        form_data = {
+            'id_product_attribute' :1,
+            'id_product':self.producto.id_product,
+            'wholesale_price':1,
+            'price': 1,
+            'quantity':1,
+            'weight':1,
+            'unit_price_impact':1,
+            'minimal_quantity':1,
+            'available_date': "2018-07-29"
+        }
+        form = ProductAttributeForm(data=form_data)
+        form.save()
+        group1 = ProductAttribute.objects.get(id_product = "1").delete()
+        try:
+            group1 = ProductAttribute.objects.get(id_product = "1")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se edita un atributo de un producto'''
+    def test_productattribute_editar(self):
+        form_data = {
+            'id_product_attribute' :1,
+            'id_product':self.producto.id_product,
+            'wholesale_price':1,
+            'price': 1,
+            'quantity':1,
+            'weight':1,
+            'unit_price_impact':1,
+            'minimal_quantity':1,
+            'available_date': "2018-07-29"
+        }
+        form = ProductAttributeForm(data=form_data)
+        form.save()
+        shop1 = ProductAttribute.objects.get(price = 1)
+        shop1.price=2
+        shop1.save()
+        shop1 = ProductAttribute.objects.get(price = 2)
+        self.assertEqual(shop1.price, 2)
+    
+    '''Caso de prueba para verificar si se crea un atributo de un producto
+        con precio negativo'''
+    def test_productattribute_precio_negativo(self):
+        form_data = {
+            'id_product_attribute' :1,
+            'id_product':self.producto.id_product,
+            'wholesale_price':1,
+            'price': -1,
+            'quantity':1,
+            'weight':1,
+            'unit_price_impact':1,
+            'minimal_quantity':1,
+            'available_date': "2018-07-29"
+        }
+        form = ProductAttributeForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un atributo de un producto
+        con string vacio de fecha'''
+    def test_productattribute_sin_fecha(self):
+        form_data = {
+            'id_product_attribute' :1,
+            'id_product':self.producto.id_product,
+            'wholesale_price':1,
+            'price': 1,
+            'quantity':1,
+            'weight':1,
+            'unit_price_impact':1,
+            'minimal_quantity':1,
+            'available_date': ""
+        }
+        form = ProductAttributeForm(data=form_data)
         self.assertFalse(form.is_valid())
