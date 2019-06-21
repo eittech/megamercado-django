@@ -2365,3 +2365,157 @@ class ProductShopTestCase(TestCase):
         }
         form = ProductShopForm(data=form_data)
         self.assertFalse(form.is_valid())
+
+class AttributeImpactTestCase(TestCase):
+    ''' Pruebas para la tabla de AttributeImpact '''
+
+    def setUp(self):
+        self.categoria = Category.objects.create(
+            id_category= "1",
+            name="Nombre",
+            description= "Description",
+            level_depth= 0,
+            active= "True",
+            date_add= timezone.now(),
+            date_upd= timezone.now(),
+            position= 1,
+            is_root_category= "False"
+        )
+        self.shopgroup = ShopGroup.objects.create(
+            id_shop_group="2",
+            name="Nombre grupo",
+            share_order= "True",
+            share_stock= "False",
+            active= "True",
+            deleted= "False")
+        self.shop= Shop.objects.create(
+            id_shop= "1",
+            id_shop_group= self.shopgroup,
+            name="Nombre"
+        )
+        self.producto=Product.objects.create(
+            id_product="1",
+            id_category_default= self.categoria,
+            id_shop_default= self.shop,
+            name="Nombre",
+            on_sale="True",
+            online_only= "True",
+            quantity= 0,
+            minimal_quantity= 0,
+            price= 1,
+            wholesale_price= 0,
+            unit_price_ratio= 0,
+            additional_shipping_cost=1,
+            width=1,
+            height=1,
+            depth=1,
+            weight=1,
+            out_of_stock= 0,
+            available_for_order="True",
+            available_date= "2018-07-29",
+            condition= "new",
+            visibility= "everywhere",
+            is_virtual="True",
+            date_add= timezone.now(),
+            date_upd= timezone.now()
+        )
+        self.attributegroup= AttributeGroup.objects.create(
+            id_attribute_group="1",
+            is_color_group="True",
+            name="Nombre",
+            public_name= "Public name",
+            group_type= "Tipo",
+            position= 1)
+        self.attribute =Attribute.objects.create(
+            id_attribute="1", 
+            id_attribute_group=self.attributegroup,
+            name="Nombre",
+            color= "Public name",
+            position=1
+        )
+
+    '''Caso de prueba para verificar que se crea el impacto de un atributo'''
+    def test_attributeimpact_crear(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_attribute' : self.attribute.id_attribute,
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':0
+        }
+        form = AttributeImpactForm(data=form_data)
+        form.save()
+        ag1 = AttributeImpact.objects.get(id_product = "1")
+        self.assertEqual(ag1.id_product.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se eliminar el impacto de un atributo'''
+    def test_attributeimpact_eliminar(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_attribute' : self.attribute.id_attribute,
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':0
+        }
+        form = AttributeImpactForm(data=form_data)
+        form.save()
+        ag1 = AttributeImpact.objects.get(id_product = "1").delete()
+        try:
+            ag1 = AttributeImpact.objects.get(id_product = "1")
+        except:
+            pass
+    
+    '''Caso de prueba para verificar que se edita el impacto de un atributo'''
+    def test_attributeimpact_editar(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_attribute' : self.attribute.id_attribute,
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':0
+        }
+        form = AttributeImpactForm(data=form_data)
+        form.save()
+        ag1 = AttributeImpact.objects.get(id_product = "1")
+        ag1.price=1
+        ag1.save()
+        ag1 = AttributeImpact.objects.get(id_product = "1")
+        self.assertEqual(ag1.price, 1)
+
+    '''Caso de prueba para verificar que se crea un producto de una tienda
+        sin foranea'''
+    def test_attributeimpact_sin_foranea(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':0
+        }
+        form = AttributeImpactForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea  un producto de una tienda
+        con foranea mala'''
+    def test_attributeimpact_foranea_mala(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_attribute' :"mala",
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':0
+        }
+        form = AttributeImpactForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea  un producto de una tienda
+        con numero negativo en precio'''
+    def test_attributeimpact_precio_negativo(self):
+        form_data = {
+            'id_attribute_impact':1,
+            'id_attribute' : self.attribute.id_attribute,
+            'id_product': self.producto.id_product,
+            'weight':0,
+            'price':-1
+        }
+        form = AttributeImpactForm(data=form_data)
+        self.assertFalse(form.is_valid())
