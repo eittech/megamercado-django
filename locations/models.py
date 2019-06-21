@@ -23,7 +23,7 @@ class Country(models.Model):
     iso_code = models.CharField(max_length=3)
     call_prefix = models.IntegerField()
     active = models.BooleanField(blank=True, default=False)
-    contains_states = models.BooleanField(blank=True)
+    contains_states = models.BooleanField(blank=True, default=False)
     need_identification_number = models.BooleanField(blank=True, default=False)
     need_zip_code = models.BooleanField(blank=True, default=False)
     zip_code_format = models.CharField(max_length=12)
