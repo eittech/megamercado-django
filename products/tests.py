@@ -2,6 +2,7 @@ from django.test import TestCase
 from products.models import *
 from products.forms import *
 from datetime import datetime
+from django.utils import timezone
 
 # Create your tests here.
 
@@ -710,7 +711,6 @@ class CategoryTestCase(TestCase):
             'date_upd': "2018-07-29 09:17:13.812189",
             'position': 1,
             'is_root_category': "False"
-
         }
         form = CategoryForm(data=form_data)
         form.save()
@@ -930,4 +930,73 @@ class GroupsTestCase(TestCase):
             'date_upd': "2018-07-29 09:17:13.812189"
         }
         form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+class CategoryGroupTestCase(TestCase):
+    ''' Pruebas para la tabla de CategoryGroup '''
+
+    def setUp(self):
+        self.groups= Groups.objects.create(
+            id_group= "1",
+            name= "Nombre",
+            reduction= 2,
+            price_display_method= 0,
+            show_prices= "True",
+            date_add=timezone.now(),
+            date_upd= timezone.now()
+        )
+        self.categoria = Category.objects.create(
+            id_category= "1",
+            name="Nombre",
+            description= "Description",
+            level_depth= 0,
+            active= "True",
+            date_add= timezone.now(),
+            date_upd= timezone.now(),
+            position= 1,
+            is_root_category= "False"
+        )
+    
+    '''Caso de prueba para verificar que se crea una categoria de un grupo'''
+    def test_categorygroup_crear(self):
+        form_data = {
+            'id_category' : self.categoria.id_category,
+            'id_group' : self.groups.id_group
+        }
+        form = CategoryGroupForm(data=form_data)
+        form.save()
+        ag1 = CategoryGroup.objects.get(id_group = "1")
+        self.assertEqual(ag1.id_group.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina una categoria de un grupo'''
+    def test_categorygroup_eliminar(self):
+        form_data = {
+            'id_category' : self.categoria.id_category,
+            'id_group' : self.groups.id_group
+        }
+        form = CategoryGroupForm(data=form_data)
+        form.save()
+        ag1 = CategoryGroup.objects.get(id_group = "1").delete()
+        try:
+            ag1 = CategoryGroup.objects.get(id_group = "1")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se crea una categoria de un grupo
+        sin foranea'''
+    def test_categorygroup_sin_foranea(self):
+        form_data = {
+            'id_group' : self.groups.id_group
+        }
+        form = CategoryGroupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea una categoria de un grupo
+        con foranea mala'''
+    def test_categorygroup_foranea_mala(self):
+        form_data = {
+            'id_category' : self.categoria.id_category,
+            'id_group' : "mala"
+        }
+        form = CategoryGroupForm(data=form_data)
         self.assertFalse(form.is_valid())

@@ -105,3 +105,16 @@ class GroupsForm(forms.ModelForm):
         '''
         model = Groups
         fields = '__all__'
+
+class CategoryGroupForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos CategoryGroup
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = CategoryGroup
+        fields = '__all__'
