@@ -310,7 +310,7 @@ class ProductShop(models.Model):
     available_date = models.DateField()
     condition = models.CharField(max_length=11, choices=OPC)
     show_price = models.BooleanField(blank=True, default=False)
-    visibility = models.CharField(max_length=7,  choices=TYPE_CHOICES)
+    visibility = models.CharField(max_length=16,  choices=TYPE_CHOICES)
     cache_default_attribute = models.IntegerField(blank=True, null=True)
     advanced_stock_management = models.BooleanField(blank=True, default=False)
     date_add = models.DateTimeField()
