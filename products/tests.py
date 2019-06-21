@@ -738,7 +738,7 @@ class CategoryTestCase(TestCase):
         except:
             pass
 
-    '''Caso de prueba para verificar que se edita un atributo de una tienda'''
+    '''Caso de prueba para verificar que se edita una categoria'''
     def test_category_editar(self):
         form_data = {
             'id_category': "1",
@@ -823,6 +823,111 @@ class CategoryTestCase(TestCase):
             'date_upd': "2018-07-29 09:17:13.812189",
             'position': -1,
             'is_root_category': "False"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+class GroupsTestCase(TestCase):
+    ''' Pruebas para la tabla de Groups '''
+
+    def setUp(self):
+        pass
+
+    '''Caso de prueba para verificar que se crea un grupo'''
+    def test_groups_crear(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "Nombre",
+            'reduction': 2,
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = GroupsForm(data=form_data)
+        form.save()
+        group1 = Groups.objects.get(name = "Nombre")
+        self.assertEqual(group1.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina un grupo'''
+    def test_groups_eliminar(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "Nombre",
+            'reduction': 2,
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = GroupsForm(data=form_data)
+        form.save()
+        group1 = Groups.objects.get(name = "Nombre").delete()
+        try:
+            group1 = Groups.objects.get(name = "Nombre")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se edita un grupo'''
+    def test_groups_editar(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "Nombre",
+            'reduction': 2,
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = GroupsForm(data=form_data)
+        form.save()
+        shop1 = Groups.objects.get(name = "Nombre")
+        shop1.name="Change"
+        shop1.save()
+        shop1 = Groups.objects.get(name = "Change")
+        self.assertEqual(shop1.name, "Change")
+
+    ''' Caso de prueba para verificar si se añaden instancias que poseen strings vacios en
+        el nombre del grupo. '''
+    def test_cgroups_sin_name(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "",
+            'reduction': 2,
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    ''' Caso de prueba para verificar si se añaden instancias que poseen strings vacios en
+        la fecha de un grupo. '''
+    def test_groups_sin_fecha(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "Nombre",
+            'reduction': 2,
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "",
+            'date_upd': "2018-07-29 09:17:13.812189"
+        }
+        form = CategoryForm(data=form_data)
+        self.assertFalse(form.is_valid())
+    
+    ''' Caso de prueba para verificar si se añaden instancias que poseen mal el atributo
+        reduction de un grupo. '''
+    def test_groups_reduction_mal(self):
+        form_data = {
+            'id_group': "1",
+            'name' : "Nombre",
+            'reduction': "hola",
+            'price_display_method': 0,
+            'show_prices': "True",
+            'date_add': "2018-07-29 09:17:13.812189",
+            'date_upd': "2018-07-29 09:17:13.812189"
         }
         form = CategoryForm(data=form_data)
         self.assertFalse(form.is_valid())
