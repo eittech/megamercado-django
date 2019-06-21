@@ -546,3 +546,72 @@ class AttributeTestCase(TestCase):
         }
         form = AttributeForm(data=form_data)
         self.assertFalse(form.is_valid())
+
+class AttributeGroupShopTestCase(TestCase):
+    ''' Pruebas para la tabla de AttributeGroupShop '''
+
+    def setUp(self):
+        self.attributegroup= AttributeGroup.objects.create(
+            id_attribute_group="1",
+            is_color_group="True",
+            name="Nombre",
+            public_name= "Public name",
+            group_type= "Tipo",
+            position= 1)
+        self.shopgroup = ShopGroup.objects.create(
+            id_shop_group="2",
+            name="Nombre grupo",
+            share_order= "True",
+            share_stock= "False",
+            active= "True",
+            deleted= "False")
+        self.shop= Shop.objects.create(
+            id_shop= "1",
+            id_shop_group= self.shopgroup,
+            name="Nombre"
+        )
+
+
+    '''Caso de prueba para verificar que se crea un atributo de un grupo de tienda'''
+    def test_attributegroupshop_crear(self):
+        form_data = {
+            'id_attribute_group' : self.attributegroup.id_attribute_group,
+            'id_shop' : self.shop.id_shop
+        }
+        form = AttributeGroupShopForm(data=form_data)
+        form.save()
+        ag1 = AttributeGroupShop.objects.get(id_shop = "1")
+        self.assertEqual(ag1.id_shop.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se crea un atributo de un grupo de tienda'''
+    def test_attributegroupshop_eliminar(self):
+        form_data = {
+            'id_attribute_group' : self.attributegroup.id_attribute_group,
+            'id_shop' : self.shop.id_shop
+        }
+        form = AttributeGroupShopForm(data=form_data)
+        form.save()
+        ag1 = AttributeGroupShop.objects.get(id_shop = "1").delete()
+        try:
+            ag1 = AttributeGroupShop.objects.get(id_shop = "1")
+        except:
+            pass
+    
+    '''Caso de prueba para verificar que se crea un atributo de un grupo 
+        de tienda sin foranea'''
+    def test_attributegroupshop_sin_foranea(self):
+        form_data = {
+            'id_shop' : self.shop.id_shop
+        }
+        form = AttributeGroupShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea un atributo de un grupo 
+        de tienda con foranea mala'''
+    def test_attributegroupshop_foranea_mala(self):
+        form_data = {
+            'id_attribute_group' : self.attributegroup.id_attribute_group,
+            'id_shop' : "mala",
+        }
+        form = AttributeGroupShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
