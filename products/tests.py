@@ -1344,7 +1344,7 @@ class CategoryProductTestCase(TestCase):
             date_upd= timezone.now()
         )
 
-    '''Caso de prueba para verificar que se crea un Producto'''
+    '''Caso de prueba para verificar que se crea una categoria de un producto'''
     def test_categoryproduct_crear(self):
         form_data = {
             'id_product':self.producto.id_product,
@@ -1356,7 +1356,7 @@ class CategoryProductTestCase(TestCase):
         group1 = CategoryProduct.objects.get(id_product = "1")
         self.assertEqual(group1.id_product.name, "Nombre")
     
-    '''Caso de prueba para verificar que se elimina un Producto'''
+    '''Caso de prueba para verificar que se elimina una categoria de un producto'''
     def test_categoryproduct_eliminar(self):
         form_data = {
             'id_product':self.producto.id_product,
@@ -1378,7 +1378,7 @@ class CategoryProductTestCase(TestCase):
             'id_category' : self.categoria.id_category,
             'position':1
         }
-        form = AttributeGroupShopForm(data=form_data)
+        form = CategoryProductForm(data=form_data)
         self.assertFalse(form.is_valid())
 
     '''Caso de prueba para verificar si se crea una categoria de un  
@@ -1389,7 +1389,7 @@ class CategoryProductTestCase(TestCase):
             'id_category' : self.categoria.id_category,
             'position':1
         }
-        form = AttributeGroupShopForm(data=form_data)
+        form = CategoryProductForm(data=form_data)
         self.assertFalse(form.is_valid())
 
     '''Caso de prueba para verificar si se crea una categoria de un  
@@ -1400,5 +1400,93 @@ class CategoryProductTestCase(TestCase):
             'id_category' : self.categoria.id_category,
             'position':-1
         }
-        form = AttributeGroupShopForm(data=form_data)
+        form = CategoryProductForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+
+class CategoryShopTestCase(TestCase):
+    ''' Pruebas para la tabla de CategoryShop '''
+
+    def setUp(self):
+        self.categoria = Category.objects.create(
+            id_category= "1",
+            name="Nombre",
+            description= "Description",
+            level_depth= 0,
+            active= "True",
+            date_add= timezone.now(),
+            date_upd= timezone.now(),
+            position= 1,
+            is_root_category= "False"
+        )
+        self.shopgroup = ShopGroup.objects.create(
+            id_shop_group="2",
+            name="Nombre grupo",
+            share_order= "True",
+            share_stock= "False",
+            active= "True",
+            deleted= "False")
+        self.shop= Shop.objects.create(
+            id_shop= "1",
+            id_shop_group= self.shopgroup,
+            name="Nombre"
+        )
+
+    '''Caso de prueba para verificar que se crea una categoria de una tienda'''
+    def test_categoryshop_crear(self):
+        form_data = {
+            'id_shop':self.shop.id_shop,
+            'id_category' : self.categoria.id_category,
+            'position':1
+        }
+        form = CategoryShopForm(data=form_data)
+        form.save()
+        group1 = CategoryShop.objects.get(id_shop = "1")
+        self.assertEqual(group1.id_shop.name, "Nombre")
+    
+    '''Caso de prueba para verificar que se elimina una categoria de una tienda'''
+    def test_categoryshop_eliminar(self):
+        form_data = {
+            'id_shop':self.shop.id_shop,
+            'id_category' : self.categoria.id_category,
+            'position':1
+        }
+        form = CategoryShopForm(data=form_data)
+        form.save()
+        group1 = CategoryShop.objects.get(id_shop = "1").delete()
+        try:
+            group1 = CategoryShop.objects.get(id_shop = "1")
+        except:
+            pass
+
+    '''Caso de prueba para verificar que se crea una categoria de una  
+        tienda sin foranea'''
+    def test_categoryshop_sin_foranea(self):
+        form_data = {
+            'id_category' : self.categoria.id_category,
+            'position':1
+        }
+        form = CategoryShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea una categoria de una  
+        tienda con foranea mala'''
+    def test_categoryshop_foranea_mala(self):
+        form_data = {
+            'id_shop':"mala",
+            'id_category' : self.categoria.id_category,
+            'position':1
+        }
+        form = CategoryShopForm(data=form_data)
+        self.assertFalse(form.is_valid())
+
+    '''Caso de prueba para verificar si se crea una categoria de una 
+        tienda con position negativo'''
+    def test_categoryshop_position_negativo(self):
+        form_data = {
+            'id_shop':self.shop.id_shop,
+            'id_category' : self.categoria.id_category,
+            'position':-1
+        }
+        form = CategoryShopForm(data=form_data)
         self.assertFalse(form.is_valid())
