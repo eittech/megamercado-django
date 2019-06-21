@@ -66,3 +66,16 @@ class AttributeGroupShopForm(forms.ModelForm):
         '''
         model = AttributeGroupShop
         fields = '__all__'
+
+class AttributeShopForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos Attribute Shop
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeShop
+        fields = '__all__'
