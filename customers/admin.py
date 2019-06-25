@@ -4,6 +4,12 @@ from django.contrib import admin
 from customers.models import *
 
 class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['username', 'alias', 'dni_type','image','dni','gender','firts_date','website','tipo','rol']
+
+admin.site.register(Customer, CustomerAdmin)
+
+'''
+class CustomerAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "user":
             user = request.user
@@ -50,6 +56,8 @@ class AddressCustomerAdmin(admin.ModelAdmin):
         return queryset
 
 admin.site.register(AddressCustomer,AddressCustomerAdmin)
+'''
+admin.site.register(AddressCustomer)
 
 class MailVerificationAdmin(admin.ModelAdmin):
     list_filter = ('type',)

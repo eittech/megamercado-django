@@ -27,7 +27,7 @@ class RegisterActivitySystem(models.Model):
     )
     type = models.CharField(verbose_name="Tipo",max_length=50,choices=TYPE_REGISTER)
     template_section = models.TextField(verbose_name="Etique Template",blank=True,null=True,choices=SECTION_SERVICE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank= True)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE,null=True, blank= True)
     data = models.TextField(verbose_name="Data",null=True, blank= True)
 
     location = models.TextField(verbose_name="Data",null=True, blank= True)
