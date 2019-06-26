@@ -521,6 +521,18 @@ def homeporto(request):
         return render(request, 'comparagrow/cozastore/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
 
 def home(request):
+    productos =Product.objects.all()[:12]
+    imagenes = Image.objects.all()
+    category = Category.objects.all()
+    print(category)
+    return render(request, 'album.html', {
+        'imagenes':imagenes,
+        'productos':productos,
+        'category':category})
+
+
+"""
+def home(request):
     error=False
     if request.GET.get('error'):
         error = True
@@ -531,32 +543,22 @@ def home(request):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
     # productos_ci = Product.objects.filter(pk__in=pk_product)
-    productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
-    ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('?')
-    ur_pk = ultimas_rebajas.values('product__pk')
-    productos_ur = Product.objects.filter(pk__in=ur_pk)[:10]
-    productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    #productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    productos_cd = Product.objects.filter()[:10]
+    #ultimas_rebajas = AlertsProduct.objects.filter().order_by('?')
+    #ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('?')
+    #ur_pk = ultimas_rebajas.values('product__pk')
+    #productos_ur = Product.objects.filter(pk__in=ur_pk)[:10]
+    productos_ur = Product.objects.filter()[:10]
+    productos_ci = Product.objects.filter(id_category_default__isnull=False).order_by('?')[:10]
+    #productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
 
-    productos = ProductImage.objects.all()[:12]
+    productos = Image.objects.all()[:12]
     category = Category.objects.all()
-    if user_agent.is_mobile:
-        # Do stuff here...
-        template_ruta = "comparagrow/porto/base_mobile.html"
-        return render(request, 'comparagrow/porto/index.html', {
-        'template_ruta':template_ruta,
-        'category':category,
-        'error':error,
-        'productos_ci':productos_ci,
-        'productos_cd':productos_cd,
-        'productos_ur':productos_ur
-        })
-        #return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
-        #return render(request, 'comparagrow/index.html', {'variable':variable})
-    else:
-        template_ruta = "comparagrow/porto/base.html"
+    template_ruta = 'comparagrow/porto/base.html'
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
         #cozastore
-        return render(request, 'comparagrow/porto/index.html', {
+    return render(request, 'comparagrow/porto/index.html', {
         'template_ruta':template_ruta,
         'productos':productos,
         'category':category,
@@ -564,6 +566,7 @@ def home(request):
         'productos_ci':productos_ci,
         'productos_cd':productos_cd,
         'productos_ur':productos_ur})
+"""
 
 @login_required
 def profile(request):

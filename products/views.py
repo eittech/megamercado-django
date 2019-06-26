@@ -545,6 +545,48 @@ def detalle_product(request,id):
     else:
         return redirect('/error')
 
+def detalle(request, id_product):
+    try:
+        producto = Product.objects.get(id_product=id_product)
+        producto_image = Image.objects.filter(id_product=producto)
+        producto_attr = ProductAttribute.objects.filter(id_product=producto)
+        allcategories= CategoryProduct.objects.filter(id_product=producto)
+        productcombination = ProductAttributeCombination.objects.filter(id_product_attribute__id_product=producto)
+        u1=None
+        u2=None
+        u3=None
+        u4=None
+        u5=None
+        u6=None
+        u7=None
+        u8=None
+        for i in range(len(producto_image)):
+            if i==0:
+                u1=producto_image[i].image.url
+            if i==1:
+                u2=producto_image[i].image.url
+            if i==2:
+                u3=producto_image[i].image.url
+            if i==3:
+                u4=producto_image[i].image.url
+            if i==4:
+                u5=producto_image[i].image.url
+            if i==5:
+                u6=producto_image[i].image.url
+            if i==6:
+                u7=producto_image[i].image.url
+            if i==7:
+                u8=producto_image[i].image.url
+        #history = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:5]
+        #history_datail = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:100]
+    except:
+        producto = None
+    if producto is not None:
+        return render(request, "new.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories, 'productcombination':productcombination, 'u1':u1, 'u2':u2, 'u3':u3, 'u4':u4, 'u5':u5, 'u6':u6, 'u7':u7,'u8':u8 })
+        #return render(request, "comparagrow/porto/detalle1.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories})
+    else:
+        return redirect('/error')
+
 def redirect_view_product(request,id):
     producto = Product.objects.get(pk=id)
     return render(request, "comparagrow/redirect.html",{'producto':producto})
