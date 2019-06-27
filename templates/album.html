@@ -82,11 +82,11 @@
     </div>
   </section>
 
-  {% for i in productos %}
   <div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row">
+          {% for i in productos %}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
             {% for j in imagenes %}
@@ -110,11 +110,11 @@
           </div>
         </div>
 
-
+        {% endfor %}
       </div>
     </div>
   </div>
-  {% endfor %}
+
 
 </main>
 

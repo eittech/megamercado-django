@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from django.db.models.functions import Substr
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django import template
 #
 # register = template.Library()
@@ -30,10 +30,56 @@ from django.db.models.functions import Substr
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
 def listado(request):
+    productos = Product.objects.all()
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+
+def listadoOrdenMenor(request):
+    productos = Product.objects.all().order_by('price')[:20]
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+
+def listadoOrdenMayor(request):
+    productos = Product.objects.all().order_by('-price')[:20]
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+
+'''
+def listado(request):
     productos = ProductImage.objects.all()[:20]
     print(productos)
     return render(request, "comparagrow/listado.html",{'productos':productos})
-
+'''
 
 def search(request):
     if request.GET.get('q'):
