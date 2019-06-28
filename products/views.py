@@ -5,6 +5,7 @@ from django.shortcuts import render
 import time
 from datetime import datetime
 from products.models import *
+from products.forms import *
 from contracts.models import *
 from systems.models import *
 from django.views.decorators.csrf import csrf_exempt
@@ -632,6 +633,38 @@ def detalle(request, id_product):
         #return render(request, "comparagrow/porto/detalle1.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories})
     else:
         return redirect('/error')
+
+from django.http import HttpResponse
+from django.db.models import Q
+
+def search(request):
+    if 'q' in request.GET:
+        query=request.GET.get('q')
+        productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+        imagenes = Image.objects.all()  
+        page = request.GET.get('page', 1)
+        form=ViForm(request.POST)
+        if request.method=="POST":
+            print(form['visibility'].value())
+            if form['visibility'].value()=='everywhere':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+            if form['visibility'].value()=='catalog':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+            if form['visibility'].value()=='search':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query)).order_by('price')
+            if form['visibility'].value()=='nowhere':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query)).order_by('-price')
+        paginator = Paginator(productos, 10)
+        try:
+            product = paginator.page(page)
+        except PageNotAnInteger:
+            product = paginator.page(1)
+        except EmptyPage:
+            product = paginator.page(paginator.num_pages)
+        return render(request, "search.html",{'productos':product, 'imagenes': imagenes})
+    else:
+        message = "You submitted an empty form."
+        return HttpResponse(message)
 
 def redirect_view_product(request,id):
     producto = Product.objects.get(pk=id)

@@ -16,4 +16,5 @@ urlpatterns = [
     path('search', search, name='search'),
     path(_('categorias/<slug:slug>/'), categorias, name='buscador'),
     path('gigs', GigsList.as_view(), name='gigs'),
+    path('search/', search, name='busqueda'),
 ]
