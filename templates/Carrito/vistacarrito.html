@@ -3,17 +3,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Album example · Bootstrap</title>
+    <title> Megamercado</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/maxcdn/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css">
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
         .input-number-group {
@@ -95,37 +91,76 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="{$ static 'css/album.css' %}" rel="stylesheet">
+
   </head>
   <body>
 
+        {% if request.user.is_authenticated %}
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
 
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-        <a class="navbar-brand" href="#" style="width: 300px; font-size: 17px"">Logo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-                <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get">
-                        <input class="form-control mr-sm-2" placeholder="Search" name="q" aria-label="Search"  style="width: 350px" type="text">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="font-size: 15px">Search</button>
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
                       </form>
-          <div  style="width: 300px"> </div>
-          <ul class="navbar-nav mr-auto" >
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="width: 116px;font-size: 17px"">Crear cuenta </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" style="font-size: 17px">Ingresar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" style="font-size: 17px" >Carrito</a>
-            </li>
-          </ul>
-          
-        </div>
-      </nav>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Usuario  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'carritos'%}" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% else %}
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      </form>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> Regístrate</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% endif %}
 
       <main role="main" class="container" >
             <div class="row" >
