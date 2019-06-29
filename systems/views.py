@@ -25,6 +25,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from products.models import *
 from customers.models import *
+from Orders.models import *
 from contracts.models import *
 from systems.models import *
 from services.models import *
@@ -35,6 +36,7 @@ from systems.actionSystem import *
 from django.db.models import Count
 from django.core.paginator import Paginator
 
+from django.utils import timezone
 
 @csrf_exempt
 @api_view(["POST"])
@@ -530,6 +532,44 @@ def home(request):
         'productos':productos,
         'category':category})
 
+def cuenta(request):
+    try:
+        carrito=Cart.objects.filter(id_customer= request.user).latest('id_cart')
+        print(carrito)
+        if Orders.objects.filter(id_cart= carrito):
+            nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+            nuevocart.save()
+        else:
+            if (timezone.now() - carrito.date_add).days > 5:
+                """carrito.delete() 
+                nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+                nuevocart.save()   
+                print("save")
+                """
+                pass
+
+    except:
+        # Si no hay carrito para este usuario, lo crea.
+        nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+        nuevocart.save()
+        print("paso")
+        pass
+    return render(request, 'Cuenta/dashboard.html', {})
 
 """
 def home(request):
