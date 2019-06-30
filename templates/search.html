@@ -136,51 +136,101 @@
                                     </form>
 
                           <br>
+                          <div id="list"> List </div>
+                          <div id="grilla" > Grilla </div>
                           <h5 style="font-size: 17px" >Ubicación: </h5>
                           <p> Ubic</p>
                           </div>
           
                       </aside><!-- /.blog-sidebar -->
           
-                      <div class="col-md-7 blog-main">
-                            <div class="p-4 mb-3 bg-light rounded">
-                                {% for i in productos %}
-                                <a href="{{i.get_absolute_url}}" style="color: black"  class="container">
-                                        <div class="row">
-                    
-                                            <aside> 
-                                                {% for j in imagenes %}
-                                                {% ifequal j.id_product i %}
-                                                {% if j.cover %}
-                                                <img src="{{j.image.url}}" style="width: 200px">
-                                                {% endif %}
-                                                {% endifequal %}
-                                                {% endfor %}
-                                            </aside>
-                                            <div class="col-md-7 blog-main"> 
-                                                <div> 
-                                                    <b>Nombre: </b> {{i.name}}<br>
-                                                    <b>Tienda: </b>{{i.id_shop_default }}<br>
-                                                    <b>Precio: </b>{{i.price}}<br>
-                                                    <b>Vendidos: </b><br>
-                                                    <b>Valoración del productos</b>
-                                                    <div class="rating">
-                                                        <div class="stars">
-                                                          <span class="fa fa-star checked"></span>
-                                                          <span class="fa fa-star checked"></span>
-                                                          <span class="fa fa-star checked"></span>
-                                                          <span class="fa fa-star"></span>
-                                                          <span class="fa fa-star"></span>
-                                                        </div>
-                                                        <span class="review-no">41 reviews</span>
-                                                      </div>
-                                                    </div>
-                                                    <br>
-                                            </div>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+          
+                      <div class="col-md-7 blog-main" id="list-1">
+                          <div class="p-4 mb-3 bg-light rounded">
+                              {% for i in productos %}
+                              <a href="{{i.get_absolute_url}}" style="color: black"  class="container">
+                                      <div class="row">
+                  
+                                          <aside > 
+                                              {% for j in imagenes %}
+                                              {% ifequal j.id_product i %}
+                                              {% if j.cover %}
+                                              <img src="{{j.image.url}}" style="width: 200px">
+                                              {% endif %}
+                                              {% endifequal %}
+                                              {% endfor %}
+                                          </aside>
+                                          <div class="col-md-7 blog-main"> 
+                                              <div> 
+                                                  <b>Nombre: </b> {{i.name}}<br>
+                                                  <b>Tienda: </b>{{i.id_shop_default }}<br>
+                                                  <b>Precio: </b>{{i.price}}<br>
+                                                  <b>Vendidos: </b><br>
+                                                  <b>Valoración</b>
+                                                  
+                                                  </div>
+                                                  <br>
+                                          </div>
+                                      </div>
+                                  </a>
+                              {% endfor %}
 
+                            </div>
+                            {% if productos.has_other_pages %}
+                            <ul class="pagination">
+                              {% if productos.has_previous %}
+                                <li><a href="?page={{ productos.previous_page_number }}">&laquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                              {% endif %}
+                              {% for i in productos.paginator.page_range %}
+                                {% if productos.number == i %}
+                                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              {% if productos.has_next %}
+                                <li><a href="?page={{ productos.next_page_number }}">&raquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                              {% endif %}
+                            </ul>
+                          {% endif %}
+                        </div><!-- /.blog-main -->
+
+                
+                        <div class="col-md-7 blog-main" id="grilla-1" style="display: none">
+                            <div class="container">
+
+                                <div class="row">
+                                    {% for i in productos %}
+                                  <div class="col-md-3">
+                                    <div class="card mb-3 shadow-sm">
+                                      {% for j in imagenes %}
+                                      {% ifequal j.id_product i %}
+                                      {% if j.cover %}
+                                      <img  src="{{j.image.url}}" style="height: 130px; width: auto">
+                                      {% endif %}
+                                      {% endifequal %}
+                                      {% endfor %}
+                                      <div class="card-body">
+                                          <b>Nombre: </b> {{i.name}}<br>
+                                          <b>Tienda: </b>{{i.id_shop_default }}<br>
+                                          <b>Precio: </b>{{i.price}}<br>
+                                          <b>Vendidos: </b><br>
+                                          <b>Valoración</b>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                          <div class="btn-group">
+                                            <a href="{{i.get_absolute_url}}" type="button" class="btn btn-sm btn-outline-secondary">Ver detalle</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                          
+                                  {% endfor %}
+                                </div>
                               </div>
                               {% if productos.has_other_pages %}
                               <ul class="pagination">
@@ -203,7 +253,7 @@
                                 {% endif %}
                               </ul>
                             {% endif %}
-                          </div><!-- /.blog-main -->
+                        </div><!-- /.blog-main -->
 
         </div><!-- /.row -->
       
@@ -213,4 +263,18 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+
+      <script>
+          $(document).ready(function(){
+            $("#grilla").click(function(){
+              $("#list-1").hide();
+              $("#grilla-1").show();
+            });
+            $("#list").click(function(){
+              $("#list-1").show();
+              $("#grilla-1").hide();
+            });
+          });
+          </script>
+
 </html>
