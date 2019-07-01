@@ -3,9 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from .views import *
 
 urlpatterns = [
-    path('listado', listado, name='listado'),
-    path('listado3', listadoOrdenMenor, name='listado3'),
-    path('listado4', listadoOrdenMayor, name='listado4'),
+    #path('listado', listado, name='listado'),
+    #path('listado3', listadoOrdenMenor, name='listado3'),
+    #path('listado4', listadoOrdenMayor, name='listado4'),
     path('redirect/<int:id>', redirect_view_product, name='redirect'),
     path('publicity/redirect/<slug:slug>/<int:id>', redirect_view_product_publicity, name='redirect'),
     path('redirect_url/<int:id>', redirect_product, name='redirect'),

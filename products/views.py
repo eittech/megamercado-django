@@ -47,8 +47,10 @@ def listado(request, id_category):
         product = paginator.page(paginator.num_pages)
     return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
-def listadoOrdenMenor(request):
-    productos = Product.objects.all().order_by('price')[:20]
+def listadoOrdenMenor(request, id_category):
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria).order_by('price')
+    #productos = Product.objects.all().order_by('price')[:20]
     imagenes = Image.objects.all()
     print(productos)
     page = request.GET.get('page', 1)
@@ -60,10 +62,12 @@ def listadoOrdenMenor(request):
         product = paginator.page(1)
     except EmptyPage:
         product = paginator.page(paginator.num_pages)
-    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
-def listadoOrdenMayor(request):
-    productos = Product.objects.all().order_by('-price')[:20]
+def listadoOrdenMayor(request, id_category):
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria).order_by('-price')
+    #productos = Product.objects.all().order_by('-price')[:20]
     imagenes = Image.objects.all()
     print(productos)
     page = request.GET.get('page', 1)
@@ -75,7 +79,7 @@ def listadoOrdenMayor(request):
         product = paginator.page(1)
     except EmptyPage:
         product = paginator.page(paginator.num_pages)
-    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
 '''
 def listado(request):

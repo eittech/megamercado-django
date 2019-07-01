@@ -116,15 +116,15 @@
                                           <div class="input-group">
                                             
                                             <select name="rol" onchange="location = this.value;">
-                                                <option value="{% url 'listado' %}" selected>---------</option>
+                                                <option value="{% url 'listado_categorias' categoria.id_category  %}" selected>---------</option>
                                               
-                                                <option value="{% url 'listado' %}">Relevancia</option>
+                                                <option value="{% url 'listado_categorias' categoria.id_category %}">Relevancia</option>
                                               
-                                                <option value="{% url 'listado' %}">Pedidos</option>
+                                                <option value="{% url 'listado_categorias' categoria.id_category  %}">Pedidos</option>
 
-                                                <option value="{% url 'listado3' %}"><a href="{% url 'listado3' %}">Menor Precio</a></option>
+                                                <option value="{% url 'listado_categorias3' categoria.id_category  %}">Menor Precio</option>
 
-                                                <option value="{% url 'listado4' %}">Mayor Precio</option>
+                                                <option value="{% url 'listado_categorias4'  categoria.id_category %}">Mayor Precio</option>
                                               
                                               </select>
                                           </div>

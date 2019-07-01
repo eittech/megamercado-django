@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('categoria', views.listadoCategorias, name="list_categorias"),
     path('categoria/<id_category>/', listado, name="listado_categorias"),
+    path('categoria3/<id_category>/', listadoOrdenMenor, name="listado_categorias3"),
+    path('categoria4/<id_category>/', listadoOrdenMayor, name="listado_categorias4"),
 
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
