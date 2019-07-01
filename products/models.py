@@ -112,6 +112,8 @@ class Category(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
+    def get_absolute_url(self):
+        return reverse('listado_categorias', kwargs={'id_category': self.id_category})
 
 
 class Groups(models.Model):
@@ -187,6 +189,8 @@ class Product(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
+    def get_absolute_url(self):
+        return reverse('products', kwargs={'id_product': self.id_product})
 
 class CategoryProduct(models.Model):
     id_category = models.ForeignKey(Category, on_delete=models.CASCADE)

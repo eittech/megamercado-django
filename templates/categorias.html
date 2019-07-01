@@ -1,0 +1,164 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Album example · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+      .navbar-inverse.nav-upper {
+  height: 50px;
+}
+.navbar-inverse.nav-upper ul {
+  float: right;
+  display: table;
+}
+.navbar-inverse.nav-upper .navbar-upper > li {
+  display: table-cell;
+  font-size: 14px;
+}
+.navbar-inverse.nav-upper .navbar-upper > li > a {
+  color: #777;
+}
+@media (min-width: 768px) {
+  .navbar.navbar-lower .navbar-nav {
+    margin-left: 100px;
+  }
+}
+.navbar-logo {
+  background-image: url('https://lh3.googleusercontent.com/-tw5LsU4Fg28/Umo6BBcoCnI/AAAAAAAAmjE/1iqULsem06E/w896-h896/heisencat.png');
+  width: 90px;
+  height: 90px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  z-index: 1051;
+}
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="static/css/album.css" rel="stylesheet">
+  </head>
+  <body>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        
+        <nav class="navbar-inverse nav-upper">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+            <a class="navbar-brand" href="#" style="width: 400px; font-size: 17px"">Logo</a>
+            <form class="form-inline mt-2 mt-md-0" style="width: 900px" action="{% url 'busqueda' %}" method="get" >
+                          <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                          <button type="submit" style="margin-left: -98px;
+                          height: 30px;
+                          width: 90px;
+                          background-color: white; 
+                          color: gray;
+                          border: 0;
+                          -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      <div class="collapse navbar-collapse" id="navbarCollapse">
+                          <div  style="width: 300px"> </div>
+                          <ul class="navbar-nav mr-auto" >
+                            <li class="nav-item">
+                              <a class="nav-link" href="#" style="width: 250px; font-size: 17px"> Publicidad </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'carritos'%}" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+                            </li>
+                          </ul>
+                          
+                        </div>  
+                      </form>
+              </nav>
+        </nav>
+
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style=" background-color: #0F084F!important;">
+                <ul class="navbar-nav mr-auto" >
+                    <div  style="width: 100px"> </div>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Menu Auxiliar</a>
+                    </li>
+                  </ul>
+                  <div  style="width: 700px"> </div>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto" >
+                      <li class="nav-item active">
+                        <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Cuenta  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+                      </li>
+                      <li class="nav-item active">
+                          <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Regístrate</a>
+                        </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                        </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+                      </li>
+                    </ul>
+                    
+                  </div>  
+              
+              </nav>
+
+              <main role="main" class="container">
+                    <div class="p-4 mb-3 bg-light rounded" style="background-color:#e9ecef!important;">
+                        {% for i in categoriasRoot %}    
+                        <a href="{{i.get_absolute_url}}" style="text-decoration:none !important;" ><h2>{{i.name}}</h2></a>
+                        {% for j in categoriasHijos %}
+                        {% ifequal i j.id_parent %}
+                            <li style="float: left; width: 20%; list-style: none;">
+                                <a href="{{j.get_absolute_url}}" style="text-decoration:none !important; color: black"> {{j.name}}</a>
+                            </li>
+                        {% endifequal %}
+                        {% endfor %}
+                        <br>
+                        <br>
+                        {% endfor %}
+                    </div>      
+            </main> 
+
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+</html>

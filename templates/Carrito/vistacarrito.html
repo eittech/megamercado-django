@@ -1,0 +1,289 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Megamercado</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/maxcdn/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+        .input-number-group {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.input-number-group input[type=number]::-webkit-inner-spin-button,
+.input-number-group input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+.input-number-group .input-group-button {
+  line-height: calc(80px/2 - 5px);
+}
+
+.input-number-group .input-number {
+  width: 80px;
+  padding: 0 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+  display: block;
+  margin: 0;
+}
+
+.input-number-group .input-number,
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+  border: 1px solid #cacaca;
+  height: 40px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 0;
+}
+
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+  display: inline-block;
+  width: 40px;
+  background: #e6e6e6;
+  color: #0a0a0a;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.input-number-group .input-number-decrement {
+  margin-right: 0.3rem;
+}
+
+.input-number-group .input-number-increment {
+  margin-left: 0.3rem;
+}
+
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+
+  </head>
+  <body>
+
+        {% if request.user.is_authenticated %}
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      </form>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Usuario  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'carritos'%}" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% else %}
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      </form>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> Regístrate</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% endif %}
+
+      <main role="main" class="container" >
+            <div class="row" >
+              <div class="col-md-7 blog-main">
+          
+                <div class="p-4 mb-3 bg-light rounded">
+                    <h4> Carrito</h4>
+                    <input type="checkbox" id="cbox1" value="first_checkbox"> Seleccionar todo<br>
+
+                  </div>
+        
+                  {% for c in array %}
+                  <div class="p-4 mb-3 bg-light rounded">
+                        <input type="checkbox" id="cbox2" value="2_checkbox"> <label style="font-size: 18px ">{{c}} </label>
+                        <br>
+
+                        {% for i in productos %}
+                        {% ifequal i.id_product.id_shop_default.name c %}
+                        <ul class="col_s_5_of_5 fr txr t_small" style="text-align: right;float: right !important;box-sizing: border-box;color: #333;" >
+                                <li id="Nombre" style="list-style: none;box-sizing: border-box;text-align: right;color: #333;" ><img src="{% static 'img/garbage.png' %}" style="width: 20px; height: 20px"></li>
+                                <br>
+                                <form method="POST" >
+                                    {% csrf_token %}
+                                <input class="input-number" name="id_product" value={{i.id_product.name}} min="0" max="1000" type="hidden" >
+                                <div class="input-group input-number-group">
+                                <div class="input-group-button">
+                                    <span class="input-number-decrement">-</span>
+                                </div>
+                                <input class="input-number" name="quantity" value="1" min="0" max="1000">
+                                <div class="input-group-button">
+                                    <span class="input-number-increment">+</span>
+                                </div>
+                                </div>
+                                <br>
+                                <input type="submit" value="Update">
+                                </form>
+                            </ul>
+                            <ul class="col_s_5_of_5 fr txr t_small" style="text-align: right;float: right !important;box-sizing: border-box;color: #333;" >   
+                                </ul>
+                        <ul class="col_s_5_of_5 fr txr t_small" style="text-align: right;float: right !important;box-sizing: border-box;color: #333;" >
+                            </ul>
+                            <ul class="col_s_5_of_5 fr txr t_small" style="text-align: right;float: right !important;box-sizing: border-box;color: #333;" >
+                                    <li id="subTotalRight" style="list-style: none;box-sizing: border-box;text-align: left;color: #333;" >Nombre: {{i.id_product.name}}</li>
+                                <li id="shippingCost" style="list-style: none;box-sizing: border-box;text-align: left;color: #333;" >Precio: {{i.id_product.price}}</li>
+                                </ul>
+                                
+                            {% for m in imagenes %}
+                            {% ifequal m.id_product i.id_product %}
+                            {% if m.cover %}
+                            <input type="checkbox" id="cbox3" value="3_checkbox">
+                            <img src="{{m.image.url}}" style="width: 100px; height: 100px;">
+                            {% endif %}
+                            {% endifequal %}
+                            {% endfor %}
+
+                        {% endifequal %}
+                    {% endfor %}
+                      </div>
+                    {% endfor %}
+
+              </div><!-- /.blog-main -->
+  
+              <aside class="col-md-4 blog-sidebar">
+                <div class="p-4 mb-3 bg-light rounded">
+
+                  <h4 class="font-italic">Resumen del pedido</h4>
+                  <ul class="col_s_5_of_5 fl t_small" style="float: left !important;box-sizing: border-box;line-height: 150%; text-align: left;color: #333;">
+                        <li style= "list-style: none;box-sizing: border-box;line-height: 150%;text-align: left;color: #333;">Subtotal</li>
+                        <li style= "list-style: none;box-sizing: border-box;line-height: 150%;text-align: left;color: #333;">Envio</li>
+                        <br><br>
+                        <li class="hp_midtitle t_bold pt_5" style= "list-style: none;box-sizing: border-box;line-height: 150%;text-align: left;color: #333;"> <b>Total</b></li>
+                    </ul>
+                    <ul class="col_s_5_of_5 fr txr t_small" style="text-align: right;float: right !important;box-sizing: border-box;color: #333;" >
+                            <li id="subTotalRight" style="list-style: none;box-sizing: border-box;text-align: right;color: #333;" >{{subtotal}} US $</li>
+                            <li id="shippingCost" style="list-style: none;box-sizing: border-box;text-align: right;color: #333;" >US $</li>
+                            <br><br>
+                            <li id="grandTotalRight" class="hp_midtitle t_bold pt_5" style="list-style: none;box-sizing: border-box;text-align: right;color: #333;"><b> US $ </b></li>
+                        </ul>
+
+                  <br><br><br><br><br><br>
+                  <button style="width: 300px; background: gold; color: black; border-color:gold" class="btn btn-outline-success my-2 my-sm-0" type="submit" >Comprar</button>
+                
+              </aside><!-- /.blog-sidebar -->
+  
+            </div><!-- /.row -->
+          
+          </main><!-- /.container -->
+
+    </body>
+
+    <script> $('.input-number-increment').click(function() {
+            var $input = $(this).parents('.input-number-group').find('.input-number');
+            var val = parseInt($input.val(), 10);
+            $input.val(val + 1);
+          });
+          
+          $('.input-number-decrement').click(function() {
+            var $input = $(this).parents('.input-number-group').find('.input-number');
+            var val = parseInt($input.val(), 10);
+            $input.val(val - 1);
+          })
+          
+          </script>
+    <script>
+    var chk1 = $('#cbox1');
+    var chk2 = $('#cbox2');
+    var chk3 = $('#cbox3');
+
+    //check the other box
+    chk1.on('click', function(){
+    if( chk1.is(':checked') ) {
+        chk2.attr('checked', true);
+    } else {
+        chk2.attr('checked', false);
+    }
+    });
+
+        //check the other box
+    chk2.on('click', function(){
+    if( chk2.is(':checked') ) {
+        chk3.attr('checked', true);
+    } else {
+        chk3.attr('checked', false);
+    }
+    });
+    </script>

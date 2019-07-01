@@ -25,6 +25,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from products.models import *
 from customers.models import *
+from Orders.models import *
 from contracts.models import *
 from systems.models import *
 from services.models import *
@@ -35,6 +36,7 @@ from systems.actionSystem import *
 from django.db.models import Count
 from django.core.paginator import Paginator
 
+from django.utils import timezone
 
 @csrf_exempt
 @api_view(["POST"])
@@ -521,6 +523,64 @@ def homeporto(request):
         return render(request, 'comparagrow/cozastore/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
 
 def home(request):
+    productos =Product.objects.all()[:12]
+    imagenes = Image.objects.all()
+    category = Category.objects.all()
+    print(category)  
+    return render(request, 'album.html', {
+        'imagenes':imagenes,
+        'productos':productos,
+        'category':category})
+
+def listadoCategorias(request):
+    categoriasRoot= Category.objects.filter(is_root_category=True).filter(active=True)
+    categoriasHijos= Category.objects.filter(is_root_category=False).filter(active=True)
+    return render(request, 'categorias.html', {
+        'categoriasRoot':categoriasRoot,
+        'categoriasHijos':categoriasHijos})
+
+def cuenta(request):
+    try:
+        carrito=Cart.objects.filter(id_customer= request.user).latest('id_cart')
+        print(carrito)
+        if Orders.objects.filter(id_cart= carrito):
+            nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+            nuevocart.save()
+        else:
+            if (timezone.now() - carrito.date_add).days > 5:
+                """carrito.delete() 
+                nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+                nuevocart.save()   
+                print("save")
+                """
+                pass
+
+    except:
+        # Si no hay carrito para este usuario, lo crea.
+        nuevocart=Cart.objects.create(
+                delivery_option="0",
+                id_customer=request.user,
+                gift=0,
+                date_add= timezone.now(),
+                date_upd= timezone.now())
+        nuevocart.save()
+        nuevocart.onwer=request.user
+        print("paso")
+        pass
+    return render(request, 'Cuenta/dashboard.html', {})
+
+"""
+def home(request):
     error=False
     if request.GET.get('error'):
         error = True
@@ -531,32 +591,22 @@ def home(request):
     #.filter(date_init__gte=datetime.now()).filter(date_end__lte=datetime.now())
     pk_product = servicecontractshop_ci.values('product__pk')
     # productos_ci = Product.objects.filter(pk__in=pk_product)
-    productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
-    ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('?')
-    ur_pk = ultimas_rebajas.values('product__pk')
-    productos_ur = Product.objects.filter(pk__in=ur_pk)[:10]
-    productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    #productos_cd = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
+    productos_cd = Product.objects.filter()[:10]
+    #ultimas_rebajas = AlertsProduct.objects.filter().order_by('?')
+    #ultimas_rebajas = AlertsProduct.objects.filter(product__photo=True).order_by('?')
+    #ur_pk = ultimas_rebajas.values('product__pk')
+    #productos_ur = Product.objects.filter(pk__in=ur_pk)[:10]
+    productos_ur = Product.objects.filter()[:10]
+    productos_ci = Product.objects.filter(id_category_default__isnull=False).order_by('?')[:10]
+    #productos_ci = Product.objects.filter(photo=True).filter(category__isnull=False).order_by('?')[:10]
 
-    productos = ProductImage.objects.all()[:12]
+    productos = Image.objects.all()[:12]
     category = Category.objects.all()
-    if user_agent.is_mobile:
-        # Do stuff here...
-        template_ruta = "comparagrow/porto/base_mobile.html"
-        return render(request, 'comparagrow/porto/index.html', {
-        'template_ruta':template_ruta,
-        'category':category,
-        'error':error,
-        'productos_ci':productos_ci,
-        'productos_cd':productos_cd,
-        'productos_ur':productos_ur
-        })
-        #return render(request, 'comparagrow/porto/index.html', {'variable':variable,'productos':productos,'category':category,'error':error,'productos_ci':productos_ci})
-        #return render(request, 'comparagrow/index.html', {'variable':variable})
-    else:
-        template_ruta = "comparagrow/porto/base.html"
+    template_ruta = 'comparagrow/porto/base.html'
         #return render(request, 'comparagrow/mobile/index.html', {'variable':variable})
         #cozastore
-        return render(request, 'comparagrow/porto/index.html', {
+    return render(request, 'comparagrow/porto/index.html', {
         'template_ruta':template_ruta,
         'productos':productos,
         'category':category,
@@ -564,6 +614,7 @@ def home(request):
         'productos_ci':productos_ci,
         'productos_cd':productos_cd,
         'productos_ur':productos_ur})
+"""
 
 @login_required
 def profile(request):

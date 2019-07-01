@@ -1,0 +1,280 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Megamercado</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/maxcdn/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{$ static 'css/album.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+
+      {% if request.user.is_authenticated %}
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      </form>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Usuario  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'carritos'%}" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% else %}
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+          <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                        <button type="submit" style="margin-left: -98px;
+                        height: 30px;
+                        width: 90px;
+                        background-color: white; 
+                        color: gray;
+                        border: 0;
+                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                      </form>
+                      <div  style="width: 300px"> </div>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div  style="width: 300px"> </div>
+            <ul class="navbar-nav mr-auto" >
+              <li class="nav-item active">
+                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" style="font-size: 17px"> Regístrate</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+              </li>
+            </ul>
+            
+          </div>
+        </nav>
+      {% endif %}
+
+
+<main class="container">
+        <div class="row">
+                <aside class="col-md-4 blog-sidebar">
+                        <div class="p-4 mb-3 bg-light rounded">
+
+                          <h4 class="font-italic">Buscaste: {{query}}</h4>
+                          
+                          <br>
+                          <h5 style="font-size: 17px" >Ordernar por: </h5>
+                              <form method="POST">
+                                  {% csrf_token %}
+                                <div class="form-row" style="margin-top:10px;">
+                                        <div class="col-sm-12">
+                                          <div class="input-group">
+                                            
+                                            <select name="visibility" >
+                                                <option value="" selected>---------</option>
+                                              
+                                                <option value="everywhere">Relevancia</option>
+                                              
+                                                <option value="catalog">Pedidos</option>
+
+                                                <option value="search">Menor Precio</option>
+
+                                                <option value="nowhere">Mayor Precio</option>
+                                              
+                                              </select>
+                                              <input type="submit" value="Aplicar">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+
+                          <br>
+                          <div id="list"> List </div>
+                          <div id="grilla" > Grilla </div>
+                          <h5 style="font-size: 17px" >Ubicación: </h5>
+                          <p> Ubic</p>
+                          </div>
+          
+                      </aside><!-- /.blog-sidebar -->
+          
+          
+                      <div class="col-md-7 blog-main" id="list-1">
+                          <div class="p-4 mb-3 bg-light rounded">
+                              {% for i in productos %}
+                              <a href="{{i.get_absolute_url}}" style="color: black"  class="container">
+                                      <div class="row">
+                  
+                                          <aside > 
+                                              {% for j in imagenes %}
+                                              {% ifequal j.id_product i %}
+                                              {% if j.cover %}
+                                              <img src="{{j.image.url}}" style="width: 200px">
+                                              {% endif %}
+                                              {% endifequal %}
+                                              {% endfor %}
+                                          </aside>
+                                          <div class="col-md-7 blog-main"> 
+                                              <div> 
+                                                  <b>Nombre: </b> {{i.name}}<br>
+                                                  <b>Tienda: </b>{{i.id_shop_default }}<br>
+                                                  <b>Precio: </b>{{i.price}}<br>
+                                                  <b>Vendidos: </b><br>
+                                                  <b>Valoración</b>
+                                                  
+                                                  </div>
+                                                  <br>
+                                          </div>
+                                      </div>
+                                  </a>
+                              {% endfor %}
+
+                            </div>
+                            {% if productos.has_other_pages %}
+                            <ul class="pagination">
+                              {% if productos.has_previous %}
+                                <li><a href="?page={{ productos.previous_page_number }}">&laquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                              {% endif %}
+                              {% for i in productos.paginator.page_range %}
+                                {% if productos.number == i %}
+                                  <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                  <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              {% if productos.has_next %}
+                                <li><a href="?page={{ productos.next_page_number }}">&raquo;</a></li>
+                              {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                              {% endif %}
+                            </ul>
+                          {% endif %}
+                        </div><!-- /.blog-main -->
+
+                
+                        <div class="col-md-7 blog-main" id="grilla-1" style="display: none">
+                            <div class="container">
+
+                                <div class="row">
+                                    {% for i in productos %}
+                                  <div class="col-md-3">
+                                    <div class="card mb-3 shadow-sm">
+                                      {% for j in imagenes %}
+                                      {% ifequal j.id_product i %}
+                                      {% if j.cover %}
+                                      <img  src="{{j.image.url}}" style="height: 130px; width: auto">
+                                      {% endif %}
+                                      {% endifequal %}
+                                      {% endfor %}
+                                      <div class="card-body">
+                                          <b>Nombre: </b> {{i.name}}<br>
+                                          <b>Tienda: </b>{{i.id_shop_default }}<br>
+                                          <b>Precio: </b>{{i.price}}<br>
+                                          <b>Vendidos: </b><br>
+                                          <b>Valoración</b>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                          <div class="btn-group">
+                                            <a href="{{i.get_absolute_url}}" type="button" class="btn btn-sm btn-outline-secondary">Ver detalle</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                          
+                                  {% endfor %}
+                                </div>
+                              </div>
+                              {% if productos.has_other_pages %}
+                              <ul class="pagination">
+                                {% if productos.has_previous %}
+                                  <li><a href="?page={{ productos.previous_page_number }}">&laquo;</a></li>
+                                {% else %}
+                                  <li class="disabled"><span>&laquo;</span></li>
+                                {% endif %}
+                                {% for i in productos.paginator.page_range %}
+                                  {% if productos.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                  {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                  {% endif %}
+                                {% endfor %}
+                                {% if productos.has_next %}
+                                  <li><a href="?page={{ productos.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                  <li class="disabled"><span>&raquo;</span></li>
+                                {% endif %}
+                              </ul>
+                            {% endif %}
+                        </div><!-- /.blog-main -->
+
+        </div><!-- /.row -->
+      
+    </main><!-- /.container -->
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+
+      <script>
+          $(document).ready(function(){
+            $("#grilla").click(function(){
+              $("#list-1").hide();
+              $("#grilla-1").show();
+            });
+            $("#list").click(function(){
+              $("#list-1").show();
+              $("#grilla-1").hide();
+            });
+          });
+          </script>
+
+</html>

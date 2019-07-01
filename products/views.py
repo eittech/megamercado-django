@@ -5,6 +5,7 @@ from django.shortcuts import render
 import time
 from datetime import datetime
 from products.models import *
+from products.forms import *
 from contracts.models import *
 from systems.models import *
 from django.views.decorators.csrf import csrf_exempt
@@ -21,7 +22,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from django.db.models.functions import Substr
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django import template
 #
 # register = template.Library()
@@ -29,11 +30,63 @@ from django.db.models.functions import Substr
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
+def listado(request, id_category):
+    #productos = Product.objects.all()
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria)
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
+
+def listadoOrdenMenor(request, id_category):
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria).order_by('price')
+    #productos = Product.objects.all().order_by('price')[:20]
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
+
+def listadoOrdenMayor(request, id_category):
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria).order_by('-price')
+    #productos = Product.objects.all().order_by('-price')[:20]
+    imagenes = Image.objects.all()
+    print(productos)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(productos, 10)
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
+
+'''
 def listado(request):
     productos = ProductImage.objects.all()[:20]
     print(productos)
     return render(request, "comparagrow/listado.html",{'productos':productos})
-
+'''
 
 def search(request):
     if request.GET.get('q'):
@@ -544,6 +597,80 @@ def detalle_product(request,id):
         return render(request, "comparagrow/porto/detalle.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'history':history,'history_datail':history_datail})
     else:
         return redirect('/error')
+
+def detalle(request, id_product):
+    try:
+        producto = Product.objects.get(id_product=id_product)
+        producto_image = Image.objects.filter(id_product=producto)
+        producto_attr = ProductAttribute.objects.filter(id_product=producto)
+        allcategories= CategoryProduct.objects.filter(id_product=producto)
+        productcombination = ProductAttributeCombination.objects.filter(id_product_attribute__id_product=producto)
+        u1=None
+        u2=None
+        u3=None
+        u4=None
+        u5=None
+        u6=None
+        u7=None
+        u8=None
+        for i in range(len(producto_image)):
+            if i==0:
+                u1=producto_image[i].image.url
+            if i==1:
+                u2=producto_image[i].image.url
+            if i==2:
+                u3=producto_image[i].image.url
+            if i==3:
+                u4=producto_image[i].image.url
+            if i==4:
+                u5=producto_image[i].image.url
+            if i==5:
+                u6=producto_image[i].image.url
+            if i==6:
+                u7=producto_image[i].image.url
+            if i==7:
+                u8=producto_image[i].image.url
+        #history = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:5]
+        #history_datail = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:100]
+    except:
+        producto = None
+    if producto is not None:
+        return render(request, "new.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories, 'productcombination':productcombination, 'u1':u1, 'u2':u2, 'u3':u3, 'u4':u4, 'u5':u5, 'u6':u6, 'u7':u7,'u8':u8 })
+        #return render(request, "comparagrow/porto/detalle1.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories})
+    else:
+        return redirect('/error')
+
+from django.http import HttpResponse
+from django.db.models import Q
+
+def search(request):
+    if 'q' in request.GET:
+        query=request.GET.get('q')
+        productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+        imagenes = Image.objects.all()  
+        page = request.GET.get('page', 1)
+        form=ViForm(request.POST)
+        if request.method=="POST":
+            print(form['visibility'].value())
+            if form['visibility'].value()=='everywhere':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+            if form['visibility'].value()=='catalog':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query))
+            if form['visibility'].value()=='search':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query)).order_by('price')
+            if form['visibility'].value()=='nowhere':
+                productos=Product.objects.filter(Q(name__icontains=query)| Q(id_shop_default__name__icontains=query)).order_by('-price')
+        paginator = Paginator(productos, 10)
+        try:
+            product = paginator.page(page)
+        except PageNotAnInteger:
+            product = paginator.page(1)
+        except EmptyPage:
+            product = paginator.page(paginator.num_pages)
+        return render(request, "search.html",{'productos':product, 'imagenes': imagenes, 'query':query})
+    else:
+        message = "You submitted an empty form."
+        return HttpResponse(message)
 
 def redirect_view_product(request,id):
     producto = Product.objects.get(pk=id)
