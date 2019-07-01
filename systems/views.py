@@ -526,11 +526,18 @@ def home(request):
     productos =Product.objects.all()[:12]
     imagenes = Image.objects.all()
     category = Category.objects.all()
-    print(category)
+    print(category)  
     return render(request, 'album.html', {
         'imagenes':imagenes,
         'productos':productos,
         'category':category})
+
+def listadoCategorias(request):
+    categoriasRoot= Category.objects.filter(is_root_category=True).filter(active=True)
+    categoriasHijos= Category.objects.filter(is_root_category=False).filter(active=True)
+    return render(request, 'categorias.html', {
+        'categoriasRoot':categoriasRoot,
+        'categoriasHijos':categoriasHijos})
 
 def cuenta(request):
     try:
@@ -567,6 +574,7 @@ def cuenta(request):
                 date_add= timezone.now(),
                 date_upd= timezone.now())
         nuevocart.save()
+        nuevocart.onwer=request.user
         print("paso")
         pass
     return render(request, 'Cuenta/dashboard.html', {})

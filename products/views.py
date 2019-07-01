@@ -30,8 +30,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
-def listado(request):
-    productos = Product.objects.all()
+def listado(request, id_category):
+    #productos = Product.objects.all()
+    categoria= Category.objects.get(id_category=id_category)
+    productos = Product.objects.filter(id_category_default=categoria)
     imagenes = Image.objects.all()
     print(productos)
     page = request.GET.get('page', 1)
@@ -43,7 +45,7 @@ def listado(request):
         product = paginator.page(1)
     except EmptyPage:
         product = paginator.page(paginator.num_pages)
-    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes})
+    return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
 def listadoOrdenMenor(request):
     productos = Product.objects.all().order_by('price')[:20]
@@ -661,7 +663,7 @@ def search(request):
             product = paginator.page(1)
         except EmptyPage:
             product = paginator.page(paginator.num_pages)
-        return render(request, "search.html",{'productos':product, 'imagenes': imagenes})
+        return render(request, "search.html",{'productos':product, 'imagenes': imagenes, 'query':query})
     else:
         message = "You submitted an empty form."
         return HttpResponse(message)

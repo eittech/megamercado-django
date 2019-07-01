@@ -1,5 +1,6 @@
 from django.urls import path, re_path
 from . import views
+from products.views import *
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
 from systems.sitemaps import *
@@ -17,6 +18,9 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
     path('', views.home, name='home_view'),
     path('porto', views.homeporto, name='home_porto'),
+
+    path('categoria', views.listadoCategorias, name="list_categorias"),
+    path('categoria/<id_category>/', listado, name="listado_categorias"),
 
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
