@@ -27,6 +27,8 @@ urlpatterns = [
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
     path('cuenta/', views.cuenta, name='cuenta'),
+    path('login/', views.login_view, name='login1'),
+    #path('login/', views.Login.as_view(), name='login'),
     #test mobile
     path('index.html', views.index_mobile, name='mobile'),
     path('pages/shop.html',views.shop_mobile,name='shop'),

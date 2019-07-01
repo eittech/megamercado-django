@@ -169,7 +169,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'django.contrib.auth.backends.RemoteUserBackend',
 
-
 )
 
 AUTH_USER_MODEL = 'customers.Customer'
@@ -239,3 +238,7 @@ SOCIAL_AUTH_TWITTER_SECRET = '9uvCC7uX58870992zP0M4cJ8lhPbGXJcT3BAiniaXgOz32onyS
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '361874647317-rfjamk7oeg7jquooa6cov96olaf9vhpk.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'R0E6_UipW7yy8jiduCYifY99'
+
+LOGIN_URL='login/'
+LOGIN_REDIRECT_URL = 'cuenta/'
+LOGOUT_REDIRECT_URL = ''

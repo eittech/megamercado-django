@@ -16,6 +16,16 @@ from customers.models import *
 from django.http import JsonResponse
 from .forms import ImageFileUploadForm
 
+from django.views.generic import CreateView
+from .forms import CustomUserCreationForm
+from django.urls import reverse_lazy
+
+class registro(CreateView):
+    model = User
+    template_name= "usuarios/register.html"
+    form_class=CustomUserCreationForm
+    success_url= reverse_lazy('login1')
+
 def django_image_and_file_upload_ajax(request):
     user = request.user
     try:

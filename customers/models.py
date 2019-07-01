@@ -28,7 +28,7 @@ class Customer(AbstractUser):
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
     firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
-    tipo = models.CharField(verbose_name="Tipo de Usuario",max_length=8,choices=TYPE_LIST,blank=False, default="Usuario")
+    tipo = models.CharField(verbose_name="Tipo de Usuario",max_length=8,choices=TYPE_LIST,blank=True, default="Usuario")
     rol = models.ForeignKey(Group,verbose_name="Tipo de Cliente",on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
         return self.username
