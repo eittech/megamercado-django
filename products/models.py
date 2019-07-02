@@ -35,9 +35,31 @@ class ShopGroup(models.Model):
             raise ValidationError("No puede estar activo y eliminado")
         super(ShopGroup, self).save(**kwargs)
 
+# CATEGORIAS
+
+class Category(models.Model):
+    id_category = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=128, blank=False)
+    description = models.TextField(blank=True, null=True)
+    id_parent = models.ForeignKey('self',null=True,related_name="category_base", blank=True, db_index=True,on_delete=models.CASCADE,verbose_name="Categoria Base")
+    level_depth = models.IntegerField()
+    active = models.BooleanField(blank=True, default=False)
+    date_add = models.DateTimeField()
+    date_upd = models.DateTimeField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
+    is_root_category = models.BooleanField(blank=True, default=False)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.name)
+    def get_absolute_url(self):
+        return reverse('listado_categorias', kwargs={'id_category': self.id_category})
+
+
 class Shop(models.Model):
     id_shop = models.AutoField(primary_key=True)
     id_shop_group = models.ForeignKey(ShopGroup, on_delete=models.CASCADE)
+    id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, blank=False)
     active = models.BooleanField(blank=True, default=False)
     deleted = models.BooleanField(blank=True, default=False)
@@ -49,6 +71,17 @@ class Shop(models.Model):
         if self.active is True and self.deleted is True:
             raise ValidationError("No puede estar activo y eliminado")
         super(Shop, self).save(**kwargs)
+
+class TrabajadoresShop(models.Model):
+    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    cargo = models.CharField(max_length=200,blank=True)
+
+    class Meta:
+        unique_together = (('id_customer', 'id_shop'),)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.id_customer) + " " +str(self.id_shop)
 
 # ATRIBUTOS
 class AttributeGroup(models.Model):
@@ -96,25 +129,6 @@ class AttributeShop(models.Model):
         '''Devuelve el modelo en tipo String'''
         return str(self.id_attribute) + " " + str(self.id_shop)
 
-# CATEGORIAS
-
-class Category(models.Model):
-    id_category = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128, blank=False)
-    description = models.TextField(blank=True, null=True)
-    id_parent = models.ForeignKey('self',null=True,related_name="category_base", blank=True, db_index=True,on_delete=models.CASCADE,verbose_name="Categoria Base")
-    level_depth = models.IntegerField()
-    active = models.BooleanField(blank=True, default=False)
-    date_add = models.DateTimeField()
-    date_upd = models.DateTimeField()
-    position = models.IntegerField(validators=[MinValueValidator(0)])
-    is_root_category = models.BooleanField(blank=True, default=False)
-    def __str__(self):    
-        '''Devuelve el modelo en tipo String'''
-        return str(self.name)
-    def get_absolute_url(self):
-        return reverse('listado_categorias', kwargs={'id_category': self.id_category})
-
 
 class Groups(models.Model):
     id_group = models.AutoField(primary_key=True)
@@ -154,6 +168,7 @@ class Product(models.Model):
     id_product = models.AutoField(primary_key=True)
     id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
     id_shop_default = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
     #id_tax_rules_group = models.ForeignKey(TaxRulesGroup, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True, null=True)
@@ -202,17 +217,6 @@ class CategoryProduct(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.id_category) + " " + str(self.id_product)
-
-class CategoryShop(models.Model):
-    id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    position = models.IntegerField(validators=[MinValueValidator(0)])
-
-    class Meta:
-        unique_together = (('id_category', 'id_shop'),)
-    def __str__(self):    
-        '''Devuelve el modelo en tipo String'''
-        return str(self.id_category) + " " +str(self.id_shop)
 
 
 class ProductAttribute(models.Model):

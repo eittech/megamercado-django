@@ -17,9 +17,6 @@ class CategoryGroupInline(admin.TabularInline):
 	model = CategoryGroup
 	extra = 1
 
-class CategoryShopInline(admin.TabularInline):
-	model = CategoryShop
-	extra = 1
 
 class AttributeGroupShopInline(admin.TabularInline):
 	model = AttributeGroupShop
@@ -55,10 +52,6 @@ class ShopGroupAdmin(admin.ModelAdmin):
 
 class ShopAdmin(admin.ModelAdmin):
 	list_display = ['id_shop', 'id_shop_group', 'name', 'active', 'deleted','virtual_url']
-	inlines=[CategoryShopInline, ]
-
-class CategoryShopAdmin(admin.ModelAdmin):
-	list_display = ['id_category','id_shop', 'position']
 
 class GroupsAdmin(admin.ModelAdmin):
 	list_display = ['id_group', 'name', 'reduction','price_display_method','show_prices','date_add', 'date_upd']
@@ -117,7 +110,6 @@ class ProductShopAdmin(admin.ModelAdmin):
 # Tiendas
 admin.site.register(Shop, ShopAdmin)
 admin.site.register(ShopGroup, ShopGroupAdmin)
-admin.site.register(CategoryShop, CategoryShopAdmin)
 
 # Grupos
 admin.site.register(Groups, GroupsAdmin)

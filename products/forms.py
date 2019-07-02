@@ -157,19 +157,6 @@ class CategoryProductForm(forms.ModelForm):
         model = CategoryProduct
         fields = '__all__'
 
-class CategoryShopForm(forms.ModelForm):
-    '''
-        Aqui se implementa el formulario para la creacion
-        de nuevos Category Shop
-    '''
-    class Meta:
-        '''
-            Aqui se especifica que datos se tienen que incluir en
-            el formulario
-        '''
-        model = CategoryShop
-        fields = '__all__'
-
 class ProductAttributeForm(forms.ModelForm):
     '''
         Aqui se implementa el formulario para la creacion
