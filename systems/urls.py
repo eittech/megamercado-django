@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 from . import views
 from products.views import *
+from customers.views import *
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
 from systems.sitemaps import *
@@ -28,6 +29,8 @@ urlpatterns = [
     
     path('cuenta/', views.cuenta, name='cuenta'),
     path('login/', views.login_view, name='login1'),
+    path('registro/', registro.as_view(), name="registrando"),
+    path('logout/', views.cerrar_sesion, name="cerrar_sesion"),
     #path('login/', views.Login.as_view(), name='login'),
     #test mobile
     path('index.html', views.index_mobile, name='mobile'),

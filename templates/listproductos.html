@@ -30,11 +30,12 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{$ static 'css/album.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
   </head>
   <body>
 
         {% if request.user.is_authenticated %}
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 color" >
           <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
 
           <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
@@ -68,7 +69,7 @@
           </div>
         </nav>
       {% else %}
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 color">
           <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
 
           <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >

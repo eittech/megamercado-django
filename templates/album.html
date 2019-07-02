@@ -155,14 +155,14 @@
     <link href="static/css/album.css" rel="stylesheet">
   </head>
   <body>
-
+      <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         
         <nav class="navbar-inverse nav-upper">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+            <nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4" >
             <a class="navbar-brand" href="#" style="width: 400px; font-size: 17px"">Logo</a>
             <form class="form-inline mt-2 mt-md-0" style="width: 900px" action="{% url 'busqueda' %}" method="get" >
                           <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
@@ -189,21 +189,25 @@
               </nav>
         </nav>
 
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style=" background-color: #0F084F!important;">
+        {% if request.user.is_authenticated %}
+            <nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4">
                 <ul class="navbar-nav mr-auto" >
                     <div  style="width: 100px"> </div>
                     <li class="nav-item active">
-                      <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Menu Auxiliar</a>
+                      <a class="nav-link" href="{% url 'list_categorias' %}" style="width: 116px;font-size: 17px""> Categorias</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Menu Auxiliar</a>
+                      </li>
                   </ul>
-                  <div  style="width: 700px"> </div>
+                  <div  style="width: 600px"> </div>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto" >
                       <li class="nav-item active">
-                        <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Cuenta  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+                        <a class="nav-link" href="{% url 'cuenta' %}" style="width: 116px;font-size: 17px""> Cuenta  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
                       </li>
                       <li class="nav-item active">
-                          <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Regístrate</a>
+                          <a class="nav-link" href="{% url 'cerrar_sesion' %}" style="width: 116px;font-size: 17px""> Cerrar sesión</a>
                         </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
@@ -216,7 +220,38 @@
                   </div>  
               
               </nav>
-
+        {% else %}
+        <nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4" >
+            <ul class="navbar-nav mr-auto" >
+                <div  style="width: 100px"> </div>
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'list_categorias' %}" style="width: 116px;font-size: 17px""> Categorias</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Menu Auxiliar</a>
+                      </li>
+                  </ul>
+                  <div  style="width: 600px"> </div>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto" >
+                  <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login1' %}" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'registrando' %}" style="width: 116px;font-size: 17px""> Regístrate</a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                    </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+                  </li>
+                </ul>
+                
+              </div>  
+          
+          </nav>
+          {% endif %}
 
 <main role="main"></main>
 

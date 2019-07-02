@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django_user_agents.utils import get_user_agent
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
@@ -68,6 +68,10 @@ def login_view(request):
             # Redirect to a success page.
             return HttpResponseRedirect(reverse('cuenta'))
         return HttpResponseRedirect(reverse('home_view'))
+
+def cerrar_sesion(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('home_view'))
 
 @csrf_exempt
 @api_view(["POST"])
