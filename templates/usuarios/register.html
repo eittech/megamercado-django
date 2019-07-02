@@ -30,15 +30,16 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static 'css/css/floating-labels.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
   </head>
   <body>
-    
-    <form class="form-signin" method="POST">
+
+    <form class="form-signin color" method="POST" >
         {% csrf_token %}
   <div class="text-center mb-4">
     <img class="mb-4" src="{% static 'img/Logo/logo-login.png' %}" alt="" width="390" height="87">
+    <h1 class="mb-1 text-center white">Regístrate</h1>
   </div>
-   <h1 class="mb-1 text-center">Regístrate</h1>
 	<br>
   <div class="form-label-group">
     <input class="form-control" type="text" name="username" id="id_username" placeholder="Username" autofocus maxlength="150" required autofocus>
@@ -74,7 +75,7 @@
   <button class="btn btn-lg btn-primary btn-block" type="submit">Crear tu cuenta</button>
 		<div class="text-center mb-4">
   <br>
-			<p class="text-gray-soft text-center small mb-2">¿Ya tienes una cuenta? <a href="{% url 'login1' %}">Iniciar sesión</a></p>
+			<p class="white text-gray-soft text-center small mb-2">¿Ya tienes una cuenta? <a href="{% url 'login1' %}">Iniciar sesión</a></p>
 	  </div>
 	
 </form>
