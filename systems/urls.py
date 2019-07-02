@@ -28,6 +28,8 @@ urlpatterns = [
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
     path('cuenta/', views.cuenta, name='cuenta'),
+    path('cuenta/completarmisdatos/', datos ,name='completardatos'),
+    path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
     path('registro/', registro.as_view(), name="registrando"),
     path('logout/', views.cerrar_sesion, name="cerrar_sesion"),

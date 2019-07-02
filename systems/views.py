@@ -615,7 +615,6 @@ def cuenta(request):
                 date_add= timezone.now(),
                 date_upd= timezone.now())
         nuevocart.save()
-        nuevocart.onwer=request.user
         print("paso")
         
         pass

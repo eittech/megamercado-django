@@ -14,17 +14,55 @@ from customers.models import *
 
 
 from django.http import JsonResponse
-from .forms import ImageFileUploadForm
+from .forms import *
 
 from django.views.generic import CreateView
-from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 class registro(CreateView):
     model = User
     template_name= "usuarios/register.html"
     form_class=CustomUserCreationForm
     success_url= reverse_lazy('login1')
+
+def datos(request):
+    print(request.user.username)
+    print(request.user.validar)
+    form = MisDatosCreationForm(request.POST)
+    if request.method=="POST":
+        usuario=Customer.objects.get(username=request.user.username)
+        usuario.alias=form['alias'].value()
+        usuario.dni_type=form['dni_type'].value()
+        usuario.dni=form['dni'].value()
+        usuario.gender=form['gender'].value()
+        usuario.firts_date=form['firts_date'].value()
+        usuario.website=form['website'].value()
+        usuario.validar="Complete"
+        usuario.save()
+        print(request.user.validar)
+        return HttpResponseRedirect(reverse('cuenta'))
+    return render(request, 
+    "Cuenta/completarDatos.html",
+    {'form': form })
+
+def solicitudVendedor(request):
+    print(request.user.username)
+    print(request.user.validar)
+    form = SolicitudVendedorCreationForm(request.POST)
+    if request.method=="POST":
+        usuario=Customer.objects.get(username=request.user.username)
+        print(form['image'].value())
+        print("DA]")
+        print(form.data['image'])
+        usuario.image=form.data['image']
+        usuario.validar="PorValidar"
+        usuario.save()
+        print(request.user.validar)
+        return HttpResponseRedirect(reverse('cuenta'))
+    return render(request, 
+    "Cuenta/solicitudVendedor.html",
+    {'form': form })
 
 def django_image_and_file_upload_ajax(request):
     user = request.user

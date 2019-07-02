@@ -249,17 +249,9 @@
               </li>
               {% ifequal user.validar "Inicial" %}
               <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'completardatos' %}">
+                  <a class="nav-link active" href="#">
                     <span data-feather="home"></span>
                     Completa tus datos
-                  </a>
-                </li>
-              {% endifequal %}
-              {% ifequal user.validar "Complete" %}
-              <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'solicitudVendedor' %}">
-                    <span data-feather="home"></span>
-                    ¿Deseas ser vendedor?
                   </a>
                 </li>
               {% endifequal %}
@@ -289,12 +281,20 @@
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h2 style="margin-left:5%" > Para convertirte en vendedor tienes que:</h2>
+      <h4 style="margin-left:7%" > 1.- Subir una foto de tu dni y enviarla.</h4>
+      <h4 style="margin-left:7%" > 2.- Esperar por la validación del administrador.</h4>
+      <h5 style="margin-left:7%" > Observación: El administrador luego de verificar los datos realizará el cambio de status a vendedor.</h5>
+      <form method="post">
+          {% csrf_token %}
+          <br>
 
+          <p><label for="id_image">Selecciona la imagen correspondiente:</label> <input type="file" name="image" accept="image/*" id="id_image" required></p>
 
-      <h2 style="margin-left:10%" >Resumen</h2>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Preguntas </a><br>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Que aun no respondistes </a>
-
+          <button type="submit" style="margin-left:5%">
+              Enviar
+          </button>
+      </form>
 
     </main>
   </div>

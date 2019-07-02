@@ -249,17 +249,9 @@
               </li>
               {% ifequal user.validar "Inicial" %}
               <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'completardatos' %}">
+                  <a class="nav-link active" href="#">
                     <span data-feather="home"></span>
                     Completa tus datos
-                  </a>
-                </li>
-              {% endifequal %}
-              {% ifequal user.validar "Complete" %}
-              <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'solicitudVendedor' %}">
-                    <span data-feather="home"></span>
-                    ¿Deseas ser vendedor?
                   </a>
                 </li>
               {% endifequal %}
@@ -289,12 +281,39 @@
     </nav>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <h2 style="margin-left:10%" >Completa tus datos </h2>
+      <br>
 
+      <form method="post">
+          {% csrf_token %}
+          <p><label for="id_alias">Alias:</label> <input type="text" name="alias" id="id_alias" maxlength="200" required></p>
+<p><label for="id_dni_type">Tipo de Documento:</label> <select name="dni_type" id="id_dni_type" required>
+  <option value="" selected>---------</option>
 
-      <h2 style="margin-left:10%" >Resumen</h2>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Preguntas </a><br>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Que aun no respondistes </a>
+  <option value="PASAPORTE">Pasaporte</option>
 
+  <option value="RUT">RUT</option>
+
+  <option value="CEDULA">Cédula</option>
+
+</select></p>
+<p><label for="id_dni">Documento de Identificación:</label> <input type="text" name="dni" id="id_dni" maxlength="200" required></p>
+<p><label for="id_gender">Género:</label> <select name="gender" id="id_gender" required>
+  <option value="" selected>---------</option>
+
+  <option value="FE">Femenino</option>
+
+  <option value="MA">Masculino</option>
+
+  <option value="DS">Diversidad</option>
+
+</select></p>
+<p><label for="id_firts_date">Fecha de Nacimiento:</label> <input type="text" name="firts_date" id="id_firts_date"></p>
+<p><label for="id_website">Sitio web:</label> <input type="text" name="website" id="id_website" maxlength="200"></p>
+          <button type="submit">
+              Guardar
+          </button>
+      </form>
 
     </main>
   </div>
@@ -305,7 +324,19 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   
         <script src="dashboard.js"></script>
-      
+        <link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
+        <script src="/static/air-datepicker/js/datepicker.min.js"></script>
+        <script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
+        
+        <script>
+                $( document ).ready(function() {
+        $('#id_firts_date').datepicker({
+          language: 'es',dateFormat:'yyyy-mm-dd'
+        });
+      });
+
+            </script>
+
         <script>
           $(document).ready(function(){
             $("#compra-subir").click(function(){

@@ -17,6 +17,12 @@ class Customer(AbstractUser):
         ('MA','Masculino'),
         ('DS','Diversidad')
     )
+    VALIDAR_LIST = (
+        ('Inicial','Inicial'),
+        ('Complete','Complete'),
+        ('PorValidar','PorValidar'),
+        ('Validado','Validado')
+    )
     TYPE_LIST = (
         ('Usuario','Usuario'),
         ('Cliente','Cliente')
@@ -26,6 +32,7 @@ class Customer(AbstractUser):
     image = models.ImageField(upload_to="assets/customer/",blank=True,null=True)
     dni = models.CharField(verbose_name="Documento de Identificacion",max_length=200,blank=True)
     gender = models.CharField(verbose_name="Genero",max_length=2,choices=GENDER_LIST,blank=True,null=True)
+    validar = models.CharField(verbose_name="status",max_length=11,choices=VALIDAR_LIST,blank=True,null=True, default="Inicial")
     firts_date = models.DateField(verbose_name="Fecha de Nacimiento",blank=True,null=True)
     website = models.URLField(verbose_name="Sitio web",max_length=200,blank=True)
     tipo = models.CharField(verbose_name="Tipo de Usuario",max_length=8,choices=TYPE_LIST,blank=True, default="Usuario")
