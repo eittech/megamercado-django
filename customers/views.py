@@ -54,8 +54,9 @@ def solicitudVendedor(request):
         usuario=Customer.objects.get(username=request.user.username)
         print(form['image'].value())
         print("DA]")
-        print(form.data['image'])
-        usuario.image=form.data['image']
+        #usuario.image=form.data['image']
+        print(request.FILES['image'])
+        usuario.image=request.FILES['image']
         usuario.validar="PorValidar"
         usuario.save()
         print(request.user.validar)

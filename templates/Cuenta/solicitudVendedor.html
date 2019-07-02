@@ -285,7 +285,7 @@
       <h4 style="margin-left:7%" > 1.- Subir una foto de tu dni y enviarla.</h4>
       <h4 style="margin-left:7%" > 2.- Esperar por la validación del administrador.</h4>
       <h5 style="margin-left:7%" > Observación: El administrador luego de verificar los datos realizará el cambio de status a vendedor.</h5>
-      <form method="post">
+      <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <br>
 
