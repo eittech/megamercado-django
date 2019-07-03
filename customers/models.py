@@ -5,8 +5,14 @@ from django.db.models.signals import pre_save
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import Group
 # Create your models here.
+from django_model_changes import ChangesMixin
+from django.db.models import signals
+from django.dispatch import receiver
+from django.db.models.signals import pre_save
+from django.conf import settings
+from django.core.mail import send_mail
 
-class Customer(AbstractUser):
+class Customer(ChangesMixin,AbstractUser):
     TYPE_DOCUMENT = (
         ('PASAPORTE', 'Pasaporte'),
         ('RUT', 'RUT'),
@@ -41,6 +47,17 @@ class Customer(AbstractUser):
         return self.username
     class Meta:
         verbose_name = "Datos del Cliente"
+
+@receiver(pre_save, sender=Customer)
+def send_email_if_tipo_cliente(sender, instance, **kwargs):
+    try:
+        if instance.previous_instance().tipo == "Usuario" and instance.tipo == "Cliente":
+            subject = 'Información verificada: ya es Vendedor.'
+            mesagge = 'Usuario %s sus datos ya han sido verificados, disfrute de su nuevo status como vendedor.' %(instance.username)
+            from_email = settings.EMAIL_HOST_USER
+            send_mail(subject, mesagge, from_email, ['gvtr96@gmail.com'], fail_silently=False)
+    except:
+        pass
 
 class AddressCustomer(models.Model):
     TYPE_ADDRESS = (

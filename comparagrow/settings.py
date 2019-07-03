@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     #social django
     'social_django',
     'django.contrib.humanize',
-
+    'django_model_changes',
     'rest_framework',
     'django_user_agents',
     'mptt',
