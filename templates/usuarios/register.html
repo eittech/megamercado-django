@@ -32,7 +32,7 @@
     <link href="{% static 'css/css/floating-labels.css' %}" rel="stylesheet">
     <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
   </head>
-  <body>
+  <body class="color">
 
     <form class="form-signin color" method="POST" >
         {% csrf_token %}
@@ -40,7 +40,6 @@
     <img class="mb-4" src="{% static 'img/Logo/logo-login.png' %}" alt="" width="390" height="87">
     <h1 class="mb-1 text-center white">Regístrate</h1>
   </div>
-	<br>
   <div class="form-label-group">
     <input class="form-control" type="text" name="username" id="id_username" placeholder="Username" autofocus maxlength="150" required autofocus>
     <label for="id_username">Username</label>
