@@ -26,6 +26,29 @@ class registro(CreateView):
     form_class=CustomUserCreationForm
     success_url= reverse_lazy('login1')
 
+def misdatos(request):
+    return render(request, 
+    "Cuenta/misdatos.html",
+    {})
+
+def verificar_identidad(request):
+    form = MisDatosCreationForm(request.POST)
+    if request.method=="POST":
+        usuario=Customer.objects.get(username=request.user.username)
+        usuario.dni_type=form['dni_type'].value()
+        usuario.dni=form['dni'].value()
+        usuario.gender=form['gender'].value()
+        usuario.firts_date=form['firts_date'].value()
+        usuario.image=request.FILES['image']
+        usuario.phone=form['phone'].value()
+        usuario.validar="PorValidar"
+        usuario.save()
+        print(request.user.validar)
+        return HttpResponseRedirect(reverse('misdatos'))
+    return render(request, 
+    "Cuenta/verificarIdentidad.html",
+    {'form': form })
+
 def datos(request):
     print(request.user.username)
     print(request.user.validar)

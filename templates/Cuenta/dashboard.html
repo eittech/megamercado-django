@@ -174,34 +174,38 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">
+    <nav id="navlarga" class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div id="navlarga1" class="sidebar-sticky">
+        <ul class="nav flex-column ">
+            <li class="nav-item textomenucuenta">
+                  <span data-feather="home"></span>
+                  <img id="micuenta-2" src="{% static 'img/cuenta/icono_perfil1.png' %}"> <b> Mi cuenta</b> <br> <div style="margin-left: 20px" > {{user.username}} </div>
+              </li>
+          <li class="nav-item ">
+            <a class="nav-link active menucuentauso" href="#">
               <span data-feather="home"></span>
-              Resumen <span class="sr-only">(current)</span>
+              <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> Resumen <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item textomenucuenta">
             <div class="nav-link" id="compra">
               <span data-feather="file"></span>
-              Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+              <img src="{% static 'img/cuenta/icono_compras1.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
             </div>
             <ul>
-              <li class="nav-item" id="compra-li1" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="home"></span>
                   Pedidos
                 </a>
               </li>
-              <li class="nav-item" id="compra-li2" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="home"></span>
                   Preguntas 
                 </a>
               </li>
-              <li class="nav-item" id="compra-li3" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="home"></span>
                   Favoritos 
@@ -209,25 +213,25 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" >
+          <li class="nav-item textomenucuenta" >
             <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
-              Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+              <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
             </a>
             <ul>
-              <li class="nav-item" id="ventas-li1" style="list-style: none" >
+              <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>
                   Pedidos
                 </a>
               </li>
-              <li class="nav-item" id="ventas-li2" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>
                   Preguntas 
                 </a>
               </li>
-              <li class="nav-item" id="ventas-li3" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>
                   Publicaciones 
@@ -235,50 +239,22 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item textomenucuenta">
             <a class="nav-link" href="#">
               <span data-feather="users"></span>
-              Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+              <img src="{% static 'img/cuenta/icono_conf1.png' %}"> Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
             </a>
             <ul>
-              <li class="nav-item" id="config-li1" style="list-style: none">
-                <a class="nav-link" href="#">
+              <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
+                <a class="nav-link" href="{% url 'misdatos' %}">
                   <span data-feather="file"></span>
                   Mis datos
                 </a>
               </li>
-              {% ifequal user.validar "Inicial" %}
-              <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'completardatos' %}">
-                    <span data-feather="home"></span>
-                    Completa tus datos
-                  </a>
-                </li>
-              {% endifequal %}
-              {% ifequal user.validar "Complete" %}
-              <li class="nav-item" style="list-style: none"> 
-                  <a class="nav-link active" href="{% url 'solicitudVendedor' %}">
-                    <span data-feather="home"></span>
-                    ¿Deseas ser vendedor?
-                  </a>
-                </li>
-              {% endifequal %}
-              <li class="nav-item" id="config-li2" style="list-style: none">
+              <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
                 <a class="nav-link" href="#">
                   <span data-feather="file"></span>
-                  Seguridad
-                </a>
-              </li>
-              <li class="nav-item" id="config-li3" style="list-style: none">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  E-mail
-                </a>
-              </li>
-              <li class="nav-item" id="config-li4"  style="list-style: none">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Tienda
+                  Direcciones
                 </a>
               </li>
             </ul>
@@ -287,6 +263,44 @@
 
       </div>
     </nav>
+
+
+    <nav id="navshort" class="d-none mostrar bg-light sidebar" style="display: none !important"  >
+        <div id="navshort1" class="sidebar-sticky">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+                    <span data-feather="home"></span>
+                    <img id="micuenta-short" src="{% static 'img/cuenta/icono_perfil1.png' %}"> 
+                </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <span data-feather="home"></span>
+                <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> 
+              </a>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link" id="compra">
+                <span data-feather="file"></span>
+                <img src="{% static 'img/cuenta/icono_compras1.png' %}">
+              </div>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" href="#">
+                <span data-feather="shopping-cart"></span>
+                <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> 
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="users"></span>
+                <img src="{% static 'img/cuenta/icono_conf1.png' %}"> 
+              </a>
+            </li>
+          </ul>
+  
+        </div>
+      </nav>
+
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
@@ -308,6 +322,16 @@
       
         <script>
           $(document).ready(function(){
+            $("#micuenta-short").click(function(){
+              $("#navlarga").show();
+              $("#navlarga").addClass("d-md-block");
+              $("#navshort").removeClass("mostrar");
+            });
+            $("#micuenta-2").click(function(){
+              $("#navshort").show();
+              $("#navlarga").removeClass("d-md-block");
+              $("#navshort").addClass("mostrar");
+            });
             $("#compra-subir").click(function(){
               $("#compra-li1").hide();
               $("#compra-li2").hide();

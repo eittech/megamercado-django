@@ -1,6 +1,14 @@
 from django import forms
 from .models import Customer
 from django.contrib.auth.forms import UserCreationForm
+from django_registration.forms import RegistrationForm
+
+
+class MyCustomUserForm(RegistrationForm):
+    class Meta(RegistrationForm.Meta):
+        model = Customer
+        fields = ( 'username','first_name','last_name', 'email')
+
 
 
 class ImageFileUploadForm(forms.ModelForm):
@@ -33,7 +41,7 @@ class MisDatosCreationForm(forms.ModelForm):
             el formulario
         '''
         model = Customer
-        fields = ['alias','dni_type','dni', 'gender','firts_date', 'website']
+        fields = ['firts_date','gender','dni_type','dni', 'image', 'phone']
 
 class SolicitudVendedorCreationForm(forms.ModelForm):
     '''

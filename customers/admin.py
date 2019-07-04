@@ -5,7 +5,7 @@ from customers.models import *
 
 class CustomerAdmin(admin.ModelAdmin):
     search_fields=['validar']
-    list_display = ['username', 'alias', 'dni_type','image','dni','gender','firts_date','validar','website','tipo','rol']
+    list_display = ['username', 'email','dni_type','image','dni','gender','firts_date','validar','phone','tipo']
 
 admin.site.register(Customer, CustomerAdmin)
 

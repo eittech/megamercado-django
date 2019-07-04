@@ -2,11 +2,13 @@ from django.urls import path, re_path
 from . import views
 from products.views import *
 from customers.views import *
+from customers.forms import *
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
 from systems.sitemaps import *
 from products.sitemaps import *
-
+from django.conf.urls import include, url
+from django_registration.backends.activation.views import RegistrationView
 
 sitemaps= {
     'pages' : BasicSitemap(['home_view','quienes-somos','contactanos',
@@ -28,11 +30,24 @@ urlpatterns = [
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
     path('cuenta/', views.cuenta, name='cuenta'),
-    path('cuenta/completarmisdatos/', datos ,name='completardatos'),
+    path('cuenta/misdatos/', misdatos, name='misdatos'),
+    path('cuenta/misdatos/verificarIdentidad', verificar_identidad ,name='verificar_identidad'),
     path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
-    path('registro/', registro.as_view(), name="registrando"),
+    #path('registro/', registro.as_view(), name="registrando"),
     path('logout/', views.cerrar_sesion, name="cerrar_sesion"),
+
+    url(r'^register/$',
+        RegistrationView.as_view(
+            form_class=MyCustomUserForm
+        ),
+        name='registrando',
+    ),
+    url(r'^accounts/',
+        include('django_registration.backends.activation.urls')
+    ),
+
+
     #path('login/', views.Login.as_view(), name='login'),
     #test mobile
     path('index.html', views.index_mobile, name='mobile'),
