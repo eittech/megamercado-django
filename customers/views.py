@@ -35,16 +35,20 @@ def verificar_identidad(request):
     form = MisDatosCreationForm(request.POST)
     if request.method=="POST":
         usuario=Customer.objects.get(username=request.user.username)
-        usuario.dni_type=form['dni_type'].value()
-        usuario.dni=form['dni'].value()
-        usuario.gender=form['gender'].value()
-        usuario.firts_date=form['firts_date'].value()
-        usuario.image=request.FILES['image']
-        usuario.phone=form['phone'].value()
-        usuario.validar="PorValidar"
-        usuario.save()
-        print(request.user.validar)
-        return HttpResponseRedirect(reverse('misdatos'))
+        if form.is_valid():
+            #print(form.cleaned_data['firts_date'])
+            usuario.dni_type=form['dni_type'].value()
+            usuario.dni=form['dni'].value()
+            usuario.gender=form['gender'].value()
+            
+            #usuario.firts_date=form['firts_date'].value()
+            usuario.firts_date=form.cleaned_data['firts_date']
+            usuario.image=request.FILES['image']
+            usuario.phone=form['phone'].value()
+            usuario.validar="PorValidar"
+            usuario.save()
+            print(request.user.validar)
+            return HttpResponseRedirect(reverse('misdatos'))
     return render(request, 
     "Cuenta/verificarIdentidad.html",
     {'form': form })

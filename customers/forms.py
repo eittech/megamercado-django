@@ -2,7 +2,7 @@ from django import forms
 from .models import Customer
 from django.contrib.auth.forms import UserCreationForm
 from django_registration.forms import RegistrationForm
-
+from comparagrow import settings
 
 class MyCustomUserForm(RegistrationForm):
     class Meta(RegistrationForm.Meta):
@@ -35,6 +35,7 @@ class MisDatosCreationForm(forms.ModelForm):
         Aqui se implementa el formulario para la creacion
         de nuevos usuarios del sistema
     '''
+    firts_date=forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     class Meta:
         '''
             Aqui se especifica que datos se tienen que incluir en

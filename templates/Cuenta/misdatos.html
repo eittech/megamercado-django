@@ -338,7 +338,7 @@
                 <h5 class="menucuentauso">¿Deseas ser vendedor?</h5>
                 <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
                 <br>
-                <a href="{% url 'verificar_identidad' %}"> <button class="white" style="margin-left: 50px; background-color: #1604FE">  Verifica tu identidad</button></a>
+                <a href="{% url 'verificar_identidad' %}"> <button class="white" style="border-color: #1604FE; margin-left: 50px; background-color: #1604FE">  Verifica tu identidad</button></a>
                 {% endifequal %}
                 {% ifequal user.validar "PorValidar" %}
                 <img style="margin-left: 100px;"  src="{% static 'img/cuenta/icono_compras1.png' %}">
@@ -349,7 +349,7 @@
                 <img style="margin-left: 60px;" src="{% static 'img/cuenta/icono_compras1.png' %}">
                 <p class="mb-0">Tus datos son incorrectos.</p>
                 <br>
-                <a href="{% url 'verificar_identidad' %}"> <button class="white" style="background-color: #1604FE">  Verifica tu identidad</button></a>
+                <a href="{% url 'verificar_identidad' %}"> <button class="white" style="border-color: #1604FE; background-color: #1604FE">  Verifica tu identidad</button></a>
                 {% endifequal %}
                 {% ifequal user.validar "Validado" %}
                 <img style="margin-left: 40px;" src="{% static 'img/cuenta/icono_compras1.png' %}">

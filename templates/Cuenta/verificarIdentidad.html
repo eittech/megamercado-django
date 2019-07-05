@@ -307,13 +307,13 @@
         
               <div class="p-4 mb-3 bg-light rounded">
                 <div class="margen">
-                  <h4 class="menucuentauso">Verifica tu identidad</h4>
+                  <h4 class="menucuentauso"> Verifica tu identidad</h4>
                   <br>
                   <h6 class="margen">Completa la siguiente información </h6>
                   <br>
                   <form method="post" enctype="multipart/form-data">
                       {% csrf_token %}
-                      <p><label class="margen" for="id_firts_date" style="width: 160px;">Fecha de Nacimiento</label> <input class="form-c mr-sm-2" type="text" name="firts_date" id="id_firts_date" required></p>
+                      <p><label class="margen" for="id_firts_date" style="width: 160px;">Fecha de Nacimiento</label> <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="firts_date" id="id_firts_date" required></p>
                       <p><label class="margen" for="id_gender" style="width: 60px;">Género</label> <select name="gender" id="id_gender" required>
                           <option value="" selected>---------</option>
                         
