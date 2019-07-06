@@ -2,6 +2,7 @@ from django.urls import path, re_path
 from . import views
 from products.views import *
 from customers.views import *
+from locations.views import *
 from customers.forms import *
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
@@ -32,7 +33,14 @@ urlpatterns = [
     path('cuenta/', views.cuenta, name='cuenta'),
     path('cuenta/misdatos/', misdatos, name='misdatos'),
     path('cuenta/misdatos/verificarIdentidad', verificar_identidad ,name='verificar_identidad'),
-    path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
+    path('cuenta/direcciones/', direcciones, name='direcciones'),
+    path('cuenta/direcciones/add/', direcciones_add, name='direcciones_add'),
+    path('cuenta/direcciones/edit/<int:pk>/', direcciones_update, name='direcciones_edit'),
+    path('cuenta/direcciones/<int:pk>/', direcciones_eliminar, name='direcciones_eliminar'),
+    path('cuenta/direcciones/pre/<int:pk>/', direcciones_predeterminado, name='direcciones_predeterminado'),
+    path('cuenta/direcciones/qpre/<int:pk>/', direcciones_quitar_predeterminado, name='direcciones_quitar_predeterminado'),
+
+    #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
     #path('registro/', registro.as_view(), name="registrando"),
     path('logout/', views.cerrar_sesion, name="cerrar_sesion"),

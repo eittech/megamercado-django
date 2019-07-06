@@ -245,18 +245,18 @@
                     <img src="{% static 'img/cuenta/icono_conf2.png' %}"> Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
                   </a>
                   <ul>
-                    <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
-                      <a class="nav-link menucuentauso" href="#">
-                        <span data-feather="file"></span>
-                        Mis datos
-                      </a>
-                    </li>
-                    <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                      <a class="nav-link" href="#">
-                        <span data-feather="file"></span>
-                        Direcciones
-                      </a>
-                    </li>
+                      <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
+                          <a class="nav-link menucuentauso" href="{% url 'misdatos' %}">
+                            <span data-feather="file"></span>
+                            Mis datos
+                          </a>
+                        </li>
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link" href="{% url 'direcciones' %}">
+                            <span data-feather="file"></span>
+                            Direcciones
+                          </a>
+                        </li>
                   </ul>
                 </li>
             </ul>

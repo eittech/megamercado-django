@@ -66,3 +66,16 @@ class AddressForm(forms.ModelForm):
         '''
         model = Address
         fields = '__all__'
+
+class DireccionForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos Address
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Address
+        fields = ['address1','address2','postcode','id_country','id_state','city','company','firstname','lastname','phone', 'phone_mobile', 'predeterminado']
