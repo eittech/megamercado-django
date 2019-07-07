@@ -23,6 +23,9 @@ from django.contrib.auth.decorators import login_required
 
 from django.db.models.functions import Substr
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
 # from django import template
 #
 # register = template.Library()
@@ -81,12 +84,53 @@ def listadoOrdenMayor(request, id_category):
         product = paginator.page(paginator.num_pages)
     return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
+def tiendas(request):
+    tiendas= Shop.objects.filter(owner=request.user, deleted=False)
+    return render(request, 
+    "Cuenta/Tienda/tiendas.html",
+    {'tiendas':tiendas})
+
+def tiendas_add(request):
+    form= TiendaForm(request.POST)
+    if request.method=="POST":
+        print("hey")
+        name = form['name'].value()
+        logo =  request.FILES['logo']
+        ti= Shop.objects.create(owner = request.user,
+            name =  name,
+            logo =  logo,
+            validar = "PorValidar")
+        print(ti)
+        ti.save()
+        return HttpResponseRedirect(reverse('tiendas'))
+    return render(request, 
+    "Cuenta/Tienda/tiendasadd.html",
+    {'form':form })
+
+def tiendas_update(request, pk): 
+    shop= Shop.objects.get(id_shop=pk)
+    form= TiendaForm(request.POST)
+    if request.method=="POST":
+        print("hey")
+        print(request.POST)
+        obj=Shop.objects.get(id_shop=pk)
+        obj.name = form['name'].value()
+        try:
+            obj.logo =  request.FILES['logo']
+        except:
+            pass
+        obj.save()
+        return HttpResponseRedirect(reverse('tiendas'))
+    return render(request, 
+    "Cuenta/Tienda/tiendasedit.html",
+    {'form':form, 'shop':shop })
+
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]
     print(productos)
     return render(request, "comparagrow/listado.html",{'productos':productos})
-'''
+
 
 def search(request):
     if request.GET.get('q'):
@@ -238,7 +282,7 @@ def search(request):
     'brand_list_selected':brand_list_selected,
     'shop_list_selected':shop_list_selected,
     'order_by':order_by})
-
+'''
 
 class GigsList(generic.ListView):
     paginate_by = 4

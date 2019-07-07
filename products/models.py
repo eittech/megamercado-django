@@ -56,14 +56,22 @@ class Category(models.Model):
 
 
 class Shop(models.Model):
+    VALIDAR_LIST = (
+        ('Inicial','Inicial'),
+        ('PorValidar','PorValidar'),
+        ('Validado','Validado'),
+        ('Rechazado','Rechazado')
+    )
     id_shop = models.AutoField(primary_key=True)
-    id_shop_group = models.ForeignKey(ShopGroup, on_delete=models.CASCADE)
-    id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
+    #id_shop_group = models.ForeignKey(ShopGroup, on_delete=models.CASCADE)
+    #id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
     owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, blank=False)
+    logo = models.ImageField(upload_to="assets/shops/",blank=True,null=True)
+    validar = models.CharField(verbose_name="status_shop",max_length=11,choices=VALIDAR_LIST,blank=True,null=True, default="Inicial")
     active = models.BooleanField(blank=True, default=False)
     deleted = models.BooleanField(blank=True, default=False)
-    virtual_url = models.URLField(max_length=250,blank=True)
+    #virtual_url = models.URLField(max_length=250,blank=True)
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)

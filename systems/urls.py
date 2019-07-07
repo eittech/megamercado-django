@@ -39,6 +39,10 @@ urlpatterns = [
     path('cuenta/direcciones/<int:pk>/', direcciones_eliminar, name='direcciones_eliminar'),
     path('cuenta/direcciones/pre/<int:pk>/', direcciones_predeterminado, name='direcciones_predeterminado'),
     path('cuenta/direcciones/qpre/<int:pk>/', direcciones_quitar_predeterminado, name='direcciones_quitar_predeterminado'),
+    path('cuenta/tiendas/', tiendas, name='tiendas'),
+    path('cuenta/tiendas/add/', tiendas_add, name='tiendas_add'),
+    path('cuenta/tiendas/edit/<int:pk>/', tiendas_update, name='tiendas_edit'),
+
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),

@@ -48,10 +48,9 @@ class ProductAttributeImageInline(admin.TabularInline):
 
 class ShopGroupAdmin(admin.ModelAdmin):
 	list_display = ['id_shop_group', 'name','share_order','share_stock','active','deleted']
-	inlines=[ShopInline,]
 
 class ShopAdmin(admin.ModelAdmin):
-	list_display = ['id_shop', 'id_shop_group', 'name', 'active', 'deleted','virtual_url']
+	list_display = ['id_shop', 'name', 'logo','active', 'deleted']
 
 class GroupsAdmin(admin.ModelAdmin):
 	list_display = ['id_group', 'name', 'reduction','price_display_method','show_prices','date_add', 'date_upd']

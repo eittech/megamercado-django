@@ -245,11 +245,19 @@
                           </a>
                         </li>
                         <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                          <a class="nav-link menucuentauso" href="{% url 'direcciones' %}">
+                          <a class="nav-link" href="{% url 'direcciones' %}">
                             <span data-feather="file"></span>
                             Direcciones
                           </a>
                         </li>
+                        {% ifequal user.validar "Validado" %}
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link menucuentauso" href="{% url 'tiendas' %}">
+                            <span data-feather="file"></span>
+                            Tiendas
+                          </a>
+                        </li>
+                        {% endifequal %}
                   </ul>
                 </li>
             </ul>
@@ -299,32 +307,22 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-      <h2 style="margin-left:5%" >Direcciones</h2>
+      <h2 style="margin-left:5%" >Tiendas        
+  </h2>
 	 <br>
   			<div style="margin-left:5%" >
 	<div class="row">
-    {% for i in direcciones %}
+    {% for i in tiendas %}
     	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
 	  		<div class="card" style="width: 300px;">
          		<div class="card-body">
-           			<h5 class="card-title">{{i.firstname}} {{i.lastname}}</h5>
-           			<h6 class="card-subtitle mb-2 text-muted">{{i.company}}</h6>
-		   			<p class="h6">{{i.address1}} {{i.address2}}</p>
-		   			<p class="h6">{{i.city}},{{i.id_state}},{{i.postcode}}</p>
-		   			<p class="h6">{{i.id_country}}</p>
-             <p class="h6">{{i.phone}}</p>
-            {% if i.predeterminado %}
-            Es el predeterminado
-            {% endif %}
-		   			<br>
+                 <h5 class="card-title">{{i.name}}</h5>
+                 <img src="{{i.logo.url}}" style="width: 250px; height: auto">
+             <br>
+             <br>
 			 		<div style="margin-left:0%">
-           				<a href="{% url 'direcciones_edit' i.id_address %}" class="card-link">Editar</a>
-                   <a href="{% url 'direcciones_eliminar' i.id_address %}" class="card-link">Eliminar</a>
-                   {% if i.predeterminado %}
-                   <a href="{% url 'direcciones_quitar_predeterminado' i.id_address %}" class="card-link">X predeterminado</a>
-                   {%else %}
-                   <a href="{% url 'direcciones_predeterminado' i.id_address %}" class="card-link">Predeterminado</a>
-                   {% endif %}
+           				<a href="{% url 'tiendas_edit' i.id_shop %}" class="card-link">Editar</a>
+                   <a href="#" class="card-link">Detalles</a>
          			</div>
 			 	</div>
       		 </div>
@@ -334,10 +332,10 @@
         <div class="card" style="width: 200px; height: 248px">
              <div class="card-body">
               
-            <a href="{% url 'direcciones_add' %}">
+            <a href="{% url 'tiendas_add' %}">
              <img style="margin-left:30px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
           </a><br><br>
-              <h6 style="margin-left:20px; margin-top:15px">Agregar dirección</h6>
+              <h6 style="margin-left:20px; margin-top:15px">Agregar tienda</h6>
               
          </div>
       </div>

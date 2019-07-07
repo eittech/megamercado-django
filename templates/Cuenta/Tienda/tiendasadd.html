@@ -245,11 +245,19 @@
                           </a>
                         </li>
                         <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                          <a class="nav-link menucuentauso" href="{% url 'direcciones' %}">
+                          <a class="nav-link" href="{% url 'direcciones' %}">
                             <span data-feather="file"></span>
                             Direcciones
                           </a>
                         </li>
+                        {% ifequal user.validar "Validado" %}
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link menucuentauso" href="{% url 'tiendas' %}">
+                            <span data-feather="file"></span>
+                            Tiendas
+                          </a>
+                        </li>
+                        {% endifequal %}
                   </ul>
                 </li>
             </ul>
@@ -295,61 +303,33 @@
           </nav>
 
 
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-
-      <h2 style="margin-left:5%" >Direcciones</h2>
-	 <br>
-  			<div style="margin-left:5%" >
-	<div class="row">
-    {% for i in direcciones %}
-    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 300px;">
-         		<div class="card-body">
-           			<h5 class="card-title">{{i.firstname}} {{i.lastname}}</h5>
-           			<h6 class="card-subtitle mb-2 text-muted">{{i.company}}</h6>
-		   			<p class="h6">{{i.address1}} {{i.address2}}</p>
-		   			<p class="h6">{{i.city}},{{i.id_state}},{{i.postcode}}</p>
-		   			<p class="h6">{{i.id_country}}</p>
-             <p class="h6">{{i.phone}}</p>
-            {% if i.predeterminado %}
-            Es el predeterminado
-            {% endif %}
-		   			<br>
-			 		<div style="margin-left:0%">
-           				<a href="{% url 'direcciones_edit' i.id_address %}" class="card-link">Editar</a>
-                   <a href="{% url 'direcciones_eliminar' i.id_address %}" class="card-link">Eliminar</a>
-                   {% if i.predeterminado %}
-                   <a href="{% url 'direcciones_quitar_predeterminado' i.id_address %}" class="card-link">X predeterminado</a>
-                   {%else %}
-                   <a href="{% url 'direcciones_predeterminado' i.id_address %}" class="card-link">Predeterminado</a>
-                   {% endif %}
-         			</div>
-			 	</div>
-      		 </div>
-     </div>
-     {% endfor %}
-     <div style="margin-left:1%" class="col-sm">
-        <div class="card" style="width: 200px; height: 248px">
-             <div class="card-body">
+            <h2 style="margin-left:5%" >Tienda</h2>
+         <br>
+         <form method="POST" enctype="multipart/form-data" >
+          {% csrf_token %}
+             <div style="margin-left:3.8%" class="col-md-3 mb-3">
+                  <label for="id_name">Nombre o razón social</label>
+                  <input  type="text" name="name" id="id_name" required maxlength="64" class="form-control">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+             </div>
               
-            <a href="{% url 'direcciones_add' %}">
-             <img style="margin-left:30px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
-          </a><br><br>
-              <h6 style="margin-left:20px; margin-top:15px">Agregar dirección</h6>
-              
-         </div>
-      </div>
-    </div>
-
-   </div> <!-- row  -->
-				</div>
-
-	
-
-		
-    </main>
+           <div style="margin-left:3.8%" class="col-md-3 mb-3">
+                  <label for="id_logo">Logo</label>
+             <br> <br>
+             <input type="file" name="logo" id="id_logo"  accept="image/*" required>
+             </div>
+              <br>
+          <div style="margin-left:3.8%" class="col-md-3 mb-3">
+          <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+            
+          </form>
+          </main>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,6 +1,19 @@
 from django import forms
 from .models import *
 
+class TiendaForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos shop groups
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Shop
+        fields = ['name', 'logo']
+
 class ViForm(forms.ModelForm):
     '''
         Aqui se implementa el formulario para la creacion
