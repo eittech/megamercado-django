@@ -21,6 +21,8 @@ def direcciones_add(request):
     estados=State.objects.all()
     if request.method=="POST":
         print("hey")
+        if form.is_valid():
+            print("valido")
         id_country =Country.objects.get(id_country=form['id_country'].value())
         id_state =State.objects.get(id_state=form['id_state'].value())
         company = form['company'].value()
@@ -33,6 +35,12 @@ def direcciones_add(request):
         phone =  form['phone'].value()
         phone_mobile =  form['phone_mobile'].value()
         predeterminado = form['predeterminado'].value()
+
+        if predeterminado==True:
+            pre=Address.objects.filter(predeterminado=True)
+            for i in pre:
+                i.predeterminado=False
+                i.save()
 
         dire= Address.objects.create(id_country =id_country, 
             id_state =id_state,
@@ -50,7 +58,10 @@ def direcciones_add(request):
             date_upd= timezone.now(),
             predeterminado= predeterminado)
         print(dire)
-        dire.save()
+        try:
+            dire.save()
+        except:
+            pass
         return HttpResponseRedirect(reverse('direcciones'))
     return render(request, 
     "Cuenta/Direcciones/direccionesform.html",
@@ -78,8 +89,16 @@ def direcciones_update(request, pk):
         obj.city =  form['city'].value()
         obj.phone =  form['phone'].value()
         obj.phone_mobile =  form['phone_mobile'].value()
+        if form['predeterminado'].value()==True:
+            pre=Address.objects.filter(predeterminado=True)
+            for i in pre:
+                i.predeterminado=False
+                i.save()
         obj.predeterminado = form['predeterminado'].value()
-        obj.save()
+        try:
+            obj.save()
+        except:
+            pass
         return HttpResponseRedirect(reverse('direcciones'))
     return render(request, 
     "Cuenta/Direcciones/direccionesedit.html",
@@ -92,6 +111,10 @@ def direcciones_eliminar(request, pk):
     return HttpResponseRedirect(reverse('direcciones'))
 
 def direcciones_predeterminado(request, pk):
+    pre=Address.objects.filter(predeterminado=True)
+    for i in pre:
+        i.predeterminado=False
+        i.save()
     dire= Address.objects.get(id_address=pk)
     dire.predeterminado=True
     dire.save()

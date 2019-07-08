@@ -303,6 +303,18 @@
 	 <br>
   			<div style="margin-left:5%" >
 	<div class="row">
+      <div style="margin-left:1%" class="col-sm">
+          <div class="card" style="width: 200px; height: 248px">
+               <div class="card-body">
+                
+              <a href="{% url 'direcciones_add' %}">
+               <img style="margin-left:30px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
+            </a><br><br>
+                <h6 style="margin-left:20px; margin-top:15px">Agregar dirección</h6>
+                
+           </div>
+        </div>
+      </div>
     {% for i in direcciones %}
     	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
 	  		<div class="card" style="width: 300px;">
@@ -314,34 +326,20 @@
 		   			<p class="h6">{{i.id_country}}</p>
              <p class="h6">{{i.phone}}</p>
             {% if i.predeterminado %}
-            Es el predeterminado
+            Es el predeterminado.
             {% endif %}
 		   			<br>
 			 		<div style="margin-left:0%">
            				<a href="{% url 'direcciones_edit' i.id_address %}" class="card-link">Editar</a>
                    <a href="{% url 'direcciones_eliminar' i.id_address %}" class="card-link">Eliminar</a>
-                   {% if i.predeterminado %}
-                   <a href="{% url 'direcciones_quitar_predeterminado' i.id_address %}" class="card-link">X predeterminado</a>
-                   {%else %}
+                   {% ifequal i.predeterminado False %}
                    <a href="{% url 'direcciones_predeterminado' i.id_address %}" class="card-link">Predeterminado</a>
-                   {% endif %}
+                   {% endifequal %}
          			</div>
 			 	</div>
       		 </div>
      </div>
      {% endfor %}
-     <div style="margin-left:1%" class="col-sm">
-        <div class="card" style="width: 200px; height: 248px">
-             <div class="card-body">
-              
-            <a href="{% url 'direcciones_add' %}">
-             <img style="margin-left:30px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
-          </a><br><br>
-              <h6 style="margin-left:20px; margin-top:15px">Agregar dirección</h6>
-              
-         </div>
-      </div>
-    </div>
 
    </div> <!-- row  -->
 				</div>
