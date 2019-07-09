@@ -74,7 +74,8 @@ INSTALLED_APPS = [
     'products',
     'blog',
     'locations',
-    'Orders'
+    'Orders',
+    'currency'
 
 ]
 
@@ -115,6 +116,10 @@ TEMPLATES = [
 GOOGLE_MAPS_API_KEY = 'SAMPLE_KEY'
 WSGI_APPLICATION = 'comparagrow.wsgi.application'
 
+
+
+
+EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -205,6 +210,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = [
+    ("%d/%m/%Y"),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -242,3 +250,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'R0E6_UipW7yy8jiduCYifY99'
 LOGIN_URL='login/'
 LOGIN_REDIRECT_URL = 'cuenta/'
 LOGOUT_REDIRECT_URL = ''
+
+#Para el registro de los usuarios 
+ACCOUNT_ACTIVATION_DAYS= 1
+REGISTRATION_OPEN=True
