@@ -370,7 +370,7 @@
               <td>{{ j.id_currency.name }}</td>
               <td>{{ j.rate_moneda}} {{j.id_currency.sign}}= {{j.rate_referencia}} {{ref.id_currency.sign}}</td>
               <td><a href="{% url 'currencyshop_edit' tienda.id_shop j.id_currency.id_currency %}">edit</a></td>
-              <td><a href="">Eliminar</a></td>
+              <td><a href="{% url 'currencyshop_eliminar' tienda.id_shop j.id_currency.id_currency %}">Eliminar</a></td>
               <td> {% for c in cuenta %}
                     {% ifequal c.id_account.id_currency j.id_currency %}
                     {{c.id_account.name}}, {{c.id_account.persona}}

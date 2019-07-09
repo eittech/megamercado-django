@@ -19,9 +19,10 @@ def currencyshop_add(request,pk):
             mo=Currency.objects.get(id_currency=form['id_currency'].value())
             rate_moneda=form['rate_moneda'].value()
             rate_referencia=form['rate_referencia'].value()
-            cs=CurrencyShop.objects.create(id_currency=mo, id_shop=tienda, rate_moneda=rate_moneda, rate_referencia=rate_referencia)
             try:
-                cs.save()
+                if rate_moneda=="1" or rate_referencia=="1":
+                    cs=CurrencyShop.objects.create(id_currency=mo, id_shop=tienda, rate_moneda=rate_moneda, rate_referencia=rate_referencia)
+                    cs.save()
             except:
                 pass
         url = reverse('tiendas_detail', kwargs={'pk': pk})
@@ -44,7 +45,8 @@ def currencyshop_edit(request,pk, id_currency):
         actual.rate_referencia=float((form['rate_referencia'].value()).replace(",", "."))
         actual.id_currency=mo
         try:
-            actual.save()
+            if actual.rate_moneda==1 or actual.rate_referencia==1:
+                actual.save()
         except:
             pass
         url = reverse('tiendas_detail', kwargs={'pk': pk})
@@ -57,6 +59,7 @@ def currencyshop_eliminar(request,pk, id_currency):
     form=CurrencyShopForm(request.POST)
     tienda=Shop.objects.get(id_shop=pk)
     moneda=Currency.objects.get(id_currency=id_currency)
+    print(CurrencyShop.objects.get(id_shop=tienda, id_currency=moneda))
     actual=CurrencyShop.objects.get(id_shop=tienda, id_currency=moneda).delete()
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)

@@ -49,6 +49,7 @@ urlpatterns = [
     path('cuenta/tiendas/nomp/<int:pk>/', tiendas_mref_nopublish, name='tiendas_mref_nopublish'),
     path('cuenta/tiendas/moneda_add/<int:pk>/', currencyshop_add, name='currencyshop_add'),
     path('cuenta/tiendas/moneda_edit/<int:pk>/<id_currency>/', currencyshop_edit, name='currencyshop_edit'),
+    path('cuenta/tiendas/moneda_elim/<int:pk>/<id_currency>/', currencyshop_eliminar, name='currencyshop_eliminar'),
     path('cuenta/tiendas/cuenta_add/<int:pk>/<id_currency>/', accountshop_add, name='accountshop_add'),
     path('cuenta/tiendas/cuenta_edit/<int:pk>/<id_account>/', accountshop_edit, name='accountshop_edit'),
     path('cuenta/tiendas/cuenta_elim/<int:pk>/<id_account>/', accountshop_eliminar, name='accountshop_eliminar'),

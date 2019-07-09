@@ -133,9 +133,11 @@ def tiendas_detail(request, pk):
     try: 
         ref=CurrencyRef.objects.get(id_shop=pk)
         money=CurrencyShop.objects.filter(id_shop=pk)
+        print(money)
     except:
         ref=None
         money=CurrencyShop.objects.filter(id_shop=pk)
+        print(money)
     
     return render(request, 
     "Cuenta/Tienda/tiendas_detail.html",
