@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 from . import views
 from products.views import *
+from currency.views import *
 from customers.views import *
 from locations.views import *
 from customers.forms import *
@@ -42,7 +43,15 @@ urlpatterns = [
     path('cuenta/tiendas/', tiendas, name='tiendas'),
     path('cuenta/tiendas/add/', tiendas_add, name='tiendas_add'),
     path('cuenta/tiendas/edit/<int:pk>/', tiendas_update, name='tiendas_edit'),
-
+    path('cuenta/tiendas/<int:pk>/', tiendas_detail, name='tiendas_detail'),
+    path('cuenta/tiendas/<int:pk>/<id_currency>/', tiendas_mref, name='tiendas_mref'),
+    path('cuenta/tiendas/mp/<int:pk>/', tiendas_mref_publish, name='tiendas_mref_publish'),
+    path('cuenta/tiendas/nomp/<int:pk>/', tiendas_mref_nopublish, name='tiendas_mref_nopublish'),
+    path('cuenta/tiendas/moneda_add/<int:pk>/', currencyshop_add, name='currencyshop_add'),
+    path('cuenta/tiendas/moneda_edit/<int:pk>/<id_currency>/', currencyshop_edit, name='currencyshop_edit'),
+    path('cuenta/tiendas/cuenta_add/<int:pk>/<id_currency>/', accountshop_add, name='accountshop_add'),
+    path('cuenta/tiendas/cuenta_edit/<int:pk>/<id_account>/', accountshop_edit, name='accountshop_edit'),
+    path('cuenta/tiendas/cuenta_elim/<int:pk>/<id_account>/', accountshop_eliminar, name='accountshop_eliminar'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),

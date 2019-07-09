@@ -307,42 +307,91 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-      <h2 style="margin-left:5%" >Tiendas        
+      <h2 style="margin-left:5%" ><img src="{{tienda.logo.url}}" style="width: 200px; height: auto" > Detalles de la Tienda {{tienda.name}}        
   </h2>
-	 <br>
+   <br>
+   {% ifequal ref None %}
+   <h4 style="margin-left:5%" >Selecciona la moneda de referencia:        
+  </h4>
   			<div style="margin-left:5%" >
 	<div class="row">
-      <div style="margin-left:1%;flex-grow: 0 !important;" class="col-sm">
-          <div class="card" style="width: 300px; height: 248px">
-               <div class="card-body">
-                
-              <a href="{% url 'tiendas_add' %}">
-               <img style="margin-left:75px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
-            </a><br><br>
-                <h6 style="margin-left:65px; margin-top:15px">Agregar tienda</h6>
-                
-           </div>
-        </div>
-      </div>
-    {% for i in tiendas %}
+    {% for i in monedas %}
     	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 300px;">
+	  		<div class="card" style="width: 200px;">
          		<div class="card-body">
-                 <h5 class="card-title">{{i.name}}</h5>
-                 <img src="{{i.logo.url}}" style="width: 250px; height: auto">
+                 <a href="{% url 'tiendas_mref' tienda.id_shop i.id_currency %}">
+                 <img src="{{i.icono.url}}" style="width: 160px; height: auto">
+                 </a>
              <br>
-             <br>
-			 		<div style="margin-left:0%">
-                   <a href="{% url 'tiendas_detail' i.id_shop %}" class="card-link">Detalles</a>
-         			</div>
 			 	</div>
       		 </div>
      </div>
      {% endfor %}
-
-
+     </div>
+    {%else %}
+   <h4 style="margin-left:5%" >Moneda referente:        
+  </h4>
+  			<div style="margin-left:5%" >
+	<div class="row">
+    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
+	  		<div class="card" style="width: 120px;">
+         		<div class="card-body">
+                 <img src="{{ref.id_currency.icono.url}}" style="width: 80px; height: auto">
+             <br>
+			 	</div>
+      		 </div>
+          </div>
    </div> <!-- row  -->
-				</div>
+   {% endifequal %}
+   <br>
+   {% ifequal ref.pregunta False %}
+   <h6>¿Deseas publicar en esta moneda? <a href="{% url 'tiendas_mref_publish' tienda.id_shop %}"> Sí</a> <a href="{% url 'tiendas_mref_nopublish' tienda.id_shop %}"> No</a>  </h6>
+   {% endifequal %}
+   <h4> Monedas <a href="{% url 'currencyshop_add' tienda.id_shop %}">
+    <img  src="{% static 'img/icono_add.png' %}" style="width: 30px; height: 30px">
+ </a></h4>
+     <br>
+     <br>
+     <div class="table-responsive">
+      <table class="table table-striped table-sm">
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Rate</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+              <th>Cuentas</th>
+              <th>Añadir cuenta</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for j in money %}
+          <tr>
+              <td>{{ j.id_currency.name }}</td>
+              <td>{{ j.rate_moneda}} {{j.id_currency.sign}}= {{j.rate_referencia}} {{ref.id_currency.sign}}</td>
+              <td><a href="{% url 'currencyshop_edit' tienda.id_shop j.id_currency.id_currency %}">edit</a></td>
+              <td><a href="">Eliminar</a></td>
+              <td> {% for c in cuenta %}
+                    {% ifequal c.id_account.id_currency j.id_currency %}
+                    {{c.id_account.name}}, {{c.id_account.persona}}
+                    <br>
+                    {{c.id_account.tipo}}, 
+                    {{c.id_account.number}}
+                    <a href="{% url 'accountshop_edit' tienda.id_shop c.id_account.id_account %}">editar</a>
+                    <a href="{% url 'accountshop_eliminar' tienda.id_shop c.id_account.id_account %}">eliminar</a>
+                    <br>
+                    {% endifequal %}
+                    {% endfor %}
+              </td>
+              <td> <a href="{%url 'accountshop_add' tienda.id_shop j.id_currency %}"> Add</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+     <br>
+
+  </div>
 
 	
 

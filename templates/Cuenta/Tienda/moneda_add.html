@@ -303,51 +303,52 @@
           </nav>
 
 
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-
-      <h2 style="margin-left:5%" >Tiendas        
-  </h2>
-	 <br>
-  			<div style="margin-left:5%" >
-	<div class="row">
-      <div style="margin-left:1%;flex-grow: 0 !important;" class="col-sm">
-          <div class="card" style="width: 300px; height: 248px">
-               <div class="card-body">
+            <h2 style="margin-left:5%" >Tienda</h2>
+         <br>
+         <form method="POST" enctype="multipart/form-data" >
+          {% csrf_token %}
+          <div style="margin-left:3.8%" class="col-md-3 mb-3">
+              <label for="id_id_currency">Moneda</label>
+              <select class="custom-select d-block w-100" name="id_currency" required id="id_id_currency">
+                <option value="">Choose...</option>
+                {%for i in moneda %}
+                <option value={{i.id_currency}}>{{i.name}}</option>
+                {% endfor %}
+              </select>
+           <div class="invalid-feedback">
+                Please select a valid country.
+           </div> 
+       </div>
+             <div style="margin-left:3.8%" class="col-md-6 mb-3">
+                  <label for="id_name">Rate entre la moneda y la moneda referente</label>
+                  <div class="row">
+                      <div class="col-sm">
+                        <label for="firstName">Moneda seleccionada</label>
+                        <input type="number" name="rate_moneda" step="0.000001" required id="id_rate_moneda" class="form-control">
+                      </div>
+                      <div>
+                        <label>=</label>
+                      </div>
+                      <div class="col-sm">
+                          <label for="lastName">Moneda referente</label>
+                          <input type="number" name="rate_referencia" step="0.000001" required id="id_rate_referencia" class="form-control">
+                        </div>
+                    </div>
+                    <br>
+                    <p> Observación: Para que sea válido tiene que ser 1 en alguna de los dos monedas.</p>
+                </div>
                 
-              <a href="{% url 'tiendas_add' %}">
-               <img style="margin-left:75px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
-            </a><br><br>
-                <h6 style="margin-left:65px; margin-top:15px">Agregar tienda</h6>
-                
-           </div>
-        </div>
-      </div>
-    {% for i in tiendas %}
-    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 300px;">
-         		<div class="card-body">
-                 <h5 class="card-title">{{i.name}}</h5>
-                 <img src="{{i.logo.url}}" style="width: 250px; height: auto">
-             <br>
-             <br>
-			 		<div style="margin-left:0%">
-                   <a href="{% url 'tiendas_detail' i.id_shop %}" class="card-link">Detalles</a>
-         			</div>
-			 	</div>
-      		 </div>
-     </div>
-     {% endfor %}
-
-
-   </div> <!-- row  -->
-				</div>
-
-	
-
-		
-    </main>
+              
+              <br>
+          <div style="margin-left:3.8%" class="col-md-3 mb-3">
+          <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+            
+          </form>
+          </main>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -303,51 +303,56 @@
           </nav>
 
 
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
+            <h2 style="margin-left:5%" >Cuenta</h2>
+         <br>
+         <form method="POST" enctype="multipart/form-data" >
+          {% csrf_token %}
+          <div style="margin-left:3.8%" class="col-md-5 mb-3">
+              <label for="id_name">Nombre de la cuenta</label>
+              <input type="text" name="name" maxlength="30" id="id_name"class="form-control" required>
+            <div class="invalid-feedback">
+                Nombre required.
+            </div>
+         </div>
+         <div style="margin-left:3.8%" class="col-md-3 mb-3">
+            <label for="id_tipo"> Tipo de cuenta</label>
+            <select class="custom-select d-block w-100" name="tipo" id="id_tipo" required>
+                <option value="" selected>Seleccione...</option>
 
-      <h2 style="margin-left:5%" >Tiendas        
-  </h2>
-	 <br>
-  			<div style="margin-left:5%" >
-	<div class="row">
-      <div style="margin-left:1%;flex-grow: 0 !important;" class="col-sm">
-          <div class="card" style="width: 300px; height: 248px">
-               <div class="card-body">
-                
-              <a href="{% url 'tiendas_add' %}">
-               <img style="margin-left:75px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
-            </a><br><br>
-                <h6 style="margin-left:65px; margin-top:15px">Agregar tienda</h6>
-                
-           </div>
+                <option value="Ahorro">Cuenta de Ahorro</option>
+              
+                <option value="Corriente">Cuenta Corriente</option>
+              
+                <option value="Wallet">Wallet</option>
+            </select>
+          <div class="invalid-feedback">
+              Please provide a valid tipo.
+          </div>
+       </div>
+         <div style="margin-left:3.8%" class="col-md-5 mb-3">
+            <label for="id_number">Número de cuenta o wallet</label>
+            <input  type="text" name="number" required maxlength="30" id="id_number" class="form-control" required>
+          <div class="invalid-feedback">
+              Number required.
+          </div>
+       </div>
+       <div style="margin-left:3.8%" class="col-md-5 mb-3">
+          <label for="id_persona" >Nombre del dueño</label>
+          <input type="text" name="persona" required maxlength="30" id="id_persona" class="form-control" required>
+        <div class="invalid-feedback">
+            Dueño required.
         </div>
-      </div>
-    {% for i in tiendas %}
-    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 300px;">
-         		<div class="card-body">
-                 <h5 class="card-title">{{i.name}}</h5>
-                 <img src="{{i.logo.url}}" style="width: 250px; height: auto">
-             <br>
-             <br>
-			 		<div style="margin-left:0%">
-                   <a href="{% url 'tiendas_detail' i.id_shop %}" class="card-link">Detalles</a>
-         			</div>
-			 	</div>
-      		 </div>
      </div>
-     {% endfor %}
 
-
-   </div> <!-- row  -->
-				</div>
-
-	
-
-		
-    </main>
+          <div style="margin-left:3.8%" class="col-md-3 mb-3">
+          <button type="submit" class="btn btn-outline-primary">Guardar</button>
+          </div>
+            
+          </form>
+          </main>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

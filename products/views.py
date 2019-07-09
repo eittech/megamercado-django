@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 import time
 from datetime import datetime
+from currency.models import *
 from products.models import *
 from products.forms import *
 from contracts.models import *
@@ -125,6 +126,45 @@ def tiendas_update(request, pk):
     "Cuenta/Tienda/tiendasedit.html",
     {'form':form, 'shop':shop })
 
+def tiendas_detail(request, pk): 
+    tienda= Shop.objects.get(id_shop=pk)
+    monedas= Currency.objects.filter(active=True)
+    cuenta=AcountShop.objects.filter(id_shop=pk)
+    try: 
+        ref=CurrencyRef.objects.get(id_shop=pk)
+        money=CurrencyShop.objects.filter(id_shop=pk)
+    except:
+        ref=None
+        money=CurrencyShop.objects.filter(id_shop=pk)
+    
+    return render(request, 
+    "Cuenta/Tienda/tiendas_detail.html",
+    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta})
+
+def tiendas_mref(request, pk, id_currency): 
+    tienda= Shop.objects.get(id_shop=pk)
+    moneda= Currency.objects.get(id_currency=id_currency)
+    mref= CurrencyRef.objects.create(id_currency=moneda, id_shop=tienda)
+    mref.save()
+    print("AQUI CREO")
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def tiendas_mref_publish(request, pk): 
+    mref= CurrencyRef.objects.get(id_shop=pk)
+    mref.publish=True
+    mref.pregunta=True
+    mref.save()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def tiendas_mref_nopublish(request, pk): 
+    mref= CurrencyRef.objects.get(id_shop=pk)
+    mref.publish=False
+    mref.pregunta=True
+    mref.save()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]
