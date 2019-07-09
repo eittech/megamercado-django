@@ -297,25 +297,25 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
       <h2 style="margin-left:5%" >Dirección</h2>
-	 <br>
+   <br>
 		<form method="POST" >
         {% csrf_token %}
 	   <div style="margin-left:3.8%" class="col-md-5 mb-3">
           <label for="id_address1">Dirección</label>
-          <input type="text" name="address1" maxlength="128" value={{dire.address1}} id="id_address1" class="form-control" required>
+          <input type="text" name="address1" maxlength="128" value="{{dire.address1}}" id="id_address1" class="form-control" required>
         <div class="invalid-feedback">
             Please enter your shipping address.
         </div>
       <br>
       {% if dire.address2 %}
-		  <input type="text" name="address2" maxlength="128"  value={{dire.address2}} id="id_address2"class="form-control">
+		  <input type="text" name="address2" maxlength="128"  value="{{dire.address2}}" id="id_address2"class="form-control">
       {%else%}
       <input type="text" name="address2" maxlength="128" id="id_address2"class="form-control">
       {% endif %}
     </div>
        <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_postcode" >Código postal</label>
-            <input type="text" name="postcode" maxlength="12"  value={{dire.postcode}} id="id_postcode" class="form-control" required>
+            <input type="text" name="postcode" maxlength="12"  value="{{dire.postcode}}" id="id_postcode" class="form-control" required>
             <div class="invalid-feedback">
               Zip code required.
           </div>
@@ -323,7 +323,7 @@
       <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_id_country">País</label>
             <select class="custom-select d-block w-100" name="id_country" required id="id_id_country">
-              <option value={{dire.id_country.id_country}}> {{dire.id_country}}</option>
+              <option value="{{dire.id_country.id_country}}"> {{dire.id_country}}</option>
               {%for i in paises %}
               <option value={{i.id_country}}>{{i.name}}</option>
               {% endfor %}
@@ -335,7 +335,7 @@
 	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_id_state">Estado</label>
             <select class="custom-select d-block w-100"  name="id_state" required id="id_id_state" required>
-              <option  value={{dire.id_state.id_state}}> {{dire.id_state}}</option>
+              <option  value="{{dire.id_state.id_state}}"> {{dire.id_state}}</option>
               {%for j in estados %}
               <option value={{j.id_state}}>{{j.name}}</option>
               {% endfor %}
@@ -346,7 +346,7 @@
        </div>
        <div style="margin-left:3.8%" class="col-md-3 mb-3">
            <label for="id_city">City</label>
-           <input type="text" name="city"  value={{dire.city}} required maxlength="64" id="id_city" class="form-control">
+           <input type="text" name="city"  value="{{dire.city}}" required maxlength="64" id="id_city" class="form-control">
        </div>	
 
 		<div style="margin-left:3.8%" class="col-md-3 mb-3">
@@ -360,25 +360,25 @@
 	       
        <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_firstname">Nombre</label>
-            <input  type="text" name="firstname" required  value={{dire.firstname}} maxlength="32" id="id_firstname" class="form-control">
+            <input  type="text" name="firstname" required  value="{{dire.firstname}}" maxlength="32" id="id_firstname" class="form-control">
           <div class="invalid-feedback">
               Valid first name is required.
           </div>
        </div>			
 	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_lastname">Apellido</label>
-            <input type="text" name="lastname" required maxlength="32"  value={{dire.lastname}} id="id_lastname" class="form-control">
+            <input type="text" name="lastname" required maxlength="32"  value="{{dire.lastname}}" id="id_lastname" class="form-control">
           <div class="invalid-feedback">
               Valid last name is required.
           </div>
        </div>
 	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label  for="id_phone">Teléfono</label>
-            <input type="text" name="phone" maxlength="32" id="id_phone" required  value={{dire.phone}} class="form-control bfh-phone">
+            <input type="text" name="phone" maxlength="32" id="id_phone" required  value="{{dire.phone}}" class="form-control bfh-phone">
 	   </div>
 	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_phone_mobile">Celular</label>
-            <input type="text" name="phone_mobile" maxlength="32" required value={{dire.phone_mobile}} id="id_phone_mobile" class="form-control bfh-phone">
+            <input type="text" name="phone_mobile" maxlength="32" required value="{{dire.phone_mobile}}" id="id_phone_mobile" class="form-control bfh-phone">
      </div>
      <div style="margin-left:3.8%" class="col-md-5 mb-3">
         <label  for="id_predeterminado" style="width: 280px;"> Asignar como dirección predeterminada</label>
@@ -393,7 +393,7 @@
 		<button type="submit" class="btn btn-outline-primary">Guardar</button>
 		</div>
 			
-		</form>
+    </form>
     </main>
   </div>
 </div>

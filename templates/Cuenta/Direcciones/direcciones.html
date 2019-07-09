@@ -303,14 +303,14 @@
 	 <br>
   			<div style="margin-left:5%" >
 	<div class="row">
-      <div style="margin-left:1%" class="col-sm">
-          <div class="card" style="width: 200px; height: 248px">
+      <div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
+          <div class="card" style="width: 300px; height: 248px">
                <div class="card-body">
                 
               <a href="{% url 'direcciones_add' %}">
-               <img style="margin-left:30px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
+               <img style="margin-left:75px; margin-top:30px" src="{% static 'img/icono_add.png' %}" style="width: 100px; height: 100px">
             </a><br><br>
-                <h6 style="margin-left:20px; margin-top:15px">Agregar dirección</h6>
+                <h6 style="margin-left:65px; margin-top:15px">Agregar dirección</h6>
                 
            </div>
         </div>
@@ -322,7 +322,7 @@
            			<h5 class="card-title">{{i.firstname}} {{i.lastname}}</h5>
            			<h6 class="card-subtitle mb-2 text-muted">{{i.company}}</h6>
 		   			<p class="h6">{{i.address1}} {{i.address2}}</p>
-		   			<p class="h6">{{i.city}},{{i.id_state}},{{i.postcode}}</p>
+		   			<p class="h6">{{i.city}}, {{i.id_state}}, {{i.postcode}}</p>
 		   			<p class="h6">{{i.id_country}}</p>
              <p class="h6">{{i.phone}}</p>
             {% if i.predeterminado %}

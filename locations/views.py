@@ -69,6 +69,7 @@ def direcciones_add(request):
 
 def direcciones_update(request, pk): 
     dire= Address.objects.get(id_address=pk)
+    #direc= Address.objects.filter(id_address=pk)
     form= DireccionForm(request.POST)
     paises=Country.objects.all()
     estados=State.objects.all()
