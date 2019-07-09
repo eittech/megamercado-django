@@ -250,6 +250,14 @@
                         Direcciones
                       </a>
                     </li>
+                    {% ifequal user.validar "Validado" %}
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link" href="{% url 'tiendas' %}">
+                            <span data-feather="file"></span>
+                            Tiendas
+                          </a>
+                        </li>
+                        {% endifequal %}
                   </ul>
                 </li>
             </ul>
