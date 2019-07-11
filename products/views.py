@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 from currency.models import *
 from products.models import *
+from carrier.models import *
 from products.forms import *
 from contracts.models import *
 from systems.models import *
@@ -103,7 +104,8 @@ def tiendas_add(request):
             validar = "PorValidar")
         print(ti)
         ti.save()
-        return HttpResponseRedirect(reverse('tiendas'))
+        url = reverse('tiendas_detail', kwargs={'pk': ti.id_shop})
+        return HttpResponseRedirect(url)
     return render(request, 
     "Cuenta/Tienda/tiendasadd.html",
     {'form':form })
@@ -133,15 +135,17 @@ def tiendas_detail(request, pk):
     try: 
         ref=CurrencyRef.objects.get(id_shop=pk)
         money=CurrencyShop.objects.filter(id_shop=pk)
+        transp=CarrierShop.objects.filter(id_shop=pk)
         print(money)
     except:
         ref=None
         money=CurrencyShop.objects.filter(id_shop=pk)
+        transp=CarrierShop.objects.filter(id_shop=pk)
         print(money)
     
     return render(request, 
     "Cuenta/Tienda/tiendas_detail.html",
-    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta})
+    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta, 'transp': transp})
 
 def tiendas_mref(request, pk, id_currency): 
     tienda= Shop.objects.get(id_shop=pk)

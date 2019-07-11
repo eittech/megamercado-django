@@ -20,7 +20,7 @@ class Service(models.Model):
     code = models.CharField(verbose_name="Codigo del servicio",max_length=20,blank=True, null=True)
     description = models.TextField(verbose_name="Descripcion",blank=True)
     template_section = models.TextField(verbose_name="Etique Template",blank=True,choices=SECTION_SERVICE)
-    priority = models.BooleanField(verbose_name="Destacar",default=False, blank=True, null=True)
+    priority = models.BooleanField(verbose_name="Destacar",default=False, blank=True)
     amount = models.FloatField(verbose_name="Costo por Unidad",default=0)
     tax = models.FloatField(verbose_name="Impuestos",default=0)
     total = models.FloatField(verbose_name="Total",default=0)

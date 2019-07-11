@@ -2,6 +2,7 @@ from django.urls import path, re_path
 from . import views
 from products.views import *
 from currency.views import *
+from carrier.views import *
 from customers.views import *
 from locations.views import *
 from customers.forms import *
@@ -53,6 +54,8 @@ urlpatterns = [
     path('cuenta/tiendas/cuenta_add/<int:pk>/<id_currency>/', accountshop_add, name='accountshop_add'),
     path('cuenta/tiendas/cuenta_edit/<int:pk>/<id_account>/', accountshop_edit, name='accountshop_edit'),
     path('cuenta/tiendas/cuenta_elim/<int:pk>/<id_account>/', accountshop_eliminar, name='accountshop_eliminar'),
+    path('cuenta/tiendas/carrier_add/<int:pk>/', transportista_add, name='transportista_add'),
+    path('cuenta/tiendas/carrier_eliminar/<int:pk>/<id_carrier>/', transportista_eliminar, name='transportista_eliminar'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
