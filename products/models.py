@@ -167,21 +167,21 @@ class CategoryGroup(models.Model):
 
 class Product(models.Model):
     TYPE_CHOICES = (('everywhere', 'EVERYWHERE'),
-                    ('catalog', 'CATALOG ONLY'),
-                    ('search', 'SEARCH ONLY'),
-                    ('nowhere', 'NOWHERE'))
-    OPC= (('new', 'New'),
-            ('used', 'Used'),
-            ('refurbished', 'Refurbished'))
+                   ('catalog', 'CATALOG ONLY'),
+                   ('search', 'SEARCH ONLY'),
+                   ('nowhere', 'NOWHERE'))
+    OPC= (('new', 'Nuevo'),
+            ('used', 'Usado'),
+            ('refurbished', 'Restaurado'))
+    ESTADO= (('Inicial', 'Inicial'),
+            ('Bloqueado', 'Bloqueado'))
     id_product = models.AutoField(primary_key=True)
     id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
     id_shop_default = models.ForeignKey(Shop, on_delete=models.CASCADE)
     owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #id_tax_rules_group = models.ForeignKey(TaxRulesGroup, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True, null=True)
     description_short = models.TextField(blank=True, null=True)
-    on_sale = models.BooleanField(blank=False)
     online_only = models.BooleanField(blank=False)
     ean13 = models.CharField(max_length=13, blank=True, null=True)
     upc = models.CharField(max_length=12, blank=True, null=True)
@@ -189,9 +189,6 @@ class Product(models.Model):
     minimal_quantity =models.IntegerField(validators=[MinValueValidator(0)])
     price = models.DecimalField(blank=False, max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
     wholesale_price = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    unity = models.CharField(max_length=255, blank=True, null=True,validators=[MinValueValidator(0)])
-    unit_price_ratio = models.DecimalField(max_digits=20, decimal_places=6,validators=[MinValueValidator(0)])
-    additional_shipping_cost = models.DecimalField(max_digits=20, decimal_places=2,validators=[MinValueValidator(0)])
     reference = models.CharField(max_length=32, blank=True, null=True)
     width = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
     height = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
@@ -199,14 +196,15 @@ class Product(models.Model):
     weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
     out_of_stock = models.IntegerField()
     quantity_discount = models.IntegerField(blank=True, null=True)
-    customizable =  models.BooleanField(blank=True, default=False)
     active = models.BooleanField(blank=True, default=False)
+    estado = models.CharField(max_length=11, choices=ESTADO,blank=True, null=True)
+    razon = models.CharField(max_length=50, blank=True, null=True)
+    visibility = models.CharField(max_length=100,  choices=TYPE_CHOICES, blank=True)
     available_for_order = models.BooleanField(blank=False)
     available_date = models.DateField()
     condition = models.CharField(max_length=11, choices=OPC)
     show_price = models.BooleanField(blank=True, default=False)
-    visibility = models.CharField(max_length=100,  choices=TYPE_CHOICES )
-    is_virtual = models.BooleanField(blank=False)
+    is_virtual = models.BooleanField(blank=True, default=False)
     date_add = models.DateTimeField()
     date_upd = models.DateTimeField()
     def __str__(self):    

@@ -171,6 +171,12 @@ def tiendas_mref_nopublish(request, pk):
     mref.save()
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
+
+def productos_list1(request):
+    productos = Product.objects.filter(owner=request.user)
+    tienda = Shop.objects.filter(owner=request.user)
+    fotos = Image.objects.filter(id_product__owner=request.user)
+    return render(request, "Cuenta/Productos/productos-list.html",{'productos':productos, 'tienda': tienda, 'fotos': fotos})
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]

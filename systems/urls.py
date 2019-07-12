@@ -56,6 +56,7 @@ urlpatterns = [
     path('cuenta/tiendas/cuenta_elim/<int:pk>/<id_account>/', accountshop_eliminar, name='accountshop_eliminar'),
     path('cuenta/tiendas/carrier_add/<int:pk>/', transportista_add, name='transportista_add'),
     path('cuenta/tiendas/carrier_eliminar/<int:pk>/<id_carrier>/', transportista_eliminar, name='transportista_eliminar'),
+    path('cuenta/productos/', productos_list1, name='productos_list'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),

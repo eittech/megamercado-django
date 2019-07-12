@@ -87,7 +87,7 @@ class ProductAttributeShopAdmin(admin.ModelAdmin):
 	list_display = ['id_product_attribute', 'id_shop','wholesale_price','price','weight','unit_price_impact','default_on','minimal_quantity', 'available_date']
 
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ['id_product', 'id_category_default','id_shop_default','name','description','on_sale','online_only', 'quantity', 'price']
+	list_display = ['id_product', 'id_category_default','id_shop_default','name','description','online_only', 'quantity', 'price']
 
 class CategoryProductAdmin(admin.ModelAdmin):
 	list_display = ['id_category','id_product','position']
@@ -103,7 +103,7 @@ class ProductAttributeImageAdmin(admin.ModelAdmin):
 	list_display = ['id_product_attribute','id_image']
 
 class ProductShopAdmin(admin.ModelAdmin):
-	list_display = ['id_product', 'id_shop', 'id_category_default','on_sale','online_only','price']
+	list_display = ['id_product', 'id_shop', 'id_category_default','online_only','price']
 
 
 # Tiendas
