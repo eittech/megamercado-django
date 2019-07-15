@@ -196,6 +196,7 @@ class Product(models.Model):
     weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
     out_of_stock = models.IntegerField()
     quantity_discount = models.IntegerField(blank=True, null=True)
+    combination = models.BooleanField(blank=True, default=False)
     active = models.BooleanField(blank=True, default=False)
     estado = models.CharField(max_length=11, choices=ESTADO,blank=True, null=True)
     razon = models.CharField(max_length=50, blank=True, null=True)
