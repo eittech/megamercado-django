@@ -29,6 +29,19 @@ class ProductosForm(forms.ModelForm):
         model = Product
         fields = ['id_category_default','id_shop_default','name','description','description_short','online_only','ean13','upc' ,'quantity', 'minimal_quantity', 'price','wholesale_price','reference','width','height','depth', 'weight','out_of_stock','quantity_discount','combination','active','available_for_order','available_date','condition', 'show_price','is_virtual']
 
+class FotosForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos imagenes de los productos
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Image
+        fields = ['image','legend','position','cover']
+
 
 class ViForm(forms.ModelForm):
     '''

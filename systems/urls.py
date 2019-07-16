@@ -60,6 +60,10 @@ urlpatterns = [
     path('cuenta/productos/add/', productos_add, name='productos_add'),
     path('cuenta/productos/edit/<int:pk>/', productos_edit, name='productos_edit'),
     path('cuenta/productos/eliminar/<int:pk>/', productos_eliminar, name='productos_eliminar'),
+    path('cuenta/productos/detalles1/<int:pk>/', productos_detalles1, name='productos_detalles1'),
+    path('cuenta/productos/imagenes/add/<int:pk>/', imagenes_add, name='imagenes_add'),
+    path('cuenta/productos/imagenes/e/<int:pk>/<id_image>/', imagenes_eliminar, name='imagenes_eliminar'),
+    path('cuenta/productos/imagenes/p/<int:pk>/<id_image>/', imagenes_cover, name='imagenes_cover'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),

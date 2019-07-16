@@ -135,9 +135,6 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/submenu/boots.css' %}">
-    <link rel="stylesheet" href="{% static 'css/submenu/bootstrap-submenu.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/submenu/docs.min.css' %}">
 
    
 
@@ -241,7 +238,7 @@
                         <span data-feather="file"></span>
                         Productos 
                       </a>
-                    </li>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item textomenucuenta">
@@ -319,284 +316,56 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-      <h2 style="margin-left:5%" >Editar producto</h2>
+      <h2 style="margin-left:5%" >Agregar imágenes del producto</h2>
 	 <br>
-		<form method="POST" >
+		<form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <div style="margin-left:3.8%" >
-        <label for="id_id_category_default">Categoria</label> 
-<div class="dropdown m-b">
-  <button class="btn btn-danger" type="button" data-toggle="dropdown">
-    Seleccione la categoria
-    <span class="caret"></span>
-  </button>
+      <div style="margin-left:3.8%" class="col-md-5 mb-3">
+          <label for="id_image">Imagen del producto</label>
+       </div>
+			
+			<div style="margin-left:5%; width: 220px" class="custom-file">
+			  <input type="file" name="image" id="id_image" accept="image/*" class="custom-file-input" lang="es" required>
+			  <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+			</div>
+			<br><br>
+       <div style="margin-left:3.8%" class="col-md-3 mb-3">
+            <label for="id_legend">Leyenda</label>
+            <input type="text" class="form-control" type="text" name="legend" id="id_legend" maxlength="128">
 
-  <!-- role="menu": fix moved by arrows (Bootstrap dropdown) -->
-<ul class="dropdown-menu" role="menu">
-    {% for category in categories %}
-        {% if category.number_of_child > 0 %}
-        <li class="dropdown-submenu">
-            <a tabindex="0" data-toggle="dropdown">{{ category.name }}</a>
-            {% tree_structure_edit category producto %}
-        </li>
-        {% else %}
-        <li><a tabindex="0">{{ category.name }} 
-            {% ifequal producto.id_category_default category %}
-            <input style="margin-left: 10px" type="checkbox" name="id_category_default" checked value="{{category.id_category}}" id="id_id_category_default">
-            {% else %}
-            <input style="margin-left: 10px" type="checkbox" name="id_category_default" value="{{category.id_category}}" id="id_id_category_default">
-            {% endifequal %}
-        </a></li>
-        {% endif %}
-{% endfor %}
-</ul>
-
-</div>
-      </div>
-
+       </div>
       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_id_shop_default">Tienda</label>
-            <select class="custom-select d-block w-100" name="id_shop_default" required id="id_id_shop_default">
-              <option value="{{producto.id_shop_default.id_shop}}">{{producto.id_shop_default.name}}</option>
-              {% for t in tienda %}
-              <option value="{{t.id_shop}}">{{t.name}}</option>
-              {% endfor %}
+            <label for="id_position">Posición</label>
+            <select class="custom-select d-block w-100" name="position" id="id_position" required>
+              <option value="">Elige...</option>
+              <option value="1">1</option>
+			  <option value="2">2</option>
+              <option value="3">3</option>
+			  <option value="4">4</option>
+              <option value="5">5</option>
+			  <option value="6">6</option>
+              <option value="7">7</option>
+			  <option value="8">8</option>				
+
             </select>
          <div class="invalid-feedback">
-              Please select a valid shop.
+              Please select a valid position.
          </div> 
 	   </div>
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_name">Nombre</label>
-		  <div style="width: 450px">
-            <input type="text" class="form-control" name="name" value="{{producto.name}}" required maxlength="128" id="id_name">
-          <div class="invalid-feedback">
-              Se requiere nombre del producto.
-          </div>
-       </div>
-			</div>
-       <div style="margin-left:3.8%" class="col-md-3 mb-3" >
-            <label for="id_description">Descripción</label>
-		   <div style="width: 500px; height: 150px">
-			   <textarea class="form-control" rows="5" name="description" id="id_description"> {{producto.description}}</textarea>
-            <!--<input type="text" class="form-control" id="name" placeholder="" required>
-          <div class="invalid-feedback">
-              Se requiere nombre del producto.
-          </div>-->
-       </div>
-		  </div> 
-       <div style="margin-left:3.8%" class="col-md-3 mb-3" >
-            <label ffor="id_description_short">Descripción corta</label>
-		   <div style="width: 500px; height: 150px">
-			   <textarea class="form-control" rows="5"  name="description_short" id="id_description_short"> {{producto.description_short}}</textarea>
-            <!--<input type="text" class="form-control" id="name" placeholder="" required>
-          <div class="invalid-feedback">
-              Se requiere nombre del producto.
-          </div>-->
-       </div>
-		  </div> <br>
-			<div style="margin-left:3.8%" class="col-md-3 mb-3">
+			<br>
+		<div style="margin-left:3.8%" class="col">
+            <label for="position">¿Desea que esta imagen sea la portada?</label>
 			<div class="custom-control custom-checkbox">
-          {% if producto.online_only %}
-          <input  type="checkbox" class="custom-control-input" checked  name="online_only" id="id_online_only">
-          {% else %}
-          <input  type="checkbox" class="custom-control-input" name="online_only" id="id_online_only">
-          {% endif %}
-          <label class="custom-control-label" for="id_online_only">Sólo en línea</label>
+          <input type="checkbox" class="custom-control-input" name="cover" id="id_cover">
+          <label class="custom-control-label" for="id_cover">Si</label>
         </div>
-		</div>	<br>
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_ean13">Ean13</label>
-  <div style="width: 450px">
-      {% if producto.ean13 %}
-		  <input class="form-control" type="text" name="ean13"  value="{{producto.ean13}}"  maxlength="13" id="id_ean13">
-      {%else%}
-      <input class="form-control" type="text" name="ean13"  maxlength="13" id="id_ean13">
-      {% endif %}
-  </div>
-    </div>
 
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <label for="id_upc">Upc</label>
-  <div style="width: 450px">
-      {% if producto.upc %}
-		  <input class="form-control" type="text" name="upc"  value="{{producto.upc}}"  maxlength="12" id="id_upc">
-      {%else%}
-      <input class="form-control" type="text" name="upc" maxlength="12" id="id_upc">
-      {% endif %}
-  </div>
-</div>
-     <!-- Cantidad  --> 
-			<div style="margin-left:3.8%" class="col-md-3 mb-3" >
-            <label for="id_quantity">Cantidad</label></div>
-			<div style="margin-left:5%; width: 200px">
-        <input class="form-control" type="text" name="quantity"  value="{{producto.quantity}}"  required id="id_quantity">
-		</div>	
-      <br>
-  
-      <div style="margin-left:3.8%" class="col-md-3 mb-3" >
-        <label for="id_minimal_quantity">Cantidad mínima</label></div>
-  <div style="margin-left:5%; width: 200px">
-    <input class="form-control" type="text" name="minimal_quantity"  value="{{producto.minimal_quantity}}" required id="id_minimal_quantity">
-</div>	
-  <br>
-		<!--   <input type="number" value="500" min="0" max="1000" step="1"/>-->	
-		
-		<div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_price">Precio</label>
-            <input class="form-control" type="text" name="price"  value="{{producto.price}}"  required id="id_price" step="0.000001">
-            <div class="invalid-feedback">
-              Valid price is required.
-          </div>
-    </div>	
-	       
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_wholesale_price">Precio al mayor</label>
-            <input type="text" class="form-control"name="wholesale_price"  value="{{producto.wholesale_price}}" required id="id_wholesale_price" step="0.000001">
-          <div class="invalid-feedback">
-              Valid price is required.
-          </div>
-       </div>			
-	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_reference">Referencia</label>
-            <input type="text" class="form-control" name="reference"  value="{{producto.reference}}"  maxlength="32" id="id_reference" required>
-          <div class="invalid-feedback">
-              Valid reference is required.
-          </div>
-       </div>
-		
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_width">Ancho</label>
-        <input type="text" class="form-control" name="width"  value="{{producto.width}}" required id="id_width">
-      <div class="invalid-feedback">
-          Valid width is required.
-      </div>
-   </div>
-
-   <div style="margin-left:3.8%" class="col-md-3 mb-3">
-    <label for="id_height">Altura</label>
-    <input type="text" class="form-control"  name="height"  value="{{producto.height}}"  required id="id_height" >
-    <div class="invalid-feedback">
-        Valid heidht is required.
-    </div>
-  </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_depth">Profundidad</label>
-        <input type="text" class="form-control" name="depth"  value="{{producto.depth}}" required id="id_depth">
-      <div class="invalid-feedback">
-          Valid depth is required.
-      </div>
-      </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_weight">Peso</label>
-        <input type="text" class="form-control" name="weight"  value="{{producto.weight}}" required id="id_weight" >
-      <div class="invalid-feedback">
-          Valid weight is required.
-      </div>
-      </div>
-
-			<div style="margin-left:3.8%" class="col-md-5 mb-3">
-        <div class="custom-control custom-checkbox">
-            {% if producto.out_of_stock %}
-            <input  type="checkbox" class="custom-control-input" checked name="out_of_stock" id="id_out_of_stock">
-            {% else %}
-            <input  type="checkbox" class="custom-control-input"name="out_of_stock" id="id_out_of_stock">
-            {% endif %}
-            <label class="custom-control-label" for="id_out_of_stock">Vender si no hay disponible en stock</label>
-          </div>
-      </div>	<br>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_quantity_discount">Cantidad de descuento</label>
-        {% if producto.quantity_discount %}
-          <input type="text" class="form-control" name="quantity_discount"  value="{{producto.quantity_discount}}" id="id_quantity_discount">
-          {% else %}
-          <input type="text" class="form-control" name="quantity_discount" id="id_quantity_discount">
-          {% endif %}
-      </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <div class="custom-control custom-checkbox">
-            {% if producto.available_for_order %}
-            <input  type="checkbox" class="custom-control-input" checked name="combination" id="id_combination">
-            {% else %}
-            <input  type="checkbox" class="custom-control-input" name="combination" id="id_combination">
-            {% endif %}
-            <label class="custom-control-label" for="id_combination">Tiene combinaciones</label>
-          </div>
-      </div>	<br>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <div class="custom-control custom-checkbox">
-            {% if producto.active %}
-            <input  type="checkbox" class="custom-control-input" checked  name="active" id="id_active">
-            {% else %}
-            <input  type="checkbox" class="custom-control-input" name="active" id="id_active">
-            {% endif %}
-            <label class="custom-control-label" for="id_active">Activo</label>
-          </div>
-      </div>	<br>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <div class="custom-control custom-checkbox">
-            {% if producto.available_for_order %}
-            <input  type="checkbox" class="custom-control-input" checked  name="available_for_order" id="id_available_for_order">
-            {% else %}
-            <input  type="checkbox" class="custom-control-input" name="available_for_order" id="id_available_for_order">
-            {% endif %}
-            <label class="custom-control-label" for="id_available_for_order">Disponible para ordenar</label>
-          </div>
-      </div>	<br>
-  
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <label for="id_available_date" style="width: 360px;">Fecha cuando estará disponible</label> 
-      <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="available_date"  value="{{producto.available_date}}" required id="id_available_date" required>
-    </div>
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_condition">Condición</label>
-            <select class="custom-select d-block w-100" name="condition" required id="id_condition">
-              <option  value="{{producto.condition}}">{{producto.condition}} </option>
-              <option value="new">Nuevo</option>
-
-              <option value="used">Usado</option>
-
-              <option value="refurbished">Restaurado</option>
-            </select>
-         <div class="invalid-feedback">
-              Please select a valid condition.
-         </div> 
-     </div>
-     
-     <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <div class="custom-control custom-checkbox">
-          {% if producto.show_price %}
-          <input  type="checkbox" class="custom-control-input" checked name="show_price" id="id_show_price">
-          {% else %}
-          <input  type="checkbox" class="custom-control-input" name="show_price" id="id_show_price">
-          {% endif %}
-          <label class="custom-control-label" for="id_show_price">Mostrar el precio</label>
-        </div>
-    </div>	<br>
-
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <div class="custom-control custom-checkbox">
-          {% if producto.is_virtual %}
-          <input  type="checkbox" class="custom-control-input" checked name="is_virtual" id="id_is_virtual">
-          {% else %}
-          <input  type="checkbox" class="custom-control-input" name="is_virtual" id="id_is_virtual">
-          {% endif %}
-          <label class="custom-control-label" for="id_is_virtual">¿Es virtual?</label>
-        </div>
-    </div>	<br>
-
-		
+	   </div>
+	   
 		<br>
 		<div style="margin-left:3.8%" class="col-md-3 mb-3">
 		<button type="submit" class="btn btn-outline-primary">Guardar</button>
 		</div>
-			
 		</form>
     </main>
   </div>

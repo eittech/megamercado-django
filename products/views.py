@@ -330,6 +330,46 @@ def productos_eliminar(request, pk):
     producto.save()
     return HttpResponseRedirect(reverse('productos_list'))
 
+def productos_detalles1(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    fotos=Image.objects.filter(id_product=producto).order_by('position')
+    return render(request, "Cuenta/Productos/productos-detalles1.html",{'fotos':fotos,'producto':producto})
+
+def imagenes_add(request, pk):
+    form= FotosForm(request.POST)
+    producto=Product.objects.get(id_product=pk)
+    fotos=Image.objects.filter(id_product=producto)
+    if request.method=="POST":
+        foto=request.FILES['image']
+        legend=form['legend'].value()
+        position=form['position'].value()
+        cover=form['cover'].value()
+        if form['cover'].value()==True:
+            for i in fotos:
+                i.cover=False
+                i.save()
+        imagen=Image.objects.create(id_product=producto, image=foto, legend=legend, position=position, cover=cover)
+        imagen.save()
+        url = reverse('productos_detalles1', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, "Cuenta/Productos/imagenes-add.html",{'form': form})
+
+def imagenes_eliminar(request, pk, id_image):
+    fotos=Image.objects.filter(id_image=id_image).delete()
+    url = reverse('productos_detalles1', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def imagenes_cover(request, pk, id_image):
+    foto=Image.objects.get(id_image=id_image)
+    foto.cover=True
+    fotos=Image.objects.filter(id_product__id_product=pk)
+    for i in fotos:
+        i.cover=False
+        i.save()
+    foto.save()
+    url = reverse('productos_detalles1', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]
