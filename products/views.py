@@ -317,7 +317,10 @@ def productos_edit(request, pk):
                 producto.show_price=form['show_price'].value()
                 producto.is_virtual=form['is_virtual'].value()
                 producto.date_upd= timezone.now()
-                producto.save()
+                try:
+                    producto.save()
+                except:
+                    pass
                 return HttpResponseRedirect(reverse('productos_list'))
     return render(request, "Cuenta/Productos/productos-edit.html",{'form':form, 'tienda': tienda, 'categories':categories, 'producto':producto})
 

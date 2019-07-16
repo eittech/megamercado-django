@@ -22,7 +22,7 @@ def tree_structure(category):
     return {"subs": subs}
 
 @register.inclusion_tag('tree_edit.html')
-def tree_structure_edit(category):
+def tree_structure_edit(category, producto):
     subs = category.category_base.all().annotate(number_of_child=Count('id_parent'))
     for i in subs:
         cuenta=0
@@ -33,4 +33,4 @@ def tree_structure_edit(category):
         i.number_of_child=cuenta
         print(i.name)
         print(i.number_of_child)
-    return {"subs": subs}
+    return {"subs": subs,'producto': producto}
