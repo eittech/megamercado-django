@@ -320,7 +320,7 @@
     <h2 style="margin-left:3%" >Productos 
       {% if tienda %}
       {% if productos %}
-      <a href="#"> 
+      <a href="{% url 'productos_add' %}"> 
     <img  src="{% static 'img/icono_add.png' %}" style="width: 40px; height: 40px"> 
       </a> 
       {% endif %}
@@ -385,9 +385,9 @@
                       {% endifequal %}
                 </td>
                 <td> 
-                  <a class="remove" href="javascript:void(0)" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a> 
-                  <a href="javascript:void(0)" title="Editar"><i class="fa fa-pencil-square-o" style="font-size: 16px"> </i></a>
+                  <a href="{% url 'productos_edit' i.id_product %}"" title="Editar"><i class="fa fa-pencil-square-o" style="font-size: 16px"> </i></a>
                   <a href="javascript:void(0)" title="Detalle"><i class="fa fa-bars" style="font-size: 16px"> </i></a> 
+                  <a class="remove" href="{% url 'productos_eliminar' i.id_product %}" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a> 
                 </td>
               </tr>
               {% endfor %}
@@ -412,7 +412,7 @@
                  border-left-width: .25rem;
                  border-radius: .25rem;">
              
-      <h6>No tienes ptoductos. <a href="#">Agrega tu primer producto.</a></h6>
+      <h6>No tienes ptoductos. <a href="{% url 'productos_add' %}">Agrega tu primer producto.</a></h6>
       </div>
       {% endif %}
    {% else %}

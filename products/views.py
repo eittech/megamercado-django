@@ -28,6 +28,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.utils import timezone
+import datetime
 # from django import template
 #
 # register = template.Library()
@@ -173,10 +175,158 @@ def tiendas_mref_nopublish(request, pk):
     return HttpResponseRedirect(url)
 
 def productos_list1(request):
-    productos = Product.objects.filter(owner=request.user)
-    tienda = Shop.objects.filter(owner=request.user)
+    productos = Product.objects.filter(owner=request.user, deleted=False)
+    tienda = Shop.objects.filter(owner=request.user,deleted=False)
     fotos = Image.objects.filter(id_product__owner=request.user)
     return render(request, "Cuenta/Productos/productos-list.html",{'productos':productos, 'tienda': tienda, 'fotos': fotos})
+
+def productos_add(request):
+    form=ProductosForm(request.POST)
+    categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
+    for i in categories:
+        cuenta=0
+        for j in Category.objects.all():
+            if j.id_parent==i:
+                cuenta=cuenta+1
+            
+        i.number_of_child=cuenta
+        print(i.name)
+        print(i.number_of_child)
+    tienda = Shop.objects.filter(owner=request.user, deleted=False)
+    if request.method=="POST":
+        print("PASO AL POST")
+        if form.is_valid():
+            print("valido")
+            if form['id_category_default'].value()!=None:
+                for i in form['id_category_default'].value():
+                    categoria=Category.objects.get(id_category=i)
+                shop=Shop.objects.get(id_shop=form['id_shop_default'].value())
+                owner=request.user
+                name=form['name'].value()
+                description=form['description'].value()
+                description_short=form['description_short'].value()
+                online_only=form['online_only'].value()
+                ean13=form['ean13'].value()
+                upc=form['upc'].value()
+                quantity=form['quantity'].value()
+                minimal_quantity=form['minimal_quantity'].value()
+                price=form['price'].value()
+                wholesale_price=form['wholesale_price'].value()
+                reference=form['reference'].value()
+                width=form['width'].value()
+                height=form['height'].value()
+                depth=form['depth'].value()
+                weight=form['weight'].value()
+                out_of_stock=form['out_of_stock'].value()
+                quantity_discount=form['quantity_discount'].value()
+                combination=form['combination'].value()
+                active=form['active'].value()
+                estado="Inicial"
+                available_for_order=form['available_for_order'].value()
+                available_date=form.cleaned_data['available_date']
+                condition=form['condition'].value()
+                show_price=form['show_price'].value()
+                is_virtual=form['is_virtual'].value()
+                date_add= timezone.now()
+                date_upd= date_add
+                pro=Product.objects.create(id_category_default=categoria, id_shop_default=shop, owner=owner, name=name, description=description, description_short=description_short, online_only=online_only, ean13=ean13, upc=upc,quantity=quantity, minimal_quantity=minimal_quantity, price=price, wholesale_price=wholesale_price, reference=reference, width=width, height=height, depth=depth, weight=weight, out_of_stock=out_of_stock, quantity_discount=quantity_discount, combination=combination, active=active, estado=estado, available_for_order=available_for_order,available_date=available_date, condition=condition, show_price=show_price, is_virtual=is_virtual,date_add=date_add, date_upd=date_upd)
+                pro.save()
+                return HttpResponseRedirect(reverse('productos_list'))
+    return render(request, "Cuenta/Productos/productos-add.html",{'form':form, 'tienda': tienda, 'categories':categories})
+
+def productos_edit(request, pk):
+    form=ProductosForm(request.POST)
+    categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
+    for i in categories:
+        cuenta=0
+        for j in Category.objects.all():
+            if j.id_parent==i:
+                cuenta=cuenta+1
+            
+        i.number_of_child=cuenta
+        print(i.name)
+        print(i.number_of_child)
+    tienda = Shop.objects.filter(owner=request.user, deleted=False)
+    producto=Product.objects.get(id_product=pk)
+    print("descripcion:")
+    print(producto.description)
+    if request.method=="POST":
+        print("PASO AL POST")
+        if form['id_category_default'].value()!=None:
+                for i in form['id_category_default'].value():
+                    producto.id_category_default=Category.objects.get(id_category=i)
+                producto.id_shop_default=Shop.objects.get(id_shop=form['id_shop_default'].value())
+                producto.name=form['name'].value()
+                producto.description=form['description'].value()
+                producto.description_short=form['description_short'].value()
+                producto.online_only=form['online_only'].value()
+                producto.ean13=form['ean13'].value()
+                producto.upc=form['upc'].value()
+                producto.quantity=form['quantity'].value()
+                producto.minimal_quantity=form['minimal_quantity'].value()
+                producto.price=float((form['price'].value()).replace(",", "."))
+                producto.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
+                producto.reference=form['reference'].value()
+                producto.width=float((form['width'].value()).replace(",", "."))
+                producto.height=float((form['height'].value()).replace(",", "."))
+                producto.depth=float((form['depth'].value()).replace(",", "."))
+                producto.weight=float((form['weight'].value()).replace(",", "."))
+                producto.out_of_stock=form['out_of_stock'].value()
+                if form['quantity_discount'].value()!="None":
+                    if form['quantity_discount'].value()!="":
+                        print("paso")
+                        print(form['quantity_discount'].value())
+                        producto.quantity_discount=float((form['quantity_discount'].value()).replace(",", "."))
+                producto.combination=form['combination'].value()
+                producto.active=form['active'].value()
+                producto.available_for_order=form['available_for_order'].value()
+                try:
+                    a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                    fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                    producto.available_date=fecha
+                except:
+                    a=(form['available_date'].value()).split()
+                    a.remove("de")
+                    a.remove("de")
+                    if a[1]=="Enero":
+                        fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
+                    if a[1]=="Febrero":
+                        fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
+                    if a[1]=="Marzo":
+                        fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
+                    if a[1]=="Abril":
+                        fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
+                    if a[1]=="Mayo":
+                        fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
+                    if a[1]=="Junio":
+                        fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
+                    if a[1]=="Julio":
+                        fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
+                    if a[1]=="Agosto":
+                        fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
+                    if a[1]=="Septiembre":
+                        fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
+                    if a[1]=="Octubre":
+                        fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
+                    if a[1]=="Noviembre":
+                        fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
+                    if a[1]=="Diciembre":
+                        fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
+                    producto.available_date=fecha
+                producto.condition=form['condition'].value()
+                producto.show_price=form['show_price'].value()
+                producto.is_virtual=form['is_virtual'].value()
+                producto.date_upd= timezone.now()
+                producto.save()
+                return HttpResponseRedirect(reverse('productos_list'))
+    return render(request, "Cuenta/Productos/productos-edit.html",{'form':form, 'tienda': tienda, 'categories':categories, 'producto':producto})
+
+def productos_eliminar(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    producto.deleted=True
+    producto.save()
+    return HttpResponseRedirect(reverse('productos_list'))
+
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]

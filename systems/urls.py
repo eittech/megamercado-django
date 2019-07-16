@@ -57,6 +57,9 @@ urlpatterns = [
     path('cuenta/tiendas/carrier_add/<int:pk>/', transportista_add, name='transportista_add'),
     path('cuenta/tiendas/carrier_eliminar/<int:pk>/<id_carrier>/', transportista_eliminar, name='transportista_eliminar'),
     path('cuenta/productos/', productos_list1, name='productos_list'),
+    path('cuenta/productos/add/', productos_add, name='productos_add'),
+    path('cuenta/productos/edit/<int:pk>/', productos_edit, name='productos_edit'),
+    path('cuenta/productos/eliminar/<int:pk>/', productos_eliminar, name='productos_eliminar'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
