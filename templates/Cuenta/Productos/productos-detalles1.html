@@ -248,7 +248,7 @@
                 </a>
               </li>
               <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'direcciones' %}">
                   <span data-feather="file"></span>
                   Direcciones
                 </a>
@@ -308,11 +308,11 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           
-          <h2 style="margin-left:6%" >Detalles del producto <a href="#"> 
+          <h2 style="margin-left:6%" >Detalles del producto {{producto.name}}<a href="#"> 
        </h2>
 	
          <br>
-          <div style="margin-left: 4.5%; margin-right: 15%" class="row">
+          <div style="margin-left: 4.5%; margin-right: 15%" >
                   <div class="col-md-12 grid-margin stretch-card">
                     <div class="card" style="width: 900px">
                       <div class="card-body dashboard-tabs p-0">
@@ -327,8 +327,6 @@
                             <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Purchases</a>
                           </li>
                         </ul>
-
-
                         {% if fotos %}
                         <div class="card">
       
@@ -376,7 +374,119 @@
                        </div>
                       {% endif %}
                       {% endfor %}
-                         </div>						  
+                      
+                         </div>	
+                         <br>
+                         <h4><b>Especificaciones</b>  <a href="{% url 'productos_edit' producto.id_product %}"" title="Editar"><i class="fa fa-pencil-square-o" style="font-size: 16px"> </i></a></h4>
+                         <div> <b>Descripción corta</b></div>
+                         <p style="margin-right:2% ">{{producto.description_short}}</p>
+                         {%if producto.description %}
+                         <div><b>Descripción</b></div>
+                         <p style="margin-right:2%">{{producto.description}}</p>
+                         {% endif %}
+                         <div class="row">
+                         {% if producto.reference %}
+                         <div class="col-sm"> <b>Referencia:</b> {{producto.reference}}</div>
+                         {% endif %}
+                         <div class="col-sm"> <b>Condición:</b> {{producto.condition}}</div>
+                       </div>
+                       <br>
+                       <div class="row">
+                          <div class="col-sm"> <b>Cantidad:</b> {{producto.quantity}}</div>
+                          {% if producto.minimal_quantity %}
+                          <div class="col-sm"> <b>Cantidad mínima:</b> {{producto.minimal_quantity}}</div>
+                          {% endif %}
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm"> <b>Precio:</b>{{producto.price}}</div>
+                            {% if producto.wholesale_price %}
+                            <div class="col-sm"> <b>Precio de costo:</b> {{producto.wholesale_price}}</div>
+                            {% endif %}
+                          </div>
+                          <br>
+                          <div class="row" >
+                              <div class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.out_of_stock %}
+                                     <div class="fa fa-check-square-o"> Vender si no hay disponible en stock</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Vender si no hay disponible en stock</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                         
+                               <div style="margin-left:3.8%" class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.combination %}
+                                     <div class="fa fa-check-square-o"> Tiene combinaciones</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Tiene combinaciones</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                             </div>
+                             <br>
+                             <div class="row"  >
+                               <div  class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.active %}
+                                     <div class="fa fa-check-square-o"> Activo</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Activo</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                         
+                               <div style="margin-left:3.8%" class="col-sm">
+                                   <div class="custom-control custom-checkbox">
+                                       {% if producto.is_virtual %}
+                                       <div class="fa fa-check-square-o"> ¿Es virtual?</div>
+                                       {% else %}
+                                       <div class="fa fa-close"> ¿Es virtual?</div>
+                                       {% endif %}
+                                     </div>
+                                 </div>	<br>
+                               </div>
+                               <br>
+                               <div style="margin-left:-1.3%" class="col-md-3 mb-3">
+                               <div class="custom-control custom-checkbox">
+                                   {% if producto.online_only %}
+                                   <div class="fa fa-check-square-o"> Sólo en línea</div>
+                                   {% else %}
+                                   <div class="fa fa-close"> Sólo en línea</div>
+                                   {% endif %}
+                                 </div>
+                             </div>	
+
+                             <div class="row">
+                                {% if producto.ean13 %}
+                                <div class="col-sm"> <b>Ean13:</b> {{producto.ean13}}</div>
+                                {% endif %}
+                                {% if producto.upc %}
+                                <div class="col-sm"> <b>Upc:</b>{{producto.upc}}</div>
+                                {% endif %}
+                              </div>
+                              <br>
+                              <div class="row">
+                                  {% if producto.width %}
+                                  <div class="col-sm"> <b>Ancho:</b> {{producto.width}}</div>
+                                  {% endif %}
+                                  {% if producto.height %}
+                                  <div class="col-sm">  <b>Altura:</b> {{producto.height}}</div>
+                                  {% endif %}
+                                </div>
+                                <br>
+                                <div class="row">
+                                    {% if producto.depth %}
+                                    <div class="col-sm"><b>Profundidad:</b> {{producto.depth}}</div>
+                                    {% endif %}
+                                    {% if producto.weight %}
+                                    <div class="col-sm"> <b>Peso:</b> {{producto.weight}}</div>
+                                    {% endif %}
+                                  </div>
+
+                       
                        <br><br>
                           </div>
                           </div>
@@ -385,8 +495,124 @@
                               <div style="margin-left: 15px; margin-top: 25px" class="container">
                               <br> 
                                    <h6>No tienes ninguna imagen. <a href="{% url 'imagenes_add' producto.id_product %}">Agrega una imagen.</a></h6>
+                              
+                              <br><br>
+
+                              <br>
+                         <h4><b>Especificaciones</b>  <a href="{% url 'productos_edit' producto.id_product %}"" title="Editar"><i class="fa fa-pencil-square-o" style="font-size: 16px"> </i></a></h4>
+                         <div> <b>Descripción corta</b></div>
+                         <p style="margin-right:2%">{{producto.description_short}}</p>
+                         {%if producto.description %}
+                         <div><b>Descripción</b></div>
+                         <p style="margin-right:2%">{{producto.description}}</p>
+                         {% endif %}
+                         <div class="row">
+                         {% if producto.reference %}
+                         <div class="col-sm"> <b>Referencia:</b> {{producto.reference}}</div>
+                         {% endif %}
+                         <div class="col-sm"> <b>Condición:</b> {{producto.condition}}</div>
+                       </div>
+                       <br>
+                       <div class="row">
+                          <div class="col-sm"> <b>Cantidad:</b> {{producto.quantity}}</div>
+                          {% if producto.minimal_quantity %}
+                          <div class="col-sm"> <b>Cantidad mínima:</b> {{producto.minimal_quantity}}</div>
+                          {% endif %}
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm"> <b>Precio:</b>{{producto.price}}</div>
+                            {% if producto.wholesale_price %}
+                            <div class="col-sm"> <b>Precio de costo:</b> {{producto.wholesale_price}}</div>
+                            {% endif %}
+                          </div>
+                          <br>
+                          <div class="row" >
+                              <div class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.out_of_stock %}
+                                     <div class="fa fa-check-square-o"> Vender si no hay disponible en stock</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Vender si no hay disponible en stock</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                         
+                               <div style="margin-left:3.8%" class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.combination %}
+                                     <div class="fa fa-check-square-o"> Tiene combinaciones</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Tiene combinaciones</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                             </div>
+                             <br>
+                             <div class="row"  >
+                               <div  class="col-sm">
+                                 <div class="custom-control custom-checkbox">
+                                     {% if producto.active %}
+                                     <div class="fa fa-check-square-o"> Activo</div>
+                                     {% else %}
+                                     <div class="fa fa-close"> Activo</div>
+                                     {% endif %}
+                                   </div>
+                               </div>	<br>
+                         
+                               <div style="margin-left:3.8%" class="col-sm">
+                                   <div class="custom-control custom-checkbox">
+                                       {% if producto.is_virtual %}
+                                       <div class="fa fa-check-square-o"> ¿Es virtual?</div>
+                                       {% else %}
+                                       <div class="fa fa-close"> ¿Es virtual?</div>
+                                       {% endif %}
+                                     </div>
+                                 </div>	<br>
+                               </div>
+                               <br>
+                               <div style="margin-left:-1.3%" class="col-md-3 mb-3">
+                               <div class="custom-control custom-checkbox">
+                                   {% if producto.online_only %}
+                                   <div class="fa fa-check-square-o"> Sólo en línea</div>
+                                   {% else %}
+                                   <div class="fa fa-close"> Sólo en línea</div>
+                                   {% endif %}
+                                 </div>
+                             </div>	
+
+                             <div class="row">
+                                {% if producto.ean13 %}
+                                <div class="col-sm"> <b>Ean13:</b> {{producto.ean13}}</div>
+                                {% endif %}
+                                {% if producto.upc %}
+                                <div class="col-sm"> <b>Upc:</b>{{producto.upc}}</div>
+                                {% endif %}
                               </div>
+                              <br>
+                              <div class="row">
+                                  {% if producto.width %}
+                                  <div class="col-sm"> <b>Ancho:</b> {{producto.width}}</div>
+                                  {% endif %}
+                                  {% if producto.height %}
+                                  <div class="col-sm">  <b>Altura:</b> {{producto.height}}</div>
+                                  {% endif %}
+                                </div>
+                                <br>
+                                <div class="row">
+                                    {% if producto.depth %}
+                                    <div class="col-sm"><b>Profundidad:</b> {{producto.depth}}</div>
+                                    {% endif %}
+                                    {% if producto.weight %}
+                                    <div class="col-sm"> <b>Peso:</b> {{producto.weight}}</div>
+                                    {% endif %}
+                                  </div>
+
+                       
+                       <br><br>
+                                  </div>
                                   <br><br>
+                                  
                                 </div>
                         {% endif %}
                       </div>

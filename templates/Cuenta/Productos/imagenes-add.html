@@ -7,7 +7,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
-
+    <link href="{% static 'css/css/all.css' %}" rel="stylesheet" position="1">
+    <link href="{% static 'css/css/fileinput.min.css' %}" rel="stylesheet" >
+    <link href="{% static 'css/css/dropdown.min.css' %}" rel="stylesheet" >
+    <script src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script>
 
     <style>
         body {
@@ -254,7 +257,7 @@
                         </a>
                       </li>
                       <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'direcciones' %}">
                           <span data-feather="file"></span>
                           Direcciones
                         </a>
@@ -314,83 +317,49 @@
 
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-
-      <h2 style="margin-left:5%" >Agregar imágenes del producto</h2>
-	 <br>
-		<form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div style="margin-left:3.8%" class="col-md-5 mb-3">
-          <label for="id_image">Imagen del producto</label>
-       </div>
-			
-			<div style="margin-left:5%; width: 220px" class="custom-file">
-			  <input type="file" name="image" id="id_image" accept="image/*" class="custom-file-input" lang="es" required>
-			  <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-			</div>
-			<br><br>
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_legend">Leyenda</label>
-            <input type="text" class="form-control" type="text" name="legend" id="id_legend" maxlength="128">
-
-       </div>
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_position">Posición</label>
-            <select class="custom-select d-block w-100" name="position" id="id_position" required>
-              <option value="">Elige...</option>
-              <option value="1">1</option>
-			  <option value="2">2</option>
-              <option value="3">3</option>
-			  <option value="4">4</option>
-              <option value="5">5</option>
-			  <option value="6">6</option>
-              <option value="7">7</option>
-			  <option value="8">8</option>				
-
-            </select>
-         <div class="invalid-feedback">
-              Please select a valid position.
-         </div> 
-	   </div>
-			<br>
-		<div style="margin-left:3.8%" class="col">
-            <label for="position">¿Desea que esta imagen sea la portada?</label>
-			<div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="cover" id="id_cover">
-          <label class="custom-control-label" for="id_cover">Si</label>
+        <h2 style="margin-left:5%" >Agregar imágenes del producto</h2>
+        <br>
+        <br>
+        <div class="container">
+           <form  method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+              <div class="form-group">
+                 <input id="file-1" type="file" class="file" name="image" multiple multiple=true data-preview-file-type="any">
+              </div>
+           </form>
         </div>
-
-	   </div>
-	   
-		<br>
-		<div style="margin-left:3.8%" class="col-md-3 mb-3">
-		<button type="submit" class="btn btn-outline-primary">Guardar</button>
-		</div>
-		</form>
     </main>
   </div>
 </div>
-<script src="{% static 'js/submenu/bootstrap-submenu.min.js' %}" defer></script>
-<script src="{% static 'js/submenu/docs.js' %}" defer></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  
+<script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><!--<script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>      
+   <script src="{% static 'js/js/bootstrap-input-spinner.js' %}"></script>
+   <script src="{% static 'js/js/compiled.0.min.js' %}"></script>
+   <script src="{% static 'js/js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'js/js/buttons.js' %}"></script>
+   <script id="dsq-count-scr"  src="{% static 'js/js/count.js' %}" async></script>
+   <script src="{% static 'js/js/purify.min.js' %}"></script>				
+   <script src="{% static 'js/js/jquery-3.3.1.min.js' %}" crossorigin="anonymous"></script>
+   <script src="{% static 'js/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+   <script src="{% static 'js/js/all-krajee.min.js' %}"></script>	
+   <script src="{% static 'js/js/sortable.min.js' %}"></script>	
+   <script src="{% static 'js/js/piexif.min.js' %}"></script>	
+   <script src="{% static 'js/js/fileinput.min.js' %}"></script>
+   <script src="{% static 'js/js/dropdown.min.js' %}"></script>
+   <script>
+     $(document).ready(function(){
+      $("#file-1").fileinput({
+      	uploadAsync: false,
+      	minFileCount: 1,
+      	maxFileCount: 3,
+      	showUpload: false,
+      	showRemove: false,
       
-        <link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
-        <script src="/static/air-datepicker/js/datepicker.min.js"></script>
-        <script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
-        
-        <script>
-                $( document ).ready(function() {
-        $('#id_available_date').datepicker({
-          language: 'es',dateFormat:'yyyy-mm-dd'
-        });
       });
-
-            </script>
-
+    });
+   </script>
         <script>
           $(document).ready(function(){
             $("#micuenta-short").click(function(){

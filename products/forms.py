@@ -27,7 +27,7 @@ class ProductosForm(forms.ModelForm):
             el formulario
         '''
         model = Product
-        fields = ['id_category_default','id_shop_default','name','description','description_short','online_only','ean13','upc' ,'quantity', 'minimal_quantity', 'price','wholesale_price','reference','width','height','depth', 'weight','out_of_stock','quantity_discount','combination','active','available_for_order','available_date','condition', 'show_price','is_virtual']
+        fields = ['id_category_default','id_shop_default','name','description','description_short','online_only','ean13','upc' ,'quantity', 'minimal_quantity', 'price','wholesale_price','reference','width','height','depth', 'weight','out_of_stock','combination','active','available_date','condition','is_virtual']
 
 class FotosForm(forms.ModelForm):
     '''

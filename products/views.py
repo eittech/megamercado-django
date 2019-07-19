@@ -190,14 +190,10 @@ def productos_add(request):
                 cuenta=cuenta+1
             
         i.number_of_child=cuenta
-        print(i.name)
-        print(i.number_of_child)
     tienda = Shop.objects.filter(owner=request.user, deleted=False)
     if request.method=="POST":
         print("PASO AL POST")
-        if form.is_valid():
-            print("valido")
-            if form['id_category_default'].value()!=None:
+        if form['id_category_default'].value()!=None:
                 for i in form['id_category_default'].value():
                     categoria=Category.objects.get(id_category=i)
                 shop=Shop.objects.get(id_shop=form['id_shop_default'].value())
@@ -218,20 +214,44 @@ def productos_add(request):
                 depth=form['depth'].value()
                 weight=form['weight'].value()
                 out_of_stock=form['out_of_stock'].value()
-                quantity_discount=form['quantity_discount'].value()
                 combination=form['combination'].value()
                 active=form['active'].value()
                 estado="Inicial"
-                available_for_order=form['available_for_order'].value()
-                available_date=form.cleaned_data['available_date']
+                if form['available_date'].value()!="":
+                    try:
+                        a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                        fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                        available_date=fecha
+                    except:
+                        pass
+                else:
+                    available_date=""
                 condition=form['condition'].value()
-                show_price=form['show_price'].value()
                 is_virtual=form['is_virtual'].value()
                 date_add= timezone.now()
                 date_upd= date_add
-                pro=Product.objects.create(id_category_default=categoria, id_shop_default=shop, owner=owner, name=name, description=description, description_short=description_short, online_only=online_only, ean13=ean13, upc=upc,quantity=quantity, minimal_quantity=minimal_quantity, price=price, wholesale_price=wholesale_price, reference=reference, width=width, height=height, depth=depth, weight=weight, out_of_stock=out_of_stock, quantity_discount=quantity_discount, combination=combination, active=active, estado=estado, available_for_order=available_for_order,available_date=available_date, condition=condition, show_price=show_price, is_virtual=is_virtual,date_add=date_add, date_upd=date_upd)
+                pro=Product.objects.create(id_category_default=categoria, id_shop_default=shop, owner=owner, name=name, description_short=description_short, online_only=online_only, ean13=ean13, upc=upc,quantity=quantity, price=price, out_of_stock=out_of_stock, combination=combination, active=active, estado=estado, condition=condition, is_virtual=is_virtual,date_add=date_add, date_upd=date_upd)
+                if reference!="":
+                    pro.reference=reference
+                if description!="":
+                    pro.description=description
+                if minimal_quantity!="":
+                    pro.minimal_quantity=minimal_quantity
+                if wholesale_price!="":
+                    pro.wholesale_price=wholesale_price
+                if width!="":
+                    pro.width=width
+                if height!="":
+                    pro.height=height
+                if depth!="":
+                    pro.depth=depth
+                if weight!="":
+                    pro.weight=weight
+                if available_date!="":
+                    pro.available_date=available_date
                 pro.save()
-                return HttpResponseRedirect(reverse('productos_list'))
+                url = reverse('productos_detalles1', kwargs={'pk': pro.id_product})
+                return HttpResponseRedirect(url)
     return render(request, "Cuenta/Productos/productos-add.html",{'form':form, 'tienda': tienda, 'categories':categories})
 
 def productos_edit(request, pk):
@@ -256,69 +276,93 @@ def productos_edit(request, pk):
                 for i in form['id_category_default'].value():
                     producto.id_category_default=Category.objects.get(id_category=i)
                 producto.id_shop_default=Shop.objects.get(id_shop=form['id_shop_default'].value())
+                if form['reference'].value()!="None":
+                    producto.reference=form['reference'].value()
+                if form['description'].value()!="None":
+                    if producto.description!="None" and producto.description!="" and form['description'].value()=="":
+                        producto.description=form['description'].value()
+                    if form['description'].value()!="":
+                        producto.description=form['description'].value()
+                if form['minimal_quantity'].value()!="None":
+                    producto.minimal_quantity=form['minimal_quantity'].value()
+                if form['minimal_quantity'].value()=="":
+                    producto.minimal_quantity=0
+                if form['wholesale_price'].value()!="None":
+                    if form['wholesale_price'].value()=="":
+                        producto.wholesale_price=0
+                    else:
+                        producto.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
+                if form['width'].value()!="None":
+                    if form['width'].value()=="":
+                        producto.width=0
+                    else:
+                        producto.width=float((form['width'].value()).replace(",", "."))
+                if form['height'].value()!="None":
+                    if form['height'].value()=="":
+                        producto.height=0
+                    else:
+                        producto.height=float((form['height'].value()).replace(",", "."))
+                if form['depth'].value()!="None":
+                    if form['depth'].value()=="":
+                        producto.depth=0
+                    else:
+                        producto.depth=float((form['depth'].value()).replace(",", "."))
+                if form['weight'].value()!="None":
+                    if form['weight'].value()=="":
+                        producto.weight=0
+                    else:
+                        producto.weight=float((form['weight'].value()).replace(",", "."))
+                if form['available_date'].value()!="None" and form['available_date'].value()!="":
+                    try:
+                        a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                        fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                        producto.available_date=fecha
+                    except:
+                        a=(form['available_date'].value()).split()
+                        a.remove("de")
+                        a.remove("de")
+                        if a[1]=="Enero":
+                            fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
+                        if a[1]=="Febrero":
+                            fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
+                        if a[1]=="Marzo":
+                            fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
+                        if a[1]=="Abril":
+                            fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
+                        if a[1]=="Mayo":
+                            fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
+                        if a[1]=="Junio":
+                            fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
+                        if a[1]=="Julio":
+                            fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
+                        if a[1]=="Agosto":
+                            fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
+                        if a[1]=="Septiembre":
+                            fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
+                        if a[1]=="Octubre":
+                            fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
+                        if a[1]=="Noviembre":
+                            fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
+                        if a[1]=="Diciembre":
+                            fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
+                        producto.available_date=fecha
                 producto.name=form['name'].value()
-                producto.description=form['description'].value()
                 producto.description_short=form['description_short'].value()
                 producto.online_only=form['online_only'].value()
                 producto.ean13=form['ean13'].value()
                 producto.upc=form['upc'].value()
                 producto.quantity=form['quantity'].value()
-                producto.minimal_quantity=form['minimal_quantity'].value()
                 producto.price=float((form['price'].value()).replace(",", "."))
-                producto.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
-                producto.reference=form['reference'].value()
-                producto.width=float((form['width'].value()).replace(",", "."))
-                producto.height=float((form['height'].value()).replace(",", "."))
-                producto.depth=float((form['depth'].value()).replace(",", "."))
-                producto.weight=float((form['weight'].value()).replace(",", "."))
                 producto.out_of_stock=form['out_of_stock'].value()
-                if form['quantity_discount'].value()!="None":
-                    if form['quantity_discount'].value()!="":
-                        print("paso")
-                        print(form['quantity_discount'].value())
-                        producto.quantity_discount=float((form['quantity_discount'].value()).replace(",", "."))
                 producto.combination=form['combination'].value()
                 producto.active=form['active'].value()
-                producto.available_for_order=form['available_for_order'].value()
-                try:
-                    a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
-                    fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
-                    producto.available_date=fecha
-                except:
-                    a=(form['available_date'].value()).split()
-                    a.remove("de")
-                    a.remove("de")
-                    if a[1]=="Enero":
-                        fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
-                    if a[1]=="Febrero":
-                        fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
-                    if a[1]=="Marzo":
-                        fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
-                    if a[1]=="Abril":
-                        fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
-                    if a[1]=="Mayo":
-                        fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
-                    if a[1]=="Junio":
-                        fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
-                    if a[1]=="Julio":
-                        fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
-                    if a[1]=="Agosto":
-                        fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
-                    if a[1]=="Septiembre":
-                        fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
-                    if a[1]=="Octubre":
-                        fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
-                    if a[1]=="Noviembre":
-                        fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
-                    if a[1]=="Diciembre":
-                        fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
-                    producto.available_date=fecha
                 producto.condition=form['condition'].value()
-                producto.show_price=form['show_price'].value()
                 producto.is_virtual=form['is_virtual'].value()
                 producto.date_upd= timezone.now()
                 try:
                     producto.save()
+                    url = reverse('productos_detalles1', kwargs={'pk': producto.id_product})
+                    return HttpResponseRedirect(url)
                 except:
                     pass
                 return HttpResponseRedirect(reverse('productos_list'))
@@ -339,17 +383,16 @@ def imagenes_add(request, pk):
     form= FotosForm(request.POST)
     producto=Product.objects.get(id_product=pk)
     fotos=Image.objects.filter(id_product=producto)
+    print(len(fotos))
     if request.method=="POST":
         foto=request.FILES['image']
-        legend=form['legend'].value()
-        position=form['position'].value()
-        cover=form['cover'].value()
-        if form['cover'].value()==True:
-            for i in fotos:
-                i.cover=False
-                i.save()
-        imagen=Image.objects.create(id_product=producto, image=foto, legend=legend, position=position, cover=cover)
-        imagen.save()
+        print("AQUI ESTA LA FOTO")
+        for f in request.FILES.getlist('image'):
+            foto=f
+            imagenes=len(Image.objects.filter(id_product=producto))
+            position=imagenes+1
+            imagen=Image.objects.create(id_product=producto, image=foto,position=position)
+            imagen.save()
         url = reverse('productos_detalles1', kwargs={'pk': pk})
         return HttpResponseRedirect(url)
     return render(request, "Cuenta/Productos/imagenes-add.html",{'form': form})

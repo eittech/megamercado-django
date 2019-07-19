@@ -257,7 +257,7 @@
                         </a>
                       </li>
                       <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'direcciones' %}">
                           <span data-feather="file"></span>
                           Direcciones
                         </a>
@@ -324,8 +324,8 @@
 		<form method="POST" >
       {% csrf_token %}
       <div style="margin-left:3.8%" >
-        <label for="id_id_category_default">Categoria</label> 
-<div class="dropdown m-b">
+        <label for="id_id_category_default" style="margin-left: 1.2%">Categoria *</label> 
+<div class="dropdown m-b" style="margin-left: 1.2%">
   <button class="btn btn-danger" type="button" data-toggle="dropdown">
     Seleccione la categoria
     <span class="caret"></span>
@@ -347,9 +347,8 @@
 
 </div>
       </div>
-
       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_id_shop_default">Tienda</label>
+            <label for="id_id_shop_default">Tienda *</label>
             <select class="custom-select d-block w-100" name="id_shop_default" required id="id_id_shop_default">
               <option value="">Elige...</option>
               {% for t in tienda %}
@@ -359,193 +358,185 @@
          <div class="invalid-feedback">
               Please select a valid shop.
          </div> 
-	   </div>
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_name">Nombre</label>
-		  <div style="width: 450px">
-            <input type="text" class="form-control" name="name" required maxlength="128" id="id_name">
+     </div>
+       <div style="margin-left:3.8%" class="col-md-4 mb-3">
+            <label for="id_name">Nombre *</label>
+      <div style="width: 550px">
+          <textarea class="form-control" rows="2" name="name" required maxlength="128" id="id_name"></textarea>
           <div class="invalid-feedback">
               Se requiere nombre del producto.
           </div>
        </div>
-			</div>
+      </div>
+      
+      <div style="margin-left:3.8%" class="col-md-3 mb-3">
+          <label for="id_reference">Referencia</label>
+          <input type="text" class="form-control" name="reference" maxlength="32" id="id_reference" >
+        <div class="invalid-feedback">
+            Valid reference is required.
+        </div>
+     </div>
+
+     <div style="margin-left:3.8%" class="col-md-3 mb-3">
+        <label for="id_condition">Condición *</label>
+        <select class="custom-select d-block w-100" name="condition" required id="id_condition">
+          <option value="">Elige...</option>
+          <option value="new">Nuevo</option>
+
+          <option value="used">Usado</option>
+
+          <option value="refurbished">Restaurado</option>
+        </select>
+     <div class="invalid-feedback">
+          Please select a valid condition.
+     </div> 
+ </div>
+
+ <div style="margin-left:3.8%" class="col-md-3 mb-3" >
+    <label ffor="id_description_short">Descripción corta *</label>
+<div style="width: 550px; height: 150px">
+ <textarea class="form-control" rows="5"  name="description_short" id="id_description_short" required></textarea>
+    <!--<input type="text" class="form-control" id="name" placeholder="" required>
+  <div class="invalid-feedback">
+      Se requiere nombre del producto.
+  </div>-->
+</div>
+</div> <br>
+
        <div style="margin-left:3.8%" class="col-md-3 mb-3" >
             <label for="id_description">Descripción</label>
-		   <div style="width: 500px; height: 150px">
-			   <textarea class="form-control" rows="5" name="description" id="id_description" required></textarea>
+		   <div style="width: 550px; height: 150px">
+			   <textarea class="form-control" rows="5" name="description" id="id_description"></textarea>
             <!--<input type="text" class="form-control" id="name" placeholder="" required>
           <div class="invalid-feedback">
               Se requiere nombre del producto.
           </div>-->
        </div>
 		  </div> 
-       <div style="margin-left:3.8%" class="col-md-3 mb-3" >
-            <label ffor="id_description_short">Descripción corta</label>
-		   <div style="width: 500px; height: 150px">
-			   <textarea class="form-control" rows="5"  name="description_short" id="id_description_short" required></textarea>
-            <!--<input type="text" class="form-control" id="name" placeholder="" required>
-          <div class="invalid-feedback">
-              Se requiere nombre del producto.
-          </div>-->
-       </div>
-		  </div> <br>
-			<div style="margin-left:3.8%" class="col-md-3 mb-3">
-			<div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="online_only" id="id_online_only">
-          <label class="custom-control-label" for="id_online_only">Sólo en línea</label>
-        </div>
-		</div>	<br>
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_ean13">Ean13</label>
-  <div style="width: 450px">
-        <input class="form-control" type="text" name="ean13" maxlength="13" id="id_ean13">
-  </div>
-    </div>
 
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <label for="id_upc">Upc</label>
-  <div style="width: 450px">
-      <input class="form-control" type="text" name="upc" maxlength="12" id="id_upc">
-  </div>
-</div>
      <!-- Cantidad  --> 
-			<div style="margin-left:3.8%" class="col-md-3 mb-3" >
-            <label for="id_quantity">Cantidad</label></div>
-			<div style="margin-left:5%; width: 200px">
-        <input class="form-control" type="number" name="quantity" required id="id_quantity">
-		</div>	
-      <br>
-  
-      <div style="margin-left:3.8%" class="col-md-3 mb-3" >
-        <label for="id_minimal_quantity">Cantidad mínima</label></div>
-  <div style="margin-left:5%; width: 200px">
-    <input class="form-control" type="number" name="minimal_quantity" required id="id_minimal_quantity">
+     <div class="row" style="margin-left:0.2%">
+     <div style="margin-left:3.8%" class="col-md-2 mb-3" >
+        <label for="id_quantity">Cantidad *</label>
+    <input class="form-control" type="number" name="quantity" required id="id_quantity">
 </div>	
   <br>
-		<!--   <input type="number" value="500" min="0" max="1000" step="1"/>-->	
-		
-		<div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_price">Precio</label>
-            <input class="form-control" type="text" name="price" required id="id_price" step="0.000001">
-            <div class="invalid-feedback">
-              Valid price is required.
-          </div>
-    </div>	
-	       
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_wholesale_price">Precio al mayor</label>
-            <input type="text" class="form-control"name="wholesale_price" required id="id_wholesale_price" step="0.000001">
-          <div class="invalid-feedback">
-              Valid price is required.
-          </div>
-       </div>			
-	   <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_reference">Referencia</label>
-            <input type="text" class="form-control" name="reference" maxlength="32" id="id_reference" required>
-          <div class="invalid-feedback">
-              Valid reference is required.
-          </div>
-       </div>
-		
-       <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_width">Ancho</label>
-        <input type="text" class="form-control" name="width" required id="id_width">
+
+  <div style="margin-left:3.8%" class="col-md-2 mb-3" >
+    <label for="id_minimal_quantity">Cantidad mínima</label>
+<input class="form-control" type="number" name="minimal_quantity" id="id_minimal_quantity">
+</div>	
+</div>
+<br>
+<!--   <input type="number" value="500" min="0" max="1000" step="1"/>-->	
+<div class="row" style="margin-left:0.2%">
+<div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_price">Precio *</label>
+        <input class="form-control" type="number" name="price" required id="id_price" step="0.000001">
+        <div class="invalid-feedback">
+          Valid price is required.
+      </div>
+</div>	
+     
+   <div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_wholesale_price">Precio de costo</label>
+        <input type="number" class="form-control"name="wholesale_price" id="id_wholesale_price" step="0.000001">
       <div class="invalid-feedback">
-          Valid width is required.
+          Valid price is required.
       </div>
-   </div>
+   </div>		
+  </div>	
+   <div class="row"  style="margin-left:0.2%">
+   <div style="margin-left:3.8%" class="col-md-2 mb-3">
+      <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name="out_of_stock" id="id_out_of_stock">
+          <label class="custom-control-label" for="id_out_of_stock">Vender si no hay disponible en stock</label>
+        </div>
+    </div>	<br>
 
-   <div style="margin-left:3.8%" class="col-md-3 mb-3">
-    <label for="id_height">Altura</label>
-    <input type="text" class="form-control"  name="height" required id="id_height" >
-    <div class="invalid-feedback">
-        Valid heidht is required.
-    </div>
-  </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_depth">Profundidad</label>
-        <input type="text" class="form-control" name="depth" required id="id_depth">
-      <div class="invalid-feedback">
-          Valid depth is required.
-      </div>
-      </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_weight">Peso</label>
-        <input type="text" class="form-control" name="weight" required id="id_weight" >
-      <div class="invalid-feedback">
-          Valid weight is required.
-      </div>
-      </div>
-
-			<div style="margin-left:3.8%" class="col-md-5 mb-3">
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" name="out_of_stock" id="id_out_of_stock">
-            <label class="custom-control-label" for="id_out_of_stock">Vender si no hay disponible en stock</label>
-          </div>
-      </div>	<br>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <label for="id_quantity_discount">Cantidad de descuento</label>
-        <input type="text" class="form-control" name="quantity_discount" id="id_quantity_discount" >
-      </div>
-
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
+    
+    <div style="margin-left:3.8%" class="col-md-2 mb-3">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" name="combination" id="id_combination">
             <label class="custom-control-label" for="id_combination">Tiene combinaciones</label>
           </div>
       </div>	<br>
+      </div>
 
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
+      <div class="row"  style="margin-left:0.2%">
+      <div style="margin-left:3.8%" class="col-md-2 mb-3">
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" name="active" id="id_active">
             <label class="custom-control-label" for="id_active">Activo</label>
           </div>
       </div>	<br>
 
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" name="available_for_order" id="id_available_for_order">
-            <label class="custom-control-label" for="id_available_for_order">Disponible para ordenar</label>
-          </div>
-      </div>	<br>
-  
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <label for="id_available_date" style="width: 360px;">Fecha cuando estará disponible</label> 
-      <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="available_date" required id="id_available_date" required>
+
+      <div style="margin-left:3.8%" class="col-md-2 mb-3">
+          <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" name="is_virtual" id="id_is_virtual">
+              <label class="custom-control-label" for="id_is_virtual">¿Es virtual?</label>
+            </div>
+        </div>	<br>
+      </div>
+
+			<div style="margin-left:3.8%" class="col-md-2 mb-3">
+			<div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name="online_only" id="id_online_only">
+          <label class="custom-control-label" for="id_online_only">Sólo en línea</label>
+        </div>
+    </div>	<br>
+    <div class="row" style="margin-left:0.2%">
+    <div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_ean13">Ean13</label>
+        <input class="form-control" type="text" name="ean13" maxlength="13" id="id_ean13">
     </div>
-      <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_condition">Condición</label>
-            <select class="custom-select d-block w-100" name="condition" required id="id_condition">
-              <option value="">Elige...</option>
-              <option value="new">Nuevo</option>
 
-              <option value="used">Usado</option>
+    <div style="margin-left:3.8%" class="col-md-2 mb-3">
+      <label for="id_upc">Upc</label>
+      <input class="form-control" type="text" name="upc" maxlength="12" id="id_upc">
+</div>
+</div>
+<div class="row" style="margin-left:0.2%">
+       <div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_width">Ancho</label>
+        <input type="number" class="form-control" name="width" id="id_width">
+      <div class="invalid-feedback">
+          Valid width is required.
+      </div>
+   </div>
 
-              <option value="refurbished">Restaurado</option>
-            </select>
-         <div class="invalid-feedback">
-              Please select a valid condition.
-         </div> 
-     </div>
-     
-     <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="show_price" id="id_show_price">
-          <label class="custom-control-label" for="id_show_price">Mostrar el precio</label>
-        </div>
-    </div>	<br>
+   <div style="margin-left:3.8%" class="col-md-2 mb-3">
+    <label for="id_height">Altura</label>
+    <input type="number" class="form-control"  name="height" id="id_height" >
+    <div class="invalid-feedback">
+        Valid heidht is required.
+    </div>
+  </div>
+  </div>
+  <div class="row" style="margin-left:0.2%">
+      <div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_depth">Profundidad</label>
+        <input type="number" class="form-control" name="depth" id="id_depth">
+      <div class="invalid-feedback">
+          Valid depth is required.
+      </div>
+      </div>
 
-    <div style="margin-left:3.8%" class="col-md-3 mb-3">
-      <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="is_virtual" id="id_is_virtual">
-          <label class="custom-control-label" for="id_is_virtual">¿Es virtual?</label>
-        </div>
-    </div>	<br>
+      <div style="margin-left:3.8%" class="col-md-2 mb-3">
+        <label for="id_weight">Peso</label>
+        <input type="number" class="form-control" name="weight" id="id_weight" >
+      <div class="invalid-feedback">
+          Valid weight is required.
+      </div>
+      </div>
+</div>
+      <div style="margin-left:3.8%" class="col-md-2 mb-3">
+      <label for="id_available_date" style="width: 360px;">Fecha cuando estará disponible</label> 
+      <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="available_date" id="id_available_date" >
+    </div>
 
-		
+
 		<br>
 		<div style="margin-left:3.8%" class="col-md-3 mb-3">
 		<button type="submit" class="btn btn-outline-primary">Guardar</button>
@@ -566,7 +557,7 @@
         <link href="/static/air-datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
         <script src="/static/air-datepicker/js/datepicker.min.js"></script>
         <script src="/static/air-datepicker/js/i18n/datepicker.es.js"></script>
-        
+
         <script>
                 $( document ).ready(function() {
         $('#id_available_date').datepicker({
