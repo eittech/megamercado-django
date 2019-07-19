@@ -389,9 +389,17 @@ def imagenes_add(request, pk):
         print("AQUI ESTA LA FOTO")
         for f in request.FILES.getlist('image'):
             foto=f
+            fotos =Image.objects.filter(id_product=producto)
+            portada=False
+            for j in fotos:
+                if j.cover==True:
+                    portada=True
             imagenes=len(Image.objects.filter(id_product=producto))
             position=imagenes+1
-            imagen=Image.objects.create(id_product=producto, image=foto,position=position)
+            if portada==False:
+                imagen=Image.objects.create(id_product=producto, image=foto,position=position, cover=True)
+            else:
+                imagen=Image.objects.create(id_product=producto, image=foto,position=position)
             imagen.save()
         url = reverse('productos_detalles1', kwargs={'pk': pk})
         return HttpResponseRedirect(url)
