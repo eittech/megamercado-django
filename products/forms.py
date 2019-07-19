@@ -42,6 +42,19 @@ class FotosForm(forms.ModelForm):
         model = Image
         fields = ['image','legend','position','cover']
 
+class GrupoAttrShopForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    id_attribute_group = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=AttributeGroup.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeGroupShop
+        fields=['id_attribute_group']
 
 class ViForm(forms.ModelForm):
     '''

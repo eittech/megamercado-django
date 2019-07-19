@@ -134,20 +134,34 @@ def tiendas_detail(request, pk):
     tienda= Shop.objects.get(id_shop=pk)
     monedas= Currency.objects.filter(active=True)
     cuenta=AcountShop.objects.filter(id_shop=pk)
+    grupos=AttributeGroup.objects.all()
+    tienda=Shop.objects.get(id_shop=pk)
+    actual=AttributeGroupShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        grupos=grupos.exclude(id_attribute_group=i.id_attribute_group.id_attribute_group)
+
+    carrito=Carrier.objects.all()
+    actual=CarrierShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        carrito=carrito.exclude(id_carrier=i.id_carrier.id_carrier)
     try: 
         ref=CurrencyRef.objects.get(id_shop=pk)
         money=CurrencyShop.objects.filter(id_shop=pk)
         transp=CarrierShop.objects.filter(id_shop=pk)
+        grupoattr=AttributeGroupShop.objects.filter(id_shop=pk)
+        atributos= AttributeShop.objects.filter(id_shop=pk)
         print(money)
     except:
         ref=None
         money=CurrencyShop.objects.filter(id_shop=pk)
         transp=CarrierShop.objects.filter(id_shop=pk)
+        grupoattr=AttributeGroupShop.objects.filter(id_shop=pk)
+        atributos= AttributeShop.objects.filter(id_shop=pk)
         print(money)
     
     return render(request, 
     "Cuenta/Tienda/tiendas_detail.html",
-    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta, 'transp': transp})
+    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta, 'transp': transp, 'grupoattr':grupoattr,'atributos':atributos, 'grupos':grupos, 'carrito': carrito})
 
 def tiendas_mref(request, pk, id_currency): 
     tienda= Shop.objects.get(id_shop=pk)
@@ -174,6 +188,31 @@ def tiendas_mref_nopublish(request, pk):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+def grupo_attr_add(request, pk):
+    form =GrupoAttrShopForm(request.POST) 
+    grupos=AttributeGroup.objects.all()
+    tienda=Shop.objects.get(id_shop=pk)
+    actual=AttributeGroupShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        grupos=grupos.exclude(id_attribute_group=i.id_attribute_group.id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        for i in form['id_attribute_group'].value():
+            grupo=AttributeGroup.objects.get(id_attribute_group=i)
+            trans=AttributeGroupShop.objects.create(id_attribute_group=grupo, id_shop=tienda)
+        url = reverse('tiendas_detail', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, 
+    "Cuenta/Tienda/attr_group_add.html",
+    {'form':form , 'grupos': grupos})
+
+def grupo_attr_eliminar(request,pk, id_attribute_group):
+    grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
+    tienda=Shop.objects.get(id_shop=pk)
+    cart=AttributeGroupShop.objects.get(id_attribute_group=grupo, id_shop=tienda).delete()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
 def productos_list1(request):
     productos = Product.objects.filter(owner=request.user, deleted=False)
     tienda = Shop.objects.filter(owner=request.user,deleted=False)
