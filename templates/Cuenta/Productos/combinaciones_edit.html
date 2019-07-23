@@ -110,17 +110,16 @@
    <body>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 color" >
           <a class="navbar-brand" href="#" style="width: 35%; font-size: 17px">Logo</a>
-
-          <form class="form-inline mt-2 mt-md-0" action="#" method="get" >
-                        <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
-                        <button type="submit" style="margin-left: -98px;
-                        height: 30px;
-                        width: 90px;
-                        background-color: white; 
-                        color: gray;
-                        border: 0;
-                        -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
-                      </form>
+          <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+              <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+              <button type="submit" style="margin-left: -98px;
+              height: 30px;
+              width: 90px;
+              background-color: white; 
+              color: gray;
+              border: 0;
+              -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+            </form>
                       <div  style="width: 30%"> </div>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto" >
