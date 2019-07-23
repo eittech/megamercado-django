@@ -6,6 +6,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+    <link href="{% static 'css/css/bootstrap-colorpicker.css' %}" rel="stylesheet" >
 
 
     <style>
@@ -303,246 +304,217 @@
           </nav>
 
 
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
-
-      <h2 style="margin-left:5%" ><img src="{{tienda.logo.url}}" style="width: 200px; height: auto" > Detalles de la Tienda {{tienda.name}}        
-  </h2>
-   <br>
-   {% ifequal ref None %}
-   <h4 style="margin-left:5%" >Selecciona la moneda de referencia:        
-  </h4>
-  			<div style="margin-left:5%" >
-	<div class="row">
-    {% for i in monedas %}
-    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 200px; height: 200px">
-         		<div class="card-body">
-                 
-                 <img src="{{i.icono.url}}" style="width: 160px; height: auto"  data-toggle="modal" data-target="#exampleModal">
-
-                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea seleccionar esta moneda como referente?</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        Después de seleccionarla no podrá realizar cambios.
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <a href="{% url 'tiendas_mref' tienda.id_shop i.id_currency %}"><button type="submit" class="btn btn-primary">Guardar</button></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-             <br>
-			 	</div>
-      		 </div>
-     </div>
-     {% endfor %}
-     </div>
-    {%else %}
-   <h4 style="margin-left:5%;"> Moneda referente</h4>
-  			<div style="margin-left:5%" >
-	<div class="row">
-    	<div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-	  		<div class="card" style="width: 120px;  height: 120px">
-         		<div class="card-body">
-                 <img src="{{ref.id_currency.icono.url}}" style="width: 80px; height: auto">
-             <br>
-			 	</div>
-      		 </div>
-          </div>
-      {% ifequal ref.pregunta False %}
-      <div style="margin-left:1%; flex-grow: 0 !important;" class="col-sm">
-            <div class="card" style="width: 500px;  height: 120px">
-                 <div class="card-body">
-                   <h5 > Necesitamos que respondas la siguiente pregunta: </h5>
-                  <h6> 
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                          Pregunta
-                        </button> </h6> 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">¿Deseas publicar en esta moneda?</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              Si respondes de manera afirmativa, los productos se publicaran con el precio según la moneda referente.
-                            </div>
-                            <div class="modal-footer">
-                              <a href="{% url 'tiendas_mref_nopublish' tienda.id_shop %}"><button type="submit" class="btn btn-primary" >No</button></a>
-                              <a href="{% url 'tiendas_mref_publish' tienda.id_shop %}"><button type="submit" class="btn btn-primary">sí</button></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                 <br>
-             </div>
-               </div>
+      {% ifequal grupo.name "Color" %}
+            <h2 style="margin-left:5%" >Color</h2>
+         <br>
+         <form method="POST" enctype="multipart/form-data" >
+          {% csrf_token %}
+          <div style="margin-left:3.8%" class="col-md-3 mb-4">
+              <label for="id_name">Nombre del color</label>
+              <input class="form-control" type="text" name="name" maxlength="128" value="{{attr.name}}" required id="id_name">
+              <div class="invalid-feedback">
+                 Valid name is required.
               </div>
-      {% endifequal %}
-   </div> <!-- row  -->
-   {% endifequal %}
-   {% ifequal ref.pregunta True %}
-   <br>
-   <h4> Monedas <a href="{% url 'currencyshop_add' tienda.id_shop %}">
-    <img  src="{% static 'img/icono_add.png' %}" style="width: 30px; height: 30px">
- </a></h4>
-     <br>
-     {% if money %}
-     <div class="table-responsive">
-      <table class="table table-striped table-sm">
-      <thead>
-          <tr>
-              <th>Nombre</th>
-              <th>Rate</th>
-              <th>Editar</th>
-              <th>Eliminar</th>
-              <th>Cuentas</th>
-              <th>Añadir cuenta</th>
-          </tr>
-      </thead>
-      <tbody>
-        {% for j in money %}
-          <tr>
-              <td>{{ j.id_currency.name }}</td>
-              <td>{{ j.rate_moneda}} {{j.id_currency.sign}}= {{j.rate_referencia}} {{ref.id_currency.sign}}</td>
-              <td><a href="{% url 'currencyshop_edit' tienda.id_shop j.id_currency.id_currency %}">edit</a></td>
-              <td><a href="{% url 'currencyshop_eliminar' tienda.id_shop j.id_currency.id_currency %}">Eliminar</a></td>
-              <td> {% for c in cuenta %}
-                    {% ifequal c.id_account.id_currency j.id_currency %}
-                    {{c.id_account.name}}, {{c.id_account.persona}}
-                    <br>
-                    {{c.id_account.tipo}}, 
-                    {{c.id_account.number}}
-                    <a href="{% url 'accountshop_edit' tienda.id_shop c.id_account.id_account %}">editar</a>
-                    <a href="{% url 'accountshop_eliminar' tienda.id_shop c.id_account.id_account %}">eliminar</a>
-                    <br>
-                    {% endifequal %}
-                    {% endfor %}
-              </td>
-              <td> <a href="{%url 'accountshop_add' tienda.id_shop j.id_currency %}"> Add</a></td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    </div>
-      {% endif %}
-     <br>
-     <h4> Transportistas 
-       {% if carrito %}
-        <a href="{% url 'transportista_add' tienda.id_shop %}"><img  src="{% static 'img/icono_add.png' %}" style="width: 30px; height: 30px"></a>
-      {% endif %}
-      </h4>
-      <br>
-    {% if transp %}
-    <div class="table-responsive">
-        <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Logo</th>
-                <th>Url</th>
-                <th>Máximo ancho</th>
-                <th>Máxima altura</th>
-                <th>Máxima profundidad</th>
-                <th>Máximo peso</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for j in transp %}
-            <tr>
-                <td>{{ j.id_carrier.name }}</td>
-                <td> <img src="{{j.id_carrier.logo.url}}" style="width:100px"></td>
-                <td><a href="{{ j.id_carrier.url}}">{{ j.id_carrier.url}}</a></td>
-                <td>{{ j.id_carrier.max_width}}</td>
-                <td>{{ j.id_carrier.max_height}}</td>
-                <td>{{ j.id_carrier.max_depth}}</td>
-                <td>{{ j.id_carrier.max_weight}}</td>
-                <td><a href="{% url 'transportista_eliminar' tienda.id_shop j.id_carrier.id_carrier %}">Eliminar</a></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      </div>
-    {% endif %}
+           </div>
+           <br>
+           <div style="margin-left:3.8%" class="col-md-3 mb-4">
+              <label for="id_color">Seleccione un color</label>
+              <div id="cp5c" class="input-group colorpicker-element" title="Using format option" data-colorpicker-id="8">
+                 <input type="text" class="form-control input-lg" name="color" value="{{attr.color}}" maxlength="32" id="id_color">
+                 <span class="input-group-append">
+                 <span class="input-group-text colorpicker-input-addon" data-original-title="" title="" tabindex="0"><i style="background: rgb(48, 90, 162) none repeat scroll 0% 0%;"></i></span>
+                 </span>
+              </div>
+           </div>
+           <br>
 
-    <br>
-   <h4> Atributos
-     {% if grupos %}
-    <a href="{% url 'grupo_attr_add' tienda.id_shop %}">
-    <img  src="{% static 'img/icono_add.png' %}" style="width: 30px; height: 30px">
- </a>
-    {% endif %}
-</h4>
-     <br>
-     {% if grupoattr %}
-     <div class="table-responsive">
-        <table class="table table-striped table-sm">
-        <thead>
-            <tr>
-                <th>Grupo de atributo</th>
-                <th>Eliminar</th>
-                <th>Atributos</th>
-                <th>Añadir atributo</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for j in grupoattr %}
-            <tr>
-                <td>{{ j.id_attribute_group.name }}</td>
-                <td> <a href="{% url 'grupo_attr_eliminar' tienda.id_shop j.id_attribute_group.id_attribute_group %}">Eliminar</a></td>
-                <td>
-                  {% for i in atributos %}
-                    {% ifequal i.id_attribute.id_attribute_group j.id_attribute_group %}
-                    {% ifequal  j.id_attribute_group.name "Color" %}
-                    <div class="row">
-                      <div class="col-sm" style="background-color: {{i.id_attribute.color}};flex-grow: 0;"></div>
-                      <div class="col-sm" style="">{{i.id_attribute.name}} <a href="{% url 'attr_edit' tienda.id_shop i.id_attribute.id_attribute %}">Editar</a><a href="{% url 'attr_eliminar' tienda.id_shop i.id_attribute.id_attribute %}"> Eliminar</a></div>
-                    </div>
-                    {% else %}
-                    {{i.id_attribute.name}}
-                    <a href="{% url 'attr_edit' tienda.id_shop i.id_attribute.id_attribute %}">Editar</a>
-                    <a href="{% url 'attr_eliminar' tienda.id_shop i.id_attribute.id_attribute %}"> Eliminar</a>
-                    <br>
-                    {% endifequal%}
-                    {% endifequal%}
-                  {% endfor %}
-                </td>
-                <td><a href="{% url 'attr_add' tienda.id_shop j.id_attribute_group.id_attribute_group %}">Añadir</a></td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      </div>
-     {% endif %}
-  {% endifequal %}
+          <div class="row">
+          <div style="margin-left:3.8%" class="col-md-1 mb-3">
+          <button type="submit" name="submit" class="btn btn-outline-primary" value="Submit">Guardar</button>
+          </div>
+        </div>
+            
+          </form>
+        {%else %}
+        <h2 style="margin-left:5%" >{{grupo.name}}</h2>
+        <br>
+        <form method="POST" enctype="multipart/form-data" >
+          {% csrf_token %}
+          <div style="margin-left:3.8%" class="col-md-3 mb-4">
+              <label for="id_name">Nombre</label>
+              <input class="form-control" type="text" name="name" maxlength="128" value="{{attr.name}}" required id="id_name">
+              <div class="invalid-feedback">
+                 Valid name is required.
+              </div>
+           </div>
+           <br>
 
-  </div>
-
-	
-
-		
-    </main>
+          <div class="row">
+          <div style="margin-left:3.8%" class="col-md-1 mb-3">
+          <button type="submit" name="submit" class="btn btn-outline-primary" value="Submit">Guardar</button>
+          </div>
+        </div>
+            
+          </form>
+        {% endifequal %}
+          </main>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-      
+        <script src="{% static 'js/js/bootstrap-colorpicker.js' %}"></script>
+        <script>
+           $(document).ready(function()
+           {
+               $('#cp1').colorpicker();
+           
+               $('#cp2, #cp3a, #cp3b').colorpicker();
+               $('#cp4').colorpicker(
+               {
+                   "color": "#16813D"
+               });
+           
+               $('#cp5a').colorpicker(
+               {
+                   format: 'auto'
+               });
+           
+               $('#cp5b').colorpicker(
+               {
+                   format: null
+               });
+           
+               $('#cp5c').colorpicker(
+               {
+                   format: "rgb"
+               });
+           
+               //Disabled / Enabled states
+               $('#cp5d').colorpicker(
+               {
+                   inline: true
+               });
+               $('#cp5d_toggle').on('click', function()
+               {
+                   var cp = $('#cp5d').colorpicker('colorpicker');
+                   if (cp.isEnabled())
+                   {
+                       cp.disable();
+                   }
+                   else
+                   {
+                       cp.enable();
+                   }
+               });
+           
+               //Horizontal mode
+               $('#cp6').colorpicker(
+               {
+                   horizontal: true
+               });
+           
+               //
+               $('#cp7').colorpicker(
+               {
+                   color: '#DD0F20',
+                   inline: true,
+                   container: true
+               });
+               $('#cp8').colorpicker(
+               {
+                   color: '#F18A31',
+                   inline: true,
+                   container: '#cp8_container'
+               });
+               $('#cp9').colorpicker(
+               {
+                   useAlpha: false
+               });
+               $('#cp10').colorpicker(
+               {
+                   useHashPrefix: false
+               });
+               $('#cp11').colorpicker(
+               {
+                   fallbackColor: 'rgb(48, 90, 162)'
+               });
+               $('#cp12').colorpicker();
+               $('#cp13').colorpicker(
+               {
+                   autoInputFallback: false
+               });
+               $('#cp14').colorpicker(
+               {
+                   popover:
+                   {
+                       title: 'Adjust the color',
+                       placement: 'top'
+                   }
+               });
+               $('#cp15').colorpicker();
+               //add complimentary swatchers
+               $('#cp16')
+                   .colorpicker(
+                   {
+                       inline: true,
+                       container: true,
+                       extensions: [
+                       {
+                           name: 'swatches',
+                           options:
+                           {
+                               colors:
+                               {
+                                   'tetrad1': '#000',
+                                   'tetrad2': '#000',
+                                   'tetrad3': '#000',
+                                   'tetrad4': '#000'
+                               },
+                               namesAsValues: false
+                           }
+                       }]
+                   })
+                   .on('colorpickerChange colorpickerCreate', function(e)
+                   {
+                       var colors = e.color.generate('tetrad');
+           
+                       colors.forEach(function(color, i)
+                       {
+                           var colorStr = color.string(),
+                               swatch = e.colorpicker.picker
+                               .find('.colorpicker-swatch[data-name="tetrad' + (i + 1) + '"]');
+           
+                           swatch
+                               .attr('data-value', colorStr)
+                               .attr('title', colorStr)
+                               .find('> i')
+                               .css('background-color', colorStr);
+                       });
+                   });
+           
+               //
+               $('#cp17').colorpicker(
+               {
+                   inline: true,
+                   container: true,
+                   template: '<div class="colorpicker">' +
+                       '<div class="colorpicker-saturation"><i class="colorpicker-guide"></i></div>' +
+                       '<div class="colorpicker-hue"><i class="colorpicker-guide"></i></div>' +
+                       '<div class="colorpicker-alpha">' +
+                       '   <div class="colorpicker-alpha-color"></div>' +
+                       '   <i class="colorpicker-guide"></i>' +
+                       '</div>' +
+                       '<div class="colorpicker-bar"><button class="btn btn-danger">Button</button></div>' +
+                       '</div>'
+               });
+           
+           });
+           
+        </script>
         <script>
           $(document).ready(function(){
             $("#micuenta-short").click(function(){

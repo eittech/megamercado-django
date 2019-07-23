@@ -320,12 +320,12 @@
                           <li class="nav-item">
                             <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Ajustes básicos</a>
                           </li>
+                          {% ifequal producto.combination True %}
                           <li class="nav-item">
-                            <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Combinaciones</a>
+                            <a class="nav-link" id="sales-tab" href="{% url 'productos_combinaciones' producto.id_product %}">Combinaciones</a>
                           </li>
-                          <li class="nav-item">
-                            <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Purchases</a>
-                          </li>
+                          {% endifequal %}
+                        
                         </ul>
                         {% if fotos %}
                         <div class="card">

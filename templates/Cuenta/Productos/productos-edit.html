@@ -599,7 +599,7 @@
   
       <div style="margin-left:3.8%" class="col-md-3 mb-3">
       <label for="id_available_date" style="width: 360px;">Fecha cuando estará disponible</label> 
-      {% if producto.weight %}
+      {% if producto.available_date %}
       <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="available_date"  value="{{producto.available_date}}" id="id_available_date">
         {%else%}
         <input class="form-c mr-sm-2" data-date-format="dd/mm/yyyy"  type="text" name="available_date" id="id_available_date">

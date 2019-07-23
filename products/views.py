@@ -213,6 +213,81 @@ def grupo_attr_eliminar(request,pk, id_attribute_group):
     cart=AttributeGroupShop.objects.get(id_attribute_group=grupo, id_shop=tienda).delete()
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
+
+def attr_add(request, pk, id_attribute_group):
+    form =AttrForm(request.POST) 
+    grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        if grupo.name=="Color":
+            #print(form['submit']).value()
+            print(request.POST['submit'])
+            nombre=form['name'].value()
+            color=form['color'].value()
+            print(color)
+            position= len(AttributeShop.objects.filter(id_shop=tienda))+1
+            attr=Attribute.objects.create(id_attribute_group=grupo, name=nombre, color=color, position=position)
+            try:
+                attr.save()
+                AttributeShop.objects.create(id_attribute=attr, id_shop=tienda)
+                if request.POST['submit']=="Submit":
+                    url = reverse('tiendas_detail', kwargs={'pk': pk})
+                    return HttpResponseRedirect(url)
+            except:
+                pass
+        else:
+            print(request.POST['submit'])
+            nombre=form['name'].value()
+            position= len(AttributeShop.objects.filter(id_shop=tienda))+1
+            attr=Attribute.objects.create(id_attribute_group=grupo, name=nombre, position=position)
+            try:
+                attr.save()
+                AttributeShop.objects.create(id_attribute=attr, id_shop=tienda)
+                if request.POST['submit']=="Submit":
+                    url = reverse('tiendas_detail', kwargs={'pk': pk})
+                    return HttpResponseRedirect(url)
+            except:
+                pass
+    return render(request, 
+    "Cuenta/Tienda/attr_add.html",
+    {'form':form , 'grupo': grupo})
+
+def attr_edit(request, pk, id_attribute):
+    form =AttrForm(request.POST) 
+    attr=Attribute.objects.get(id_attribute=id_attribute)
+    grupo=AttributeGroup.objects.get(id_attribute_group=attr.id_attribute_group.id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        if grupo.name=="Color":
+            attr.name=form['name'].value()
+            attr.color=form['color'].value()
+            try:
+                attr.save()
+                url = reverse('tiendas_detail', kwargs={'pk': pk})
+                return HttpResponseRedirect(url)
+            except:
+                pass
+        else:
+            attr.name=form['name'].value()
+            try:
+                attr.save()
+                url = reverse('tiendas_detail', kwargs={'pk': pk})
+                return HttpResponseRedirect(url)
+            except:
+                pass
+    return render(request, 
+    "Cuenta/Tienda/attr_edit.html",
+    {'form':form , 'grupo': grupo, 'attr': attr})
+
+def attr_eliminar(request,pk, id_attribute):
+    attr=Attribute.objects.get(id_attribute=id_attribute)
+    tienda=Shop.objects.get(id_shop=pk)
+    cart=AttributeShop.objects.get(id_attribute=attr, id_shop=tienda).delete()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
 def productos_list1(request):
     productos = Product.objects.filter(owner=request.user, deleted=False)
     tienda = Shop.objects.filter(owner=request.user,deleted=False)
@@ -446,6 +521,12 @@ def imagenes_add(request, pk):
 
 def imagenes_eliminar(request, pk, id_image):
     fotos=Image.objects.filter(id_image=id_image).delete()
+    producto=Product.objects.get(id_product=pk)
+    otros=Image.objects.filter(id_product=producto)
+    if len(otros)!=0:
+        print(otros[0])
+        otros[0].cover=True
+        otros[0].save()
     url = reverse('productos_detalles1', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
@@ -460,6 +541,332 @@ def imagenes_cover(request, pk, id_image):
     url = reverse('productos_detalles1', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+def productos_combinaciones(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.filter(id_product=producto).annotate(price_number=Count('id_product'))
+    for i in comb:
+        if i.unit_price_impact!=None:
+            i.price_number=producto.price+ i.unit_price_impact
+        else:
+            i.price_number=producto.price
+    fotos=ProductAttributeImage.objects.filter(id_image__id_product=producto)
+    img=Image.objects.filter(id_product=producto).order_by('position')
+    count=0
+    for i in comb:
+        if count==0:
+            attr=ProductAttributeCombination.objects.filter(id_product_attribute=i.id_product_attribute)
+            count=count+1
+        else:
+            attr=attr | ProductAttributeCombination.objects.filter(id_product_attribute=i.id_product_attribute)
+    if not comb:
+        attr=None
+    return render(request, "Cuenta/Productos/combinaciones.html",{'producto':producto, 'comb':comb, 'attr':attr, 'fotos':fotos, 'img':img})
+
+def productos_comb_add(request,pk):
+    producto=Product.objects.get(id_product=pk)
+    form=CombAttrForm(request.POST)
+    tienda=Shop.objects.get(id_shop=producto.id_shop_default.id_shop)
+    grupo=AttributeGroupShop.objects.filter(id_shop=tienda)
+    attr=AttributeShop.objects.filter(id_shop=tienda)
+    foto=Image.objects.get(id_product=producto, cover=True)
+    if request.method=="POST":
+        print(form)
+        count=0
+        print(form['id'].value())
+        for i in form['id'].value():
+            if count==0:
+                atributo=AttributeShop.objects.filter(id=i)
+                count=count+1
+            else:
+                atributo=atributo | AttributeShop.objects.filter(id=i)
+
+        color=atributo.filter(id_attribute__id_attribute_group__name="Color")
+        print(color)
+        talla=atributo.filter(id_attribute__id_attribute_group__name="Talla")  
+        print(talla)
+        dimension=atributo.filter(id_attribute__id_attribute_group__name="Dimensión") 
+        print(dimension)     
+        if len(color)>0:
+            print(len(color))
+            for c in color:
+                if len(talla)>0:
+                    print(len(talla))
+                    for t in talla:
+                        if len(dimension)>0:
+                            for d in dimension:
+                                pre=True
+                                comb=ProductAttribute.objects.filter(id_product=producto)
+                                if comb:    
+                                    for i in comb:
+                                        if i.default_on==True:
+                                            pre=False
+                                else:
+                                    pass
+                                combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                                combinacion.save()
+                                fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                                try:
+                                    fo.save()
+                                except:
+                                    pass
+                                co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                                co.save()
+                                ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                                ta.save()
+                                di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                                di.save()
+                        else:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0,quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                            co.save()
+                            print('AQUI')
+                            print(co)
+                            ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                            ta.save()
+                            print('AQUI2')
+                            print(ta)
+                else:
+                    print("paso")
+                    if len(dimension)>0:
+                        print("paso2")
+                        for d in dimension:
+                            print("paso3")
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                            co.save()
+                            print("AQUI1")
+                            print(co)
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+                            print("AQUI2")
+                            print(di)
+                    else:
+                        print("paso4")
+                        pre=True
+                        comb=ProductAttribute.objects.filter(id_product=producto)
+                        if comb:    
+                            for i in comb:
+                                if i.default_on==True:
+                                    pre=False
+                        else:
+                            pass
+
+                        combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                        combinacion.save()
+                        fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                        try:
+                            fo.save()
+                        except:
+                            pass
+                        co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                        co.save()
+        else:
+            if len(talla)>0:
+                for t in talla:
+                    if len(dimension)>0:
+                        for d in dimension:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto,unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                            ta.save()
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+                    else:
+                        pre=True
+                        comb=ProductAttribute.objects.filter(id_product=producto)
+                        if comb:    
+                            for i in comb:
+                                if i.default_on==True:
+                                    pre=False
+                        else:
+                            pass
+                        combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                        combinacion.save()
+                        fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                        try:
+                            fo.save()
+                        except:
+                            pass
+                        ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                        ta.save()
+            else:
+                if len(dimension)>0:
+                        for d in dimension:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+        url = reverse('productos_combinaciones', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+                                
+    return render(request, "Cuenta/Productos/combination_add.html",{'producto':producto,'form':form,'grupo':grupo, 'attr':attr})
+
+def combinacion_predeterminada(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id)
+    todascomb=ProductAttribute.objects.filter(id_product=producto, default_on=True)
+    for i in todascomb:
+        i.default_on=False
+        i.save()
+
+    comb.default_on=True
+    comb.save()
+    url = reverse('productos_combinaciones', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def combinacion_eliminar(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id).delete()
+    otros=ProductAttribute.objects.filter(id_product=producto)
+    if len(otros)!=0:
+        print(otros[0])
+        otros[0].default_on=True
+        otros[0].save()
+    url = reverse('productos_combinaciones', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def combinacion_editar(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id)
+    form=CombForm(request.POST)
+    fotos=Image.objects.filter(id_product=producto)
+    actual=ProductAttributeImage.objects.filter(id_product_attribute=comb)
+    if len(actual)>0:
+        for i in actual:
+            id_img=i.id_image
+    else:
+        id_img=None
+    if request.method=="POST":
+        if form['reference'].value()!="None":
+            comb.reference=form['reference'].value()
+        if form['minimal_quantity'].value()!="None":
+            comb.minimal_quantity=form['minimal_quantity'].value()
+        if form['minimal_quantity'].value()=="":
+            comb.minimal_quantity=0
+        if form['unit_price_impact'].value()!="None":
+            if form['unit_price_impact'].value()=="":
+                comb.unit_price_impact=0
+            else:
+                comb.unit_price_impact=float((form['unit_price_impact'].value()).replace(",", "."))
+        if form['wholesale_price'].value()!="None":
+            if form['wholesale_price'].value()=="":
+                comb.wholesale_price=0
+            else:
+                comb.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
+        if form['weight'].value()!="None":
+            if form['weight'].value()=="":
+                comb.weight=0
+            else:
+                comb.weight=float((form['weight'].value()).replace(",", "."))
+        if form['available_date'].value()!="None" and form['available_date'].value()!="":
+            try:
+                a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                comb.available_date=fecha
+            except:
+                a=(form['available_date'].value()).split()
+                a.remove("de")
+                a.remove("de")
+                if a[1]=="Enero":
+                    fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
+                if a[1]=="Febrero":
+                    fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
+                if a[1]=="Marzo":
+                    fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
+                if a[1]=="Abril":
+                    fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
+                if a[1]=="Mayo":
+                    fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
+                if a[1]=="Junio":
+                    fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
+                if a[1]=="Julio":
+                    fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
+                if a[1]=="Agosto":
+                    fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
+                if a[1]=="Septiembre":
+                    fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
+                if a[1]=="Octubre":
+                    fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
+                if a[1]=="Noviembre":
+                    fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
+                if a[1]=="Diciembre":
+                    fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
+                comb.available_date=fecha
+
+        comb.default_on=form['default_on'].value()
+        comb.ean13=form['ean13'].value()
+        comb.upc=form['upc'].value()
+        comb.quantity=form['quantity'].value()
+        comb.save()
+        if id_img!=None:
+            if len(form['image'].value())!=0:
+                if form['image'].value()[0]!=id_img:
+                    actual=ProductAttributeImage.objects.filter(id_product_attribute=comb).delete()
+                    imagen=Image.objects.get(id_image=form['image'].value()[0])
+                    pro=ProductAttributeImage.objects.create(id_product_attribute=comb, id_image=imagen)
+                    pro.save()
+        else:
+            if len(form['image'].value())!=0:
+                imagen=Image.objects.get(id_image=form['image'].value()[0])
+                pro=ProductAttributeImage.objects.create(id_product_attribute=comb,id_image= imagen)
+                pro.save()
+        url = reverse('productos_combinaciones', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, "Cuenta/Productos/combinaciones_edit.html",{'producto':producto,'form':form,'comb':comb, 'fotos':fotos, 'actual':actual})
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]

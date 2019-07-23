@@ -77,7 +77,7 @@ class AttributeShopAdmin(admin.ModelAdmin):
 	list_display = ['id_attribute','id_shop']
 
 class ProductAttributeAdmin(admin.ModelAdmin):
-	list_display = ['id_product_attribute', 'id_product','reference','ean13','upc','wholesale_price','price','quantity','weight','unit_price_impact','default_on', 'minimal_quantity','available_date']
+	list_display = ['id_product_attribute', 'id_product','reference','ean13','upc','wholesale_price','quantity','weight','unit_price_impact','default_on', 'minimal_quantity','available_date']
 	inlines=[ProductAttributeCombinationInline,ProductAttributeShopInline, ]
 
 class ProductAttributeCombinationAdmin(admin.ModelAdmin):

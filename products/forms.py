@@ -56,6 +56,47 @@ class GrupoAttrShopForm(forms.ModelForm):
         model = AttributeGroupShop
         fields=['id_attribute_group']
 
+class AttrForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos atributos
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Attribute
+        fields= ['name','color']
+
+class CombAttrForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    id = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=AttributeShop.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeShop
+        fields=['id']
+    
+class CombForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    image=forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=Image.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = ProductAttribute
+        fields=['reference','ean13','upc','wholesale_price','quantity','weight','unit_price_impact','default_on','minimal_quantity','available_date']
+
 class ViForm(forms.ModelForm):
     '''
         Aqui se implementa el formulario para la creacion
