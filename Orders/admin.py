@@ -40,7 +40,7 @@ class OrderOrderMessageInline(admin.TabularInline):
     extra = 1
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['id_cart','delivery_option','id_customer','gift','gift_message']
+    list_display = ['id_cart','delivery_option','id_customer']
     inlines=[CartProductInline,]
 
 class CartProductAdmin(admin.ModelAdmin):
@@ -57,7 +57,7 @@ class CartRuleCountryAdmin(admin.ModelAdmin):
     list_display = ['id_cart_rule', 'id_country']
 
 class OrdersAdmin(admin.ModelAdmin):
-    list_display = ['id_order','reference','id_customer','id_cart','id_address_delivery','id_address_invoice','shipping_number','total_discounts', 'total_paid', 'total_products']
+    list_display = ['id_order','reference','id_customer','id_cart','id_shop', 'id_carrier', 'id_address_delivery','id_address_invoice','shipping_number','total_discounts', 'total_paid', 'total_products']
     inlines=[OrderCartRuleInline,]
 
 class OrderCartRuleAdmin(admin.ModelAdmin):
@@ -65,10 +65,9 @@ class OrderCartRuleAdmin(admin.ModelAdmin):
 
 class OrderInvoiceAdmin(admin.ModelAdmin):
     list_display = ['id_order_invoice','id_order','number','delivery_number','delivery_date','total_discount_tax_excl','total_discount_tax_incl','total_paid_tax_excl','total_paid_tax_incl', 'total_products']
-    inlines=[OrderDetailInline,]
 
 class OrderDetailAdmin(admin.ModelAdmin):
-    list_display = ['id_order_detail', 'id_order', 'id_order_invoice', 'id_shop', 'product_id', 'product_attribute_id', 'product_name', 'product_quantity', 'product_quantity_in_stock','product_quantity_refunded']
+    list_display = ['id_order_detail', 'id_order', 'product_id', 'product_attribute_id', 'product_name', 'product_quantity']
 
 class TaxAdmin(admin.ModelAdmin):
     list_display = ['id_tax','rate', 'active', 'deleted']

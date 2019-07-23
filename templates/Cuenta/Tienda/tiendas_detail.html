@@ -467,10 +467,34 @@
                 <td>{{ j.id_carrier.name }}</td>
                 <td> <img src="{{j.id_carrier.logo.url}}" style="width:100px"></td>
                 <td><a href="{{ j.id_carrier.url}}">{{ j.id_carrier.url}}</a></td>
-                <td>{{ j.id_carrier.max_width}}</td>
-                <td>{{ j.id_carrier.max_height}}</td>
-                <td>{{ j.id_carrier.max_depth}}</td>
-                <td>{{ j.id_carrier.max_weight}}</td>
+                <td>
+                  {% if j.id_carrier.max_width %}
+                  {{ j.id_carrier.max_width}}
+                  {% else %}
+                    No tiene
+                  {% endif %}  
+                </td>
+                <td>
+                    {% if j.id_carrier.max_height %}
+                    {{ j.id_carrier.max_height}}
+                    {% else %}
+                    No tiene
+                    {% endif %} 
+                </td>
+                <td>
+                    {% if j.id_carrier.max_depth %}
+                    {{ j.id_carrier.max_depth}}
+                    {% else %}
+                    No tiene
+                    {% endif %}  
+                </td>
+                <td>
+                    {% if j.id_carrier.max_weight %}
+                    {{ j.id_carrier.max_weight}}
+                    {% else %}
+                    No tiene
+                    {% endif %} 
+                </td>
                 <td><a href="{% url 'transportista_eliminar' tienda.id_shop j.id_carrier.id_carrier %}">Eliminar</a></td>
             </tr>
           {% endfor %}

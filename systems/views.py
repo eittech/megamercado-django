@@ -586,7 +586,6 @@ def cuenta(request):
             nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
             nuevocart.save()
@@ -597,7 +596,6 @@ def cuenta(request):
                 nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
                 nuevocart.save()   
@@ -611,7 +609,6 @@ def cuenta(request):
         nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
         nuevocart.save()
