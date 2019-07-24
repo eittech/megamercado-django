@@ -320,9 +320,9 @@
 	  		<div class="card" style="width: 200px; height: 200px">
          		<div class="card-body">
                  
-                 <img src="{{i.icono.url}}" style="width: 160px; height: auto"  data-toggle="modal" data-target="#exampleModal">
+                 <a data-toggle="modal" data-target="#exampleModal{{i.id_currency}}"><img src="{{i.icono.url}}" style="width: 160px; height: auto"></a>
 
-                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal fade" id="exampleModal{{i.id_currency}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">

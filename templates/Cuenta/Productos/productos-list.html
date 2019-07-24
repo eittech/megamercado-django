@@ -368,7 +368,11 @@
                     {% endfor %}
                 </td>
                 <td>{{i.name}}</td>
-                <td>{{i.reference}}</td>
+                <td>
+                  {% if i.reference %}
+                  {{i.reference}}
+                  {%endif%}
+                </td>
                 <td>{{i.id_shop_default}}</td>
                 <td>{{i.id_category_default}}</td>
                 <td>{{i.price}}</td>
@@ -386,9 +390,9 @@
                 </td>
                 <td> 
                   <a href="{% url 'productos_detalles1' i.id_product %}" title="Editar"><i class="fa fa-pencil-square-o" style="font-size: 16px"> </i></a> 
-                  <a data-toggle="modal" data-target="#exampleModal" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a>                   
+                  <a data-toggle="modal" data-target="#exampleModal{{i.id_product}}" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a>                   
                   <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal{{i.id_product}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">

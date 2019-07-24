@@ -373,9 +373,9 @@
                               {% else %}
                               <a href="{% url 'combinacion_predeterminada' producto.id_product i.id_product_attribute %}" title="Predeterminado"><i class="fa fa-circle-o" style="font-size: 16px"> </i></a>
                               {% endif %}
-                              <a  class="remove" data-toggle="modal" data-target="#exampleModal" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a>                   
+                              <a  class="remove" data-toggle="modal" data-target="#exampleModal{{i.id_product_attribute}}" title="Eliminar"><i class="fa fa-trash" style="font-size: 16px"></i></a>                   
                               <!-- Modal -->
-                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal fade" id="exampleModal{{i.id_product_attribute}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
