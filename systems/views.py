@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django_user_agents.utils import get_user_agent
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
@@ -37,6 +37,41 @@ from django.db.models import Count
 from django.core.paginator import Paginator
 
 from django.utils import timezone
+from django.http import HttpResponseRedirect
+from django.db.models import Q
+
+def login_view(request):
+    if request.method == 'GET':
+        return render(request, 'usuarios/login.html')
+    if request.method == 'POST':
+        qs = Customer.objects.filter(Q(email=request.POST.get('username', '')) | Q(username=request.POST.get('username', '')))
+        if qs.exists():
+            username = qs.first().username
+            print("aqui")
+            print(request.POST)
+            #username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            print(username)
+            print("clave:")
+            print(password)
+            user = authenticate(username=username, password=password)
+            print("antes")
+            print(user)
+            
+            if user is None:
+                return HttpResponseRedirect(reverse('home_view'))
+            if not user.is_active:
+                return HttpResponseRedirect(reverse('home_view'))
+
+            # Correct password, and the user is marked "active"
+            login(request, user)
+            # Redirect to a success page.
+            return HttpResponseRedirect(reverse('cuenta'))
+        return HttpResponseRedirect(reverse('home_view'))
+
+def cerrar_sesion(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('home_view'))
 
 @csrf_exempt
 @api_view(["POST"])
@@ -540,45 +575,48 @@ def listadoCategorias(request):
         'categoriasHijos':categoriasHijos})
 
 def cuenta(request):
+    print(request.user)
+
     try:
+        print(request.user)
+        
         carrito=Cart.objects.filter(id_customer= request.user).latest('id_cart')
         print(carrito)
         if Orders.objects.filter(id_cart= carrito):
             nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
             nuevocart.save()
+        
         else:
             if (timezone.now() - carrito.date_add).days > 5:
-                """carrito.delete() 
+                '''carrito.delete() 
                 nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
                 nuevocart.save()   
                 print("save")
-                """
+                '''
                 pass
 
     except:
         # Si no hay carrito para este usuario, lo crea.
+        
         nuevocart=Cart.objects.create(
                 delivery_option="0",
                 id_customer=request.user,
-                gift=0,
                 date_add= timezone.now(),
                 date_upd= timezone.now())
         nuevocart.save()
-        nuevocart.onwer=request.user
         print("paso")
+        
         pass
+        
     return render(request, 'Cuenta/dashboard.html', {})
-
 """
 def home(request):
     error=False

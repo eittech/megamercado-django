@@ -13,6 +13,8 @@ Django==2.1.7
 django-allauth==0.38.0
 django-autoslug==1.9.4
 django-js-asset==1.2.1
+django-model-changes==0.15
+django-registration==3.0.1
 django-mptt==0.9.1
 django-suit==0.2.25
 django-tagging==0.4.6

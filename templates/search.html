@@ -30,12 +30,13 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="{$ static 'css/album.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
   </head>
   <body>
 
 
       {% if request.user.is_authenticated %}
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+        <nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4">
           <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
 
           <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
@@ -69,7 +70,7 @@
           </div>
         </nav>
       {% else %}
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="background-color: #0F084F!important;">
+      <nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4">
           <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
 
           <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
@@ -87,10 +88,10 @@
             <div  style="width: 300px"> </div>
             <ul class="navbar-nav mr-auto" >
               <li class="nav-item active">
-                <a class="nav-link" href="#" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+                <a class="nav-link" href="{% url 'login1' %}" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#" style="font-size: 17px"> Regístrate</a>
+                  <a class="nav-link" href="{% url 'registrando' %}" style="font-size: 17px"> Regístrate</a>
                 </li>
               <li class="nav-item">
                 <a class="nav-link" href="#" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>

@@ -4,7 +4,8 @@ from django.contrib import admin
 from customers.models import *
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['username', 'alias', 'dni_type','image','dni','gender','firts_date','website','tipo','rol']
+    search_fields=['validar']
+    list_display = ['username', 'email','dni_type','image','dni','gender','firts_date','validar','phone','tipo']
 
 admin.site.register(Customer, CustomerAdmin)
 

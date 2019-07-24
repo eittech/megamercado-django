@@ -1,5 +1,101 @@
 from django import forms
 from .models import *
+from comparagrow import settings
+
+class TiendaForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos shop groups
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Shop
+        fields = ['name', 'logo']
+
+class ProductosForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos productos
+    '''
+    available_date=forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Product
+        fields = ['id_category_default','id_shop_default','name','description','description_short','online_only','ean13','upc' ,'quantity', 'minimal_quantity', 'price','wholesale_price','reference','width','height','depth', 'weight','out_of_stock','combination','active','available_date','condition','is_virtual']
+
+class FotosForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos imagenes de los productos
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Image
+        fields = ['image','legend','position','cover']
+
+class GrupoAttrShopForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    id_attribute_group = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=AttributeGroup.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeGroupShop
+        fields=['id_attribute_group']
+
+class AttrForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos atributos
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = Attribute
+        fields= ['name','color']
+
+class CombAttrForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    id = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=AttributeShop.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = AttributeShop
+        fields=['id']
+    
+class CombForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos carrier shop
+    '''
+    image=forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(),queryset=Image.objects.all())
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = ProductAttribute
+        fields=['reference','ean13','upc','wholesale_price','quantity','weight','unit_price_impact','default_on','minimal_quantity','available_date']
 
 class ViForm(forms.ModelForm):
     '''
@@ -155,19 +251,6 @@ class CategoryProductForm(forms.ModelForm):
             el formulario
         '''
         model = CategoryProduct
-        fields = '__all__'
-
-class CategoryShopForm(forms.ModelForm):
-    '''
-        Aqui se implementa el formulario para la creacion
-        de nuevos Category Shop
-    '''
-    class Meta:
-        '''
-            Aqui se especifica que datos se tienen que incluir en
-            el formulario
-        '''
-        model = CategoryShop
         fields = '__all__'
 
 class ProductAttributeForm(forms.ModelForm):

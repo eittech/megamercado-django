@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Megamercado login</title>
+
+   
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/docs/4.3/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/css/floating-labels.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
+  </head>
+  <body class="color" >
+<div class="color container" style="width: 450px; height: 450px;">
+    <form class="form-signin" method="POST" >
+        {% csrf_token %}
+  <div class="text-center mb-4">
+    <img class="mb-4" src="{% static 'img/Logo/logo-login.png' %}" alt="" width="390" height="87">
+
+  </div>
+
+  <div class="form-label-group">
+    <input type="text" name="username" placeholder="Username" class="form-control" required autofocus>
+    <label for="username">E-mail o usuario</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <label for="inputPassword">Contraseña</label>
+  </div>
+
+  <div class="white checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Recuérdame
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Inicia sesión</button>
+		<div class="text-center mb-4">
+  <br>
+			<p class=" white text-gray-soft text-center small mb-2">¿Eres nuevo en Megamercado? <a href="{% url 'registrando' %}">Crea tu cuenta</a></p>
+	  </div>
+	
+</form>
+</div>
+</body>
+</html>

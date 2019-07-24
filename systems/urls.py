@@ -1,11 +1,17 @@
 from django.urls import path, re_path
 from . import views
 from products.views import *
+from currency.views import *
+from carrier.views import *
+from customers.views import *
+from locations.views import *
+from customers.forms import *
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
 from systems.sitemaps import *
 from products.sitemaps import *
-
+from django.conf.urls import include, url
+from django_registration.backends.activation.views import RegistrationView
 
 sitemaps= {
     'pages' : BasicSitemap(['home_view','quienes-somos','contactanos',
@@ -27,6 +33,65 @@ urlpatterns = [
     path('marketplace/<int:id>', views.marketplace, name='mobile'),
     
     path('cuenta/', views.cuenta, name='cuenta'),
+    path('cuenta/misdatos/', misdatos, name='misdatos'),
+    path('cuenta/misdatos/verificarIdentidad', verificar_identidad ,name='verificar_identidad'),
+    path('cuenta/direcciones/', direcciones, name='direcciones'),
+    path('cuenta/direcciones/add/', direcciones_add, name='direcciones_add'),
+    path('cuenta/direcciones/edit/<int:pk>/', direcciones_update, name='direcciones_edit'),
+    path('cuenta/direcciones/<int:pk>/', direcciones_eliminar, name='direcciones_eliminar'),
+    path('cuenta/direcciones/pre/<int:pk>/', direcciones_predeterminado, name='direcciones_predeterminado'),
+    path('cuenta/direcciones/qpre/<int:pk>/', direcciones_quitar_predeterminado, name='direcciones_quitar_predeterminado'),
+    path('cuenta/tiendas/', tiendas, name='tiendas'),
+    path('cuenta/tiendas/add/', tiendas_add, name='tiendas_add'),
+    path('cuenta/tiendas/edit/<int:pk>/', tiendas_update, name='tiendas_edit'),
+    path('cuenta/tiendas/<int:pk>/', tiendas_detail, name='tiendas_detail'),
+    path('cuenta/tiendas/<int:pk>/<id_currency>/', tiendas_mref, name='tiendas_mref'),
+    path('cuenta/tiendas/mp/<int:pk>/', tiendas_mref_publish, name='tiendas_mref_publish'),
+    path('cuenta/tiendas/nomp/<int:pk>/', tiendas_mref_nopublish, name='tiendas_mref_nopublish'),
+    path('cuenta/tiendas/moneda_add/<int:pk>/', currencyshop_add, name='currencyshop_add'),
+    path('cuenta/tiendas/moneda_edit/<int:pk>/<id_currency>/', currencyshop_edit, name='currencyshop_edit'),
+    path('cuenta/tiendas/moneda_elim/<int:pk>/<id_currency>/', currencyshop_eliminar, name='currencyshop_eliminar'),
+    path('cuenta/tiendas/cuenta_add/<int:pk>/<id_currency>/', accountshop_add, name='accountshop_add'),
+    path('cuenta/tiendas/cuenta_edit/<int:pk>/<id_account>/', accountshop_edit, name='accountshop_edit'),
+    path('cuenta/tiendas/cuenta_elim/<int:pk>/<id_account>/', accountshop_eliminar, name='accountshop_eliminar'),
+    path('cuenta/tiendas/carrier_add/<int:pk>/', transportista_add, name='transportista_add'),
+    path('cuenta/tiendas/carrier_eliminar/<int:pk>/<id_carrier>/', transportista_eliminar, name='transportista_eliminar'),
+    path('cuenta/tiendas/groupattr_add/<int:pk>/', grupo_attr_add, name='grupo_attr_add'),
+    path('cuenta/tiendas/groupattr_eliminar/<int:pk>/<id_attribute_group>/', grupo_attr_eliminar, name='grupo_attr_eliminar'),
+    path('cuenta/tiendas/attr_add/<int:pk>/<id_attribute_group>/', attr_add, name='attr_add'),
+    path('cuenta/tiendas/attr_edit/<int:pk>/<id_attribute>/', attr_edit, name='attr_edit'),
+    path('cuenta/tiendas/attr_eliminar/<int:pk>/<id_attribute>/', attr_eliminar, name='attr_eliminar'),
+    path('cuenta/productos/', productos_list1, name='productos_list'),
+    path('cuenta/productos/add/', productos_add, name='productos_add'),
+    path('cuenta/productos/edit/<int:pk>/', productos_edit, name='productos_edit'),
+    path('cuenta/productos/eliminar/<int:pk>/', productos_eliminar, name='productos_eliminar'),
+    path('cuenta/productos/detalles1/<int:pk>/', productos_detalles1, name='productos_detalles1'),
+    path('cuenta/productos/imagenes/add/<int:pk>/', imagenes_add, name='imagenes_add'),
+    path('cuenta/productos/imagenes/e/<int:pk>/<id_image>/', imagenes_eliminar, name='imagenes_eliminar'),
+    path('cuenta/productos/imagenes/p/<int:pk>/<id_image>/', imagenes_cover, name='imagenes_cover'),
+    path('cuenta/productos/detalles2/<int:pk>/', productos_combinaciones, name='productos_combinaciones'),
+    path('cuenta/productos/combinaciones/add/<int:pk>/', productos_comb_add, name='productos_comb_add'),
+    path('cuenta/productos/combinaciones/pre/<int:pk>/<id>/', combinacion_predeterminada, name='combinacion_predeterminada'),
+    path('cuenta/productos/combinaciones/elim/<int:pk>/<id>/', combinacion_eliminar, name='combinacion_eliminar'),
+    path('cuenta/productos/combinaciones/edit/<int:pk>/<id>/', combinacion_editar, name='combinacion_editar'),
+
+    #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
+    path('login/', views.login_view, name='login1'),
+    #path('registro/', registro.as_view(), name="registrando"),
+    path('logout/', views.cerrar_sesion, name="cerrar_sesion"),
+
+    url(r'^register/$',
+        RegistrationView.as_view(
+            form_class=MyCustomUserForm
+        ),
+        name='registrando',
+    ),
+    url(r'^accounts/',
+        include('django_registration.backends.activation.urls')
+    ),
+
+
+    #path('login/', views.Login.as_view(), name='login'),
     #test mobile
     path('index.html', views.index_mobile, name='mobile'),
     path('pages/shop.html',views.shop_mobile,name='shop'),

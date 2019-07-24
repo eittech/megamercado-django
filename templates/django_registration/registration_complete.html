@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Megamercado</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/maxcdn/bootstrap.css' %}" rel="stylesheet" id="bootstrap-css">
+<link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  </head>
+
+  <body>
+
+<nav class="color navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#" style="width: 200px; font-size: 17px"">Logo</a>
+
+    <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                  <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                  <button type="submit" style="margin-left: -98px;
+                  height: 30px;
+                  width: 90px;
+                  background-color: white; 
+                  color: gray;
+                  border: 0;
+                  -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                </form>
+                <div  style="width: 300px"> </div>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div  style="width: 300px"> </div>
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'login1' %}" style="width: 116px;font-size: 17px""> Iniciar sesión </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'registrando' %}" style="font-size: 17px"> Regístrate</a>
+          </li>
+      </ul>
+      
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+    <div class="jumbotron">
+      <h1>Registro</h1>
+      <p class="lead">Tu estas registrado. Se te envio al correo un email de activación.</p>
+      
+    </div>
+  </main>
+
+</body>
+

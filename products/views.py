@@ -4,7 +4,9 @@ from django.http import JsonResponse
 from django.shortcuts import render
 import time
 from datetime import datetime
+from currency.models import *
 from products.models import *
+from carrier.models import *
 from products.forms import *
 from contracts.models import *
 from systems.models import *
@@ -23,6 +25,11 @@ from django.contrib.auth.decorators import login_required
 
 from django.db.models.functions import Substr
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
+from django.utils import timezone
+import datetime
 # from django import template
 #
 # register = template.Library()
@@ -81,12 +88,791 @@ def listadoOrdenMayor(request, id_category):
         product = paginator.page(paginator.num_pages)
     return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
+def tiendas(request):
+    tiendas= Shop.objects.filter(owner=request.user, deleted=False)
+    return render(request, 
+    "Cuenta/Tienda/tiendas.html",
+    {'tiendas':tiendas})
+
+def tiendas_add(request):
+    form= TiendaForm(request.POST)
+    if request.method=="POST":
+        print("hey")
+        name = form['name'].value()
+        logo =  request.FILES['logo']
+        ti= Shop.objects.create(owner = request.user,
+            name =  name,
+            logo =  logo,
+            validar = "PorValidar")
+        print(ti)
+        ti.save()
+        url = reverse('tiendas_detail', kwargs={'pk': ti.id_shop})
+        return HttpResponseRedirect(url)
+    return render(request, 
+    "Cuenta/Tienda/tiendasadd.html",
+    {'form':form })
+
+def tiendas_update(request, pk): 
+    shop= Shop.objects.get(id_shop=pk)
+    form= TiendaForm(request.POST)
+    if request.method=="POST":
+        print("hey")
+        print(request.POST)
+        obj=Shop.objects.get(id_shop=pk)
+        obj.name = form['name'].value()
+        try:
+            obj.logo =  request.FILES['logo']
+        except:
+            pass
+        obj.save()
+        return HttpResponseRedirect(reverse('tiendas'))
+    return render(request, 
+    "Cuenta/Tienda/tiendasedit.html",
+    {'form':form, 'shop':shop })
+
+def tiendas_detail(request, pk): 
+    tienda= Shop.objects.get(id_shop=pk)
+    monedas= Currency.objects.filter(active=True)
+    cuenta=AcountShop.objects.filter(id_shop=pk)
+    grupos=AttributeGroup.objects.all()
+    tienda=Shop.objects.get(id_shop=pk)
+    actual=AttributeGroupShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        grupos=grupos.exclude(id_attribute_group=i.id_attribute_group.id_attribute_group)
+
+    carrito=Carrier.objects.all()
+    actual=CarrierShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        carrito=carrito.exclude(id_carrier=i.id_carrier.id_carrier)
+    try: 
+        ref=CurrencyRef.objects.get(id_shop=pk)
+        money=CurrencyShop.objects.filter(id_shop=pk)
+        transp=CarrierShop.objects.filter(id_shop=pk)
+        grupoattr=AttributeGroupShop.objects.filter(id_shop=pk)
+        atributos= AttributeShop.objects.filter(id_shop=pk)
+        print(money)
+    except:
+        ref=None
+        money=CurrencyShop.objects.filter(id_shop=pk)
+        transp=CarrierShop.objects.filter(id_shop=pk)
+        grupoattr=AttributeGroupShop.objects.filter(id_shop=pk)
+        atributos= AttributeShop.objects.filter(id_shop=pk)
+        print(money)
+    
+    return render(request, 
+    "Cuenta/Tienda/tiendas_detail.html",
+    {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta, 'transp': transp, 'grupoattr':grupoattr,'atributos':atributos, 'grupos':grupos, 'carrito': carrito})
+
+def tiendas_mref(request, pk, id_currency): 
+    tienda= Shop.objects.get(id_shop=pk)
+    moneda= Currency.objects.get(id_currency=id_currency)
+    mref= CurrencyRef.objects.create(id_currency=moneda, id_shop=tienda)
+    mref.save()
+    print("AQUI CREO")
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def tiendas_mref_publish(request, pk): 
+    mref= CurrencyRef.objects.get(id_shop=pk)
+    mref.publish=True
+    mref.pregunta=True
+    mref.save()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def tiendas_mref_nopublish(request, pk): 
+    mref= CurrencyRef.objects.get(id_shop=pk)
+    mref.publish=False
+    mref.pregunta=True
+    mref.save()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def grupo_attr_add(request, pk):
+    form =GrupoAttrShopForm(request.POST) 
+    grupos=AttributeGroup.objects.all()
+    tienda=Shop.objects.get(id_shop=pk)
+    actual=AttributeGroupShop.objects.filter(id_shop=tienda)
+    for i in actual:
+        grupos=grupos.exclude(id_attribute_group=i.id_attribute_group.id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        for i in form['id_attribute_group'].value():
+            grupo=AttributeGroup.objects.get(id_attribute_group=i)
+            trans=AttributeGroupShop.objects.create(id_attribute_group=grupo, id_shop=tienda)
+        url = reverse('tiendas_detail', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, 
+    "Cuenta/Tienda/attr_group_add.html",
+    {'form':form , 'grupos': grupos})
+
+def grupo_attr_eliminar(request,pk, id_attribute_group):
+    grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
+    tienda=Shop.objects.get(id_shop=pk)
+    cart=AttributeGroupShop.objects.get(id_attribute_group=grupo, id_shop=tienda).delete()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def attr_add(request, pk, id_attribute_group):
+    form =AttrForm(request.POST) 
+    grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        if grupo.name=="Color":
+            #print(form['submit']).value()
+            print(request.POST['submit'])
+            nombre=form['name'].value()
+            color=form['color'].value()
+            print(color)
+            position= len(AttributeShop.objects.filter(id_shop=tienda))+1
+            attr=Attribute.objects.create(id_attribute_group=grupo, name=nombre, color=color, position=position)
+            try:
+                attr.save()
+                AttributeShop.objects.create(id_attribute=attr, id_shop=tienda)
+                if request.POST['submit']=="Submit":
+                    url = reverse('tiendas_detail', kwargs={'pk': pk})
+                    return HttpResponseRedirect(url)
+            except:
+                pass
+        else:
+            print(request.POST['submit'])
+            nombre=form['name'].value()
+            position= len(AttributeShop.objects.filter(id_shop=tienda))+1
+            attr=Attribute.objects.create(id_attribute_group=grupo, name=nombre, position=position)
+            try:
+                attr.save()
+                AttributeShop.objects.create(id_attribute=attr, id_shop=tienda)
+                if request.POST['submit']=="Submit":
+                    url = reverse('tiendas_detail', kwargs={'pk': pk})
+                    return HttpResponseRedirect(url)
+            except:
+                pass
+    return render(request, 
+    "Cuenta/Tienda/attr_add.html",
+    {'form':form , 'grupo': grupo})
+
+def attr_edit(request, pk, id_attribute):
+    form =AttrForm(request.POST) 
+    attr=Attribute.objects.get(id_attribute=id_attribute)
+    grupo=AttributeGroup.objects.get(id_attribute_group=attr.id_attribute_group.id_attribute_group)
+
+    if request.method=="POST":
+        tienda=Shop.objects.get(id_shop=pk)
+        if grupo.name=="Color":
+            attr.name=form['name'].value()
+            attr.color=form['color'].value()
+            try:
+                attr.save()
+                url = reverse('tiendas_detail', kwargs={'pk': pk})
+                return HttpResponseRedirect(url)
+            except:
+                pass
+        else:
+            attr.name=form['name'].value()
+            try:
+                attr.save()
+                url = reverse('tiendas_detail', kwargs={'pk': pk})
+                return HttpResponseRedirect(url)
+            except:
+                pass
+    return render(request, 
+    "Cuenta/Tienda/attr_edit.html",
+    {'form':form , 'grupo': grupo, 'attr': attr})
+
+def attr_eliminar(request,pk, id_attribute):
+    attr=Attribute.objects.get(id_attribute=id_attribute)
+    tienda=Shop.objects.get(id_shop=pk)
+    cart=AttributeShop.objects.get(id_attribute=attr, id_shop=tienda).delete()
+    url = reverse('tiendas_detail', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def productos_list1(request):
+    productos = Product.objects.filter(owner=request.user, deleted=False)
+    tienda = Shop.objects.filter(owner=request.user,deleted=False)
+    fotos = Image.objects.filter(id_product__owner=request.user)
+    return render(request, "Cuenta/Productos/productos-list.html",{'productos':productos, 'tienda': tienda, 'fotos': fotos})
+
+def productos_add(request):
+    form=ProductosForm(request.POST)
+    categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
+    for i in categories:
+        cuenta=0
+        for j in Category.objects.all():
+            if j.id_parent==i:
+                cuenta=cuenta+1
+            
+        i.number_of_child=cuenta
+    tienda = Shop.objects.filter(owner=request.user, deleted=False)
+    if request.method=="POST":
+        print("PASO AL POST")
+        if form['id_category_default'].value()!=None:
+                for i in form['id_category_default'].value():
+                    categoria=Category.objects.get(id_category=i)
+                shop=Shop.objects.get(id_shop=form['id_shop_default'].value())
+                owner=request.user
+                name=form['name'].value()
+                description=form['description'].value()
+                description_short=form['description_short'].value()
+                online_only=form['online_only'].value()
+                ean13=form['ean13'].value()
+                upc=form['upc'].value()
+                quantity=form['quantity'].value()
+                minimal_quantity=form['minimal_quantity'].value()
+                price=form['price'].value()
+                wholesale_price=form['wholesale_price'].value()
+                reference=form['reference'].value()
+                width=form['width'].value()
+                height=form['height'].value()
+                depth=form['depth'].value()
+                weight=form['weight'].value()
+                out_of_stock=form['out_of_stock'].value()
+                combination=form['combination'].value()
+                active=form['active'].value()
+                estado="Inicial"
+                if form['available_date'].value()!="":
+                    try:
+                        a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                        fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                        available_date=fecha
+                    except:
+                        pass
+                else:
+                    available_date=""
+                condition=form['condition'].value()
+                is_virtual=form['is_virtual'].value()
+                date_add= timezone.now()
+                date_upd= date_add
+                pro=Product.objects.create(id_category_default=categoria, id_shop_default=shop, owner=owner, name=name, description_short=description_short, online_only=online_only, ean13=ean13, upc=upc,quantity=quantity, price=price, out_of_stock=out_of_stock, combination=combination, active=active, estado=estado, condition=condition, is_virtual=is_virtual,date_add=date_add, date_upd=date_upd)
+                if reference!="":
+                    pro.reference=reference
+                if description!="":
+                    pro.description=description
+                if minimal_quantity!="":
+                    pro.minimal_quantity=minimal_quantity
+                if wholesale_price!="":
+                    pro.wholesale_price=wholesale_price
+                if width!="":
+                    pro.width=width
+                if height!="":
+                    pro.height=height
+                if depth!="":
+                    pro.depth=depth
+                if weight!="":
+                    pro.weight=weight
+                if available_date!="":
+                    pro.available_date=available_date
+                pro.save()
+                url = reverse('productos_detalles1', kwargs={'pk': pro.id_product})
+                return HttpResponseRedirect(url)
+    return render(request, "Cuenta/Productos/productos-add.html",{'form':form, 'tienda': tienda, 'categories':categories})
+
+def productos_edit(request, pk):
+    form=ProductosForm(request.POST)
+    categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
+    for i in categories:
+        cuenta=0
+        for j in Category.objects.all():
+            if j.id_parent==i:
+                cuenta=cuenta+1
+            
+        i.number_of_child=cuenta
+        print(i.name)
+        print(i.number_of_child)
+    tienda = Shop.objects.filter(owner=request.user, deleted=False)
+    producto=Product.objects.get(id_product=pk)
+    print("descripcion:")
+    print(producto.description)
+    if request.method=="POST":
+        print("PASO AL POST")
+        if form['id_category_default'].value()!=None:
+                for i in form['id_category_default'].value():
+                    producto.id_category_default=Category.objects.get(id_category=i)
+                producto.id_shop_default=Shop.objects.get(id_shop=form['id_shop_default'].value())
+                if form['reference'].value()!="None":
+                    producto.reference=form['reference'].value()
+                if form['description'].value()!="None":
+                    if producto.description!="None" and producto.description!="" and form['description'].value()=="":
+                        producto.description=form['description'].value()
+                    if form['description'].value()!="":
+                        producto.description=form['description'].value()
+                if form['minimal_quantity'].value()!="None":
+                    producto.minimal_quantity=form['minimal_quantity'].value()
+                if form['minimal_quantity'].value()=="":
+                    producto.minimal_quantity=0
+                if form['wholesale_price'].value()!="None":
+                    if form['wholesale_price'].value()=="":
+                        producto.wholesale_price=0
+                    else:
+                        producto.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
+                if form['width'].value()!="None":
+                    if form['width'].value()=="":
+                        producto.width=0
+                    else:
+                        producto.width=float((form['width'].value()).replace(",", "."))
+                if form['height'].value()!="None":
+                    if form['height'].value()=="":
+                        producto.height=0
+                    else:
+                        producto.height=float((form['height'].value()).replace(",", "."))
+                if form['depth'].value()!="None":
+                    if form['depth'].value()=="":
+                        producto.depth=0
+                    else:
+                        producto.depth=float((form['depth'].value()).replace(",", "."))
+                if form['weight'].value()!="None":
+                    if form['weight'].value()=="":
+                        producto.weight=0
+                    else:
+                        producto.weight=float((form['weight'].value()).replace(",", "."))
+                if form['available_date'].value()!="None" and form['available_date'].value()!="":
+                    try:
+                        a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                        fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                        producto.available_date=fecha
+                    except:
+                        a=(form['available_date'].value()).split()
+                        a.remove("de")
+                        a.remove("de")
+                        if a[1]=="Enero":
+                            fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
+                        if a[1]=="Febrero":
+                            fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
+                        if a[1]=="Marzo":
+                            fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
+                        if a[1]=="Abril":
+                            fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
+                        if a[1]=="Mayo":
+                            fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
+                        if a[1]=="Junio":
+                            fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
+                        if a[1]=="Julio":
+                            fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
+                        if a[1]=="Agosto":
+                            fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
+                        if a[1]=="Septiembre":
+                            fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
+                        if a[1]=="Octubre":
+                            fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
+                        if a[1]=="Noviembre":
+                            fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
+                        if a[1]=="Diciembre":
+                            fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
+                        producto.available_date=fecha
+                producto.name=form['name'].value()
+                producto.description_short=form['description_short'].value()
+                producto.online_only=form['online_only'].value()
+                producto.ean13=form['ean13'].value()
+                producto.upc=form['upc'].value()
+                producto.quantity=form['quantity'].value()
+                producto.price=float((form['price'].value()).replace(",", "."))
+                producto.out_of_stock=form['out_of_stock'].value()
+                producto.combination=form['combination'].value()
+                producto.active=form['active'].value()
+                producto.condition=form['condition'].value()
+                producto.is_virtual=form['is_virtual'].value()
+                producto.date_upd= timezone.now()
+                try:
+                    producto.save()
+                    url = reverse('productos_detalles1', kwargs={'pk': producto.id_product})
+                    return HttpResponseRedirect(url)
+                except:
+                    pass
+                return HttpResponseRedirect(reverse('productos_list'))
+    return render(request, "Cuenta/Productos/productos-edit.html",{'form':form, 'tienda': tienda, 'categories':categories, 'producto':producto})
+
+def productos_eliminar(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    producto.deleted=True
+    producto.save()
+    return HttpResponseRedirect(reverse('productos_list'))
+
+def productos_detalles1(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    fotos=Image.objects.filter(id_product=producto).order_by('position')
+    return render(request, "Cuenta/Productos/productos-detalles1.html",{'fotos':fotos,'producto':producto})
+
+def imagenes_add(request, pk):
+    form= FotosForm(request.POST)
+    producto=Product.objects.get(id_product=pk)
+    fotos=Image.objects.filter(id_product=producto)
+    print(len(fotos))
+    if request.method=="POST":
+        foto=request.FILES['image']
+        print("AQUI ESTA LA FOTO")
+        for f in request.FILES.getlist('image'):
+            foto=f
+            fotos =Image.objects.filter(id_product=producto)
+            portada=False
+            for j in fotos:
+                if j.cover==True:
+                    portada=True
+            imagenes=len(Image.objects.filter(id_product=producto))
+            position=imagenes+1
+            if portada==False:
+                imagen=Image.objects.create(id_product=producto, image=foto,position=position, cover=True)
+            else:
+                imagen=Image.objects.create(id_product=producto, image=foto,position=position)
+            imagen.save()
+        url = reverse('productos_detalles1', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, "Cuenta/Productos/imagenes-add.html",{'form': form})
+
+def imagenes_eliminar(request, pk, id_image):
+    fotos=Image.objects.filter(id_image=id_image).delete()
+    producto=Product.objects.get(id_product=pk)
+    otros=Image.objects.filter(id_product=producto)
+    if len(otros)!=0:
+        print(otros[0])
+        otros[0].cover=True
+        otros[0].save()
+    url = reverse('productos_detalles1', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def imagenes_cover(request, pk, id_image):
+    foto=Image.objects.get(id_image=id_image)
+    foto.cover=True
+    fotos=Image.objects.filter(id_product__id_product=pk)
+    for i in fotos:
+        i.cover=False
+        i.save()
+    foto.save()
+    url = reverse('productos_detalles1', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def productos_combinaciones(request, pk):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.filter(id_product=producto).annotate(price_number=Count('id_product'))
+    for i in comb:
+        if i.unit_price_impact!=None:
+            i.price_number=producto.price+ i.unit_price_impact
+        else:
+            i.price_number=producto.price
+    fotos=ProductAttributeImage.objects.filter(id_image__id_product=producto)
+    img=Image.objects.filter(id_product=producto).order_by('position')
+    count=0
+    for i in comb:
+        if count==0:
+            attr=ProductAttributeCombination.objects.filter(id_product_attribute=i.id_product_attribute)
+            count=count+1
+        else:
+            attr=attr | ProductAttributeCombination.objects.filter(id_product_attribute=i.id_product_attribute)
+    if not comb:
+        attr=None
+    return render(request, "Cuenta/Productos/combinaciones.html",{'producto':producto, 'comb':comb, 'attr':attr, 'fotos':fotos, 'img':img})
+
+def productos_comb_add(request,pk):
+    producto=Product.objects.get(id_product=pk)
+    form=CombAttrForm(request.POST)
+    tienda=Shop.objects.get(id_shop=producto.id_shop_default.id_shop)
+    grupo=AttributeGroupShop.objects.filter(id_shop=tienda)
+    attr=AttributeShop.objects.filter(id_shop=tienda)
+    foto=Image.objects.get(id_product=producto, cover=True)
+    if request.method=="POST":
+        print(form)
+        count=0
+        print(form['id'].value())
+        for i in form['id'].value():
+            if count==0:
+                atributo=AttributeShop.objects.filter(id=i)
+                count=count+1
+            else:
+                atributo=atributo | AttributeShop.objects.filter(id=i)
+
+        color=atributo.filter(id_attribute__id_attribute_group__name="Color")
+        print(color)
+        talla=atributo.filter(id_attribute__id_attribute_group__name="Talla")  
+        print(talla)
+        dimension=atributo.filter(id_attribute__id_attribute_group__name="Dimensión") 
+        print(dimension)     
+        if len(color)>0:
+            print(len(color))
+            for c in color:
+                if len(talla)>0:
+                    print(len(talla))
+                    for t in talla:
+                        if len(dimension)>0:
+                            for d in dimension:
+                                pre=True
+                                comb=ProductAttribute.objects.filter(id_product=producto)
+                                if comb:    
+                                    for i in comb:
+                                        if i.default_on==True:
+                                            pre=False
+                                else:
+                                    pass
+                                combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                                combinacion.save()
+                                fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                                try:
+                                    fo.save()
+                                except:
+                                    pass
+                                co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                                co.save()
+                                ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                                ta.save()
+                                di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                                di.save()
+                        else:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0,quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                            co.save()
+                            print('AQUI')
+                            print(co)
+                            ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                            ta.save()
+                            print('AQUI2')
+                            print(ta)
+                else:
+                    print("paso")
+                    if len(dimension)>0:
+                        print("paso2")
+                        for d in dimension:
+                            print("paso3")
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                            co.save()
+                            print("AQUI1")
+                            print(co)
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+                            print("AQUI2")
+                            print(di)
+                    else:
+                        print("paso4")
+                        pre=True
+                        comb=ProductAttribute.objects.filter(id_product=producto)
+                        if comb:    
+                            for i in comb:
+                                if i.default_on==True:
+                                    pre=False
+                        else:
+                            pass
+
+                        combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                        combinacion.save()
+                        fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                        try:
+                            fo.save()
+                        except:
+                            pass
+                        co=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=c.id_attribute)
+                        co.save()
+        else:
+            if len(talla)>0:
+                for t in talla:
+                    if len(dimension)>0:
+                        for d in dimension:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto,unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                            ta.save()
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+                    else:
+                        pre=True
+                        comb=ProductAttribute.objects.filter(id_product=producto)
+                        if comb:    
+                            for i in comb:
+                                if i.default_on==True:
+                                    pre=False
+                        else:
+                            pass
+                        combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                        combinacion.save()
+                        fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                        try:
+                            fo.save()
+                        except:
+                            pass
+                        ta=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=t.id_attribute)
+                        ta.save()
+            else:
+                if len(dimension)>0:
+                        for d in dimension:
+                            pre=True
+                            comb=ProductAttribute.objects.filter(id_product=producto)
+                            if comb:    
+                                for i in comb:
+                                    if i.default_on==True:
+                                        pre=False
+                            else:
+                                pass
+                            combinacion=ProductAttribute.objects.create(id_product=producto, unit_price_impact=0, quantity=0, default_on=pre)
+                            combinacion.save()
+                            fo=ProductAttributeImage.objects.create(id_image=foto, id_product_attribute=combinacion)
+                            try:
+                                fo.save()
+                            except:
+                                pass
+                            di=ProductAttributeCombination.objects.create(id_product_attribute=combinacion, id_attribute=d.id_attribute)
+                            di.save()
+        url = reverse('productos_combinaciones', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+                                
+    return render(request, "Cuenta/Productos/combination_add.html",{'producto':producto,'form':form,'grupo':grupo, 'attr':attr})
+
+def combinacion_predeterminada(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id)
+    todascomb=ProductAttribute.objects.filter(id_product=producto, default_on=True)
+    for i in todascomb:
+        i.default_on=False
+        i.save()
+
+    comb.default_on=True
+    comb.save()
+    url = reverse('productos_combinaciones', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def combinacion_eliminar(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id).delete()
+    otros=ProductAttribute.objects.filter(id_product=producto)
+    if len(otros)!=0:
+        print(otros[0])
+        otros[0].default_on=True
+        otros[0].save()
+    url = reverse('productos_combinaciones', kwargs={'pk': pk})
+    return HttpResponseRedirect(url)
+
+def combinacion_editar(request,pk, id):
+    producto=Product.objects.get(id_product=pk)
+    comb=ProductAttribute.objects.get(id_product_attribute=id)
+    form=CombForm(request.POST)
+    fotos=Image.objects.filter(id_product=producto)
+    actual=ProductAttributeImage.objects.filter(id_product_attribute=comb)
+    if len(actual)>0:
+        for i in actual:
+            id_img=i.id_image
+    else:
+        id_img=None
+    if request.method=="POST":
+        if form['reference'].value()!="None":
+            comb.reference=form['reference'].value()
+        if form['minimal_quantity'].value()!="None":
+            comb.minimal_quantity=form['minimal_quantity'].value()
+        if form['minimal_quantity'].value()=="":
+            comb.minimal_quantity=0
+        if form['unit_price_impact'].value()!="None":
+            if form['unit_price_impact'].value()=="":
+                comb.unit_price_impact=0
+            else:
+                comb.unit_price_impact=float((form['unit_price_impact'].value()).replace(",", "."))
+        if form['wholesale_price'].value()!="None":
+            if form['wholesale_price'].value()=="":
+                comb.wholesale_price=0
+            else:
+                comb.wholesale_price=float((form['wholesale_price'].value()).replace(",", "."))
+        if form['weight'].value()!="None":
+            if form['weight'].value()=="":
+                comb.weight=0
+            else:
+                comb.weight=float((form['weight'].value()).replace(",", "."))
+        if form['available_date'].value()!="None" and form['available_date'].value()!="":
+            try:
+                a=datetime.datetime.strptime(form['available_date'].value(), '%d/%m/%Y').date()
+                fecha=str(a.year)+"-"+str(a.month)+"-"+str(a.day)
+                comb.available_date=fecha
+            except:
+                a=(form['available_date'].value()).split()
+                a.remove("de")
+                a.remove("de")
+                if a[1]=="Enero":
+                    fecha= str(a[2])+"-"+str("01")+"-"+str(a[0])
+                if a[1]=="Febrero":
+                    fecha= str(a[2])+"-"+str("02")+"-"+str(a[0])
+                if a[1]=="Marzo":
+                    fecha= str(a[2])+"-"+str("03")+"-"+str(a[0])
+                if a[1]=="Abril":
+                    fecha= str(a[2])+"-"+str("04")+"-"+str(a[0])
+                if a[1]=="Mayo":
+                    fecha= str(a[2])+"-"+str("05")+"-"+str(a[0])
+                if a[1]=="Junio":
+                    fecha= str(a[2])+"-"+str("06")+"-"+str(a[0])
+                if a[1]=="Julio":
+                    fecha= str(a[2])+"-"+str("07")+"-"+str(a[0])
+                if a[1]=="Agosto":
+                    fecha= str(a[2])+"-"+str("08")+"-"+str(a[0])
+                if a[1]=="Septiembre":
+                    fecha= str(a[2])+"-"+str("09")+"-"+str(a[0])
+                if a[1]=="Octubre":
+                    fecha= str(a[2])+"-"+str("10")+"-"+str(a[0])
+                if a[1]=="Noviembre":
+                    fecha= str(a[2])+"-"+str("11")+"-"+str(a[0])
+                if a[1]=="Diciembre":
+                    fecha= str(a[2])+"-"+str("12")+"-"+str(a[0])
+                comb.available_date=fecha
+
+        comb.default_on=form['default_on'].value()
+        comb.ean13=form['ean13'].value()
+        comb.upc=form['upc'].value()
+        comb.quantity=form['quantity'].value()
+        comb.save()
+        if id_img!=None:
+            if len(form['image'].value())!=0:
+                if form['image'].value()[0]!=id_img:
+                    actual=ProductAttributeImage.objects.filter(id_product_attribute=comb).delete()
+                    imagen=Image.objects.get(id_image=form['image'].value()[0])
+                    pro=ProductAttributeImage.objects.create(id_product_attribute=comb, id_image=imagen)
+                    pro.save()
+        else:
+            if len(form['image'].value())!=0:
+                imagen=Image.objects.get(id_image=form['image'].value()[0])
+                pro=ProductAttributeImage.objects.create(id_product_attribute=comb,id_image= imagen)
+                pro.save()
+        url = reverse('productos_combinaciones', kwargs={'pk': pk})
+        return HttpResponseRedirect(url)
+    return render(request, "Cuenta/Productos/combinaciones_edit.html",{'producto':producto,'form':form,'comb':comb, 'fotos':fotos, 'actual':actual})
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]
     print(productos)
     return render(request, "comparagrow/listado.html",{'productos':productos})
-'''
+
 
 def search(request):
     if request.GET.get('q'):
@@ -238,7 +1024,7 @@ def search(request):
     'brand_list_selected':brand_list_selected,
     'shop_list_selected':shop_list_selected,
     'order_by':order_by})
-
+'''
 
 class GigsList(generic.ListView):
     paginate_by = 4

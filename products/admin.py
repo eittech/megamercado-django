@@ -17,9 +17,6 @@ class CategoryGroupInline(admin.TabularInline):
 	model = CategoryGroup
 	extra = 1
 
-class CategoryShopInline(admin.TabularInline):
-	model = CategoryShop
-	extra = 1
 
 class AttributeGroupShopInline(admin.TabularInline):
 	model = AttributeGroupShop
@@ -51,14 +48,9 @@ class ProductAttributeImageInline(admin.TabularInline):
 
 class ShopGroupAdmin(admin.ModelAdmin):
 	list_display = ['id_shop_group', 'name','share_order','share_stock','active','deleted']
-	inlines=[ShopInline,]
 
 class ShopAdmin(admin.ModelAdmin):
-	list_display = ['id_shop', 'id_shop_group', 'name', 'active', 'deleted','virtual_url']
-	inlines=[CategoryShopInline, ]
-
-class CategoryShopAdmin(admin.ModelAdmin):
-	list_display = ['id_category','id_shop', 'position']
+	list_display = ['id_shop', 'name', 'logo','active', 'deleted']
 
 class GroupsAdmin(admin.ModelAdmin):
 	list_display = ['id_group', 'name', 'reduction','price_display_method','show_prices','date_add', 'date_upd']
@@ -85,7 +77,7 @@ class AttributeShopAdmin(admin.ModelAdmin):
 	list_display = ['id_attribute','id_shop']
 
 class ProductAttributeAdmin(admin.ModelAdmin):
-	list_display = ['id_product_attribute', 'id_product','reference','ean13','upc','wholesale_price','price','quantity','weight','unit_price_impact','default_on', 'minimal_quantity','available_date']
+	list_display = ['id_product_attribute', 'id_product','reference','ean13','upc','wholesale_price','quantity','weight','unit_price_impact','default_on', 'minimal_quantity','available_date']
 	inlines=[ProductAttributeCombinationInline,ProductAttributeShopInline, ]
 
 class ProductAttributeCombinationAdmin(admin.ModelAdmin):
@@ -95,7 +87,7 @@ class ProductAttributeShopAdmin(admin.ModelAdmin):
 	list_display = ['id_product_attribute', 'id_shop','wholesale_price','price','weight','unit_price_impact','default_on','minimal_quantity', 'available_date']
 
 class ProductAdmin(admin.ModelAdmin):
-	list_display = ['id_product', 'id_category_default','id_shop_default','name','description','on_sale','online_only', 'quantity', 'price']
+	list_display = ['id_product', 'id_category_default','id_shop_default','name','description','online_only', 'quantity', 'price']
 
 class CategoryProductAdmin(admin.ModelAdmin):
 	list_display = ['id_category','id_product','position']
@@ -111,13 +103,12 @@ class ProductAttributeImageAdmin(admin.ModelAdmin):
 	list_display = ['id_product_attribute','id_image']
 
 class ProductShopAdmin(admin.ModelAdmin):
-	list_display = ['id_product', 'id_shop', 'id_category_default','on_sale','online_only','price']
+	list_display = ['id_product', 'id_shop', 'id_category_default','online_only','price']
 
 
 # Tiendas
 admin.site.register(Shop, ShopAdmin)
 admin.site.register(ShopGroup, ShopGroupAdmin)
-admin.site.register(CategoryShop, CategoryShopAdmin)
 
 # Grupos
 admin.site.register(Groups, GroupsAdmin)

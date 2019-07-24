@@ -1,0 +1,82 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>FMegamercado Registro</title>
+
+   
+
+    <!-- Bootstrap core CSS -->
+<link href="{% static 'css/docs/4.3/dist/css/bootstrap.min.css' %}" rel="stylesheet" >
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/css/floating-labels.css' %}" rel="stylesheet">
+    <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
+  </head>
+  <body class="color">
+
+    <form class="form-signin color" method="POST" action="." >
+        {% csrf_token %}
+  <div class="text-center mb-4">
+    <img class="mb-4" src="{% static 'img/Logo/logo-login.png' %}" alt="" width="390" height="87">
+    <h1 class="mb-1 text-center white">Regístrate</h1>
+  </div>
+  <div class="form-label-group">
+    <input class="form-control" type="text" name="username" id="id_username" placeholder="Username" autofocus maxlength="150" required autofocus>
+    <label for="id_username">Username</label>
+  </div>
+
+  <div class="form-label-group">
+      <input class="form-control" type="text" name="first_name" id="id_first_name" maxlength="30" placeholder="Nombre" required autofocus>
+      <label for="id_first_name">Nombre</label>
+    </div>
+  <div class="form-label-group">
+      <input class="form-control" type="text" name="last_name" id="id_last_name" maxlength="150" placeholder="Apellido"  required autofocus>
+      <label for="id_last_name">Apellido</label>
+    </div>
+
+    <div class="form-label-group">
+    <input tytype="email" name="email" id="id_email" maxlength="254" class="form-control" placeholder="Email address" required autofocus>
+    <label for="id_email">E-mail</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Password" required>
+    <label for="id_password1">Contraseña</label>
+  </div>
+  <div class="form-label-group">
+      <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Password" required>
+      <label for="id_password2">Contraseña (Confirmación) </label>
+    </div>
+
+  <div class="checkbox mb-3">
+
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Crear tu cuenta</button>
+		<div class="text-center mb-4">
+  <br>
+			<p class="white text-gray-soft text-center small mb-2">¿Ya tienes una cuenta? <a href="{% url 'login1' %}">Iniciar sesión</a></p>
+	  </div>
+	
+</form>
+</body>
+</html>

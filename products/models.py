@@ -35,13 +35,43 @@ class ShopGroup(models.Model):
             raise ValidationError("No puede estar activo y eliminado")
         super(ShopGroup, self).save(**kwargs)
 
+# CATEGORIAS
+
+class Category(models.Model):
+    id_category = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=128, blank=False)
+    description = models.TextField(blank=True, null=True)
+    id_parent = models.ForeignKey('self',null=True,related_name="category_base", blank=True, db_index=True,on_delete=models.CASCADE,verbose_name="Categoria Base")
+    level_depth = models.IntegerField()
+    active = models.BooleanField(blank=True, default=False)
+    date_add = models.DateTimeField()
+    date_upd = models.DateTimeField()
+    position = models.IntegerField(validators=[MinValueValidator(0)])
+    is_root_category = models.BooleanField(blank=True, default=False)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.name)
+    def get_absolute_url(self):
+        return reverse('listado_categorias', kwargs={'id_category': self.id_category})
+
+
 class Shop(models.Model):
+    VALIDAR_LIST = (
+        ('Inicial','Inicial'),
+        ('PorValidar','PorValidar'),
+        ('Validado','Validado'),
+        ('Rechazado','Rechazado')
+    )
     id_shop = models.AutoField(primary_key=True)
-    id_shop_group = models.ForeignKey(ShopGroup, on_delete=models.CASCADE)
+    #id_shop_group = models.ForeignKey(ShopGroup, on_delete=models.CASCADE)
+    #id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, blank=False)
+    logo = models.ImageField(upload_to="assets/shops/",blank=True,null=True)
+    validar = models.CharField(verbose_name="status_shop",max_length=11,choices=VALIDAR_LIST,blank=True,null=True, default="Inicial")
     active = models.BooleanField(blank=True, default=False)
     deleted = models.BooleanField(blank=True, default=False)
-    virtual_url = models.URLField(max_length=250,blank=True)
+    #virtual_url = models.URLField(max_length=250,blank=True)
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.name)
@@ -49,6 +79,17 @@ class Shop(models.Model):
         if self.active is True and self.deleted is True:
             raise ValidationError("No puede estar activo y eliminado")
         super(Shop, self).save(**kwargs)
+
+class TrabajadoresShop(models.Model):
+    id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    cargo = models.CharField(max_length=200,blank=True)
+
+    class Meta:
+        unique_together = (('id_customer', 'id_shop'),)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.id_customer) + " " +str(self.id_shop)
 
 # ATRIBUTOS
 class AttributeGroup(models.Model):
@@ -96,25 +137,6 @@ class AttributeShop(models.Model):
         '''Devuelve el modelo en tipo String'''
         return str(self.id_attribute) + " " + str(self.id_shop)
 
-# CATEGORIAS
-
-class Category(models.Model):
-    id_category = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128, blank=False)
-    description = models.TextField(blank=True, null=True)
-    id_parent = models.ForeignKey('self',null=True,related_name="category_base", blank=True, db_index=True,on_delete=models.CASCADE,verbose_name="Categoria Base")
-    level_depth = models.IntegerField()
-    active = models.BooleanField(blank=True, default=False)
-    date_add = models.DateTimeField()
-    date_upd = models.DateTimeField()
-    position = models.IntegerField(validators=[MinValueValidator(0)])
-    is_root_category = models.BooleanField(blank=True, default=False)
-    def __str__(self):    
-        '''Devuelve el modelo en tipo String'''
-        return str(self.name)
-    def get_absolute_url(self):
-        return reverse('listado_categorias', kwargs={'id_category': self.id_category})
-
 
 class Groups(models.Model):
     id_group = models.AutoField(primary_key=True)
@@ -145,45 +167,43 @@ class CategoryGroup(models.Model):
 
 class Product(models.Model):
     TYPE_CHOICES = (('everywhere', 'EVERYWHERE'),
-                    ('catalog', 'CATALOG ONLY'),
-                    ('search', 'SEARCH ONLY'),
-                    ('nowhere', 'NOWHERE'))
-    OPC= (('new', 'New'),
-            ('used', 'Used'),
-            ('refurbished', 'Refurbished'))
+                   ('catalog', 'CATALOG ONLY'),
+                   ('search', 'SEARCH ONLY'),
+                   ('nowhere', 'NOWHERE'))
+    OPC= (('new', 'Nuevo'),
+            ('used', 'Usado'),
+            ('refurbished', 'Restaurado'))
+    ESTADO= (('Inicial', 'Inicial'),
+            ('Bloqueado', 'Bloqueado'))
     id_product = models.AutoField(primary_key=True)
     id_category_default = models.ForeignKey(Category, on_delete=models.CASCADE)
     id_shop_default = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    #id_tax_rules_group = models.ForeignKey(TaxRulesGroup, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, blank=False)
     description = models.TextField(blank=True, null=True)
     description_short = models.TextField(blank=True, null=True)
-    on_sale = models.BooleanField(blank=False)
     online_only = models.BooleanField(blank=False)
     ean13 = models.CharField(max_length=13, blank=True, null=True)
     upc = models.CharField(max_length=12, blank=True, null=True)
     quantity = models.IntegerField(blank=False, validators=[MinValueValidator(0)])
-    minimal_quantity =models.IntegerField(validators=[MinValueValidator(0)])
+    minimal_quantity =models.IntegerField(blank=True, null=True, validators=[MinValueValidator(0)])
     price = models.DecimalField(blank=False, max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    wholesale_price = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    unity = models.CharField(max_length=255, blank=True, null=True,validators=[MinValueValidator(0)])
-    unit_price_ratio = models.DecimalField(max_digits=20, decimal_places=6,validators=[MinValueValidator(0)])
-    additional_shipping_cost = models.DecimalField(max_digits=20, decimal_places=2,validators=[MinValueValidator(0)])
+    wholesale_price = models.DecimalField(blank=True,null=True,  max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
     reference = models.CharField(max_length=32, blank=True, null=True)
-    width = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    height = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    depth = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    out_of_stock = models.IntegerField()
-    quantity_discount = models.IntegerField(blank=True, null=True)
-    customizable =  models.BooleanField(blank=True, default=False)
+    width = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)],blank=True,null=True )
+    height = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)],blank=True,null=True)
+    depth = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)],blank=True,null=True)
+    weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)],blank=True,null=True)
+    out_of_stock = models.BooleanField(blank=True, default=False)
+    combination = models.BooleanField(blank=True, default=False)
     active = models.BooleanField(blank=True, default=False)
-    available_for_order = models.BooleanField(blank=False)
-    available_date = models.DateField()
+    deleted = models.BooleanField(blank=True, default=False)
+    estado = models.CharField(max_length=11, choices=ESTADO,blank=True, null=True)
+    razon = models.CharField(max_length=50, blank=True, null=True)
+    visibility = models.CharField(max_length=100,  choices=TYPE_CHOICES, blank=True)
+    available_date = models.DateField(blank=True,null=True)
     condition = models.CharField(max_length=11, choices=OPC)
-    show_price = models.BooleanField(blank=True, default=False)
-    visibility = models.CharField(max_length=100,  choices=TYPE_CHOICES )
-    is_virtual = models.BooleanField(blank=False)
+    is_virtual = models.BooleanField(blank=True, default=False)
     date_add = models.DateTimeField()
     date_upd = models.DateTimeField()
     def __str__(self):    
@@ -203,17 +223,6 @@ class CategoryProduct(models.Model):
         '''Devuelve el modelo en tipo String'''
         return str(self.id_category) + " " + str(self.id_product)
 
-class CategoryShop(models.Model):
-    id_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-    position = models.IntegerField(validators=[MinValueValidator(0)])
-
-    class Meta:
-        unique_together = (('id_category', 'id_shop'),)
-    def __str__(self):    
-        '''Devuelve el modelo en tipo String'''
-        return str(self.id_category) + " " +str(self.id_shop)
-
 
 class ProductAttribute(models.Model):
     id_product_attribute = models.AutoField(primary_key=True)
@@ -221,14 +230,13 @@ class ProductAttribute(models.Model):
     reference = models.CharField(max_length=32, blank=True, null=True)
     ean13 = models.CharField(max_length=13, blank=True, null=True)
     upc = models.CharField(max_length=12, blank=True, null=True)
-    wholesale_price = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    price = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
+    wholesale_price = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)], blank=True,null=True)
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
-    weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)])
-    unit_price_impact = models.DecimalField(max_digits=17, decimal_places=2,validators=[MinValueValidator(0)])
+    weight = models.DecimalField(max_digits=20, decimal_places=6, validators=[MinValueValidator(0)], blank=True,null=True)
+    unit_price_impact = models.DecimalField(max_digits=17, decimal_places=2,validators=[MinValueValidator(0)], default=0)
     default_on = models.BooleanField(blank=True, default=False)
-    minimal_quantity =models.IntegerField(validators=[MinValueValidator(0)])
-    available_date = models.DateField()
+    minimal_quantity = models.IntegerField(validators=[MinValueValidator(0)],blank=True,null=True)
+    available_date = models.DateField(blank=True,null=True)
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.id_product_attribute)+ " "+ str(self.id_product)

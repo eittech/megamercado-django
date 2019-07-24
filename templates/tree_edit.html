@@ -1,0 +1,19 @@
+{% load categorias %}
+<ul class="dropdown-menu">
+    {% for sub in subs %}
+    {% if sub.number_of_child > 0 %}
+    <li class="dropdown-submenu">
+        <a tabindex="0" data-toggle="dropdown">{{ sub.name }}</a>
+        {% tree_structure_edit sub producto %}
+    </li>
+    {% else %}
+    <li><a tabindex="0">{{ sub.name }} 
+        {% ifequal producto.id_category_default sub %}
+        <input style="margin-left: 10px" type="checkbox" name="id_category_default" checked value="{{sub.id_category}}" id="id_id_category_default">
+        {% else %}
+        <input style="margin-left: 10px" type="checkbox" name="id_category_default" value="{{sub.id_category}}" id="id_id_category_default">
+        {% endifequal %}
+    </a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
