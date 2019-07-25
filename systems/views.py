@@ -574,6 +574,7 @@ def listadoCategorias(request):
         'categoriasRoot':categoriasRoot,
         'categoriasHijos':categoriasHijos})
 
+@login_required(login_url='/login/')
 def cuenta(request):
     print(request.user)
 

@@ -98,6 +98,7 @@ class Orders(models.Model):
     id_currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     current_state = models.IntegerField(blank=True, null=True)
     shipping_number = models.CharField(max_length=64, blank=True, null=True)
+    shipping_date = models.DateField(blank=True, null=True)
     total_discounts = models.DecimalField(max_digits=17, decimal_places=2)
     total_paid = models.DecimalField(max_digits=17, decimal_places=2)
     total_paid_real = models.DecimalField(max_digits=17, decimal_places=2)

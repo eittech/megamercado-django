@@ -34,7 +34,6 @@ import datetime
 #
 # register = template.Library()
 
-
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
 def listado(request, id_category):
@@ -88,12 +87,14 @@ def listadoOrdenMayor(request, id_category):
         product = paginator.page(paginator.num_pages)
     return render(request, "listproductos.html",{'productos':product, 'imagenes': imagenes, 'categoria':categoria})
 
+@login_required(login_url='/login/')
 def tiendas(request):
     tiendas= Shop.objects.filter(owner=request.user, deleted=False)
     return render(request, 
     "Cuenta/Tienda/tiendas.html",
     {'tiendas':tiendas})
 
+@login_required(login_url='/login/')
 def tiendas_add(request):
     form= TiendaForm(request.POST)
     if request.method=="POST":
@@ -112,6 +113,7 @@ def tiendas_add(request):
     "Cuenta/Tienda/tiendasadd.html",
     {'form':form })
 
+@login_required(login_url='/login/')
 def tiendas_update(request, pk): 
     shop= Shop.objects.get(id_shop=pk)
     form= TiendaForm(request.POST)
@@ -130,6 +132,7 @@ def tiendas_update(request, pk):
     "Cuenta/Tienda/tiendasedit.html",
     {'form':form, 'shop':shop })
 
+@login_required(login_url='/login/')
 def tiendas_detail(request, pk): 
     tienda= Shop.objects.get(id_shop=pk)
     monedas= Currency.objects.filter(active=True)
@@ -163,6 +166,7 @@ def tiendas_detail(request, pk):
     "Cuenta/Tienda/tiendas_detail.html",
     {'monedas':monedas, 'tienda':tienda, 'ref':ref, 'money':money, 'cuenta': cuenta, 'transp': transp, 'grupoattr':grupoattr,'atributos':atributos, 'grupos':grupos, 'carrito': carrito})
 
+@login_required(login_url='/login/')
 def tiendas_mref(request, pk, id_currency): 
     tienda= Shop.objects.get(id_shop=pk)
     moneda= Currency.objects.get(id_currency=id_currency)
@@ -172,6 +176,7 @@ def tiendas_mref(request, pk, id_currency):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def tiendas_mref_publish(request, pk): 
     mref= CurrencyRef.objects.get(id_shop=pk)
     mref.publish=True
@@ -180,6 +185,7 @@ def tiendas_mref_publish(request, pk):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def tiendas_mref_nopublish(request, pk): 
     mref= CurrencyRef.objects.get(id_shop=pk)
     mref.publish=False
@@ -188,6 +194,7 @@ def tiendas_mref_nopublish(request, pk):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def grupo_attr_add(request, pk):
     form =GrupoAttrShopForm(request.POST) 
     grupos=AttributeGroup.objects.all()
@@ -207,6 +214,7 @@ def grupo_attr_add(request, pk):
     "Cuenta/Tienda/attr_group_add.html",
     {'form':form , 'grupos': grupos})
 
+@login_required(login_url='/login/')
 def grupo_attr_eliminar(request,pk, id_attribute_group):
     grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
     tienda=Shop.objects.get(id_shop=pk)
@@ -214,6 +222,7 @@ def grupo_attr_eliminar(request,pk, id_attribute_group):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def attr_add(request, pk, id_attribute_group):
     form =AttrForm(request.POST) 
     grupo=AttributeGroup.objects.get(id_attribute_group=id_attribute_group)
@@ -253,6 +262,7 @@ def attr_add(request, pk, id_attribute_group):
     "Cuenta/Tienda/attr_add.html",
     {'form':form , 'grupo': grupo})
 
+@login_required(login_url='/login/')
 def attr_edit(request, pk, id_attribute):
     form =AttrForm(request.POST) 
     attr=Attribute.objects.get(id_attribute=id_attribute)
@@ -281,6 +291,7 @@ def attr_edit(request, pk, id_attribute):
     "Cuenta/Tienda/attr_edit.html",
     {'form':form , 'grupo': grupo, 'attr': attr})
 
+@login_required(login_url='/login/')
 def attr_eliminar(request,pk, id_attribute):
     attr=Attribute.objects.get(id_attribute=id_attribute)
     tienda=Shop.objects.get(id_shop=pk)
@@ -288,12 +299,14 @@ def attr_eliminar(request,pk, id_attribute):
     url = reverse('tiendas_detail', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def productos_list1(request):
     productos = Product.objects.filter(owner=request.user, deleted=False)
     tienda = Shop.objects.filter(owner=request.user,deleted=False)
     fotos = Image.objects.filter(id_product__owner=request.user)
     return render(request, "Cuenta/Productos/productos-list.html",{'productos':productos, 'tienda': tienda, 'fotos': fotos})
 
+@login_required(login_url='/login/')
 def productos_add(request):
     form=ProductosForm(request.POST)
     categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
@@ -368,6 +381,7 @@ def productos_add(request):
                 return HttpResponseRedirect(url)
     return render(request, "Cuenta/Productos/productos-add.html",{'form':form, 'tienda': tienda, 'categories':categories})
 
+@login_required(login_url='/login/')
 def productos_edit(request, pk):
     form=ProductosForm(request.POST)
     categories = Category.objects.filter(id_parent=None).annotate(number_of_child=Count('id_parent'))
@@ -482,17 +496,20 @@ def productos_edit(request, pk):
                 return HttpResponseRedirect(reverse('productos_list'))
     return render(request, "Cuenta/Productos/productos-edit.html",{'form':form, 'tienda': tienda, 'categories':categories, 'producto':producto})
 
+@login_required(login_url='/login/')
 def productos_eliminar(request, pk):
     producto=Product.objects.get(id_product=pk)
     producto.deleted=True
     producto.save()
     return HttpResponseRedirect(reverse('productos_list'))
 
+@login_required(login_url='/login/')
 def productos_detalles1(request, pk):
     producto=Product.objects.get(id_product=pk)
     fotos=Image.objects.filter(id_product=producto).order_by('position')
     return render(request, "Cuenta/Productos/productos-detalles1.html",{'fotos':fotos,'producto':producto})
 
+@login_required(login_url='/login/')
 def imagenes_add(request, pk):
     form= FotosForm(request.POST)
     producto=Product.objects.get(id_product=pk)
@@ -519,6 +536,7 @@ def imagenes_add(request, pk):
         return HttpResponseRedirect(url)
     return render(request, "Cuenta/Productos/imagenes-add.html",{'form': form})
 
+@login_required(login_url='/login/')
 def imagenes_eliminar(request, pk, id_image):
     fotos=Image.objects.filter(id_image=id_image).delete()
     producto=Product.objects.get(id_product=pk)
@@ -530,6 +548,7 @@ def imagenes_eliminar(request, pk, id_image):
     url = reverse('productos_detalles1', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def imagenes_cover(request, pk, id_image):
     foto=Image.objects.get(id_image=id_image)
     foto.cover=True
@@ -541,6 +560,7 @@ def imagenes_cover(request, pk, id_image):
     url = reverse('productos_detalles1', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def productos_combinaciones(request, pk):
     producto=Product.objects.get(id_product=pk)
     comb=ProductAttribute.objects.filter(id_product=producto).annotate(price_number=Count('id_product'))
@@ -562,6 +582,7 @@ def productos_combinaciones(request, pk):
         attr=None
     return render(request, "Cuenta/Productos/combinaciones.html",{'producto':producto, 'comb':comb, 'attr':attr, 'fotos':fotos, 'img':img})
 
+@login_required(login_url='/login/')
 def productos_comb_add(request,pk):
     producto=Product.objects.get(id_product=pk)
     form=CombAttrForm(request.POST)
@@ -755,6 +776,7 @@ def productos_comb_add(request,pk):
                                 
     return render(request, "Cuenta/Productos/combination_add.html",{'producto':producto,'form':form,'grupo':grupo, 'attr':attr})
 
+@login_required(login_url='/login/')
 def combinacion_predeterminada(request,pk, id):
     producto=Product.objects.get(id_product=pk)
     comb=ProductAttribute.objects.get(id_product_attribute=id)
@@ -768,6 +790,7 @@ def combinacion_predeterminada(request,pk, id):
     url = reverse('productos_combinaciones', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def combinacion_eliminar(request,pk, id):
     producto=Product.objects.get(id_product=pk)
     comb=ProductAttribute.objects.get(id_product_attribute=id).delete()
@@ -779,6 +802,7 @@ def combinacion_eliminar(request,pk, id):
     url = reverse('productos_combinaciones', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+@login_required(login_url='/login/')
 def combinacion_editar(request,pk, id):
     producto=Product.objects.get(id_product=pk)
     comb=ProductAttribute.objects.get(id_product_attribute=id)

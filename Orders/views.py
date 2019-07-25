@@ -28,7 +28,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def pedidos_compras(request):
-    pedidos =Orders.objects.filter(id_customer=request.user)
+    pedidos =Orders.objects.filter(id_customer=request.user).order_by('-date_add')
     if len(pedidos)==0:
         detalles=None
         fotos= None
@@ -65,7 +65,7 @@ def pedidos_compras(request):
     {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos })
 
 def pedidos_ventas(request):
-    pedidos =Orders.objects.filter(id_shop__owner=request.user)
+    pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
     if len(pedidos)==0:
         detalles=None
         fotos= None
