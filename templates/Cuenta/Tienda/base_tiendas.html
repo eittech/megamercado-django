@@ -2,17 +2,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Dashboard Template · Bootstrap</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-<link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+    <link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
 
 
     <style>
@@ -174,159 +167,152 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="navlarga" class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div id="navlarga1" class="sidebar-sticky">
-        <ul class="nav flex-column ">
-            <li class="nav-item textomenucuenta">
+      <nav id="navlarga" class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div id="navlarga1" class="sidebar-sticky">
+            <ul class="nav flex-column ">
+                <li class="nav-item textomenucuenta">
+                      <span data-feather="home"></span>
+                      <img id="micuenta-2" src="{% static 'img/cuenta/icono_perfil1.png' %}"> <b> Mi cuenta</b> <br> <div style="margin-left: 20px" > {{user.username}} </div>
+                  </li>
+              <li class="nav-item ">
+                <a class="nav-link textomenucuenta" href="#">
                   <span data-feather="home"></span>
-                  <img id="micuenta-2" src="{% static 'img/cuenta/icono_perfil1.png' %}"> <b> Mi cuenta</b> <br> <div style="margin-left: 20px" > {{user.username}} </div>
-              </li>
-          <li class="nav-item ">
-            <a class="nav-link active menucuentauso" href="#">
-              <span data-feather="home"></span>
-              <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> Resumen <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item textomenucuenta">
-            <div class="nav-link" id="compra">
-              <span data-feather="file"></span>
-              <img src="{% static 'img/cuenta/icono_compras1.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
-            </div>
-            <ul>
-              <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
-                <a class="nav-link" href="{% url 'pedidos_compras' %}">
-                  <span data-feather="home"></span>
-                  Pedidos
+                  <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> Resumen 
                 </a>
               </li>
-              <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
+              <li class="nav-item textomenucuenta">
+                <div class="nav-link" id="compra">
+                  <span data-feather="file"></span>
+                  <img src="{% static 'img/cuenta/icono_compras1.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+                </div>
+                <ul>
+                  <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
+                    <a class="nav-link" href="{% url 'pedidos_compras' %}">
+                      <span data-feather="home"></span>
+                      Pedidos
+                    </a>
+                  </li>
+                  <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
+                    <a class="nav-link" href="#">
+                      <span data-feather="home"></span>
+                      Preguntas 
+                    </a>
+                  </li>
+                  <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
+                    <a class="nav-link" href="#">
+                      <span data-feather="home"></span>
+                      Favoritos 
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item textomenucuenta" >
                 <a class="nav-link" href="#">
-                  <span data-feather="home"></span>
-                  Preguntas 
+                  <span data-feather="shopping-cart"></span>
+                  <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
                 </a>
+                <ul>
+                  <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
+                    <a class="nav-link" href="{% url 'pedidos_ventas' %}">
+                      <span data-feather="file"></span>
+                      Pedidos
+                    </a>
+                  </li>
+                  <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
+                    <a class="nav-link" href="#">
+                      <span data-feather="file"></span>
+                      Preguntas 
+                    </a>
+                  </li>
+                  <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
+                    <a class="nav-link" href="{% url 'productos_list' %}">
+                      <span data-feather="file"></span>
+                      Productos 
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
-                <a class="nav-link" href="#">
-                  <span data-feather="home"></span>
-                  Favoritos 
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item textomenucuenta" >
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
-            </a>
-            <ul>
-              <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
-                <a class="nav-link" href="{% url 'pedidos_ventas' %}">
-                  <span data-feather="file"></span>
-                  Pedidos
-                </a>
-              </li>
-              <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Preguntas 
-                </a>
-              </li>
-              <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
-                <a class="nav-link" href="{% url 'productos_list' %}">
-                  <span data-feather="file"></span>
-                  Productos 
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item textomenucuenta">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              <img src="{% static 'img/cuenta/icono_conf1.png' %}"> Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
-            </a>
-            <ul>
-              <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
-                <a class="nav-link" href="{% url 'misdatos' %}">
-                  <span data-feather="file"></span>
-                  Mis datos
-                </a>
-              </li>
-              <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                <a class="nav-link" href="{% url 'direcciones' %}">
-                  <span data-feather="file"></span>
-                  Direcciones
-                </a>
-              </li>
-              {% ifequal user.validar "Validado" %}
-              <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
-                <a class="nav-link" href="{% url 'tiendas' %}">
-                  <span data-feather="file"></span>
-                  Tiendas
-                </a>
-              </li>
-              {% endifequal %}
-            </ul>
-          </li>
-        </ul>
-
-      </div>
-    </nav>
-
-
-    <nav id="navshort" class="d-none mostrar bg-light sidebar" style="display: none !important"  >
-        <div id="navshort1" class="sidebar-sticky">
-          <ul class="nav flex-column">
-              <li class="nav-item">
-                    <span data-feather="home"></span>
-                    <img id="micuenta-short" src="{% static 'img/cuenta/icono_perfil1.png' %}"> 
+              <li class="nav-item textomenucuenta">
+                  <a class="nav-link  active menucuentauso" href="#">
+                    <span data-feather="users"></span>
+                    <img src="{% static 'img/cuenta/icono_conf2.png' %}"> Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+                  </a>
+                  <ul>
+                      <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
+                          <a class="nav-link" href="{%url 'misdatos' %}">
+                            <span data-feather="file"></span>
+                            Mis datos
+                          </a>
+                        </li>
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link" href="{% url 'direcciones' %}">
+                            <span data-feather="file"></span>
+                            Direcciones
+                          </a>
+                        </li>
+                        {% ifequal user.validar "Validado" %}
+                        <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                          <a class="nav-link menucuentauso" href="{% url 'tiendas' %}">
+                            <span data-feather="file"></span>
+                            Tiendas
+                          </a>
+                        </li>
+                        {% endifequal %}
+                  </ul>
                 </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="home"></span>
-                <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> 
-              </a>
-            </li>
-            <li class="nav-item">
-              <div class="nav-link" id="compra">
-                <span data-feather="file"></span>
-                <img src="{% static 'img/cuenta/icono_compras1.png' %}">
-              </div>
-            </li>
-            <li class="nav-item" >
-              <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
-                <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> 
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                <img src="{% static 'img/cuenta/icono_conf1.png' %}"> 
-              </a>
-            </li>
-          </ul>
-  
-        </div>
-      </nav>
+            </ul>
+    
+          </div>
+        </nav>
+    
+    
+        <nav id="navshort" class="d-none mostrar bg-light sidebar" style="display: none !important"  >
+            <div id="navshort1" class="sidebar-sticky">
+              <ul class="nav flex-column">
+                  <li class="nav-item">
+                        <span data-feather="home"></span>
+                        <img id="micuenta-short" src="{% static 'img/cuenta/icono_perfil1.png' %}"> 
+                    </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">
+                    <span data-feather="home"></span>
+                    <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> 
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <div class="nav-link" id="compra">
+                    <span data-feather="file"></span>
+                    <img src="{% static 'img/cuenta/icono_compras1.png' %}">
+                  </div>
+                </li>
+                <li class="nav-item" >
+                  <a class="nav-link" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> 
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="users"></span>
+                    <img src="{% static 'img/cuenta/icono_conf1.png' %}"> 
+                  </a>
+                </li>
+              </ul>
+      
+            </div>
+          </nav>
 
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
+          {% block content %}
 
-      <h2 style="margin-left:10%" >Resumen</h2>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Preguntas </a><br>
-      <a  href="#" style="margin-left:10%; text-decoration: none; color: black"> Que aun no respondistes </a>
-
-
-    </main>
+          {% endblock %}
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-  
-        <script src="dashboard.js"></script>
       
         <script>
           $(document).ready(function(){

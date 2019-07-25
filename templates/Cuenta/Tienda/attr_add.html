@@ -178,7 +178,7 @@
               <li class="nav-item ">
                 <a class="nav-link textomenucuenta" href="#">
                   <span data-feather="home"></span>
-                  <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> Resumen 
+                  <img src="{% static 'img/cuenta/icono_resumen1.png' %}"> Resumen 
                 </a>
               </li>
               <li class="nav-item textomenucuenta">
@@ -188,7 +188,7 @@
                 </div>
                 <ul>
                   <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{% url 'pedidos_compras' %}">
                       <span data-feather="home"></span>
                       Pedidos
                     </a>
@@ -214,7 +214,7 @@
                 </a>
                 <ul>
                   <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{% url 'pedidos_ventas' %}">
                       <span data-feather="file"></span>
                       Pedidos
                     </a>
