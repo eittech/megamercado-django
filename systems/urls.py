@@ -3,6 +3,7 @@ from . import views
 from products.views import *
 from currency.views import *
 from carrier.views import *
+from Orders.views import *
 from customers.views import *
 from locations.views import *
 from customers.forms import *
@@ -74,6 +75,8 @@ urlpatterns = [
     path('cuenta/productos/combinaciones/pre/<int:pk>/<id>/', combinacion_predeterminada, name='combinacion_predeterminada'),
     path('cuenta/productos/combinaciones/elim/<int:pk>/<id>/', combinacion_eliminar, name='combinacion_eliminar'),
     path('cuenta/productos/combinaciones/edit/<int:pk>/<id>/', combinacion_editar, name='combinacion_editar'),
+    path('cuenta/compras/pedidos/', pedidos_compras, name='pedidos_compras'),
+    path('cuenta/ventas/pedidos/', pedidos_ventas, name='pedidos_ventas'),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),

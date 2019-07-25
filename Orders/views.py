@@ -27,6 +27,80 @@ from django.db.models.functions import Substr
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
+def pedidos_compras(request):
+    pedidos =Orders.objects.filter(id_customer=request.user)
+    if len(pedidos)==0:
+        detalles=None
+        fotos= None
+    else:
+        count=0
+        for i in pedidos:
+            if count==0:
+                detalles=OrderDetail.objects.filter(id_order=i)
+                count=count+1
+            else:
+                detalles=detalles | OrderDetail.objects.filter(id_order=i)
+        
+        count=0
+        for d in detalles:
+            if count==0:
+                fotos=Image.objects.filter(id_product=d.product_id, cover=True)
+                count=count+1
+            else:
+                fotos=fotos | Image.objects.filter(id_product=d.product_id, cover=True)
+    
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(pedidos, 5)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+    print(pedidos)
+    print(detalles)
+    return render(request, 
+    "Cuenta/Pedidos/Pedidos-compras.html",
+    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos })
+
+def pedidos_ventas(request):
+    pedidos =Orders.objects.filter(id_shop__owner=request.user)
+    if len(pedidos)==0:
+        detalles=None
+        fotos= None
+    else:
+        count=0
+        for i in pedidos:
+            if count==0:
+                detalles=OrderDetail.objects.filter(id_order=i)
+                count=count+1
+            else:
+                detalles=detalles | OrderDetail.objects.filter(id_order=i)
+        
+        count=0
+        for d in detalles:
+            if count==0:
+                fotos=Image.objects.filter(id_product=d.product_id, cover=True)
+                count=count+1
+            else:
+                fotos=fotos | Image.objects.filter(id_product=d.product_id, cover=True)
+    
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(pedidos, 5)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+    print(pedidos)
+    print(detalles)
+    return render(request, 
+    "Cuenta/Pedidos/Pedidos-ventas.html",
+    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos })
+
 def carritos(request):
     print(request.user)
     cart=Cart.objects.get(id_customer=request.user)
