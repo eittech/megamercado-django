@@ -58,11 +58,11 @@ class Account(models.Model):
     active = models.BooleanField(blank=True, default=False)
     def __str__(self):   
         '''Devuelve el modelo en tipo String'''
-        return str(self.id_account)
+        return str(self.id_currency) + " " + str(self.name)
 
 class AcountShop(models.Model):
     id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
     id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     def __str__(self):   
         '''Devuelve el modelo en tipo String'''
-        return str(self.id)
+        return str(self.id_account)

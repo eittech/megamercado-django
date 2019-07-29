@@ -104,8 +104,10 @@ class Orders(models.Model):
     total_paid_real = models.DecimalField(max_digits=17, decimal_places=2)
     total_products = models.DecimalField(max_digits=17, decimal_places=2)
     total_shipping = models.DecimalField(max_digits=17, decimal_places=2)
-    delivery_date = models.DateTimeField(blank=True, null=True)
+    delivery_date = models.DateField(blank=True, null=True)
     valid = models.BooleanField(blank=True, default=False)
+    entregado = models.BooleanField(blank=True, default=False)
+    enviado = models.BooleanField(blank=True, default=False)
     date_add = models.DateTimeField()
     date_upd = models.DateTimeField()
 
@@ -237,4 +239,17 @@ class OrderOrderMessage(models.Model):
         '''Devuelve el modelo en tipo String'''
         return str(self.id)
 
-
+class Transaction(models.Model):
+    id_transaction = models.AutoField(primary_key=True)
+    id_acount = models.ForeignKey(Account, on_delete=models.CASCADE)
+    id_shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    id_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=30, blank=True, null=True)
+    amount = models.DecimalField(max_digits=17, decimal_places=6)
+    description = models.TextField(blank=True, null=True)
+    observation = models.TextField(blank=True, null=True)
+    aprobado = models.BooleanField(blank=True, default=False)
+    date_add = models.DateField(blank=True, null=True)
+    def __str__(self):   
+        '''Devuelve el modelo en tipo String'''
+        return str(self.id_transaction)

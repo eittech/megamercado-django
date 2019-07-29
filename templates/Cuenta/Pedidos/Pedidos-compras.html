@@ -6,6 +6,7 @@
 
     <!-- Bootstrap core CSS -->
 <link href="{% static 'css/css/bootstrap.min.css' %}" rel="stylesheet" >
+<link href="{% static 'css/css/style2.css' %}" rel="stylesheet" >	  
 
 <style>
     body {
@@ -166,7 +167,7 @@
          </div>
          <ul>
            <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
-             <a class="nav-link  menucuentauso" href="{% url 'pedidos_ventas' %}">
+             <a class="nav-link  menucuentauso" href="{% url 'pedidos_compras' %}">
                <span data-feather="home"></span>
                Pedidos
              </a>
@@ -293,7 +294,10 @@
 	  <div class="card-body">
 		 <div>
 			<h6> Fecha de la orden: {{i.date_add}} </h6>
-      <p> Número de pedido: {{i.id_order}}  </p>
+      <p> Número de pedido: {{i.id_order}}  {% for h in historial %}
+        {% ifequal h.id_order i %}. Estado: {{h.id_order_state.name}} 
+        {% endifequal %}
+        {%endfor %} </p>
       <h6 class="card-subtitle mb-2 text-muted"> {{i.id_shop.name}}</h6>
     </div>
 		<div style="padding-top: 0px" class="row" >
@@ -313,7 +317,6 @@
                {% endfor %}
 							<div class="col-sm-8" > <!-- col info.// -->
 								<h5 class="card-title"> {{d.product_name}}  </h5>
-								<h6 class="card-subtitle mb-2 text-muted"> {{i.id_shop.name}}</h6>
                 <p>Cantidad: {{d.product_quantity}} <br>
                   {% if d.product_attribute_id %}
                   <strong>{{d.product_attribute_id}}</strong></p>
@@ -335,28 +338,127 @@
 				
 					<div class="action-wrap">
 						<div style="padding-top: 20px" class="price-wrap  h4">
-							<span class="price"> Total: {{i.total_paid}}$ </span>	
-							
+              {% ifequal i.id_carrier.is_free True %}
+              <span class="price"> Total: {{i.total_paid}}{{i.id_currency.sign}} </span>	
+              <br>
+              <p class="text-success">Envio gratis</p>
+              {% else %}
+              <span class="price"> Total: {{i.total_paid}}{{i.id_currency.sign}} </span>	
+              <br>
+              {% endifequal %}
             </div> <!-- info-price-detail // -->
             {% if i.shipping_number %}
 							Número de rastreo: <p class="text-success">{{i.shipping_number}}</p>
 							{%endif %}
 							<br>
 							<p>
-							<a href="#" class="btn btn-primary"> Detalles </a>
-							<div class="dropdown">
-  							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    						Más acciones
-  							</button>
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-							<button class="dropdown-item" type="button">Disputa</button>
-							<button class="dropdown-item" type="button">Contactar al vendedor</button>
-							<button class="dropdown-item" type="button">Confirmación de recibido</button>
-						  </div>
-						</div>
+              <a href="{% url 'pedidos_detalle_compras' i.id_order %}" class="btn btn-primary"> Detalles </a>
+              {% for h in historial %}
+              {% ifequal h.id_order i %}
+              {%ifequal h.id_order_state.name "Espera de pago" %} 
+              <br>
+              <a href="{% url 'registrar_pago' i.id_order %}" class="btn btn-success" style="margin-top:5%"> Registrar Pago </a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Más acciones
+                </button>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" data-toggle="modal" data-target="#recepcion{{i.id_order}}">Confirmar recepción</a>
+                <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+              </div>
+              </div>
+              {% endifequal %} 
+              {%ifequal h.id_order_state.name "Pago aceptado" %} 
+              <br>
+              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Confirmar recepción</a>
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Más acciones
+                </button>
+                <div class="dropdown-menu">
+                <a class="dropdown-item"  data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+              </div>
+              </div>
+              {% endifequal %} 
+              {%ifequal h.id_order_state.name "Enviado" %} 
+              {% if i.valid %}
+              <br>
+              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Confirmar recepción</a>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                </div>
+                </div>
+              {% else %}
+              <br>
+              <a href="{% url 'registrar_pago' i.id_order %}" class="btn btn-success" style="margin-top:5%"> Registrar Pago</a>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#recepcion{{i.id_order}}">Confirmar recepción</a>
+                  <a class="dropdown-item"  data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                </div>
+              </div>
+              {%endif%}
+              {% endifequal %}
+              {%ifequal h.id_order_state.name "Finalizado" %} 
+              <br>
+              <a  data-toggle="modal" data-target="#disputa{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Disputa </a>
+              {% endifequal %}  
+              {% endifequal %}
+              {%endfor %} 
+
+              <div class="modal fade" id="recepcion{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que recibiste los productos de tu orden?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Si lo confirma será de forma permanente.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a class="remove" href="{% url 'confirmar_recepcion' i.id_order %}"><button type="submit" class="btn btn-primary">Estoy seguro</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="disputa{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que deseas iniciar una disputa por esta orden?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Al iniciarla se creara un chat para mediar los casos.
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <a class="remove" href="{% url 'disputa_comprador' i.id_order %}"><button type="submit" class="btn btn-primary">Estoy seguro</button></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+							
 					<!--<a href="#" class="btn btn-secondary"> Details  </a>-->
 							</p>
-							<a href="#"><i class="fa fa-heart"></i> Contactar con el vendedor</a>
 					</div> <!-- action-wrap.// -->
 				
 		</div> <!-- Class 2 -->

@@ -123,3 +123,5 @@ admin.site.register(OrderHistory,OrderHistoryAdmin)
 #Mensaje
 admin.site.register(OrderMessage,OrderMessageAdmin)
 admin.site.register(OrderOrderMessage,OrderOrderMessageAdmin)
+
+admin.site.register(Transaction)

@@ -308,13 +308,30 @@
                   </ul>
                   <div class="tab-content py-0 px-0 border-left-0 border-bottom-0 border-right-0">
 
-		<br><br>
+    <br><br>
+    {% if trans %}
+    <div class="alert alert-primary"  role="alert">
+      Tienes un pago sin aprobar
+    </div>
+    {% endif %}
     {% for i in pedidos %}
     <div  class="card">
       <div class="card-body">
        <div>
+         {% ifequal i.valid False %}
+          {% for t in trans %}
+          {% ifequal t.id_order i %}
+          <div class="alert alert-dark" role="alert">
+            Tienes un pago sin aprobar en esta orden.
+          </div>
+          {% endifequal %}
+          {%endfor %}
+          {% endifequal %}
         <h6> Fecha de la orden: {{i.date_add}} </h6>
-      <p> Número de pedido: {{i.id_order}}  </p>
+      <p> Número de pedido: {{i.id_order}}   {% for h in historial %}
+        {% ifequal h.id_order i %}. Estado: {{h.id_order_state.name}} 
+        {% endifequal %}
+        {%endfor %} </p>
       <h6 class="card-subtitle mb-2 text-muted"> {{i.id_shop.name}}</h6></div>
     </div>
       <div style="padding-top: 0px" class="row" >
@@ -335,7 +352,6 @@
 
                 <div class="col-sm-8" style="padding-left: 10%"> <!-- col info.// -->
                   <h5 class="card-title"> {{d.product_name}}  </h5>
-								<h6 class="card-subtitle mb-2 text-muted"> {{i.id_shop.name}}</h6>
                 <p>Cantidad: {{d.product_quantity}} <br>
                   {% if d.product_attribute_id %}
                   <strong>{{d.product_attribute_id}}</strong></p>
@@ -355,7 +371,14 @@
           
             <div class="action-wrap">
               <div style="padding-top: 20px" class="price-wrap  h4">
-                <span class="price"> Total: {{i.total_paid}}$ </span>	
+                {% ifequal i.id_carrier.is_free True %}
+              <span class="price"> Total: {{i.total_paid}}{{i.id_currency.sign}} </span>	
+              <br>
+              <p class="text-success">Envio gratis</p>
+              {% else %}
+              <span class="price"> Total: {{i.total_paid}}{{i.id_currency.sign}} </span>	
+              <br>
+              {% endifequal %}
                 
               </div> <!-- info-price-detail // -->
               {% if i.shipping_number %}
@@ -364,23 +387,145 @@
                 
                 <br>
                 <p>
-                <a href="#" class="btn btn-primary"> Detalles </a>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Más acciones
-                    </button>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Disputa</a>
-                    <a class="dropdown-item" href="#">Contactar con el vendedor</a>
-                    <a class="dropdown-item" href="#">Confirmación de reicibido</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                <a href="{% url 'pedidos_detalle_ventas' i.id_order %}" class="btn btn-primary"> Detalles </a>
+              {% for h in historial %}
+              {% ifequal h.id_order i %}
+              {%ifequal h.id_order_state.name "Espera de pago" %} 
+              {% for t in trans %}
+              {% ifequal t.id_order i %}
+              <br>
+              <a href="{{i.id_order}}/#aprobar" class="btn btn-success" style="margin-top:5%"> Aprobar Pago </a>
+              {% endifequal %}
+              {%endfor %}
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#pagado{{i.id_order}}">Marcar como pagado</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#entregado{{i.id_order}}">Marcar como entregado</a>
+                  <a class="dropdown-item" href="{% url 'registrar_envio' i.id_order %}">Registrar tracking o envio</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                </div>
+              </div>
+              {% endifequal %} 
+              {%ifequal h.id_order_state.name "Pago aceptado" %} 
+              <br>
+              <a href="{% url 'registrar_envio' i.id_order %}" class="btn btn-success" style="margin-top:5%">Registrar tracking o envio </a>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#entregado{{i.id_order}}">Marcar como entregado</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                </div>
+              </div>
+              {% endifequal %} 
+              {%ifequal h.id_order_state.name "Enviado" %} 
+              {% if i.valid %}
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                </div>
+              </div>
+              {% else %}
+              <br>
+              <a data-toggle="modal" data-target="#pagado{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Marcar como pagado</a>
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" href="{{i.id_order}}/#aprobar">Aprobar Pago</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                </div>
+              </div>
+              {% endif %}
+              {% endifequal %}
+              {%ifequal h.id_order_state.name "Finalizado" %} 
+              <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Más acciones
+                  </button>
+                  <div class="dropdown-menu">
+                  <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
+                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                </div>
+              </div>
+              {% endifequal %} 
+              {% endifequal %}
+              {%endfor %}   
+
+              <div class="modal fade" id="pagado{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro de que ya te pagaron el monto total del pedido?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Si lo confirma será de forma permanente.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a class="remove" href="{% url 'marcar_pagado' i.id_order %}"><button type="submit" class="btn btn-primary">Estoy seguro</button></a>
+                      </div>
                     </div>
                   </div>
-  
+                </div>
+
+                <div class="modal fade" id="entregado{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">¿Ya realizó la entrega de los productos?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            Si lo confirma será de forma permanente.
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <a class="remove" href="{% url 'marcar_entregado' i.id_order %}"><button type="submit" class="btn btn-primary">Estoy seguro</button></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="disputa{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que deseas iniciar una disputa por esta orden?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Al iniciarla se creara un chat para mediar los casos.
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a class="remove" href="{% url 'disputa_comprador' i.id_order %}"><button type="submit" class="btn btn-primary">Estoy seguro</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
             <!--<a href="#" class="btn btn-secondary"> Details  </a>-->
                 </p>
-                <a href="#"><i class="fa fa-heart"></i> Contactar con el vendedor</a>
+              
             </div> <!-- action-wrap.// -->
           
       </div> <!-- Class 2 -->
