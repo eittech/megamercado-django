@@ -52,9 +52,9 @@ class Account(models.Model):
     id_currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     tipo  = models.CharField(verbose_name="tipo_cuenta",max_length=11,choices=TIPO_LIST,blank=True,null=True)
-    number = models.CharField(max_length=30)
+    number = models.CharField(max_length=30, blank=True)
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    persona = models.CharField(max_length=30)
+    persona = models.TextField(blank=True, null=True)
     active = models.BooleanField(blank=True, default=False)
     def __str__(self):   
         '''Devuelve el modelo en tipo String'''

@@ -49,14 +49,14 @@
          <form method="POST" enctype="multipart/form-data" >
           {% csrf_token %}
           <div style="margin-left:3.8%" class="col-md-5 mb-3">
-              <label for="id_name">Nombre de la cuenta</label>
+              <label for="id_name">Nombre de la cuenta *</label>
               <input type="text" name="name" maxlength="30" value="{{actual.name}}" id="id_name"class="form-control" required>
             <div class="invalid-feedback">
                 Nombre required.
             </div>
          </div>
          <div style="margin-left:3.8%" class="col-md-3 mb-3">
-            <label for="id_tipo"> Tipo de cuenta</label>
+            <label for="id_tipo"> Tipo de cuenta *</label>
             <select class="custom-select d-block w-100" name="tipo" id="id_tipo" required>
               {% ifequal actual.tipo "Ahorro" %}
                 <option value="{{actual.tipo}}" selected>Cuenta de Ahorro</option>
@@ -79,14 +79,23 @@
        </div>
          <div style="margin-left:3.8%" class="col-md-5 mb-3">
             <label for="id_number">Número de cuenta o wallet</label>
-            <input  type="text" name="number" value="{{actual.number}}" required maxlength="30" id="id_number" class="form-control" required>
+            {% if actual.number %}
+            <input class="form-control" type="text" name="number" value="{{actual.number}}" maxlength="30" id="id_number" >
+            {%else%}
+            <input class="form-control" type="text"name="number" maxlength="30" id="id_number">
+            {% endif %}
           <div class="invalid-feedback">
               Number required.
           </div>
        </div>
        <div style="margin-left:3.8%" class="col-md-5 mb-3">
-          <label for="id_persona" >Nombre del dueño</label>
-          <input type="text" name="persona" value="{{actual.persona}}" required maxlength="30" id="id_persona" class="form-control" required>
+          <label for="id_persona" >Datos adicionales</label>
+          <div style="width: 550px; height: 150px">
+            {% if actual.persona %}
+           <textarea class="form-control" name="persona" id="id_persona" rows="5" cols="40">{{actual.persona}}</textarea>
+           {% else %}
+           <textarea class="form-control" name="persona" id="id_persona" rows="5" cols="40"></textarea>
+           {% endif %}
         <div class="invalid-feedback">
             Dueño required.
         </div>

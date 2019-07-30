@@ -120,9 +120,9 @@
               <td><a href="{% url 'currencyshop_eliminar' tienda.id_shop j.id_currency.id_currency %}">Eliminar</a></td>
               <td> {% for c in cuenta %}
                     {% ifequal c.id_account.id_currency j.id_currency %}
-                    {{c.id_account.name}}, {{c.id_account.persona}}
+                    {{c.id_account.name}}. {{c.id_account.persona}}
                     <br>
-                    {{c.id_account.tipo}}, 
+                    {{c.id_account.tipo}}. 
                     {{c.id_account.number}}
                     <a href="{% url 'accountshop_edit' tienda.id_shop c.id_account.id_account %}">editar</a>
                     <a href="{% url 'accountshop_eliminar' tienda.id_shop c.id_account.id_account %}">eliminar</a>

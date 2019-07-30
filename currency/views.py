@@ -101,8 +101,13 @@ def accountshop_edit(request,pk,id_account):
         if form.is_valid():
             actual.name=form['name'].value()
             actual.tipo=form['tipo'].value()
-            actual.number=form['number'].value()
-            actual.persona=form['persona'].value()
+            if form['persona'].value()!="None":
+                if actual.persona!="None" and actual.persona!="" and form['persona'].value()=="":
+                    actual.persona=form['persona'].value()
+                if form['persona'].value()!="":
+                    actual.persona=form['persona'].value()
+            if form['number'].value()!="None":
+                actual.number=form['number'].value()
             try:
                 actual.save()
             except:
