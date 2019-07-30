@@ -356,3 +356,15 @@ class FavoriteProduct(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.id_favorite)
+
+class MensajeProduct(models.Model):
+    id_pregunta = models.AutoField(primary_key=True)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
+    pregunta = models.TextField()
+    respuesta = models.TextField(blank=True, null=True)
+    fecha_pregunta = models.DateTimeField()
+    fecha_respuesta = models.DateTimeField(blank=True, null=True)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.id_pregunta)

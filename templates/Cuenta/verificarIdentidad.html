@@ -188,57 +188,57 @@
                 </a>
               </li>
               <li class="nav-item textomenucuenta">
-                <div class="nav-link" id="compra">
-                  <span data-feather="file"></span>
-                  <img src="{% static 'img/cuenta/icono_compras1.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
-                </div>
-                <ul>
-                  <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
-                    <a class="nav-link" href="#">
-                      <span data-feather="home"></span>
-                      Pedidos
-                    </a>
-                  </li>
-                  <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
-                    <a class="nav-link" href="#">
-                      <span data-feather="home"></span>
-                      Preguntas 
-                    </a>
-                  </li>
-                  <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
-                    <a class="nav-link" href="#">
-                      <span data-feather="home"></span>
-                      Favoritos 
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item textomenucuenta" >
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
-                </a>
-                <ul>
-                  <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
-                    <a class="nav-link" href="#">
-                      <span data-feather="file"></span>
-                      Pedidos
-                    </a>
-                  </li>
-                  <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
-                    <a class="nav-link" href="#">
-                      <span data-feather="file"></span>
-                      Preguntas 
-                    </a>
-                  </li>
-                  <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
-                    <a class="nav-link" href="{% url 'productos_list' %}">
-                      <span data-feather="file"></span>
-                      Productos 
-                    </a>
-                  </li>
-                </ul>
-              </li>
+                  <div class="nav-link" id="compra">
+                    <span data-feather="file"></span>
+                    <img src="{% static 'img/cuenta/icono_compras1.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+                  </div>
+                  <ul>
+                    <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
+                      <a class="nav-link" href="{% url 'pedidos_compras' %}">
+                        <span data-feather="home"></span>
+                        Pedidos
+                      </a>
+                    </li>
+                    <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
+                      <a class="nav-link" href="{% url 'compras_preguntas' %}">
+                        <span data-feather="home"></span>
+                        Preguntas 
+                      </a>
+                    </li>
+                    <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
+                      <a class="nav-link" href="{% url 'favoritos_list' %}">
+                        <span data-feather="home"></span>
+                        Favoritos 
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item textomenucuenta" >
+                  <a class="nav-link" href="#">
+                    <span data-feather="shopping-cart"></span>
+                    <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+                  </a>
+                  <ul>
+                    <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
+                      <a class="nav-link" href="{% url 'pedidos_ventas' %}">
+                        <span data-feather="file"></span>
+                        Pedidos
+                      </a>
+                    </li>
+                    <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
+                      <a class="nav-link" href="{% url 'ventas_preguntas' %}">
+                        <span data-feather="file"></span>
+                        Preguntas 
+                      </a>
+                    </li>
+                    <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
+                      <a class="nav-link" href="{% url 'productos_list' %}">
+                        <span data-feather="file"></span>
+                        Productos 
+                      </a>
+                    </li>
+                  </ul>
+                </li>
               <li class="nav-item textomenucuenta">
                   <a class="nav-link  active menucuentauso" href="#">
                     <span data-feather="users"></span>

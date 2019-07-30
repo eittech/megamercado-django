@@ -244,14 +244,113 @@
                     {% endif %}
                     <br>
                     <h4 class="font-italic">¿Tienes una pregunta?</h4>
-                    <form class="form-inline mt-2 mt-md-0" >
-                        <input class="form-control mr-sm-2" placeholder="Pregunta" style="width: 450px" aria-label="Pregunta"  style="width: 350px" type="text">
-                        <button class="btn btn-outline-success my-2 my-sm-0" style="width: 100px" type="submit" >Enviar</button>
+                    <form class="form-inline mt-2 mt-md-0" method="POST">
+                        {% csrf_token %}
+                        <textarea class="form-control" style="width: 450px" name="pregunta" id="id_pregunta" rows="3" required></textarea>
+                        <button class="btn btn-outline-success my-2 my-sm-0" name="submit"  style="width: 100px" type="submit" value="form1" >Enviar</button>
                       </form>
                     <br>
                     <br>
                     <h4 class="font-italic">Últimas preguntas</h4>
-                    <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  
+                  
+                          {%for p in preg %}
+                          <div class="row">
+                        <div class="media">
+                          <!-- first comment -->
+                  
+                          <div class="media-heading">
+                            <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseOne{{p.id_pregunta}}" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> 
+                          </div>
+                          
+                          <div class="panel-collapse collapse in" id="collapseOne{{p.id_pregunta}}">
+                  
+                            <div class="media-left">
+                              <div class="vote-wrap">
+                                <div class="vote up">
+                                  <i class="glyphicon glyphicon-menu-up"></i>
+                                </div>
+                                <div class="vote inactive">
+                                  <i class="glyphicon glyphicon-menu-down"></i>
+                                </div>
+                              </div>
+                              <!-- vote-wrap -->
+                            </div>
+                            <!-- media-left -->
+                  
+
+                            <div class="media-body">
+                              <p><b>{{p.owner.username}}:</b>{{p.pregunta}} - <cite>{{p.fecha_pregunta}}</cite></p>
+                              <div class="comment-meta">
+                                {%if p.respuesta %}
+                                {%else%}
+                                {% if dueño %}
+                                <span>
+                                          <a class="" role="button" data-toggle="collapse" href="#replyCommentT" aria-expanded="false" aria-controls="collapseExample">Responder</a>
+                                        </span>
+                                      {%endif%}
+                                      {%endif%}
+                                <div class="collapse" id="replyCommentT">
+                                  <form method="POST">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="pregunta" id="id_pregunta" value="{{p.id_pregunta}}">
+                                    <div class="form-group">
+                                      <label for="comment">Respuesta</label>
+                                      <textarea name="respuesta"  style="width: 500px" id="id_respuesta" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <button name="submit" type="submit" value="form2" class="btn btn-default">Enviar</button>
+                                  </form>
+                                </div>
+                              </div>
+                              <!-- comment-meta -->
+                              {% if p.respuesta %}
+                              <div class="media">
+                                <!-- answer to the first comment -->
+                  
+                                <div class="media-heading">
+                                  <button class="btn btn-default btn-collapse btn-xs" type="button" data-toggle="collapse" data-target="#collapseTwo{{p.id_pregunta}}" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> 
+                                </div>
+                  
+                                <div class="panel-collapse collapse in" id="collapseTwo{{p.id_pregunta}}">
+                  
+                                  <div class="media-left">
+                                    <div class="vote-wrap">
+                                      <div class="vote up">
+                                        <i class="glyphicon glyphicon-menu-up"></i>
+                                      </div>
+                                      <div class="vote inactive">
+                                        <i class="glyphicon glyphicon-menu-down"></i>
+                                      </div>
+                                    </div>
+                                    <!-- vote-wrap -->
+                                  </div>
+                                  <!-- media-left -->
+                  
+                  
+                                  <div class="media-body">
+                                    <p><b>{{p.id_product.id_shop_default.name}}: </b>{{p.respuesta}} - <cite>{{p.fecha_respuesta}}</cite></p>
+                                    <!-- comment-meta -->
+                                  </div>
+                                </div>
+                                <!-- comments -->
+                  
+                              </div>
+                              {% endif %}
+                              <!-- answer to the first comment -->
+                  
+                            </div>
+                            
+                          </div>
+                          <!-- comments -->
+                  
+                        </div>
+                        <br>
+
+                        <!-- first comment -->
+
+                        <!-- first comment -->
+                      </div>
+                      {% endfor %}
                   
                   </div>
               </div><!-- /.blog-main -->

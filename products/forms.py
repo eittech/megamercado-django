@@ -15,6 +15,32 @@ class TiendaForm(forms.ModelForm):
         model = Shop
         fields = ['name', 'logo']
 
+class PreguntaForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos shop groups
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = MensajeProduct
+        fields = ['pregunta']
+
+class RespuestaForm(forms.ModelForm):
+    '''
+        Aqui se implementa el formulario para la creacion
+        de nuevos shop groups
+    '''
+    class Meta:
+        '''
+            Aqui se especifica que datos se tienen que incluir en
+            el formulario
+        '''
+        model = MensajeProduct
+        fields = ['respuesta', 'pregunta']
+
 class ProductosForm(forms.ModelForm):
     '''
         Aqui se implementa el formulario para la creacion

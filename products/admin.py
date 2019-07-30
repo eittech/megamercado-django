@@ -143,6 +143,8 @@ admin.site.register(ProductAttributeImage, ProductAttributeImageAdmin)
 admin.site.register(ProductShop, ProductShopAdmin)
 
 admin.site.register(FavoriteProduct)
+admin.site.register(MensajeProduct)
+
 '''
 def controlaction(modeladmin, request, queryset):
 		category = Category.objects.get(pk=2)

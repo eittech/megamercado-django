@@ -239,6 +239,21 @@ def aprobar_pago(request, pk, id_transaction):
     url = reverse('pedidos_detalle_ventas', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
+def compras_preguntas(request):
+    preg=MensajeProduct.objects.filter(owner=request.user).order_by('-fecha_pregunta')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(preg, 10)
+    try:
+        preg = paginator.page(page)
+    except PageNotAnInteger:
+        preg = paginator.page(1)
+    except EmptyPage:
+        preg = paginator.page(paginator.num_pages)
+    return render(request, 
+    "Cuenta/Pedidos/compras_preguntas.html",
+    {'preg': preg })
+
 
 def pedidos_ventas(request):
     pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
@@ -531,9 +546,24 @@ def registrar_envio(request,pk):
     "Cuenta/Pedidos/registrar_envio.html",
     {'form':form})
 
+def ventas_preguntas(request):
+    preg=MensajeProduct.objects.filter(id_product__owner=request.user).order_by('-fecha_pregunta')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(preg, 10)
+    try:
+        preg = paginator.page(page)
+    except PageNotAnInteger:
+        preg = paginator.page(1)
+    except EmptyPage:
+        preg = paginator.page(paginator.num_pages)
+    return render(request, 
+    "Cuenta/Pedidos/ventas_preguntas.html",
+    {'preg': preg })
+
 def carritos(request):
     print(request.user)
-    cart=Cart.objects.get(id_customer=request.user)
+    cart=Cart.objects.filter(id_customer=request.user).last()
     productos=CartProduct.objects.filter(id_cart=cart)
     imagenes = Image.objects.all()
     tiendas=Shop.objects.all()

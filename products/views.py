@@ -1429,6 +1429,8 @@ def detalle_product(request,id):
         return redirect('/error')
 
 def detalle(request, id_product):
+    form1=PreguntaForm(request.POST)
+    form2=RespuestaForm(request.POST)
     try:
         producto = Product.objects.get(id_product=id_product)
         producto_image = Image.objects.filter(id_product=producto)
@@ -1464,8 +1466,33 @@ def detalle(request, id_product):
         #history_datail = HistoryPrice.objects.filter(product=producto).order_by('date_update')[:100]
     except:
         producto = None
+    preg=MensajeProduct.objects.filter(id_product=producto).order_by('-fecha_pregunta')
+    if producto.owner==request.user:
+        dueño=True
+    else:
+        dueño=False
+
+    if request.method=="POST":
+        print(request.POST)
+        if request.POST['submit']=="form1":
+            preg=form1['pregunta'].value()
+            ask=MensajeProduct.objects.create(id_product=producto, owner=request.user, pregunta=preg, fecha_pregunta=timezone.now())
+            ask.save()
+            url = reverse('products', kwargs={'id_product': id_product})
+            return HttpResponseRedirect(url)
+        if request.POST['submit']=="form2":
+            print("Respondiendo")
+            preg=form2['pregunta'].value()
+            msg=MensajeProduct.objects.get(id_pregunta=form2['pregunta'].value())
+            msg.respuesta=form2['respuesta'].value()
+            msg.fecha_respuesta=timezone.now()
+            msg.save()
+            url = reverse('products', kwargs={'id_product': id_product})
+            return HttpResponseRedirect(url)
+
     if producto is not None:
-        return render(request, "new.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories, 'productcombination':productcombination, 'u1':u1, 'u2':u2, 'u3':u3, 'u4':u4, 'u5':u5, 'u6':u6, 'u7':u7,'u8':u8 })
+        return render(request, "new.html",
+        {'form1':form1, 'form2':form2,'preg': preg,'dueño':dueño, 'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories, 'productcombination':productcombination, 'u1':u1, 'u2':u2, 'u3':u3, 'u4':u4, 'u5':u5, 'u6':u6, 'u7':u7,'u8':u8 })
         #return render(request, "comparagrow/porto/detalle1.html",{'producto':producto,'producto_image':producto_image,'producto_attr':producto_attr,'allcategories':allcategories})
     else:
         return redirect('/error')
