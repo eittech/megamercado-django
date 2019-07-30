@@ -222,6 +222,7 @@ def aprobar_pago(request, pk, id_transaction):
 
 def pedidos_ventas(request):
     pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
+    ordenes=pedidos
     if len(pedidos)==0:
         detalles=None
         fotos= None
@@ -232,30 +233,36 @@ def pedidos_ventas(request):
             if count==0:
                 detalles=OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
-                historial =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
-                if tr==0:
-                    t=Transaction.objects.filter(id_order=i, aprobado=False).last()
-                    print(t)
-                    if t is not None:
-                        trans=Transaction.objects.filter(id_transaction=t.id_transaction)
-                        tr=tr+1
-                count=count+1
+                if hist.id_order_state.name=="Finalizado" or  hist.id_order_state.name=="Disputa":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
+                else:
+                    historial =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    count=count+1
             else:
                 detalles=detalles | OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
-                ultimo =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
-                historial= historial | ultimo
-                if tr==0:
-                    t=Transaction.objects.filter(id_order=i, aprobado=False).last()
-                    print(t)
-                    if t is not None:
-                        trans=Transaction.objects.filter(id_transaction=t.id_transaction)
-                        tr=tr+1
+                if hist.id_order_state.name=="Finalizado" or  hist.id_order_state.name=="Disputa":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
                 else:
-                    t=Transaction.objects.filter(id_order=i, aprobado=False).last()
-                    if t is not None:
-                        last=Transaction.objects.filter(id_transaction=t.id_transaction)
-                        trans=trans | last
+                    ultimo =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    historial= historial | ultimo
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    else:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        if t is not None:
+                            last=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            trans=trans | last
         
         try:
             print("tamaño de trsn")
@@ -271,6 +278,7 @@ def pedidos_ventas(request):
             else:
                 fotos=fotos | Image.objects.filter(id_product=d.product_id, cover=True)
     
+    pedidos=ordenes
     page = request.GET.get('page', 1)
 
     paginator = Paginator(pedidos, 5)
@@ -284,7 +292,7 @@ def pedidos_ventas(request):
     print(detalles)
     return render(request, 
     "Cuenta/Pedidos/Pedidos-ventas.html",
-    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos, 'historial': historial, 'trans':trans })
+    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos, 'historial': historial, 'trans':trans, 'pag':1 })
 
 def pedidos_detalle_ventas(request, pk):
     pedidos =Orders.objects.filter(id_order=pk)
@@ -306,6 +314,157 @@ def pedidos_detalle_ventas(request, pk):
     return render(request, 
     "Cuenta/Pedidos/Detalle-pedidos-ventas.html",
     {'i': pedidos,'detalles':detalles, 'fotos': fotos ,'estado':estado, 'historial': historial, 'trans': trans, 'sinaprob':sinaprob})
+
+def pedidos_ventas_finalizado(request):
+    pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
+    ordenes=pedidos
+    historial=None
+    if len(pedidos)==0:
+        detalles=None
+        fotos= None
+    else:
+        count=0
+        tr=0
+        for i in pedidos:
+            if count==0:
+                detalles=OrderDetail.objects.filter(id_order=i)
+                hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Espera de pago" or hist.id_order_state.name=="Pago aceptado" or hist.id_order_state.name=="Enviado" or  hist.id_order_state.name=="Disputa":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
+                else:
+                    historial =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    count=count+1
+            else:
+                detalles=detalles | OrderDetail.objects.filter(id_order=i)
+                hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Espera de pago" or hist.id_order_state.name=="Pago aceptado" or hist.id_order_state.name=="Enviado" or  hist.id_order_state.name=="Disputa":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
+                else:
+                    ultimo =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    historial= historial | ultimo
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    else:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        if t is not None:
+                            last=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            trans=trans | last
+        
+        try:
+            print("tamaño de trsn")
+            print(len(trans))
+        except:
+            trans=None
+
+
+        count=0
+        for d in detalles:
+            if count==0:
+                fotos=Image.objects.filter(id_product=d.product_id, cover=True)
+                count=count+1
+            else:
+                fotos=fotos | Image.objects.filter(id_product=d.product_id, cover=True)
+    
+    pedidos=ordenes
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(pedidos, 5)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+    print(pedidos)
+    print(detalles)
+    return render(request, 
+    "Cuenta/Pedidos/Pedidos-ventas.html",
+    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos, 'historial': historial, 'trans':trans, 'pag':2 })
+
+def pedidos_ventas_disputa(request):
+    pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
+    ordenes=pedidos
+    historial=None
+    if len(pedidos)==0:
+        detalles=None
+        fotos= None
+    else:
+        count=0
+        tr=0
+        for i in pedidos:
+            if count==0:
+                detalles=OrderDetail.objects.filter(id_order=i)
+                hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Espera de pago" or hist.id_order_state.name=="Pago aceptado" or hist.id_order_state.name=="Enviado" or  hist.id_order_state.name=="Finalizado":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
+                else:
+                    historial =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    count=count+1
+            else:
+                detalles=detalles | OrderDetail.objects.filter(id_order=i)
+                hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Espera de pago" or hist.id_order_state.name=="Pago aceptado" or hist.id_order_state.name=="Enviado" or  hist.id_order_state.name=="Finalizado":
+                    ordenes=ordenes.exclude(id_order=i.id_order)
+                else:
+                    ultimo =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
+                    historial= historial | ultimo
+                    if tr==0:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        print(t)
+                        if t is not None:
+                            trans=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            tr=tr+1
+                    else:
+                        t=Transaction.objects.filter(id_order=i, aprobado=False).last()
+                        if t is not None:
+                            last=Transaction.objects.filter(id_transaction=t.id_transaction)
+                            trans=trans | last
+        
+        try:
+            print("tamaño de trsn")
+            print(len(trans))
+        except:
+            trans=None
+
+        count=0
+        for d in detalles:
+            if count==0:
+                fotos=Image.objects.filter(id_product=d.product_id, cover=True)
+                count=count+1
+            else:
+                fotos=fotos | Image.objects.filter(id_product=d.product_id, cover=True)
+    
+    pedidos=ordenes
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(pedidos, 5)
+    try:
+        pedidos = paginator.page(page)
+    except PageNotAnInteger:
+        pedidos = paginator.page(1)
+    except EmptyPage:
+        pedidos = paginator.page(paginator.num_pages)
+    print(pedidos)
+    print(detalles)
+    return render(request, 
+    "Cuenta/Pedidos/Pedidos-ventas.html",
+    {'pedidos': pedidos,'detalles':detalles, 'fotos': fotos, 'historial': historial, 'trans':trans, 'pag':3 })
 
 def registrar_envio(request,pk):
     orden=Orders.objects.get(id_order=pk)

@@ -296,19 +296,49 @@
               <div class="card" style="border: 0px">
                 <div class="card-body dashboard-tabs p-0">
                   <ul class="nav nav-tabs px-4 border-left-0 border-top-0 border-right-0" role="tablist">
+                    {% ifequal pag 1 %}
                     <li class="nav-item">
-                      <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Pedidos</a>
+                      <a class="nav-link active" id="overview-tab" href="{% url 'pedidos_ventas' %}">Pedidos en curso</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="sales" aria-selected="false">Pedidos en curso</a>
+                      <a class="nav-link" id="sales-tab"href="{% url 'pedidos_ventas_finalizado'%}">Pedidos finalizados</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="false">Pedidos cancelados</a>
+                      <a class="nav-link" id="purchases-tab" href="{% url 'pedidos_ventas_disputa' %}">Pedidos en disputa</a>
                     </li>
+                    {%endifequal%}
+                    {% ifequal pag 2 %}
+                    <li class="nav-item">
+                        <a class="nav-link" id="overview-tab" href="{% url 'pedidos_ventas' %}">Pedidos en curso</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" id="sales-tab"href="{% url 'pedidos_ventas_finalizado' %}">Pedidos finalizados</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="purchases-tab" href="{% url 'pedidos_ventas_disputa' %}">Pedidos en disputa</a>
+                      </li>
+                    {%endifequal%}
+                    {% ifequal pag 3 %}
+                    <li class="nav-item">
+                        <a class="nav-link" id="overview-tab" href="{% url 'pedidos_ventas' %}">Pedidos en curso</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="sales-tab"href="{% url 'pedidos_ventas_finalizado'%}">Pedidos finalizados</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" id="purchases-tab" href="{% url 'pedidos_ventas_disputa' %}">Pedidos en disputa</a>
+                      </li>
+                    {%endifequal%}
                   </ul>
                   <div class="tab-content py-0 px-0 border-left-0 border-bottom-0 border-right-0">
 
     <br><br>
+    {% if pedidos %}
+    {%else%}
+    <div class="alert alert-primary"  role="alert">
+      No tienes ningún pedido en este estado.
+    </div>
+    {%endif%}
     {% if trans %}
     <div class="alert alert-primary"  role="alert">
       Tienes un pago sin aprobar
