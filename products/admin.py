@@ -142,6 +142,7 @@ admin.site.register(ProductAttributeImage, ProductAttributeImageAdmin)
 # Productos anidados 
 admin.site.register(ProductShop, ProductShopAdmin)
 
+admin.site.register(FavoriteProduct)
 '''
 def controlaction(modeladmin, request, queryset):
 		category = Category.objects.get(pk=2)

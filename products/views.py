@@ -891,6 +891,26 @@ def combinacion_editar(request,pk, id):
         url = reverse('productos_combinaciones', kwargs={'pk': pk})
         return HttpResponseRedirect(url)
     return render(request, "Cuenta/Productos/combinaciones_edit.html",{'producto':producto,'form':form,'comb':comb, 'fotos':fotos, 'actual':actual})
+
+def favoritos_list(request):
+    fav=FavoriteProduct.objects.filter(owner=request.user,id_product__active=True,id_product__deleted=False)
+    fotos=None
+    count=0
+    for i in fav:
+        if count==0:
+            fotos = Image.objects.filter(id_product=i.id_product, cover=True)
+            count=count+1
+        else:
+            fotos = fotos | Image.objects.filter(id_product=i.id_product, cover=True)
+    return render(request, 
+    "Cuenta/Pedidos/compras_favoritos.html",
+    {'fav': fav, 'fotos':fotos})
+
+
+def favoritos_eliminar(request, pk):
+    fav=FavoriteProduct.objects.filter(owner=request.user,id_product__id_product=pk).delete()
+    return HttpResponseRedirect(reverse('favoritos_list'))
+    
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]

@@ -346,3 +346,13 @@ class AttributeImpact(models.Model):
     def __str__(self):    
         '''Devuelve el modelo en tipo String'''
         return str(self.id_attribute_impact)
+
+class FavoriteProduct(models.Model):
+    id_favorite = models.AutoField(primary_key=True)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    owner= models.ForeignKey(Customer, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = (('id_product', 'owner'),)
+    def __str__(self):    
+        '''Devuelve el modelo en tipo String'''
+        return str(self.id_favorite)
