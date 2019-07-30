@@ -305,12 +305,28 @@
                        <span class="post-byline"><span>
                        <span class="author publisher-anchor-color">
                        <img  src="{% static 'img/reply.png' %}" style="width: 20px; height: 20px">
-                       <strong>{{p.id_product.id_shop_default}}</strong></span> </span></span> <span class="post-meta"><span class="bullet time-ago-bullet" aria-hidden="true">•</span> <a data-role="relative-time" class="time-ago" title="Tuesday, March 31, 2015 9:58 PM">{{p.fecha_repuesta}}</a> </span>  
+                       <strong>{{p.id_product.id_shop_default}}</strong></span> </span></span> <span class="post-meta"><span class="bullet time-ago-bullet" aria-hidden="true">•</span> <a data-role="relative-time" class="time-ago" title="Tuesday, March 31, 2015 9:58 PM">{{p.fecha_respuesta}}</a> </span>  
                     </header>
                     <p style="color: gray">{{p.respuesta}}
                     </h6> 
                  </div>
-                 {%endif%}
+                 {%else%}
+                                <span>
+                                          <a class="" role="button" data-toggle="collapse" href="#replyCommentT" aria-expanded="false" aria-controls="collapseExample">Responder</a>
+                                          <a href="{%url 'eliminar_pregunta' p.id_pregunta %}">Eliminar</a>
+                                        </span>
+                                      {%endif%}
+                                <div class="collapse" id="replyCommentT">
+                                  <form method="POST">
+                                      {% csrf_token %}
+                                      <input type="hidden" name="pregunta" id="id_pregunta" value="{{p.id_pregunta}}">
+                                    <div class="form-group">
+                                      <textarea name="respuesta"  style="width: 500px" id="id_respuesta" class="form-control" rows="3" required></textarea>
+                                    </div>
+                                    <button name="submit" type="submit" value="form2" class="btn btn-default">Enviar</button>
+                                  </form>
+                                </div>
+                              
               </div>
            </div>
         </div>

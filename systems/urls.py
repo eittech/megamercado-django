@@ -84,6 +84,7 @@ urlpatterns = [
     path('cuenta/compras/pedidos/<int:pk>/', pedidos_detalle_compras, name='pedidos_detalle_compras'),
     path('cuenta/compras/pedidos/registrar_pago/<int:pk>/', registrar_pago, name='registrar_pago'),
     path('cuenta/ventas/preguntas/', ventas_preguntas, name='ventas_preguntas'),
+    path('cuenta/ventas/preguntas/elim/<int:pk>/', eliminar_pregunta, name='eliminar_pregunta'),
     path('cuenta/ventas/pedidos/a/', pedidos_ventas, name='pedidos_ventas'),
     path('cuenta/ventas/pedidos/b/', pedidos_ventas_finalizado, name='pedidos_ventas_finalizado'),
     path('cuenta/ventas/pedidos/c/', pedidos_ventas_disputa, name='pedidos_ventas_disputa'),

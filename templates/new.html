@@ -287,6 +287,8 @@
                                 {% if dueño %}
                                 <span>
                                           <a class="" role="button" data-toggle="collapse" href="#replyCommentT" aria-expanded="false" aria-controls="collapseExample">Responder</a>
+                                          <a href="{% url 'delete_pregunta' producto.id_product p.id_pregunta %}">Eliminar</a>
+                                          
                                         </span>
                                       {%endif%}
                                       {%endif%}

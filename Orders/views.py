@@ -6,6 +6,7 @@ from django.shortcuts import render
 import time
 from datetime import datetime
 from products.models import *
+from products.forms import *
 from Orders.forms import *
 from contracts.models import *
 from systems.models import *
@@ -548,6 +549,18 @@ def registrar_envio(request,pk):
 
 def ventas_preguntas(request):
     preg=MensajeProduct.objects.filter(id_product__owner=request.user).order_by('-fecha_pregunta')
+    form2=RespuestaForm(request.POST)
+    if request.method=="POST":
+        print(request.POST)
+        if request.POST['submit']=="form2":
+            print("Respondiendo")
+            preg=form2['pregunta'].value()
+            msg=MensajeProduct.objects.get(id_pregunta=form2['pregunta'].value())
+            msg.respuesta=form2['respuesta'].value()
+            msg.fecha_respuesta=timezone.now()
+            msg.save()
+            return HttpResponseRedirect(reverse('ventas_preguntas'))
+
     page = request.GET.get('page', 1)
 
     paginator = Paginator(preg, 10)
@@ -561,6 +574,10 @@ def ventas_preguntas(request):
     "Cuenta/Pedidos/ventas_preguntas.html",
     {'preg': preg })
 
+def eliminar_pregunta(request, pk):
+    preg=MensajeProduct.objects.filter(id_pregunta=pk).delete()
+    return HttpResponseRedirect(reverse('ventas_preguntas'))
+    
 def carritos(request):
     print(request.user)
     cart=Cart.objects.filter(id_customer=request.user).last()

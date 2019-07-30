@@ -911,6 +911,10 @@ def favoritos_eliminar(request, pk):
     fav=FavoriteProduct.objects.filter(owner=request.user,id_product__id_product=pk).delete()
     return HttpResponseRedirect(reverse('favoritos_list'))
     
+def delete_pregunta(request, pk, id_pregunta):
+    preg=MensajeProduct.objects.filter(id_pregunta=id_pregunta).delete()
+    url = reverse('products', kwargs={'id_product': pk})
+    return HttpResponseRedirect(url)
 '''
 def listado(request):
     productos = ProductImage.objects.all()[:20]

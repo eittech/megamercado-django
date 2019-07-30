@@ -13,6 +13,7 @@ urlpatterns = [
     path('favorito/search/add', favorite_search_add, name='favorite_search_add'),
     path('favoritos/', favorite_detail, name='favorite_detail'),
     path('detalle/<id_product>/', detalle, name='products'),
+    path('detalle/<int:pk>/<id_pregunta>/', delete_pregunta, name='delete_pregunta'),
     path('search', search, name='search'),
     path(_('categorias/<slug:slug>/'), categorias, name='buscador'),
     path('gigs', GigsList.as_view(), name='gigs'),
