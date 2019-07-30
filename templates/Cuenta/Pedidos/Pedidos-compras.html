@@ -288,7 +288,11 @@
 
       <h2 style="margin-left:5%" >Pedidos</h2>
 	 <br>
-		
+   {% if env %}
+   <div class="alert alert-primary"  role="alert">
+     Confirma la recepción de los pedidos enviados.
+   </div>
+   {%endif%}
 	{% for i in pedidos %}
 	<div class="card" style="margin-left:3%">
 	  <div class="card-body">

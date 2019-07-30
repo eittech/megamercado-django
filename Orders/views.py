@@ -32,6 +32,8 @@ from datetime import date
 
 def pedidos_compras(request):
     pedidos =Orders.objects.filter(id_customer=request.user).order_by('-date_add')
+    historial=None
+    env=False
     if len(pedidos)==0:
         detalles=None
         fotos= None
@@ -41,11 +43,29 @@ def pedidos_compras(request):
             if count==0:
                 detalles=OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    if (date.today()-hist.id_order.shipping_date).days>=15:
+                        print("Aqui")
+                        fin=OrderState.objects.get(name="Finalizado")
+                        new=OrderHistory.objects.create(id_order=i, id_order_state=fin, date_add=timezone.now())
+                        new.save()
+                        hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    env=True
                 historial =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
                 count=count+1
             else:
                 detalles=detalles | OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    if (date.today()-hist.id_order.shipping_date).days>=15:
+                        print("Aqui")
+                        fin=OrderState.objects.get(name="Finalizado")
+                        new=OrderHistory.objects.create(id_order=i, id_order_state=fin, date_add=timezone.now())
+                        new.save()
+                        hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    env=True
                 ultimo =OrderHistory.objects.filter(id_order_history=hist.id_order_history)
                 historial= historial | ultimo
         
@@ -223,6 +243,7 @@ def aprobar_pago(request, pk, id_transaction):
 def pedidos_ventas(request):
     pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
     ordenes=pedidos
+    historial=None
     if len(pedidos)==0:
         detalles=None
         fotos= None
@@ -233,6 +254,13 @@ def pedidos_ventas(request):
             if count==0:
                 detalles=OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    if (date.today()-hist.id_order.shipping_date).days>=15:
+                        print("Aqui")
+                        fin=OrderState.objects.get(name="Finalizado")
+                        new=OrderHistory.objects.create(id_order=i, id_order_state=fin, date_add=timezone.now())
+                        new.save()
+                        hist =OrderHistory.objects.filter(id_order=i).last()
                 if hist.id_order_state.name=="Finalizado" or  hist.id_order_state.name=="Disputa":
                     ordenes=ordenes.exclude(id_order=i.id_order)
                 else:
@@ -247,6 +275,13 @@ def pedidos_ventas(request):
             else:
                 detalles=detalles | OrderDetail.objects.filter(id_order=i)
                 hist =OrderHistory.objects.filter(id_order=i).last()
+                if hist.id_order_state.name=="Enviado":
+                    if (date.today()-hist.id_order.shipping_date).days>=15:
+                        print("Aqui")
+                        fin=OrderState.objects.get(name="Finalizado")
+                        new=OrderHistory.objects.create(id_order=i, id_order_state=fin, date_add=timezone.now())
+                        new.save()
+                        hist =OrderHistory.objects.filter(id_order=i).last()
                 if hist.id_order_state.name=="Finalizado" or  hist.id_order_state.name=="Disputa":
                     ordenes=ordenes.exclude(id_order=i.id_order)
                 else:
