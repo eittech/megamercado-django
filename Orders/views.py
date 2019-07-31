@@ -255,6 +255,12 @@ def compras_preguntas(request):
     "Cuenta/Pedidos/compras_preguntas.html",
     {'preg': preg })
 
+def compras_chat(request,pk):
+    orden=Orders.objects.get(id_order=pk)
+    usuario=orden.id_shop.owner.username
+    return render(request, 
+    "Cuenta/Pedidos/antes_chat.html",
+    {'orden': orden , 'usuario':usuario})
 
 def pedidos_ventas(request):
     pedidos =Orders.objects.filter(id_shop__owner=request.user).order_by('-date_add')
@@ -574,10 +580,17 @@ def ventas_preguntas(request):
     "Cuenta/Pedidos/ventas_preguntas.html",
     {'preg': preg })
 
+def ventas_chat(request,pk):
+    orden=Orders.objects.get(id_order=pk)
+    usuario=orden.id_customer.username
+    return render(request, 
+    "Cuenta/Pedidos/antes_chat_v.html",
+    {'orden': orden , 'usuario':usuario})
+
 def eliminar_pregunta(request, pk):
     preg=MensajeProduct.objects.filter(id_pregunta=pk).delete()
     return HttpResponseRedirect(reverse('ventas_preguntas'))
-    
+
 def carritos(request):
     print(request.user)
     cart=Cart.objects.filter(id_customer=request.user).last()

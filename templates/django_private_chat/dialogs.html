@@ -1,0 +1,614 @@
+{# This template is here just to demonstrate how to customize the default one. #}
+{# It has none to very few changes #}
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+<style>
+        body {
+        font-size: .875rem;
+        }
+        .feather {
+        width: 16px;
+        height: 16px;
+        vertical-align: text-bottom;
+        }
+        /*
+        * Sidebar
+        */
+        .sidebar {
+        left: 0;
+        z-index: 100; /* Behind the navbar */
+        padding: 48px 0 0; /* Height of navbar */
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        margin-top: -22px;
+        }
+        .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: .5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        }
+        @supports ((position: -webkit-sticky) or (position: sticky)) {
+        .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        }
+        }
+        .sidebar .nav-link {
+        font-weight: 500;
+        color: #333;
+        }
+        .sidebar .nav-link .feather {
+        margin-right: 4px;
+        color: #999;
+        }
+        .sidebar .nav-link.active {
+        color: #007bff;
+        }
+        .sidebar .nav-link:hover .feather,
+        .sidebar .nav-link.active .feather {
+        color: inherit;
+        }
+        .sidebar-heading {
+        font-size: .75rem;
+        text-transform: uppercase;
+        }
+        /*
+        * Content
+        */
+        [role="main"] {
+        padding-top: 133px; /* Space for fixed navbar */
+        }
+        @media (min-width: 768px) {
+        [role="main"] {
+        padding-top: 48px; /* Space for fixed navbar */
+        }
+        }
+        /*
+        * Navbar
+        */
+        .navbar-brand {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        font-size: 1rem;
+        }
+        .navbar .form-control {
+        padding: .75rem 1rem;
+        border-width: 0;
+        border-radius: 0;
+        }
+        .form-control-dark {
+        color: #fff;
+        background-color: rgba(255, 255, 255, .1);
+        border-color: rgba(255, 255, 255, .1);
+        }
+        .form-control-dark:focus {
+        border-color: transparent;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+        }
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        }
+        @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+        }
+     </style>
+     <!-- Custom styles for this template -->
+     <link href="{% static 'css/comun/color.css' %}" rel="stylesheet">
+    </head>
+    <body>
+    
+         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 color" >
+                 <a class="navbar-brand" href="#" style="width: 35%; font-size: 17px">Logo</a>
+       
+                 <form class="form-inline mt-2 mt-md-0" action="{% url 'busqueda' %}" method="get" >
+                     <input class="form-control mr-sm-2" name="q" aria-label="Search"  style="width: 450px" type="text">
+                     <button type="submit" style="margin-left: -98px;
+                     height: 30px;
+                     width: 90px;
+                     background-color: white; 
+                     color: gray;
+                     border: 0;
+                     -webkit-appearance: none;font-size: 15px"> <img style="width: 15px; height: 15px" src="{% static 'img/menu/search(1).png' %}">Search</button>
+                   </form>
+                             <div  style="width: 30%"> </div>
+                 <div class="collapse navbar-collapse" id="navbarCollapse">
+                   <ul class="navbar-nav mr-auto" >
+                     <li class="nav-item active">
+                       <a class="nav-link" href="#" style="width: 116px;font-size: 17px"> Usuario  <img style="width: 20px; height: 20px" src="{% static 'img/menu/Mi-cuenta.png' %}"></a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/notification.png' %}"></a>
+                       </li>
+                     <li class="nav-item">
+                       <a class="nav-link" href="#" style="font-size: 17px"> <img style="width: 20px; height: 20px" src="{% static 'img/menu/heart.png' %}"></a>
+                     </li>
+                     <li class="nav-item">
+                       <a class="nav-link" href="#" style="font-size: 17px" > <img style="width: 20px; height: 20px" src="{% static 'img/menu/shopping-cart2.png' %}"></a>
+                     </li>
+                   </ul>
+                   
+                 </div>
+               </nav>
+    
+    <div class="container-fluid">
+    <div class="row">
+     <nav id="navlarga" class="col-md-2 d-none d-md-block bg-light sidebar">
+       <div id="navlarga1" class="sidebar-sticky">
+         <ul class="nav flex-column ">
+             <li class="nav-item textomenucuenta">
+                   <span data-feather="home"></span>
+                   <img id="micuenta-2" src="{% static 'img/cuenta/icono_perfil1.png' %}"> <b> Mi cuenta</b> <br> <div style="margin-left: 20px" > {{user.username}} </div>
+               </li>
+           <li class="nav-item ">
+             <a class="nav-link textomenucuenta" href="{% url 'cuenta' %}">
+               <span data-feather="home"></span>
+               <img src="{% static 'img/cuenta/icono_resumen1.png' %}"> Resumen <span class="sr-only">(current)</span>
+             </a>
+           </li>
+           <li class="nav-item textomenucuenta">
+             <div class="nav-link  menucuentauso" id="compra">
+               <span data-feather="file"></span>
+               <img src="{% static 'img/cuenta/icono_compras2.png' %}"> Compras <img id="compra-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="compra-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+             </div>
+             <ul>
+               <li class="nav-item textomenucuenta" id="compra-li1" style="list-style: none">
+                 <a class="nav-link  menucuentauso" href="{% url 'pedidos_compras' %}">
+                   <span data-feather="home"></span>
+                   Pedidos
+                 </a>
+               </li>
+               <li class="nav-item textomenucuenta" id="compra-li2" style="list-style: none">
+                  <a class="nav-link" href="{% url 'compras_preguntas' %}">
+                    <span data-feather="home"></span>
+                    Preguntas 
+                  </a>
+                </li>
+                <li class="nav-item textomenucuenta" id="compra-li3" style="list-style: none">
+                  <a class="nav-link" href="{% url 'favoritos_list' %}">
+                    <span data-feather="home"></span>
+                    Favoritos 
+                  </a>
+                </li>
+             </ul>
+           </li>
+           <li class="nav-item textomenucuenta" >
+             <a class="nav-link" href="#">
+               <span data-feather="shopping-cart"></span>
+               <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> Ventas  <img id="ventas-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="ventas-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+             </a>
+             <ul>
+                <li class="nav-item textomenucuenta" id="ventas-li1" style="list-style: none" >
+                    <a class="nav-link" href="{% url 'pedidos_ventas' %}">
+                      <span data-feather="file"></span>
+                      Pedidos
+                    </a>
+                  </li>
+                  <li class="nav-item textomenucuenta" id="ventas-li2" style="list-style: none">
+                    <a class="nav-link" href="{% url 'ventas_preguntas' %}">
+                      <span data-feather="file"></span>
+                      Preguntas 
+                    </a>
+                  </li>
+               <li class="nav-item textomenucuenta" id="ventas-li3" style="list-style: none">
+                 <a class="nav-link" href="{% url 'productos_list' %}">
+                   <span data-feather="file"></span>
+                   Productos 
+                 </a>
+               </li>
+             </ul>
+           </li>
+           <li class="nav-item textomenucuenta">
+             <a class="nav-link" href="#">
+               <span data-feather="users"></span>
+               <img src="{% static 'img/cuenta/icono_conf1.png' %}"> Configuración  <img id="config-subir" style="width: 10px; height: 10px" src="{% static 'img/menu/subir.png' %}"> <img id="config-bajar" style="width: 10px; height: 10px" src="{% static 'img/menu/down-arrow.png' %}"> 
+             </a>
+             <ul>
+               <li class="nav-item textomenucuenta" id="config-li1" style="list-style: none">
+                 <a class="nav-link" href="{% url 'misdatos' %}">
+                   <span data-feather="file"></span>
+                   Mis datos
+                 </a>
+               </li>
+               <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                 <a class="nav-link" href="{% url 'direcciones' %}">
+                   <span data-feather="file"></span>
+                   Direcciones
+                 </a>
+               </li>
+               {% ifequal user.validar "Validado" %}
+                         <li class="nav-item textomenucuenta" id="config-li2" style="list-style: none">
+                           <a class="nav-link " href="{% url 'tiendas' %}">
+                             <span data-feather="file"></span>
+                             Tiendas
+                           </a>
+                         </li>
+                         {% endifequal %}
+             </ul>
+           </li>
+         </ul>
+    
+       </div>
+     </nav>
+    
+    
+     <nav id="navshort" class="d-none mostrar bg-light sidebar" style="display: none !important"  >
+         <div id="navshort1" class="sidebar-sticky">
+           <ul class="nav flex-column">
+               <li class="nav-item">
+                     <span data-feather="home"></span>
+                     <img id="micuenta-short" src="{% static 'img/cuenta/icono_perfil1.png' %}"> 
+                 </li>
+             <li class="nav-item">
+               <a class="nav-link active" href="#">
+                 <span data-feather="home"></span>
+                 <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> 
+               </a>
+             </li>
+             <li class="nav-item">
+               <div class="nav-link" id="compra">
+                 <span data-feather="file"></span>
+                 <img src="{% static 'img/cuenta/icono_compras1.png' %}">
+               </div>
+             </li>
+             <li class="nav-item" >
+               <a class="nav-link" href="#">
+                 <span data-feather="shopping-cart"></span>
+                 <img src="{% static 'img/cuenta/icono_ventas1.png' %}"> 
+               </a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#">
+                 <span data-feather="users"></span>
+                 <img src="{% static 'img/cuenta/icono_conf1.png' %}"> 
+               </a>
+             </li>
+           </ul>
+    
+         </div>
+       </nav>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <input id="owner_username" type="hidden" value="{{ request.user.username }}">
+    <div class="container">
+        <div class="col-md-9">
+            <div class="well well-lg" style="padding: 24px;
+            border-radius: 6px;
+            min-height: 20px;
+margin-bottom: 20px;
+background-color: #f5f5f5;
+border: 1px solid #e3e3e3;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);">
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-9">
+                    <span class="pull-right" hidden id="typing-text">
+                        <strong>{{ opponent_username }} {% trans "is typing..." %}</strong>
+                    </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <p >
+                        {{ opponent_username }}: 
+                    </p>
+                    <p class="text-success" id="online-status" style="display: none"> {% trans "Online" %}</p>
+                    <p class="text-danger" id="offline-status" style="display: none"> {% trans "Offline" %}</p>
+                </div> 
+                    <div class="messages-container">
+                        <div id="messages" class="messages" style="box-sizing: border-box;
+                        padding: 20px;
+                        overflow: auto;
+                        height: 300px;">
+                            {% for msg in active_dialog.messages.all %}
+                                <div class="row  {% if msg.read %}msg-read{% else %}msg-unread{% endif %} {% if msg.sender != request.user %}opponent{% endif %}"
+                                     data-id="{{ msg.id }}">
+                                    <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
+                                        <span class="username">{{ msg.sender.username }}:</span>
+                                        {{ msg.text }}
+                                        <span class="timestamp">&ndash; <span
+                                                data-livestamp="{{ msg.get_formatted_create_datetime }}">{{ msg.get_formatted_create_datetime }}</span></span>
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="add-message">
+                        <div class="form-group">
+                        <textarea id="chat-message" class="form-control message" style="margin-left:10%; width: 600px"
+                                  placeholder="{% trans 'Write a message' %}"></textarea>
+                        </div>
+
+                        <div class="form-group clearfix">
+                            <input id="btn-send-message" type="submit" class="btn btn-primary pull-right send-message"
+                                   style="float: right" value="{% trans 'Send' %}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollmonitor/1.2.0/scrollMonitor.js"
+            integrity="sha256-BseZlDlA+yL4qu+Voi82iFa5aaifralQEXIjOjaXgeo=" crossorigin="anonymous"></script>
+    <script>
+        var base_ws_server_path = "{{ ws_server_path }}";
+        $(document).ready(function () {
+            var websocket = null;
+            var monitor = null;
+
+            function initReadMessageHandler(containerMonitor, elem) {
+                var id = $(elem).data('id');
+                var elementWatcher = containerMonitor.create(elem);
+                elementWatcher.enterViewport(function () {
+                    var opponent_username = getOpponnentUsername();
+                    var packet = JSON.stringify({
+                        type: 'read_message',
+                        session_key: '{{ request.session.session_key }}',
+                        username: opponent_username,
+                        message_id: id
+                    });
+                    $(elem).removeClass('msg-unread').addClass('msg-read');
+                    websocket.send(packet);
+                });
+            }
+
+            function initScrollMonitor() {
+                var containerElement = $("#messages");
+                var containerMonitor = scrollMonitor.createContainer(containerElement);
+                $('.msg-unread').each(function (i, elem) {
+                    if ($(elem).hasClass('opponent')){
+                        initReadMessageHandler(containerMonitor, elem);
+                    }
+
+                });
+                return containerMonitor
+            }
+
+            function getOpponnentUsername() {
+                return "{{ opponent_username }}";
+            }
+            function getOrder() {
+                return "{{ orden }}";
+            }
+
+            // TODO: Use for adding new dialog
+            function addNewUser(packet) {
+                $('#user-list').html('');
+                packet.value.forEach(function (userInfo) {
+                    if (userInfo.username == getUsername()) return;
+                    var tmpl = Handlebars.compile($('#user-list-item-template').html());
+                    $('#user-list').append(tmpl(userInfo))
+                });
+            }
+
+            function addNewMessage(packet) {
+                var msg_class = "";
+                if (packet['sender_name'] == $("#owner_username").val()) {
+                    msg_class = "pull-left";
+                } else {
+                    msg_class = "pull-right";
+                }
+                var msgElem =
+                    $('<div class="row msg-unread" data-id="' + packet.message_id + '">' +
+                        '<p class="' + msg_class + '">' +
+                        '<span class="username">' + packet['sender_name'] + ': </span>' +
+                        packet['message'] +
+                        ' <span class="timestamp">&ndash; <span data-livestamp="' + packet['created'] + '"> ' + packet['created'] + '</span></span> ' +
+                        '</p> ' +
+                        '</div>');
+                $('#messages').append(msgElem);
+                scrollToLastMessage()
+            }
+
+            function scrollToLastMessage() {
+                var $msgs = $('#messages');
+                $msgs.animate({"scrollTop": $msgs.prop('scrollHeight')})
+            }
+
+            function generateMessage(context) {
+                var tmpl = Handlebars.compile($('#chat-message-template').html());
+                return tmpl({msg: context})
+            }
+
+            function setUserOnlineOffline(username, online) {
+                var elem = $("#user-" + username);
+                if (online) {
+                    elem.attr("class", "btn btn-success");
+                } else {
+                    elem.attr("class", "btn btn-danger");
+                }
+            }
+
+            function gone_online() {
+                $("#offline-status").hide();
+                $("#online-status").show();
+            }
+
+            function gone_offline() {
+                $("#online-status").hide();
+                $("#offline-status").show();
+            }
+
+            function flash_user_button(username) {
+                var btn = $("#user-" + username);
+                btn.fadeTo(700, 0.1, function () {
+                    $(this).fadeTo(800, 1.0);
+                });
+            }
+
+            function setupChatWebSocket() {
+                var opponent_username = getOpponnentUsername();
+                websocket = new WebSocket(base_ws_server_path + '{{ request.session.session_key }}/' + opponent_username);
+
+                websocket.onopen = function (event) {
+                    var opponent_username = getOpponnentUsername();
+
+                    var onOnlineCheckPacket = JSON.stringify({
+                        type: "check-online",
+                        session_key: '{{ request.session.session_key }}',
+                        username: opponent_username
+                        {#                      Sending username because the user needs to know if his opponent is online #}
+                    });
+                    var onConnectPacket = JSON.stringify({
+                        type: "online",
+                        session_key: '{{ request.session.session_key }}'
+
+                    });
+
+                    console.log('connected, sending:', onConnectPacket);
+                    websocket.send(onConnectPacket);
+                    console.log('checking online opponents with:', onOnlineCheckPacket);
+                    websocket.send(onOnlineCheckPacket);
+                    monitor = initScrollMonitor();
+                };
+
+
+                window.onbeforeunload = function () {
+
+                    var onClosePacket = JSON.stringify({
+                        type: "offline",
+                        session_key: '{{ request.session.session_key }}',
+                        username: opponent_username,
+                        {# Sending username because to let opponnent know that the user went offline #}
+                    });
+                    console.log('unloading, sending:', onClosePacket);
+                    websocket.send(onClosePacket);
+                    websocket.close();
+                };
+
+
+                websocket.onmessage = function (event) {
+                    var packet;
+
+                    try {
+                        packet = JSON.parse(event.data);
+                        console.log(packet)
+                    } catch (e) {
+                        console.log(e);
+                    }
+
+                    switch (packet.type) {
+                        case "new-dialog":
+                            // TODO: add new dialog to dialog_list
+                            break;
+                        case "user-not-found":
+                            // TODO: dispay some kind of an error that the user is not found
+                            break;
+                        case "gone-online":
+                            if (packet.usernames.indexOf(opponent_username) != -1) {
+                                gone_online();
+                            } else {
+                                gone_offline();
+                            }
+                            for (var i = 0; i < packet.usernames.length; ++i) {
+                                setUserOnlineOffline(packet.usernames[i], true);
+                            }
+                            break;
+                        case "gone-offline":
+                            if (packet.username == opponent_username) {
+                                gone_offline();
+                            }
+                            setUserOnlineOffline(packet.username, false);
+                            break;
+                        case "new-message":
+                            var username = packet['sender_name'];
+                           if (username == opponent_username || username == $("#owner_username").val()){
+                                addNewMessage(packet);
+                                if (username == opponent_username) {
+                                    initReadMessageHandler(monitor, $("div[data-id='" + packet['message_id'] + "']"));
+                                }
+                            } else {
+                                if ($("#user-"+username).length == 0){
+                                    var new_button = $(''+
+                                        '<a href="/'+ username + '"' +
+                                        'id="user-'+username+'" class="btn btn-danger">{% trans "Chat with" %} '+username+'</a>');
+                                    $("#user-list-div").find("ul").append()
+                                }
+                                flash_user_button(username);
+
+                            }
+                            break;
+                        case "opponent-typing":
+                            var typing_elem = $('#typing-text');
+                            if (!typing_elem.is(":visible")) {
+                                typing_elem.fadeIn(500);
+                            } else {
+                                typing_elem.stop(true);
+                                typing_elem.fadeIn(0);
+                            }
+                            typing_elem.fadeOut(3000);
+                            break;
+                        case "opponent-read-message":
+                            if (packet['username'] == opponent_username) {
+                                $("div[data-id='" + packet['message_id'] + "']").removeClass('msg-unread').addClass('msg-read');
+                            }
+                            break;
+
+                        default:
+                            console.log('error: ', event)
+                    }
+                }
+            }
+
+            function sendMessage(message) {
+                var opponent_username = getOpponnentUsername();
+                var ord= getOrder();
+                var newMessagePacket = JSON.stringify({
+                    type: 'new-message',
+                    session_key: '{{ request.session.session_key }}',
+                    username: opponent_username,
+                    message: message,
+                    id_order:ord 
+                    
+                });
+                websocket.send(newMessagePacket)
+            }
+
+            $('#chat-message').keypress(function (e) {
+                if (e.which == 13 && this.value) {
+                    sendMessage(this.value);
+                    this.value = "";
+                    return false
+                } else {
+                    var opponent_username = getOpponnentUsername();
+                    var packet = JSON.stringify({
+                        type: 'is-typing',
+                        session_key: '{{ request.session.session_key }}',
+                        username: opponent_username,
+                        typing: true
+                    });
+                    websocket.send(packet);
+                }
+            });
+
+            $('#btn-send-message').click(function (e) {
+                var $chatInput = $('#chat-message');
+                var msg = $chatInput.val();
+                if (!msg) return;
+                sendMessage($chatInput.val());
+                $chatInput.val('')
+            });
+
+            setupChatWebSocket();
+            scrollToLastMessage();
+        });
+
+    </script>
+{% endblock %}

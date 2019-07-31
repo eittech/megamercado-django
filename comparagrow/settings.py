@@ -44,6 +44,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.8','192.168.1.6','192.168.1.5','192.168.1.9','127.0.0.1','35.185.63.218']
 
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
+
 #habilitar cuando use postgres
 # SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -76,7 +80,8 @@ INSTALLED_APPS = [
     'locations',
     'Orders',
     'currency', 
-    'carrier'
+    'carrier',
+    'django_private_chat'
 
 ]
 

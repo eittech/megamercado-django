@@ -13,6 +13,7 @@ from systems.sitemaps import *
 from products.sitemaps import *
 from django.conf.urls import include, url
 from django_registration.backends.activation.views import RegistrationView
+from django_private_chat import urls as django_private_chat_urls
 
 sitemaps= {
     'pages' : BasicSitemap(['home_view','quienes-somos','contactanos',
@@ -83,6 +84,7 @@ urlpatterns = [
     path('cuenta/disputac/<int:pk>/', disputa_comprador, name='disputa_comprador'),
     path('cuenta/compras/pedidos/<int:pk>/', pedidos_detalle_compras, name='pedidos_detalle_compras'),
     path('cuenta/compras/pedidos/registrar_pago/<int:pk>/', registrar_pago, name='registrar_pago'),
+    path('cuenta/compras/pedidos/chat/<int:pk>/', compras_chat, name='compras_chat'),
     path('cuenta/ventas/preguntas/', ventas_preguntas, name='ventas_preguntas'),
     path('cuenta/ventas/preguntas/elim/<int:pk>/', eliminar_pregunta, name='eliminar_pregunta'),
     path('cuenta/ventas/pedidos/a/', pedidos_ventas, name='pedidos_ventas'),
@@ -94,6 +96,8 @@ urlpatterns = [
     path('cuenta/registrar_envio/<int:pk>/', registrar_envio, name='registrar_envio'),
     path('cuenta/registrar_envio/<int:pk>/<id_transaction>/', aprobar_pago, name='aprobar_pago'),
     path('cuenta/ventas/pedidos/<int:pk>/', pedidos_detalle_ventas, name='pedidos_detalle_ventas'),
+    path('cuenta/ventas/pedidos/chat/<int:pk>/', ventas_chat, name='ventas_chat'),
+    path('', include('django_private_chat.urls')),
 
     #path('cuenta/cambiar/', solicitudVendedor, name='solicitudVendedor'),
     path('login/', views.login_view, name='login1'),
