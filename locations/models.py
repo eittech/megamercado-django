@@ -58,7 +58,7 @@ class Address(models.Model):
     id_country = models.ForeignKey(Country, on_delete=models.CASCADE)
     id_state = models.ForeignKey(State, on_delete=models.CASCADE)
     id_customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #alias = models.CharField(max_length=32)
+    alias = models.CharField(max_length=32, blank=True, null=True)
     company = models.CharField(max_length=64, blank=True, null=True)
     lastname = models.CharField(max_length=32)
     firstname = models.CharField(max_length=32)

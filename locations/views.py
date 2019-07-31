@@ -25,6 +25,7 @@ def direcciones_add(request):
             print("valido")
         id_country =Country.objects.get(id_country=form['id_country'].value())
         id_state =State.objects.get(id_state=form['id_state'].value())
+        alias =  form['alias'].value()
         company = form['company'].value()
         lastname =  form['lastname'].value()
         firstname =  form['firstname'].value()
@@ -50,6 +51,7 @@ def direcciones_add(request):
             firstname =  firstname,
             address1 = address1,
             address2 = address2,
+            alias=alias,
             postcode = postcode,
             city =  city,
             phone =  phone,
@@ -82,6 +84,7 @@ def direcciones_update(request, pk):
         obj.id_country =Country.objects.get(id_country=form['id_country'].value())
         obj.id_state =State.objects.get(id_state=form['id_state'].value())
         obj.company = form['company'].value()
+        obj.alias =  form['alias'].value()
         obj.lastname =  form['lastname'].value()
         obj.firstname =  form['firstname'].value()
         obj.address1 = form['address1'].value()

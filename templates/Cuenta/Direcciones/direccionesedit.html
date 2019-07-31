@@ -23,6 +23,13 @@
       <input type="text" name="address2" maxlength="128" id="id_address2"class="form-control">
       {% endif %}
     </div>
+    <div style="margin-left:3.8%" class="col-md-3 mb-3">
+        <label for="id_alias" >Nombre de la dirección</label>
+        <input type="text" name="alias" maxlength="32"  value="{{dire.alias}}" id="id_alias" class="form-control" required>
+        <div class="invalid-feedback">
+          Zip code required.
+      </div>
+   </div>
        <div style="margin-left:3.8%" class="col-md-3 mb-3">
             <label for="id_postcode" >Código postal</label>
             <input type="text" name="postcode" maxlength="12"  value="{{dire.postcode}}" id="id_postcode" class="form-control" required>

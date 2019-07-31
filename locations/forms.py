@@ -78,4 +78,4 @@ class DireccionForm(forms.ModelForm):
             el formulario
         '''
         model = Address
-        fields = ['address1','address2','postcode','id_country','id_state','city','company','firstname','lastname','phone', 'phone_mobile', 'predeterminado']
+        fields = ['alias','address1','address2','postcode','id_country','id_state','city','company','firstname','lastname','phone', 'phone_mobile', 'predeterminado']
