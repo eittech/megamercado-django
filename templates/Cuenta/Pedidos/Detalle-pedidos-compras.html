@@ -353,7 +353,7 @@
                                 <div class="dropdown-menu">
                                 <a class="dropdown-item" data-toggle="modal" data-target="#recepcion{{i.id_order}}">Confirmar recepción</a>
                                 <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                                <a class="dropdown-item" href="{% url 'compras_chat' i.id_order %}">Contactar con el vendedor</a>
                               </div>
                               </div>
                               {% endifequal %} 
@@ -366,7 +366,7 @@
                                 </button>
                                 <div class="dropdown-menu">
                                 <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                                <a class="dropdown-item" href="{% url 'compras_chat' i.id_order %}">Contactar con el vendedor</a>
                               </div>
                               </div>
                               {% endifequal %} 
@@ -380,7 +380,7 @@
                                   </button>
                                   <div class="dropdown-menu">
                                   <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                                  <a class="dropdown-item" href="{% url 'compras_chat' i.id_order %}">Contactar con el vendedor</a>
                                 </div>
                                 </div>
                               {% else %}
@@ -393,7 +393,7 @@
                                   <div class="dropdown-menu">
                                   <a class="dropdown-item" data-toggle="modal" data-target="#recepcion{{i.id_order}}">Confirmar recepción</a>
                                   <a class="dropdown-item"  data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el vendedor</a>
+                                  <a class="dropdown-item" href="{% url 'compras_chat' i.id_order %}">Contactar con el vendedor</a>
                                 </div>
                               </div>
                               {%endif%}

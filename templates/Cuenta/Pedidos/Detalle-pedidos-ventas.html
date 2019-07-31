@@ -357,7 +357,7 @@
                                       <a class="dropdown-item" data-toggle="modal" data-target="#entregado{{i.id_order}}">Marcar como entregado</a>
                                       <a class="dropdown-item" href="{% url 'registrar_envio' i.id_order %}">Registrar tracking o envio</a>
                                       <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                      <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                                      <a class="dropdown-item" href="{% url 'ventas_chat' i.id_order %}">Contactar con el comprador</a>
                                 </div>
                               </div>
                               {% endifequal %} 
@@ -371,7 +371,7 @@
                                   <div class="dropdown-menu">
                                   <a class="dropdown-item" data-toggle="modal" data-target="#entregado{{i.id_order}}">Marcar como entregado</a>
                                   <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                                  <a class="dropdown-item" href="{% url 'ventas_chat' i.id_order %}">Contactar con el comprador</a>
                                 </div>
                               </div>
                               {% endifequal %} 
@@ -383,7 +383,7 @@
                                   </button>
                                   <div class="dropdown-menu">
                                   <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                                  <a class="dropdown-item" href="{% url 'ventas_chat' i.id_order %}">Contactar con el comprador</a>
                                 </div>
                               </div>
                               {% else %}
@@ -398,7 +398,7 @@
                                   <a class="dropdown-item" href="#aprobar">Aprobar Pago</a>
                                   {% endif %}
                                   <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                                  <a class="dropdown-item" href="{% url 'ventas_chat' i.id_order %}">Contactar con el comprador</a>
                                 </div>
                               </div>
                               {% endif %}
@@ -410,7 +410,7 @@
                                   </button>
                                   <div class="dropdown-menu">
                                   <a class="dropdown-item" data-toggle="modal" data-target="#disputa{{i.id_order}}">Disputa</a>
-                                  <a class="dropdown-item" href="#">Contactar con el comprador</a>
+                                  <a class="dropdown-item" href="{% url 'ventas_chat' i.id_order %}">Contactar con el comprador</a>
                                 </div>
                               </div>
                               {% endifequal %} 
