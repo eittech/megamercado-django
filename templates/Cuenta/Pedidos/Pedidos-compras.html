@@ -375,7 +375,7 @@
               {% endifequal %} 
               {%ifequal h.id_order_state.name "Pago aceptado" %} 
               <br>
-              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Confirmar recepción</a>
+              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%;color: #fff !important"> Confirmar recepción</a>
               <div class="btn-group">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Más acciones
@@ -389,7 +389,7 @@
               {%ifequal h.id_order_state.name "Enviado" %} 
               {% if i.valid %}
               <br>
-              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Confirmar recepción</a>
+              <a data-toggle="modal" data-target="#recepcion{{i.id_order}}" class="btn btn-success" style="margin-top:5%;color: #fff !important"> Confirmar recepción</a>
               <div class="btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Más acciones
@@ -416,7 +416,7 @@
               {% endifequal %}
               {%ifequal h.id_order_state.name "Finalizado" %} 
               <br>
-              <a  data-toggle="modal" data-target="#disputa{{i.id_order}}" class="btn btn-success" style="margin-top:5%"> Disputa </a>
+              <a  data-toggle="modal" data-target="#disputa{{i.id_order}}" class="btn btn-success" style="margin-top:5%;color: #fff !important"> Disputa </a>
               {% endifequal %}  
               {%ifequal h.id_order_state.name "Disputa" %} 
               <br>
