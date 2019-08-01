@@ -402,6 +402,10 @@
                               <br>
                               <a href="{% url 'disputa_comprador' i.id_order %}" class="btn btn-success" style="margin-top:5%"> Disputa </a>
                               {% endifequal %}  
+                              {%ifequal estado.id_order_state.name  "Disputa" %} 
+                              <br>
+                              <a href="{% url 'dialogs_detail' i.id_order 'admin' %}" class="btn btn-success" style="margin-top:5%">Ir al chat</a>
+                              {% endifequal %} 
 
                               <div class="modal fade" id="recepcion{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">

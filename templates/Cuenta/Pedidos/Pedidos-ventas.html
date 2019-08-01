@@ -491,6 +491,10 @@
                 </div>
               </div>
               {% endifequal %} 
+              {%ifequal h.id_order_state.name "Disputa" %} 
+              <br>
+              <a href="{% url 'dialogs_detail' i.id_order 'admin' %}" class="btn btn-success" style="margin-top:5%">Ir al chat</a>
+              {% endifequal %} 
               {% endifequal %}
               {%endfor %}   
 

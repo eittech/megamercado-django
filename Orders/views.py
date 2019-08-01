@@ -131,7 +131,7 @@ def disputa_comprador(request, pk):
     fin=OrderState.objects.get(name="Disputa")
     estado=OrderHistory.objects.create(id_order=orden, id_order_state=fin, date_add=timezone.now())
     estado.save()
-    url = reverse('pedidos_detalle_compras', kwargs={'pk': pk})
+    url= reverse('dialogs_detail',  kwargs={'pk': pk, 'username': "admin"})
     return HttpResponseRedirect(url)
 
 
@@ -188,7 +188,8 @@ def disputa_vendedor(request, pk):
     fin=OrderState.objects.get(name="Disputa")
     estado=OrderHistory.objects.create(id_order=orden, id_order_state=fin, date_add=timezone.now())
     estado.save()
-    url = reverse('pedidos_detalle_ventas', kwargs={'pk': pk})
+    url= reverse('dialogs_detail',  kwargs={'pk': pk, 'username': "admin"})
+    #url = reverse('pedidos_detalle_ventas', kwargs={'pk': pk})
     return HttpResponseRedirect(url)
 
 def marcar_pagado(request, pk):

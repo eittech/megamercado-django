@@ -414,6 +414,10 @@
                                 </div>
                               </div>
                               {% endifequal %} 
+                              {%ifequal estado.id_order_state.name  "Disputa" %} 
+                              <br>
+                              <a href="{% url 'dialogs_detail' i.id_order 'admin' %}" class="btn btn-success" style="margin-top:5%">Ir al chat</a>
+                              {% endifequal %} 
                           
 
                               <div class="modal fade" id="pagado{{i.id_order}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
