@@ -176,7 +176,7 @@
                       <img id="micuenta-2" src="{% static 'img/cuenta/icono_perfil1.png' %}"> <b> Mi cuenta</b> <br> <div style="margin-left: 20px" > {{user.username}} </div>
                   </li>
               <li class="nav-item ">
-                <a class="nav-link textomenucuenta" href="#">
+                  <a class="nav-link textomenucuenta" href="{% url 'cuenta' %}">
                   <span data-feather="home"></span>
                   <img src="{% static 'img/cuenta/icono_resumen2.png' %}"> Resumen 
                 </a>
